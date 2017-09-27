@@ -29,7 +29,7 @@
 | 银行账户   | BankAccount                |
 | 备注     | Comment                    |
 | 销售类单据  | SaleBill （继承Bill）          |
-| 进货类单据  | ImportBill（继承Bill）         |
+| 进货类单据  | PurchaseBill（继承Bill）       |
 | 财务类单据  | FinancialBill              |
 | 库存类单据  | StockBill                  |
 | 操作员    | Operator（属性名）              |
@@ -65,4 +65,38 @@
 |        |                            |
 |        |                            |
 |        |                            |
+
+## 功能点中英对照
+
+| 中文           | 英文                        |
+| ------------ | ------------------------- |
+| 商品分类管理       | ProductCategoryManagement |
+| 商品管理         | ProductManagement         |
+| 库存查看         | StockQuery                |
+| 库存盘点         | StockCheck                |
+| 建立库存赠送单      | StockGiveaway             |
+| 建立库存报损单      | StockLoss                 |
+| 建立库存报警单      | StockWarning              |
+| 库存管理人员响应进出货  | StockStuffResponse        |
+| 客户管理         | ClientManagement          |
+| 制定进货单        | PurchaseBill              |
+| 制定进货退货单      | PurchaseRefundBill        |
+| 制定销售单        | SaleBill                  |
+| 制定销售退货单      | SaleRefundBill            |
+| 进货销售人员响应审批消息 | SaleStuffResponse         |
+| 账户管理         | AccountManagement         |
+| 制定收款单        | ReceiptBill               |
+| 制定付款单        | PaymentBill               |
+| 制定现金费用单      | CashBill                  |
+| 查看销售明细表      | SaleDetailQuery           |
+| 查看经营历程表      | TradeHistoryQuery         |
+| 红冲           | BillRevert                |
+| 查看经营情况表      | TradeSituationQuery       |
+| 期初建账         | InitialEstablishment      |
+| 审批单据         | BillApproval              |
+| 制定促销策略       | Promotion                 |
+| 查看日志         | LogInspection             |
+| 管理用户账户       | UserAccountManagement     |
+|              |                           |
+|              |                           |
 
