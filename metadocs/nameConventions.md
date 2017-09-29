@@ -49,8 +49,8 @@
 | 默认业务员  | DefaultOperator            |
 | 总价     | Total                      |
 | 单价     | UnitPrice                  |
-|        |                            |
-|        |                            |
+| 修改（更新） | Modify                     |
+| 删除     | Delete                     |
 |        |                            |
 |        |                            |
 |        |                            |
@@ -88,11 +88,12 @@
 | 制定收款单        | ReceiptBill               |
 | 制定付款单        | PaymentBill               |
 | 制定现金费用单      | CashBill                  |
-| 查看销售明细表      | SaleDetailQuery           |
-| 查看经营历程表      | TradeHistoryQuery         |
-| 红冲           | BillRevert                |
-| 查看经营情况表      | TradeSituationQuery       |
+| 查看销售明细表      | SaleDetail                |
+| 查看经营历程表      | TradeHistory              |
+| 红冲           | RevertBill                |
+| 查看经营情况表      | TradeSituation            |
 | 期初建账         | InitialEstablishment      |
+| 完成现实银行操作     | FinancialStuffResponse    |
 | 审批单据         | BillApproval              |
 | 制定促销策略       | Promotion                 |
 | 查看日志         | LogInspection             |
