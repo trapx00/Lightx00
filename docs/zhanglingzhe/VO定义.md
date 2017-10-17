@@ -1,5 +1,5 @@
 ```java
-class ClientVO {
+class ClientPO {
     String id;
     ClientType clientType;
     int clientLevel;
@@ -10,7 +10,7 @@ class ClientVO {
     String email;
     double receivableQuota;
     double payableQuota;
-    String defaultOperatorId;
+    SaleStaffPO defaultOperator;
 }
 ```
 
@@ -22,7 +22,7 @@ enum ClientType {
 ```
 
 ```java
-class SaleStaffVO extends EmployeeVO {
+class SaleStaffPO extends EmployeePO {
     SaleStaffType saleStaffType;
 }
 ```
@@ -35,7 +35,7 @@ enum SaleStaffType {
 ```
 
 ```java
-class SaleBillBaseVO extends BillVO {
+class SaleBillBasePO extends BillPO {
     SaleBillType saleBillType;
 }
 ```
@@ -48,10 +48,10 @@ enum SaleBillType {
 ```
 
 ```java
-class SaleBillVO extends SaleBillBaseVO {
+class SaleBillPO extends SaleBillBasePO {
     String supplier;
-    String defaultOperatorId;
-    String operatorId;
+    Employee defaultOperator;
+    SaleStaffPO operator;
     int repository;
     Commodity[] commodityList;
     double originTotal;
@@ -63,10 +63,10 @@ class SaleBillVO extends SaleBillBaseVO {
 ```
 
 ```java
-class SaleRefundBillVO extends SaleBillBaseVO {
+class SaleRefundBillPO extends SaleBillBasePO {
     String supplier;
-    String defaultOperatorId;
-    String operatorId;
+    Employee defaultOperator;
+    SaleStaffPO operator;
     int repository;
     Commodity[] commodityList;
     double originTotal;
@@ -78,7 +78,7 @@ class SaleRefundBillVO extends SaleBillBaseVO {
 ```
 
 ```java
-class PurchaseBillBaseVO extends BillVO {
+class PurchaseBillBasePO extends BillPO {
     PurchaseBillType purchaseBillType;
 }
 ```
@@ -91,10 +91,10 @@ enum PurchaseBillType {
 ```
 
 ```java
-class PurchaseBillVO extends PurchaseBillBaseVO {
+class PurchaseBillPO extends PurchaseBillBasePO {
     String supplier;
     int repository;
-    String operatorId;
+    SaleStaffPO operator;
     String Comment;
     double total;
     Commodity[] commodityList;
@@ -102,10 +102,10 @@ class PurchaseBillVO extends PurchaseBillBaseVO {
 ```
 
 ```java
-class PurchaseRefundBillVO extends PurchaseBillBaseVO {
+class PurchaseRefundBillPO extends PurchaseBillBasePO {
     String supplier;
     int repository;
-    String operatorId;
+    SaleStaffPO operator;
     String Comment;
     double total;
     Commodity[] commodityList;
