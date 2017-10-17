@@ -1,5 +1,5 @@
 ```java
-class ClientVO {
+class ClientPO {
     String id;
     ClientType clientType;
     int clientLevel;
@@ -22,7 +22,7 @@ enum ClientType {
 ```
 
 ```java
-class SaleStaffVO extends EmployeeVO {
+class SaleStaffPO extends EmployeePO {
     SaleStaffType saleStaffType;
 }
 ```
@@ -35,7 +35,7 @@ enum SaleStaffType {
 ```
 
 ```java
-class SaleBillBaseVO extends BillVO {
+class SaleBillBasePO extends BillPO {
     SaleBillType saleBillType;
 }
 ```
@@ -48,12 +48,12 @@ enum SaleBillType {
 ```
 
 ```java
-class SaleBillVO extends SaleBillBaseVO {
+class SaleBillPO extends SaleBillBasePO {
     String supplier;
     String defaultOperatorId;
     String operatorId;
     int repository;
-    Commodity[] commodityList;
+    CommodityPO[] commodityList;
     double originTotal;
     double minusProfits;
     double token;
@@ -63,12 +63,12 @@ class SaleBillVO extends SaleBillBaseVO {
 ```
 
 ```java
-class SaleRefundBillVO extends SaleBillBaseVO {
+class SaleRefundBillPO extends SaleBillBasePO {
     String supplier;
     String defaultOperatorId;
     String operatorId;
     int repository;
-    Commodity[] commodityList;
+    CommodityPO[] commodityList;
     double originTotal;
     double minusProfits;
     double token;
@@ -78,7 +78,7 @@ class SaleRefundBillVO extends SaleBillBaseVO {
 ```
 
 ```java
-class PurchaseBillBaseVO extends BillVO {
+class PurchaseBillBasePO extends BillPO {
     PurchaseBillType purchaseBillType;
 }
 ```
@@ -91,24 +91,24 @@ enum PurchaseBillType {
 ```
 
 ```java
-class PurchaseBillVO extends PurchaseBillBaseVO {
+class PurchaseBillPO extends PurchaseBillBasePO {
     String supplier;
     int repository;
     String operatorId;
     String Comment;
     double total;
-    Commodity[] commodityList;
+    CommodityPO[] commodityList;
 }
 ```
 
 ```java
-class PurchaseRefundBillVO extends PurchaseBillBaseVO {
+class PurchaseRefundBillPO extends PurchaseBillBasePO {
     String supplier;
     int repository;
     String operatorId;
     String Comment;
     double total;
-    Commodity[] commodityList;
+    CommodityPO[] commodityList;
 }
 ```
 
