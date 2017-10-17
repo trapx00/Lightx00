@@ -10,6 +10,7 @@ class InvetoryStaffPO extends EmployeePO {
 class CommodityPo {//商品
   String ID;
   String name;
+  String type;
   double number;
   double PurchasePrice;//进价
   double RecentPurPrice;//最近进价
@@ -20,21 +21,20 @@ class CommodityPo {//商品
 
 
 ```java
-class CommodityManagePo{//商品分类
+class CommoditySortPo{//商品分类
   String ID;
   String name;
-  ArrayList<Commodity> store;
+  String []commodityID;
   String PreName;//父类
   String[] NextName; //子类
 }
 ```
 ```java
-class InventoryBill extends InventoryBillPo{//报损报溢报警
+class InventoryDetailBillPo extends InventoryBillPo{//报损报溢报警
   String ID;
   String operatorID;
-  Arraylist<Commodity> commodityList;
-  Arraylist<Integer> nums;
-  InventoryBillType type;
+  String[]commodityID;
+  int[] nums;
   Date time;
 }
 ```
@@ -47,7 +47,7 @@ enum InventoryBillType{
 
 ```java
 class InventoryBillPo extends BillPo{
-    InventoryBill inventoryBill;
+    InventoryBillType inventoryBillType;
 }
 ```
 
