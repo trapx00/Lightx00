@@ -4,6 +4,7 @@ class FinancialStaffVO extends EmployeeVO {
 
 }
 
+
 class ReceivalPaymentBillVOBase {
     String ID; //收款单格式是SKD-yyyyMMDD-00001，付款单格式是FKD-yyyyMMDD-00001
     ClientVO client; 
@@ -85,5 +86,12 @@ class TradeSituationVO { //经营历程表
 class BankAccountQueryVO {
     String ID;
     String name;
+}
+
+class SystemSnapshotPO { //账
+    //存储一次不修改
+    CommodityVO[] commodities;
+    ClientVO[] clients;
+    BankAccountVO[] bankAccounts;
 }
 ```

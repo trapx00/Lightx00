@@ -63,8 +63,8 @@ class CashBillItemPO {
 
 class SystemSnapshotPO { //账
     //存储一次不修改
-    Commodity[] commodities;
-    Client[] clients;
-    BankAccount[] bankAccounts;
+    CommodityVO[] commodities;
+    ClientVO[] clients;
+    BankAccountVO[] bankAccounts;
 }
 ```
