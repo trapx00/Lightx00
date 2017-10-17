@@ -1,3 +1,4 @@
+```java
 class BillPO {
     BillType bill;
     String ID;
@@ -53,6 +54,13 @@ class BillApprovalNotificationPO extends NotificationPO {
     String billID;
 }
 
+class BillApprovalNotificationVO {
+    String ID;
+    Date date;
+    NotificationType type;
+    BillVO bill;
+}
+
 class OtherNotificationPO extends NotificationPO {
     String content;
 }
@@ -61,3 +69,18 @@ class DraftPO {
     Date saveTime;
     String billID;
 }
+
+class LogPO {
+    Date date;
+    LogSeverity severity;
+    String content;
+}
+
+enum LogSeverity{
+    Info,
+    Success,
+    Warning,
+    Failure
+}
+
+```
