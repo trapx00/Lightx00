@@ -14,7 +14,7 @@
    double PurchasePrice;//进价
    double RecentPurPrice;//最近进价
    double RetailPrice;//售价
-   double RecentReprice；//最近售价
+   double RecentReprice;//最近售价
  }
  ```
  ```java
