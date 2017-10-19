@@ -15,7 +15,7 @@ class CommodityPO {//商品
   double purchasePrice;//进价
   double recentPurchasePrice;//最近进价
   double retailPrice;//售价
-  double recentRetailPrice；//最近售价
+  double recentRetailPrice;//最近售价
   double warningValue;//警戒值
 }
 ```
@@ -58,7 +58,7 @@ class InventoryPicturePO {
   Date time;
   String[] IDs;//
   String[] names;//名称
-  String[] types;//型号
+  String[] models;//型号
   double[] inventoryAmountList;//入库数量
   double[] inventoryMoneyList;//入库均价
   double[] orderList;//批次

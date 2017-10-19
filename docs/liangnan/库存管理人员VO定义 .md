@@ -73,7 +73,7 @@
  //名称，型号，库存数量，库存均价，批次，批号，出厂日期
    String[] IDs;//
    String[] names;//名称
-   String[] types;//型号
+   String[] models;//型号
    double[] inventoryAmountList;//入库数量
    double[] inventoryMoneyList;//入库均价
    double[] orderList;//批次
