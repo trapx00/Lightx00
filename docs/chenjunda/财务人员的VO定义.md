@@ -9,7 +9,7 @@ class ReceivalPaymentBillVOBase {
     String ID; //收款单格式是SKD-yyyyMMDD-00001，付款单格式是FKD-yyyyMMDD-00001
     ClientVO client; 
     FinanceStaffVO operator;
-    TranscationVO[] transcations;
+    Transcation[] transcations;
     double total;
 }
 
@@ -25,17 +25,17 @@ class CashBillVO {
     String ID;//格式是XJFYD-yyyyMMDD-00001
     FinanceStaffVO operator;
     BankAccountVO account;
-    CashBillItemVO[] itemIDs;
+    CashBillItem[] items;
 }
 
-class CashBillItemVO {
+class CashBillItem {
     String ID; //格式是XJFYDX-yyyyMMDD-XJFYDID-00001
     String name;
     double amount;
     String comment;
 }
 
-class TranscationVO {
+class Transcation {
     String ID; //格式是FKDSKD-yyyyMMDD-ID-00001
     String accountID;
     double total;

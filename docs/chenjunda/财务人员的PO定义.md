@@ -20,7 +20,7 @@ class ReceivalPaymentBillPOBase extends FinancialBillPO {
     String ID; //收款单格式是SKD-yyyyMMDD-00001，付款单格式是FKD-yyyyMMDD-00001
     String clientID; 
     String operatorID;
-    String[] transcationIDs;
+    Transcation[] transcations;
     double total;
 }
 
@@ -36,7 +36,7 @@ enum FinancialBillType {
 class ReceivalBillPO extends ReceivalPaymentBillPOBase {
 }
     
-class TranscationPO {
+class Transcation {
     String ID; //格式是FKDSKD-yyyyMMDD-ID-00001
     String accountID;
     double total;
@@ -51,10 +51,10 @@ class CashBillPO extends FinancialBillPO {
     String ID;//格式是XJFYD-yyyyMMDD-00001
     String operatorID;
     String accountID;
-    String[] itemIDs;
+    CashBillItem[] items;
 }
     
-class CashBillItemPO {
+class CashBillItem {
     String ID; //格式是XJFYDX-yyyyMMDD-XJFYDID-00001
     String name;
     double amount;
