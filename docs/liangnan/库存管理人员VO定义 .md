@@ -10,11 +10,11 @@
  class CommodityVO {//商品
    String ID;
    String name;
-   double number;
-   double PurchasePrice;//进价
-   double RecentPurPrice;//最近进价
-   double RetailPrice;//售价
-   double RecentReprice;//最近售价
+   double amount;
+   double purchasePrice;//进价
+   double recentPurPrice;//最近进价
+   double retailPrice;//售价
+   double recentReprice;//最近售价
  }
  ```
  ```java
@@ -29,8 +29,8 @@
    String ID;
    String name;
    String[] commodityIDList;
-   String PreID;//父类
-   String[] NextIDs; //子类
+   String preID;//父类
+   String[] nextIDs; //子类
  }
  ```
  ```java
@@ -44,7 +44,7 @@
    String ID;
    String operatorID;
    String[] IDlist;//商品
-   double[] numList;//报损报警报溢数量
+   double[] amountList;//报损报警报溢数量
    InventoryBillTypeVO type;
    Date time;
  }
@@ -58,9 +58,9 @@
  ```java
  class InventoryViewVO {
    Date time;
-   double inVenNums;//入库数量
+   double inVenAmounts;//入库数量
    double inVenMoney;//入库金额
-   double outVenNUms;//出库数量
+   double outVenAmounts;//出库数量
    double outVenMoney;//出库金额
    double sum;//合计
    double inSoldPrice;//最近进价
@@ -74,12 +74,12 @@
  }
  ```
  ```java
- class InventoryPcitureVO {
+ class InventoryPictureVO {
  //名称，型号，库存数量，库存均价，批次，批号，出厂日期，并且显示行号
    String[] IDs;//
    String[] names;//名称
    String[] types;//型号
-   double[] inVenNumList;//入库数量
+   double[] inVenAmountList;//入库数量
    double[] inVenMoneyList;//入库均价
    double[] orderList;//批次
    double[] orderNumList;//批号
@@ -92,8 +92,7 @@
 class InventoryGiftVO{
    Date time;
    String ID;
-   String[]commodityIDs;//赠送商品
-   String[]commodityNums;//对应商品数量
+   PromotionCommodity[] gifts;
 }
  ```
 
