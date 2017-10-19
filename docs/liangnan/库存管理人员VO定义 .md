@@ -8,13 +8,18 @@
 
  ```java
  class CommodityVO {//商品
-   String ID;
+   String ID;//型号+名称生成
    String name;
+   String type;
    double amount;
+   Date productionDate;//生产日期
+   String batch;//批次
+   String batchNo;//批号
    double purchasePrice;//进价
    double recentPurchasePrice;//最近进价
    double retailPrice;//售价
    double recentRetailPrice;//最近售价
+   double warningValue;//警戒值
  }
  ```
  ```java
@@ -63,22 +68,10 @@
  }
  ```
  ```java
- class InventoryCheckVO{
-    Date beginDate;
-    Date endDate;
- }
- ```
- ```java
  class InventoryPictureVO {
  //名称，型号，库存数量，库存均价，批次，批号，出厂日期
-   String[] IDs;//
-   String[] names;//名称
-   String[] models;//型号
-   double[] inventoryAmountList;//入库数量
-   double[] inventoryMoneyList;//入库均价
-   double[] orderList;//批次
-   double[] orderNumList;//批号
    Date time;//出厂日期
+   CommodityVO[] items;
  }
  ```
 

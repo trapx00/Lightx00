@@ -5,7 +5,9 @@ class BillPO {
     Date date;
     BillState state;
 }
+```
 
+```java
 enum BillType {
     InventoryBill, //库存类单据
     StockBill, //进货类单据
@@ -13,7 +15,9 @@ enum BillType {
     FinanceBill, //财务类单据
 
 }
+```
 
+```java
 enum BillState {
     Draft,
     WaitingForApproval,
@@ -21,7 +25,9 @@ enum BillState {
     Approved,
     Abandoned
 }
+```
 
+```java
 class EmployeePO {
     String name;
     String ID;
@@ -30,7 +36,9 @@ class EmployeePO {
     String password;
     EmployeePosition position;
 }
+```
 
+```java
 enum EmployeePosition{
     InventoryStaff,
     SaleStaff,
@@ -38,49 +46,64 @@ enum EmployeePosition{
     Manager,
     Admin
 }
+```
 
+```java
 class NotificationPO {
     String ID;
     Date date;
     NotificationType type;
 }
+```
 
+```java
 enum NotificationType{
     BillApproval,
     Others
 }
+```
 
+```java
 class BillApprovalNotificationPO extends NotificationPO {
     String billID;
 }
+```
 
+```java
 class BillApprovalNotificationVO {
     String ID;
     Date date;
     NotificationType type;
     BillVO bill;
 }
+```
 
+```java
 class OtherNotificationPO extends NotificationPO {
     String content;
 }
+```
 
+```java
 class DraftPO {
     Date saveTime;
     String billID;
 }
+```
 
+```java
 class LogPO {
     Date date;
     LogSeverity severity;
     String content;
 }
+```
 
+```java
 enum LogSeverity{
     Info,
     Success,
     Warning,
     Failure
 }
-
 ```

@@ -1,7 +1,6 @@
 
 ```java
-class FinancialStaffPO extends EmployeePO {
-   
+class FinancialStaffPO extends EmployeePO {  
 }
     
 class BankAccountPO {
