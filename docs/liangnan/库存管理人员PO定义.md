@@ -92,8 +92,8 @@ class InventoryViewPO {
 class InventoryGiftPO{
    Date time;
    String ID;
-   String[]giftIDs;//赠送商品
-   String[]giftyAmounts;//对应商品数量
+   String[] giftIDs;//赠送商品
+   String[] giftyAmounts;//对应商品数量
 }
 ```
 
