@@ -1,6 +1,6 @@
-# TrapLight
+# Light x00
 
-Lights Purchasing-Selling-Stokcing System by Trap x00.
+Light x00 is a light product purchasing-selling-stokcing system made by Trap x00.
 
 ## Feature
 

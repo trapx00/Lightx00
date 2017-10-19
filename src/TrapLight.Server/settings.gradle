@@ -1,3 +1,0 @@
-rootProject.name = 'traplight.server'
-include 'traplight.shared'
-project(':traplight.shared').projectDir = new File('../TrapLight.Shared')

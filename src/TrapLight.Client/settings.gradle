@@ -1,4 +1,0 @@
-rootProject.name = 'traplight.client'
-include 'traplight.shared'
-
-project(':trapLight.shared').projectDir = new File('../TrapLight.Shared')
