@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/traplight.client.iml" filepath="$PROJECT_DIR$/.idea/modules/traplight.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/289019065/traplight.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/289019065/traplight.shared.iml" />
+    </modules>
+  </component>
+</project>
