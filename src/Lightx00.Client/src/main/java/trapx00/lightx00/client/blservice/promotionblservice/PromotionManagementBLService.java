@@ -1,17 +1,23 @@
 package trapx00.lightx00.client.blservice.promotionblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionPOBase;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVO;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVO;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVO;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionVOBase;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
+import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
+import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
+import trapx00.lightx00.shared.vo.manager.promotion.PromotionVoBase;
 
-public interface PromotionManagementBLService {
-    ResultMessage submit(PromotionVOBase newPromotion);
-    ResultMessage saveAsDraft(PromotionVOBase promotion);
-    ResultMessage delete(PromotionPOBase promotion);
-    PromotionVOBase resume();
-    PromotionVOBase[] queryPromotion(PromotionQueryVO query);
-    CommodityVO[] queryCommodity(CommodityQueryVO commodity);
+public interface PromotionManagementBlService {
+
+    ResultMessage submit(PromotionVoBase newPromotion);
+
+    ResultMessage saveAsDraft(PromotionVoBase promotion);
+
+    ResultMessage delete(PromotionPoBase promotion);
+
+    PromotionVoBase resume();
+
+    PromotionVoBase[] queryPromotion(PromotionQueryVo query);
+
+    CommodityVo[] queryCommodity(CommodityQueryVo commodity);
 }

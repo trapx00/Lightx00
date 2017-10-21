@@ -1,7 +1,13 @@
 package trapx00.lightx00.shared.vo.manager;
 
-import trapx00.lightx00.shared.vo.EmployeeVO;
+import trapx00.lightx00.shared.po.EmployeePosition;
+import trapx00.lightx00.shared.vo.EmployeeVo;
 
-public class ManagerVO extends EmployeeVO{
+import java.util.Date;
 
+public class ManagerVo extends EmployeeVo{
+
+    public ManagerVo(String name, String Id, Date workSince, String username) {
+        super(name, Id, workSince, username, EmployeePosition.Manager);
+    }
 }

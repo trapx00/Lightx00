@@ -1,12 +1,16 @@
 package trapx00.lightx00.client.blservice.adminblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.admin.UserAccountQueryVO;
-import trapx00.lightx00.shared.vo.admin.UserAccountVO;
+import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
+import trapx00.lightx00.shared.vo.admin.UserAccountVo;
 
-public interface UserManagementBLService {
-    ResultMessage add(UserAccountVO newUserAccount);
-    ResultMessage modify(UserAccountVO newUserAccount);
-    ResultMessage query(UserAccountQueryVO query);
-    ResultMessage delete(UserAccountVO account);
+public interface UserManagementBlService {
+
+    ResultMessage add(UserAccountVo newUserAccount);
+
+    ResultMessage modify(UserAccountVo newUserAccount);
+
+    ResultMessage query(UserAccountQueryVo query);
+
+    ResultMessage delete(UserAccountVo account);
 }

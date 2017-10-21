@@ -2,7 +2,12 @@ package trapx00.lightx00.shared.vo;
 
 import java.util.Date;
 
-public class DraftVO {
+public class DraftVo {
     Date saveTime;
-    BillVO bill;
+    BillVo bill;
+
+    public DraftVo(Date saveTime, BillVo bill) {
+        this.saveTime = saveTime;
+        this.bill = bill;
+    }
 }

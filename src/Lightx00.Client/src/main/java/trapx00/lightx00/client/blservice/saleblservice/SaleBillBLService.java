@@ -1,10 +1,11 @@
 package trapx00.lightx00.client.blservice.saleblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.SaleBillVO;
+import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
 
-interface SaleBillBLService {
-    public ResultMessage[] submit(SaleBillVO saleBill);//提交销售单
+public interface SaleBillBlService {
 
-    public ResultMessage saveAsDraft(SaleBillVO saleBill);//保存销售单为草稿
+    ResultMessage[] submit(SaleBillVo saleBill);//提交销售单
+
+    ResultMessage saveAsDraft(SaleBillVo saleBill);//保存销售单为草稿
 }

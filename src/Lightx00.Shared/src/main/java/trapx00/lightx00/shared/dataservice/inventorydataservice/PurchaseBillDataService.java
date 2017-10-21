@@ -1,8 +1,9 @@
 package trapx00.lightx00.shared.dataservice.inventorydataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.salestaff.PurchaseBillPO;
+import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 
-interface  PurchaseBillDataService{
-    public ResultMessage submit(PurchaseBillPO purchaseBill);//提交进货单
+public interface  PurchaseBillDataService {
+
+    ResultMessage submit(PurchaseBillPo purchaseBill);//提交进货单
 }

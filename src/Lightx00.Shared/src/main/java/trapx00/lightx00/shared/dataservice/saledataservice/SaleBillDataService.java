@@ -1,8 +1,8 @@
 package trapx00.lightx00.shared.dataservice.saledataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPO;
+import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 
 interface SaleBillDataService{
-    public ResultMessage submit(SaleBillPO saleBill);//提交销售单
+    public ResultMessage submit(SaleBillPo saleBill);//提交销售单
 }

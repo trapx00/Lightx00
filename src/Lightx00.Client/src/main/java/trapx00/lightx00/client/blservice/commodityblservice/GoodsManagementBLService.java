@@ -1,14 +1,14 @@
 package trapx00.lightx00.client.blservice.commodityblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVO;
+import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 
-public interface GoodsManagementBLService {
-    public ResultMessage add(CommodityVO newCommodity);//新建商品
+public interface GoodsManagementBlService {
+    ResultMessage add(CommodityVo newCommodity);//新建商品
 
-    public ResultMessage modify(CommodityVO updateCommodity);//修改商品
+    ResultMessage modify(CommodityVo updateCommodity);//修改商品
 
-    public CommodityVO[] query(String ID, String name);//查询商品
+    CommodityVo[] query(String id, String name);//查询商品
 
-    public ResultMessage delete(CommodityVO commodity);//删除商品
+    ResultMessage delete(CommodityVo commodity);//删除商品
 }

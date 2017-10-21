@@ -1,11 +1,13 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
-import trapx00.lightx00.shared.po.client.ClientPO;
-import trapx00.lightx00.shared.po.salestaff.SaleStaffPO;
-import trapx00.lightx00.shared.vo.financestaff.SaleDetailVO;
-
 import java.util.Date;
+import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
+import trapx00.lightx00.shared.vo.financestaff.SaleDetailVo;
+
+
 
 public interface SaleDetailDataService {
-    SaleDetailVO query(Date start, Date end, String commodityName, ClientPO client, SaleStaffPO operator, int inventory);
+    SaleDetailVo query(Date start, Date end, String commodityName, ClientPo client,
+                       SaleStaffPo operator, int inventory);
 }

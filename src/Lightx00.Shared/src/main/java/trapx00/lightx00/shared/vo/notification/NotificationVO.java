@@ -4,8 +4,14 @@ import trapx00.lightx00.shared.po.notification.NotificationType;
 
 import java.util.Date;
 
-public class NotificationVO {
-    String ID;
+public class NotificationVo {
+    String id;
     Date date;
     NotificationType type;
+
+    public NotificationVo(String id, Date date, NotificationType type) {
+        this.id = id;
+        this.date = date;
+        this.type = type;
+    }
 }

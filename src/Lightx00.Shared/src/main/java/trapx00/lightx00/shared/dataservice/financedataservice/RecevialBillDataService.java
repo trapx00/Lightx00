@@ -1,11 +1,13 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.financestaff.ReceivalBillPO;
+import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 
 public interface RecevialBillDataService {
-    ResultMessage submit(ReceivalBillPO bSill);
-    ResultMessage activate(ReceivalBillPO bill);
-    ResultMessage abandon(ReceivalBillPO bill);
+    ResultMessage submit(ReceivalBillPo bill);
+
+    ResultMessage activate(ReceivalBillPo bill);
+
+    ResultMessage abandon(ReceivalBillPo bill);
 
 }

@@ -1,7 +1,7 @@
 package trapx00.lightx00.shared.dataservice.logindataservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.EmployeePo;
 
 public interface LoginDataService {
-    ResultMessage login(String username, String password);
+    EmployeePo login(String username, String password);
 }

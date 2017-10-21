@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.blservice.financeblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVO;
+import trapx00.lightx00.shared.vo.BillVo;
 
-public interface RevertBillBLService {
-    void init(BillVO bill);
+public interface RevertBillBlService {
+    void init(BillVo bill);
 }

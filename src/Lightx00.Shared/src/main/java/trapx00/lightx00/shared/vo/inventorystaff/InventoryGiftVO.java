@@ -6,8 +6,14 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import java.util.Date;
 
 
-public class InventoryGiftVO{
+public class InventoryGiftVo{
     Date time;
-    String ID;
+    String Id;
     PromotionCommodity[] gifts;
+
+    public InventoryGiftVo(Date time, String Id, PromotionCommodity[] gifts) {
+        this.time = time;
+        this.Id = Id;
+        this.gifts = gifts;
+    }
 }

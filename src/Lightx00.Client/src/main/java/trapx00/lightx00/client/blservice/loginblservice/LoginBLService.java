@@ -1,7 +1,8 @@
 package trapx00.lightx00.client.blservice.loginblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.vo.EmployeeVo;
 
-public interface LoginBLService {
-    ResultMessage login(String username, String password);
+public interface LoginBlService {
+
+    EmployeeVo login(String username, String password);
 }

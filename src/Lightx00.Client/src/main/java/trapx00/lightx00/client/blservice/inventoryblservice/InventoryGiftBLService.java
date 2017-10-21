@@ -1,7 +1,9 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryGiftVO;
+import trapx00.lightx00.shared.vo.inventorystaff.InventoryGiftVo;
 
-public interface InventoryGiftBLService{
-    public InventoryGiftVO sumbit(InventoryGiftVO inventoryGiftVO);//提交赠送单
+public interface InventoryGiftBlService {
+
+    InventoryGiftVo sumbit(InventoryGiftVo inventoryGiftVo);//提交赠送单
+
 }

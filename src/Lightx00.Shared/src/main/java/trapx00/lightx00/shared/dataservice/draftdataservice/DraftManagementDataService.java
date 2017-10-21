@@ -1,9 +1,10 @@
 package trapx00.lightx00.shared.dataservice.draftdataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVO;
+import trapx00.lightx00.shared.vo.BillVo;
 
 public interface DraftManagementDataService {
-    BillVO[] update();
-    ResultMessage delete(BillVO bill);
+    BillVo[] update();
+
+    ResultMessage delete(BillVo bill);
 }

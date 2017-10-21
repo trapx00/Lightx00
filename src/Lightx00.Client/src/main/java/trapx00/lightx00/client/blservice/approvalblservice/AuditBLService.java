@@ -1,11 +1,14 @@
 package trapx00.lightx00.client.blservice.approvalblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVO;
-import trapx00.lightx00.shared.vo.manager.BillQueryVO;
+import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.manager.BillQueryVo;
 
-public interface AuditBLService {
-    ResultMessage show(BillQueryVO query);
-    ResultMessage reject(BillVO bill);
-    ResultMessage pass(BillVO bill);
+public interface AuditBlService {
+
+    ResultMessage show(BillQueryVo query);
+
+    ResultMessage reject(BillVo bill);
+
+    ResultMessage pass(BillVo bill);
 }
