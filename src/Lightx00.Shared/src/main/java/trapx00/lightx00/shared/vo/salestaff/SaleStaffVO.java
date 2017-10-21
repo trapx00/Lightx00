@@ -9,8 +9,16 @@ import java.util.Date;
 public class SaleStaffVo extends EmployeeVo {
     SaleStaffType saleStaffType;
 
-    public SaleStaffVo(String name, String Id, Date workSince, String username, SaleStaffType saleStaffType) {
-        super(name, Id, workSince, username, EmployeePosition.SaleStaff);
+    public SaleStaffType getSaleStaffType() {
+        return saleStaffType;
+    }
+
+    public void setSaleStaffType(SaleStaffType saleStaffType) {
+        this.saleStaffType = saleStaffType;
+    }
+
+    public SaleStaffVo(String name, String id, Date workSince, String username, SaleStaffType saleStaffType) {
+        super(name, id, workSince, username, EmployeePosition.SaleStaff);
         this.saleStaffType = saleStaffType;
     }
 }
