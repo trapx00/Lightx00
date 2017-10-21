@@ -1,12 +1,28 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
 public class CommodityOnSalePo extends PromotionPoBase {
-    PromotionCommodity[] commodityOnSale;
-    double onSalePrice;
+    private PromotionCommodity[] commodityOnSale;
+    private double onSalePrice;
 
-    public CommodityOnSalePo(String Id,  String startDate, String endDate, PromotionState state, PromotionCommodity[] commodityOnSale, double onSalePrice) {
-        super(Id, PromotionType.CommodityOnSale, startDate, endDate, state);
+    public CommodityOnSalePo(String id,  String startDate, String endDate, PromotionState state, PromotionCommodity[] commodityOnSale, double onSalePrice) {
+        super(id, PromotionType.CommodityOnSale, startDate, endDate, state);
         this.commodityOnSale = commodityOnSale;
         this.onSalePrice = onSalePrice;
+    }
+
+    public double getOnSalePrice() {
+        return onSalePrice;
+    }
+
+    public void setOnSalePrice(double onSalePrice) {
+        this.onSalePrice = onSalePrice;
+    }
+
+    public PromotionCommodity[] getCommodityOnSale() {
+        return commodityOnSale;
+    }
+
+    public void setCommodityOnSale(PromotionCommodity[] commodityOnSale) {
+        this.commodityOnSale = commodityOnSale;
     }
 }
