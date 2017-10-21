@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.admin.UserAccountQueryVO;
 import trapx00.lightx00.shared.vo.admin.UserAccountVO;
 
-public interface UserManagement {
+public interface UserManagementBLService {
     ResultMessage add(UserAccountVO newUserAccount);
     ResultMessage modify(UserAccountVO newUserAccount);
     ResultMessage query(UserAccountQueryVO query);

@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
 
-public interface PromotionManagement {
+public interface PromotionManagementDataService {
     ResultMessage submit(PromotionPOBase promotion);
     PromotionPOBase[] queryPromotion(Date[] timeRange, PromotionType promotionType, int clientLevel, double totalPrice);
     ResultMessage delete(PromotionPOBase promotion);

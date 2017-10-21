@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.vo.inventorystaff.CommodityVO;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVO;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionVOBase;
 
-public interface PromotionManagement {
+public interface PromotionManagementBLService {
     ResultMessage submit(PromotionVOBase newPromotion);
     ResultMessage saveAsDraft(PromotionVOBase promotion);
     ResultMessage delete(PromotionPOBase promotion);
