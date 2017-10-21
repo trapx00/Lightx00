@@ -3,9 +3,7 @@
 
 
 ```java
-class ManagerStaffPO{
-  String ID;
-  String name;
+class ManagerStaffPO extends EmployeePO{
 }
 ```
 

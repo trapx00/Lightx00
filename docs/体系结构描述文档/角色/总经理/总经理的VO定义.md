@@ -1,7 +1,5 @@
 ```java
-class ManagerVO{
-    String ID;
-    String name;
+class ManagerVO extends EmployeeVO{
 }
 
 class BillQueryVO{

@@ -1,5 +1,5 @@
 ```java
-class UserStaffVO extend EmployeeVO{
+class AdminVO extends EmployeeVO{
 }
 
 class UserAccountQueryVO{
@@ -8,6 +8,15 @@ class UserAccountQueryVO{
     String accountName;
     String password;
     boolean hasRoot;
+}
+
+class UserAccountVO{
+    String ID;
+    String name;
+    String accountName;
+    String password;
+    boolean hasRoot;
+    AccountState state;
 }
 ```
 

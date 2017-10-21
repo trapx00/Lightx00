@@ -1,10 +1,9 @@
-package trapx00.lightx00.shared.po.admin;
+package trapx00.lightx00.shared.vo.admin;
 
-public class UserAccountPO{
+public class UserAccountQueryVO {
     String ID;
     String name;
     String accountName;
     String password;
     boolean hasRoot;
-    UserAccountState state;
 }

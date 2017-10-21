@@ -1,10 +1,10 @@
 ```java
-class userStaffPO extends EmpolyeePO{
+class AdminPO extends EmpolyeePO{
 }
 ```
 
 ```java
-class userAccountPO{
+class UserAccountPO{
     String ID;
     String name;
     String accountName;
@@ -15,7 +15,7 @@ class userAccountPO{
 ```
 
 ```java
-enum AccountState{
+enum UserAccountState{
     Using;
     Abondoned;
 }
