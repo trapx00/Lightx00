@@ -51,7 +51,7 @@ class TradeHistoryQueryVO { //经营历程表查询条件
     BillType billType;
     Client client;
     Employee operator;
-    Inventory inventory;
+    int repository; 
 }
     
 class SaleDetailVO { //销售明细表
@@ -72,7 +72,7 @@ class SaleDetailQueryVO { //销售明细表查询条件
     String commodityName;
     Client client;
     SaleStaff operator;
-    Inventory inventory; 
+    int repository; 
 }
 
 class TradeSituationVO { //经营历程表
