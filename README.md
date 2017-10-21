@@ -1,6 +1,6 @@
 # Light x00
 
-Light x00 is a light product purchasing-selling-stokcing system made by Trap x00.
+Light x00 is a light product purchasing-selling-stacking system under active development by Trap x00.
 
 ## Feature
 
@@ -8,6 +8,7 @@ Light x00 is a light product purchasing-selling-stokcing system made by Trap x00
 - Automated Build & Continuous Integration
 - Java 8 + JavaFX + SQLite
 - Intellij IDEA Project
+- Checkstyle integrated with [Google Java Style](http://google.github.io/styleguide/javaguide.html) based custom configuration
 - to be added...
 
 ## Copyright Notice
