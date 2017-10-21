@@ -14,4 +14,28 @@ public class LogQueryVo {
         this.severity = severity;
         this.content = content;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public LogSeverity getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(LogSeverity severity) {
+        this.severity = severity;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

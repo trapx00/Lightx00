@@ -14,4 +14,28 @@ public class NotificationVo {
         this.date = date;
         this.type = type;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public NotificationType getType() {
+        return type;
+    }
+
+    public void setType(NotificationType type) {
+        this.type = type;
+    }
 }

@@ -19,4 +19,28 @@ public class  SystemSnapshotPo extends FinanceBillPo { //账
         this.clients = clients;
         this.bankAccounts = bankAccounts;
     }
+
+    public CommodityPo[] getCommodities() {
+        return commodities;
+    }
+
+    public void setCommodities(CommodityPo[] commodities) {
+        this.commodities = commodities;
+    }
+
+    public ClientPo[] getClients() {
+        return clients;
+    }
+
+    public void setClients(ClientPo[] clients) {
+        this.clients = clients;
+    }
+
+    public BankAccountPo[] getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(BankAccountPo[] bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
 }

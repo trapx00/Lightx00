@@ -11,6 +11,8 @@ public class FinanceStaffPo extends EmployeePo {
                           Date workSince, String username, String password) {
         super(name, id, workSince, username, password, EmployeePosition.FinanceStaff);
     }
+
+
 }
 
 

@@ -10,4 +10,6 @@ public class  PaymentBillPo extends ReceivalPaymentBillPoBase {
                          Transcation[] transcations, double total) {
         super(id, date, state, financeBillType, clientId, operatorId, transcations, total);
     }
+
+
 }

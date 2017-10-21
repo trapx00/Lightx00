@@ -20,4 +20,28 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
         this.clients = clients;
         this.bankAccounts = bankAccounts;
     }
+
+    public CommodityVo[] getCommodities() {
+        return commodities;
+    }
+
+    public void setCommodities(CommodityVo[] commodities) {
+        this.commodities = commodities;
+    }
+
+    public ClientVo[] getClients() {
+        return clients;
+    }
+
+    public void setClients(ClientVo[] clients) {
+        this.clients = clients;
+    }
+
+    public BankAccountVo[] getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(BankAccountVo[] bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
 }

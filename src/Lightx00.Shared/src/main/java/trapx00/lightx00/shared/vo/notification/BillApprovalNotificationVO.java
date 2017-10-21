@@ -12,4 +12,12 @@ public class BillApprovalNotificationVo extends NotificationVo {
         super(Id, date, type);
         this.bill = bill;
     }
+
+    public BillVo getBill() {
+        return bill;
+    }
+
+    public void setBill(BillVo bill) {
+        this.bill = bill;
+    }
 }

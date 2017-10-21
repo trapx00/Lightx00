@@ -20,4 +20,36 @@ public class  ReceivalPaymentBillPoBase extends FinanceBillPo {
         this.transcations = transcations;
         this.total = total;
     }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    public Transcation[] getTranscations() {
+        return transcations;
+    }
+
+    public void setTranscations(Transcation[] transcations) {
+        this.transcations = transcations;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

@@ -13,4 +13,12 @@ public class FinanceBillPo extends BillPo {
         super(BillType.FinanceBill, id, date, state);
         this.financeBillType = financeBillType;
     }
+
+    public FinanceBillType getFinanceBillType() {
+        return financeBillType;
+    }
+
+    public void setFinanceBillType(FinanceBillType financeBillType) {
+        this.financeBillType = financeBillType;
+    }
 }

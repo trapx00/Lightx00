@@ -8,4 +8,12 @@ public class TradeHistoryVo { //经营历程表
     public TradeHistoryVo(BillVo[] bills) {
         this.bills = bills;
     }
+
+    public BillVo[] getBills() {
+        return bills;
+    }
+
+    public void setBills(BillVo[] bills) {
+        this.bills = bills;
+    }
 }

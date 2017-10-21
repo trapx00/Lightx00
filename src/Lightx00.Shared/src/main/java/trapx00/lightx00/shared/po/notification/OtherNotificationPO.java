@@ -9,4 +9,12 @@ public class OtherNotificationPo extends NotificationPo {
         super(id, date, NotificationType.Others);
         this.content = content;
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
