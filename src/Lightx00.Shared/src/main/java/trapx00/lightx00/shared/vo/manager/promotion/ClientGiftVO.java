@@ -5,12 +5,28 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 public class ClientGiftVo extends PromotionVoBase {
-    int clientLevel;
-    PromotionCommodity[] gifts;
+    private int clientLevel;
+    private PromotionCommodity[] gifts;
 
-    public ClientGiftVo(String Id,  String startDate, String endDate, PromotionState state, int clientLevel, PromotionCommodity[] gifts) {
-        super(Id, PromotionType.ClientGift, startDate, endDate, state);
+    public ClientGiftVo(String id,  String startDate, String endDate, PromotionState state, int clientLevel, PromotionCommodity[] gifts) {
+        super(id, PromotionType.ClientGift, startDate, endDate, state);
         this.clientLevel = clientLevel;
+        this.gifts = gifts;
+    }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int level) {
+        clientLevel = level;
+    }
+
+    public PromotionCommodity[] getGifts() {
+        return gifts;
+    }
+
+    public void setGifts(PromotionCommodity[] gifts) {
         this.gifts = gifts;
     }
 }
