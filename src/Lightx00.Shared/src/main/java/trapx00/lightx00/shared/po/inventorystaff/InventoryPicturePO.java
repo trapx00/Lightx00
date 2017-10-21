@@ -11,4 +11,20 @@ public class InventoryPicturePo {
         this.time = time;
         this.items = items;
     }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public CommodityPo[] getItems() {
+        return items;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public void setItems(CommodityPo[] items) {
+        this.items = items;
+    }
 }

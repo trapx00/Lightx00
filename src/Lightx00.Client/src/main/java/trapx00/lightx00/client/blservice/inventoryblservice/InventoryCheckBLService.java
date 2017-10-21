@@ -1,11 +1,13 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
+import java.io.File;
+import java.util.Date;
+
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryPictureVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryViewVo;
 
-import java.io.File;
-import java.util.Date;
+
 
 public interface InventoryCheckBlService {
 

@@ -5,6 +5,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortVo;
 
 public interface ProductManagementBlService {
+    //商品分类管理
 
     ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort);//新建分类
 
