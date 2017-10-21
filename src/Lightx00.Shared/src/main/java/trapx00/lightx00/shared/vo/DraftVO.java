@@ -10,4 +10,20 @@ public class DraftVo {
         this.saveTime = saveTime;
         this.bill = bill;
     }
+
+    public Date getSaveTime() {
+        return saveTime;
+    }
+
+    public void setSaveTime(Date saveTime) {
+        this.saveTime = saveTime;
+    }
+
+    public BillVo getBill() {
+        return bill;
+    }
+
+    public void setBill(BillVo bill) {
+        this.bill = bill;
+    }
 }

@@ -9,4 +9,12 @@ public class BillApprovalNotificationPo extends NotificationPo {
         super(id, date, NotificationType.BillApproval);
         this.billId = billId;
     }
+
+    public String getBillId() {
+        return billId;
+    }
+
+    public void setBillId(String billId) {
+        this.billId = billId;
+    }
 }

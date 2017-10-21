@@ -11,4 +11,12 @@ public class OtherNotificationVo extends NotificationVo {
         super(id, date, type);
         this.content = content;
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
