@@ -8,7 +8,8 @@ public class CommodityOnSaleVo extends PromotionVoBase {
     private PromotionCommodity[] commodityOnSale;
     private double onSalePrice;
 
-    public CommodityOnSaleVo(String id,  String startDate, String endDate, PromotionState state, PromotionCommodity[] commodityOnSale, double onSalePrice) {
+    public CommodityOnSaleVo(String id,  String startDate, String endDate, PromotionState state,
+                             PromotionCommodity[] commodityOnSale, double onSalePrice) {
         super(id, PromotionType.CommodityOnSale, startDate, endDate, state);
         this.commodityOnSale = commodityOnSale;
         this.onSalePrice = onSalePrice;

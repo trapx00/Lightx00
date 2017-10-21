@@ -7,7 +7,8 @@ public class ClientCouponVo extends PromotionVoBase {
     private int clientLevel;
     private double couponPrice;
 
-    public ClientCouponVo(String id, String startDate, String endDate, PromotionState state, int clientLevel, double couponPrice) {
+    public ClientCouponVo(String id, String startDate, String endDate, PromotionState state,
+                          int clientLevel, double couponPrice) {
         super(id, PromotionType.ClientCoupon, startDate, endDate, state);
         this.clientLevel = clientLevel;
         this.couponPrice = couponPrice;

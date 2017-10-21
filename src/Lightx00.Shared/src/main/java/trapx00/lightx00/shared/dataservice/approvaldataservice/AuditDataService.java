@@ -8,7 +8,9 @@ import trapx00.lightx00.shared.vo.BillVo;
 import java.util.Date;
 
 public interface AuditDataService {
-    BillVo[] query(String Id, BillType type, Date date, BillState state);
+    BillVo[] query(String id, BillType type, Date date, BillState state);
+
     ResultMessage reject(BillVo bill);
+
     ResultMessage pass(BillVo bill);
 }

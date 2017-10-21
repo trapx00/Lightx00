@@ -6,8 +6,8 @@ import trapx00.lightx00.shared.po.EmployeePosition;
 import java.util.Date;
 
 public class ManagerStaffPo extends EmployeePo {
-    public ManagerStaffPo(String name, String Id, Date workSince, String username, String password) {
-        super(name, Id, workSince, username, password, EmployeePosition.Manager);
+    public ManagerStaffPo(String name, String id, Date workSince, String username, String password) {
+        super(name, id, workSince, username, password, EmployeePosition.Manager);
     }
 }
 

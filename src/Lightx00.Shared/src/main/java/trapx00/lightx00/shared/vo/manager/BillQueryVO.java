@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.po.bill.BillType;
 
 import java.util.Date;
 
-public class BillQueryVo{ //得到待审批单据
+public class BillQueryVo { //得到待审批单据
     String Id;
     BillType type;
     Date date;

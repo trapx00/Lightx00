@@ -6,7 +6,10 @@ import trapx00.lightx00.shared.vo.financestaff.BankAccountVo;
 
 public interface BankAccountManagementBlService {
     ResultMessage add(BankAccountVo newAccount);
+
     ResultMessage modify(BankAccountVo newAccount);
+
     BankAccountVo[] query(BankAccountQueryVo query);
+
     ResultMessage delete(BankAccountVo account);
 }

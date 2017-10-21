@@ -1,7 +1,5 @@
 package trapx00.lightx00.shared.vo.financestaff;
 
-
-
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;

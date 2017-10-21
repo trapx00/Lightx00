@@ -5,11 +5,15 @@ import java.util.Date;
 public class NotificationPo {
     String id;
     Date date;
+    String senderId;
+    String receiverId;
     NotificationType type;
 
-    public NotificationPo(String id, Date date, NotificationType type) {
+    public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type) {
         this.id = id;
         this.date = date;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
         this.type = type;
     }
 
@@ -27,6 +31,22 @@ public class NotificationPo {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
     public NotificationType getType() {

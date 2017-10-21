@@ -4,7 +4,8 @@ public class CommodityOnSalePo extends PromotionPoBase {
     private PromotionCommodity[] commodityOnSale;
     private double onSalePrice;
 
-    public CommodityOnSalePo(String id,  String startDate, String endDate, PromotionState state, PromotionCommodity[] commodityOnSale, double onSalePrice) {
+    public CommodityOnSalePo(String id,  String startDate, String endDate, PromotionState state,
+                             PromotionCommodity[] commodityOnSale, double onSalePrice) {
         super(id, PromotionType.CommodityOnSale, startDate, endDate, state);
         this.commodityOnSale = commodityOnSale;
         this.onSalePrice = onSalePrice;

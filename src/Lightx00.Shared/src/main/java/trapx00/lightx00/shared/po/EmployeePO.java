@@ -3,11 +3,11 @@ package trapx00.lightx00.shared.po;
 import java.util.Date;
 
 public class EmployeePo {
-    String name;
-    String id;
-    Date workSince;
-    String username;
-    String password;
+    private String name;
+    private String id;
+    private Date workSince;
+    private String username;
+    private String password;
     EmployeePosition position;
 
     public EmployeePo(String name, String id, Date workSince, String username,

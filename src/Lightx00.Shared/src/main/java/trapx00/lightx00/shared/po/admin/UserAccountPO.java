@@ -7,18 +7,16 @@ public class UserAccountPo {
     String name;
     String accountName;
     String password;
-    boolean hasRoot;
-    EmployeePo employee;
+    String employeeId;
     UserAccountState state;
 
-    public UserAccountPo(String id, String name, String accountName, String password, boolean hasRoot,
-                         EmployeePo employee, UserAccountState state) {
-        id = id;
+    public UserAccountPo(String id, String name, String accountName, String password, String employeeId,
+                         UserAccountState state) {
+        this.id = id;
         this.name = name;
         this.accountName = accountName;
         this.password = password;
-        this.hasRoot = hasRoot;
-        this.employee = employee;
+        this.employeeId = employeeId;
         this.state = state;
     }
 
@@ -54,20 +52,12 @@ public class UserAccountPo {
         this.password = password;
     }
 
-    public boolean isHasRoot() {
-        return hasRoot;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setHasRoot(boolean hasRoot) {
-        this.hasRoot = hasRoot;
-    }
-
-    public EmployeePo getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EmployeePo employee) {
-        this.employee = employee;
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public UserAccountState getState() {

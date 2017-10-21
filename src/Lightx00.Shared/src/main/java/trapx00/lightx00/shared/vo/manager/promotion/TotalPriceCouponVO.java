@@ -7,7 +7,8 @@ public class TotalPriceCouponVo extends PromotionVoBase {
     private double couponPrice;
     private double totalPrice;
 
-    public TotalPriceCouponVo(String id, String startDate, String endDate, PromotionState state, double couponPrice, double totalPrice) {
+    public TotalPriceCouponVo(String id, String startDate, String endDate,
+                              PromotionState state, double couponPrice, double totalPrice) {
         super(id, PromotionType.TotalPriceCoupon, startDate, endDate, state);
         this.couponPrice = couponPrice;
         this.totalPrice = totalPrice;
