@@ -11,4 +11,20 @@ public class InventoryPictureVo {
         this.time = time;
         this.items = items;
     }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public CommodityVo[] getItems() {
+        return items;
+    }
+
+    public void setItems(CommodityVo[] items) {
+        this.items = items;
+    }
 }

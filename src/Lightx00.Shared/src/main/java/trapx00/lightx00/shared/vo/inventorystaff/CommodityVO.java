@@ -2,8 +2,9 @@ package trapx00.lightx00.shared.vo.inventorystaff;
 
 import java.util.Date;
 
-public class CommodityVo {//商品
-    String Id;//型号+名称生成
+public class CommodityVo {
+    //商品
+    String id;//型号+名称生成
     String name;
     String type;
     double amount;
@@ -16,8 +17,11 @@ public class CommodityVo {//商品
     double recentRetailPrice;//最近售价
     double warningValue;//警戒值
 
-    public CommodityVo(String Id, String name, String type, double amount, Date productionDate, String batch, String batchNo, double purchasePrice, double recentPurchasePrice, double retailPrice, double recentRetailPrice, double warningValue) {
-        this.Id = Id;
+    public CommodityVo(String id, String name, String type, double amount, Date productionDate,
+                       String batch, String batchNo, double purchasePrice,
+                       double recentPurchasePrice, double retailPrice, double recentRetailPrice,
+                       double warningValue) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.amount = amount;
@@ -28,6 +32,90 @@ public class CommodityVo {//商品
         this.recentPurchasePrice = recentPurchasePrice;
         this.retailPrice = retailPrice;
         this.recentRetailPrice = recentRetailPrice;
+        this.warningValue = warningValue;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public Date getProductionDate() {
+        return productionDate;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public String getBatchNo() {
+        return batchNo;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public double getRecentPurchasePrice() {
+        return recentPurchasePrice;
+    }
+
+    public double getRetailPrice() {
+        return retailPrice;
+    }
+
+    public double getRecentRetailPrice() {
+        return recentRetailPrice;
+    }
+
+    public double getWarningValue() {
+        return warningValue;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public void setRecentPurchasePrice(double recentPurchasePrice) {
+        this.recentPurchasePrice = recentPurchasePrice;
+    }
+
+    public void setRetailPrice(double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
+    public void setRecentRetailPrice(double recentRetailPrice) {
+        this.recentRetailPrice = recentRetailPrice;
+    }
+
+    public void setWarningValue(double warningValue) {
         this.warningValue = warningValue;
     }
 }
