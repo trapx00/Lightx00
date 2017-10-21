@@ -1,7 +1,5 @@
 package trapx00.lightx00.shared.po.notification;
 
-import trapx00.lightx00.shared.po.notification.NotificationPo;
-
 import java.util.Date;
 
 public class OtherNotificationPo extends NotificationPo {

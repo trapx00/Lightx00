@@ -8,7 +8,6 @@ import trapx00.lightx00.shared.vo.financestaff.TradeHistoryVo;
 
 
 public interface TradeHistoryDataService {
-
     TradeHistoryVo query(Date start, Date end, BillType billType, ClientPo client,
                          EmployeePo operator, int repository);
 }

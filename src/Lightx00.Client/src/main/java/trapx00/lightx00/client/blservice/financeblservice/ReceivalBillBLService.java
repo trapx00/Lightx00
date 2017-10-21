@@ -5,6 +5,8 @@ import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
 
 public interface ReceivalBillBlService {
     ResultMessage submit(ReceivalBillVo bill);
+
     ResultMessage saveAsDraft(ReceivalBillVo bill);
+
     ReceivalBillVo resume();
 }

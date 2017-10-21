@@ -10,7 +10,8 @@ public class EmployeePo {
     String password;
     EmployeePosition position;
 
-    public EmployeePo(String name, String id, Date workSince, String username, String password, EmployeePosition position) {
+    public EmployeePo(String name, String id, Date workSince, String username,
+                      String password, EmployeePosition position) {
         this.name = name;
         this.id = id;
         this.workSince = workSince;

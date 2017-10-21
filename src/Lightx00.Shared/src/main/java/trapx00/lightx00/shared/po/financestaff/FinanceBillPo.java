@@ -1,10 +1,10 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.util.Date;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 
-import java.util.Date;
 
 public class FinanceBillPo extends BillPo {
     FinanceBillType financeBillType;
