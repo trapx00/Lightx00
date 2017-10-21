@@ -8,10 +8,18 @@ import trapx00.lightx00.shared.vo.BillVo;
 import java.util.Date;
 
 public class PurchaseBillBaseVo extends BillVo {
-    PurchaseBillType purchaseBillType;
+    private PurchaseBillType purchaseBillType;
 
-    public PurchaseBillBaseVo(String Id, Date date, BillState state, PurchaseBillType purchaseBillType) {
-        super(BillType.SaleBill, Id, date, state);
+    public PurchaseBillType getPurchaseBillType() {
+        return purchaseBillType;
+    }
+
+    public void setPurchaseBillType(PurchaseBillType purchaseBillType) {
+        this.purchaseBillType = purchaseBillType;
+    }
+
+    public PurchaseBillBaseVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType) {
+        super(BillType.SaleBill, id, date, state);
         this.purchaseBillType = purchaseBillType;
     }
 }

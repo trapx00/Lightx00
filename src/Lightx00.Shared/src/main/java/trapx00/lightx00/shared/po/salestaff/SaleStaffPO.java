@@ -8,10 +8,18 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import java.util.Date;
 
 public class SaleStaffPo extends EmployeePo {
-    SaleStaffType saleStaffType;
+    private SaleStaffType saleStaffType;
 
-    public SaleStaffPo(String name, String Id, Date workSince, String username, String password, SaleStaffType saleStaffType) {
-        super(name, Id, workSince, username, password, EmployeePosition.SaleStaff);
+    public SaleStaffType getSaleStaffType() {
+        return saleStaffType;
+    }
+
+    public void setSaleStaffType(SaleStaffType saleStaffType) {
+        this.saleStaffType = saleStaffType;
+    }
+
+    public SaleStaffPo(String name, String id, Date workSince, String username, String password, SaleStaffType saleStaffType) {
+        super(name, id, workSince, username, password, EmployeePosition.SaleStaff);
         this.saleStaffType = saleStaffType;
     }
 }

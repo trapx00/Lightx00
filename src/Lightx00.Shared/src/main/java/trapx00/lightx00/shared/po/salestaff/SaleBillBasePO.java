@@ -7,10 +7,18 @@ import trapx00.lightx00.shared.po.bill.BillType;
 import java.util.Date;
 
 public class SaleBillBasePo extends BillPo {
-    SaleBillType saleBillType;
+    private SaleBillType saleBillType;
 
-    public SaleBillBasePo(String Id, Date date, BillState state, SaleBillType saleBillType) {
-        super(BillType.SaleBill, Id, date, state);
+    public SaleBillType getSaleBillType() {
+        return saleBillType;
+    }
+
+    public void setSaleBillType(SaleBillType saleBillType) {
+        this.saleBillType = saleBillType;
+    }
+
+    public SaleBillBasePo(String id, Date date, BillState state, SaleBillType saleBillType) {
+        super(BillType.SaleBill, id, date, state);
         this.saleBillType = saleBillType;
     }
 }
