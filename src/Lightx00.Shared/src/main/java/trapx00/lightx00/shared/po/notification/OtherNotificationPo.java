@@ -5,8 +5,8 @@ import java.util.Date;
 public class OtherNotificationPo extends NotificationPo {
     String content;
 
-    public OtherNotificationPo(String id, Date date, String content) {
-        super(id, date, NotificationType.Others);
+    public OtherNotificationPo(String id, Date date, String senderId, String receiverId, String content) {
+        super(id, date, senderId, receiverId, NotificationType.Others);
         this.content = content;
     }
 

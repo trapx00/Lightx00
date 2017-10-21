@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.blservice.notificationblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.vo.notification.BillApprovalNotificationVo;
 import trapx00.lightx00.shared.vo.notification.NotificationVo;
 
 public interface NotificationBlService {
@@ -9,10 +10,10 @@ public interface NotificationBlService {
 
     ResultMessage acknowledge(NotificationVo notification);
 
-    ResultMessage activate(NotificationVo notification);
+    ResultMessage activate(BillApprovalNotificationVo notification);
 
-    ResultMessage abandon(NotificationVo notification);
+    ResultMessage abandon(BillApprovalNotificationVo notification);
 
-    ResultMessage modify(NotificationVo notification);
+    ResultMessage modify(BillApprovalNotificationVo notification);
 
 }

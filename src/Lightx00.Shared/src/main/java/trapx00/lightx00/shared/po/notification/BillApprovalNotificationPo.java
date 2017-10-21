@@ -5,8 +5,8 @@ import java.util.Date;
 public class BillApprovalNotificationPo extends NotificationPo {
     String billId;
 
-    public BillApprovalNotificationPo(String id, Date date,  String billId) {
-        super(id, date, NotificationType.BillApproval);
+    public BillApprovalNotificationPo(String id, Date date, String senderId, String receiverId, String billId) {
+        super(id, date, senderId, receiverId, NotificationType.BillApproval);
         this.billId = billId;
     }
 
