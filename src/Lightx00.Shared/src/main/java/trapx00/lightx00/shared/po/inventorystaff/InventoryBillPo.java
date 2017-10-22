@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.bill.BillType;
 
 public class InventoryBillPo extends BillPo {
 
-    InventoryBillType inventoryBillType;
+    private InventoryBillType inventoryBillType;
 
     public InventoryBillPo(String id, Date date, BillState state,
                            InventoryBillType inventoryBillType) {

@@ -7,10 +7,10 @@ import trapx00.lightx00.shared.po.bill.BillType;
 
 public class InventoryDetailBillPo extends InventoryBillPo {
     //报损报溢报警
-    String operatorId;//操作员编号
-    String[] commodityIdList;//商品
-    double[] amounts;//报损/报溢/报警数量
-    Date time;
+    private  String operatorId;//操作员编号
+    private String[] commodityIdList;//商品
+    private  double[] amounts;//报损/报溢/报警数量
+    private  Date time;
 
     public InventoryDetailBillPo(String id, Date date, BillState state,
                                  InventoryBillType inventoryBillType, String operatorId,

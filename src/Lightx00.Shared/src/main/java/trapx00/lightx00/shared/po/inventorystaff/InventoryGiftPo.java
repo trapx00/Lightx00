@@ -5,9 +5,9 @@ import java.util.Date;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
 public class InventoryGiftPo {
-    Date time;
-    String id;
-    PromotionCommodity[] gifts;
+    private Date time;
+    private String id;
+    private  PromotionCommodity[] gifts;
 
     public InventoryGiftPo(Date time, String id, PromotionCommodity[] gifts) {
         this.time = time;
