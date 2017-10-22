@@ -1,14 +1,15 @@
 package trapx00.lightx00.shared.dataservice.admindataservice;
 
+import trapx00.lightx00.shared.po.EmployeePosition;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.admin.UserAccountPo;
+import trapx00.lightx00.shared.po.EmployeePo;
 
 public interface UserManagementDataService {
-    UserAccountPo[] query(String id, String name, String accountName, String password, boolean hasRoot);
+    EmployeePo[] query(String name, String id,EmployeePosition positoin);
 
-    ResultMessage add(UserAccountPo account);
+    ResultMessage add(EmployeePo account);
 
-    ResultMessage modify(UserAccountPo account);
+    ResultMessage modify(EmployeePo account);
 
-    ResultMessage delete(UserAccountPo account);
+    ResultMessage delete(EmployeePo account);
 }

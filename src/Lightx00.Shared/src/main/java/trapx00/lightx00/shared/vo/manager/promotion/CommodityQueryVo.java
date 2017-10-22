@@ -5,6 +5,12 @@ public class CommodityQueryVo {
     private String name;
     private String type;
 
+    public CommodityQueryVo(String id,String name,String type){
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
+
     public String getId() {
         return id;
     }

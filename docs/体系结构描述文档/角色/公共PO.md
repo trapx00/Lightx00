@@ -1,7 +1,7 @@
 ```java
 class BillPO {
-    BillType bill;
-    String ID;
+    BillType billType;
+    String id;
     Date date;
     BillState state;
 }
@@ -30,7 +30,7 @@ enum BillState {
 ```java
 class EmployeePO {
     String name;
-    String ID;
+    String id;
     Date workSince;
     String username;
     String password;
@@ -50,7 +50,7 @@ enum EmployeePosition{
 
 ```java
 class NotificationPO {
-    String ID;
+    String id;
     Date date;
     NotificationType type;
 }
@@ -65,13 +65,13 @@ enum NotificationType{
 
 ```java
 class BillApprovalNotificationPO extends NotificationPO {
-    String billID;
+    String billId;
 }
 ```
 
 ```java
 class BillApprovalNotificationVO {
-    String ID;
+    String id;
     Date date;
     NotificationType type;
     BillVO bill;
@@ -87,7 +87,7 @@ class OtherNotificationPO extends NotificationPO {
 ```java
 class DraftPO {
     Date saveTime;
-    String billID;
+    String billId;
 }
 ```
 

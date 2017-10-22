@@ -3,14 +3,16 @@ package trapx00.lightx00.shared.vo.manager.promotion;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
+import java.util.Date;
+
 public class PromotionVoBase {
     private String id;
     private PromotionType type;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private PromotionState state;
 
-    public PromotionVoBase(String id, PromotionType type, String startDate, String endDate,
+    public PromotionVoBase(String id, PromotionType type, Date startDate, Date endDate,
                            PromotionState state) {
         this.id = id;
         this.type = type;
@@ -27,7 +29,7 @@ public class PromotionVoBase {
         return type;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -35,11 +37,11 @@ public class PromotionVoBase {
         return id;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -47,7 +49,7 @@ public class PromotionVoBase {
         this.id = id;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 

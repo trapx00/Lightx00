@@ -6,11 +6,11 @@ import trapx00.lightx00.shared.vo.EmployeeVo;
 import java.util.Date;
 
 public class NotificationVo {
-    String id;
-    Date date;
-    EmployeeVo sender;
-    EmployeeVo receiver;
-    NotificationType type;
+    private String id;
+    private Date date;
+    private EmployeeVo sender;
+    private EmployeeVo receiver;
+    private NotificationType type;
 
     public NotificationVo(String id, Date date, EmployeeVo sender, EmployeeVo receiver,
                           NotificationType type) {

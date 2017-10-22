@@ -6,13 +6,13 @@ import trapx00.lightx00.shared.po.bill.BillType;
 import java.util.Date;
 
 public class BillQueryVo { //得到待审批单据
-    String Id;
+    String id;
     BillType type;
     Date date;
     BillState state;
 
-    public BillQueryVo(String Id, BillType type, Date date, BillState state) {
-        this.Id = Id;
+    public BillQueryVo(String id, BillType type, Date date, BillState state) {
+        this.id = id;
         this.type = type;
         this.date = date;
         this.state = state;
@@ -27,7 +27,7 @@ public class BillQueryVo { //得到待审批单据
     }
 
     public void setId(String id) {
-        Id = id;
+        id = id;
     }
 
     public void setDate(Date date) {
@@ -35,7 +35,7 @@ public class BillQueryVo { //得到待审批单据
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public BillState getState() {

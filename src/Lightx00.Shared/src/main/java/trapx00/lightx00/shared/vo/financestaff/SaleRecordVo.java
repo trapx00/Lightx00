@@ -3,12 +3,12 @@ package trapx00.lightx00.shared.vo.financestaff;
 import java.util.Date;
 
 public class SaleRecordVo { //商品销售记录
-    Date date;
-    String commodityName;
-    String model;
-    double amount;
-    double unitPrice;
-    double total;
+    private Date date;
+    private String commodityName;
+    private String model;
+    private double amount;
+    private double unitPrice;
+    private double total;
 
     public SaleRecordVo(Date date, String commodityName, String model, double amount, double unitPrice, double total) {
         this.date = date;

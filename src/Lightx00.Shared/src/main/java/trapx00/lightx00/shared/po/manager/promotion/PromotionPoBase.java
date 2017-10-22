@@ -1,14 +1,16 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
 
+import java.util.Date;
+
 public class PromotionPoBase{
     private String id;
     private PromotionType type;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private PromotionState state;
 
-    public PromotionPoBase(String id, PromotionType type, String startDate, String endDate, PromotionState state) {
+    public PromotionPoBase(String id, PromotionType type, Date startDate, Date endDate, PromotionState state) {
         this.id = id;
         this.type = type;
         this.startDate = startDate;
@@ -24,7 +26,7 @@ public class PromotionPoBase{
         return type;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -32,11 +34,11 @@ public class PromotionPoBase{
         return id;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -44,7 +46,7 @@ public class PromotionPoBase{
         this.id = id;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 

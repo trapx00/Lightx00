@@ -3,11 +3,13 @@ package trapx00.lightx00.shared.vo.manager.promotion;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
+import java.util.Date;
+
 public class TotalPriceCouponVo extends PromotionVoBase {
     private double couponPrice;
     private double totalPrice;
 
-    public TotalPriceCouponVo(String id, String startDate, String endDate,
+    public TotalPriceCouponVo(String id, Date startDate, Date endDate,
                               PromotionState state, double couponPrice, double totalPrice) {
         super(id, PromotionType.TotalPriceCoupon, startDate, endDate, state);
         this.couponPrice = couponPrice;

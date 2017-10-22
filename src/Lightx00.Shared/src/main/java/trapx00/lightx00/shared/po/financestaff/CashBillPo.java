@@ -5,12 +5,16 @@ import trapx00.lightx00.shared.po.bill.BillState;
 
 
 public class CashBillPo extends FinanceBillPo {
-    String operatorId;
-    String accountId;
-    CashBillItem[] items;
+    private String operatorId;
+    private String accountId;
+    private CashBillItem[] items;
 
-    public CashBillPo(String id, Date date, BillState state) {
+    public CashBillPo(String id, Date date, BillState state, String operatorId,
+                      String accountId, CashBillItem[] items) {
         super(id, date, state, FinanceBillType.CashBill);
+        this.operatorId = operatorId;
+        this.accountId = accountId;
+        this.items = items;
     }
 
     public String getOperatorId() {

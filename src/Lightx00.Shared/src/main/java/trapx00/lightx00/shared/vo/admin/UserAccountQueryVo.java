@@ -1,57 +1,42 @@
 package trapx00.lightx00.shared.vo.admin;
 
-public class UserAccountQueryVo {
-    String id;
-    String name;
-    String accountName;
-    String password;
-    boolean hasRoot;
+import trapx00.lightx00.shared.po.EmployeePosition;
 
-    public UserAccountQueryVo(String id, String name, String accountName, String password, boolean hasRoot) {
-        this.id = id;
+import java.util.Date;
+
+public class UserAccountQueryVo {
+    private String name;
+    private String id;
+    private EmployeePosition position;
+
+    public UserAccountQueryVo(String name,String id,Date workSince,String username,EmployeePosition position){
         this.name = name;
-        this.accountName = accountName;
-        this.password = password;
-        this.hasRoot = hasRoot;
+        this.id = id;
+        this.position = position;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public EmployeePosition getPosition() {
+        return position;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setPosition(EmployeePosition position) {
+        this.position = position;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isHasRoot() {
-        return hasRoot;
-    }
-
-    public void setHasRoot(boolean hasRoot) {
-        this.hasRoot = hasRoot;
-    }
 }

@@ -1,9 +1,9 @@
 package trapx00.lightx00.shared.po.financestaff;
 
 public class CashBillItem {
-    String name;
-    double amount;
-    String comment;
+    private String name;
+    private double amount;
+    private String comment;
 
     public CashBillItem(String name, double amount, String comment) {
         this.name = name;

@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.vo.EmployeeVo;
 import java.util.Date;
 
 public class OtherNotificationVo extends NotificationVo {
-    String content;
+    private String content;
 
     public OtherNotificationVo(String id, Date date, EmployeeVo sender,
                                EmployeeVo receiver, String content) {

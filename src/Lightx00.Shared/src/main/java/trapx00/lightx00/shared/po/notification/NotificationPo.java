@@ -3,11 +3,11 @@ package trapx00.lightx00.shared.po.notification;
 import java.util.Date;
 
 public class NotificationPo {
-    String id;
-    Date date;
-    String senderId;
-    String receiverId;
-    NotificationType type;
+    private String id;
+    private Date date;
+    private String senderId;
+    private String receiverId;
+    private NotificationType type;
 
     public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type) {
         this.id = id;

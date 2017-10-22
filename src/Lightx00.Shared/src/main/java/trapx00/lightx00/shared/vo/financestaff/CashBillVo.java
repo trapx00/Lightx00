@@ -6,9 +6,9 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 
 public class CashBillVo extends FinanceBillVo {
-    FinanceStaffVo operator;
-    BankAccountVo account;
-    CashBillItem[] items;
+    private FinanceStaffVo operator;
+    private BankAccountVo account;
+    private CashBillItem[] items;
 
 
     public CashBillVo(String id, Date date, BillState state, FinanceStaffVo operator,

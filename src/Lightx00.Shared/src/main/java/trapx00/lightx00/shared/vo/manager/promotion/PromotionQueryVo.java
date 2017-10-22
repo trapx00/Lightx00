@@ -2,14 +2,26 @@ package trapx00.lightx00.shared.vo.manager.promotion;
 
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
+import java.util.Date;
+
 public class PromotionQueryVo {
     private String id;
     private PromotionType type;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private int clientLevel;
     private double couponPrice;
     private double totalPrice;
+
+    public PromotionQueryVo(String id,PromotionType type,Date startDate,Date endDate,int clientLevel,double couponPrice,double totalPrice){
+        this.id = id;
+        this.type = type;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.clientLevel = clientLevel;
+        this.couponPrice = couponPrice;
+        this.totalPrice = totalPrice;
+    }
 
     public String getId() {
         return id;
@@ -19,11 +31,11 @@ public class PromotionQueryVo {
         return type;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -47,11 +59,11 @@ public class PromotionQueryVo {
         this.type = type;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

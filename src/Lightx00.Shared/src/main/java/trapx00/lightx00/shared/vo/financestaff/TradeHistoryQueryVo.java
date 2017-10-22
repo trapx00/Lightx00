@@ -7,12 +7,12 @@ import trapx00.lightx00.shared.vo.salestaff.ClientVo;
 import java.util.Date;
 
 public class TradeHistoryQueryVo { //经营历程表查询条件
-    Date start;
-    Date end;
-    BillType billType;
-    ClientVo client;
-    EmployeeVo operator;
-    int inventory;
+    private Date start;
+    private Date end;
+    private BillType billType;
+    private ClientVo client;
+    private EmployeeVo operator;
+    private int inventory;
 
     public TradeHistoryQueryVo(Date start, Date end, BillType billType, ClientVo client, EmployeeVo operator, int inventory) {
         this.start = start;

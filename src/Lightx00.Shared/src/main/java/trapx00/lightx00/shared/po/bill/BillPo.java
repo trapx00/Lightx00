@@ -3,24 +3,24 @@ package trapx00.lightx00.shared.po.bill;
 import java.util.Date;
 
 public class BillPo {
-    BillType bill;
-    String id;
-    Date date;
-    BillState state;
+    private BillType billType;
+    private String id;
+    private Date date;
+    private BillState state;
 
-    public BillPo(BillType bill, String id, Date date, BillState state) {
-        this.bill = bill;
+    public BillPo(BillType billType, String id, Date date, BillState state) {
+        this.billType = billType;
         this.id = id;
         this.date = date;
         this.state = state;
     }
 
-    public BillType getBill() {
-        return bill;
+    public BillType getBillType() {
+        return billType;
     }
 
-    public void setBill(BillType bill) {
-        this.bill = bill;
+    public void setBillType(BillType billType) {
+        this.billType = billType;
     }
 
     public String getId() {

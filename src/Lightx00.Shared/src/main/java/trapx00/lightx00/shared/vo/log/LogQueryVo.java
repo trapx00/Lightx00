@@ -5,9 +5,9 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import java.util.Date;
 
 public class LogQueryVo {
-    Date date;
-    LogSeverity severity;
-    String content;
+    private Date date;
+    private LogSeverity severity;
+    private String content;
 
     public LogQueryVo(Date date, LogSeverity severity, String content) {
         this.date = date;

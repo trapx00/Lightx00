@@ -10,9 +10,9 @@ import java.util.Date;
 
 public class SystemSnapshotVo extends FinanceBillVo { //账
     //存储一次不修改
-    CommodityVo[] commodities;
-    ClientVo[] clients;
-    BankAccountVo[] bankAccounts;
+    private CommodityVo[] commodities;
+    private ClientVo[] clients;
+    private BankAccountVo[] bankAccounts;
 
     public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts) {
         super(FinanceBillType.SystemSnapshot, id, date, state);

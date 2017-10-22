@@ -3,10 +3,10 @@ package trapx00.lightx00.shared.po.financestaff;
 import java.util.Date;
 
 public class BankAccountPo {
-    String id;
-    String name;
-    double amount;
-    Date createTime;
+    private String id;
+    private String name;
+    private double amount;
+    private Date createTime;
 
     public BankAccountPo(String id, String name, double amount, Date createTime) {
         this.id = id;

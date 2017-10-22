@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.blservice.promotionblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.vo.manager.promotion.CommodityQueryVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
@@ -13,7 +12,7 @@ public interface PromotionManagementBlService {
 
     ResultMessage saveAsDraft(PromotionVoBase promotion);
 
-    ResultMessage delete(PromotionPoBase promotion);
+    ResultMessage delete(PromotionVoBase promotion);
 
     PromotionVoBase resume();
 
