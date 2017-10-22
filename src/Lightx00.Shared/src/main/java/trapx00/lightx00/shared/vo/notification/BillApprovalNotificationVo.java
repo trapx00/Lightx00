@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.vo.EmployeeVo;
 import java.util.Date;
 
 public class BillApprovalNotificationVo extends NotificationVo {
-    BillVo bill;
+    private BillVo bill;
 
     public BillApprovalNotificationVo(String id, Date date, EmployeeVo sender, EmployeeVo receiver, BillVo bill) {
         super(id, date, sender, receiver, NotificationType.BillApproval);

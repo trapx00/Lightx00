@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentationdriver.logblservice;
+package trapx00.lightx00.client.presentationdriver.loginblservice;
 
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
@@ -13,7 +13,7 @@ public class LoginBlServiceDriver {
     @Test
     public void testLogin(){
         EmployeeVo expected = service.login("123","123");
-        assertEquals("123",expected.getId());
+        assertEquals(expected.getId(), "123");
 
     }
 

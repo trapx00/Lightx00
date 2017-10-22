@@ -8,10 +8,10 @@ import trapx00.lightx00.shared.vo.salestaff.ClientVo;
 import java.util.Date;
 
 public class ReceivalPaymentBillVoBase extends FinanceBillVo {
-    ClientVo client;
-    FinanceStaffVo operator;
-    Transcation[] transcations;
-    double total;
+    private ClientVo client;
+    private FinanceStaffVo operator;
+    private Transcation[] transcations;
+    private double total;
 
     public ReceivalPaymentBillVoBase(FinanceBillType financeBillType, String id, Date date,
                                      BillState state, ClientVo client, FinanceStaffVo operator,

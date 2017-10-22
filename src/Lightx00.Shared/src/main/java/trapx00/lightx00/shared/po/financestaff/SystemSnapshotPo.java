@@ -8,9 +8,9 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 public class  SystemSnapshotPo extends FinanceBillPo { //账
     //存储一次不修改
-    CommodityPo[] commodities;
-    ClientPo[] clients;
-    BankAccountPo[] bankAccounts;
+    private CommodityPo[] commodities;
+    private ClientPo[] clients;
+    private BankAccountPo[] bankAccounts;
 
     public SystemSnapshotPo(String id, Date date, BillState state, CommodityPo[] commodities,
                             ClientPo[] clients, BankAccountPo[] bankAccounts) {

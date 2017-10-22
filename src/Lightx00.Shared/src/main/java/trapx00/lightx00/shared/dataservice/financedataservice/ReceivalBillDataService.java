@@ -3,7 +3,7 @@ package trapx00.lightx00.shared.dataservice.financedataservice;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 
-public interface RecevialBillDataService {
+public interface ReceivalBillDataService {
     ResultMessage submit(ReceivalBillPo bill);
 
     ResultMessage activate(ReceivalBillPo bill);

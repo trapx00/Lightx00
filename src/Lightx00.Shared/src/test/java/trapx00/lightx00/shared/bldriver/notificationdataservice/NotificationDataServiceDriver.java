@@ -19,12 +19,12 @@ public class NotificationDataServiceDriver {
 
     @Test
     public void update() throws Exception {
-        assertEquals(notifications[0].getId(),"123");
+        assertEquals("123", notifications[0].getId());
     }
 
     @Test
     public void acknowledge() throws Exception {
-        assertEquals(service.acknowledge(notifications[0]), ResultMessage.Success);
+        assertEquals(ResultMessage.Success, service.acknowledge(notifications[0]));
     }
 
 }

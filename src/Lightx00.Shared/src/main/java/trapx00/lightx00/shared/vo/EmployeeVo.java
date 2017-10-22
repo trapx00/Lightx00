@@ -4,11 +4,11 @@ import java.util.Date;
 import trapx00.lightx00.shared.po.EmployeePosition;
 
 public class EmployeeVo {
-    String name;
-    String id;
-    Date workSince;
-    String username;
-    EmployeePosition position;
+    private String name;
+    private String id;
+    private Date workSince;
+    private String username;
+    private EmployeePosition position;
 
     public EmployeeVo(String name, String id, Date workSince, String username,
                       EmployeePosition position) {

@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.po.bill.BillType;
 
 
 public class FinanceBillPo extends BillPo {
-    FinanceBillType financeBillType;
+    private FinanceBillType financeBillType;
 
     public FinanceBillPo(String id, Date date, BillState state, FinanceBillType financeBillType) {
         super(BillType.FinanceBill, id, date, state);

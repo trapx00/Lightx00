@@ -7,12 +7,12 @@ import trapx00.lightx00.shared.vo.salestaff.SaleStaffVo;
 
 
 public class SaleDetailQueryVo { //销售明细表查询条件
-    Date start;
-    Date end;
-    String commodityName;
-    ClientVo client;
-    SaleStaffVo operator;
-    int inventory;
+    private Date start;
+    private Date end;
+    private String commodityName;
+    private ClientVo client;
+    private SaleStaffVo operator;
+    private int inventory;
 
     public SaleDetailQueryVo(Date start, Date end, String commodityName, ClientVo client,
                              SaleStaffVo operator, int inventory) {

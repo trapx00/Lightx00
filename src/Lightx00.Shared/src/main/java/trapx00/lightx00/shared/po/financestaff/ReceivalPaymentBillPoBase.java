@@ -6,10 +6,10 @@ import trapx00.lightx00.shared.po.bill.BillState;
 
 public class  ReceivalPaymentBillPoBase extends FinanceBillPo {
     //收款单格式是SKD-yyyyMMDD-00001，付款单格式是FKD-yyyyMMDD-00001
-    String clientId;
-    String operatorId;
-    Transcation[] transcations;
-    double total;
+    protected String clientId;
+    protected String operatorId;
+    protected Transcation[] transcations;
+    protected double total;
 
     public ReceivalPaymentBillPoBase(String id, Date date, BillState state,
                                      FinanceBillType financeBillType, String clientId,
