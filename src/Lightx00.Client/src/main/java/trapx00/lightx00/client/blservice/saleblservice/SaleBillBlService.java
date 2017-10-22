@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
 
 public interface SaleBillBlService {
 
-    ResultMessage[] submit(SaleBillVo saleBill);//提交销售单
+    ResultMessage submit(SaleBillVo saleBill);//提交销售单
 
     ResultMessage saveAsDraft(SaleBillVo saleBill);//保存销售单为草稿
 }
