@@ -1,10 +1,12 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
+import java.util.Date;
+
 public class CommodityOnSalePo extends PromotionPoBase {
     private PromotionCommodity[] commodityOnSale;
     private double onSalePrice;
 
-    public CommodityOnSalePo(String id,  String startDate, String endDate, PromotionState state,
+    public CommodityOnSalePo(String id, Date startDate, Date endDate, PromotionState state,
                              PromotionCommodity[] commodityOnSale, double onSalePrice) {
         super(id, PromotionType.CommodityOnSale, startDate, endDate, state);
         this.commodityOnSale = commodityOnSale;

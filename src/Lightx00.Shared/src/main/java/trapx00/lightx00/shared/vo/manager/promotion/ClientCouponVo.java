@@ -3,11 +3,13 @@ package trapx00.lightx00.shared.vo.manager.promotion;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
+import java.util.Date;
+
 public class ClientCouponVo extends PromotionVoBase {
     private int clientLevel;
     private double couponPrice;
 
-    public ClientCouponVo(String id, String startDate, String endDate, PromotionState state,
+    public ClientCouponVo(String id, Date startDate, Date endDate, PromotionState state,
                           int clientLevel, double couponPrice) {
         super(id, PromotionType.ClientCoupon, startDate, endDate, state);
         this.clientLevel = clientLevel;

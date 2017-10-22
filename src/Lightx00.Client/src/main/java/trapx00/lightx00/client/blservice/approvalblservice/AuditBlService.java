@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.vo.manager.BillQueryVo;
 
 public interface AuditBlService {
 
-    ResultMessage show(BillQueryVo query);
+    BillVo[] query(BillQueryVo query);
 
     ResultMessage reject(BillVo bill);
 
