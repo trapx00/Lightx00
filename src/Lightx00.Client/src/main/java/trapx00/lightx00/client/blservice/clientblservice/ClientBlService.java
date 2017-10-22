@@ -15,5 +15,5 @@ public interface ClientBlService {
 
     public ResultMessage delete(ClientVo[] client);//删除客户
 
-    public ClientVo detail(ClientVo[] client);//查询客户详细信息
+    public ClientVo detail(ClientVo client);//查询客户详细信息
 }
