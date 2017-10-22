@@ -22,27 +22,27 @@ public class NotificationBlServiceDriver {
 
     @Test
     public void update() throws Exception {
-        assertEquals(notifications[0].getId(), "123");
+        assertEquals("123",notifications[0].getId());
     }
 
     @Test
     public void acknowledge() throws Exception {
-        assertEquals(service.acknowledge(notifications[1]), ResultMessage.Success);
+        assertEquals(ResultMessage.Success, service.acknowledge(notifications[1]));
     }
 
     @Test
     public void activate() throws Exception {
-        assertEquals(service.activate((BillApprovalNotificationVo)notifications[1]), ResultMessage.Success);
+        assertEquals(ResultMessage.Success, service.activate((BillApprovalNotificationVo)notifications[1]));
     }
 
     @Test
     public void abandon() throws Exception {
-        assertEquals(service.abandon((BillApprovalNotificationVo)notifications[1]), ResultMessage.Success);
+        assertEquals(ResultMessage.Success, service.abandon((BillApprovalNotificationVo)notifications[1]));
     }
 
     @Test
     public void modify() throws Exception {
-        assertEquals(service.abandon((BillApprovalNotificationVo)notifications[1]), ResultMessage.Success);
+        assertEquals(ResultMessage.Success, service.abandon((BillApprovalNotificationVo)notifications[1]));
     }
 
 }

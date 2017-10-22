@@ -6,10 +6,10 @@ import trapx00.lightx00.shared.po.bill.BillType;
 import java.util.Date;
 
 public class BillVo {
-    BillType billType;
-    String id;
-    Date date;
-    BillState state;
+    private BillType billType;
+    private String id;
+    private Date date;
+    private BillState state;
 
     public BillVo(BillType billType, String id, Date date, BillState state) {
         this.billType = billType;

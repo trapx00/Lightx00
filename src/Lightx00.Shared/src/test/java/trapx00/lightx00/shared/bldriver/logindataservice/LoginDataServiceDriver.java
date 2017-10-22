@@ -10,7 +10,7 @@ public class LoginDataServiceDriver {
     LoginDataService service = new LoginDataServiceStub();
     @Test
     public void login() throws Exception {
-        assertEquals(service.login("123","123").getId(), "123");
+        assertEquals("123", service.login("123","123").getId());
     }
 
 }
