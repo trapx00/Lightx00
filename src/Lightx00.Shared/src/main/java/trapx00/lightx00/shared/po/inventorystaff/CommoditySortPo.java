@@ -2,11 +2,11 @@ package trapx00.lightx00.shared.po.inventorystaff;
 
 public class CommoditySortPo {
     //商品分类
-    String id;
-    String name;
-    String []commodityIdList;
-    String preId;//父类
-    String[] nextId; //子类
+    private String id;
+    private  String name;
+    private  String []commodityIdList;
+    private  String preId;//父类
+    private  String[] nextId; //子类
 
     public CommoditySortPo(String id, String name, String[] commodityIdList,
                            String preId, String[] nextId) {
