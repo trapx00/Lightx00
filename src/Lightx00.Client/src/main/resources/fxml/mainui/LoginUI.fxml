@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.validation.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="341.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.mainui.LoginUI">
+   <children>
+      <JFXRippler />
+      <JFXTextField labelFloat="true" layoutX="364.0" layoutY="125.0" promptText="用户名" />
+      <JFXPasswordField labelFloat="true" layoutX="364.0" layoutY="185.0" promptText="密码" />
+      <JFXButton buttonType="RAISED" layoutX="364.0" layoutY="257.0" prefHeight="32.0" prefWidth="55.0" style="-fx-background-color: #7986CB;" text="登录" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="456.0" layoutY="257.0" prefHeight="32.0" prefWidth="55.0" style="-fx-background-color: #7986CB;" text="退出" textFill="WHITE" />
+      <ImageView fitHeight="245.0" fitWidth="293.0" layoutX="37.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="364.0" layoutY="32.0" prefHeight="38.0" prefWidth="128.0" text="Light x00">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="441.0" layoutY="76.0" text="进销存管理系统" />
+      <Label layoutX="511.0" layoutY="312.0" text="By Trap x00" />
+      <JFXRippler />
+   </children>
+</AnchorPane>
