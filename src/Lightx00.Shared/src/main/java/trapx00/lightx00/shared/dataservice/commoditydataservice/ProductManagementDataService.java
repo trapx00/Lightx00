@@ -2,6 +2,7 @@ package trapx00.lightx00.shared.dataservice.commoditydataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
+import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
 
 public interface ProductManagementDataService {
 
@@ -9,7 +10,7 @@ public interface ProductManagementDataService {
 
     ResultMessage modify(CommoditySortPo commoditySort);//修改分类
 
-    CommoditySortPo[] query(String id, String name);//查询
+    CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo);//查询
 
     ResultMessage delete(CommoditySortPo commoditySort);//删除
 

@@ -83,3 +83,17 @@ class InventoryGiftVO{
 }
  ```
 
+```java
+class CommodityQueryVo{
+   String id;
+   String name;
+}
+```
+
+```java
+class CommoditySortQueryVo{
+   String id;
+   String name;
+}
+```
+

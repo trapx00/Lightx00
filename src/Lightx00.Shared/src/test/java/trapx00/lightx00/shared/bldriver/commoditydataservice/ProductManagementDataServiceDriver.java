@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.commoditydataservice.ProductManag
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
+import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +31,10 @@ public class ProductManagementDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals("S0001",service.query("S0001","Led")[0].getId());
+        CommoditySortQueryVo commoditySortQueryVo=new CommoditySortQueryVo();
+        commoditySortQueryVo.setId("S0001");
+        commoditySortQueryVo.setName("Led");
+        assertEquals("S0001",service.query(commoditySortQueryVo)[0].getId());
     }
 
     @Test

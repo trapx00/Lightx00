@@ -3,6 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.commoditydataservice;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.ProductManagementDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
+import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
 
 public class ProductManagementDataServiceStub implements ProductManagementDataService {
     String commodityIdList[]={"C0001","C0002"};
@@ -20,9 +21,9 @@ public class ProductManagementDataServiceStub implements ProductManagementDataSe
     }
 
     @Override
-    public CommoditySortPo[] query(String id, String name) {
+    public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
         return new CommoditySortPo[]{
-                new CommoditySortPo("S0001","Led", null,
+                new CommoditySortPo(commoditySortQueryVo.getId(),commoditySortQueryVo.getName(), null,
                         "", nextIds)
         };
     }
@@ -43,7 +44,7 @@ public class ProductManagementDataServiceStub implements ProductManagementDataSe
     @Override
     public CommoditySortPo[] dispaly(CommoditySortPo commoditySort) {
         return new CommoditySortPo[]{
-                new CommoditySortPo("S0002","Led", null,
+                new CommoditySortPo(commoditySort.getId(),commoditySort.getName(), null,
                         "", nextIds)
         };
     }
