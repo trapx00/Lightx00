@@ -7,14 +7,15 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.client.ClientPo;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
+import trapx00.lightx00.shared.vo.financestaff.TradeHistoryQueryVo;
 
 import java.util.Date;
 
 public class TradeHistoryDataServiceStub implements TradeHistoryDataService {
     @Override
-    public BillPo[] query(Date start, Date end, BillType billType, ClientPo client, EmployeePo operator, int repository) {
+    public BillPo[] query(TradeHistoryQueryVo query) {
         return new BillPo[] {
-                new PaymentBillPo("123",start,BillState.Draft,"123","123",null,0)
+                new PaymentBillPo("123",query.getStart(),BillState.Draft,"123","123",null,0)
         };
     }
 }

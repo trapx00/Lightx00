@@ -5,9 +5,9 @@ import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.vo.financestaff.TradeHistoryQueryVo;
 
 
 public interface TradeHistoryDataService {
-    BillPo[] query(Date start, Date end, BillType billType, ClientPo client,
-                   EmployeePo operator, int repository);
+    BillPo[] query(TradeHistoryQueryVo query);
 }
