@@ -21,7 +21,7 @@ public class Test extends Application {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/mainui/FrameworkUI.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/mainui/LoginUI.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.show();

@@ -11,6 +11,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lightx00.shared_main" />
     <orderEntry type="library" name="Gradle: com.jfoenix:jfoenix:1.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-commons:9.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-commons:8.15" level="project" />
+    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-materialicons:2.2.0-5" level="project" />
   </component>
 </module>
