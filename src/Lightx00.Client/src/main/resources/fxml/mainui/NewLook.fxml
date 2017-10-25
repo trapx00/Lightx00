@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane alignment="CENTER" prefHeight="602" prefWidth="802" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.mainui.NewLookController">
+    <StackPane fx:id="baseStackPane" prefHeight="600.0" prefWidth="800.0">
+        <BorderPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
+            <left>
+                <JFXDrawer fx:id="drawer" prefHeight="400.0" prefWidth="200.0">
+                    <VBox style="-fx-background-color: white">
+                        <ImageView fitHeight="100.0" fitWidth="200.0">
+                            <image>
+                                <Image url="@../../img/2.jpg" />
+                            </image></ImageView>
+                        <JFXButton prefHeight="60" prefWidth="200" text="功能1" textFill="#000000" />
+                        <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
+                    </VBox>
+
+                </JFXDrawer>
+            </left>
+            <right>
+                <BorderPane prefHeight="600" prefWidth="600">
+                    <top>
+                        <GridPane fx:id="titleBar" style="-fx-background-color: #3F51B5;">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+
+                            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="0">
+                                <padding>
+                                    <Insets left="20" />
+                                </padding>
+                                <Text fill="white" text="功能">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Text>
+                            </HBox>
+                            <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
+                                <padding>
+                                    <Insets right="20" />
+                                </padding>
+                                <JFXButton text="">
+                                    <graphic>
+                                        <MaterialIconView glyphName="CLOSE" glyphSize="26" glyphStyle="-fx-textFill: #FFFFFF;" />
+                                    </graphic>
+                                </JFXButton>
+
+                            </HBox>
+                        </GridPane>
+
+                        <!--<HBox fx:id="titleBar" prefHeight="50" style="-fx-background-image: url(../../img/1.jpg);">-->
+                        <!--</HBox>-->
+                    </top>
+                    <center>
+                        <Pane fx:id="contentPane" styleClass="floatingPane">
+                            <BorderPane.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </BorderPane.margin>
+                        </Pane>
+                    </center>
+                    <bottom>
+                        <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+
+
+                            <HBox fx:id="logBasePane" alignment="CENTER" GridPane.columnIndex="0">
+                                <JFXButton prefWidth="1000.0" text="日志" />
+                            </HBox>
+                            <HBox fx:id="userBasePane" alignment="CENTER" spacing="5" GridPane.columnIndex="1">
+                                <JFXButton prefWidth="1000.0" text="用户" />
+                                <MaterialIconView glyphName="SIGNAL_CELLULAR_4_BAR" glyphSize="16" glyphStyle="-fx-background-color: #DDDDDD" />
+                                <Text text="2017/10/25 11:00" />
+                            </HBox>
+                     <BorderPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </BorderPane.margin>
+
+                        </GridPane>
+                    </bottom>
+                </BorderPane>
+            </right>
+        </BorderPane>
+    </StackPane>
+</StackPane>
