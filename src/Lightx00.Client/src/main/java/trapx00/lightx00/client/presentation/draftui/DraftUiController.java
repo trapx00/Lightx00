@@ -62,7 +62,7 @@ public class DraftUiController {
             DraftUiController draftUiController = loader.getController();
             draftUiController.frameworkController = frameworkUiController;
             frameworkUiController.setContent(content);
-            frameworkUiController.titleText.setText("管理草稿箱");
+            //frameworkUiController.titleText.setText("管理草稿箱");
             return draftUiController;
         } catch (IOException e) {
             e.printStackTrace();

@@ -60,7 +60,7 @@ public class LogUiController {
             LogUiController thisController = loader.getController();
             thisController.frameworkController = frameworkUiController;
             frameworkUiController.setContent(content);
-            frameworkUiController.titleText.setText("查看日志");
+            //frameworkUiController.titleText.setText("查看日志");
             return thisController;
         } catch (IOException e) {
             e.printStackTrace();

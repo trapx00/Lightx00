@@ -93,7 +93,7 @@ public class TradeHistoryUiController {
             TradeHistoryUiController thisController = loader.getController();
             thisController.frameworkController = frameworkUiController;
             frameworkUiController.setContent(content);
-            frameworkUiController.titleText.setText("查看经营历程表");
+            //frameworkUiController.titleText.setText("查看经营历程表");
             return thisController;
         } catch (IOException e) {
             e.printStackTrace();
