@@ -51,7 +51,7 @@ public class LoginUiController {
     public void onLoginButtonClicked() {
         if (usernameField.getText().length() == 0) {
             new PromptDialogHelper("登录失败！","请输入用户名！")
-                    .addCloseButton("好的",null)
+                    .addCloseButton("好的","CHECK",null)
                     .create(dialogContainer)
                     .show();
         } else {

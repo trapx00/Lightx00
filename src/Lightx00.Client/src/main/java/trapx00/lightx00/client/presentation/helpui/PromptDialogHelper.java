@@ -3,6 +3,7 @@ package trapx00.lightx00.client.presentation.helpui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -45,18 +46,38 @@ public class PromptDialogHelper {
         return this;
     }
 
-    public PromptDialogHelper addCloseButton(String content, Node icon) {
+    public PromptDialogHelper addCloseButton(Node icon, String content, EventHandler<? super MouseEvent> e) {
         JFXButton button = new JFXButton(content, icon);
-        button.setOnMouseClicked(e -> dialog.close());
+        button.setOnMouseClicked(event -> {
+            if (e!=null){
+                e.handle(event);
+            }
+
+            dialog.close();
+        });
         buttonList.add(button);
         return this;
     }
 
-    public PromptDialogHelper addButton(String content, Node icon, EventHandler<? super MouseEvent> e) {
+    public PromptDialogHelper addCloseButton(String content, String glyphName, EventHandler<? super MouseEvent> e){
+        MaterialIconView icon  =new MaterialIconView();
+        icon.setGlyphName(glyphName);
+        icon.setGlyphSize(24);
+        return addCloseButton(icon, content, e);
+    }
+
+    public PromptDialogHelper addButton(Node icon, String content, EventHandler<? super MouseEvent> e) {
         JFXButton button = new JFXButton(content, icon);
         button.setOnMouseClicked(e);
         buttonList.add(button);
         return this;
+    }
+
+    public PromptDialogHelper addButton(String content, String glyphName, EventHandler<? super MouseEvent> e) {
+        MaterialIconView icon  =new MaterialIconView();
+        icon.setGlyphName(glyphName);
+        icon.setGlyphSize(24);
+        return addButton(icon, content,e);
     }
 
     public PromptDialogHelper addButtons(JFXButton... buttons) {

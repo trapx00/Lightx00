@@ -13,4 +13,9 @@ public class DateHelper {
     public static String fromTimestamp(long millisecond) {
         return dateFormatter.format(Instant.ofEpochMilli(millisecond));
     }
+
+
+    public static String fromDate(Date date){
+        return dateFormatter.format(date.toInstant());
+    }
 }
