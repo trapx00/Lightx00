@@ -26,7 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class FrameworkUiController {
-    public StackPane baseStackPane;
+    public StackPane dialogContainer;
     public GridPane drawer;
     public static final int DEPTH = 3;
     public GridPane titleBar;
@@ -39,7 +39,7 @@ public class FrameworkUiController {
     public JFXButton minimizeButton;
     public MaterialIconView maximizeButtonGlyph;
     public Label promptLabel;
-    private EmployeeVo employeeVo;
+    protected EmployeeVo employeeVo;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -80,12 +80,14 @@ public class FrameworkUiController {
         timeline.play();
     }
 
-    public void addContent(Node content) {
+
+    public void setContent(Node content) {
+        contentPane.getChildren().clear();
         contentPane.getChildren().add(content);
     }
 
     public void onDraftFunctionButtonClicked() {
-        DraftUiController.selected(this);
+        DraftUiController.init(this);
     }
 
 

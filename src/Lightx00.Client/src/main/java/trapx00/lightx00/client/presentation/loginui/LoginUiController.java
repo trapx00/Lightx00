@@ -28,9 +28,9 @@ public class LoginUiController {
     public JFXTextField passwordField;
     public JFXTextField usernameField;
     public JFXButton cancelButton;
-    @FXML private StackPane dialogContainer;
-    @FXML private BorderPane rootPane;
-    @FXML private JFXButton loginButton;
+    public StackPane dialogContainer;
+    public BorderPane rootPane;
+    public JFXButton loginButton;
 
 
     private JFXDepthManager depthManager;
