@@ -72,7 +72,8 @@ public class LoginUiController {
             newStage.initStyle(StageStyle.UNDECORATED);
 
             newStage.setScene(scene);
-            newStage.sizeToScene();
+            newStage.setHeight(900);
+            newStage.setWidth(1600);
 
             controller.setEmployee(employeeVo);
             controller.setStage(newStage);
