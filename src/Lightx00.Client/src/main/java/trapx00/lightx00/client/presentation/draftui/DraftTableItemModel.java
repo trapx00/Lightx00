@@ -3,21 +3,20 @@ package trapx00.lightx00.client.presentation.draftui;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.*;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.util.DateHelper;
 import trapx00.lightx00.shared.vo.BillVo;
 
 import java.util.Date;
 
-public class DraftModel extends RecursiveTreeObject<DraftModel> {
+public class DraftTableItemModel extends RecursiveTreeObject<DraftTableItemModel> {
     private ObjectProperty<Date> date;
     private ObjectProperty<BillType> type;
     private StringProperty id;
 
-    public DraftModel(BillVo bill){
+    public DraftTableItemModel(BillVo bill){
         this(bill.getDate(), bill.getBill(), bill.getId());
     }
 
-    public DraftModel(Date date, BillType type, String id) {
+    public DraftTableItemModel(Date date, BillType type, String id) {
         this.date = new SimpleObjectProperty<>(date);
         this.type = new SimpleObjectProperty<>(type);
         this.id = new SimpleStringProperty(id);

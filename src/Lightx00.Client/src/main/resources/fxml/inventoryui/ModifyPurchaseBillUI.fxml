@@ -12,13 +12,14 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.mainui.FrameworkUiController">
+<StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.inventoryui.ModifyPurchaseBillUiController">
     <AnchorPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <GridPane fx:id="drawer" style="-fx-background-color: white" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
@@ -39,9 +40,9 @@
                             </ImageView>
                         </graphic>
                     </Label>
-                    
 
-                    <JFXButton onAction="#onTradeSituationClicked" prefHeight="60" prefWidth="200" text="查看经营情况表" textFill="#000000" />
+
+                    <JFXButton prefHeight="60" prefWidth="200" text="功能1" textFill="#000000" />
                     <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
                     <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
                     <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
@@ -49,7 +50,7 @@
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
-                    <JFXButton onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                    <JFXButton prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
                         </graphic>
@@ -81,7 +82,7 @@
                             <padding>
                                 <Insets left="20" />
                             </padding>
-                            <Text fx:id="titleText" fill="white" text="功能">
+                            <Text fill="white" text="功能">
                                 <font>
                                     <Font size="24.0" />
                                 </font>
@@ -110,11 +111,11 @@
                     <!--</HBox>-->
                 </top>
                 <center>
-                    <StackPane fx:id="contentPane" alignment="CENTER" styleClass="floatingPane">
+                    <Pane fx:id="contentPane" styleClass="floatingPane">
                         <BorderPane.margin>
                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </BorderPane.margin>
-                    </StackPane>
+                    </Pane>
                 </center>
                 <bottom>
                     <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">
@@ -128,7 +129,7 @@
 
 
                         <HBox alignment="CENTER" GridPane.columnIndex="0">
-                            <JFXButton onAction="#onLogButtonClicked" prefWidth="1000.0" text="日志" />
+                            <JFXButton prefWidth="1000.0" text="日志" />
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1">
                             <MaterialIconView glyphName="SIGNAL_CELLULAR_4_BAR" glyphSize="16" glyphStyle="-fx-background-color: #DDDDDD" />
