@@ -3,13 +3,16 @@ package trapx00.lightx00.client.presentation.helpui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTreeTableView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +20,7 @@ import java.util.Collections;
 
 public class PromptDialogHelper {
     private Text titleText;
-    private Text contentText;
+    private Node contentNode;
     private ArrayList<JFXButton> buttonList = new ArrayList<>();
     private JFXDialog dialog = new JFXDialog(null,null, JFXDialog.DialogTransition.CENTER);
 
@@ -25,7 +28,22 @@ public class PromptDialogHelper {
         Text titleText = new Text(title);
         titleText.setFont(Font.font(20));
         this.titleText = titleText;
-        this.contentText  = new Text(content);
+        this.contentNode  = new Text(content);
+    }
+
+    public static PromptDialogHelper start(String title, String content){
+        return new PromptDialogHelper(title, content);
+    }
+
+    public PromptDialogHelper addTable(JFXTreeTableView table){
+        AnchorPane pane = new AnchorPane();
+        pane.getChildren().add(table);
+        AnchorPane.setTopAnchor(table,24.0);
+        AnchorPane.setBottomAnchor(table, 24.0);
+        AnchorPane.setLeftAnchor(table, 24.0);
+        AnchorPane.setRightAnchor(table, 24.0);
+        contentNode = table;
+        return this;
     }
 
     public Text getTitleText() {
@@ -37,16 +55,16 @@ public class PromptDialogHelper {
         return this;
     }
 
-    public Text getContentText() {
-        return contentText;
+    public Node getContentNode() {
+        return contentNode;
     }
 
-    public PromptDialogHelper setContentText(Text contentText) {
-        this.contentText = contentText;
+    public PromptDialogHelper setContentText(String contentText) {
+        this.contentNode = new Text(contentText);
         return this;
     }
 
-    public PromptDialogHelper addCloseButton(Node icon, String content, EventHandler<? super MouseEvent> e) {
+    public PromptDialogHelper addCloseButton(String content, Node icon,  EventHandler<? super MouseEvent> e) {
         JFXButton button = new JFXButton(content, icon);
         button.setOnMouseClicked(event -> {
             if (e!=null){
@@ -63,10 +81,10 @@ public class PromptDialogHelper {
         MaterialIconView icon  =new MaterialIconView();
         icon.setGlyphName(glyphName);
         icon.setGlyphSize(24);
-        return addCloseButton(icon, content, e);
+        return addCloseButton(content,icon, e);
     }
 
-    public PromptDialogHelper addButton(Node icon, String content, EventHandler<? super MouseEvent> e) {
+    public PromptDialogHelper addButton(String content, Node icon, EventHandler<? super MouseEvent> e) {
         JFXButton button = new JFXButton(content, icon);
         button.setOnMouseClicked(e);
         buttonList.add(button);
@@ -77,7 +95,7 @@ public class PromptDialogHelper {
         MaterialIconView icon  =new MaterialIconView();
         icon.setGlyphName(glyphName);
         icon.setGlyphSize(24);
-        return addButton(icon, content,e);
+        return addButton(content, icon, e);
     }
 
     public PromptDialogHelper addButtons(JFXButton... buttons) {
@@ -88,7 +106,7 @@ public class PromptDialogHelper {
     public JFXDialog create(StackPane container) {
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(titleText);
-        content.setBody(contentText);
+        content.setBody(contentNode);
         content.setActions(buttonList);
         dialog.setContent(content);
         dialog.setDialogContainer(container);

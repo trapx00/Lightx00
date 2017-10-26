@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.presentation.Client;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -78,11 +79,16 @@ public class DraftUiController {
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         int index = draftTable.getSelectionModel().getFocusedIndex();
         DraftModel model = draftTable.getRoot().getChildren().get(index).getValue();
-        new PromptDialogHelper("确定要删除吗？","你选择了单据"+model.getId())
+        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个单据吗？","你选择了单据"+model.getId())
+                .addTable(ReadOnlyPairTableHelper.start()
+                        .addPair("ID", model.getId())
+                        .addPair("单据类型", model.getType().toString())
+                        .addPair("时间", DateHelper.fromDate(model.getDate()))
+                        .create())
                 .addCloseButton("确定", "CHECK",e -> deleteItem(index))
                 .addCloseButton("取消", "CLOSE", null)
-                .create(frameworkController.dialogContainer)
-                .show();
+                .create(frameworkController.dialogContainer);
+        dialog.show();
     }
 
     public void deleteItem(int index){
