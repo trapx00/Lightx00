@@ -1,85 +1,45 @@
 package trapx00.lightx00.client.presentation.inventoryui;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.effects.JFXDepthManager;
-import de.jensd.fx.glyphs.materialicons.MaterialIconView;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import trapx00.lightx00.client.presentation.draftui.DraftUiController;
-import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
-import trapx00.lightx00.shared.util.DateHelper;
-import trapx00.lightx00.shared.vo.EmployeeVo;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
+import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
+import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 
-public class ModifyPurchaseBillUiController {
-    public StackPane dialogContainer;
-    public GridPane drawer;
-    public static final int DEPTH = 3;
-    public GridPane titleBar;
-    public GridPane bottomBar;
-    public Pane contentPane;
-    public JFXButton closeButton;
-    public Stage stage;
-    public Text timeText;
-    public JFXButton maximizeButton;
-    public JFXButton minimizeButton;
-    public MaterialIconView maximizeButtonGlyph;
-    public Label promptLabel;
-    protected EmployeeVo employeeVo;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-        UiUtil.setStage(stage);
-        BorderlessStageHelper.makeResizeable(stage);
-        BorderlessStageHelper.makeDraggable(stage, titleBar);
+public class ModifyPurchaseBillUiController extends FrameworkUiController {
+    public PurchaseBillPo purchaseBillPo = new PurchaseBillPo("JHD-20171026-00000", null, null, "李四",1,"16125012323","无",200.00,null);
+
+    public void onSubmitButtonClicked() {
+        PromptDialogHelper.start("单据详情", null)
+                .addCloseButton("确认提交", "DONE", e->submitSuccess())
+                .addCloseButton("取消","CLOSE",null)
+                .addTable(
+                        ReadOnlyPairTableHelper.start()
+                                .addPair("单据编号", purchaseBillPo.getId())
+                                .addPair("操作员", purchaseBillPo.getOperatorId())
+                                .addPair("供应商", purchaseBillPo.getSupplier())
+                                .addPair("仓库", purchaseBillPo.getRepository() + "")
+                                .addPair("总额合计", purchaseBillPo.getTotal() + "")
+                                .addPair("备注", purchaseBillPo.getComment())
+                                .create())
+                .create(this.dialogContainer)
+                .show();
     }
 
-    public void initialize() {
-        JFXDepthManager.setDepth(drawer, DEPTH);
-        JFXDepthManager.setDepth(titleBar, DEPTH);
-        JFXDepthManager.setDepth(bottomBar, DEPTH);
-        JFXDepthManager.setDepth(contentPane, DEPTH);
-        closeButton.setOnMouseClicked(e -> stage.close());
-        minimizeButton.setOnMouseClicked(e -> stage.setIconified(true));
-        maximizeButton.setOnMouseClicked(e -> {
-            if (stage.isMaximized()) {
-                stage.setMaximized(false);
-                maximizeButtonGlyph.setGlyphName("KEYBOARD_ARROW_UP");
-            } else {
-                stage.setMaximized(true);
-                maximizeButtonGlyph.setGlyphName("KEYBOARD_ARROW_DOWN");
-            }
-
-        });
-
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(1000),
-                        event -> timeText.setText(DateHelper.fromTimestamp(System.currentTimeMillis()))
-                )
-        );
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+    public void onCancelButtonClicked() {
+        PromptDialogHelper.start("是否要存入草稿箱", null)
+                .addCloseButton("存入", "DONE", null)
+                .addCloseButton("不存入","CLOSE",null)
+                .addCloseButton("取消","UNDO",null)
+                .create(this.dialogContainer)
+                .show();
     }
 
-
-    public void setContent(Node content) {
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(content);
+    public void submitSuccess(){
+        PromptDialogHelper.start("提交成功", null)
+                .addCloseButton("确定", "DONE", null)
+                .create(this.dialogContainer)
+                .show();
     }
-
-    /*public void onDraftFunctionButtonClicked() {
-        DraftUiController.init(this);
-    }*/
-
-
 }
 
