@@ -50,7 +50,7 @@
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
-                    <JFXButton prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                    <JFXButton onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
                         </graphic>
@@ -111,11 +111,11 @@
                     <!--</HBox>-->
                 </top>
                 <center>
-                    <Pane fx:id="contentPane" styleClass="floatingPane">
+                    <StackPane alignment="CENTER" fx:id="contentPane" styleClass="floatingPane">
                         <BorderPane.margin>
                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </BorderPane.margin>
-                    </Pane>
+                    </StackPane>
                 </center>
                 <bottom>
                     <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">

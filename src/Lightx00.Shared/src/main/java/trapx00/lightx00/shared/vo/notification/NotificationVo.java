@@ -3,6 +3,7 @@ package trapx00.lightx00.shared.vo.notification;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.vo.EmployeeVo;
 
+
 import java.util.Date;
 
 public class NotificationVo {
