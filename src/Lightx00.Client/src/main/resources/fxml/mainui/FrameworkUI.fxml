@@ -41,7 +41,7 @@
                     </Label>
                     
 
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能1" textFill="#000000" />
+                    <JFXButton onAction="#onTradeSituationClicked" prefHeight="60" prefWidth="200" text="查看经营情况表" textFill="#000000" />
                     <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
                     <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
                     <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
@@ -81,7 +81,7 @@
                             <padding>
                                 <Insets left="20" />
                             </padding>
-                            <Text fill="white" text="功能">
+                            <Text fx:id="titleText" fill="white" text="功能">
                                 <font>
                                     <Font size="24.0" />
                                 </font>
@@ -141,7 +141,7 @@
 
 
                         <HBox alignment="CENTER" GridPane.columnIndex="0">
-                            <JFXButton prefWidth="1000.0" text="日志" />
+                            <JFXButton onAction="#onLogButtonClicked" prefWidth="1000.0" text="日志" />
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1">
                             <MaterialIconView glyphName="SIGNAL_CELLULAR_4_BAR" glyphSize="16" glyphStyle="-fx-background-color: #DDDDDD" />
