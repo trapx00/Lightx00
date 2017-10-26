@@ -21,6 +21,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
 <StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.inventoryui.ModifyPurchaseBillUiController">
     <AnchorPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
@@ -124,6 +125,25 @@
                             </top>
                             <bottom>
                                 <StackPane>
+                                    <GridPane>
+                                        <rowConstraints>
+                                            <RowConstraints prefHeight="100.0"/>
+                                        </rowConstraints>
+                                        <columnConstraints>
+                                            <ColumnConstraints prefWidth="466.66"/>
+                                            <ColumnConstraints prefWidth="466.66"/>
+                                            <ColumnConstraints prefWidth="466.66"/>
+                                        </columnConstraints>
+                                        <HBox alignment="CENTER" GridPane.columnIndex="0">
+                                            <JFXButton fx:id="submitButton" onAction="#onSubmitButtonClicked" buttonType="RAISED" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF" text="提交" />
+                                        </HBox>
+                                        <HBox alignment="CENTER" GridPane.columnIndex="1">
+                                            <JFXButton fx:id="cancelButton" onAction="#onCancelButtonClicked" buttonType="RAISED" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF" text="返回" />
+                                        </HBox>
+                                        <HBox alignment="CENTER" GridPane.columnIndex="2">
+                                            <JFXButton fx:id="resetButton" buttonType="RAISED" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF" text="清空" />
+                                        </HBox>
+                                    </GridPane>
                                     <padding>
                                         <Insets bottom="20" left="20" right="20" top="20" />
                                     </padding>
@@ -138,6 +158,13 @@
                             </left>
                             <right>
                                 <StackPane>
+                                    <JFXTreeTableView fx:id="commodityList">
+                                        <columns>
+                                            <JFXTreeTableColumn fx:id="commodityNameColumn" editable="false" text="商品名称"/>
+                                            <JFXTreeTableColumn fx:id="logSeverityColumn" editable="false" text="商品数量"/>
+                                            <JFXTreeTableColumn fx:id="logContentColumn" editable="false" text="商品总价"/>
+                                        </columns>
+                                    </JFXTreeTableView>
                                     <padding>
                                         <Insets bottom="20" left="20" right="20" top="20" />
                                     </padding>
@@ -158,24 +185,10 @@
                                     </rowConstraints>
                                     <columnConstraints>
                                         <ColumnConstraints prefWidth="700.0"/>
+                                        <ColumnConstraints prefWidth="700.0"/>
                                      </columnConstraints>
                                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER">
                                         <HBox alignment="CENTER">
-                                            <Text fill="black" text="单据编号：">
-                                                <font>
-                                                    <Font size="24.0" />
-                                                </font>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20" left="20" right="20" top="20" />
-                                            </padding>
-                                        </HBox>
-                                        <HBox alignment="CENTER">
-                                            <Text fx:id="BillId" fill="black" text="JHD-20171026-00000">
-                                                <font>
-                                                    <Font size="24.0" />
-                                                </font>
-                                            </Text>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -183,17 +196,7 @@
                                     </HBox>
                                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER">
                                         <HBox alignment="CENTER">
-                                            <Text fill="black" text="操 作 员：">
-                                                <font>
-                                                    <Font size="24.0" />
-                                                </font>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20" left="20" right="20" top="20" />
-                                            </padding>
-                                        </HBox>
-                                        <HBox alignment="CENTER" prefWidth="280">
-                                            <Text fx:id="operator" fill="black" text="王二小">
+                                            <Text fill="black" text="单据信息">
                                                 <font>
                                                     <Font size="24.0" />
                                                 </font>
@@ -205,7 +208,43 @@
                                     </HBox>
                                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="CENTER">
                                         <HBox alignment="CENTER">
-                                            <Text fill="black" text="供 应 商：">
+                                            <Text fill="black" text="单据编号：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXTextField fx:id="BillId" prefWidth="250" text="JHD-20171026-00000" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="操作员ID：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefWidth="280">
+                                            <JFXTextField fx:id="OperatorId" prefWidth="250" text="1612501213" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text=" 供应商：">
                                                 <font>
                                                  <Font size="24.0" />
                                                 </font>
@@ -221,9 +260,9 @@
                                             </padding>
                                         </HBox>
                                     </HBox>
-                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="5" alignment="CENTER">
                                         <HBox alignment="CENTER">
-                                            <Text fill="black" text="仓     库：">
+                                            <Text fill="black" text="仓  库：">
                                                 <font>
                                                     <Font size="24.0" />
                                                 </font>
@@ -239,9 +278,9 @@
                                             </padding>
                                         </HBox>
                                     </HBox>
-                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER">
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER">
                                         <HBox alignment="CENTER">
-                                            <Text fill="black" text="备注：">
+                                            <Text fill="black" text="总额合计：">
                                                 <font>
                                                     <Font size="24.0" />
                                                 </font>
@@ -251,7 +290,33 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER" prefWidth="250">
-                                            <Text fx:id="totalText" fill="black" text="1000.0">
+                                            <JFXTextField fx:id="BillTotal" prefWidth="250" text="200.00" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="7" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="备  注：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXTextField prefWidth="250"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="商品信息">
                                                 <font>
                                                     <Font size="24.0" />
                                                 </font>
@@ -261,9 +326,140 @@
                                             </padding>
                                         </HBox>
                                     </HBox>
-                                    <padding>
-                                        <Insets bottom="20" left="20" right="20" top="20" />
-                                    </padding>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="商品编号：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefWidth="250">
+                                            <JFXTextField fx:id="CommodityId" prefWidth="250" text="000000" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="名  称：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="型  号：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="4" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="数  量：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXTextField fx:id="CommodityNumber" prefWidth="250" text="10.0" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="5" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="单  价：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefWidth="250">
+                                            <JFXTextField fx:id="CommodityPrice" prefWidth="250" text="20.00" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="6" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="金  额：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefWidth="250">
+                                            <JFXTextField fx:id="CommodityTotal" prefWidth="250" text="200.00" alignment="CENTER"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="7" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="备  注：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXTextField prefWidth="250"></JFXTextField>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="8" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <JFXButton fx:id="addCommodityButton" buttonType="RAISED" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF" text="添加商品" />
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
                                 </GridPane>
                             </center>
                                 <padding>
