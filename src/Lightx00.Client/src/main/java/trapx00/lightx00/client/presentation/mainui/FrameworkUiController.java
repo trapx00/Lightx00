@@ -1,23 +1,33 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.effects.JFXDepthManager;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
+import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
 import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
 import trapx00.lightx00.client.presentation.helpui.UiUtil;
-import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
+import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.shared.util.DateHelper;
 import trapx00.lightx00.shared.vo.EmployeeVo;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FrameworkUiController {
     public StackPane dialogContainer;
@@ -33,7 +43,9 @@ public class FrameworkUiController {
     public JFXButton minimizeButton;
     public MaterialIconView maximizeButtonGlyph;
     public Label promptLabel;
+    public Text titleText;
     protected EmployeeVo employeeVo;
+    private Object subController;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -80,14 +92,28 @@ public class FrameworkUiController {
         contentPane.getChildren().add(content);
     }
 
-    public void onDraftFunctionButtonClicked() {
-        DraftUiController.init(this);
+    public void onDraftFunctionButtonClicked(ActionEvent event) {
+        if (!(subController instanceof DraftUiController)) {
+            subController = DraftUiController.init(this);
+        }
+    }
+    public void onTradeSituationClicked(ActionEvent actionEvent) {
+        if (!(subController instanceof TradeHistoryUiController)) {
+
+            subController = TradeHistoryUiController.init(this);
+        }
+
     }
 
-    public void onNotificationFunctionButtonClicked(){
+    public void onLogButtonClicked(ActionEvent actionEvent) {
+        if (!(subController instanceof LogUiController)) {
 
-        NotificationUiController.init(this);
+            subController = LogUiController.init(this);
+        }
     }
 
+    public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
 
+
+    }
 }
