@@ -12,14 +12,16 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.inventoryui.ModifyPurchaseBillUiController">
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.inventoryui.ModifyPurchaseBillUiController">
     <AnchorPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <GridPane fx:id="drawer" style="-fx-background-color: white" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
@@ -82,7 +84,7 @@
                             <padding>
                                 <Insets left="20" />
                             </padding>
-                            <Text fill="white" text="功能">
+                            <Text fill="white" text="进货单">
                                 <font>
                                     <Font size="24.0" />
                                 </font>
@@ -111,11 +113,167 @@
                     <!--</HBox>-->
                 </top>
                 <center>
-                    <Pane fx:id="contentPane" styleClass="floatingPane">
+                    <StackPane fx:id="contentPane" alignment="CENTER" styleClass="floatingPane">
+                        <BorderPane fx:id="contentFramePane" styleClass="floatingPane" BorderPane.alignment="CENTER">
+                            <top>
+                                <StackPane>
+                                    <padding>
+                                        <Insets bottom="20" left="20" right="20" top="20" />
+                                    </padding>
+                                </StackPane>
+                            </top>
+                            <bottom>
+                                <StackPane>
+                                    <padding>
+                                        <Insets bottom="20" left="20" right="20" top="20" />
+                                    </padding>
+                                </StackPane>
+                            </bottom>
+                            <left>
+                                <StackPane>
+                                    <padding>
+                                        <Insets bottom="20" left="20" right="20" top="20" />
+                                    </padding>
+                                </StackPane>
+                            </left>
+                            <right>
+                                <StackPane>
+                                    <padding>
+                                        <Insets bottom="20" left="20" right="20" top="20" />
+                                    </padding>
+                                </StackPane>
+                            </right>
+                            <center>
+                                <GridPane fx:id="billPane" styleClass="floatingPane">
+                                    <rowConstraints>
+                                        <RowConstraints prefHeight="100.0"/>
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                        <RowConstraints prefHeight="100.0" />
+                                    </rowConstraints>
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="700.0"/>
+                                     </columnConstraints>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="单据编号：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <Text fx:id="BillId" fill="black" text="JHD-20171026-00000">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="操 作 员：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefWidth="280">
+                                            <Text fx:id="operator" fill="black" text="王二小">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="供 应 商：">
+                                                <font>
+                                                 <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="仓     库：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER">
+                                        <HBox alignment="CENTER">
+                                            <Text fill="black" text="备注：">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefWidth="250">
+                                            <Text fx:id="totalText" fill="black" text="1000.0">
+                                                <font>
+                                                    <Font size="24.0" />
+                                                </font>
+                                            </Text>
+                                            <padding>
+                                                <Insets bottom="20" left="20" right="20" top="20" />
+                                            </padding>
+                                        </HBox>
+                                    </HBox>
+                                    <padding>
+                                        <Insets bottom="20" left="20" right="20" top="20" />
+                                    </padding>
+                                </GridPane>
+                            </center>
+                                <padding>
+                                    <Insets bottom="20" left="20" right="20" top="20" />
+                                </padding>
+                        </BorderPane>
                         <BorderPane.margin>
                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </BorderPane.margin>
-                    </Pane>
+                    </StackPane>
                 </center>
                 <bottom>
                     <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">
