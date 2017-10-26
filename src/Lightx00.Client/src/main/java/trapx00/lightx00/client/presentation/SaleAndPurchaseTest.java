@@ -19,14 +19,14 @@ public class SaleAndPurchaseTest extends Application{
     public void start(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/mainui/SaleStaffUI.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/inventoryui/ModifyPurchaseBillUI.fxml"));
 
             Scene scene = new Scene(loader.load());
 
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
 
-            SaleStaffUiController controller = loader.getController();
+            ModifyPurchaseBillUiController controller = loader.getController();
             controller.setStage(primaryStage);
 
             primaryStage.show();
