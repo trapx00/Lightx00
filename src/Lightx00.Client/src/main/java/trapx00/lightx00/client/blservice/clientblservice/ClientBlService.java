@@ -9,6 +9,8 @@ public interface ClientBlService {
 
     public ResultMessage saveAsDraft(ClientVo client);//保存客户信息为草稿
 
+    public String getId();//获得新单据的ID
+
     public ResultMessage modify(ClientVo client);//修改客户信息
 
     public ResultMessage add(ClientVo client);//新增客户
