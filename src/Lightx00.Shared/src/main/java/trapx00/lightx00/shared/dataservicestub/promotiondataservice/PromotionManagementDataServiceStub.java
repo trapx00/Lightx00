@@ -6,6 +6,8 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
+import trapx00.lightx00.shared.vo.manager.promotion.CommodityQueryVo;
+import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
 import java.util.Date;
 
@@ -16,9 +18,9 @@ public class PromotionManagementDataServiceStub implements PromotionManagementDa
     }
 
     @Override
-    public PromotionPoBase[] queryPromotion(Date[] timeRange, PromotionType promotionType, int clientLevel, double totalPrice) {
+    public PromotionPoBase[] queryPromotion(PromotionQueryVo query) {
         return new PromotionPoBase[]{
-                new PromotionPoBase("0001", PromotionType.CommodityOnSale,new Date(),new Date(), PromotionState.Waiting)
+                new PromotionPoBase(query.getId(), query.getType(),new Date(),new Date(), PromotionState.Waiting)
         };
     }
 
@@ -28,9 +30,9 @@ public class PromotionManagementDataServiceStub implements PromotionManagementDa
     }
 
     @Override
-    public CommodityPo[] queryCommodity(String id, String type, String name) {
+    public CommodityPo[] queryCommodity(CommodityQueryVo query) {
         return new CommodityPo[]{
-                new CommodityPo("000001","落地灯",null,1,new Date(),null,null,100,100,150,150,10)
+                new CommodityPo(query.getId(),query.getName(),query.getType(),1,new Date(),null,null,100,100,150,150,10)
         };
     }
 }

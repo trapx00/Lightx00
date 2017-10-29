@@ -5,15 +5,16 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.manager.BillQueryVo;
 
 import java.util.Date;
 
 public class AuditDataServiceStub implements AuditDataService {
     @Override
-    public BillVo[] query(String id, BillType type, Date date, BillState state) {
+    public BillVo[] query(BillQueryVo query) {
 
         return new BillVo[]{
-                new BillVo(BillType.FinanceBill,"0001",new Date(), BillState.WaitingForApproval)
+                new BillVo(query.getType(),query.getId(),new Date(), query.getState())
         };
 
     }

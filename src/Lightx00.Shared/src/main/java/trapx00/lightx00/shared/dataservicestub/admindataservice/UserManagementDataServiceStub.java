@@ -4,14 +4,15 @@ import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataSe
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
+import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
 
 import java.util.Date;
 
 public class UserManagementDataServiceStub implements UserManagementDataService {
     @Override
-    public EmployeePo[] query(String name, String id,EmployeePosition position) {
+    public EmployeePo[] query(UserAccountQueryVo query) {
         return new EmployeePo[]{
-                new EmployeePo(name,id,new Date(),"","",position)};
+                new EmployeePo(query.getName(),query.getId(),new Date(),"","",query.getPosition())};
     }
 
     @Override
