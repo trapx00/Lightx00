@@ -12,7 +12,7 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 
 ##### 2.3.6.3.1 设计图
 
-![financedata](/img/设计图/financedata.png)
+![financedata](../../img/设计图/financedata.png)
 
 ##### 2.3.6.3.2 各个类的职责
 
@@ -88,7 +88,7 @@ financedata包负责银行账户管理的数据操作。具体功能需求和非
 
 ##### 2.3.7.3.1 设计图
 
-![bankaccountdata](/img/设计图/bankaccountdata.png)
+![bankaccountdata](../../img/设计图/bankaccountdata.png)
 
 ##### 2.3.7.3.2 各个类的职责
 
