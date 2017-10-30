@@ -54,10 +54,10 @@ commoditybl包负责库存管理人员商品管理、商品分类管理的的UI�
 | ---------------------------------------- | --------- |
 | `commodityblservice.ProductManagementBlService.add(CommoditySortVo newSort,CommoditySortVo parentSort)` | 提交新分类。    |
 | `commodityblservice.ProductManagementBlService.modify(CommoditySortVo sort)` | 修改分类。     |
-| `commodityblservice.ProductManagementBlService.query(CommoditySortQuerVo commoditySortQueryVo);` | 查询分类信息。   |
-| `commodityblservice.ProductManagementBlService.delete(CommoditySortVo sort);` | 删除分类。     |
-| `commodityblservice.ProductManagementBlService.display();` | 显示所有父类。   |
-| `commodityblservice.ProductManagementBlService.display(CommoditySortVo commoditySort);` | 显示父类下的子类。 |
+| `commodityblservice.ProductManagementBlService.query(CommoditySortQuerVo commoditySortQueryVo)` | 查询分类信息。   |
+| `commodityblservice.ProductManagementBlService.delete(CommoditySortVo sort)` | 删除分类。     |
+| `commodityblservice.ProductManagementBlService.display(); | 显示所有父类。   |
+| `commodityblservice.ProductManagementBlService.display(CommoditySortVo commoditySort)` | 显示父类下的子类。 |
 
 
 
@@ -116,9 +116,10 @@ inventoryui包负责库存管理相关等功能的UI的展示和功能实现。�
 
 | 接口名称                                     | 服务名           |
 | ---------------------------------------- | ------------- |
-| `inventoryblservice.InventoryGiftBlService.getGift(InventoryGiftVo inventoryGiftVo);` | 提供满足促销条件的赠送单。 |
+| `inventoryblservice.InventoryGiftBlService.getGift(Date time); | 提供满足促销条件的赠送单。 |
 | `InventoryGiftBlService.getId`           | 得到ID。         |
-| `commoditylservice.GoodsManagementBlService.showAllCommodity()` | 选择商品。         |
+| `inventoryblservice.InventoryGiftBlService.getAllCommodity(); | 选择商品。         |
+| `inventoryblservice.InventoryGiftBlService.submit(InventoryGiftVo inventoryGiftVo)` | 提交完成赠送单。      |
 
 
 
@@ -136,9 +137,10 @@ inventoryui包负责库存管理相关等功能的UI的展示和功能实现。�
 
 | 接口名称                                     | 服务名     |
 | ---------------------------------------- | ------- |
-| `inventoryblservice.InventoryWarningBlService.submit(InventoryBillVo bill);` | 提交单据。   |
-| `inventoryblservice.InventoryWarningBlService.saveAsDraft(InventoryBillVo bill);` | 保存草稿。   |
-| `inventoryblservice.InventoryWarningBlService.modify(CommodityVo commodity，double modifyWarning);` | 修改警戒值。  |
-| `inventoryblservice.InventoryWarningBlService.getCurrentBill();` | 得到现有单据。 |
-| `inventoryblservice.InventoryWarningBlService.query(InventoryBillQueryVo inventoryBillQueryVo);` | 查询单据。   |
-| `inventoryblservice.InventoryWarningBlService.public String getId();` | 提供ID。   |
+| `inventoryblservice.InventoryWarningBlService.submit(InventoryBillVo bill)` | 提交单据。   |
+| `inventoryblservice.InventoryWarningBlService.saveAsDraft(InventoryBillVo bill)` | 保存草稿。   |
+| `inventoryblservice.InventoryWarningBlService.modify(CommodityVo commodity，double modifyWarning)` | 修改警戒值。  |
+| `inventoryblservice.InventoryWarningBlService.getCurrentBill()` | 得到现有单据。 |
+| `inventoryblservice.InventoryWarningBlService.query(InventoryBillQueryVo inventoryBillQueryVo)` | 查询单据。   |
+| `inventoryblservice.InventoryWarningBlService.getId()` | 提供ID。   |
+| `inventoryblservice.InventoryWarningBlService.getAllCommodity()` | 提供商品。   |

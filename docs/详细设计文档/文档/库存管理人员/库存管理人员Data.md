@@ -73,11 +73,11 @@ Inventorydata包负责库存的数据操作。具体功能需求和非功能需�
 
 ##### 
 
-| 类名                           | 职责           |
-| ---------------------------- | ------------ |
-| InventoryCheckDataController | 负责库存查看功能的实现。 |
-| InventoryGiftDataController  | 负责商品赠送功能的实现。 |
-| InventoryWarningBlController | 负责库存监控功能的实现。 |
+| 类名                             | 职责           |
+| ------------------------------ | ------------ |
+| InventoryCheckDataController   | 负责库存查看功能的实现。 |
+| InventoryGiftDataController    | 负责商品赠送功能的实现。 |
+| InventoryWarningDataController | 负责库存监控功能的实现。 |
 
 ##### 
 
@@ -104,6 +104,7 @@ Inventorydata包负责库存的数据操作。具体功能需求和非功能需�
 | -------------------------------- | ---------------------------------------- | ----- | ------------------------------------ |
 | InventoryGiftDataService.getGift | `public InventoryGiftPo getGift(Date time);` | 输入有效。 | 若存在则返回符合条件的InventoryGiftPo，否则返回NULL。 |
 | InventoryGiftDataService.init    | `public void init();`                    | 无。    | 初始化持久数据。                             |
+| InventoryGiftDataService.submit  | `public ResultMessage submit(InventoryGiftPo inventoryGiftpo);` | 输入有效。 | 完成赠送单，返回完成是否成功。                      |
 
 **InventoryWarningDataController**
 

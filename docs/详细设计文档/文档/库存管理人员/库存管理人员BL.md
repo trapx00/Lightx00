@@ -78,7 +78,7 @@ commoditybl包负责库存管理人员商品管理、商品分类管理的业务
 | 接口名称                             | 语法                                       | 前置条件         | 后置条件          |
 | -------------------------------- | ---------------------------------------- | ------------ | ------------- |
 | CommodityInfo.queryCommodity     | `public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo);` | 其他类需要商品信息。   | 返回所需商品的持久化对象。 |
-| CommodityInfo.queryCommoditySort | `public CommoditySortVo[] modify(CommoditySortQueryVo commoditySortQueryVo);` | 其他类需要商品分类信息。 | 返回所需分类的持久化对象。 |
+| CommodityInfo.queryCommoditySort | `public CommoditySortVo[] queryCommoditySort(CommoditySortQueryVo commoditySortQueryVo);` | 其他类需要商品分类信息。 | 返回所需分类的持久化对象。 |
 
 需要的接口
 
@@ -142,10 +142,12 @@ Inventorybl模块负责实现仓库的管理，对库存进行报损、报溢，
 
 提供的接口
 
-| 接口名称                           | 语法                                       | 前置条件     | 后置条件        |
-| ------------------------------ | ---------------------------------------- | -------- | ----------- |
-| InventoryGiftBlService.getGift | `public InventoryGiftVo getGift(InventoryGiftVo inventoryGiftVo);` | 输入合法。    | 提供符合条件的赠送单。 |
-| InventoryGiftBlService.getId   | `public String getId();`                 | 当前存在赠送单。 | 提供当前赠送单ID。  |
+| 接口名称                                   | 语法                                       | 前置条件     | 后置条件        |
+| -------------------------------------- | ---------------------------------------- | -------- | ----------- |
+| InventoryGiftBlService.getGift         | `public InventoryGiftVo getGift(Data time);` | 输入合法。    | 提供符合条件的赠送单。 |
+| InventoryGiftBlService.getId           | `public String getId();`                 | 当前存在赠送单。 | 提供当前赠送单ID。  |
+| InventoryGiftBlService.getAllCommodity | `public CommodityVo[] getAllCommodity();` | 存在商品。    | 提供商品.       |
+| InventoryGiftBlService.submit          | `public ResultMessage submit(InventoryGiftVo bill);` | 输入合法。    | 提交完成的赠送单。   |
 
 
 
@@ -155,6 +157,7 @@ Inventorybl模块负责实现仓库的管理，对库存进行报损、报溢，
 | ---------------------------------------- | ------------- |
 | `inventorydataservice.InventoryGiftDataService.getGift(Date time)` | 提供满足促销条件的赠送单。 |
 | `logbl.LogBl.log(LogSeverity severity, String content)` | 记录日志。         |
+| `inventorydataservice.InventoryGiftDataService.getGift(Date time)` |               |
 
 
 
@@ -162,15 +165,15 @@ Inventorybl模块负责实现仓库的管理，对库存进行报损、报溢，
 
 提供的接口
 
-| 接口名称                                     | 语法                                       | 前置条件              | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ----------------- | ------------------------------------- |
-| InventoryWarningBlService.submit         | `public ResultMessage submit(InventoryBillVo bill);` | 单据所有属性有效。         | 单据已经保存到数据库，持久化信息已经保存。                 |
-| InventoryWarningBlService.saveAsDraft    | `public ResultMessage saveAsDraft(InventoryBillVo bill);` | 单据信息非空。           | 保存草稿，持久化信息已经保存。                       |
-| InventoryWarningBlService.resume         | `public InventoryBillVo resume();`       | 开始填写。             | 如果系统记录需要继续填写单据，那么返回值为继续填写的单据；反之为null。 |
-| InventoryWarningBlService.modify         | `public ResultMessage modify(CommodityVo commodity，double modifyWarning);` | 该商品存在，且修改警戒值输入合法。 | 修改警戒值，持久化更新涉及的对象的数据。                  |
-| InventoryWarningBlService.getCurrentBill | `public InventoryBillVo getCurrentBill();` | 现有单据存在。           | 返回现有单据。                               |
-| InventoryWarningBlService.query          | `public InventoryBillVo []query(InventoryBillQueryVo inventoryBillQueryVo);` | 单据所有属性有效。         | 返回符合条件的单据。                            |
-| InventoryWarningBlService.getId          | `public String getId();`                 | 现有单据存在。           | 返回现有单据Id。                             |
+| 接口名称                                     | 语法                                       | 前置条件              | 后置条件                  |
+| ---------------------------------------- | ---------------------------------------- | ----------------- | --------------------- |
+| InventoryWarningBlService.submit         | `public ResultMessage submit(InventoryBillVo bill);` | 单据所有属性有效。         | 单据已经保存到数据库，持久化信息已经保存。 |
+| InventoryWarningBlService.saveAsDraft    | `public ResultMessage saveAsDraft(InventoryBillVo bill);` | 单据信息非空。           | 保存草稿，持久化信息已经保存。       |
+| InventoryWarningBlService.modify         | `public ResultMessage modify(CommodityVo commodity，double modifyWarning);` | 该商品存在，且修改警戒值输入合法。 | 修改警戒值，持久化更新涉及的对象的数据。  |
+| InventoryWarningBlService.getCurrentBill | `public InventoryBillVo getCurrentBill();` | 现有单据存在。           | 返回现有单据。               |
+| InventoryWarningBlService.query          | `public InventoryBillVo []query(InventoryBillQueryVo inventoryBillQueryVo);` | 单据所有属性有效。         | 返回符合条件的单据。            |
+| InventoryWarningBlService.getId          | `public String getId();`                 | 现有单据存在。           | 返回现有单据Id。             |
+| InventoryWarningBService.getAllCommodity | `public CommodityVo[] getAllCommodity();` | 存在商品。             | 返回商品。                 |
 
 需要的接口
 
@@ -180,6 +183,7 @@ Inventorybl模块负责实现仓库的管理，对库存进行报损、报溢，
 | `inventorydataservice.InventoryWarningDataService.modify(CommodityPo commodity，double ModifyWarning)` | 修改警戒值。    |
 | ` logbl.LogBl.log(LogSeverity severity, String content)` | 记录日志。     |
 | `inventorydataservice.InventoryWarningDataService.query(InventoryBillQueryVo inventoryBillQueryVo)` | 查询符合条件单据。 |
+| `commodityblservice.CommodityInfo.queryCommodity(CommodityQueryVo commodityQueryVo)` | 获取商品。     |
 
 
 
