@@ -7,7 +7,9 @@ public interface  ClientDataService {
     public ClientPo[] query(String query);//查询客户
 
     public ResultMessage modify(ClientPo client);//修改客户信息
-
+    
+    public String getId();//获得新客户的ID
+    
     public ResultMessage add(ClientPo client);//增加客户
 
     public ResultMessage delete(ClientPo[] client);//删除客户
