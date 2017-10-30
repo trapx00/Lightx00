@@ -12,7 +12,7 @@ admindata包为数据层的一部分，它负责数据的存储以及与bl层的
 
 ##### 2.3.11.3.1 设计图
 
-![admindata](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/admindata.png)
+![admindata](../../img/设计图/admindata.png)
 
 ##### 2.3.11.3.2 各个类的职责
 
@@ -20,15 +20,15 @@ admindata包为数据层的一部分，它负责数据的存储以及与bl层的
 | ---------------------------- | ---------------- |
 | UserManagementDataConteoller | 负责保存管理职员信息操作的数据。 |
 
-**UserManagementUiController**
+**UserManagementDataController**
 
 提供的接口
 
-| 接口名称                                   | 语法                                       | 前置条件         | 后置条件                           |
-| -------------------------------------- | ---------------------------------------- | ------------ | ------------------------------ |
-| admindataservice.UserManagement.query  | `public UserAccoutPO[] query(String ID, String name,String accountName, String password,boolean hasRoot);` | 查询条件合法。      | 返回满足条件的账户PO。某一项为null的意思是此项无限制。 |
-| admindataservice.UserManagement.add    | `public ResultMessage add(UserAccountPO account);` | 新账户信息合法且无冲突。 | 新账户信息已经添加，持久化信息已经保存。           |
-| admindataservice.UserManagement.modify | `public ResultMessage modify(UserAccountPO account); ` | 新账户信息合法且无冲突。 | 账户信息已经修改，持久化信息已经保存。            |
-| admindataservice.UserManagement.delete | `public ResultMessage delete(UserAccountPO account);` | 新账户信息合法且无冲突。 | 选定账户信息已经删除，持久化信息已经保存。          |
-| admindataservice.UserManagement.getId  | `public String getId();`                 | 无。           | 返回当前账户的ID。                     |
+| 接口名称                             | 语法                                       | 前置条件         | 后置条件                           |
+| -------------------------------- | ---------------------------------------- | ------------ | ------------------------------ |
+| UserManagementDataService.query  | `public EmployeePo[] query(UserAccountQueryVo query);` | 查询条件合法。      | 返回满足条件的账户PO。某一项为null的意思是此项无限制。 |
+| UserManagementDataService.add    | `public ResultMessage add(EmployeePo account);` | 新账户信息合法且无冲突。 | 新账户信息已经添加，持久化信息已经保存。           |
+| UserManagementDataService.modify | `public ResultMessage modify(EmployeePo account); ` | 新账户信息合法且无冲突。 | 账户信息已经修改，持久化信息已经保存。            |
+| UserManagementDataService.delete | `public ResultMessage delete(EmployeePo account);` | 新账户信息合法且无冲突。 | 选定账户信息已经删除，持久化信息已经保存。          |
+| UserManagementDataService.getId  | `public String getId();`                 | 无。           | 返回当前账户的ID。                     |
 
