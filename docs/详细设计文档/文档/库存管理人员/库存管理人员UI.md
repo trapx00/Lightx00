@@ -38,11 +38,6 @@ commoditybl包负责库存管理人员商品管理、商品分类管理的的UI�
 | `commodityblservice.GoodsManagementBlService.query(CommdoityQueryVo commodityQueryVo)` | 查询商品   |
 | `commodityblservice.GoodsManagementBlService.delete(CommodityVo commodity)` | 删除商品。  |
 
-
-// 体系文件里的resume方法需要删掉，根据昨天的讨论，可以直接通过ContinueWritable接口实现。
-// 记得加ID！！！
-
-
 **CommoditySortUiController**
 
 提供的接口
