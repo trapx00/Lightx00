@@ -55,7 +55,7 @@ draftdata包负责草稿相关的数据操作。具体功能需求和非功能�
 提供的接口
 | 接口名称 | 语法 | 前置条件 | 后置条件 |
 | ------  | ---- | ------- | ------- | 
-| draftdataservice.DraftDataService.update | `public BillVo[] update();` | 无。| 获得当前用户已经保存的草稿。|
+| draftdataservice.DraftDataService.update | `public BillVo[] update(DraftQueryVo query);` | 无。| 获得当前用户已经保存的草稿。|
 | draftdataservice.DraftDataService.delete | `public ResultMessage delete(BillVo bill);` | 选择的单据有效并状态是草稿。| 将草稿删除，持久化信息已经保存。|
 
 ### 2.3.9 logdata包
@@ -117,5 +117,6 @@ notificationdata包负责通知相关的数据操作。具体功能需求和非�
 
 | 接口名称 | 语法   | 前置条件 | 后置条件 |
 | ---- | ---- | ---- | ---- |
-| notificationdataservice.NotificationDataService.update | `public NotificationVo[] update();` | 无。| 返回当前用户已有的通知。 |
+| notificationdataservice.NotificationDataService.add | `public ResultMessage addNotification(NotificationVo notification);` | notification有效。| 将新通知写入数据库。|
+| notificationdataservice.NotificationDataService.update | `public NotificationPo[] update(NotificationQueryVo query);` | 无。| 返回符合条件已有的通知。 |
 | notificationdataservice.NotificationDataService.acknowledge | `public ResultMessage acknowledge(NotificationPo notification);` | 参数notification有效非null。| 删除已有的通知，持久化信息已经保存。|

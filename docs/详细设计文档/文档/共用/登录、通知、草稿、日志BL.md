@@ -67,14 +67,14 @@ draftbl包包括了草稿功能的业务逻辑实现代码。具体功能需求�
 
 | 接口名称 | 语法 | 前置条件 | 后置条件 |
 | ------  | ---- | ------- | ------- | 
-| draftblservice.DraftBlService.update | `public Draftable[] update();` | 无。| 获得当前用户已经保存的草稿。|
+| draftblservice.DraftBlService.update | `public Draftable[] update(DraftQueryVo query);` | 无。| 获得当前用户已经保存的草稿。|
 | draftblservice.DraftBlService.delete | `public ResultMessage delete(Draftable bill);` | 选择的单据有效并状态是草稿。| 将草稿删除，持久化信息已经保存。|
 
 需要的接口
 
 | 接口名称 | 服务名 |
 | ------- | ------| 
-| `draftdataservice.DraftDataService.update()` | 更新草稿。|
+| `draftdataservice.DraftDataService.update(DraftQueryVo query)` | 更新草稿。|
 | `draftdataservice.DraftDataService.delete(Draftable bill)` | 删除草稿。|
 
 ### 2.2.9 logbl包
@@ -148,16 +148,18 @@ notificationbl包负责登录功能的业务逻辑实现代码。具体功能需
 
 | 接口名称 | 语法   | 前置条件 | 后置条件 |
 | ---- | ---- | ---- | ---- |
-| notificationblservice.Notification.update | `public NotificationVo[] update();` | 无。| 返回当前用户已有的通知。 |
-| notificationblservice.Notification.acknowledge | `public ResultMessage acknowledge(NotificationVo notification);` | 参数notification有效非null。| 删除已有的通知，持久化信息已经保存。|
-| notificationblservice.Notification.abandon | `public ResultMessage abandon(NotificationVo notification);` | notification为已经审批结束的单据通知。| 单据被标记为废弃，持久化信息已经保存。|
+| notificationblservice.NotificationBlService.update | `public NotificationVo[] update(NotificationQueryVo query);` | 无。| 返回当前用户已有的通知。 |
+| notificationblservice.NotificationBlService.acknowledge | `public ResultMessage acknowledge(NotificationVo notification);` | 参数notification有效非null。| 删除已有的通知，持久化信息已经保存。|
+| notificationblservice.NotificationBlService.abandon | `public ResultMessage abandon(NotificationVo notification);` | notification为已经审批结束的单据通知。| 单据被标记为废弃，持久化信息已经保存。|
+| NotificationService.addNotification | `public ResultMessage addNotification(NotificationVo notification)` | notification有效。 | 增加通知。|
 
 需要的接口
 
 | 接口名称 | 服务名 |
 | ------- | ------| 
-| `notificationdataservice.Notification.update()` | 更新通知。|
-| `notificationdataservice.Notification.acknowledge(NotificationPo notification)` | 已读通知。|
+| `notificationdataservice.NotificationDataService.update(NotificationQueryVo query)` | 更新通知。|
+| `notificationdataservice.NotificationDataService.addNotification(NotificationVo notification)` | 增加通知。|
+| `notificationdataservice.NotificationDataService.acknowledge(NotificationPo notification)` | 已读通知。|
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。 |
 | `NotificationActivation.activate(BillVo bill)` | 入账单据。|
 | `NotificationActivation.abandon(BillVo bill)` | 丢弃单据。|

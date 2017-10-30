@@ -130,9 +130,9 @@ notificationui包负责通知功能的UI界面以及相应控制代码。具体�
 
 | 接口名称                                     | 服务名          |
 | ---------------------------------------- | ------------ |
-| `notificationblservice.Notification.update()` | 更新通知。|
-| `notificationblservice.Notification.acknowledge(NotificationVo notification)` | 已读通知。|
-| `notificationblservice.Notification.abandon(NotificationVo notification)` | 丢弃单据通知。|
+| `notificationblservice.NotificationBlService.update(NotificationQueryVo query)` | 更新通知。|
+| `notificationblservice.NotificationBlService.acknowledge(NotificationVo notification)` | 已读通知。|
+| `notificationblservice.NotificationBlService.abandon(NotificationVo notification)` | 丢弃单据通知。|
 | `ContinueWritable.continueWriting(T draft)` | 继续填写所选单据。| 
 
 

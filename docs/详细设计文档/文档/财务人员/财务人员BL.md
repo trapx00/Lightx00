@@ -25,8 +25,6 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | SaleDetailBlController | 负责查看销售明细表的功能实现。|
 | TradeHistoryBlController | 负责经营历程表的功能实现。 |
 | TradeSituationBlController | 负责经营情况表的功能实现。|
-| ExpenseCalculation | 在经营情况表用例里负责计算支出。|
-| IncomeCalculation | 在经营情况表用例里负责计算收入。|
 
 
 ##### 2.2.6.3.3 内部类的接口规范
@@ -49,6 +47,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | ------------ |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。|
 | `draftbl.DraftService.saveAsDraft(PaymentBillVo bill)` | 保存草稿。|
+| `approvalbl.ApprovalRequest.requestApproval(BillVo bill)` | 提交等待审核。|
 | `financedataservice.PaymentBillDataService.submit(PaymentBillPo bill)` | 提交新单据。       |
 | `financedataservice.PaymentBillDataService.activate(PaymentBillPo bill) ` | 使单据入账。       |
 | `financedataservice.PaymentBillDataService.abandon(PaymentBillPo bill)` | 废弃单据。        |
@@ -72,6 +71,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | ------------ |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。|
 | `draftbl.DraftService.saveAsDraft(ReceivalBillVo bill)` | 保存草稿。|
+| `approvalbl.ApprovalRequest.requestApproval(BillVo bill)` | 提交等待审核。|
 | `financedataservice.ReceivalBillDataService.submit(ReceivalBillPo bill)` | 提交新单据。       |
 | `financedataservice.ReceivalBillDataService.activate(ReceivalBillPo bill) ` | 使单据入账。       |
 | `financedataservice.ReceivalBillDataService.abandon(ReceivalBillPo bill)` | 废弃单据。        |
@@ -95,6 +95,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | ------------ |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。|
 | `draftbl.DraftService.saveAsDraft(CashBillVo bill)` | 保存草稿。|
+| `approvalbl.ApprovalRequest.requestApproval(BillVo bill)` | 提交等待审核。|
 | `financedataservice.CashBillDataService.submit(CashBillPo bill)` | 提交新单据。       |
 | `financedataservice.CashBillDataService.activate(CashBillPo bill)` | 使单据入账。       |
 | `financedataservice.CashBillDataService.abandon(CashBillPo bill)` | 废弃单据。        |
@@ -109,9 +110,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
 | InitialEstablishmentBlService.submit     | `public ResultMessage submit(SystemSnapshotVo bill);` | 单据所有属性有效。                    | 单据已经保存到数据库，持久化信息已经保存。                 |
 | InitialEstablishmentBlService.saveAsDraft | `public ResultMessage saveAsDraft(SystemSnapshotVo bill);` | 单据信息非空。                      | 保存草稿，持久化信息已经保存。                       |
-| InitialEstablishmentBlService.getId      | `public String getId(); ` | 无。 | 获得新单据的ID。|
-| NotificationActivation.activate          | `public ResultMessage activate(SystemSnapshotVo bill);` | 单据有效且状态为审批通过。                | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| NotificationActivation.abandon           | `public ResultMessage abandon(SystemSnapshotVo bill);` | 单据有效且状态为审批完成。                | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| InitialEstablishmentBlService.autofill | `public SystemSnapshotVo autofill();`     | 无。                           | 返回现有系统信息。                             |
 
 需要的接口
 
@@ -119,13 +118,11 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | ------------ |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。|
 | `draftbl.DraftService.saveAsDraft(SystemSnapshotVo bill)` | 保存草稿。|
-| `inventorybl.InventoryBillInfo.getAllInventoryBill()` | 取得所有库存类单据。|
+| `clientbl.queryClient(String query)` | 查询客户。 |
 | `commoditybl.CommodityInfo.getAllCommodity()` | 取得所有商品信息。|
 | `commoditybl.CommodityInfo.getAllCommoditySort()` | 取得所有商品分类信息。|
 | `bankaccountbl.BankAccountInfo.getAllBankAccount()` | 取得所有银行账户信息。|
 | `financedataservice.InitialEstablishmentDataService.submit(SystemSnapshotPo snapshot)` | 提交新单据。       |
-| `financedataservice.InitialEstablishmentDataService.activate(SystemSnapshotPo snapshot)` | 系统记入账。       |
-| `financedataservice.InitialEstablishmentDataService.abandon(SystemSnapshotPo snapshot)` | 废弃单据。        |
 | `financedataservice.InitialEstablishmentDataService.getId()` | 获得新单据的ID。|
 
 **SaleDetailBlController**
@@ -186,34 +183,54 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `financebl.ExpenseCalculation.calculate(Date start, Date end)` | 计算支出。|
 | `financebl.IncomeCalculation.calculate(Date start, Date end)` | 计算收入。|
 
+##### 2.2.6.3.4 业务逻辑层的动态模型
 
-**ExpenseCalculation**
+下图为填写付款单时的顺序图。
 
-提供的接口
+![填写付款单](../../img/流程图/填写付款单.png)
 
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| ExpenseCalculation.calculate | `public TradeSituationExpenseVo calculate (Date start, Date end);` | 输入的时间段有效。 | 计算支出。|
+下图为填写付款单时被中断保存草稿的顺序图，其他单据保存草稿同理。
+
+![填写付款单保存草稿](../../img/流程图/填写付款单保存草稿.png)
+
+下图为填写付款单时PaymentBillBlController的状态图，其他单据同理。
+
+![填写付款单状态](../../img/状态图/填写付款单.png)
+
+下图为填写收款单时的顺序图。
+
+![填写收款单](../../img/流程图/填写收款单.png)
+
+下图为填写现金费用单时的顺序图。
+
+![填写现金费用单](../../img/流程图/填写现金费用单.png)
+
+下图为期初建账时的顺序图。
+
+![期初建账](../../img/流程图/期初建账.png)
+
+下图为期初建账时InitialEstablishmentBlController的状态图。
+
+![期初建账状态](../../img/状态图/期初建账.png)
+
+下图为查看经营历程表的顺序图。
+
+![查看经营历程表](../../img/流程图/查看经营历程表.png)
+
+下图为查看经营历程表时TradeHistory的状态图，其他同理。
+
+![查看经营历程表状态](../../img/状态图/查看经营历程表.png)
+
+下图为查看销售明细表的顺序图。
+
+![查看销售明细表](../../img/流程图/查看销售明细表.png)
+
+下图为查看经营情况表的顺序图。
+
+![查看经营情况表](../../img/流程图/查看经营情况表.png)
 
 
 
-**IncomeCalculation**
-
-提供的接口
-
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| IncomeCalculation.calculate | `public TradeSituationIncomeVo calculate(Date start, Date end);` | 输入的时间段有效。 | 计算收入。|
-
-需要的接口
-
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `salebl.SaleBillInfo.querySaleBill(SaleBillQueryVo query)` | 查询销售单。|
-| `salebl.SaleBillInfo.querySaleRefundBill(SaleRefundBillQueryVo query)` | 查询销售退货单。|
-| `salebl.SaleBillInfo.queryPurchaseBill(PurchaseBillQueryVo query)` | 查询进货单。|
-| `salebl.SaleBillInfo.queryPurchaseRefundBill(PurchaseRefundBillQueryVo query)` | 查询进货退货单。|
-| `inventorybl.InventoryBillInfo.getAllInventoryBill()` | 查询库存类单据。|
 
 ### 2.2.7 bankaccountbl包
 

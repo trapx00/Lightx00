@@ -46,8 +46,6 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `financeblservice.PaymentBillBlService.submit(PaymentBillVo bill)` | 提交单据。|
 | `financeblservice.PaymentBillBlService.saveAsDraft(PaymentBillVo bill)` | 保存草稿。|
 | `financeblservice.PaymentBillBlService.getId()` | 获得当前单据的ID。|
-// 体系文件里的resume方法需要删掉，根据昨天的讨论，可以直接通过ContinueWritable接口实现。
-// 记得加ID！！！
 
 
 **ReceivalBillUiController**
