@@ -29,9 +29,9 @@ clientbl包负责进货销售人员客户管理用例的业务逻辑实现代码
 | ClientBlService.query       | `public ClientVo[] query(String query);` | 无。        | 数据库给出符合条件的客户信息。       |
 | ClientBlService.saveAsDraft | `public ResultMessage saveAsDraft(ClientVo client);` | 客户信息信息非空。 | 保存草稿，持久化信息已经保存。       |
 | ClientBlService.getId       | `public String getId(); `                | 无。        | 获得新客户的ID。             |
-| ClientBlService.modify      | `public ResultMessage activate(ClientVo client);` | 客户所有属性有效。 | 系统修改对应客户信息，持久化信息已经保存。 |
 | ClientBlService.add         | `public ResultMessage add(ClientVo client);` | 客户所有属性有效。 | 客户已经保存到数据库，持久化信息已经保存。 |
 | ClientBlService.delete      | `public ResultMessage delete(ClientVo[] client);` | 客户非空。     | 数据库删除客户信息，持久化信息已经保存。  |
+| ClientBlService.detail      | `public ResultMessage detail(ClientVo client);` | 无。     | 数据库返回该客户的详细信息。  |
 
 需要的接口
 
@@ -75,11 +75,11 @@ salebl包负责进货销售人员与销售有关的用例（制定销售单、�
 
 | 接口名称                            | 语法                                       | 前置条件          | 后置条件                             |
 | ------------------------------- | ---------------------------------------- | ------------- | -------------------------------- |
-| SaleBillBlService.submit        | `public ResultMessage[] submit(SaleBillVO saleBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
+| SaleBillBlService.submit        | `public ResultMessage submit(SaleBillVO saleBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
 | SaleBillBlService.saveAsDraft   | `public ResultMessage saveAsDraft(SaleBillVO saleBill);` | 用户已经点击保存草稿。   | 持久化层保存草稿信息。                      |
 | SaleBillBlService.getId         | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
 | SaleBillBlService.getPromotion  | `public Promotion[] getPromotion(SaleBillVo saleBill); ` | 销售单已经填写完。     | 获得可用的销售策略。                       |
-| SaleBillBlInfo.querySaleBill  | `public SaleBillVo[] querySaleBill(SaleBillQueryVo query); ` | 无。     | 获得所有单据信息。                       |
+| SaleBillBlInfo.querySaleBill    | `public SaleBillVo[] querySaleBill(SaleBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
 | NotificationActivation.activate | `public ResultMessage activate(SaleBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationActivation.abandon  | `public ResultMessage abandon(SaleBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
 
@@ -89,7 +89,8 @@ salebl包负责进货销售人员与销售有关的用例（制定销售单、�
 | ---------------------------------------- | --------------- |
 | `saledataservice.SaleBillDataService.submit(SaleBillPO saleBill);` | 提交表单。           |
 | `saledataservice.SaleBillDataService.getId();` | 获得新单据的ID。       |
-| `promotionbl.PromotionBlInfo.queryPromotion(SaleBillVo);` | 根据销售单获得可用的促销策略。 |
+| `saledataservice.SaleBillDataService.getSaleBill(SaleBillQueryPo query);` | 获得指定的销售单。       |
+| `promotionbl.PromotionInfoBl.queryPromotion(SaleBillVo);` | 根据销售单获得可用的促销策略。 |
 | `saledataservice.SaleBillDataService.activate(SaleBillPo bill) ` | 使单据生效。          |
 | `saledataservice.SaleBillDataService.abandon(SaleBillPo bill)` | 废弃单据。           |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。           |
@@ -104,7 +105,7 @@ salebl包负责进货销售人员与销售有关的用例（制定销售单、�
 | SaleBillRefundBlService.submit      | `public ResultMessage[] submit(SaleRefundBillVO saleRefundBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
 | SaleBillRefundBlService.saveAsDraft | `public ResultMessage saveAsDraft(SaleRefundBillVO saleRefundBill);` | 用户已经点击保存草稿。   | 持久化层保存草稿信息。                      |
 | SaleBillRefundBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
-| SaleRefundBillBlInfo.querySaleBill  | `public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query); ` | 无。     | 获得所有单据信息。                       |
+| SaleBillBlInfo.querySaleBill  | `public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
 | NotificationActivation.activate     | `public ResultMessage activate(SaleRefundBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationActivation.abandon      | `public ResultMessage abandon(SaleRefundBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
 
@@ -114,6 +115,7 @@ salebl包负责进货销售人员与销售有关的用例（制定销售单、�
 | ---------------------------------------- | --------- |
 | `saledataservice.SaleRefundBillDataService.submit(SaleRefundBillPO saleRefundBill);` | 提交表单。     |
 | `saledataservice.SaleRefundBillDataService.getId();` | 获得新单据的ID。 |
+| `saledataservice.SaleRefundBillDataService.getSaleRefundBill(SaleRefundBillQueryPo query);` | 获得指定的销售退货单。       |
 | `saledataservice.SaleRefundBillDataService.activate(SaleRefundBillPO bill) ` | 使单据生效。    |
 | `saledataservice.SaleRefundBillDataService.abandon(SaleRefundBillPO bill)` | 废弃单据。     |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
@@ -147,20 +149,22 @@ inventorybl包负责与库存相关的用例（包括进货销售人员的制定
 
 提供的接口
 
-| 接口名称                              | 语法                                       | 前置条件          | 后置条件                             |
-| --------------------------------- | ---------------------------------------- | ------------- | -------------------------------- |
-| PurchaseBillBlService.submit      | `public ResultMessage submit(PurchaseBillVO purchaseBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
-| PurchaseBillBlService.saveAsDraft | `public ResultMessage saveAsDraft(PurchaseBillVO purchaseBill);` | 表单数据非空。       | 持久化层保存草稿信息。                      |
-| PurchaseBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
-| PurchaseBillBlInfo.queryPurchaseBillVo  | `public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query); ` | 无。     | 获得所有单据信息。                       |
-| NotificationActivation.activate   | `public ResultMessage activate(PurchaseBillVO bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| NotificationActivation.abandon    | `public ResultMessage abandon(PurchaseBillVO bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
+| 接口名称                                   | 语法                                       | 前置条件          | 后置条件                             |
+| -------------------------------------- | ---------------------------------------- | ------------- | -------------------------------- |
+| PurchaseBillBlService.submit           | `public ResultMessage submit(PurchaseBillVO purchaseBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
+| PurchaseBillBlService.saveAsDraft      | `public ResultMessage saveAsDraft(PurchaseBillVO purchaseBill);` | 表单数据非空。       | 持久化层保存草稿信息。                      |
+| PurchaseBillBlService.getId            | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
+| PurchaseBillBlInfo.queryPurchaseBillVo | `public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
+| NotificationActivation.activate        | `public ResultMessage activate(PurchaseBillVO bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| NotificationActivation.abandon         | `public ResultMessage abandon(PurchaseBillVO bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
 
 需要的接口
 
 | 接口名称                                     | 服务名       |
 | ---------------------------------------- | --------- |
 | `inventorydataservice.PurchaseBillDataService.submit(PurchaseBillPO purchaseBill);` | 提交表单。     |
+| `inventorydataservice.PurchaseBillDataService.getId();` | 获得新单据的ID。 |
+| `inventorydataservice.PurchaseBillDataService.getPurchaseBill(PurchaseBillQueryPo query);` | 获得指定的进货单。       |
 | `inventorydataservice.PurchaseBillDataService.saveAsDraft(PurchaseBillPO purchaseBill);` | 保存草稿。     |
 | `inventorydataservice.PurchaseBillDataService.getId();` | 获得新单据的ID。 |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
@@ -170,20 +174,22 @@ inventorybl包负责与库存相关的用例（包括进货销售人员的制定
 
 提供的接口
 
-| 接口名称                                    | 语法                                       | 前置条件          | 后置条件                             |
-| --------------------------------------- | ---------------------------------------- | ------------- | -------------------------------- |
-| PurchaseRefundBillBlService.submit      | `public ResultMessage submit(PurchaseRefundBillVO purchaseRefundBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
-| PurchaseRefundBillBlService.saveAsDraft | `public ResultMessage saveAsDraft(PurchaseRefundBillVO purchaseRefundBill);` | 表单数据非空。       | 持久化层保存草稿信息。                      |
-| PurchaseRefundBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
-| PurchaseRefundBillInfo.queryPurchaseRefundBillVo  | `public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query); ` | 无。     | 获得所有单据信息。                       |
-| NotificationActivation.activate         | `public ResultMessage activate(PurchaseRefundBillVO bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| NotificationActivation.abandon          | `public ResultMessage abandon(PurchaseRefundBillVO bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
+| 接口名称                                     | 语法                                       | 前置条件          | 后置条件                             |
+| ---------------------------------------- | ---------------------------------------- | ------------- | -------------------------------- |
+| PurchaseRefundBillBlService.submit       | `public ResultMessage submit(PurchaseRefundBillVO purchaseRefundBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
+| PurchaseRefundBillBlService.saveAsDraft  | `public ResultMessage saveAsDraft(PurchaseRefundBillVO purchaseRefundBill);` | 表单数据非空。       | 持久化层保存草稿信息。                      |
+| PurchaseRefundBillBlService.getId        | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
+| PurchaseBillInfo.queryPurchaseRefundBillVo | `public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query); ` | 无。            | 获得所有单据信息。                        |
+| NotificationActivation.activate          | `public ResultMessage activate(PurchaseRefundBillVO bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| NotificationActivation.abandon           | `public ResultMessage abandon(PurchaseRefundBillVO bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
 
 需要的接口
 
 | 接口名称                                     | 服务名       |
 | ---------------------------------------- | --------- |
 | `inventorydataservice.PurchaseRefundBillDataService.submit(PurchaseRefundBillPO purchaseRefundBill);` | 提交表单。     |
+| `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。 |
+| `inventorydataservice.PurchaseRefundBillDataService.getPurchaseRefundBill(PurchaseRefundBillQueryPo query);` | 获得指定的进货退货单。       |
 | `inventorydataservice.PurchaseRefundBillDataService.saveAsDraft(PurchaseRefundBillPO purchaseRefundBill);` | 保存草稿。     |
 | `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。 |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
