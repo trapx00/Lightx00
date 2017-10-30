@@ -28,20 +28,37 @@ adminbl包负责管理员管理用户的用例的业务逻辑实现代码。具�
 
 | 接口名称                                 | 语法                                       | 前置条件                  | 后置条件                  |
 | ------------------------------------ | ---------------------------------------- | --------------------- | --------------------- |
-| adminblservice.UserManagement.add    | `public ResultMessage add(UserAccoutVO newAccount);` | 新账户信息合法且无冲突，用户具有最高权限。 | 新账户信息已经添加，持久化信息已经保存。  |
-| adminblservice.UserManagement.modify | `public ResultMessage modify(UserAccoutVO newAccount);` | 新账户信息合法且无冲突，用户具有最高权限。 | 账户信息已经修改，持久化信息已经保存。   |
-| adminblservice.UserManagement.query  | `public UserAccoutVO[] query(UserAccoutQueryVO query);` | 查询条件合法。               | 返回符合查询条件的数据。          |
-| adminblservice.UserManagement.delete | `public ResultMessage delete(UserAccoutVO account);` | 选择的账户合法，用户具有最高权限      | 选定账户信息已经删除，持久化信息已经保存。 |
+| adminblservice.UserManagement.add    | `public ResultMessage add(EmployeeVO newAccount);` | 新账户信息合法且无冲突，用户具有最高权限。 | 新账户信息已经添加，持久化信息已经保存。  |
+| adminblservice.UserManagement.modify | `public ResultMessage modify(EmployeeVO newAccount);` | 新账户信息合法且无冲突，用户具有最高权限。 | 账户信息已经修改，持久化信息已经保存。   |
+| adminblservice.UserManagement.query  | `public EmployeeVO[] query(UserAccoutQueryVO query);` | 查询条件合法。               | 返回符合查询条件的数据。          |
+| adminblservice.UserManagement.delete | `public ResultMessage delete(EmployeeVO account);` | 选择的账户合法，用户具有最高权限      | 选定账户信息已经删除，持久化信息已经保存。 |
 | adminblservice.UserManagement.getId  | `public String getId();`                 | 新建一个账户。               | 返回当前账户的ID。            |
 
 需要的接口
 
 | 接口名称                                     | 服务名            |
 | ---------------------------------------- | -------------- |
-| `admindataservice.UserManagement.query(String ID, String name,Stirng accountName, String password,boolean hasRoot)` | 根据ID和/或名称查询账户。 |
-| `admindataservice.UserManagement.add(UserAccoutPO account)` | 添加账户。          |
-| `admindataservice.UserManagement.modify(UserAccoutPO account)` | 修改账户信息。        |
-| `admindataservice.UserManagement.delete(UserAccoutPO account)` | 删除账户信息。        |
+| `admindataservice.UserManagement.query(EmployeeQueryVo query)` | 根据ID和/或名称查询账户。 |
+| `admindataservice.UserManagement.add(EmployeetPO account)` | 添加账户。          |
+| `admindataservice.UserManagement.modify(EmployeePO account)` | 修改账户信息。        |
+| `admindataservice.UserManagement.delete(EmployeePO account)` | 删除账户信息。        |
 | `admindataservice.UserManagement.getId();` | 返回当前账户的ID。     |
-| `logblservice.Logger.log(LogSeverity severity, String content);` | 记录日志           |
+| `log.LogService.log(LogSeverity severity, String content);` | 记录日志           |
 
+#### 2.2.11.3.4 业务逻辑层的动态模型
+
+下图为增加用户账户顺序图
+
+![增加用户账户](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/增加用户账户.png)
+
+下图为删除用户账户顺序图
+
+![删除用户账户](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/删除用户账户.png)
+
+下图为查询用户账户顺序图
+
+![查询用户账户](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/查询用户账户.png)
+
+由于此包对外提供选择职员的接口，此功能实现顺序图如下
+
+![BL层查询职员](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/BL层查询职员.png)
