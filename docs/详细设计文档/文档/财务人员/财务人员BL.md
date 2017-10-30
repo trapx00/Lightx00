@@ -217,6 +217,10 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 ![查看经营历程表](../../img/流程图/查看经营历程表.png)
 
+由于本包会对外提供查询财务单据的接口，此用例顺序图如下。
+
+![BL层查询财务单据信息](../../img/流程图/BL层查询财务单据信息.png)
+
 下图为查看经营历程表时TradeHistory的状态图，其他同理。
 
 ![查看经营历程表状态](../../img/状态图/查看经营历程表.png)
@@ -279,3 +283,25 @@ bankaccountbl包负责银行账户管理的的业务逻辑实现代码。具体�
 | `bankaccountdataservice.BankAccountManagementDataService.modify(BankAccountPo account);` | 修改账户信息。        |
 | `bankaccountdataservice.BankAccountManagementDataService.delete(BankAccountPo account);` | 删除账户信息。        |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。|
+
+##### 2.2.7.3.4 业务逻辑层的动态模型
+
+下图为新增银行账户的顺序图。
+
+![增加银行账户](../../img/流程图/增加银行账户.png)
+
+下图为修改银行账户的顺序图。
+
+![修改银行账户](../../img/流程图/修改银行账户.png)
+
+下图为删除银行账户的顺序图。
+
+![删除银行账户](../../img/流程图/删除银行账户.png)
+
+下图为查询银行账户的顺序图。
+
+![查询银行账户](../../img/流程图/查询银行账户.png)
+
+由于本包会对外提供查询银行账户接口，此功能实现顺序图如下。
+
+![BL层查询银行账户](../../img/流程图/BL层查询银行账户.png)
