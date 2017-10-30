@@ -161,9 +161,9 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `financedataservice.TradeHistoryDataService.query(FinanceBillQueryVo query)` | 根据条件查找财务类单据。    |
 | `salebl.SaleBillInfo.querySaleBill(SaleBillQueryVo query)` | 查询销售单。|
 | `salebl.SaleBillInfo.querySaleRefundBill(SaleRefundBillQueryVo query)` | 查询销售退货单。|
-| `salebl.SaleBillInfo.queryPurchaseBill(PurchaseBillQueryVo query)` | 查询进货单。|
-| `salebl.SaleBillInfo.queryPurchaseRefundBill(PurchaseRefundBillQueryVo query)` | 查询进货退货单。|
-| `inventorybl.InventoryBillInfo.getAllInventoryBill()` | 查询库存类单据。|
+| `inventorybl.PurchaseBillInfo.queryPurchaseBill(PurchaseBillQueryVo query)` | 查询进货单。|
+| `inventorybl.PurchaseBillInfo.queryPurchaseRefundBill(PurchaseRefundBillQueryVo query)` | 查询进货退货单。|
+| `inventorybl.InventoryBillInfo.queryInventoryBill(InventoryBillQueryVo query)` | 查询库存类单据。|
 
 **TradeSituationBlController**
 
@@ -180,46 +180,50 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | 接口名称                                     | 服务名          |
 | ---------------------------------------- | ------------ |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。|
-| `financebl.ExpenseCalculation.calculate(Date start, Date end)` | 计算支出。|
-| `financebl.IncomeCalculation.calculate(Date start, Date end)` | 计算收入。|
+| `salebl.SaleBillInfo.querySaleBill(SaleBillQueryVo query)` | 查询销售单。|
+| `salebl.SaleBillInfo.querySaleRefundBill(SaleRefundBillQueryVo query)` | 查询销售退货单。|
+| `inventorybl.PurchaseBillInfo.queryPurchaseBill(PurchaseBillQueryVo query)` | 查询进货单。|
+| `inventorybl.PurchaseBillInfo.queryPurchaseRefundBill(PurchaseRefundBillQueryVo query)` | 查询进货退货单。|
+| `inventorybl.InventoryBillInfo.queryInventoryBill(InventoryBillQueryVo query)` | 查询库存类单据。|
+
 
 ##### 2.2.6.3.4 业务逻辑层的动态模型
 
 下图为填写付款单时的顺序图。
 
-![填写付款单](../../img/流程图/填写付款单.png)
+![填写付款单](../../img/顺序图/填写付款单.png)
 
 下图为填写付款单时被中断保存草稿的顺序图，其他单据保存草稿同理。
 
-![填写付款单保存草稿](../../img/流程图/填写付款单保存草稿.png)
+![填写付款单保存草稿](../../img/顺序图/填写付款单保存草稿.png)
 
 下图为填写收款单时的顺序图。
 
-![填写收款单](../../img/流程图/填写收款单.png)
+![填写收款单](../../img/顺序图/填写收款单.png)
 
 下图为填写现金费用单时的顺序图。
 
-![填写现金费用单](../../img/流程图/填写现金费用单.png)
+![填写现金费用单](../../img/顺序图/填写现金费用单.png)
 
 下图为期初建账时的顺序图。
 
-![期初建账](../../img/流程图/期初建账.png)
+![期初建账](../../img/顺序图/期初建账.png)
 
 下图为查看经营历程表的顺序图。
 
-![查看经营历程表](../../img/流程图/查看经营历程表.png)
+![查看经营历程表](../../img/顺序图/查看经营历程表.png)
 
 由于本包会对外提供查询财务单据的接口，此用例顺序图如下。
 
-![BL层查询财务单据信息](../../img/流程图/BL层查询财务单据信息.png)
+![BL层查询财务单据信息](../../img/顺序图/BL层查询财务单据信息.png)
 
 下图为查看销售明细表的顺序图。
 
-![查看销售明细表](../../img/流程图/查看销售明细表.png)
+![查看销售明细表](../../img/顺序图/查看销售明细表.png)
 
 下图为查看经营情况表的顺序图。
 
-![查看经营情况表](../../img/流程图/查看经营情况表.png)
+![查看经营情况表](../../img/顺序图/查看经营情况表.png)
 
 
 
@@ -276,20 +280,20 @@ bankaccountbl包负责银行账户管理的的业务逻辑实现代码。具体�
 
 下图为新增银行账户的顺序图。
 
-![增加银行账户](../../img/流程图/增加银行账户.png)
+![增加银行账户](../../img/顺序图/增加银行账户.png)
 
 下图为修改银行账户的顺序图。
 
-![修改银行账户](../../img/流程图/修改银行账户.png)
+![修改银行账户](../../img/顺序图/修改银行账户.png)
 
 下图为删除银行账户的顺序图。
 
-![删除银行账户](../../img/流程图/删除银行账户.png)
+![删除银行账户](../../img/顺序图/删除银行账户.png)
 
 下图为查询银行账户的顺序图。
 
-![查询银行账户](../../img/流程图/查询银行账户.png)
+![查询银行账户](../../img/顺序图/查询银行账户.png)
 
 由于本包会对外提供查询银行账户接口，此功能实现顺序图如下。
 
-![BL层查询银行账户](../../img/流程图/BL层查询银行账户.png)
+![BL层查询银行账户](../../img/顺序图/BL层查询银行账户.png)
