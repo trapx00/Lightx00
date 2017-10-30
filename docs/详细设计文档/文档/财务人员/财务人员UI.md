@@ -131,6 +131,12 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `financeblservice.TradeSituationBlService.query(TradeSituationQueryVo query)` | 查询经营情况。|
 | `financeblservice.TradeSituationBlService.export(TradeSituationVo situation)` | 导出。|
 
+##### 2.1.6.3.4 展示层的动态模型
+
+下图为填写付款单时的PaymentBillVo对象的状态图。其他单据Vo对象同理。
+
+![付款单状态图](../../img/状态图/付款单状态图.png)
+
 ### 2.1.7 bankaccountui包
 
 #### 2.1.7.1 概述
