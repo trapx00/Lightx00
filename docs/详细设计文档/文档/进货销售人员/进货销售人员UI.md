@@ -12,7 +12,9 @@ clientui包负责进货销售人员管理客户的用例的UI界面以及响应�
 
 ##### 2.1.6.3.1 设计图
 
-![financeui](/img/设计图/financeui.png)
+clientui模块的设计如图
+
+![clientui](../../img/设计图/clientui.png)
 
 
 ##### 2.1.6.3.2 各个类的职责
@@ -34,13 +36,20 @@ clientui包负责进货销售人员管理客户的用例的UI界面以及响应�
 
 需要的接口
 
-| 接口名称                                     | 服务名        |
-| ---------------------------------------- | ---------- |
-| `clientblservice.ClientBlService.query(String query);` | 查询客户。      |
-| `clientblservice.ClientBlService.saveAsDraft(ClientVo client);` | 保存草稿       |
-| `clientblservice.ClientBlService.getId(); ` | 提供新客户的ID。  |
-| `clientblservice.ClientBlService.add(ClientVo client);` | 添加客户。      |
-| `clientblservice.ClientBlService.delete(ClientVo[] client);` | 客户非空。      |
+| 接口名称                                     | 服务名       |
+| ---------------------------------------- | --------- |
+| `clientblservice.ClientBlService.query(String query);` | 查询客户。     |
+| `clientblservice.ClientBlService.saveAsDraft(ClientVo client);` | 保存草稿      |
+| `clientblservice.ClientBlService.getId(); ` | 提供新客户的ID。 |
+| `clientblservice.ClientBlService.add(ClientVo client);` | 添加客户。     |
+| `clientblservice.ClientBlService.delete(ClientVo[] client);` | 客户非空。     |
+
+##### 2.1.6.3.3 内部类的接口规范
+
+如下图所示的状态图描述了ClientVo对象的生存期间的状态序列、引起转移的事件，以及因转移而伴随的动作。
+随着getId的方法被UI调用，ClientVo自动填入新的ID，进入正在填写状态，如果填写完成，就可以i进入审查状态，当审查完成后提交，ClientVo就可以进入被提交状态。
+
+![填写客户信息状态图](../../img/顺序图/填写客户信息状态图.png)
 
 ### 2.1.6 saleui包
 
@@ -56,7 +65,9 @@ saleui包负责进货销售人员与销售相关的用例（制定销售单、�
 
 ##### 2.1.6.3.1 设计图
 
-![financeui](/img/设计图/financeui.png)
+saleui模块的设计如图
+
+![saleui](../../img/设计图/saleui.png)
 
 
 ##### 2.1.6.3.2 各个类的职责
