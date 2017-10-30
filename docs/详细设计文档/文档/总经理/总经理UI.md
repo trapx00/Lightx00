@@ -28,6 +28,21 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 **PromotionUiControllerBase**
 
+提供的接口
+
+| 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
+| -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
+| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(CommodityOnSaleVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
+
+需要的接口
+
+| 接口名称                                     | 服务名          |
+| ---------------------------------------- | ------------ |
+| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。        |
+| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
+| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
+| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
+
 **CommodityOnSaleUiController**
 
 提供的接口
