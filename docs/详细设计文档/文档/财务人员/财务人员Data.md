@@ -63,7 +63,7 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
 | InitialEstablishmentDataService.submit | `public ResultMessage submit(SystemSnapshotPo snapshot);` | 账有效且状态为审批通过。     | 账单独被保存，持久化数据已保存。                      |
-| InitialEstablishmentDataService.activate | `public ResultMessage activate(SystemSnapshotPo snapshot) ` | 账有效且状态为审批完成。     | 账状态被修改为已废弃，持久化数据已保存。                  |
+| InitialEstablishmentDataService.activate | `public ResultMessage activate(SystemSnapshotPo snapshot);` | 账有效且状态为审批完成。     | 账状态被修改为已废弃，持久化数据已保存。                  |
 | InitialEstablishmentDataService.abandon | `public ResultMessage abandon(SystemSnapshotPo snapshot);` | 账有效且状态为草稿。       | 系统记录需要继续填写账。                          |
 
 **TradeHistoryDataController**
