@@ -12,6 +12,10 @@ clientbl包负责进货销售人员客户管理用例的业务逻辑实现代码
 
 ##### 2.2.6.3.1 设计图
 
+clientbl模块的设计如图
+
+![clientbl](../../img/设计图/clientbl.png)
+
 ##### 2.2.6.3.2 各个类的职责
 
 | 类名                 | 职责              |
@@ -31,7 +35,7 @@ clientbl包负责进货销售人员客户管理用例的业务逻辑实现代码
 | ClientBlService.getId       | `public String getId(); `                | 无。        | 获得新客户的ID。             |
 | ClientBlService.add         | `public ResultMessage add(ClientVo client);` | 客户所有属性有效。 | 客户已经保存到数据库，持久化信息已经保存。 |
 | ClientBlService.delete      | `public ResultMessage delete(ClientVo[] client);` | 客户非空。     | 数据库删除客户信息，持久化信息已经保存。  |
-| ClientBlService.detail      | `public ResultMessage detail(ClientVo client);` | 无。     | 数据库返回该客户的详细信息。  |
+| ClientBlService.detail      | `public ResultMessage detail(ClientVo client);` | 无。        | 数据库返回该客户的详细信息。        |
 
 需要的接口
 
@@ -46,6 +50,33 @@ clientbl包负责进货销售人员客户管理用例的业务逻辑实现代码
 | `clientdataservice.ClientDataService.detail(ClientPO client);` | 查询客户详细信息。     |
 | `draftbl.DraftService.saveAsDraft(ClientVo bill)` | 保存草稿。         |
 
+##### 2.2.6.3.4  业务逻辑层的动态模型
+
+如下图表示了在进销存系统中，当进货销售人员想要查看客户详细信息的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![查看客户详细信息](../../img/顺序图/查看客户详细信息.png)
+
+如下图表示了在进销存系统中，当进货销售人员想要删除客户的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![删除客户](../../img/顺序图/删除客户.png)
+
+如下图表示了在进销存系统中，当进货销售人员想要搜索客户的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![搜索客户](../../img/顺序图/搜索客户.png)
+
+如下图表示了在进销存系统中，当进货销售人员在填写客户信息的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![填写客户信息](../../img/顺序图/填写客户信息.png)
+
+如下图表示了在进销存系统中，当进货销售人员在想要将客户信息保存为草稿的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![填写客户信息保存为草稿](../../img/顺序图/填写客户信息保存为草稿.png)
+
+如下图所示的状态图描述了ClientVo对象的生存期间的状态序列、引起转移的事件，以及因转移而伴随的动作。
+随着getId的方法被UI调用，ClientVo自动填入新的ID，进入正在填写状态，如果填写完成，就可以i进入审查状态，当审查完成后提交，ClientVo就可以进入被提交状态。
+
+![填写客户信息状态图](../../img/顺序图/填写客户信息状态图.png)
+
 ### 2.2.7 salebl包
 
 #### 2.2.6.1 概述
@@ -59,6 +90,10 @@ salebl包负责进货销售人员与销售有关的用例（制定销售单、�
 #### 2.2.6.3 设计
 
 ##### 2.2.6.3.1 设计图
+
+salebl模块的设计如图
+
+![salebl](../../img/设计图/salebl.png)
 
 ##### 2.2.6.3.2 各个类的职责
 
@@ -105,21 +140,49 @@ salebl包负责进货销售人员与销售有关的用例（制定销售单、�
 | SaleBillRefundBlService.submit      | `public ResultMessage[] submit(SaleRefundBillVO saleRefundBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
 | SaleBillRefundBlService.saveAsDraft | `public ResultMessage saveAsDraft(SaleRefundBillVO saleRefundBill);` | 用户已经点击保存草稿。   | 持久化层保存草稿信息。                      |
 | SaleBillRefundBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
-| SaleBillBlInfo.querySaleBill  | `public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
+| SaleBillBlInfo.querySaleBill        | `public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
 | NotificationActivation.activate     | `public ResultMessage activate(SaleRefundBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationActivation.abandon      | `public ResultMessage abandon(SaleRefundBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
 
 需要的接口
 
-| 接口名称                                     | 服务名       |
-| ---------------------------------------- | --------- |
-| `saledataservice.SaleRefundBillDataService.submit(SaleRefundBillPO saleRefundBill);` | 提交表单。     |
-| `saledataservice.SaleRefundBillDataService.getId();` | 获得新单据的ID。 |
-| `saledataservice.SaleRefundBillDataService.getSaleRefundBill(SaleRefundBillQueryPo query);` | 获得指定的销售退货单。       |
-| `saledataservice.SaleRefundBillDataService.activate(SaleRefundBillPO bill) ` | 使单据生效。    |
-| `saledataservice.SaleRefundBillDataService.abandon(SaleRefundBillPO bill)` | 废弃单据。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
-| `draftbl.DraftService.saveAsDraft(SaleRefundBillPO bill)` | 保存草稿。     |
+| 接口名称                                     | 服务名         |
+| ---------------------------------------- | ----------- |
+| `saledataservice.SaleRefundBillDataService.submit(SaleRefundBillPO saleRefundBill);` | 提交表单。       |
+| `saledataservice.SaleRefundBillDataService.getId();` | 获得新单据的ID。   |
+| `saledataservice.SaleRefundBillDataService.getSaleRefundBill(SaleRefundBillQueryPo query);` | 获得指定的销售退货单。 |
+| `saledataservice.SaleRefundBillDataService.activate(SaleRefundBillPO bill) ` | 使单据生效。      |
+| `saledataservice.SaleRefundBillDataService.abandon(SaleRefundBillPO bill)` | 废弃单据。       |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。       |
+| `draftbl.DraftService.saveAsDraft(SaleRefundBillPO bill)` | 保存草稿。       |
+
+##### 2.2.6.3.4  业务逻辑层的动态模型
+
+如下图表示了在进销存系统中，当进货销售人员想要查看所有销售单信息的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![提供所有销售单信息](../../img/顺序图/提供所有销售单信息.png)
+
+如下图表示了在进销存系统中，当进货销售人员想要查看所有销售退货单信息的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![提供所有销售退货单信息](../../img/顺序图/提供所有销售退货单信息.png)
+
+如下图表示了在进销存系统中，当进货销售人员填写销售单的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![填写销售单](../../img/顺序图/填写销售单.png)
+
+如下图表示了在进销存系统中，当进货销售人员想要将销售单保存为草稿的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![填写销售单保存为草稿](../../img/顺序图/填写销售单保存为草稿.png)
+
+如下图表示了在进销存系统中，当进货销售人员填写销售退货单的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![填写销售退货单](../../img/顺序图/填写销售退货单.png)
+
+如下图表示了在进销存系统中，当进货销售人员想要将销售退货单保存为草稿的时候，客户管理业务逻辑处理的相关对象之间的协作
+
+![填写销售退货单](../../img/顺序图/填写销售退货单.png)
+
+
 
 ### 2.2.7 inventorybl包
 
@@ -164,7 +227,7 @@ inventorybl包负责与库存相关的用例（包括进货销售人员的制定
 | ---------------------------------------- | --------- |
 | `inventorydataservice.PurchaseBillDataService.submit(PurchaseBillPO purchaseBill);` | 提交表单。     |
 | `inventorydataservice.PurchaseBillDataService.getId();` | 获得新单据的ID。 |
-| `inventorydataservice.PurchaseBillDataService.getPurchaseBill(PurchaseBillQueryPo query);` | 获得指定的进货单。       |
+| `inventorydataservice.PurchaseBillDataService.getPurchaseBill(PurchaseBillQueryPo query);` | 获得指定的进货单。 |
 | `inventorydataservice.PurchaseBillDataService.saveAsDraft(PurchaseBillPO purchaseBill);` | 保存草稿。     |
 | `inventorydataservice.PurchaseBillDataService.getId();` | 获得新单据的ID。 |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
@@ -185,13 +248,13 @@ inventorybl包负责与库存相关的用例（包括进货销售人员的制定
 
 需要的接口
 
-| 接口名称                                     | 服务名       |
-| ---------------------------------------- | --------- |
-| `inventorydataservice.PurchaseRefundBillDataService.submit(PurchaseRefundBillPO purchaseRefundBill);` | 提交表单。     |
-| `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。 |
-| `inventorydataservice.PurchaseRefundBillDataService.getPurchaseRefundBill(PurchaseRefundBillQueryPo query);` | 获得指定的进货退货单。       |
-| `inventorydataservice.PurchaseRefundBillDataService.saveAsDraft(PurchaseRefundBillPO purchaseRefundBill);` | 保存草稿。     |
-| `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。 |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
-| `draftbl.DraftService.saveAsDraft(PurchaseRefundBillPO bill)` | 保存草稿。     |
+| 接口名称                                     | 服务名         |
+| ---------------------------------------- | ----------- |
+| `inventorydataservice.PurchaseRefundBillDataService.submit(PurchaseRefundBillPO purchaseRefundBill);` | 提交表单。       |
+| `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。   |
+| `inventorydataservice.PurchaseRefundBillDataService.getPurchaseRefundBill(PurchaseRefundBillQueryPo query);` | 获得指定的进货退货单。 |
+| `inventorydataservice.PurchaseRefundBillDataService.saveAsDraft(PurchaseRefundBillPO purchaseRefundBill);` | 保存草稿。       |
+| `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。   |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。       |
+| `draftbl.DraftService.saveAsDraft(PurchaseRefundBillPO bill)` | 保存草稿。       |
 
