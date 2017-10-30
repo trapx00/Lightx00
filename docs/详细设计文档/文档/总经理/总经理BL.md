@@ -1,3 +1,5 @@
+
+
 ##### 2.2.12 promotionbl包
 
 #### 2.2.12.1 概述
@@ -170,7 +172,31 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
 | `promotiondataservice.PromotionManagementDataService.delete(ClientOnSalePo promotion)` | 删除单一持久化对象。       |
 
+#### 2.2.12.3.4 业务逻辑层的动态模型
 
+下图为填写促销策略（不需要查询商品）时的顺序图
+
+![填写促销策略（不需要查询商品）](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略（不需要查询商品）.png)
+
+下图为填写促销策略（需要查询商品）时的顺序图
+
+![填写促销策略（查询商品）](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略（查询商品）.png)
+
+下图为填写促销策略时被中断保存草稿的顺序图
+
+![填写促销策略保存草稿](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略保存草稿.png)
+
+下图是查询（筛选）促销策略的顺序图
+
+![查询促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/查询促销策略.png)
+
+下图是删除促销策略的顺序图
+
+![删除促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/删除促销策略.png)
+
+由于本包会对销售行为提供查询销售可用的促销策略接口，此功能实现顺序图如下
+
+![BL层查询可用促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/BL层查询可用促销策略.png)
 
 ### 2.2.13 approvalbl包
 
@@ -218,3 +244,14 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 | `notificationbl.NotificationService.addNotification(NotificationVo notification);` | 新增一条通知。      |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。        |
 
+#### 2.2.13.3.4 业务逻辑层的动态模型
+
+下图是审批通过的顺序图
+
+![审批通过](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/审批通过.png)
+
+下图是审批不通过的顺序图
+
+![审批通过](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/审批通过.png)
+
+由于本包对外提供申请提交接口，此功能实现顺序图如下![BL层处理申请审批](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/BL层处理申请审批.png)
