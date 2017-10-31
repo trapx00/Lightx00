@@ -1,6 +1,4 @@
-
-
-##### 2.2.12 promotionbl包
+### 2.2.12 promotionbl包
 
 #### 2.2.12.1 概述
 
@@ -20,7 +18,7 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 
 | 类名                           | 职责                      |
 | ---------------------------- | ----------------------- |
-| PromotionBlControllerBase    | 填写促销策略的功能实现的基类。         |
+| PromotionBlController        | 负责管理促销策略控制器的职责。         |
 | CommodityOnSaleBlController  | 负责管理填写组合商品降价促销策略的功能实现。  |
 | TotalPriceCouponBlController | 负责管理填写满额赠送代金券促销策略的功能实现。 |
 | TotalPriceGiftBlController   | 负责管理填写满额赠送礼品促销策略的功能实现。  |
@@ -28,26 +26,26 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | ClientGiftBlController       | 负责管理填写客户赠送礼品促销策略的功能实现。  |
 | ClientOnSaleBlController     | 负责管理填写客户价格折让促销策略的功能实现。  |
 
-**PromotionBlControllerBase**
+**PromotionBlController**
 
 提供的接口
 
 | 接口名称                              | 语法                                       | 前置条件                                | 后置条件                    |
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
-| PromotionBlService.submit         | `public ResultMessage submit(PromotionVOBase newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
-| PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(PromotionVOBase promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public PromotionVOBase[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(PromotionPOBase promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.submit         | `public ResultMessage submit(PromotionVoBase newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
+| PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(PromotionVoBase promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
+| PromotionBlService.queryPromotion | `public PromotionVOBase[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(PromotionVoBase promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
 | PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
-| PromotionBlService.promotionInfo  | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
+| promotionbl.PromotionInfo         | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(PromotionPOBase promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(PromotionPoBase promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.submit(PromotionVoBase promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(PromotionVoBase promotion)` | 删除单一持久化对象。       |
 | `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID。      |
 | `draftbl.DraftService.saveAsDraft(PromotionVoBase promotion)` | 保存草稿。            |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
@@ -60,18 +58,21 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
 | PromotionBlService.submit         | `public ResultMessage submit(CommodityOnSaleVo newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
 | PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(CommodityOnSaleVo promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public CommodityOnSaleVo[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(CommodityOnSalePo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.queryPromotion | `public CommodityOnSaleVo[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(CommodityOnSaleVo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
+| PromotionInfo.queryPromotion      | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(CommodityOnSalePo promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(CommodityOnSalePo promotion)` | 删除单一持久化对象。       |
-| `CommodityInfo.queryCommodity.queryCommodity(CommodityQueryVo commodityQueryVo)` | 获得筛选的商品。         |
-| `CommodityInfo.queryCommoditySort.queryCommoditySort(CommoditySortQueryVo commoditySortQueryVo )` | 讲筛选出的商品进行排序。     |
+| `promotiondataservice.PromotionManagementDataService.submit(CommodityOnSaleVo promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(CommodityOnSaleVo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID。      |
+| `draftbl.DraftService.saveAsDraft(CommodityOnSaleVo promotion)` | 保存草稿。            |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **TotalPriceCouponBlController**
 
@@ -81,16 +82,21 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
 | PromotionBlService.submit         | `public ResultMessage submit(TotalPriceCouponVo newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
 | PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(TotalPriceCouponVo promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public TotalPriceCouponVo[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(TotalPriceCouponPo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.queryPromotion | `public TotalPriceCouponVo[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(TotalPriceCouponVo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
+| PromotionInfo.queryPromotion      | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(TotalPriceCouponPo promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(TotalPriceCouponPo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.submit(TotalPriceCouponVo promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(TotalPriceCouponVo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID       |
+| `draftbl.DraftService.saveAsDraft(TotalPriceCouponVo promotion)` | 保存草稿。            |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **TotalPriceGiftBlController**
 
@@ -100,18 +106,21 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
 | PromotionBlService.submit         | `public ResultMessage submit(TotalPriceGiftVo newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
 | PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(TotalPriceGiftVo promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public TotalPriceGiftVo[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(TotalPriceGiftPo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.queryPromotion | `public TotalPriceGiftVo[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(TotalPriceGiftVo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
+| PromotionInfo.queryPromotion      | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(TotalPriceGiftPo promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(TotalPriceGiftPo promotion)` | 删除单一持久化对象。       |
-| `CommodityInfo.queryCommodity.queryCommodity(CommodityQueryVo commodityQueryVo)` | 获得筛选的商品。         |
-| `CommodityInfo.queryCommoditySort.queryCommoditySort(CommoditySortQueryVo commoditySortQueryVo )` | 讲筛选出的商品进行排序。     |
+| `promotiondataservice.PromotionManagementDataService.submit(TotalPriceGiftVo promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(TotalPriceGiftVo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID       |
+| `draftbl.DraftService.saveAsDraft(TotalPriceGiftVo promotion)` | 保存草稿。            |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **ClientCouponBlController**
 
@@ -121,16 +130,21 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
 | PromotionBlService.submit         | `public ResultMessage submit(ClientCouponVo newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
 | PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(ClientCouponVo promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public ClientCouponV[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(ClientCouponPo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.queryPromotion | `public ClientCouponV[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(ClientCouponVo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
+| PromotionInfo.queryPromotion      | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(ClientCouponPo promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(ClientCouponPo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.submit(ClientCouponVo promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(ClientCouponVo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID       |
+| `draftbl.DraftService.saveAsDraft(ClientCouponVo promotion)` | 保存草稿。            |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **ClientGiftBlController**
 
@@ -140,18 +154,21 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
 | PromotionBlService.submit         | `public ResultMessage submit(ClientGiftVo newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
 | PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(ClientGiftVo promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public ClientGiftVo[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(ClientGiftPo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.queryPromotion | `public ClientGiftVo[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(ClientGiftVo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
+| PromotionInfo.queryPromotion      | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(ClientGiftPo promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(ClientGiftPo promotion)` | 删除单一持久化对象。       |
-| `CommodityInfo.queryCommodity.queryCommodity(CommodityQueryVo commodityQueryVo)` | 获得筛选的商品。         |
-| `CommodityInfo.queryCommoditySort.queryCommoditySort(CommoditySortQueryVo commoditySortQueryVo )` | 讲筛选出的商品进行排序。     |
+| `promotiondataservice.PromotionManagementDataService.submit(ClientGiftVo promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(ClientGiftVo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID       |
+| `draftbl.DraftService.saveAsDraft(ClientGiftVo promotion)` | 保存草稿。            |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **ClientOnSaleBlController**
 
@@ -161,36 +178,41 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | --------------------------------- | ---------------------------------------- | ----------------------------------- | ----------------------- |
 | PromotionBlService.submit         | `public ResultMessage submit(ClientOnSaleVo newPromotion);` | 促销策略所有属性有效。                         | 持久化促销策略信息已经保存。          |
 | PromotionBlService.saveAsDraft    | `public ResultMessage saveAsDraft(ClientOnSaleVo promotion);` | 促销策略信息非空。                           | 保存草稿，持久化信息已经保存。         |
-| PromotionBlService.queryPromotion | `public ClientOnSaleVo[] queryPromotion(PromotionQueryVO query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
-| PromotionBlService.delete         | `public ResultMessage delete(ClientOnSalePo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.queryPromotion | `public ClientOnSaleVo[] queryPromotion(PromotionQueryVo query);` | 输入的query不为空，其中值为null字段的为不限制，筛选条件有效。 | 返回符合条件的促销策略。            |
+| PromotionBlService.delete         | `public ResultMessage delete(ClientOnSaleVo promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
+| PromotionBlService.getId          | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
+| PromotionInfo.queryPromotion      | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotiondataservice.PromotionManagementDataService.submit(ClientOnSalePo promotion)` | 提交新促销策略。         |
-| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotiondataservice.PromotionManagementDataService.delete(ClientOnSalePo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.submit(ClientOnSaleVo promotion)` | 提交新促销策略。         |
+| `promotiondataservice.PromotionManagementDataService.queryPromotion(PromotionQueryVo query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotiondataservice.PromotionManagementDataService.delete(ClientOnSaleVo promotion)` | 删除单一持久化对象。       |
+| `promotiondataservice.PromotionManagementDataService.getId()` | 返回当前促销策略ID       |
+| `draftbl.DraftService.saveAsDraft(ClientOnSaleVo promotion)` | 保存草稿。            |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 #### 2.2.12.3.4 业务逻辑层的动态模型
 
-下图为填写促销策略（不需要查询商品）时的顺序图
+下图为填写用户赠送代金券促销策略（不需要查询商品）时的顺序图，用户价格折让、满额赠送代金券促销策略的顺序图参见此图。
 
 ![填写促销策略（不需要查询商品）](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略（不需要查询商品）.png)
 
-下图为填写促销策略（需要查询商品）时的顺序图
+下图为填写组合商品降价促销策略（需要查询商品）时的顺序图，客户赠送礼品，满额赠送礼品促销策略的顺序图参见此图。
 
 ![填写促销策略（查询商品）](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略（查询商品）.png)
 
-下图为填写促销策略时被中断保存草稿的顺序图
+下图为填写组合商品降价促销策略时被中断保存草稿的顺序图，其他促销策略顺序图参见此图。
 
 ![填写促销策略保存草稿](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略保存草稿.png)
 
-下图是查询（筛选）促销策略的顺序图
+下图是查询（筛选）组合商品降价促销策略的顺序图，其他促销策略顺序图参见此图。
 
 ![查询促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/查询促销策略.png)
 
-下图是删除促销策略的顺序图
+下图是删除组合商品降价促销策略的顺序图，其他促销策略顺序图参见此图。
 
 ![删除促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/删除促销策略.png)
 
@@ -238,9 +260,9 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 | 接口名称                                     | 服务名          |
 | ---------------------------------------- | ------------ |
 | `approvaldataservice.AuditDataService.query(BillQueryVo query)` | 得到待审批的持久化对象。 |
-| `approvaldataservice.AuditDataService.reject(BillPO bill)` | 拒绝通过审批。      |
-| `approvaldataservice.AuditDataService.pass(BillPO bill)` | 通过审批。        |
-| `approvaldataservice.ApprovalRequest(BillPo bill)` | 保存提交的单据。     |
+| `approvaldataservice.AuditDataService.reject(BillVo bill)` | 拒绝通过审批。      |
+| `approvaldataservice.AuditDataService.pass(BillVo bill)` | 通过审批。        |
+| `approvaldataservice.ApprovalRequest(BillVo bill)` | 保存提交的单据。     |
 | `notificationbl.NotificationService.addNotification(NotificationVo notification);` | 新增一条通知。      |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。        |
 
