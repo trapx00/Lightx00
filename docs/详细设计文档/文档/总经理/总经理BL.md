@@ -6,13 +6,13 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 
 #### 2.2.12.2 整体结构
 
-此包为业务逻辑层的一部分，它负责业务逻辑的实现。它实现了promotionPromotionBlService包所需要的promotionblservice所有接口，并依赖对应的promotiondataservice包与data层进行交互。由于销售行为需要依赖促销策略，它还需要实现PromotionInfo接口。
+此包为业务逻辑层的一部分，它负责业务逻辑的实现。它实现了PromotionBlService包所需要的promotionblservice所有接口，并依赖对应的promotiondataservice包与data层进行交互。由于销售行为需要依赖促销策略，它还需要实现PromotionInfo接口。
 
 #### 2.2.12.3 设计
 
 ##### 2.2.12.3.1 设计图
 
-##### ![promotionbl](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/promotionbl.png)
+![promotionbl](../../img/设计图/promotionbl.png)
 
 ##### 2.2.12.3.2 各个类的职责
 
@@ -198,27 +198,27 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 
 下图为填写用户赠送代金券促销策略（不需要查询商品）时的顺序图，用户价格折让、满额赠送代金券促销策略的顺序图参见此图。
 
-![填写促销策略（不需要查询商品）](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略（不需要查询商品）.png)
+![填写促销策略（不需要查询商品）](../../img/顺序图/填写促销策略（不需要查询商品）.png)
 
 下图为填写组合商品降价促销策略（需要查询商品）时的顺序图，客户赠送礼品，满额赠送礼品促销策略的顺序图参见此图。
 
-![填写促销策略（查询商品）](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略（查询商品）.png)
+![填写促销策略（查询商品）](../../img/顺序图/填写促销策略（查询商品）.png)
 
 下图为填写组合商品降价促销策略时被中断保存草稿的顺序图，其他促销策略顺序图参见此图。
 
-![填写促销策略保存草稿](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/填写促销策略保存草稿.png)
+![填写促销策略保存草稿](../../img/顺序图/填写促销策略保存草稿.png)
 
 下图是查询（筛选）组合商品降价促销策略的顺序图，其他促销策略顺序图参见此图。
 
-![查询促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/查询促销策略.png)
+![查询促销策略](../../img/顺序图/查询促销策略.png)
 
 下图是删除组合商品降价促销策略的顺序图，其他促销策略顺序图参见此图。
 
-![删除促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/删除促销策略.png)
+![删除促销策略](../../img/顺序图/删除促销策略.png)
 
 由于本包会对销售行为提供查询销售可用的促销策略接口，此功能实现顺序图如下
 
-![BL层查询可用促销策略](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/BL层查询可用促销策略.png)
+![BL层查询可用促销策略](../../img/顺序图/BL层查询可用促销策略.png)
 
 ### 2.2.13 approvalbl包
 
@@ -234,7 +234,7 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 
 ##### 2.2.13.3.1 设计图
 
-![approvalbl](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/approvalbl.png)
+![approvalbl](../../img/设计图/approvalbl.png)
 
 
 
@@ -250,7 +250,7 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 
 | 接口名称                           | 语法                                       | 前置条件          | 后置条件                  |
 | ------------------------------ | ---------------------------------------- | ------------- | --------------------- |
-| AuditBlService.query           | `public ResultMessage  query (BillQueryVO query);` | 有处于提交状态的单据单据。 | 返回符合条件的单据。            |
+| AuditBlService.query           | `public ResultMessage query (BillQueryVO query);` | 有处于提交状态的单据单据。 | 返回符合条件的单据。            |
 | AuditBlService.reject          | `public ResultMessage reject(BillVO bill);` | 用户已经查看了单据内容。  | 拒绝通过审批，持久化更新涉及的对象的数据。 |
 | AuditBlService.pass            | `public ResultMessage pass(BillVO bill);` | 用户已经查看了单据内容。  | 通过审批，持久化更新涉及的对象的数据。   |
 | ApprovalRequest.requestMessage | `public ResultMessage requestMessage(BillVo bill);` | 用户提交了单据。      | 保存单据并返回保存结果。          |
@@ -270,10 +270,12 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 
 下图是审批通过的顺序图
 
-![审批通过](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/审批通过.png)
+![审批通过](../../img/顺序图/审批通过.png)
 
 下图是审批不通过的顺序图
 
-![审批通过](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/审批通过.png)
+![审批通过](../../img/顺序图/审批通过.png)
 
-由于本包对外提供申请提交接口，此功能实现顺序图如下![BL层处理申请审批](/Users/ricering/ERPnju/docs/详细设计文档/img/顺序图/BL层处理申请审批.png)
+由于本包对外提供申请提交接口，此功能实现顺序图如下
+
+![BL层处理申请审批](../../img/顺序图/BL层处理申请审批.png)

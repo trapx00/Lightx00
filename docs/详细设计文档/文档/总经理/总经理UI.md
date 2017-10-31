@@ -178,7 +178,7 @@ approvalui包负责总经理单据审批用例的UI界面以及响应控制代�
 
 ##### 2.1.13.3.1 设计图
 
-![approvalui](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/approvalui.png)
+![approvalui](../../img/设计图/approvalui.png)
 
 ##### 2.1.13.3.2 各个类的职责
 
