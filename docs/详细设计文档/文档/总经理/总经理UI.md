@@ -26,6 +26,8 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 | ClientGiftUiController       | 负责管理填写客户赠送礼品促销策略界面的展示和功能。  |
 | ClientOnSaleUiController     | 负责管理填写客户价格折让促销策略界面的展示和功能。  |
 
+##### 2.1.12.3.3 内部类的接口规范
+
 **PromotionUiController**
 
 提供的接口
@@ -185,6 +187,8 @@ approvalui包负责总经理单据审批用例的UI界面以及响应控制代�
 | 类名                | 职责                |
 | ----------------- | ----------------- |
 | AuditUiController | 负责管理审批单据界面的展示和功能。 |
+
+##### 2.2.13.3.3 内部类的接口规范
 
 **AuditUiController**
 

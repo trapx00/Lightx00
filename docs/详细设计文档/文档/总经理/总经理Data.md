@@ -25,6 +25,8 @@ promtiondata包负责总经理制定促销策略（包括组合商品降价、�
 | ClientGiftDataController       | 负责管理填写客户赠送礼品促销策略的数据操作。  |
 | ClientOnSaleDataController     | 负责管理填写客户价格折让促销策略的数据操作。  |
 
+##### 2.3.12.3.3 内部类的接口规范
+
 **CommodityOnSaleDataController**
 
 提供的接口
@@ -110,6 +112,8 @@ approvaldata包负责总经理审批单据用例的数据操作。具体功能�
 | 类名                  | 职责           |
 | ------------------- | ------------ |
 | AuditDataController | 负责管理审批单据的数据。 |
+
+##### 2.3.13.3.3 内部类的接口规范
 
 **AuditDataController**
 
