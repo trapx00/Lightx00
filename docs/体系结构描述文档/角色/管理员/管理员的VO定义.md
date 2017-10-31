@@ -10,13 +10,5 @@ class UserAccountQueryVO{
     boolean hasRoot;
 }
 
-class UserAccountVO{
-    String ID;
-    String name;
-    String accountName;
-    String password;
-    boolean hasRoot;
-    AccountState state;
-}
 ```
 

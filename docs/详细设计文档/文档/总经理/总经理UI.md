@@ -12,13 +12,13 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 ##### 2.1.12.3.1 设计图
 
-![promotionui](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/promotionui.png)
+![promotionui](../../img/设计图/promotionui.png)
 
 ##### 2.1.12.3.2 各个类的职责
 
 | 类名                           | 职责                         |
 | ---------------------------- | -------------------------- |
-| PromotionUiControllerBase    | 促销策略界面控制器基类                |
+| PromotionUiController        | 负责管理各促销策略控制器的职责。           |
 | CommodityOnSaleUiController  | 负责管理填写组合商品降价促销策略界面的展示和功能。  |
 | TotalPriceCouponUiController | 负责管理填写满额赠送代金券促销策略界面的展示和功能。 |
 | TotalPriceGiftUiController   | 负责管理填写满额赠送礼品促销策略界面的展示和功能。  |
@@ -26,22 +26,24 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 | ClientGiftUiController       | 负责管理填写客户赠送礼品促销策略界面的展示和功能。  |
 | ClientOnSaleUiController     | 负责管理填写客户价格折让促销策略界面的展示和功能。  |
 
-**PromotionUiControllerBase**
+**PromotionUiController**
 
 提供的接口
 
 | 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
 | -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(CommodityOnSaleVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
+| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(PromotionVoBase promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。        |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `promotionblservice.PromotionManagementBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(PromotionVoBase promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **CommodityOnSaleUiController**
 
@@ -53,29 +55,15 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。        |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
-
-**CommodityOnSaleUiController**
-
-提供的接口
-
-| 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
-| -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(CommodityOnSaleVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
-
-需要的接口
-
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。        |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
+| `promotionblservice.PromotionManagementBlService.submit(CommodityOnSaleVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(CommodityOnSaleVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(CommodityOnSaleVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **TotalPriceCouponUiController**
 
@@ -87,11 +75,14 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `promotionblservice.PromotionManagementBlService.submit(TotalPriceCouponVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(TotalPriceCouponVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(TotalPriceCouponVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **TotalPriceGiftUiController**
 
@@ -103,14 +94,15 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。        |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
-
-
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
+| `promotionblservice.PromotionManagementBlService.submit(TotalPriceGiftVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(TotalPriceGiftVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(TotalPriceGiftVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **ClientCouponUiController**
 
@@ -122,11 +114,14 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `promotionblservice.PromotionManagementBlService.submit(ClientCouponVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(ClientCouponVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(ClientCouponVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
 **ClientGiftUiController**
 
@@ -138,14 +133,15 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。        |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
-
-
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
+| `promotionblservice.PromotionManagementBlService.submit(ClientGiftVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(ClientGiftVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(ClientGiftVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志             |
 
 **ClientOnSaleUiController**
 
@@ -157,11 +153,14 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `promotionblservice.PromotionBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。      |
-| `promotionblservice.PromotionBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。    |
-| `promotionblservice.PromotionBlService.getId()` | 获得当前促销策略的ID。 |
+| 接口名称                                     | 服务名              |
+| ---------------------------------------- | ---------------- |
+| `promotionblservice.PromotionManagementBlService.submit(ClientOnSaleVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.PromotionManagementBlService.saveAsDraft(ClientOnSaleVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.PromotionManagementBlService.delete(ClientOnSaleVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志             |
 
 
 
@@ -179,7 +178,7 @@ approvalui包负责总经理单据审批用例的UI界面以及响应控制代�
 
 ##### 2.1.13.3.1 设计图
 
-![approvalui](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/approvalui.png)
+![approvalui](../../img/设计图/approvalui.png)
 
 ##### 2.1.13.3.2 各个类的职责
 

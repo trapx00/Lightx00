@@ -6,11 +6,11 @@ adminui包负责管理员管理用户的用例的UI界面以及相应控制代�
 
 #### 2.1.11.2 整体结构
 
-adminui包为展示层的一部分，它负责展示信息以及与用户的交互。它依赖它对应的adminblservice包与bl层进行交互。由于它有填写单据的用例，为了实现草稿箱功能，它还需要实现ContinueWritable接口。它需要给财务人员提供选择职员的接口。
+adminui包为展示层的一部分，它负责展示信息以及与用户的交互。它依赖它对应的adminblservice包与bl层进行交互。它需要给财务人员提供选择职员的接口。
 
 #### 2.1.11.3 设计
 
-![adminui](/Users/ricering/ERPnju/docs/详细设计文档/img/设计图/adminui.png)
+![adminui](../../img/设计图/adminui.png)
 
 ##### 2.1.11.3.1 设计图
 
@@ -26,18 +26,17 @@ adminui包为展示层的一部分，它负责展示信息以及与用户的交�
 
 提供的接口
 
-| 接口名称                             | 语法                                       | 前置条件           | 后置条件        |
-| -------------------------------- | ---------------------------------------- | -------------- | ----------- |
-| ContinueWritable.continueWriting | `public UserManagementUiController continueWriting(EmployeeVo account);` | 输入有效的用于继续填写单据。 | 初始化传入单据的内容。 |
-| adminui.AdminInfoUi              | `public EmployeeVo[] showEmployeeSelectDialog();` | 查询并选择有效的职员。    | 返回职员的详细信息。  |
+| 接口名称                | 语法                                       | 前置条件        | 后置条件       |
+| ------------------- | ---------------------------------------- | ----------- | ---------- |
+| adminui.AdminInfoUi | `public EmployeeVo[] showEmployeeSelectDialog();` | 查询并选择有效的职员。 | 返回职员的详细信息。 |
 
 需要的接口
 
 | 接口名称                                     | 服务名          |
 | ---------------------------------------- | ------------ |
-| `adminblservice.UserManagement.add(EmployeeVo newAccount);` | 添加账户。        |
-| `adminblservice.UserManagement.modify(EmployeeVo newAccount);` | 修改账户信息。      |
-| `adminblservice.UserManagement.query(UserAccoutQueryVO query);` | 删除账户信息。      |
-| `adminblservice.UserManagement.delete(EmployeeVo account);` | 查询账户。        |
-| `adminblservice.AdminBlService.getId()`  | 获得当前用户账号的ID。 |
+| `adminblservice.UserManagementBlService.add(EmployeeVo newAccount)` | 添加账户。        |
+| `adminblservice.UserManagementBlService.modify(EmployeeVo newAccount)` | 修改账户信息。      |
+| `adminblservice.UserManagementBlService.query(UserAccoutQueryVO query)` | 查询账户信息。      |
+| `adminblservice.UserManagementBlService.delete(EmployeeVo account)` | 删除账户。        |
+| `adminblservice.UserManagementBlService.getId()` | 获得当前用户账号的ID。 |
 
