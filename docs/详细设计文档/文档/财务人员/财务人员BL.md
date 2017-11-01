@@ -12,7 +12,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 ##### 2.2.6.3.1 设计图
 
-![financebl](/img/设计图/financebl.png)
+![financebl](../../img/设计图/financebl.png)
 
 ##### 2.2.6.3.2 各个类的职责
 
@@ -48,6 +48,9 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
 | `draftbl.DraftService.saveAsDraft(PaymentBillVo bill)` | 保存草稿。     |
 | `approvalbl.ApprovalRequest.requestApproval(BillVo bill)` | 提交等待审核。   |
+| `clientbl.ClientModificationService.modifyClient(ClientVo client)` | 修改用户信息。|
+| `clientbl.ClientInfo.queryClient(String query)`     | 查询客户。       |
+| `bankaccountbl.BankAccountModificationService.modityBankAccount(BankAccountVo bill)` | 修改银行账户信息。 | 
 | `financedataservice.PaymentBillDataService.submit(PaymentBillPo bill)` | 提交新单据。    |
 | `financedataservice.PaymentBillDataService.activate(PaymentBillPo bill) ` | 使单据入账。    |
 | `financedataservice.PaymentBillDataService.abandon(PaymentBillPo bill)` | 废弃单据。     |
@@ -72,6 +75,9 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
 | `draftbl.DraftService.saveAsDraft(ReceivalBillVo bill)` | 保存草稿。     |
 | `approvalbl.ApprovalRequest.requestApproval(BillVo bill)` | 提交等待审核。   |
+| `clientbl.ClientModificationService.modifyClient(ClientVo client)` | 修改用户信息。|
+| `clientbl.ClientInfo.queryClient(String query)`     | 查询客户。       |
+| `bankaccountbl.BankAccountModificationService.modityBankAccount(BankAccountVo bill)` | 修改银行账户信息。 | 
 | `financedataservice.ReceivalBillDataService.submit(ReceivalBillPo bill)` | 提交新单据。    |
 | `financedataservice.ReceivalBillDataService.activate(ReceivalBillPo bill) ` | 使单据入账。    |
 | `financedataservice.ReceivalBillDataService.abandon(ReceivalBillPo bill)` | 废弃单据。     |
@@ -95,6 +101,9 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | --------- |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
 | `draftbl.DraftService.saveAsDraft(CashBillVo bill)` | 保存草稿。     |
+| `clientbl.ClientModificationService.modifyClient(ClientVo client)` | 修改用户信息。|
+| `clientbl.ClientInfo.queryClient(String query)`     | 查询客户。       |
+| `bankaccountbl.BankAccountModificationService.modityBankAccount(BankAccountVo bill)` | 修改银行账户信息。 | 
 | `approvalbl.ApprovalRequest.requestApproval(BillVo bill)` | 提交等待审核。   |
 | `financedataservice.CashBillDataService.submit(CashBillPo bill)` | 提交新单据。    |
 | `financedataservice.CashBillDataService.activate(CashBillPo bill)` | 使单据入账。    |
@@ -118,7 +127,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ---------------------------------------- | ----------- |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。       |
 | `draftbl.DraftService.saveAsDraft(SystemSnapshotVo bill)` | 保存草稿。       |
-| `clientbl.queryClient(String query)`     | 查询客户。       |
+| `clientbl.ClientInfo.queryClient(String query)`     | 查询客户。       |
 | `commoditybl.CommodityInfo.getAllCommodity()` | 取得所有商品信息。   |
 | `commoditybl.CommodityInfo.getAllCommoditySort()` | 取得所有商品分类信息。 |
 | `bankaccountbl.BankAccountInfo.getAllBankAccount()` | 取得所有银行账户信息。 |
@@ -225,6 +234,10 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 ![查看经营情况表](../../img/顺序图/查看经营情况表.png)
 
+下面为单据入账的顺序图，丢弃同理。
+
+![单据入账](../../img/顺序图/单据入账.png)
+
 
 
 
@@ -236,7 +249,7 @@ bankaccountbl包负责银行账户管理的的业务逻辑实现代码。具体�
 
 #### 2.2.7.2 整体架构
 
-此包为业务逻辑层的一部分，它负责业务逻辑的实现。它实现了bankaccountui包所需要的bankaccountblservice的所有接口，并依赖bankaccountdataservice包与data层进行交互。它同时公开了BankAccountInfo接口用于给其他bl提供银行账户信息。
+此包为业务逻辑层的一部分，它负责业务逻辑的实现。它实现了bankaccountui包所需要的bankaccountblservice的所有接口，并依赖bankaccountdataservice包与data层进行交互。它同时公开了BankAccountInfo接口用于给其他bl提供银行账户信息，也公开了BankAccountModificationService用于提供修改银行账户的方法。
 
 #### 2.2.7.3 设计
 
@@ -263,6 +276,7 @@ bankaccountbl包负责银行账户管理的的业务逻辑实现代码。具体�
 | BankAccountManagementBlService.query  | `public BankAccountVo[] query(BankAccountQueryVo query);` | 查询条件合法。               | 返回符合查询条件的数据。           |
 | BankAccountManagementBlService.delete | `public ResultMessage delete(BankAccountVo account);` | 选择的账户合法，用户具有最高权限。     | 选定账户信息已经删除，持久化信息已经保存。  |
 | BankAccountInfo.queryBankAccount      | `public BankAccountVo[] queryBankAccount(BankAccoutQueryVo query);` | 无。                    | 返回符合查询条件的数据。           |
+| BankAccountModificationService.modifyBankAccount |  `public ResultMessage modityBankAccount(BankAccountVo bill);` | 新银行账户Vo的ID存在于原数据库。|  修改银行账户信息。 | 
 
 
 需要的接口
@@ -282,7 +296,7 @@ bankaccountbl包负责银行账户管理的的业务逻辑实现代码。具体�
 
 ![增加银行账户](../../img/顺序图/增加银行账户.png)
 
-下图为修改银行账户的顺序图。
+下图为修改银行账户的顺序图。对外提供的BankAccountModificationService与这个方法相同。
 
 ![修改银行账户](../../img/顺序图/修改银行账户.png)
 
