@@ -1,6 +1,7 @@
 package trapx00.lightx00.shared.vo.salestaff;
 
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillType;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 
@@ -12,7 +13,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
     private SaleStaffVo operator;
     private String comment;
     private double total;
-    private CommodityVo[] commodityList;
+    private CommodityItem[] commodityList;
 
     public String getSupplier() {
         return supplier;
@@ -43,7 +44,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
     }
 
     public void setComment(String comment) {
-        comment = comment;
+        this.comment = comment;
     }
 
     public double getTotal() {
@@ -54,16 +55,16 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
         this.total = total;
     }
 
-    public CommodityVo[] getCommodityList() {
+    public CommodityItem[] getCommodityList() {
         return commodityList;
     }
 
-    public void setCommodityList(CommodityVo[] commodityList) {
+    public void setCommodityList(CommodityItem[] commodityList) {
         this.commodityList = commodityList;
     }
 
-    public PurchaseBillVo(String id, Date date, BillState state, String supplier, int repository, SaleStaffVo operator, String comment, double total, CommodityVo[] commodityList) {
-        super(id, date, state, PurchaseBillType.Purchase);
+    public PurchaseBillVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String supplier, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, purchaseBillType);
         this.supplier = supplier;
         this.repository = repository;
         this.operator = operator;

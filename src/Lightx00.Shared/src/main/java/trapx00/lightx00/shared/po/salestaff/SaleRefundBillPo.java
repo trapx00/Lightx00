@@ -10,7 +10,7 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     private String defaultOperatorId;
     private String operatorId;
     private int repository;
-    private CommodityPo[] commodityList;
+    private CommodityItem[] commodityList;
     private double originTotal;
     private double minusProfits;
     private double token;
@@ -49,11 +49,11 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         this.repository = repository;
     }
 
-    public CommodityPo[] getCommodityList() {
+    public CommodityItem[] getCommodityList() {
         return commodityList;
     }
 
-    public void setCommodityList(CommodityPo[] commodityList) {
+    public void setCommodityList(CommodityItem[] commodityList) {
         this.commodityList = commodityList;
     }
 
@@ -94,11 +94,11 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     }
 
     public void setComment(String comment) {
-        comment = comment;
+        this.comment = comment;
     }
 
-    public SaleRefundBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityPo[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
+    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType);
         this.supplier = supplier;
         this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;
