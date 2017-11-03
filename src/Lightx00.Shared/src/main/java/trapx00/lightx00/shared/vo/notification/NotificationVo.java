@@ -9,16 +9,15 @@ import java.util.Date;
 public class NotificationVo {
     private String id;
     private Date date;
-    private EmployeeVo sender;
-    private EmployeeVo receiver;
+    private String senderId;
+    private String receiverId;
     private NotificationType type;
 
-    public NotificationVo(String id, Date date, EmployeeVo sender, EmployeeVo receiver,
-                          NotificationType type) {
+    public NotificationVo(String id, Date date, String senderId, String receiverId, NotificationType type) {
         this.id = id;
         this.date = date;
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
         this.type = type;
     }
 
@@ -38,20 +37,20 @@ public class NotificationVo {
         this.date = date;
     }
 
-    public EmployeeVo getSender() {
-        return sender;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setSender(EmployeeVo sender) {
-        this.sender = sender;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public EmployeeVo getReceiver() {
-        return receiver;
+    public String getReceiverId() {
+        return receiverId;
     }
 
-    public void setReceiver(EmployeeVo receiver) {
-        this.receiver = receiver;
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
     public NotificationType getType() {

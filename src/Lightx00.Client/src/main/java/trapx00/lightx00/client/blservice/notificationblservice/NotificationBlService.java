@@ -14,6 +14,4 @@ public interface NotificationBlService {
 
     ResultMessage abandon(BillApprovalNotificationVo notification);
 
-    ResultMessage modify(BillApprovalNotificationVo notification);
-
 }
