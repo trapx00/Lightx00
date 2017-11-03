@@ -36,6 +36,7 @@ clientbl模块的设计如图
 | ClientBlService.add         | `public ResultMessage add(ClientVo client);` | 客户所有属性有效。 | 客户已经保存到数据库，持久化信息已经保存。 |
 | ClientBlService.delete      | `public ResultMessage delete(ClientVo[] client);` | 客户非空。     | 数据库删除客户信息，持久化信息已经保存。  |
 | ClientBlService.detail      | `public ResultMessage detail(ClientVo client);` | 无。        | 数据库返回该客户的详细信息。        |
+| ClientModificationService.modifyClient|`public ResultMessage modifyClient(ClientVo client);`|无。 | 数据库修改用户信息。|
 
 需要的接口
 
@@ -136,7 +137,7 @@ salebl模块的设计如图
 | SaleBillRefundBlService.submit      | `public ResultMessage[] submit(SaleRefundBillVO saleRefundBill);` | 表单数据输入格式正确。   | 持久化层新增表单信息。                      |
 | SaleBillRefundBlService.saveAsDraft | `public ResultMessage saveAsDraft(SaleRefundBillVO saleRefundBill);` | 用户已经点击保存草稿。   | 持久化层保存草稿信息。                      |
 | SaleBillRefundBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                        |
-| SaleBillBlInfo.querySaleBill        | `public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
+| SaleBillBlInfo.querySaleRefundBill        | `public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query); ` | 无。            | 获得所有单据信息。                        |
 | NotificationActivation.activate     | `public ResultMessage activate(SaleRefundBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationActivation.abandon      | `public ResultMessage abandon(SaleRefundBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。         |
 
@@ -223,7 +224,6 @@ inventorybl包负责与库存相关的用例（包括进货销售人员的制定
 | `inventorydataservice.PurchaseBillDataService.getId();` | 获得新单据的ID。 |
 | `inventorydataservice.PurchaseBillDataService.getPurchaseBill(PurchaseBillQueryPo query);` | 获得指定的进货单。 |
 | `inventorydataservice.PurchaseBillDataService.saveAsDraft(PurchaseBillPO purchaseBill);` | 保存草稿。     |
-| `inventorydataservice.PurchaseBillDataService.getId();` | 获得新单据的ID。 |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。     |
 | `draftbl.DraftService.saveAsDraft(PurchaseBillPO bill)` | 保存草稿。     |
 
@@ -248,7 +248,6 @@ inventorybl包负责与库存相关的用例（包括进货销售人员的制定
 | `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。   |
 | `inventorydataservice.PurchaseRefundBillDataService.getPurchaseRefundBill(PurchaseRefundBillQueryPo query);` | 获得指定的进货退货单。 |
 | `inventorydataservice.PurchaseRefundBillDataService.saveAsDraft(PurchaseRefundBillPO purchaseRefundBill);` | 保存草稿。       |
-| `inventorydataservice.PurchaseRefundBillDataService.getId();` | 获得新单据的ID。   |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。       |
 | `draftbl.DraftService.saveAsDraft(PurchaseRefundBillPO bill)` | 保存草稿。       |
 
