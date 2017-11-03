@@ -7,6 +7,5 @@ public interface ReceivalBillBlService {
     ResultMessage submit(ReceivalBillVo bill);
 
     ResultMessage saveAsDraft(ReceivalBillVo bill);
-
-    ReceivalBillVo resume();
+    String getId();
 }

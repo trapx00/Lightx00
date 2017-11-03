@@ -19,7 +19,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
     }
 
     @Override
-    public PaymentBillVo resume() {
+    public String getId() {
         return null;
     }
 
