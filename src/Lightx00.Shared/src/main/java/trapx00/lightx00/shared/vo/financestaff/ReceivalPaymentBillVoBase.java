@@ -8,35 +8,34 @@ import trapx00.lightx00.shared.vo.salestaff.ClientVo;
 import java.util.Date;
 
 public class ReceivalPaymentBillVoBase extends FinanceBillVo {
-    private ClientVo client;
-    private FinanceStaffVo operator;
+    private String clientId;
+    private String operatorId;
     private Transcation[] transcations;
     private double total;
 
-    public ReceivalPaymentBillVoBase(FinanceBillType financeBillType, String id, Date date,
-                                     BillState state, ClientVo client, FinanceStaffVo operator,
-                                     Transcation[] transcations, double total) {
+    public ReceivalPaymentBillVoBase(FinanceBillType financeBillType,
+                                     String id, Date date, BillState state, String clientId, String operatorId, Transcation[] transcations, double total) {
         super(financeBillType, id, date, state);
-        this.client = client;
-        this.operator = operator;
+        this.clientId = clientId;
+        this.operatorId = operatorId;
         this.transcations = transcations;
         this.total = total;
     }
 
-    public ClientVo getClient() {
-        return client;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setClient(ClientVo client) {
-        this.client = client;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public FinanceStaffVo getOperator() {
-        return operator;
+    public String getOperatorId() {
+        return operatorId;
     }
 
-    public void setOperator(FinanceStaffVo operator) {
-        this.operator = operator;
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 
     public Transcation[] getTranscations() {
@@ -55,4 +54,5 @@ public class ReceivalPaymentBillVoBase extends FinanceBillVo {
         this.total = total;
     }
 }
+
 

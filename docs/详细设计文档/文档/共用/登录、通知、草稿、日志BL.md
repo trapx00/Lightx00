@@ -76,7 +76,7 @@ draftbl包包括了草稿功能的业务逻辑实现代码。具体功能需求�
 | ------  | ---- | ------- | ------- | 
 | draftblservice.DraftBlService.update | `public Draftable[] update(DraftQueryVo query);` | 无。| 获得当前用户已经保存的草稿。|
 | draftblservice.DraftBlService.delete | `public ResultMessage delete(Draftable bill);` | 选择的单据有效并状态是草稿。| 将草稿删除，持久化信息已经保存。|
-
+| draftbl.DraftService.saveAsDraft | `public ResultMessage saveAsDraft(Draftable bill);` | 新增草稿有效。 | 保存草稿，持久化信息已经保存。|
 
 
 

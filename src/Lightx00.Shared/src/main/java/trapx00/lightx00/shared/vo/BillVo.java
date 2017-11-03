@@ -4,8 +4,9 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 
 import java.util.Date;
+import java.util.HashMap;
 
-public class BillVo {
+public class BillVo implements Draftable {
     private BillType billType;
     private String id;
     private Date date;
@@ -48,5 +49,10 @@ public class BillVo {
 
     public void setState(BillState state) {
         this.state = state;
+    }
+
+    @Override
+    public HashMap<String, String> getPairValues() {
+        return null;
     }
 }

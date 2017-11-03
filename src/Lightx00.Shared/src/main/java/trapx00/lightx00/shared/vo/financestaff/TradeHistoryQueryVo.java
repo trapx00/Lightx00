@@ -10,17 +10,17 @@ public class TradeHistoryQueryVo { //经营历程表查询条件
     private Date start;
     private Date end;
     private BillType billType;
-    private ClientVo client;
-    private EmployeeVo operator;
-    private int inventory;
+    private String clientId;
+    private String operatorId;
+    private int repository;
 
-    public TradeHistoryQueryVo(Date start, Date end, BillType billType, ClientVo client, EmployeeVo operator, int inventory) {
+    public TradeHistoryQueryVo(Date start, Date end, BillType billType, String clientId, String operatorId, int repository) {
         this.start = start;
         this.end = end;
         this.billType = billType;
-        this.client = client;
-        this.operator = operator;
-        this.inventory = inventory;
+        this.clientId = clientId;
+        this.operatorId = operatorId;
+        this.repository = repository;
     }
 
     public Date getStart() {
@@ -47,27 +47,27 @@ public class TradeHistoryQueryVo { //经营历程表查询条件
         this.billType = billType;
     }
 
-    public ClientVo getClient() {
-        return client;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setClient(ClientVo client) {
-        this.client = client;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public EmployeeVo getOperator() {
-        return operator;
+    public String getOperatorId() {
+        return operatorId;
     }
 
-    public void setOperator(EmployeeVo operator) {
-        this.operator = operator;
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 
-    public int getInventory() {
-        return inventory;
+    public int getRepository() {
+        return repository;
     }
 
-    public void setInventory(int inventory) {
-        this.inventory = inventory;
+    public void setRepository(int repository) {
+        this.repository = repository;
     }
 }

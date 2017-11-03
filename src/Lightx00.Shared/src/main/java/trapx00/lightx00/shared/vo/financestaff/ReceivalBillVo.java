@@ -8,8 +8,7 @@ import trapx00.lightx00.shared.vo.salestaff.ClientVo;
 import java.util.Date;
 
 public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
-    public ReceivalBillVo(String id, Date date, BillState state, ClientVo client,
-                          FinanceStaffVo operator, Transcation[] transcations, double total) {
-        super(FinanceBillType.ReceivalBill, id, date, state, client, operator, transcations, total);
+    public ReceivalBillVo(String id, Date date, BillState state, String clientId, String operatorId, Transcation[] transcations, double total) {
+        super(FinanceBillType.ReceivalBill, id, date, state, clientId, operatorId, transcations, total);
     }
 }

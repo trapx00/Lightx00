@@ -2,11 +2,10 @@ package trapx00.lightx00.client.blservice.draftblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.Draftable;
 
 public interface DraftManagementBlService {
-    BillVo[] update();
+    Draftable[] update();
 
-    ResultMessage delete(BillVo bill);
-
-    ResultMessage resume(BillVo bill);
+    ResultMessage delete(Draftable draft);
 }
