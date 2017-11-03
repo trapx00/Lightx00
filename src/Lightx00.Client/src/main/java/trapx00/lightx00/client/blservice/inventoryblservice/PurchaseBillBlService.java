@@ -9,4 +9,6 @@ public interface PurchaseBillBlService {
     ResultMessage submit(PurchaseBillVo purchaseBill);//提交进货单
 
     ResultMessage saveAsDraft(PurchaseBillVo purchaseBill);//保存进货单为草稿
+
+    String getId();//获得新的ID
 }

@@ -8,4 +8,6 @@ public interface PurchaseRefundBillBlService {
     ResultMessage submit(PurchaseRefundBillVo purchaseRefundBill);//提交进货退货单
 
     ResultMessage saveAsDraft(PurchaseRefundBillVo purchaseRefundBill);//保存进货退货单为草稿
+
+    String getId();//获得新的ID
 }
