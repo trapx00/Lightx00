@@ -9,5 +9,6 @@ public interface CashBillBlService {
 
     ResultMessage saveAsDraft(CashBillVo bill);
 
-    CashBillVo resume();
+    String getId();
+
 }

@@ -38,8 +38,8 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | PaymentBillBlService.submit      | `public ResultMessage submit(PaymentBillVo bill);` | 单据所有属性有效。     | 单据已经保存到数据库，持久化信息已经保存。                 |
 | PaymentBillBlService.saveAsDraft | `public ResultMessage saveAsDraft(PaymentBillVo bill);` | 单据信息非空。       | 保存草稿，持久化信息已经保存。                       |
 | PaymentBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                             |
-| NotificationActivation.activate  | `public ResultMessage activate(PaymentBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| NotificationActivation.abandon   | `public ResultMessage abandon(PaymentBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| NotificationActivateService.activate  | `public ResultMessage activate(PaymentBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| NotificationAbandonService.abandon   | `public ResultMessage abandon(PaymentBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
 
 需要的接口
 
@@ -64,8 +64,8 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ReceivalBillBlService.submit      | `public ResultMessage submit(ReceivalBillVo bill);` | 单据所有属性有效。     | 单据已经保存到数据库，持久化信息已经保存。                 |
 | ReceivalBillBlService.saveAsDraft | `public ResultMessage saveAsDraft(ReceivalBillVo bill);` | 单据信息非空。       | 保存草稿，持久化信息已经保存。                       |
 | ReceivalBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                             |
-| NotificationActivation.activate   | `public ResultMessage activate(ReceivalBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| NotificationActivation.abandon    | `public ResultMessage abandon(ReceivalBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| NotificationActivateService.activate   | `public ResultMessage activate(ReceivalBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| NotificationAbandonService.abandon    | `public ResultMessage abandon(ReceivalBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
 
 需要的接口
 

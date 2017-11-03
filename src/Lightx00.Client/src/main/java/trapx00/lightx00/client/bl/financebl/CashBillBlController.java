@@ -19,7 +19,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
     }
 
     @Override
-    public CashBillVo resume() {
+    public String getId() {
         return null;
     }
 

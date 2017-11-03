@@ -19,9 +19,4 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
     public ResultMessage saveAsDraft(SystemSnapshotVo snapshot) {
         return null;
     }
-
-    @Override
-    public SystemSnapshotVo resume() {
-        return null;
-    }
 }

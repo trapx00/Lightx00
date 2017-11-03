@@ -7,6 +7,5 @@ public interface PaymentBillBlService {
     ResultMessage submit(PaymentBillVo bill);
 
     ResultMessage saveAsDraft(PaymentBillVo bill);
-
-    PaymentBillVo resume();
+    String getId();
 }

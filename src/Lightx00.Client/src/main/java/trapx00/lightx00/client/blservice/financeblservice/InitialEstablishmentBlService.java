@@ -11,7 +11,4 @@ public interface InitialEstablishmentBlService {
     ResultMessage submit(SystemSnapshotVo snapshot);
 
     ResultMessage saveAsDraft(SystemSnapshotVo snapshot);
-
-    SystemSnapshotVo resume();
-
 }

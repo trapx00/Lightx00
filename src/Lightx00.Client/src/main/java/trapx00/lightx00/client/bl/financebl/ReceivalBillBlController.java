@@ -19,7 +19,7 @@ public class ReceivalBillBlController implements ReceivalBillBlService, Notifica
     }
 
     @Override
-    public ReceivalBillVo resume() {
+    public String getId() {
         return null;
     }
 
