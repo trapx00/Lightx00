@@ -72,7 +72,7 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
-| TradeHistoryDataService.query    | `public BillPo[] query(FinanceBillQueryVo query);` | 输入有效。            | 返回符合条件的商品销售记录，若某一属性为null则为无限制。        |
+| TradeHistoryDataService.query    | `public FinanceBillVo[] query(FinanceBillQueryVo query);` | 输入有效。            | 返回符合条件的商品销售记录，若某一属性为null则为无限制。        |
 
 ### 2.3.7 bankaccountbl包
 
