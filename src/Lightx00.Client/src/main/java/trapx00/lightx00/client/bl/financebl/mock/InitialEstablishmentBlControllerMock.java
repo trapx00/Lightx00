@@ -1,11 +1,10 @@
-package trapx00.lightx00.client.bl.financebl;
+package trapx00.lightx00.client.bl.financebl.mock;
 
-import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
+import trapx00.lightx00.client.bl.financebl.InitialEstablishmentBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
 
-public class InitialEstablishmentBlController implements InitialEstablishmentBlService {
-
+public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBlController {
     /**
      * Auto fills some contents with current system state.
      *
@@ -13,7 +12,7 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
      */
     @Override
     public SystemSnapshotVo autofill() {
-        return null;
+        return super.autofill();
     }
 
     /**
@@ -24,7 +23,7 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
      */
     @Override
     public ResultMessage submit(SystemSnapshotVo snapshot) {
-        return null;
+        return super.submit(snapshot);
     }
 
     /**
@@ -35,6 +34,6 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
      */
     @Override
     public ResultMessage saveAsDraft(SystemSnapshotVo snapshot) {
-        return null;
+        return super.saveAsDraft(snapshot);
     }
 }

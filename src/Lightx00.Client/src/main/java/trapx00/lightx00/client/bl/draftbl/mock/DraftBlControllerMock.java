@@ -1,12 +1,10 @@
-package trapx00.lightx00.client.bl.draftbl;
+package trapx00.lightx00.client.bl.draftbl.mock;
 
-import trapx00.lightx00.client.blservice.draftblservice.DraftManagementBlService;
+import trapx00.lightx00.client.bl.draftbl.DraftBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
 import trapx00.lightx00.shared.vo.Draftable;
 
-public class DraftBlController implements DraftManagementBlService, DraftService {
-
+public class DraftBlControllerMock extends DraftBlController {
     /**
      * Saves a draftable as a draft.
      *
@@ -15,7 +13,7 @@ public class DraftBlController implements DraftManagementBlService, DraftService
      */
     @Override
     public ResultMessage saveAsDraft(Draftable draft) {
-        return null;
+        return super.saveAsDraft(draft);
     }
 
     /**
@@ -25,7 +23,7 @@ public class DraftBlController implements DraftManagementBlService, DraftService
      */
     @Override
     public Draftable[] update() {
-        return new Draftable[0];
+        return super.update();
     }
 
     /**
@@ -36,6 +34,6 @@ public class DraftBlController implements DraftManagementBlService, DraftService
      */
     @Override
     public ResultMessage delete(Draftable draft) {
-        return null;
+        return super.delete(draft);
     }
 }

@@ -1,12 +1,12 @@
-package trapx00.lightx00.client.bl.logbl;
+package trapx00.lightx00.client.bl.logbl.mock;
 
-import trapx00.lightx00.client.blservice.logblservice.LogBlService;
+import trapx00.lightx00.client.bl.logbl.LogBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.vo.log.LogQueryVo;
 import trapx00.lightx00.shared.vo.log.LogVo;
 
-public class LogBlController implements LogBlService, LogService {
+public class LogBlControllerMock extends LogBlController {
     /**
      * Writes log.
      *
@@ -16,7 +16,7 @@ public class LogBlController implements LogBlService, LogService {
      */
     @Override
     public ResultMessage log(LogSeverity severity, String content) {
-        return null;
+        return super.log(severity, content);
     }
 
     /**
@@ -27,6 +27,6 @@ public class LogBlController implements LogBlService, LogService {
      */
     @Override
     public LogVo[] query(LogQueryVo query) {
-        return new LogVo[0];
+        return super.query(query);
     }
 }

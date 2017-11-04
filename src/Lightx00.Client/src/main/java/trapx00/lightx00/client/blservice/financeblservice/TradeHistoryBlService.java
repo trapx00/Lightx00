@@ -6,10 +6,19 @@ import trapx00.lightx00.shared.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.TradeHistoryVo;
 
 public interface TradeHistoryBlService {
+    /**
+     * Queries a TradeHistory
+     * @param query TradeHistory query condition
+     * @return TradeHistory that matches query condition
+     */
 
     TradeHistoryVo query(TradeHistoryQueryVo query);
 
-    BillVo revert(BillVo selectedBill);
+    /**
+     * Export a TradeHistory
+     * @param tradeHistory TradeHistory to be exported
+     * @return whether the operation is done successfully
+     */
 
-    ResultMessage export(TradeHistoryVo bills);
+    ResultMessage export(TradeHistoryVo tradeHistory);
 }

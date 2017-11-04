@@ -1,14 +1,11 @@
-package trapx00.lightx00.client.bl.financebl;
+package trapx00.lightx00.client.bl.financebl.mock;
 
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
+import trapx00.lightx00.client.bl.financebl.CashBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
 import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
 
-public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService {
-
+public class CashBillBlControllerMock extends CashBillBlController {
     /**
      * Abandons a bill.
      *
@@ -17,7 +14,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage abandon(BillVo bill) {
-        return null;
+        return super.abandon(bill);
     }
 
     /**
@@ -28,7 +25,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage activate(BillVo bill) {
-        return null;
+        return super.activate(bill);
     }
 
     /**
@@ -39,7 +36,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage submit(CashBillVo bill) {
-        return null;
+        return super.submit(bill);
     }
 
     /**
@@ -50,7 +47,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage saveAsDraft(CashBillVo bill) {
-        return null;
+        return super.saveAsDraft(bill);
     }
 
     /**
@@ -60,6 +57,6 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public String getId() {
-        return null;
+        return super.getId();
     }
 }

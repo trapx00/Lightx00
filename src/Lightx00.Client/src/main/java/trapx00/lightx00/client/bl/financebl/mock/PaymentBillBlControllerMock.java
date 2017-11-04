@@ -1,13 +1,11 @@
-package trapx00.lightx00.client.bl.financebl;
+package trapx00.lightx00.client.bl.financebl.mock;
 
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.financeblservice.PaymentBillBlService;
+import trapx00.lightx00.client.bl.financebl.PaymentBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
 import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
 
-public class PaymentBillBlController implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService {
+public class PaymentBillBlControllerMock extends PaymentBillBlController {
     /**
      * Abandons a bill.
      *
@@ -16,7 +14,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage abandon(BillVo bill) {
-        return null;
+        return super.abandon(bill);
     }
 
     /**
@@ -27,7 +25,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage activate(BillVo bill) {
-        return null;
+        return super.activate(bill);
     }
 
     /**
@@ -38,7 +36,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage submit(PaymentBillVo bill) {
-        return null;
+        return super.submit(bill);
     }
 
     /**
@@ -49,7 +47,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage saveAsDraft(PaymentBillVo bill) {
-        return null;
+        return super.saveAsDraft(bill);
     }
 
     /**
@@ -59,6 +57,6 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public String getId() {
-        return null;
+        return super.getId();
     }
 }

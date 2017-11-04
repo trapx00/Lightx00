@@ -1,11 +1,11 @@
-package trapx00.lightx00.client.bl.notificationbl;
+package trapx00.lightx00.client.bl.notificationbl.mock;
 
-import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.notification.BillApprovalNotificationVo;
 import trapx00.lightx00.shared.vo.notification.NotificationVo;
 
-public class NotificationBlController implements NotificationBlService, NotificationService {
+public class NotificationBlControllerMock extends NotificationBlController {
     /**
      * Adds a notification.
      *
@@ -14,7 +14,7 @@ public class NotificationBlController implements NotificationBlService, Notifica
      */
     @Override
     public ResultMessage addNotification(NotificationVo notification) {
-        return null;
+        return super.addNotification(notification);
     }
 
     /**
@@ -24,7 +24,7 @@ public class NotificationBlController implements NotificationBlService, Notifica
      */
     @Override
     public NotificationVo[] update() {
-        return new NotificationVo[0];
+        return super.update();
     }
 
     /**
@@ -35,7 +35,7 @@ public class NotificationBlController implements NotificationBlService, Notifica
      */
     @Override
     public ResultMessage acknowledge(NotificationVo notification) {
-        return null;
+        return super.acknowledge(notification);
     }
 
     /**
@@ -46,6 +46,6 @@ public class NotificationBlController implements NotificationBlService, Notifica
      */
     @Override
     public ResultMessage abandon(BillApprovalNotificationVo notification) {
-        return null;
+        return super.abandon(notification);
     }
 }

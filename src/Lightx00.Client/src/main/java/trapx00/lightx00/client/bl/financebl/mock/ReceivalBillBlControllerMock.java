@@ -1,14 +1,11 @@
-package trapx00.lightx00.client.bl.financebl;
+package trapx00.lightx00.client.bl.financebl.mock;
 
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
+import trapx00.lightx00.client.bl.financebl.ReceivalBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
 
-public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService {
-
+public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
     /**
      * Abandons a bill.
      *
@@ -17,7 +14,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage abandon(BillVo bill) {
-        return null;
+        return super.abandon(bill);
     }
 
     /**
@@ -28,29 +25,29 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage activate(BillVo bill) {
-        return null;
+        return super.activate(bill);
     }
 
     /**
-     * Submits a CashBill.
+     * Submits a ReceivalBill.
      *
-     * @param bill CashBillVo to be submitted
+     * @param bill ReceivalBill to be submitted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage submit(CashBillVo bill) {
-        return null;
+    public ResultMessage submit(ReceivalBillVo bill) {
+        return super.submit(bill);
     }
 
     /**
-     * Saves a half-completed CashBill as draft.
+     * Saves a half-completed ReceivalBill as a draft.
      *
-     * @param bill CashBillVo to be saved as a draft
+     * @param bill ReceivalBill to be saved as a draft
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage saveAsDraft(CashBillVo bill) {
-        return null;
+    public ResultMessage saveAsDraft(ReceivalBillVo bill) {
+        return super.saveAsDraft(bill);
     }
 
     /**
@@ -60,6 +57,6 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public String getId() {
-        return null;
+        return super.getId();
     }
 }
