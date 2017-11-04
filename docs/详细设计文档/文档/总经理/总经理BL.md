@@ -26,6 +26,8 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | ClientGiftBlController       | 负责管理填写客户赠送礼品促销策略的功能实现。  |
 | ClientOnSaleBlController     | 负责管理填写客户价格折让促销策略的功能实现。  |
 
+##### 2.2.12.3.3 内部类的接口规范
+
 **PromotionBlController**
 
 提供的接口
@@ -194,7 +196,7 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | `draftbl.DraftService.saveAsDraft(ClientOnSaleVo promotion)` | 保存草稿。            |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
-#### 2.2.12.3.4 业务逻辑层的动态模型
+##### 2.2.12.3.4 业务逻辑层的动态模型
 
 下图为填写用户赠送代金券促销策略（不需要查询商品）时的顺序图，用户价格折让、满额赠送代金券促销策略的顺序图参见此图。
 
@@ -244,6 +246,8 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 | ----------------- | ----------------- |
 | AuditBlController | 负责管理审批单据界面的展示和功能。 |
 
+##### 2.2.13.3.3 内部类的接口规范
+
 **AuditBlController**
 
 提供的接口
@@ -266,7 +270,7 @@ approvalbl包负责总经理审批单据用例的业务逻辑实现代码。具�
 | `notificationbl.NotificationService.addNotification(NotificationVo notification);` | 新增一条通知。      |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。        |
 
-#### 2.2.13.3.4 业务逻辑层的动态模型
+##### 2.2.13.3.4 业务逻辑层的动态模型
 
 下图是审批通过的顺序图
 

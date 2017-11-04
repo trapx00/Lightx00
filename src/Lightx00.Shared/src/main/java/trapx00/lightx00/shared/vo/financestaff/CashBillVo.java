@@ -6,33 +6,41 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 
 public class CashBillVo extends FinanceBillVo {
-    private FinanceStaffVo operator;
-    private BankAccountVo account;
+    private String operatorId;
+    private String accountId;
     private CashBillItem[] items;
 
+    /**
+     * Creates a CashBillVo
+     * @param id id for cash bill
+     * @param date date
+     * @param state initial state for the billvo object
+     * @param operatorId operator id
+     * @param accountId bankaccount id
+     * @param items cashbillitems
+     */
 
-    public CashBillVo(String id, Date date, BillState state, FinanceStaffVo operator,
-                      BankAccountVo account, CashBillItem[] items) {
+    public CashBillVo(String id, Date date, BillState state, String operatorId, String accountId, CashBillItem[] items) {
         super(FinanceBillType.CashBill, id, date, state);
-        this.operator = operator;
-        this.account = account;
+        this.operatorId = operatorId;
+        this.accountId = accountId;
         this.items = items;
     }
 
-    public FinanceStaffVo getOperator() {
-        return operator;
+    public String getOperatorId() {
+        return operatorId;
     }
 
-    public void setOperator(FinanceStaffVo operator) {
-        this.operator = operator;
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 
-    public BankAccountVo getAccount() {
-        return account;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(BankAccountVo account) {
-        this.account = account;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public CashBillItem[] getItems() {

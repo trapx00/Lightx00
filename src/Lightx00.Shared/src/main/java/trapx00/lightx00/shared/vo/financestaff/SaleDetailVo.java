@@ -10,8 +10,4 @@ public class SaleDetailVo { //销售明细表
     public SaleRecordVo[] getRecords() {
         return records;
     }
-
-    public void setRecords(SaleRecordVo[] records) {
-        this.records = records;
-    }
 }

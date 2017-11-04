@@ -5,15 +5,27 @@ import trapx00.lightx00.shared.vo.salestaff.ClientVo;
 
 public interface ClientBlService {
 
-    public ClientVo[] query(String query);//查询客户信息
+    /**
+     * query for client
+     * @param query condition
+     * @return client array whose information includes query condition
+     */
+    ClientVo[] query(String query);
 
-    public ResultMessage saveAsDraft(ClientVo client);//保存客户信息为草稿
+    /**
+     *
+     * @param client
+     * @return
+     */
+    ResultMessage saveAsDraft(ClientVo client);//保存客户信息为草稿
 
-    public ResultMessage modify(ClientVo client);//修改客户信息
+    String getId();//获得新的ID
 
-    public ResultMessage add(ClientVo client);//新增客户
+    ResultMessage modify(ClientVo client);//修改客户信息
 
-    public ResultMessage delete(ClientVo[] client);//删除客户
+    ResultMessage add(ClientVo client);//新增客户
 
-    public ClientVo detail(ClientVo client);//查询客户详细信息
+    ResultMessage delete(ClientVo[] client);//删除客户
+
+    ClientVo detail(ClientVo client);//查询客户详细信息
 }

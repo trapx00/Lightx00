@@ -20,6 +20,8 @@ admindata包为数据层的一部分，它负责数据的存储以及与bl层的
 | ---------------------------- | ---------------- |
 | UserManagementDataConteoller | 负责保存管理职员信息操作的数据。 |
 
+##### 2.3.11.3.3 内部类的接口规范
+
 **UserManagementDataController**
 
 提供的接口
