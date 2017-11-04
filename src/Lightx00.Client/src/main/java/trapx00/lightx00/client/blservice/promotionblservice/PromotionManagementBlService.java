@@ -14,9 +14,7 @@ public interface PromotionManagementBlService {
 
     ResultMessage delete(PromotionVoBase promotion);
 
-    PromotionVoBase resume();
-
     PromotionVoBase[] queryPromotion(PromotionQueryVo query);
 
-    CommodityVo[] queryCommodity(CommodityQueryVo commodity);
+    String getId();
 }
