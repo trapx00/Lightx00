@@ -7,15 +7,45 @@ import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortVo;
 public interface ProductManagementBlService {
     //商品分类管理
 
+    /**
+     * Create a new commoditySort attaching to a parentSort
+     * @param newSort
+     * @param parentSort
+     * @return whether the operation is done successfully
+     */
     ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort);//新建分类
 
+    /**
+     * Modify a commoditySort
+     * @param sort
+     * @return whether the operation is done successfully
+     */
     ResultMessage modify(CommoditySortVo sort);//修改分类
 
-    CommoditySortVo[] query(String id, String name);//查询分类
+    /**
+     *  Query a commodifySort
+     * @param id
+     * @return the list of the commoditySort
+     */
+    CommoditySortVo[] query(String id);//查询分类
 
+    /**
+     *  Delete a commoditySort
+     * @param sort
+     * @return whether the operation is done successfully
+     */
     ResultMessage delete(CommoditySortVo sort);//删除分类
 
+    /**
+     * Display all commoditySorts
+     * @return the list of commoditySort
+     */
     CommoditySortVo[] display();//得到all
 
+    /**
+     *  Get the childsoft of a commoditySort
+     * @param commoditySort
+     * @return the childCommoditySort
+     */
     CommoditySortVo[] dispaly(CommoditySortVo commoditySort);//得到子类
 }
