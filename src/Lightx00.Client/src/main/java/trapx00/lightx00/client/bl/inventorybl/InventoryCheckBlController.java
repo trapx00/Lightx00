@@ -1,33 +1,41 @@
-package trapx00.lightx00.client.blservice.inventoryblservice;
+package trapx00.lightx00.client.bl.inventorybl;
 
-import java.io.File;
-import java.util.Date;
-
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryPictureVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryViewVo;
 
+import java.io.File;
+import java.util.Date;
 
-
-public interface InventoryCheckBlService {
+public class InventoryCheckBlController implements InventoryCheckBlService {
     /**
      * Checks the invenntory change between the begintime and endtime
      * @param beginTime
      * @param endTime
      * @return The inventoryView during specified time range
      */
-    InventoryViewVo check(Date beginTime, Date endTime);//库存查看
+    @Override
+    public InventoryViewVo check(Date beginTime, Date endTime) {
+        return null;
+    }
 
     /**
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
-    InventoryPictureVo picture();//库存盘点
+    @Override
+    public InventoryPictureVo picture() {
+        return null;
+    }
 
     /**
      * Exports the inventory snapshot to the required file by excel
      * @param newfile
      * @return whether the operation is done successfully
      */
-    ResultMessage export(File newfile);//导出Excel
+    @Override
+    public ResultMessage export(File newfile) {
+        return null;
+    }
 }

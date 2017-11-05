@@ -1,10 +1,10 @@
 package trapx00.lightx00.client.blservicestub.commodityblservice;
 
-import trapx00.lightx00.client.blservice.commodityblservice.ProductManagementBlService;
+import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortVo;
 
-public class ProductManagementBlServiceStub implements ProductManagementBlService {
+public class CommoditySortBlServiceStub implements CommoditySortBlService {
 
 
 
@@ -19,8 +19,8 @@ public class ProductManagementBlServiceStub implements ProductManagementBlServic
     }
 
     @Override
-    public CommoditySortVo[] query(String id, String name) {
-        String commodityIdList[]={"C0001","C0002"};
+    public CommoditySortVo[] query(String id) {
+        String commodityIdList[]={"C0001"};
         String nextIds[]={"S0002"};
         String lowNextIds[]={""};
         return new CommoditySortVo[]{

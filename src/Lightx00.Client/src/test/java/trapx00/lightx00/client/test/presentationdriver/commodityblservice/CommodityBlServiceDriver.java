@@ -2,8 +2,8 @@ package trapx00.lightx00.client.test.presentationdriver.commodityblservice;
 
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.client.blservice.commodityblservice.GoodsManagementBlService;
-import trapx00.lightx00.client.blservicestub.commodityblservice.GoodsManagementBlServiceStub;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
+import trapx00.lightx00.client.blservicestub.commodityblservice.CommodityBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 
@@ -12,9 +12,9 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class GoodsManagementBlServiceDriver {
+public class CommodityBlServiceDriver {
 
-    GoodsManagementBlService service=new GoodsManagementBlServiceStub();
+    CommodityBlService service=new CommodityBlServiceStub();
 
     Date date=new Date() ;
 
@@ -25,7 +25,7 @@ public class GoodsManagementBlServiceDriver {
 
     @Before
     public void setup()throws Exception{
-        commoditys=service.query("C0001","LedLight");
+        commoditys=service.query("C0001");
     }
     @Test
     public void add() throws Exception {

@@ -39,4 +39,6 @@ public class InventoryGiftVo {
     public void setGifts(PromotionCommodity[] gifts) {
         this.gifts = gifts;
     }
+
+    public void revert() { ;}
 }

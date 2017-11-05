@@ -1,17 +1,16 @@
 package trapx00.lightx00.shared.bldriver.commoditydataservice;
 
 import org.junit.Test;
-import trapx00.lightx00.shared.dataservice.commoditydataservice.GoodsManagementDataService;
-import trapx00.lightx00.shared.dataservicestub.commoditydataservice.GoodsManagementDataServiceStub;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
+import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommodityDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 
 import static org.junit.Assert.*;
 
-public class GoodsManagementDataServiceDriver {
-    GoodsManagementDataService service=new GoodsManagementDataServiceStub();
+public class CommodityDataServiceDriver {
+    CommodityDataService service=new CommodityDataServiceStub();
     CommodityPo commodityPo=null;
     @Test
     public void add() throws Exception {

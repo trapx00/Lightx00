@@ -1,17 +1,16 @@
 package trapx00.lightx00.shared.bldriver.commoditydataservice;
 
 import org.junit.Test;
-import trapx00.lightx00.shared.dataservice.commoditydataservice.ProductManagementDataService;
-import trapx00.lightx00.shared.dataservicestub.commoditydataservice.ProductManagementDataServiceStub;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
+import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommoditySortDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
 
 import static org.junit.Assert.*;
 
-public class ProductManagementDataServiceDriver {
-    ProductManagementDataService service=new ProductManagementDataServiceStub();
+public class CommoditySortDataServiceDriver {
+    CommoditySortDataService service=new CommoditySortDataServiceStub();
     CommoditySortPo commoditySortPo=null;
     CommoditySortPo fatheCommoditySortPo=null;
     String commodityIdList[]={""};
