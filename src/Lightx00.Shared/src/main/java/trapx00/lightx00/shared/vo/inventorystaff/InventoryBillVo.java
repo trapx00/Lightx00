@@ -62,6 +62,8 @@ public class InventoryBillVo extends BillVo {
         return time;
     }
 
+    public void revert(){;}
+
     public void setTime(Date time) {
         this.time = time;
     }

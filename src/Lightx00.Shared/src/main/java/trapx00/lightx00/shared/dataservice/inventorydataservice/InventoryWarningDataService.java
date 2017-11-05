@@ -3,6 +3,8 @@ package trapx00.lightx00.shared.dataservice.inventorydataservice;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
+import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillQueryVo;
+import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillVo;
 
 public interface InventoryWarningDataService {
     /**
@@ -43,6 +45,13 @@ public interface InventoryWarningDataService {
      * @return the bill
      */
     InventoryBillPo[] getLossByIds(String... ids);//提供报损
+
+    /**
+     *  Querys a bill
+     * @param inventoryBillQueryVo
+     * @return InventoryBillVo
+     */
+    InventoryBillPo[]query(InventoryBillQueryVo inventoryBillQueryVo);
 
     void init();
 }

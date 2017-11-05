@@ -11,7 +11,7 @@ import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillVo;
 
-public class InventoryWarningBlController implements InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService {
+public class InventoryWarningBlController implements InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService,InventoryBillService {
     /**
      * Submits a Bill.
      * @param bill
@@ -108,5 +108,14 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
     @Override
     public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
         return new CommodityVo[0];
+    }
+    /**
+     * Querys inventoryBill
+     * @param inventoryBillQueryVo
+     * @return  the list of inventoryBIlls that match to the requirement
+     */
+    @Override
+    public InventoryBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo) {
+        return new InventoryBillVo[0];
     }
 }

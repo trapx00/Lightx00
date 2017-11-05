@@ -1,11 +1,13 @@
 package trapx00.lightx00.client.bl.commoditybl;
 
 public class CommoditySortServiceFactory {
+
+    private static CommoditySortService instance =new CommoditySortBlController();
     /**
-     * Gets a CommodityService instance
-     * @return a CommodityService instance
+     * Gets a CommoditySortService instance.
+     * @return CommoditySortService instance
      */
     public static CommoditySortService getInstance(){
-        return new CommoditySortBlController();
+        return instance;
     }
 }
