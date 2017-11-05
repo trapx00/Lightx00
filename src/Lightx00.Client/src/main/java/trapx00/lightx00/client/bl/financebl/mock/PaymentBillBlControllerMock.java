@@ -7,25 +7,36 @@ import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
 
 public class PaymentBillBlControllerMock extends PaymentBillBlController {
     /**
-     * Abandons a bill.
+     * Deletes a draft.
      *
-     * @param bill bill
+     * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage abandon(BillVo bill) {
-        return super.abandon(bill);
+    public ResultMessage deleteDraft(String id) {
+        return super.deleteDraft(id);
+    }
+
+    /**
+     * Abandons a bill.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage abandon(String id) {
+        return super.abandon(id);
     }
 
     /**
      * Activates a bill that has been approved of.
      *
-     * @param bill bill that has been approved of
+     * @param id id for the bill
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage activate(BillVo bill) {
-        return super.activate(bill);
+    public ResultMessage activate(String id) {
+        return super.activate(id);
     }
 
     /**

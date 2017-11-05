@@ -13,7 +13,7 @@ public interface PaymentBillBlService {
 
     /**
      * Saves a half-completed PaymentBill as a draft.
-     * @param bill
+     * @param bill PaymentBill to be saved as a draft
      * @return whether the operation is done successfully
      */
 

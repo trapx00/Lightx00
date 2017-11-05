@@ -1,10 +1,11 @@
 package trapx00.lightx00.client.bl.financebl;
 
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
 
-public class InitialEstablishmentBlController implements InitialEstablishmentBlService {
+public class InitialEstablishmentBlController implements InitialEstablishmentBlService, DraftDeleteService {
 
     /**
      * Auto fills some contents with current system state.
@@ -35,6 +36,17 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
      */
     @Override
     public ResultMessage saveAsDraft(SystemSnapshotVo snapshot) {
+        return null;
+    }
+
+    /**
+     * Deletes a draft.
+     *
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
         return null;
     }
 }

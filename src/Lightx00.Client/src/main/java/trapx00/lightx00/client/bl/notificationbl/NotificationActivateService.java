@@ -6,8 +6,8 @@ import trapx00.lightx00.shared.vo.BillVo;
 public interface NotificationActivateService {
     /**
      * Activates a bill that has been approved of.
-     * @param bill bill that has been approved of
+     * @param id id for the bill
      * @return whether the operation is done successfully
      */
-    ResultMessage activate(BillVo bill);
+    ResultMessage activate(String id);
 }

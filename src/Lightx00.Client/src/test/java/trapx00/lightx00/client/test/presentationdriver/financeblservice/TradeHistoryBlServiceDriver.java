@@ -29,11 +29,6 @@ public class TradeHistoryBlServiceDriver {
     }
 
     @Test
-    public void revert() throws Exception {
-        assertEquals(bill, service.revert(bill) );
-    }
-
-    @Test
     public void export() throws Exception {
         assertEquals(ResultMessage.Success,
                 service.export(service.query(

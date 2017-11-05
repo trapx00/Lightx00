@@ -16,6 +16,17 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
     }
 
     /**
+     * Deletes a draft.
+     *
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
+        return super.deleteDraft(id);
+    }
+
+    /**
      * Submits the system snapshot.
      *
      * @param snapshot SystemSnapVo to be submitted

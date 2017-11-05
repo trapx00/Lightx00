@@ -37,9 +37,11 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | -------------------------------- | ---------------------------------------- | ------------- | ------------------------------------- |
 | PaymentBillBlService.submit      | `public ResultMessage submit(PaymentBillVo bill);` | 单据所有属性有效。     | 单据已经保存到数据库，持久化信息已经保存。                 |
 | PaymentBillBlService.saveAsDraft | `public ResultMessage saveAsDraft(PaymentBillVo bill);` | 单据信息非空。       | 保存草稿，持久化信息已经保存。                       |
-| PaymentBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                             |
+| PaymentBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                         
+| PaymentBillInfo.query            | `public PaymentBillVo[] query(PaymentBillQueryVo query);` | 查询条件有效。|返回符合条件的单据。|    |
 | NotificationActivateService.activate  | `public ResultMessage activate(PaymentBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationAbandonService.abandon   | `public ResultMessage abandon(PaymentBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| DraftDeleteService.deleteDraft  | `public ResultMessage deleteDraft(String id);` | ID有效。| 删除草稿。|
 
 需要的接口
 
@@ -64,8 +66,10 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | ReceivalBillBlService.submit      | `public ResultMessage submit(ReceivalBillVo bill);` | 单据所有属性有效。     | 单据已经保存到数据库，持久化信息已经保存。                 |
 | ReceivalBillBlService.saveAsDraft | `public ResultMessage saveAsDraft(ReceivalBillVo bill);` | 单据信息非空。       | 保存草稿，持久化信息已经保存。                       |
 | ReceivalBillBlService.getId       | `public String getId(); `                | 无。            | 获得新单据的ID。                             |
+| ReceivalBillInfo.query            | `public ReceivalBillVo[] query(ReceivalBillQueryVo query);` | 查询条件有效。|返回符合条件的单据。|
 | NotificationActivateService.activate   | `public ResultMessage activate(ReceivalBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationAbandonService.abandon    | `public ResultMessage abandon(ReceivalBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| DraftDeleteService.deleteDraft  | `public ResultMessage deleteDraft(String id);` | ID有效。| 删除草稿。|
 
 需要的接口
 
@@ -90,8 +94,10 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | CashBillBlService.submit        | `public ResultMessage submit(CashBillVo bill);` | 单据所有属性有效。     | 单据已经保存到数据库，持久化信息已经保存。                 |
 | CashBillBlService.saveAsDraft   | `public ResultMessage saveAsDraft(CashBillVo bill);` | 单据信息非空。       | 保存草稿，持久化信息已经保存。                       |
 | CashBillBlService.getId         | `public String getId(); `                | 无。            | 获得新单据的ID。                             |
+| CashBillInfo.query            | `public CashBillVo[] query(CashBillQueryVo query);` | 查询条件有效。|返回符合条件的单据。|
 | NotificationActivateService.activate | `public ResultMessage activate(CashBillVo bill);` | 单据有效且状态为审批通过。 | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
 | NotificationAbandonService.abandon  | `public ResultMessage abandon(CashBillVo bill);` | 单据有效且状态为审批完成。 | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| DraftDeleteService.deleteDraft  | `public ResultMessage deleteDraft(String id);` | ID有效。| 删除草稿。|
 
 需要的接口
 
@@ -117,6 +123,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | InitialEstablishmentBlService.submit     | `public ResultMessage submit(SystemSnapshotVo bill);` | 单据所有属性有效。 | 单据已经保存到数据库，持久化信息已经保存。 |
 | InitialEstablishmentBlService.saveAsDraft | `public ResultMessage saveAsDraft(SystemSnapshotVo bill);` | 单据信息非空。   | 保存草稿，持久化信息已经保存。       |
 | InitialEstablishmentBlService.autofill   | `public SystemSnapshotVo autofill();`    | 无。        | 返回现有系统信息。             |
+| DraftDeleteService.deleteDraft  | `public ResultMessage deleteDraft(String id);` | ID有效。| 删除草稿。|
 
 需要的接口
 
@@ -129,6 +136,7 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 | `commoditybl.CommodityInfo.queryCommoditySort(CommoditySortQueryVo query)` | 取得所有商品分类信息。 |
 | `bankaccountbl.BankAccountInfo.queryBankAccount(BankAccountQueryVo query)` | 取得所有银行账户信息。 |
 | `financedataservice.InitialEstablishmentDataService.submit(SystemSnapshotPo snapshot)` | 提交新单据。      |
+| `financedataservice.InitialEstablishmentDataService.abandon(String id)` | 删除草稿。|
 | `financedataservice.InitialEstablishmentDataService.getId()` | 获得新单据的ID。   |
 
 **SaleDetailBlController**
@@ -235,7 +243,9 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 ![单据入账](../../img/顺序图/单据入账.png)
 
+下图为在BL层查询付款单的顺序图，收款单和现金费用单同理。
 
+![查询付款单](../../img/顺序图/BL层查询付款单.png)
 
 
 ### 2.2.7 bankaccountbl包

@@ -10,16 +10,6 @@ public class CashBillVo extends FinanceBillVo {
     private String accountId;
     private CashBillItem[] items;
 
-    /**
-     * Creates a CashBillVo
-     * @param id id for cash bill
-     * @param date date
-     * @param state initial state for the billvo object
-     * @param operatorId operator id
-     * @param accountId bankaccount id
-     * @param items cashbillitems
-     */
-
     public CashBillVo(String id, Date date, BillState state, String operatorId, String accountId, CashBillItem[] items) {
         super(FinanceBillType.CashBill, id, date, state);
         this.operatorId = operatorId;
