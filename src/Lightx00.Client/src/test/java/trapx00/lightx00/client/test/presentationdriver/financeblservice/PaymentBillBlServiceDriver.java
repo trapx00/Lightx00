@@ -5,7 +5,11 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.financeblservice.PaymentBillBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.PaymentBillBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +18,7 @@ public class PaymentBillBlServiceDriver {
     PaymentBillVo bill = null;
     @Before
     public void setUp() throws Exception {
-        bill = service.resume();
+        bill = new PaymentBillVo("123",new Date(), BillState.Draft,"123","123",null,0);
     }
 
     @Test

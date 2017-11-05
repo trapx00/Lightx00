@@ -6,8 +6,8 @@ import trapx00.lightx00.shared.vo.BillVo;
 public interface NotificationAbandonService {
     /**
      * Abandons a bill.
-     * @param bill bill
+     * @param id id for the bill
      * @return whether the operation is done successfully
      */
-    ResultMessage abandon(BillVo bill);
+    ResultMessage abandon(String id);
 }

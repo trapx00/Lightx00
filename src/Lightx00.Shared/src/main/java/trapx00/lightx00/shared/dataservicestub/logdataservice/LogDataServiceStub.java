@@ -17,7 +17,7 @@ public class LogDataServiceStub implements LogDataService {
     @Override
     public LogVo[] query(LogQueryVo query) {
         return new LogVo[] {
-                new LogVo(new Date(), query.getSeverity(),"123")
+                new LogVo(new Date(), LogSeverity.Success,"123")
         };
     }
 }
