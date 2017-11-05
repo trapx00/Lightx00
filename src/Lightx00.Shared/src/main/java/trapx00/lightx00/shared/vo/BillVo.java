@@ -51,6 +51,10 @@ public class BillVo implements Draftable {
         this.state = state;
     }
 
+    public void revert() {
+
+    }
+
     @Override
     public HashMap<String, String> getPairValues() {
         return null;

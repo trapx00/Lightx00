@@ -1,12 +1,37 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
+import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
+import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
 
 public interface InitialEstablishmentDataService {
+    /**
+     * Submits a snapshot.
+     * @param snapshot snapshot to be submitted
+     * @return whether the operation is done successfully
+     */
     ResultMessage submit(SystemSnapshotPo snapshot);
 
-    ResultMessage activate(SystemSnapshotPo snapshot);
+    /**
+     * Deletes a draft.
+     * @param id id for a draft
+     * @return whether the operation is done successfully
+     */
 
-    ResultMessage abandon(SystemSnapshotPo snapshot);
+    ResultMessage abandon(String id);
+
+    /**
+     * Gets the id for the next snapshot.
+     * @return id for the next snapshot
+     */
+    String getId();
+
+    /**
+     * Queries SystemSnapshot.
+     * @param query query
+     * @return SystemSnapshotVos that match the condition
+     */
+    SystemSnapshotVo query(SystemSnapshotQueryVo query);
 }

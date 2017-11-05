@@ -4,11 +4,17 @@ import java.util.Date;
 
 public class DraftVo {
     private Date saveTime;
-    private BillVo bill;
+    private String id;
+    private String saverId;
+    private Draftable draft;
+    private String billTypePoClassName;
 
-    public DraftVo(Date saveTime, BillVo bill) {
+    public DraftVo(Date saveTime, String id, String saverId, Draftable draft, String billTypePoClassName) {
         this.saveTime = saveTime;
-        this.bill = bill;
+        this.id = id;
+        this.saverId = saverId;
+        this.draft = draft;
+        this.billTypePoClassName = billTypePoClassName;
     }
 
     public Date getSaveTime() {
@@ -19,11 +25,35 @@ public class DraftVo {
         this.saveTime = saveTime;
     }
 
-    public BillVo getBill() {
-        return bill;
+    public String getId() {
+        return id;
     }
 
-    public void setBill(BillVo bill) {
-        this.bill = bill;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSaverId() {
+        return saverId;
+    }
+
+    public void setSaverId(String saverId) {
+        this.saverId = saverId;
+    }
+
+    public Draftable getDraft() {
+        return draft;
+    }
+
+    public void setDraft(Draftable draft) {
+        this.draft = draft;
+    }
+
+    public String getBillTypePoClassName() {
+        return billTypePoClassName;
+    }
+
+    public void setBillTypePoClassName(String billTypePoClassName) {
+        this.billTypePoClassName = billTypePoClassName;
     }
 }

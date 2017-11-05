@@ -23,13 +23,8 @@ public class InitialEstablishmentDataServiceDriver {
     }
 
     @Test
-    public void activate() throws Exception {
-        assertEquals(ResultMessage.Success, service.activate(snapshot));
-    }
-
-    @Test
     public void abandon() throws Exception {
-        assertEquals(ResultMessage.Success, service.abandon(snapshot));
+        assertEquals(ResultMessage.Success, service.abandon(snapshot.getId()));
     }
 
 }

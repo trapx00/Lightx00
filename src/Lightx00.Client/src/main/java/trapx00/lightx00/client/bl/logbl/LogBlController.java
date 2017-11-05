@@ -8,23 +8,25 @@ import trapx00.lightx00.shared.vo.log.LogVo;
 
 public class LogBlController implements LogBlService, LogService {
     /**
-     * Queries logs by LogQueryVo.
-     * @param query query
-     * @return LogVos that match the query
-     */
-    @Override
-    public LogVo[] query(LogQueryVo query) {
-        return new LogVo[0];
-    }
-
-    /**
-     * Writes log
+     * Writes log.
+     *
      * @param severity Log Severity
-     * @param content Log content
-     * @return Whether operation is done successfully
+     * @param content  Log content
+     * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage log(LogSeverity severity, String content) {
         return null;
+    }
+
+    /**
+     * Queries Log with LogQueryVo.
+     *
+     * @param query query
+     * @return LogVos that match query
+     */
+    @Override
+    public LogVo[] query(LogQueryVo query) {
+        return new LogVo[0];
     }
 }
