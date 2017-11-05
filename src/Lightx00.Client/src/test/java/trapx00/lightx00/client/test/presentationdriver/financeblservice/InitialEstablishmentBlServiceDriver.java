@@ -34,9 +34,4 @@ public class InitialEstablishmentBlServiceDriver {
         assertEquals(ResultMessage.Success, service.saveAsDraft(systemSnapshotVo));
     }
 
-    @Test
-    public void resume() throws Exception {
-        assertEquals(systemSnapshotVo.getId(), service.resume().getId());
-    }
-
 }

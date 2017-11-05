@@ -6,7 +6,10 @@ import trapx00.lightx00.shared.vo.log.LogQueryVo;
 import trapx00.lightx00.shared.vo.log.LogVo;
 
 public interface LogBlService {
+    /**
+     * Queries Log with LogQueryVo.
+     * @param query query
+     * @return LogVos that match query
+     */
     LogVo[] query(LogQueryVo query);
-
-    ResultMessage log(LogSeverity severity, String content);
 }

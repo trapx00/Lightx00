@@ -7,7 +7,19 @@ import trapx00.lightx00.shared.vo.notification.NotificationVo;
 
 public class NotificationBlController implements NotificationBlService, NotificationService {
     /**
+     * Adds a notification.
+     *
+     * @param notification notification to be added
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage addNotification(NotificationVo notification) {
+        return null;
+    }
+
+    /**
      * Updates current user's notifications
+     *
      * @return current users's notifications
      */
     @Override
@@ -16,7 +28,8 @@ public class NotificationBlController implements NotificationBlService, Notifica
     }
 
     /**
-     * Acknowledges a notification. For a BillApprovalNotification with a bill that is approved of, it also activates the bill
+     * Acknowledges a notification. For a BillApprovalNotification with a bill that is approved of, it also activates the bill.
+     *
      * @param notification notification
      * @return whether the operation is done successfully
      */
@@ -26,33 +39,13 @@ public class NotificationBlController implements NotificationBlService, Notifica
     }
 
     /**
-     * Activates a bill that has been approved of.
-     * @param notification notification with a bill that has been approved of
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage activate(BillApprovalNotificationVo notification) {
-        return null;
-    }
-
-
-    /**
      * Abandons a bill.
+     *
      * @param notification notification with a bill
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage abandon(BillApprovalNotificationVo notification) {
-        return null;
-    }
-
-    /**
-     * Adds a notification.
-     * @param notification notification to be added
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage addNotification(NotificationVo notification) {
         return null;
     }
 }

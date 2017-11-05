@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.vo.Draftable;
 
 public interface DraftService {
     /**
-     * Saves a draftable as a draft.
+     * Saves a draftable as a draft
      * @param draft draft
      * @return whether operation is done successfully
      */

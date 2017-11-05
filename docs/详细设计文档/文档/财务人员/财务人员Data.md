@@ -33,8 +33,10 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
 | PaymentBillDataService.submit    | `public ResultMessage submit(PaymentBillPo bill);` | 用户已经登录，单据所有属性有效。 | 提交新单据。                                |
-| PaymentBillDataService.activate  | `public ResultMessage activate(PaymentBillPo bill);` | 单据有效且状态为审批通过。    | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| PaymentBillDataService.abandon   | `public ResultMessage abandon(PaymentBillPo bill);` | 单据有效且状态为审批完成。    | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| PaymentBillDataService.query     | `public PaymentBillPo[] query(PaymentBillQueryVo query);` | 输入查询条件有效。| 返回符合筛选条件的收款单。|
+| PaymentBillDataService.getId     | `public String getId();` | 无。|返回下一张单据的ID。|
+| PaymentBillDataService.activate  | `public ResultMessage activate(String id);` | 单据有效且状态为审批通过。    | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| PaymentBillDataService.abandon   | `public ResultMessage abandon(String id);` | 单据有效且状态为审批完成。    | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
 
 **ReceivalBillDataController**
 
@@ -42,9 +44,11 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
-| CashBillDataService.submit       | `public ResultMessage submit(CashBillPo bill);` | 用户已经登录，单据所有属性有效。 | 提交新单据。                                |
-| CashBillDataService.activate     | `public ResultMessage activate(CashBillPo bill);` | 单据有效且状态为审批通过。    | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| CashBillDataService.abandon      | `public ResultMessage abandon(CashBillPo bill);` | 单据有效且状态为审批完成。    | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| ReceivalBillDataService.submit       | `public ResultMessage submit(ReceivalBillPo bill);` | 用户已经登录，单据所有属性有效。 | 提交新单据。                                |
+| ReceivalBillDataService.activate     | `public ResultMessage activate(String id);` | 单据有效且状态为审批通过。    | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| ReceivalBillDataService.abandon      | `public ResultMessage abandon(String id);` | 单据有效且状态为审批完成。    | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| ReceivalBillDataService.query    | `public ReceivalBillPo[] query(ReceivalBillQueryVo query);` | 输入查询条件有效。| 返回符合筛选条件的付款单。|
+| ReceivalBillDataService.getId    | `public String getId();` | 无。|返回下一张单据的ID。|
 
 **CashBillDataController**
 
@@ -53,8 +57,10 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
 | CashBillDataService.submit       | `public ResultMessage submit(CashBillPo bill);` | 用户已经登录，单据所有属性有效。 | 提交新单据。                                |
-| CashBillDataService.activate     | `public ResultMessage activate(CashBillPo bill);` | 单据有效且状态为审批通过。    | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
-| CashBillDataService.abandon      | `public ResultMessage abandon(CashBillPo bill);` | 单据有效且状态为审批完成。    | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| CashBillDataService.activate     | `public ResultMessage activate(String id);` | 单据有效且状态为审批通过。    | 系统修改对应银行账户和客户信息，修改单据状态为已入账，持久化信息已经保存。 |
+| CashBillDataService.abandon      | `public ResultMessage abandon(String id);` | 单据有效且状态为审批完成。    | 系统修改单据状态为已经废弃，持久化信息已经保存。              |
+| CashBillDataService.query        | `public CashBillPo[] query(CashBillQueryVo query);` | 输入查询条件有效。| 返回符合筛选条件的现金费用单。|
+| CashBillDataService.getId        | `public String getId();` | 无。|返回下一张单据的ID。|
 
 **InitialEstablishmentDataController**
 
@@ -63,8 +69,8 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
 | InitialEstablishmentDataService.submit | `public ResultMessage submit(SystemSnapshotPo snapshot);` | 账有效且状态为审批通过。     | 账单独被保存，持久化数据已保存。                      |
-| InitialEstablishmentDataService.activate | `public ResultMessage activate(SystemSnapshotPo snapshot);` | 账有效且状态为审批完成。     | 账状态被修改为已废弃，持久化数据已保存。                  |
-| InitialEstablishmentDataService.abandon | `public ResultMessage abandon(SystemSnapshotPo snapshot);` | 账有效且状态为草稿。       | 系统记录需要继续填写账。                          |
+| InitialEstablishmentDataService.abandon | `public ResultMessage abandon(String id);` | 账有效且状态为草稿。       | 系统记录需要继续填写账。                          |
+| InitialEstablishmentDataService.getId | `public String getId();` | 无。| 返回下一个单据的ID。|
 
 **TradeHistoryDataController**
 
@@ -72,7 +78,7 @@ financedata包负责财务人员除了银行账户管理外的用例（制定收
 
 | 接口名称                                     | 语法                                       | 前置条件             | 后置条件                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------- | ------------------------------------- |
-| TradeHistoryDataService.query    | `public BillPo[] query(FinanceBillQueryVo query);` | 输入有效。            | 返回符合条件的商品销售记录，若某一属性为null则为无限制。        |
+| TradeHistoryDataService.query    | `public FinanceBillVo[] query(FinanceBillQueryVo query);` | 输入有效。            | 返回符合条件的商品销售记录，若某一属性为null则为无限制。        |
 
 ### 2.3.7 bankaccountbl包
 

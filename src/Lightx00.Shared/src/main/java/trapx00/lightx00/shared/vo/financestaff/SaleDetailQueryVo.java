@@ -12,16 +12,16 @@ public class SaleDetailQueryVo { //销售明细表查询条件
     private String commodityName;
     private ClientVo client;
     private SaleStaffVo operator;
-    private int inventory;
+    private int repository;
 
     public SaleDetailQueryVo(Date start, Date end, String commodityName, ClientVo client,
-                             SaleStaffVo operator, int inventory) {
+                             SaleStaffVo operator, int repository) {
         this.start = start;
         this.end = end;
         this.commodityName = commodityName;
         this.client = client;
         this.operator = operator;
-        this.inventory = inventory;
+        this.repository = repository;
     }
 
     public Date getStart() {
@@ -64,11 +64,11 @@ public class SaleDetailQueryVo { //销售明细表查询条件
         this.operator = operator;
     }
 
-    public int getInventory() {
-        return inventory;
+    public int getRepository() {
+        return repository;
     }
 
-    public void setInventory(int inventory) {
-        this.inventory = inventory;
+    public void setRepository(int repository) {
+        this.repository = repository;
     }
 }

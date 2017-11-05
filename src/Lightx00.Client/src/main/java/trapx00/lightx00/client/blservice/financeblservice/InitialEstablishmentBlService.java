@@ -6,12 +6,24 @@ import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
 
 public interface InitialEstablishmentBlService {
 
+    /**
+     * Auto fills some contents with current system state.
+     * @return SystemSnapshot with current system state
+     */
     SystemSnapshotVo autofill();
+
+    /**
+     * Submits the system snapshot.
+     * @param snapshot SystemSnapVo to be submitted
+     * @return whether the operation is done successfully
+     */
 
     ResultMessage submit(SystemSnapshotVo snapshot);
 
+    /**
+     * Saves a half-completed system snapshot as a draft.
+     * @param snapshot SystemSnapshotVo to be saved as draft
+     * @return whether the operation is done successfully
+     */
     ResultMessage saveAsDraft(SystemSnapshotVo snapshot);
-
-    SystemSnapshotVo resume();
-
 }

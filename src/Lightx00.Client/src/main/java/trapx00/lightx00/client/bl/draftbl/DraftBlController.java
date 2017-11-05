@@ -9,8 +9,9 @@ public class DraftBlController implements DraftManagementBlService, DraftService
 
     /**
      * Saves a draftable as a draft.
+     *
      * @param draft draft
-     * @return
+     * @return whether operation is done successfully
      */
     @Override
     public ResultMessage saveAsDraft(Draftable draft) {
@@ -18,10 +19,10 @@ public class DraftBlController implements DraftManagementBlService, DraftService
     }
 
     /**
-     * Updates current users' drafts.
-     * @return Current users' drafts
+     * Updates current user's draft.
+     *
+     * @return Current User's draft
      */
-
     @Override
     public Draftable[] update() {
         return new Draftable[0];
@@ -29,10 +30,10 @@ public class DraftBlController implements DraftManagementBlService, DraftService
 
     /**
      * Deletes a draft.
+     *
      * @param draft draft to be deleted
-     * @return whether operation is done successfully
+     * @return whether the operation is done successfully
      */
-
     @Override
     public ResultMessage delete(Draftable draft) {
         return null;
