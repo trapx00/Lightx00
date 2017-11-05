@@ -29,8 +29,5 @@ public class AdminPo extends EmployeePo {
         return "AdminPo{}";
     }
 
-    public void a(){
-
-    }
 }
 
