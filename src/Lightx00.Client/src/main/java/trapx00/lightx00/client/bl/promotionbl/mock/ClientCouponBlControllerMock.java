@@ -1,10 +1,11 @@
-package trapx00.lightx00.client.bl.promotionbl;
+package trapx00.lightx00.client.bl.promotionbl.mock;
 
+import trapx00.lightx00.client.bl.promotionbl.ClientCouponBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.manager.promotion.ClientCouponVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
-public class ClientCouponBlController{
+public class ClientCouponBlControllerMock extends ClientCouponBlController {
 
     /**
      * submit a ClientCouponVo
@@ -12,7 +13,7 @@ public class ClientCouponBlController{
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(ClientCouponVo newPromotion) {
-        return null;
+        return super.submit(newPromotion);
     }
 
     /**
@@ -21,7 +22,7 @@ public class ClientCouponBlController{
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(ClientCouponVo promotion) {
-        return null;
+        return super.saveAsDraft(promotion);
     }
 
     /**
@@ -30,7 +31,7 @@ public class ClientCouponBlController{
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(ClientCouponVo promotion) {
-        return null;
+        return super.delete(promotion);
     }
 
     /**
@@ -39,7 +40,7 @@ public class ClientCouponBlController{
      * @return array of ClientCouponVos which match the conditions
      */
     public ClientCouponVo[] queryPromotion(PromotionQueryVo query) {
-        return new ClientCouponVo[0];
+        return super.queryPromotion(query);
     }
 
     /**
@@ -47,6 +48,6 @@ public class ClientCouponBlController{
      * @return id for the next ClientCouponVo
      */
     public String getId() {
-        return null;
+        return super.getId();
     }
 }

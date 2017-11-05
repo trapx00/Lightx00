@@ -1,18 +1,18 @@
-package trapx00.lightx00.client.bl.promotionbl;
+package trapx00.lightx00.client.bl.promotionbl.mock;
 
+import trapx00.lightx00.client.bl.promotionbl.ClientGiftBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.manager.promotion.ClientGiftVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
-public class ClientGiftBlController {
-
+public class ClientGiftBlControllerMock extends ClientGiftBlController{
     /**
      * submit a ClientGiftVo
      * @param newPromotion the ClientGiftVo to be submitted
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(ClientGiftVo newPromotion) {
-        return null;
+        return super.submit(newPromotion);
     }
 
     /**
@@ -21,7 +21,7 @@ public class ClientGiftBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(ClientGiftVo promotion) {
-        return null;
+        return super.saveAsDraft(promotion);
     }
 
     /**
@@ -30,7 +30,7 @@ public class ClientGiftBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(ClientGiftVo promotion) {
-        return null;
+        return super.delete(promotion);
     }
 
     /**
@@ -39,7 +39,7 @@ public class ClientGiftBlController {
      * @return array of ClientGiftVos which match the conditions
      */
     public ClientGiftVo[] queryPromotion(PromotionQueryVo query) {
-        return new ClientGiftVo[0];
+        return super.queryPromotion(query);
     }
 
     /**
@@ -47,6 +47,6 @@ public class ClientGiftBlController {
      * @return id for the next ClientGiftVo
      */
     public String getId() {
-        return null;
+        return super.getId();
     }
 }

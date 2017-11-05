@@ -1,17 +1,18 @@
-package trapx00.lightx00.client.bl.promotionbl;
+package trapx00.lightx00.client.bl.promotionbl.mock;
 
+import trapx00.lightx00.client.bl.promotionbl.CommodityOnSaleBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.manager.promotion.CommodityOnSaleVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
-public class CommodityOnSaleBlController {
+public class CommodityOnSaleBlControllerMock extends CommodityOnSaleBlController {
     /**
      * submit a CommodityOnSaleVo
      * @param newPromotion the CommodityOnSaleVo to be submitted
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(CommodityOnSaleVo newPromotion) {
-        return null;
+        return super.submit(newPromotion);
     }
 
     /**
@@ -20,7 +21,7 @@ public class CommodityOnSaleBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(CommodityOnSaleVo promotion) {
-        return null;
+        return super.saveAsDraft(promotion);
     }
 
     /**
@@ -29,7 +30,7 @@ public class CommodityOnSaleBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(CommodityOnSaleVo promotion) {
-        return null;
+        return super.delete(promotion);
     }
 
     /**
@@ -38,7 +39,7 @@ public class CommodityOnSaleBlController {
      * @return array of CommodityOnSaleVos which match the conditions
      */
     public CommodityOnSaleVo[] queryPromotion(PromotionQueryVo query) {
-        return new CommodityOnSaleVo[0];
+        return super.queryPromotion(query);
     }
 
     /**
@@ -46,7 +47,7 @@ public class CommodityOnSaleBlController {
      * @return id for the next CommodityOnSaleVo
      */
     public String getId() {
-        return null;
+        return super.getId();
     }
 
 }

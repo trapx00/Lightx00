@@ -40,6 +40,7 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | PromotionManagementBlService.delete      | `public ResultMessage delete(PromotionVoBase promotion);` | 选择删除促销策略。                           | 返回删除是否成功，持久化更新涉及的对象的数据。 |
 | PromotionManagementBlService.getId       | `public String getId();`                 | 新建促销策略。                             | 返回当前促销策略的ID。            |
 | promotionbl.PromotionInfo                | `public PromotionVoBase[] queryPromotion(SaleBillVo saleBill);` | 产生销售行为。                             | 返回可用的促销策略。              |
+| DraftDeleteService.deleteDraft           | `public ResultMessage deleteDraft(String id);` | ID有效。                               | 删除草稿。                   |
 
 需要的接口
 

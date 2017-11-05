@@ -8,7 +8,7 @@ public interface UserManagementBlService {
 
     ResultMessage add(EmployeeVo newUserAccount);
 
-    ResultMessage modify(EmployeeVo newUserAccount);
+    ResultMessage modify(EmployeeVo account);
 
     EmployeeVo[] query(UserAccountQueryVo query);
 

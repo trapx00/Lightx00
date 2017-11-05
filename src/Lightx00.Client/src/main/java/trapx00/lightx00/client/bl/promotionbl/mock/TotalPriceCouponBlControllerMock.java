@@ -1,17 +1,18 @@
-package trapx00.lightx00.client.bl.promotionbl;
+package trapx00.lightx00.client.bl.promotionbl.mock;
 
+import trapx00.lightx00.client.bl.promotionbl.TotalPriceCouponBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.manager.promotion.TotalPriceCouponVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
+import trapx00.lightx00.shared.vo.manager.promotion.TotalPriceCouponVo;
 
-public class TotalPriceCouponBlController {
+public class TotalPriceCouponBlControllerMock extends TotalPriceCouponBlController {
     /**
      * submit a TotalPriceCouponVo
      * @param newPromotion the TotalPriceCouponVo to be submitted
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(TotalPriceCouponVo newPromotion) {
-        return null;
+        return super.submit(newPromotion);
     }
 
     /**
@@ -20,7 +21,7 @@ public class TotalPriceCouponBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(TotalPriceCouponVo promotion) {
-        return null;
+        return super.saveAsDraft(promotion);
     }
 
     /**
@@ -29,7 +30,7 @@ public class TotalPriceCouponBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(TotalPriceCouponVo promotion) {
-        return null;
+        return super.delete(promotion);
     }
 
     /**
@@ -38,7 +39,7 @@ public class TotalPriceCouponBlController {
      * @return array of TotalPriceCouponVos which match the conditions
      */
     public TotalPriceCouponVo[] queryPromotion(PromotionQueryVo query) {
-        return new TotalPriceCouponVo[0];
+        return super.queryPromotion(query);
     }
 
     /**
@@ -46,6 +47,6 @@ public class TotalPriceCouponBlController {
      * @return id for the next TotalPriceCouponVo
      */
     public String getId() {
-        return null;
+        return super.getId();
     }
 }

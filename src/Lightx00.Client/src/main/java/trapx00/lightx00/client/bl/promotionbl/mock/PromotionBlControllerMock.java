@@ -1,14 +1,14 @@
-package trapx00.lightx00.client.bl.promotionbl;
+package trapx00.lightx00.client.bl.promotionbl.mock;
 
-import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.promotionbl.PromotionBlController;
+import trapx00.lightx00.client.bl.promotionbl.PromotionInfo;
 import trapx00.lightx00.client.blservice.promotionblservice.PromotionManagementBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
 
-public class PromotionBlController implements PromotionInfo,PromotionManagementBlService,DraftDeleteService {
-
+public class PromotionBlControllerMock extends PromotionBlController {
     /**
      * give promotion information to the saleman
      * @param saleBill SallBillVo which asks for useable promotion in this sale beheavior
@@ -16,7 +16,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public PromotionVoBase[] queryPromotion(SaleBillVo saleBill) {
-        return new PromotionVoBase[0];
+        return super.queryPromotion(saleBill);
     }
 
     /**
@@ -26,7 +26,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public ResultMessage submit(PromotionVoBase newPromotion) {
-        return null;
+        return super.submit(newPromotion);
     }
 
     /**
@@ -36,7 +36,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public ResultMessage saveAsDraft(PromotionVoBase promotion) {
-        return null;
+        return super.saveAsDraft(promotion);
     }
 
     /**
@@ -46,7 +46,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public ResultMessage delete(PromotionVoBase promotion) {
-        return null;
+        return super.delete(promotion);
     }
 
     /**
@@ -56,7 +56,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public PromotionVoBase[] queryPromotion(PromotionQueryVo query) {
-        return new PromotionVoBase[0];
+        return super.queryPromotion(query);
     }
 
     /**
@@ -65,7 +65,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public String getId() {
-        return null;
+        return super.getId();
     }
 
     /**
@@ -75,6 +75,7 @@ public class PromotionBlController implements PromotionInfo,PromotionManagementB
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return super.deleteDraft(id);
     }
+
 }

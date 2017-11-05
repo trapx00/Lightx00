@@ -1,17 +1,18 @@
-package trapx00.lightx00.client.bl.promotionbl;
+package trapx00.lightx00.client.bl.promotionbl.mock;
 
+import trapx00.lightx00.client.bl.promotionbl.ClientOnSaleBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.manager.promotion.*;
+import trapx00.lightx00.shared.vo.manager.promotion.ClientOnSaleVo;
+import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
-public class ClientOnSaleBlController {
-
+public class ClientOnSaleBlControllerMock extends ClientOnSaleBlController{
     /**
      * submit a ClientOnSaleVo
      * @param newPromotion the ClientOnSaleVo to be submitted
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(ClientOnSaleVo newPromotion) {
-        return null;
+        return super.submit(newPromotion);
     }
 
     /**
@@ -20,7 +21,7 @@ public class ClientOnSaleBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(ClientOnSaleVo promotion) {
-        return null;
+        return super.saveAsDraft(promotion);
     }
 
     /**
@@ -29,7 +30,7 @@ public class ClientOnSaleBlController {
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(ClientOnSaleVo promotion) {
-        return null;
+        return super.delete(promotion);
     }
 
     /**
@@ -38,7 +39,7 @@ public class ClientOnSaleBlController {
      * @return array of ClientOnSaleVos which match the conditions
      */
     public ClientOnSaleVo[] queryPromotion(PromotionQueryVo query) {
-        return new ClientOnSaleVo[0];
+        return super.queryPromotion(query);
     }
 
     /**
@@ -46,7 +47,8 @@ public class ClientOnSaleBlController {
      * @return id for the next ClientOnSaleVo
      */
     public String getId() {
-        return null;
+        return super.getId();
     }
+
 
 }
