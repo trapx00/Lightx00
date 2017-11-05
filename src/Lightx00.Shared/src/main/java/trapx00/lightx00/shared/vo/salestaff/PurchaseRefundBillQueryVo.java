@@ -2,5 +2,5 @@ package trapx00.lightx00.shared.vo.salestaff;
 
 import java.util.function.Predicate;
 
-public interface SaleBillQueryVo extends Predicate<SaleBillVo> {
+public interface PurchaseRefundBillQueryVo extends Predicate<PurchaseRefundBillVo> {
 }
