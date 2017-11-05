@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class DraftVo {
     private Date saveTime;
-    private BillVo bill;
+    private Draftable draft;
 
-    public DraftVo(Date saveTime, BillVo bill) {
+    public DraftVo(Date saveTime, Draftable draft) {
         this.saveTime = saveTime;
-        this.bill = bill;
+        this.draft = draft;
     }
 
     public Date getSaveTime() {
@@ -19,11 +19,11 @@ public class DraftVo {
         this.saveTime = saveTime;
     }
 
-    public BillVo getBill() {
-        return bill;
+    public Draftable getDraft() {
+        return draft;
     }
 
-    public void setBill(BillVo bill) {
-        this.bill = bill;
+    public void setDraft(Draftable draft) {
+        this.draft = draft;
     }
 }
