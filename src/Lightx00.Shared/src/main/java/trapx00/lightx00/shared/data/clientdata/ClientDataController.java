@@ -1,42 +1,61 @@
-package trapx00.lightx00.shared.dataservice.clientdataservice;
+package trapx00.lightx00.shared.data.clientdata;
 
+import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientPo;
 
-public interface  ClientDataService {
-
+public class ClientDataController implements ClientDataService {
     /**
      * Query clients which includes the words
+     *
      * @param query condition
      * @return the clients which corresponds to the query
      */
-    public ClientPo[] query(String query);//查询客户
+    @Override
+    public ClientPo[] query(String query) {
+        return new ClientPo[0];
+    }
 
     /**
      * modify a client
+     *
      * @param client to be modified
      * @return whether the operation is done successfully
      */
-    public ResultMessage modify(ClientPo client);//修改客户信息
+    @Override
+    public ResultMessage modify(ClientPo client) {
+        return null;
+    }
 
     /**
      * Gets the id for the next client
      *
      * @return id for the next client
      */
-    public String getId();//获得新客户的ID
+    @Override
+    public String getId() {
+        return null;
+    }
 
     /**
      * add a client
+     *
      * @param client to be added
      * @return whether the operation is done successfully
      */
-    public ResultMessage add(ClientPo client);//增加客户
+    @Override
+    public ResultMessage add(ClientPo client) {
+        return null;
+    }
 
     /**
      * delete some clients
+     *
      * @param id of the client to be deleted
      * @return whether the operation is done successfully
      */
-    public ResultMessage delete(String[] id);//删除客户
+    @Override
+    public ResultMessage delete(String[] id) {
+        return null;
+    }
 }

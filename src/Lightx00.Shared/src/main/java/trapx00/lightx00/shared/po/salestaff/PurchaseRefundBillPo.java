@@ -11,7 +11,7 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
     private String operatorId;
     private String comment;
     private double total;
-    private CommodityPo[] commodityList;
+    private CommodityItem[] commodityList;
 
     public String getSupplier() {
         return supplier;
@@ -42,7 +42,7 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
     }
 
     public void setComment(String comment) {
-        comment = comment;
+        this.comment = comment;
     }
 
     public double getTotal() {
@@ -53,16 +53,16 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
         this.total = total;
     }
 
-    public CommodityPo[] getCommodityList() {
+    public CommodityItem[] getCommodityList() {
         return commodityList;
     }
 
-    public void setCommodityList(CommodityPo[] commodityList) {
+    public void setCommodityList(CommodityItem[] commodityList) {
         this.commodityList = commodityList;
     }
 
-    public PurchaseRefundBillPo(String id, Date date, BillState state, String supplier, int repository, String operatorId, String comment, double total, CommodityPo[] commodityList) {
-        super(id, date, state, PurchaseBillType.PurchaseRefund);
+    public PurchaseRefundBillPo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String supplier, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, purchaseBillType);
         this.supplier = supplier;
         this.repository = repository;
         this.operatorId = operatorId;
@@ -70,6 +70,4 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
         this.total = total;
         this.commodityList = commodityList;
     }
-
-
 }
