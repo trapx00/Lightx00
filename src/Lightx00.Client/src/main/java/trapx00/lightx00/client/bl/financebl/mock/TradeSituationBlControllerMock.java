@@ -31,4 +31,6 @@ public class TradeSituationBlControllerMock extends TradeSituationBlController {
     public ResultMessage export(TradeSituationVo situation) {
         return super.export(situation);
     }
+
+
 }

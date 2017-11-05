@@ -21,12 +21,12 @@ public class ReceivalDataServiceDriver {
 
     @Test
     public void activate() throws Exception {
-        assertEquals(ResultMessage.Success, service.activate(bill));
+        assertEquals(ResultMessage.Success, service.activate(bill.getId()));
     }
 
     @Test
     public void abandon() throws Exception {
-        assertEquals(ResultMessage.Success, service.abandon(bill));
+        assertEquals(ResultMessage.Success, service.abandon(bill.getId()));
     }
 
 }

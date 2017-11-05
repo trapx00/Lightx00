@@ -15,7 +15,7 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
      * @return Finance bills that match query condition
      */
     @Override
-    public FinanceBillVo query(FinanceBillQueryVo query) {
+    public FinanceBillVo[] query(FinanceBillQueryVo query) {
         return null;
     }
 

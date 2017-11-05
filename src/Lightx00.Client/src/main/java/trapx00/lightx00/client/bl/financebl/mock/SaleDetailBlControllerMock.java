@@ -27,4 +27,6 @@ public class SaleDetailBlControllerMock extends SaleDetailBlController {
     public ResultMessage export(SaleDetailVo detail) {
         return super.export(detail);
     }
+
+
 }

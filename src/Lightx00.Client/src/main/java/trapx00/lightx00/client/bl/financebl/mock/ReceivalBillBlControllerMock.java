@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.financebl.mock;
 import trapx00.lightx00.client.bl.financebl.ReceivalBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
 
 public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
@@ -69,5 +70,16 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
     @Override
     public String getId() {
         return super.getId();
+    }
+
+    /**
+     * Queries ReceivalBillVo.
+     *
+     * @param query query
+     * @return ReceivalBills that match the condition
+     */
+    @Override
+    public ReceivalBillVo[] query(ReceivalBillQueryVo query) {
+        return super.query(query);
     }
 }

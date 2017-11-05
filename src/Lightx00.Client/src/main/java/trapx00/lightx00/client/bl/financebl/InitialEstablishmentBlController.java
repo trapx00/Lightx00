@@ -3,9 +3,10 @@ package trapx00.lightx00.client.bl.financebl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
 
-public class InitialEstablishmentBlController implements InitialEstablishmentBlService, DraftDeleteService {
+public class InitialEstablishmentBlController implements InitialEstablishmentBlService, DraftDeleteService, SystemSnapshotInfo {
 
     /**
      * Auto fills some contents with current system state.
@@ -48,5 +49,16 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
     @Override
     public ResultMessage deleteDraft(String id) {
         return null;
+    }
+
+    /**
+     * Queries SystemSnapshot.
+     *
+     * @param query query
+     * @return SystemSnapshotVos that match the query
+     */
+    @Override
+    public SystemSnapshotVo[] query(SystemSnapshotQueryVo query) {
+        return new SystemSnapshotVo[0];
     }
 }

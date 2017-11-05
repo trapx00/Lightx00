@@ -3,6 +3,8 @@ package trapx00.lightx00.shared.dataservice.financedataservice;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
+import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
+import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
 
 public interface InitialEstablishmentDataService {
     /**
@@ -25,4 +27,11 @@ public interface InitialEstablishmentDataService {
      * @return id for the next snapshot
      */
     String getId();
+
+    /**
+     * Queries SystemSnapshot.
+     * @param query query
+     * @return SystemSnapshotVos that match the condition
+     */
+    SystemSnapshotVo query(SystemSnapshotQueryVo query);
 }

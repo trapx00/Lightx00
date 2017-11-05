@@ -6,9 +6,10 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
 
-public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, CashBillInfo {
 
 
 
@@ -75,5 +76,16 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
     @Override
     public ResultMessage activate(String id) {
         return null;
+    }
+
+    /**
+     * Queries CashBill.
+     *
+     * @param query query
+     * @return CashBillVos that match the condition
+     */
+    @Override
+    public CashBillVo[] query(CashBillQueryVo query) {
+        return new CashBillVo[0];
     }
 }

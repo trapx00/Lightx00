@@ -6,9 +6,10 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.financeblservice.ReceivalBillBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
 
-public class ReceivalBillBlController implements ReceivalBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+public class ReceivalBillBlController implements ReceivalBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, ReceivalBillInfo {
 
 
     /**
@@ -74,5 +75,16 @@ public class ReceivalBillBlController implements ReceivalBillBlService, Notifica
     @Override
     public ResultMessage activate(String id) {
         return null;
+    }
+
+    /**
+     * Queries ReceivalBillVo.
+     *
+     * @param query query
+     * @return ReceivalBills that match the condition
+     */
+    @Override
+    public ReceivalBillVo[] query(ReceivalBillQueryVo query) {
+        return new ReceivalBillVo[0];
     }
 }

@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.financebl.mock;
 import trapx00.lightx00.client.bl.financebl.PaymentBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.financestaff.PaymentBillQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
 
 public class PaymentBillBlControllerMock extends PaymentBillBlController {
@@ -53,7 +54,7 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
     /**
      * Saves a half-completed PaymentBill as a draft.
      *
-     * @param bill
+     * @param bill PaymentBill to be saved as a draft
      * @return whether the operation is done successfully
      */
     @Override
@@ -69,5 +70,16 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
     @Override
     public String getId() {
         return super.getId();
+    }
+
+    /**
+     * Queries PaymentBill.
+     *
+     * @param query query
+     * @return PaymentBillVos that match the condition
+     */
+    @Override
+    public PaymentBillVo[] query(PaymentBillQueryVo query) {
+        return super.query(query);
     }
 }

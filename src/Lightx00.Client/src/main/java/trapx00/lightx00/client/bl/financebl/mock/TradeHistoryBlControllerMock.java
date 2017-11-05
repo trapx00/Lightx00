@@ -37,7 +37,9 @@ public class TradeHistoryBlControllerMock extends TradeHistoryBlController {
      * @return Finance bills that match query condition
      */
     @Override
-    public FinanceBillVo query(FinanceBillQueryVo query) {
+    public FinanceBillVo[] query(FinanceBillQueryVo query) {
         return super.query(query);
     }
+
+
 }

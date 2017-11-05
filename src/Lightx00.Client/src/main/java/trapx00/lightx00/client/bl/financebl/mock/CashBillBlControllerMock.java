@@ -2,10 +2,42 @@ package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.CashBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
 
 public class CashBillBlControllerMock extends CashBillBlController {
+    /**
+     * Submits a CashBill.
+     *
+     * @param bill CashBillVo to be submitted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage submit(CashBillVo bill) {
+        return super.submit(bill);
+    }
+
+    /**
+     * Saves a half-completed CashBill as draft.
+     *
+     * @param bill CashBillVo to be saved as a draft
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage saveAsDraft(CashBillVo bill) {
+        return super.saveAsDraft(bill);
+    }
+
+    /**
+     * Gets the id for the next bill
+     *
+     * @return id for the next bill
+     */
+    @Override
+    public String getId() {
+        return super.getId();
+    }
+
     /**
      * Deletes a draft.
      *
@@ -40,34 +72,13 @@ public class CashBillBlControllerMock extends CashBillBlController {
     }
 
     /**
-     * Submits a CashBill.
+     * Queries CashBill.
      *
-     * @param bill CashBillVo to be submitted
-     * @return whether the operation is done successfully
+     * @param query query
+     * @return CashBillVos that match the condition
      */
     @Override
-    public ResultMessage submit(CashBillVo bill) {
-        return super.submit(bill);
-    }
-
-    /**
-     * Saves a half-completed CashBill as draft.
-     *
-     * @param bill CashBillVo to be saved as a draft
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage saveAsDraft(CashBillVo bill) {
-        return super.saveAsDraft(bill);
-    }
-
-    /**
-     * Gets the id for the next bill
-     *
-     * @return id for the next bill
-     */
-    @Override
-    public String getId() {
-        return super.getId();
+    public CashBillVo[] query(CashBillQueryVo query) {
+        return super.query(query);
     }
 }

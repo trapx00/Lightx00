@@ -24,7 +24,7 @@ public class InitialEstablishmentDataServiceDriver {
 
     @Test
     public void abandon() throws Exception {
-        assertEquals(ResultMessage.Success, service.abandon(snapshot));
+        assertEquals(ResultMessage.Success, service.abandon(snapshot.getId()));
     }
 
 }
