@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.data.draftdata.mock;
 
 import trapx00.lightx00.server.data.draftdata.DraftDataController;
+import trapx00.lightx00.shared.po.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.Draftable;
 
@@ -11,19 +12,19 @@ public class DraftDataControllerMock extends DraftDataController {
      * @return curent user's drafts
      */
     @Override
-    public Draftable[] update() {
+    public DraftPo[] update() {
         return super.update();
     }
 
     /**
      * Deletes a draft.
      *
-     * @param draft draft to be deleted
+     * @param draftId id for the draft to be deleted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(Draftable draft) {
-        return super.delete(draft);
+    public ResultMessage delete(String draftId) {
+        return super.delete(draftId);
     }
 
     /**
@@ -33,7 +34,7 @@ public class DraftDataControllerMock extends DraftDataController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(Draftable draft) {
+    public ResultMessage add(String draft) {
         return super.add(draft);
     }
 }

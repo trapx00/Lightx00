@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.draftbl;
 import trapx00.lightx00.client.blservice.draftblservice.DraftManagementBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.DraftVo;
 import trapx00.lightx00.shared.vo.Draftable;
 
 public class DraftBlController implements DraftManagementBlService, DraftService {
@@ -24,8 +25,8 @@ public class DraftBlController implements DraftManagementBlService, DraftService
      * @return Current User's draft
      */
     @Override
-    public Draftable[] update() {
-        return new Draftable[0];
+    public DraftVo[] update() {
+        return new DraftVo[0];
     }
 
     /**

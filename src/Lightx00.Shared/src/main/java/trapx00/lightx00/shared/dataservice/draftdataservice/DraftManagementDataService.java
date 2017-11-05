@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.dataservice.draftdataservice;
 
+import trapx00.lightx00.shared.po.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.vo.BillVo;
@@ -10,7 +11,7 @@ public interface DraftManagementDataService {
      * Updates current user's drafts.
      * @return curent user's drafts
      */
-    Draftable[] update();
+    DraftPo[] update();
 
     /**
      * Deletes a draft.

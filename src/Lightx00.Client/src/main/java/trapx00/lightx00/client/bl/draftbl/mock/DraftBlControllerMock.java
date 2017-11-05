@@ -2,6 +2,7 @@ package trapx00.lightx00.client.bl.draftbl.mock;
 
 import trapx00.lightx00.client.bl.draftbl.DraftBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.vo.DraftVo;
 import trapx00.lightx00.shared.vo.Draftable;
 
 public class DraftBlControllerMock extends DraftBlController {
@@ -22,7 +23,7 @@ public class DraftBlControllerMock extends DraftBlController {
      * @return Current User's draft
      */
     @Override
-    public Draftable[] update() {
+    public DraftVo[] update() {
         return super.update();
     }
 

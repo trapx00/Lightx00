@@ -2,6 +2,7 @@ package trapx00.lightx00.client.blservice.draftblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.shared.vo.DraftVo;
 import trapx00.lightx00.shared.vo.Draftable;
 
 public interface DraftManagementBlService {
@@ -9,7 +10,7 @@ public interface DraftManagementBlService {
      * Updates current user's draft.
      * @return Current User's draft
      */
-    Draftable[] update();
+    DraftVo[] update();
 
     /**
      * Deletes a draft.
