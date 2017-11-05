@@ -1,6 +1,6 @@
-package trapx00.lightx00.client.bl.inventorybl;
+package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
+import trapx00.lightx00.client.bl.inventorybl.InventoryCheckBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryPictureVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryViewVo;
@@ -8,16 +8,16 @@ import trapx00.lightx00.shared.vo.inventorystaff.InventoryViewVo;
 import java.io.File;
 import java.util.Date;
 
-public class InventoryCheckBlController implements InventoryCheckBlService {
+public class InventoryCheckBlContronllerMock extends InventoryCheckBlController {
     /**
-     * Checks the invenntory change between the begintime and endtime
+     * Checks the invenntory change during specified time range
      * @param beginTime
      * @param endTime
      * @return The inventoryView during specified time range
      */
     @Override
     public InventoryViewVo check(Date beginTime, Date endTime) {
-        return null;
+        return super.check(beginTime,endTime);
     }
 
     /**
@@ -26,7 +26,7 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public InventoryPictureVo picture() {
-        return null;
+        return super.picture();
     }
 
     /**
@@ -36,6 +36,6 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public ResultMessage export(File newfile) {
-        return null;
+        return super.export(newfile);
     }
 }

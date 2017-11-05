@@ -31,14 +31,20 @@ public interface InventoryWarningBlService {
     ResultMessage modify(String id, double modifyWarning);//修改警戒值
 
     /**
-     *
-     * @return
+     * Gets the current Bill
+     * @return the current BillVo
      */
     InventoryBillVo getCurrentBill();//得到正在操作单据信息
-
+    /**
+     *  Querys a bill
+     * @param inventoryBillQueryVo
+     * @return InventoryBillVo
+     */
     InventoryBillVo []query(InventoryBillQueryVo inventoryBillQueryVo);
-
+    /**
+     * Gets the id for the next bill.
+     * @return id for the next bill
+     */
     String getId();
 
-    CommodityVo[] getAllCommodity();
 }

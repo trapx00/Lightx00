@@ -1,17 +1,13 @@
-package trapx00.lightx00.client.bl.inventorybl;
+package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.commoditybl.CommodityService;
-import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
+import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillVo;
 
-public class InventoryWarningBlController implements InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService {
+public class InventoryWarningBlControllerMock extends InventoryWarningBlController{
     /**
      * Submits a Bill.
      * @param bill
@@ -19,7 +15,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage submit(InventoryBillVo bill) {
-        return null;
+        return super.submit(bill);
     }
 
     /**
@@ -29,7 +25,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage saveAsDraft(InventoryBillVo bill) {
-        return null;
+        return super.saveAsDraft(bill);
     }
 
     /**
@@ -40,7 +36,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage modify(String id, double modifyWarning) {
-        return null;
+        return super.modify(id,modifyWarning);
     }
 
     /**
@@ -49,17 +45,17 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public InventoryBillVo getCurrentBill() {
-        return null;
+        return super.getCurrentBill();
     }
 
     /**
      *  Querys a bill
      * @param inventoryBillQueryVo
-     * @return InventoryBillVo
+     * @return InventoryBill that match query condition
      */
     @Override
     public InventoryBillVo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
-        return new InventoryBillVo[0];
+        return super.query(inventoryBillQueryVo);
     }
 
     /**
@@ -68,7 +64,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public String getId() {
-        return null;
+        return super.getId();
     }
 
     /**
@@ -78,7 +74,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return super.deleteDraft(id);
     }
 
     /**
@@ -88,7 +84,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return super.abandon(id);
     }
 
     /**
@@ -98,15 +94,15 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return super.activate(id);
     }
 
     /**
      * Query a commodity
-     * @return CommodityVo
+     * @return Commodity that match query condition
      */
     @Override
     public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return new CommodityVo[0];
+        return super.queryCommodity(commodityQueryVo);
     }
 }

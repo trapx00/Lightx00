@@ -2,16 +2,16 @@ package trapx00.lightx00.client.test.presentationdriver.commodityblservice;
 
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.client.blservice.commodityblservice.ProductManagementBlService;
-import trapx00.lightx00.client.blservicestub.commodityblservice.ProductManagementBlServiceStub;
+import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
+import trapx00.lightx00.client.blservicestub.commodityblservice.CommoditySortBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortVo;
 
 import static org.junit.Assert.*;
 
-public class ProductManagementBlServiceDriver {
+public class CommoditySortBlServiceDriver {
 
-    ProductManagementBlService service=new ProductManagementBlServiceStub();
+    CommoditySortBlService service=new CommoditySortBlServiceStub();
     CommoditySortVo[] commoditysorts;
     String commodityIdList[]={""};
     String nextIds[]={"S0002"};
@@ -21,7 +21,7 @@ public class ProductManagementBlServiceDriver {
 
     @Before
     public void setUp() throws Exception {
-        commoditysorts = service.query("S0001","Led");
+        commoditysorts = service.query("S0001");
     }
     @Test
     public void add() throws Exception {

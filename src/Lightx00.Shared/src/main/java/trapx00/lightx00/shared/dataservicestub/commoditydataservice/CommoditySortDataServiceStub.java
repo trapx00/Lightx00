@@ -1,11 +1,11 @@
 package trapx00.lightx00.shared.dataservicestub.commoditydataservice;
 
-import trapx00.lightx00.shared.dataservice.commoditydataservice.ProductManagementDataService;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
 
-public class ProductManagementDataServiceStub implements ProductManagementDataService {
+public class CommoditySortDataServiceStub implements CommoditySortDataService {
     String commodityIdList[]={"C0001","C0002"};
     String nextIds[]={"S0002"};
     String lowNextIds[]={""};

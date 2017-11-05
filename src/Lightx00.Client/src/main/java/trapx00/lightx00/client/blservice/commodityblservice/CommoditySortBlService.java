@@ -2,9 +2,10 @@ package trapx00.lightx00.client.blservice.commodityblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 
+import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortVo;
 
-public interface ProductManagementBlService {
+public interface CommoditySortBlService {
     //商品分类管理
 
     /**
@@ -24,10 +25,10 @@ public interface ProductManagementBlService {
 
     /**
      *  Query a commodifySort
-     * @param id
+     * @param commoditySortQueryVo
      * @return the list of the commoditySort
      */
-    CommoditySortVo[] query(String id);//查询分类
+    CommoditySortVo[] query(CommoditySortQueryVo commoditySortQueryVo);//查询分类
 
     /**
      *  Delete a commoditySort

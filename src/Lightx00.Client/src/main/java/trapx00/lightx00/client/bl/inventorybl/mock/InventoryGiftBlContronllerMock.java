@@ -1,9 +1,6 @@
-package trapx00.lightx00.client.bl.inventorybl;
+package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.commoditybl.CommodityService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
+import trapx00.lightx00.client.bl.inventorybl.InventoryGiftBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
@@ -11,7 +8,7 @@ import trapx00.lightx00.shared.vo.inventorystaff.InventoryGiftVo;
 
 import javax.xml.crypto.Data;
 
-public class InventoryGiftBlController implements InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,CommodityService {
+public class InventoryGiftBlContronllerMock extends InventoryGiftBlController{
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo
@@ -19,7 +16,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage sumbit(InventoryGiftVo inventoryGiftVo) {
-        return null;
+        return super.sumbit(inventoryGiftVo);
     }
 
     /**
@@ -28,7 +25,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public String getId() {
-        return null;
+        return super.getId();
     }
 
     /**
@@ -38,7 +35,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public InventoryGiftVo getGift(Data time) {
-        return null;
+        return super.getGift(time);
     }
 
     /**
@@ -48,7 +45,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return new CommodityVo[0];
+        return  super.queryCommodity(commodityQueryVo);
     }
     /**
      * Abandons a bill.
@@ -57,7 +54,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return super.abandon(id);
     }
     /**
      *  Activates a bill that has been approved of.
@@ -66,6 +63,6 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return super.activate(id);
     }
 }

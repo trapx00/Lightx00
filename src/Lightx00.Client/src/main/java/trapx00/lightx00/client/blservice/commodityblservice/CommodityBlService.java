@@ -1,10 +1,11 @@
 package trapx00.lightx00.client.blservice.commodityblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 
 
-public interface GoodsManagementBlService {
+public interface CommodityBlService {
     //商品管理
 
     /**
@@ -23,10 +24,10 @@ public interface GoodsManagementBlService {
 
     /**
      * uery for a commodity
-     * @param id
+     * @param commodityQueryVo
      * @return the list of the commodity
      */
-    CommodityVo[] query(String id);//查询商品
+    CommodityVo[] query(CommodityQueryVo commodityQueryVo);//查询商品
 
     /**
      * Delete a commodity

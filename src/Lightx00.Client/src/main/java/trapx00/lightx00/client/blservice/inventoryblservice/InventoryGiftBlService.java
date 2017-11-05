@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.vo.inventorystaff.InventoryGiftVo;
 
@@ -7,30 +8,24 @@ import javax.xml.crypto.Data;
 
 public interface InventoryGiftBlService {
     /**
-     *
+     * Submits a GiftBill.
      * @param inventoryGiftVo
-     * @return
+     * @return whether the operation is done successfully
      */
-    InventoryGiftVo sumbit(InventoryGiftVo inventoryGiftVo);//提交赠送单
+    ResultMessage sumbit(InventoryGiftVo inventoryGiftVo);//提交赠送单
 
     /**
-     *
-     * @return
+     *  Gets the id for the next GiftBill
+     * @return the id
      */
     String getId();
 
     /**
-     *
+     * Gets the giftBill during the time
      * @param time
-     * @return
+     * @return the giftBill
      */
     InventoryGiftVo getGift(Data time);
-
-    /**
-     *
-     * @return
-     */
-    public CommodityVo[] getAllCommodity();
 
 
 
