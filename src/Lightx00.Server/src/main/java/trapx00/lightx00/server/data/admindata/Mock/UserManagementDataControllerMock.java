@@ -1,11 +1,11 @@
-package trapx00.lightx00.server.data.financedata.admindata;
+package trapx00.lightx00.server.data.admindata.Mock;
 
-import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.server.data.admindata.UserManagementDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
 
-public class UserManagementDataController implements UserManagementDataService {
+public class UserManagementDataControllerMock extends UserManagementDataController {
     /**
      * filter some user accounts
      * @param query the filter conditions
@@ -13,7 +13,7 @@ public class UserManagementDataController implements UserManagementDataService {
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        return new EmployeePo[0];
+        return super.query(query);
     }
 
     /**
@@ -23,7 +23,7 @@ public class UserManagementDataController implements UserManagementDataService {
      */
     @Override
     public ResultMessage add(EmployeePo account) {
-        return null;
+        return super.add(account);
     }
 
     /**
@@ -33,7 +33,7 @@ public class UserManagementDataController implements UserManagementDataService {
      */
     @Override
     public ResultMessage modify(EmployeePo account) {
-        return null;
+        return super.modify(account);
     }
 
     /**
@@ -43,6 +43,6 @@ public class UserManagementDataController implements UserManagementDataService {
      */
     @Override
     public ResultMessage delete(EmployeePo account) {
-        return null;
+        return super.delete(account);
     }
 }

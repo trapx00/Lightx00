@@ -1,11 +1,11 @@
-package trapx00.lightx00.server.data.financedata.admindata.Mock;
+package trapx00.lightx00.server.data.admindata;
 
-import trapx00.lightx00.server.data.UserManagementDataController;
+import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
 
-public class UserManagementDataController extends UserManagementDataController {
+public class UserManagementDataController implements UserManagementDataService {
     /**
      * filter some user accounts
      * @param query the filter conditions

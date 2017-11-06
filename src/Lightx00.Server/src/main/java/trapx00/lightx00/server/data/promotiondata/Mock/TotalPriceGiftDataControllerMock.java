@@ -1,20 +1,19 @@
-package trapx00.lightx00.server.data.financedata.promotiondata;
+package trapx00.lightx00.server.data.promotiondata.Mock;
 
-import trapx00.lightx00.shared.dataservice.promotiondataservice.PromotionManagementDataService;
+import trapx00.lightx00.server.data.promotiondata.TotalPriceGiftDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.manager.promotion.CommodityOnSalePo;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
-public class CommodityOnSaleDataController implements PromotionManagementDataService {
+public class TotalPriceGiftDataControllerMock extends TotalPriceGiftDataController {
 
     /**
      * submit a completed promotion
      * @param promotion the promotion to be submitted
      * @return whether the operation is done successfully
      */
-
-    public ResultMessage submit(CommodityOnSalePo promotion) {
-        return null;
+    public ResultMessage submit(PromotionPoBase promotion){
+        return super.submit(promotion);
     }
 
     /**
@@ -22,9 +21,8 @@ public class CommodityOnSaleDataController implements PromotionManagementDataSer
      * @param query the filter conditions
      * @return array of promotions which match the conditions
      */
-    @Override
-    public CommodityOnSalePo[] queryPromotion(PromotionQueryVo query) {
-        return new CommodityOnSalePo[0];
+    public PromotionPoBase[] queryPromotion(PromotionQueryVo query) {
+        return super.queryPromotion(query);
     }
 
     /**
@@ -32,9 +30,8 @@ public class CommodityOnSaleDataController implements PromotionManagementDataSer
      * @param promotion the promotion to be deleted
      * @return whether the operation is done successfully
      */
-
-    public ResultMessage delete(CommodityOnSalePo promotion) {
-        return null;
+    public ResultMessage delete(PromotionPoBase promotion) {
+        return super.delete(promotion);
     }
 
     /**
@@ -42,8 +39,7 @@ public class CommodityOnSaleDataController implements PromotionManagementDataSer
      *
      * @return id for the next promotion
      */
-    @Override
-   public String getId(){
-        return null;
+    public String getId(){
+        return super.getId();
     }
 }
