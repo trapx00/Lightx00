@@ -1,48 +1,49 @@
-package trapx00.lightx00.client.bl.approvalbl.mock;
+package trapx00.lightx00.server.data.approvaldata;
 
-import trapx00.lightx00.client.bl.approvalbl.AuditBlController;
+import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
 import trapx00.lightx00.shared.vo.manager.BillQueryVo;
 
-public class AuditBlControllerMock extends AuditBlController {
+public class AuditDataController implements AuditDataService {
+
     /**
-     * filter some bills to audit
+     * filter some bills
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
     @Override
     public BillVo[] query(BillQueryVo query) {
-        return super.query(query);
+        return new BillVo[0];
     }
 
     /**
      * reject to approve the bill
-     * @param bill bill to be audited
+     * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage reject(BillVo bill) {
-        return super.reject(bill);
+        return null;
     }
 
     /**
      * approve the bill
-     * @param bill bill to be audited
+     * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage pass(BillVo bill) {
-        return super.pass(bill);
+        return null;
     }
 
     /**
-     * submitted bills request approval
-     * @param bill bill has been submitted
+     * save the submitted bill
+     * @param bill the bill has been submitted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestMessage(BillVo bill) {
-        return super.requestMessage(bill);
+    public ResultMessage requestApproval(BillVo bill) {
+        return null;
     }
 }

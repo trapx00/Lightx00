@@ -1,40 +1,45 @@
-package trapx00.lightx00.shared.dataservice.promotiondataservice;
+package trapx00.lightx00.server.data.promotiondata.Mock;
 
+import trapx00.lightx00.server.data.promotiondata.TotalPriceGiftDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
-import trapx00.lightx00.shared.vo.manager.promotion.CommodityQueryVo;
 import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
 
-import java.util.Date;
+public class TotalPriceGiftDataControllerMock extends TotalPriceGiftDataController {
 
-public interface PromotionManagementDataService {
     /**
      * submit a completed promotion
      * @param promotion the promotion to be submitted
      * @return whether the operation is done successfully
      */
-    ResultMessage submit(PromotionPoBase promotion);
+    public ResultMessage submit(PromotionPoBase promotion){
+        return super.submit(promotion);
+    }
 
     /**
      * filter some promotions
      * @param query the filter conditions
      * @return array of promotions which match the conditions
      */
-    PromotionPoBase[] queryPromotion(PromotionQueryVo query) ;
+    public PromotionPoBase[] queryPromotion(PromotionQueryVo query) {
+        return super.queryPromotion(query);
+    }
 
     /**
      * delete a useless promotion
      * @param promotion the promotion to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(PromotionPoBase promotion);
+    public ResultMessage delete(PromotionPoBase promotion) {
+        return super.delete(promotion);
+    }
 
     /**
      * get id for the next promotion
      *
      * @return id for the next promotion
      */
-    String getId();
+    public String getId(){
+        return super.getId();
+    }
 }
