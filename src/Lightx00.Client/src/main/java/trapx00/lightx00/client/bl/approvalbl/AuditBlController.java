@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.vo.BillVo;
 import trapx00.lightx00.shared.vo.manager.BillQueryVo;
 
-public class AuditBlController implements AuditBlService {
+public class AuditBlController implements AuditBlService,ApprovalRequest {
 
     /**
      * filter some bills to audit
@@ -34,6 +34,16 @@ public class AuditBlController implements AuditBlService {
      */
     @Override
     public ResultMessage pass(BillVo bill) {
+        return null;
+    }
+
+    /**
+     * submitted bills request approval
+     * @param bill bill has been submitted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage requestMessage(BillVo bill) {
         return null;
     }
 }
