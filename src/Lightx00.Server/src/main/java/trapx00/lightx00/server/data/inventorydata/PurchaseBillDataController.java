@@ -1,4 +1,4 @@
-package trapx00.lightx00.shared.data.inventorydata;
+package trapx00.lightx00.server.data.inventorydata;
 
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;

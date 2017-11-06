@@ -1,6 +1,6 @@
-package trapx00.lightx00.client.blservicestub.saleblservice;
+package trapx00.lightx00.client.bl.salebl.mock;
 
-import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
 import trapx00.lightx00.client.datafactory.saledataservicefactory.SaleBillDataServiceFactory;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
@@ -8,11 +8,40 @@ import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.vo.salestaff.SaleBillQueryVo;
 import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
 
-import java.rmi.RemoteException;
+public class SaleBillBlControllerMock extends SaleBillBlController {
+    /**
+     * Deletes a draft.
+     *
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
+        return null;
+    }
 
-public class SaleBillBlServiceStub implements SaleBillBlService {
+    /**
+     * Abandons a bill.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage abandon(String id) {
+        return null;
+    }
 
-    SaleBillDataService saleBillDataService=new SaleBillDataServiceFactory().getInstance();
+    /**
+     * Activates a bill that has been approved of.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage activate(String id) {
+        return null;
+    }
+
     /**
      * submit a saleBill
      *
@@ -21,12 +50,8 @@ public class SaleBillBlServiceStub implements SaleBillBlService {
      */
     @Override
     public ResultMessage submit(SaleBillVo saleBill) {
-        SaleBillPo saleBillPo=null;
-        try {
-            return saleBillDataService.submit(saleBillPo);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        SaleBillPo saleBillPo;
+        return saleBillDataService.submit(saleBillPo);
     }
 
     /**
@@ -37,7 +62,7 @@ public class SaleBillBlServiceStub implements SaleBillBlService {
      */
     @Override
     public ResultMessage saveAsDraft(SaleBillVo saleBill) {
-        return ResultMessage.Success;
+        return null;
     }
 
     /**
@@ -47,7 +72,7 @@ public class SaleBillBlServiceStub implements SaleBillBlService {
      */
     @Override
     public String getId() {
-        return "XSD-20171107-00000";
+        return null;
     }
 
     /**

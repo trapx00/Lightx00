@@ -1,4 +1,4 @@
-package trapx00.lightx00.shared.data.clientdata;
+package trapx00.lightx00.server.data.clientdata;
 
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
