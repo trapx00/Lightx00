@@ -31,11 +31,6 @@ public class NotificationBlServiceDriver {
     }
 
     @Test
-    public void activate() throws Exception {
-        assertEquals(ResultMessage.Success, service.activate((BillApprovalNotificationVo)notifications[1]));
-    }
-
-    @Test
     public void abandon() throws Exception {
         assertEquals(ResultMessage.Success, service.abandon((BillApprovalNotificationVo)notifications[1]));
     }

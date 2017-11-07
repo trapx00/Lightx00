@@ -2,8 +2,12 @@ package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.CashBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
 import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+
+import java.util.Date;
 
 public class CashBillBlControllerMock extends CashBillBlController {
     /**
@@ -14,7 +18,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public ResultMessage submit(CashBillVo bill) {
-        return super.submit(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -25,7 +29,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public ResultMessage saveAsDraft(CashBillVo bill) {
-        return super.saveAsDraft(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -35,7 +39,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public String getId() {
-        return super.getId();
+        return "XJFYD-20171107-00001";
     }
 
     /**
@@ -46,7 +50,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return super.deleteDraft(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -68,7 +72,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public ResultMessage activate(String id) {
-        return super.activate(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -79,6 +83,9 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public CashBillVo[] query(CashBillQueryVo query) {
-        return super.query(query);
+        return new CashBillVo[]
+                {
+                        new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "","",new CashBillItem[0])
+                };
     }
 }

@@ -16,7 +16,7 @@ public class DraftManagementDataServiceDriver {
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success, service.delete(service.update()[0]));
+        assertEquals(ResultMessage.Success, service.delete(service.update()[0].getId()));
     }
 
 }

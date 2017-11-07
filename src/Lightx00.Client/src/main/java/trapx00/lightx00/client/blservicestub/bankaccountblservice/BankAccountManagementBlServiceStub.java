@@ -21,7 +21,7 @@ public class BankAccountManagementBlServiceStub implements BankAccountManagement
     @Override
     public BankAccountVo[] query(BankAccountQueryVo query) {
         return new BankAccountVo[] {
-               new BankAccountVo("123",query.getName(),123,new Date())
+               new BankAccountVo("123","123",123,new Date())
         };
     }
 

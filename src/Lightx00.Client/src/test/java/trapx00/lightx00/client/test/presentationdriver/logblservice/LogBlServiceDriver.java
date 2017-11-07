@@ -18,17 +18,12 @@ public class LogBlServiceDriver {
     LogVo[] logs;
     @Before
     public void setUp() throws Exception {
-        logs = service.query(new LogQueryVo(new Date(), LogSeverity.Info,"123"));
+        logs = service.query(x->true);
     }
 
     @Test
     public void query() throws Exception {
         assertEquals("123",logs[0].getContent());
-    }
-
-    @Test
-    public void log() throws Exception {
-        assertEquals(ResultMessage.Success, service.log(LogSeverity.Success,"123"));
     }
 
 }

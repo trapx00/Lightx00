@@ -19,11 +19,6 @@ public class TradeHistoryBlServiceStub implements TradeHistoryBlService {
     }
 
     @Override
-    public BillVo revert(BillVo selectedBill) {
-        return selectedBill;
-    }
-
-    @Override
     public ResultMessage export(TradeHistoryVo bills) {
         return ResultMessage.Success;
     }
