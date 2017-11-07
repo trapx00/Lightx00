@@ -3,8 +3,8 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.client.vo.financestaff.ReceivalBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 
 public class ReceivalDataServiceStub implements ReceivalBillDataService {
     /**

@@ -3,8 +3,7 @@ package trapx00.lightx00.server.data.financedata.mock;
 import trapx00.lightx00.server.data.financedata.InitialEstablishmentDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
 public class InitialEstablishmentDataControllerMock extends InitialEstablishmentDataController {
     /**
@@ -46,7 +45,7 @@ public class InitialEstablishmentDataControllerMock extends InitialEstablishment
      * @return SystemSnapshotVos that match the condition
      */
     @Override
-    public SystemSnapshotVo query(SystemSnapshotQueryVo query) {
+    public SystemSnapshotPo[] query(SystemSnapshotQueryVo query) {
         return super.query(query);
     }
 }

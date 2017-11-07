@@ -3,7 +3,7 @@ package trapx00.lightx00.client.presentation.draftui;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.*;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.client.vo.BillVo;
 
 import java.util.Date;
 

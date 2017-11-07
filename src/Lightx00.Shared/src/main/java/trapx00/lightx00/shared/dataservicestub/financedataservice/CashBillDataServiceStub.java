@@ -3,8 +3,8 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 
 public class CashBillDataServiceStub implements CashBillDataService {
 

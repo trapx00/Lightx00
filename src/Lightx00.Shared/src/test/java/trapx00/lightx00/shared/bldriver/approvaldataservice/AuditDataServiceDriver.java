@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservicestub.approvaldataservice.AuditDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.vo.BillVo;
+import trapx00.lightx00.client.vo.BillVo;
 
 import static org.junit.Assert.*;
 

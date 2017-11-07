@@ -109,7 +109,7 @@ public class BorderlessStageHelper {
                     cursorEvent = Cursor.DEFAULT;
                 }
                 scene.setCursor(cursorEvent);
-            } else if(MouseEvent.MOUSE_EXITED.equals(mouseEventType) || MouseEvent.MOUSE_EXITED_TARGET.equals(mouseEventType)){
+            } else if (MouseEvent.MOUSE_EXITED.equals(mouseEventType) || MouseEvent.MOUSE_EXITED_TARGET.equals(mouseEventType)) {
                 scene.setCursor(Cursor.DEFAULT);
             } else if (MouseEvent.MOUSE_PRESSED.equals(mouseEventType)) {
                 startX = stage.getWidth() - mouseEventX;

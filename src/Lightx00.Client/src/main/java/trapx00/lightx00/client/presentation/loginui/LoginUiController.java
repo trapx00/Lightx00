@@ -1,25 +1,20 @@
 package trapx00.lightx00.client.presentation.loginui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiUtil;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
-import trapx00.lightx00.shared.vo.EmployeeVo;
-import trapx00.lightx00.shared.vo.admin.AdminVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.admin.AdminVo;
 
 import java.io.IOException;
 import java.util.Date;

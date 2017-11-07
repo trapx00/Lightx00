@@ -5,7 +5,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommodityBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 
 
 import java.util.Date;

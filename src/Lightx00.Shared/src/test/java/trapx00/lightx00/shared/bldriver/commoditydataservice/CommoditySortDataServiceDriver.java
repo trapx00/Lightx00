@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDat
 import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommoditySortDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
-import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
 
 import static org.junit.Assert.*;
 

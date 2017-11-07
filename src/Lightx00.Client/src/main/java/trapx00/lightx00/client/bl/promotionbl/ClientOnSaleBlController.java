@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.promotionbl;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.manager.promotion.*;
+import trapx00.lightx00.client.vo.manager.promotion.*;
 
 public class ClientOnSaleBlController {
 

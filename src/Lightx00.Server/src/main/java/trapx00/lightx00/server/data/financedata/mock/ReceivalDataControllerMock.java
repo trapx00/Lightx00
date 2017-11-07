@@ -3,8 +3,7 @@ package trapx00.lightx00.server.data.financedata.mock;
 import trapx00.lightx00.server.data.financedata.ReceivalBillDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
 public class ReceivalDataControllerMock extends ReceivalBillDataController {
     /**
@@ -47,7 +46,7 @@ public class ReceivalDataControllerMock extends ReceivalBillDataController {
      * @return ReceivalBillVos that match query condition
      */
     @Override
-    public ReceivalBillVo[] query(ReceivalBillQueryVo query) {
+    public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
         return super.query(query);
     }
 

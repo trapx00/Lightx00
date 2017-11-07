@@ -3,8 +3,8 @@ package trapx00.lightx00.client.blservicestub.clientblservice;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientType;
-import trapx00.lightx00.shared.vo.salestaff.ClientVo;
-import trapx00.lightx00.shared.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 
 public class ClientBlServiceStub implements ClientBlService{
     @Override

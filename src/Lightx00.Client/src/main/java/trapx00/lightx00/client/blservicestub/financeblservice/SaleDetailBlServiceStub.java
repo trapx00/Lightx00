@@ -2,9 +2,9 @@ package trapx00.lightx00.client.blservicestub.financeblservice;
 
 import trapx00.lightx00.client.blservice.financeblservice.SaleDetailBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.financestaff.SaleDetailQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SaleDetailVo;
-import trapx00.lightx00.shared.vo.financestaff.SaleRecordVo;
+import trapx00.lightx00.client.vo.financestaff.SaleDetailQueryVo;
+import trapx00.lightx00.client.vo.financestaff.SaleDetailVo;
+import trapx00.lightx00.client.vo.financestaff.SaleRecordVo;
 
 import java.util.Date;
 

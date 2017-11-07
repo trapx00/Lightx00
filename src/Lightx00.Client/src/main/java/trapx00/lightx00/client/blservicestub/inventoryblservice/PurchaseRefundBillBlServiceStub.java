@@ -2,7 +2,7 @@ package trapx00.lightx00.client.blservicestub.inventoryblservice;
 
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 
 public class PurchaseRefundBillBlServiceStub implements PurchaseRefundBillBlService {
     @Override

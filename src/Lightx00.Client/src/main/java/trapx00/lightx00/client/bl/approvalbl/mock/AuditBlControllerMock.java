@@ -2,8 +2,8 @@ package trapx00.lightx00.client.bl.approvalbl.mock;
 
 import trapx00.lightx00.client.bl.approvalbl.AuditBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.manager.BillQueryVo;
+import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.manager.BillQueryVo;
 
 public class AuditBlControllerMock extends AuditBlController {
     /**

@@ -2,8 +2,7 @@ package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 
 public interface PaymentBillDataService {
     /**
@@ -35,7 +34,7 @@ public interface PaymentBillDataService {
      * @return PaymentBillVos that match query condition
      */
 
-    PaymentBillVo[] query(PaymentBillQueryVo query);
+    PaymentBillPo[] query(PaymentBillQueryVo query);
 
     /**
      * Gets the id for the next bill.

@@ -2,8 +2,8 @@ package trapx00.lightx00.client.bl.inventorybl.mock;
 
 import trapx00.lightx00.client.bl.inventorybl.InventoryCheckBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryPictureVo;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryViewVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
 
 import java.io.File;
 import java.util.Date;

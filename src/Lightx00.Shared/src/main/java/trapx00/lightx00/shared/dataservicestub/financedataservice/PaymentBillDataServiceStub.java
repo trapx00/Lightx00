@@ -3,8 +3,8 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.client.vo.financestaff.PaymentBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
 public class PaymentBillDataServiceStub implements PaymentBillDataService {
     /**

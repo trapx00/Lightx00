@@ -6,8 +6,8 @@ import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.TradeHistoryBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.financestaff.TradeHistoryQueryVo;
+import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 
 import java.util.Date;
 

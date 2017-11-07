@@ -6,8 +6,8 @@ import trapx00.lightx00.client.blservice.draftblservice.DraftManagementBlService
 import trapx00.lightx00.client.blservicestub.draftblservice.DraftManagementBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.vo.Draftable;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
 import java.util.Date;
 

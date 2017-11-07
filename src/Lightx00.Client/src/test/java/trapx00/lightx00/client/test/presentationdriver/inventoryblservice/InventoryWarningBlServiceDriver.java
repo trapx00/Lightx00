@@ -4,8 +4,8 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.client.blservicestub.inventoryblservice.InventoryWarningBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 import static org.junit.Assert.*;
 

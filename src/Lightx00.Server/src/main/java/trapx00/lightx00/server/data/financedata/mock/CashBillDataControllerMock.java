@@ -3,8 +3,7 @@ package trapx00.lightx00.server.data.financedata.mock;
 import trapx00.lightx00.server.data.financedata.CashBillDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
 public class CashBillDataControllerMock extends CashBillDataController {
     /**
@@ -47,7 +46,7 @@ public class CashBillDataControllerMock extends CashBillDataController {
      * @return CashBillVos that match the query condition
      */
     @Override
-    public CashBillVo[] query(CashBillQueryVo query) {
+    public CashBillPo[] query(CashBillQueryVo query) {
         return super.query(query);
     }
 

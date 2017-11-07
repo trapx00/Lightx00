@@ -16,7 +16,7 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.util.DateHelper;
-import trapx00.lightx00.shared.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
 
 import java.io.IOException;
 import java.util.Date;

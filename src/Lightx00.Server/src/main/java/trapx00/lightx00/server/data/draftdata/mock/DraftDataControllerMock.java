@@ -3,7 +3,6 @@ package trapx00.lightx00.server.data.draftdata.mock;
 import trapx00.lightx00.server.data.draftdata.DraftDataController;
 import trapx00.lightx00.shared.po.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.Draftable;
 
 public class DraftDataControllerMock extends DraftDataController {
     /**

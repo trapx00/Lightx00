@@ -1,10 +1,8 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
 public interface InitialEstablishmentDataService {
     /**
@@ -33,5 +31,5 @@ public interface InitialEstablishmentDataService {
      * @param query query
      * @return SystemSnapshotVos that match the condition
      */
-    SystemSnapshotVo query(SystemSnapshotQueryVo query);
+    SystemSnapshotPo[] query(SystemSnapshotQueryVo query);
 }

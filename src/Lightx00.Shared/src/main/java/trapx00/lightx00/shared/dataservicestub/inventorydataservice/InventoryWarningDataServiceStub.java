@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 import java.util.Date;
 

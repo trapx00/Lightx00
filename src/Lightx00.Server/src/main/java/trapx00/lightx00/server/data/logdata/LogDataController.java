@@ -2,9 +2,9 @@ package trapx00.lightx00.server.data.logdata;
 
 import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.vo.log.LogQueryVo;
-import trapx00.lightx00.shared.vo.log.LogVo;
+import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
 public class LogDataController implements LogDataService {
     /**
@@ -26,7 +26,7 @@ public class LogDataController implements LogDataService {
      * @return LogVos that match query condition
      */
     @Override
-    public LogVo[] query(LogQueryVo query) {
-        return new LogVo[0];
+    public LogPo[] query(LogQueryVo query) {
+        return new LogPo[0];
     }
 }

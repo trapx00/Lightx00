@@ -2,8 +2,8 @@ package trapx00.lightx00.client.bl.promotionbl.mock;
 
 import trapx00.lightx00.client.bl.promotionbl.TotalPriceCouponBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
-import trapx00.lightx00.shared.vo.manager.promotion.TotalPriceCouponVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionQueryVo;
+import trapx00.lightx00.client.vo.manager.promotion.TotalPriceCouponVo;
 
 public class TotalPriceCouponBlControllerMock extends TotalPriceCouponBlController {
     /**

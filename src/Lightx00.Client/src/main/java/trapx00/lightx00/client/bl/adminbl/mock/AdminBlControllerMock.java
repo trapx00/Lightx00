@@ -2,8 +2,8 @@ package trapx00.lightx00.client.bl.adminbl.mock;
 
 import trapx00.lightx00.client.bl.adminbl.AdminBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.EmployeeVo;
-import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.admin.UserAccountQueryVo;
 
 public class AdminBlControllerMock extends AdminBlController {
     /**

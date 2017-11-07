@@ -2,7 +2,7 @@ package trapx00.lightx00.client.blservicestub.commodityblservice;
 
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 
 public class CommoditySortBlServiceStub implements CommoditySortBlService {
 

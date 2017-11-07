@@ -6,9 +6,8 @@ import trapx00.lightx00.shared.dataservicestub.financedataservice.InitialEstabli
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
-import javax.xml.transform.Result;
 import java.util.Date;
 
 import static org.junit.Assert.*;

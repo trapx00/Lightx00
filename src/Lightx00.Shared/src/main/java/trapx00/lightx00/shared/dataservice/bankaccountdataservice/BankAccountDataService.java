@@ -2,7 +2,7 @@ package trapx00.lightx00.shared.dataservice.bankaccountdataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
-import trapx00.lightx00.shared.vo.financestaff.BankAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 public interface BankAccountDataService {
     BankAccountPo[] query(BankAccountQueryVo query);

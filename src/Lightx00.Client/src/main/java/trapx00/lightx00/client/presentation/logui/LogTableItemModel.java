@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.vo.log.LogVo;
+import trapx00.lightx00.client.vo.log.LogVo;
 
 import java.util.Date;
 

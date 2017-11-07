@@ -1,12 +1,10 @@
 package trapx00.lightx00.client.bl.clientbl;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.ClientVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
 public class ClientBlController implements ClientBlService, DraftDeleteService,ClientModificationService {
 

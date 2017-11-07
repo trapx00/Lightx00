@@ -3,8 +3,8 @@ package trapx00.lightx00.shared.dataservicestub.logdataservice;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.vo.log.LogQueryVo;
-import trapx00.lightx00.shared.vo.log.LogVo;
+import trapx00.lightx00.client.vo.log.LogQueryVo;
+import trapx00.lightx00.client.vo.log.LogVo;
 
 import java.util.Date;
 

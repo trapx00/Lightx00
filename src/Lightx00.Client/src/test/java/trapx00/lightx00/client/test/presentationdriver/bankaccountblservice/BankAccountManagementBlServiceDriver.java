@@ -4,7 +4,6 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlService;
 import trapx00.lightx00.client.blservicestub.bankaccountblservice.BankAccountManagementBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.financestaff.BankAccountQueryVo;
 
 import static org.junit.Assert.*;
 

@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
-import trapx00.lightx00.shared.vo.salestaff.PurchaseBillQueryVo;
-import trapx00.lightx00.shared.vo.salestaff.PurchaseBillVo;
-import trapx00.lightx00.shared.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 
 public interface PurchaseBillBlInfo {
 

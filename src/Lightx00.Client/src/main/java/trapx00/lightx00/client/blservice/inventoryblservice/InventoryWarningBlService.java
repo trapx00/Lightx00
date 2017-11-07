@@ -1,9 +1,8 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillQueryVo;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 public interface InventoryWarningBlService {
     //库存监控

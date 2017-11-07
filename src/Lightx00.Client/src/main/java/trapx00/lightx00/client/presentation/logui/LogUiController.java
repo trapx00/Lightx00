@@ -11,18 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.presentation.Client;
-import trapx00.lightx00.client.presentation.financeui.BillTableItemModel;
-import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.util.DateHelper;
-import trapx00.lightx00.shared.vo.log.LogVo;
+import trapx00.lightx00.client.vo.log.LogVo;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class LogUiController {
 

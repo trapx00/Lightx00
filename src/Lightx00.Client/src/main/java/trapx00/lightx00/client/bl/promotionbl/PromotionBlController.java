@@ -3,9 +3,9 @@ package trapx00.lightx00.client.bl.promotionbl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.PromotionManagementBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionVoBase;
-import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionQueryVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 public class PromotionBlController implements PromotionInfo,PromotionManagementBlService,DraftDeleteService {
 

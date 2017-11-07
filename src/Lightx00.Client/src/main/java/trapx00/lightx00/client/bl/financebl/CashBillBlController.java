@@ -5,9 +5,8 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 
 public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, CashBillInfo {
 

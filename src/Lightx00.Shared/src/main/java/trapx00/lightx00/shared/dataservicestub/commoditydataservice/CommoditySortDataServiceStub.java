@@ -3,7 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.commoditydataservice;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
-import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
 
 public class CommoditySortDataServiceStub implements CommoditySortDataService {
     String commodityIdList[]={"C0001","C0002"};

@@ -2,8 +2,8 @@ package trapx00.lightx00.client.bl.promotionbl.mock;
 
 import trapx00.lightx00.client.bl.promotionbl.CommodityOnSaleBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.manager.promotion.CommodityOnSaleVo;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
+import trapx00.lightx00.client.vo.manager.promotion.CommodityOnSaleVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionQueryVo;
 
 public class CommodityOnSaleBlControllerMock extends CommodityOnSaleBlController {
     /**

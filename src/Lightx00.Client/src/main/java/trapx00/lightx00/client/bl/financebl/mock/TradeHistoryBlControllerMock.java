@@ -2,10 +2,10 @@ package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.TradeHistoryBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.financestaff.FinanceBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.FinanceBillVo;
-import trapx00.lightx00.shared.vo.financestaff.TradeHistoryQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.TradeHistoryVo;
+import trapx00.lightx00.shared.queryvo.FinanceBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.FinanceBillVo;
+import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
+import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 
 public class TradeHistoryBlControllerMock extends TradeHistoryBlController {
     /**

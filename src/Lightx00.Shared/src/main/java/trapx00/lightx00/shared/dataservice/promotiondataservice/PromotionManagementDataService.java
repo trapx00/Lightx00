@@ -1,13 +1,9 @@
 package trapx00.lightx00.shared.dataservice.promotiondataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
-import trapx00.lightx00.shared.vo.manager.promotion.CommodityQueryVo;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
-
-import java.util.Date;
+import trapx00.lightx00.client.vo.manager.promotion.CommodityQueryVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionQueryVo;
 
 public interface PromotionManagementDataService {
     /**

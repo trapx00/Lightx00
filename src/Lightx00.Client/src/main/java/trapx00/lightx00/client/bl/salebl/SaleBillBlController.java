@@ -5,8 +5,8 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.SaleBillQueryVo;
-import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 public class SaleBillBlController implements SaleBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
     /**

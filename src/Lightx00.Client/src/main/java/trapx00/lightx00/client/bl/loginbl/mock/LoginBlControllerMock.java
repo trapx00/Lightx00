@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.loginbl.mock;
 
 import trapx00.lightx00.client.bl.loginbl.LoginBlController;
-import trapx00.lightx00.shared.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
 
 public class LoginBlControllerMock extends LoginBlController {
     /**

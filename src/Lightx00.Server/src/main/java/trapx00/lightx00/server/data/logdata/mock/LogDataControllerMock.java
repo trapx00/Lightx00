@@ -2,9 +2,9 @@ package trapx00.lightx00.server.data.logdata.mock;
 
 import trapx00.lightx00.server.data.logdata.LogDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.vo.log.LogQueryVo;
-import trapx00.lightx00.shared.vo.log.LogVo;
+import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
 public class LogDataControllerMock extends LogDataController {
     /**
@@ -26,7 +26,7 @@ public class LogDataControllerMock extends LogDataController {
      * @return LogVos that match query condition
      */
     @Override
-    public LogVo[] query(LogQueryVo query) {
+    public LogPo[] query(LogQueryVo query) {
         return super.query(query);
     }
 }

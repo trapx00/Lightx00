@@ -3,8 +3,8 @@ package trapx00.lightx00.client.bl.financebl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
 public class InitialEstablishmentBlController implements InitialEstablishmentBlService, DraftDeleteService, SystemSnapshotInfo {
 

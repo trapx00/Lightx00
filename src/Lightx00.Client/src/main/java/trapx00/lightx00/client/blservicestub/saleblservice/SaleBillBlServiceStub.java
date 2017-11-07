@@ -5,8 +5,8 @@ import trapx00.lightx00.client.datafactory.saledataservicefactory.SaleBillDataSe
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
-import trapx00.lightx00.shared.vo.salestaff.SaleBillQueryVo;
-import trapx00.lightx00.shared.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 import java.rmi.RemoteException;
 

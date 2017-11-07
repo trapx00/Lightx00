@@ -3,8 +3,8 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotQueryVo;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
 public class InitialEstablishmentDataServiceStub implements InitialEstablishmentDataService {
     /**

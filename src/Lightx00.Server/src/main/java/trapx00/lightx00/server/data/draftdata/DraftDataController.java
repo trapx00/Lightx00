@@ -3,7 +3,6 @@ package trapx00.lightx00.server.data.draftdata;
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftManagementDataService;
 import trapx00.lightx00.shared.po.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.Draftable;
 
 public class DraftDataController implements DraftManagementDataService {
 

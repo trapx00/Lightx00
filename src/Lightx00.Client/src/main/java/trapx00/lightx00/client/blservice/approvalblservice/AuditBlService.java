@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.blservice.approvalblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.manager.BillQueryVo;
+import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.manager.BillQueryVo;
 
 public interface AuditBlService {
 

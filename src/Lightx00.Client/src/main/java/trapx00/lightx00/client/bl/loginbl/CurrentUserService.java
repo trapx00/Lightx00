@@ -1,6 +1,6 @@
 package trapx00.lightx00.client.bl.loginbl;
 
-import trapx00.lightx00.shared.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
 
 public interface CurrentUserService {
     /**

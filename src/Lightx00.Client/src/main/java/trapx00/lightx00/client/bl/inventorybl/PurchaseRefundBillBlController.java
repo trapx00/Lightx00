@@ -5,7 +5,7 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 
 public class PurchaseRefundBillBlController implements PurchaseRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
     /**

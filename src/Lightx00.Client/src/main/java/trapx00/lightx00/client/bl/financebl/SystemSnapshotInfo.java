@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.financebl;
 
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
 public interface SystemSnapshotInfo {
     /**

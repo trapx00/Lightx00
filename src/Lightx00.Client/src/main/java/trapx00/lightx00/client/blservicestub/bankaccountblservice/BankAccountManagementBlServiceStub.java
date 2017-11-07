@@ -2,8 +2,8 @@ package trapx00.lightx00.client.blservicestub.bankaccountblservice;
 
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.financestaff.BankAccountQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.BankAccountVo;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 
 import java.util.Date;
 

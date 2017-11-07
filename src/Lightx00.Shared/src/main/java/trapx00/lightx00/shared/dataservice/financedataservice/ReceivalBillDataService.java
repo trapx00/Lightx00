@@ -2,8 +2,7 @@ package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
 public interface ReceivalBillDataService {
 
@@ -34,7 +33,7 @@ public interface ReceivalBillDataService {
      * @param query query
      * @return ReceivalBillVos that match query condition
      */
-    ReceivalBillVo[] query(ReceivalBillQueryVo query);
+    ReceivalBillPo[] query(ReceivalBillQueryVo query);
 
     /**
      * Gets the id for the next bill.
