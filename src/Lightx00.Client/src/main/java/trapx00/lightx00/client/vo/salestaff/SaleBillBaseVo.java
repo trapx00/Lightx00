@@ -6,7 +6,7 @@ import trapx00.lightx00.client.vo.BillVo;
 
 import java.util.Date;
 
-public class SaleBillBaseVo extends BillVo {
+public abstract class SaleBillBaseVo extends BillVo {
     private SaleBillType saleBillType;
 
     public SaleBillType getSaleBillType() {

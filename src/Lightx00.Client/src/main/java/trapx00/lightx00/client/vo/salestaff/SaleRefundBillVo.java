@@ -1,10 +1,15 @@
 package trapx00.lightx00.client.vo.salestaff;
 
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class SaleRefundBillVo extends SaleBillBaseVo {
     String supplier;
@@ -110,5 +115,55 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
+    }
+
+    /**
+     * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return NotificationActivateService
+     */
+    @Override
+    public NotificationActivateService notificationActivateService() {
+        return null;
+    }
+
+    /**
+     * Gets the NotificationAbandonService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return NotificationAbandonService
+     */
+    @Override
+    public NotificationAbandonService notificationAbandonService() {
+        return null;
+    }
+
+    /**
+     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
+     *
+     * @return key-value maps for the properties
+     */
+    @Override
+    public HashMap<String, String> properties() {
+        return null;
+    }
+
+    /**
+     * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DeleteService
+     */
+    @Override
+    public DraftDeleteService deleteService() {
+        return null;
+    }
+
+    /**
+     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return ContinueWritable
+     */
+    @Override
+    public ContinueWritable continueWriteService() {
+        return null;
     }
 }

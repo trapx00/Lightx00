@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface SaleBillDataService extends Remote{
+public interface SaleBillDataService extends Remote {
 
     /**
      * submit a saleBill
