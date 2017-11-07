@@ -19,8 +19,15 @@ public class PaymentBillBlServiceStub implements PaymentBillBlService {
         return ResultMessage.Success;
     }
 
+    /**
+     * Gets the id for the next bill.
+     *
+     * @return id for the next bill
+     */
     @Override
-    public PaymentBillVo resume() {
-        return new PaymentBillVo("123",new Date(), BillState.Draft, null,null,null,10);
+    public String getId() {
+        return "FXD-20171107-00001";
     }
+
+
 }

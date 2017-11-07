@@ -25,9 +25,4 @@ public class InitialEstablishmentBlServiceStub implements InitialEstablishmentBl
         return ResultMessage.Success;
     }
 
-    @Override
-    public SystemSnapshotVo resume() {
-        return new SystemSnapshotVo("123",new Date(),
-                BillState.Draft, null, null, null);
-    }
 }

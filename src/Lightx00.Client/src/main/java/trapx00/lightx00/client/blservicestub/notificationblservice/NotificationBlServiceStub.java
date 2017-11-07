@@ -26,10 +26,7 @@ public class NotificationBlServiceStub implements NotificationBlService {
         return ResultMessage.Success;
     }
 
-    @Override
-    public ResultMessage activate(BillApprovalNotificationVo notification) {
-        return ResultMessage.Success;
-    }
+
 
     @Override
     public ResultMessage abandon(BillApprovalNotificationVo notification) {
@@ -37,8 +34,5 @@ public class NotificationBlServiceStub implements NotificationBlService {
         return ResultMessage.Success;
     }
 
-    @Override
-    public ResultMessage modify(BillApprovalNotificationVo notification) {
-        return ResultMessage.Success;
-    }
+
 }

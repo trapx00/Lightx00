@@ -6,16 +6,14 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.vo.log.LogQueryVo;
 import trapx00.lightx00.shared.vo.log.LogVo;
 
+import java.util.Date;
+
 public class LogBlServiceStub implements LogBlService {
     @Override
     public LogVo[] query(LogQueryVo query) {
         return new LogVo[] {
-                new LogVo(query.getDate(), query.getSeverity(), "123")
+                new LogVo(new Date(), LogSeverity.Failure, "123")
         };
     }
 
-    @Override
-    public ResultMessage log(LogSeverity severity, String content) {
-        return ResultMessage.Success;
-    }
 }

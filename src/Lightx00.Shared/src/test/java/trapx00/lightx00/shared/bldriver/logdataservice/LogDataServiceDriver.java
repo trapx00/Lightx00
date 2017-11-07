@@ -21,7 +21,7 @@ public class LogDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals("123", service.query(new LogQueryVo(new Date(), LogSeverity.Success,"123"))[0].getContent());
+        assertEquals("123", service.query(x->true)[0].getContent());
     }
 
 }

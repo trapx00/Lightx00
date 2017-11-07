@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class BankAccountDataServiceDriver {
     BankAccountDataService service = new BankAccountDataServiceStub();
-    BankAccountPo account = service.query("123","123")[0];
+    BankAccountPo account = service.query(x->true)[0];
     @Test
     public void query() throws Exception {
         assertEquals("123", account.getId());

@@ -19,9 +19,14 @@ public class CashBillBlServiceStub implements CashBillBlService {
         return ResultMessage.Success;
     }
 
+    /**
+     * Gets the id for the next bill
+     *
+     * @return id for the next bill
+     */
     @Override
-    public CashBillVo resume() {
-        return new CashBillVo("123",new Date(), BillState.Draft, null,null,
-                new CashBillItem[] {new CashBillItem("123",123,"123")});
+    public String getId() {
+        return "XJFYD-20171107-00001";
     }
+
 }

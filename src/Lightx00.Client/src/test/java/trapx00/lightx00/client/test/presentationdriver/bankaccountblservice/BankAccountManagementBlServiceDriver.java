@@ -23,7 +23,7 @@ public class BankAccountManagementBlServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals("123",service.query(new BankAccountQueryVo("123","123"))[0].getId());
+        assertEquals("123",service.query(x->true)[0].getId());
     }
 
     @Test
