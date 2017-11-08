@@ -8,6 +8,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 
 public class PurchaseRefundBillBlController implements PurchaseRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+
     /**
      * Deletes a draft.
      *

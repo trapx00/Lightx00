@@ -9,6 +9,7 @@ import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 public class SaleBillBlController implements SaleBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+
     /**
      * Deletes a draft.
      *

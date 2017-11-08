@@ -1,12 +1,10 @@
-package trapx00.lightx00.client.bl.salebl.mock;
+package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
+import trapx00.lightx00.client.bl.inventorybl.PurchaseRefundBillBlController;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
-public class SaleBillBlControllerMock extends SaleBillBlController {
+public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlController {
 
     /**
      * Deletes a draft.
@@ -42,31 +40,31 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
     }
 
     /**
-     * submit a saleBill
+     * submit a purchaseRefundBill
      *
-     * @param saleBill to be submitted
+     * @param purchaseRefundBill to be submitted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage submit(SaleBillVo saleBill) {
+    public ResultMessage submit(PurchaseRefundBillVo purchaseRefundBill) {
         return null;
     }
 
     /**
-     * saves a half-completed saleBill as draft.
+     * saves a half-completed purchaseRefundBill as draft.
      *
-     * @param saleBill SaleBillVo to be saved as a draft
+     * @param purchaseRefundBill PurchaseRefundBillVo to be saved as a draft
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage saveAsDraft(SaleBillVo saleBill) {
+    public ResultMessage saveAsDraft(PurchaseRefundBillVo purchaseRefundBill) {
         return null;
     }
 
     /**
-     * Gets the id for the next saleBill
+     * Gets the id for the next purchaseRefundBill
      *
-     * @return id for the next saleBill
+     * @return id for the next purchaseRefundBill
      */
     @Override
     public String getId() {
@@ -74,13 +72,13 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
     }
 
     /**
-     * query for SaleBills
+     * query for PurchaseRefundBills
      *
      * @param query function
-     * @return array of SaleBillVo
+     * @return array of PurchaseRefundBillVo
      */
     @Override
-    public SaleBillVo[] querySaleBill(SaleBillQueryVo query) {
-        return new SaleBillVo[0];
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
+        return new PurchaseRefundBillVo[0];
     }
 }

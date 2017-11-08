@@ -1,14 +1,11 @@
-package trapx00.lightx00.client.bl.inventorybl;
+package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
+import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlController;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 
-public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
 
     /**
      * Deletes a draft.
@@ -85,5 +82,3 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
         return new PurchaseBillVo[0];
     }
 }
-
-

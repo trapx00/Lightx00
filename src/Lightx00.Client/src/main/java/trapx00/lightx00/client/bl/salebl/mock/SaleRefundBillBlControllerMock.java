@@ -1,14 +1,11 @@
-package trapx00.lightx00.client.bl.salebl;
+package trapx00.lightx00.client.bl.salebl.mock;
 
-import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
+import trapx00.lightx00.client.bl.salebl.SaleRefundBillBlController;
+import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 
-public class SaleRefundBillBlController implements SaleRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+public class SaleRefundBillBlControllerMock extends SaleRefundBillBlController {
 
     /**
      * Deletes a draft.
