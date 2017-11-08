@@ -14,12 +14,8 @@ public class PurchaseBillBasePo extends BillPo {
         return purchaseBillType;
     }
 
-    public void setPurchaseBillType(PurchaseBillType purchaseBillType) {
-        this.purchaseBillType = purchaseBillType;
-    }
-
     public PurchaseBillBasePo(String id, Date date, BillState state, PurchaseBillType purchaseBillType) {
-        super(BillType.FinanceBill, id, date, state);
+        super(BillType.InventoryBill, id, date, state);
         this.purchaseBillType = purchaseBillType;
     }
 }

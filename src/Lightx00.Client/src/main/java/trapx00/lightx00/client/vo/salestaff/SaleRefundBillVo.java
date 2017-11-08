@@ -103,8 +103,8 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
         this.comment = comment;
     }
 
-    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String supplier, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType);
+    public SaleRefundBillVo(String id, Date date, BillState state, String supplier, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.SaleRefund);
         this.supplier = supplier;
         this.defaultOperator = defaultOperator;
         this.operator = operator;

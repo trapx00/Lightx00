@@ -13,10 +13,6 @@ public abstract class SaleBillBaseVo extends BillVo {
         return saleBillType;
     }
 
-    public void setSaleBillType(SaleBillType saleBillType) {
-        this.saleBillType = saleBillType;
-    }
-
     public SaleBillBaseVo(String id, Date date, BillState state, SaleBillType saleBillType) {
         super(BillType.SaleBill, id, date, state);
         this.saleBillType = saleBillType;

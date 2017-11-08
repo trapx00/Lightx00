@@ -61,8 +61,8 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
         this.commodityList = commodityList;
     }
 
-    public PurchaseRefundBillPo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String supplier, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, purchaseBillType);
+    public PurchaseRefundBillPo(String id, Date date, BillState state, String supplier, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, PurchaseBillType.PurchaseRefund);
         this.supplier = supplier;
         this.repository = repository;
         this.operatorId = operatorId;

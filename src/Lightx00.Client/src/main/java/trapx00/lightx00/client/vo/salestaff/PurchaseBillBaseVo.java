@@ -14,10 +14,6 @@ public abstract class PurchaseBillBaseVo extends BillVo {
         return purchaseBillType;
     }
 
-    public void setPurchaseBillType(PurchaseBillType purchaseBillType) {
-        this.purchaseBillType = purchaseBillType;
-    }
-
     public PurchaseBillBaseVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType) {
         super(BillType.SaleBill, id, date, state);
         this.purchaseBillType = purchaseBillType;
