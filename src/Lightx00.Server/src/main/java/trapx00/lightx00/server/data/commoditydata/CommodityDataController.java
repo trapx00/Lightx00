@@ -3,7 +3,7 @@ package trapx00.lightx00.server.data.commoditydata;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
 public class CommodityDataController implements CommodityDataService {
 

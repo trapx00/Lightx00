@@ -2,8 +2,8 @@ package trapx00.lightx00.shared.dataservice.inventorydataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+
 
 public interface InventoryWarningDataService {
     /**
