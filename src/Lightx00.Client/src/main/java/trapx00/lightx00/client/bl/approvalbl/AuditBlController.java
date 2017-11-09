@@ -3,7 +3,7 @@ package trapx00.lightx00.client.bl.approvalbl;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.client.vo.manager.BillQueryVo;
+import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
 public class AuditBlController implements AuditBlService,ApprovalRequest {
 

@@ -2,7 +2,7 @@
 
 #### 2.1.12.1 概述
 
-promtionui包负责总经理制定促销策略（包括组合商品降价、满额赠送商品、满额赠送代金券、客户赠送礼品、客户赠送代金券以及客户价格这让）用例的UI界面以及相应控制代码。具体功能需求和非功能需求可参见需求规格说明文档和体系结构设计文档。
+promtionui包负责总经理制定促销策略（包括组合商品降价、满额促销策略（赠送商品或者代金券）、客户促销策略（赠送礼品或者代金券或者价格这让））用例的UI界面以及相应控制代码。具体功能需求和非功能需求可参见需求规格说明文档和体系结构设计文档。
 
 #### 2.1.12.2 整体结构
 
@@ -16,155 +16,69 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 
 ##### 2.1.12.3.2 各个类的职责
 
-| 类名                           | 职责                         |
-| ---------------------------- | -------------------------- |
-| PromotionUiController        | 负责管理各促销策略控制器的职责。           |
-| CommodityOnSaleUiController  | 负责管理填写组合商品降价促销策略界面的展示和功能。  |
-| TotalPriceCouponUiController | 负责管理填写满额赠送代金券促销策略界面的展示和功能。 |
-| TotalPriceGiftUiController   | 负责管理填写满额赠送礼品促销策略界面的展示和功能。  |
-| ClientCouponUiController     | 负责管理填写客户赠送代金券促销策略界面的展示和功能。 |
-| ClientGiftUiController       | 负责管理填写客户赠送礼品促销策略界面的展示和功能。  |
-| ClientOnSaleUiController     | 负责管理填写客户价格折让促销策略界面的展示和功能。  |
+| 类名                              | 职责                         |
+| ------------------------------- | -------------------------- |
+| ComSalePromotionUiController    | 负责管理填写组合商品降价促销策略界面的展示和功能。  |
+| TotalPricePromotionUiController | 负责管理填写满额赠送代金券促销策略界面的展示和功能。 |
+| ClientPromotionUiController     | 负责管理填写客户赠送代金券促销策略界面的展示和功能。 |
 
 ##### 2.1.12.3.3 内部类的接口规范
 
-**PromotionUiController**
+**ComSalePromotionUiController**
 
 提供的接口
 
 | 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
 | -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(PromotionVoBase promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
-
-需要的接口
-
-| 接口名称                                     | 服务名              |
-| ---------------------------------------- | ---------------- |
-| `promotionblservice.PromotionManagementBlService.submit(PromotionVoBase promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(PromotionVoBase promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(PromotionVoBase promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
-
-**CommodityOnSaleUiController**
-
-提供的接口
-
-| 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
-| -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(CommodityOnSaleVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
+| ContinueWritable.continueWriting | `public CommodityOnSaleUiController continueWriting(ComSalePromotionVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
 | `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
-| `promotionblservice.PromotionManagementBlService.submit(CommodityOnSaleVo promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(CommodityOnSaleVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(CommodityOnSaleVo promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
+| `promotionblservice.ComSalePromotionBlService.submit(ComSalePromotionVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.ComSalePromotionBlService.saveAsDraft(CComSalePromotionVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.ComSalePromotionBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.ComSalePromotionBlService.delete(CommodityOnSaleVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.ComSalePromotionBlService.getId()` | 获得当前促销策略的ID。     |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
-**TotalPriceCouponUiController**
+**TotalPricePromotionUiController**
 
 提供的接口
 
 | 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
 | -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public TotalPriceCouponUiController continueWriting(TotalPriceCouponVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
+| ContinueWritable.continueWriting | `public TotalPriceCouponUiController continueWriting(TotalPricePromotionVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `promotionblservice.PromotionManagementBlService.submit(TotalPriceCouponVo promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(TotalPriceCouponVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(TotalPriceCouponVo promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
+| `promotionblservice.TotalPricePromotionBlService.submit(TotalPricePromotionVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.TotalPricePromotionBlService.saveAsDraft(TotalPricePromotionVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.TotalPricePromotionBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.TotalPricePromotionBlService.delete(TotalPricePromotionVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.TotalPricePromotionBlService.getId()` | 获得当前促销策略的ID。     |
 
-**TotalPriceGiftUiController**
+**ClientPromotionUiController**
 
 提供的接口
 
 | 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
 | -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public TotalPriceGiftUiController continueWriting(TotalPriceGiftVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
+| ContinueWritable.continueWriting | `public ClientCouponUiController continueWriting(ClientPromotionVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
 
 需要的接口
 
 | 接口名称                                     | 服务名              |
 | ---------------------------------------- | ---------------- |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
-| `promotionblservice.PromotionManagementBlService.submit(TotalPriceGiftVo promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(TotalPriceGiftVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(TotalPriceGiftVo promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
-
-**ClientCouponUiController**
-
-提供的接口
-
-| 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
-| -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public ClientCouponUiController continueWriting(ClientCouponVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
-
-需要的接口
-
-| 接口名称                                     | 服务名              |
-| ---------------------------------------- | ---------------- |
-| `promotionblservice.PromotionManagementBlService.submit(ClientCouponVo promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(ClientCouponVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(ClientCouponVo promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
-
-**ClientGiftUiController**
-
-提供的接口
-
-| 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
-| -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public ClientGiftUiController continueWriting(ClientGiftVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
-
-需要的接口
-
-| 接口名称                                     | 服务名              |
-| ---------------------------------------- | ---------------- |
-| `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
-| `promotionblservice.PromotionManagementBlService.submit(ClientGiftVo promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(ClientGiftVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(ClientGiftVo promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志             |
-
-**ClientOnSaleUiController**
-
-提供的接口
-
-| 接口名称                             | 语法                                       | 前置条件             | 后置条件          |
-| -------------------------------- | ---------------------------------------- | ---------------- | ------------- |
-| ContinueWritable.continueWriting | `public ClientOnSaleUiController continueWriting(ClientOnSaleVo promotion);` | 输入有效的用于继续填写促销策略。 | 初始化传入促销策略的内容。 |
-
-需要的接口
-
-| 接口名称                                     | 服务名              |
-| ---------------------------------------- | ---------------- |
-| `promotionblservice.PromotionManagementBlService.submit(ClientOnSaleVo promotion) ` | 提交促销策略。          |
-| `promotionblservice.PromotionManagementBlService.saveAsDraft(ClientOnSaleVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.PromotionManagementBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.PromotionManagementBlService.delete(ClientOnSaleVo promotion)` | 删除单一持久化对象。       |
-| `promotionblservice.PromotionManaementBlService.getId()` | 获得当前促销策略的ID。     |
-| `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志             |
-
-
+| `promotionblservice.ClientPromotionBlService.submit(ClientPromotionVo promotion) ` | 提交促销策略。          |
+| `promotionblservice.ClientPromotionBlService.saveAsDraft(ClientPromotionVo promotion)` | 保存促销策略草稿。        |
+| `promotionblservice.ClientPromotionBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.ClientPromotionBlService.delete(ClientPromotionVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.ClientPromotionBlService.getId()` | 获得当前促销策略的ID。     |
 
 ### 2.1.13 approvalui包
 

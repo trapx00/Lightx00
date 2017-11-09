@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
 
-public class PromotionVoBase {
+public abstract class PromotionVoBase {
     private String id;
     private PromotionType type;
     private Date startDate;
@@ -33,7 +33,7 @@ public class PromotionVoBase {
         return endDate;
     }
 
-    public String getid() {
+    public String getId() {
         return id;
     }
 
@@ -41,11 +41,15 @@ public class PromotionVoBase {
         return startDate;
     }
 
+    public PromotionType getPromotionType(){return type;}
+
+    public PromotionState getPromotionState(){return state;}
+
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public void setid(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,7 +61,4 @@ public class PromotionVoBase {
         this.state = state;
     }
 
-    public void setType(PromotionType type) {
-        this.type = type;
-    }
 }
