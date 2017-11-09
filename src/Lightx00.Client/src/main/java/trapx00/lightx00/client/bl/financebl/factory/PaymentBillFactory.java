@@ -22,4 +22,8 @@ public class PaymentBillFactory {
     public static DraftDeleteService getDraftDeleteService() {
         return draftDeleteService;
     }
+
+    public static PaymentBillBlController getController() {
+        return controller;
+    }
 }

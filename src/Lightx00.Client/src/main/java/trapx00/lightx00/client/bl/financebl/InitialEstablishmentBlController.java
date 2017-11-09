@@ -1,12 +1,14 @@
 package trapx00.lightx00.client.bl.financebl;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
-public class InitialEstablishmentBlController implements InitialEstablishmentBlService, DraftDeleteService, SystemSnapshotInfo {
+public class InitialEstablishmentBlController implements InitialEstablishmentBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, SystemSnapshotInfo {
 
     /**
      * Auto fills some contents with current system state.
@@ -60,5 +62,27 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
     @Override
     public SystemSnapshotVo[] query(SystemSnapshotQueryVo query) {
         return new SystemSnapshotVo[0];
+    }
+
+    /**
+     * Abandons a bill.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage abandon(String id) {
+        return null;
+    }
+
+    /**
+     * Activates a bill that has been approved of.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage activate(String id) {
+        return null;
     }
 }

@@ -19,6 +19,10 @@ public class CashBillFactory {
         return notificationAbandonService;
     }
 
+    public static CashBillBlController getController() {
+        return controller;
+    }
+
     public static DraftDeleteService getDraftDeleteService() {
         return draftDeleteService;
     }

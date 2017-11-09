@@ -6,7 +6,23 @@ import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+
 public class LogDataControllerMock extends LogDataController {
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected LogDataControllerMock() throws RemoteException {
+    }
+
     /**
      * Writes log.
      *

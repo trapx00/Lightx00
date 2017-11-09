@@ -29,4 +29,4 @@ public class ReceivalDataServiceDriver {
         assertEquals(ResultMessage.Success, service.abandon(bill.getId()));
     }
 
-}
+}8

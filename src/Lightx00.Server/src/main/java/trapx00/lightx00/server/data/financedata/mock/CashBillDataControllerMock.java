@@ -5,7 +5,24 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+
 public class CashBillDataControllerMock extends CashBillDataController {
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected CashBillDataControllerMock() throws RemoteException {
+    }
+
     /**
      * Submits a CashBill or save it as a draft.
      *

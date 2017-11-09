@@ -3,8 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
-import trapx00.lightx00.client.vo.financestaff.ReceivalBillQueryVo;
-import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
 public class ReceivalDataServiceStub implements ReceivalBillDataService {
     /**
@@ -47,8 +46,8 @@ public class ReceivalDataServiceStub implements ReceivalBillDataService {
      * @return ReceivalBillVos that match query condition
      */
     @Override
-    public ReceivalBillVo[] query(ReceivalBillQueryVo query) {
-        return new ReceivalBillVo[0];
+    public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
+        return new ReceivalBillPo[0];
     }
 
     /**
