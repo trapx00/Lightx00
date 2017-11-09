@@ -4,8 +4,10 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
+import java.rmi.Remote;
 
-public interface InventoryWarningDataService {
+
+public interface InventoryWarningDataService extends Remote {
     /**
      * Submits a bill
      * @param bill

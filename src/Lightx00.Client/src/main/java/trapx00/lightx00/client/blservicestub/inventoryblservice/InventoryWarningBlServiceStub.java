@@ -26,18 +26,8 @@ public class InventoryWarningBlServiceStub implements InventoryWarningBlService 
     }
 
     @Override
-    public InventoryBillVo resume() {
-        return new InventoryBillVo("B0001",new Date(), BillState.Draft,null,null,null,null,null);
-    }
-
-    @Override
-    public ResultMessage modify(CommodityVo commodity, double modifyWarning) {
-        return ResultMessage.Success;
-    }
-
-    @Override
     public InventoryBillVo getCurrentBill() {
-        return new InventoryBillVo("B0001",new Date(), BillState.Draft,null,null,null,null,null);
+        return new InventoryBillVo("B0001",new Date(), BillState.Draft,null,null,null,null);
     }
 
     @Override

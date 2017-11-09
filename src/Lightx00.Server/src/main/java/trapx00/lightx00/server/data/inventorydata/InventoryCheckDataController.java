@@ -4,9 +4,18 @@ import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDa
 import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
-public class InventoryCheckDataController implements InventoryCheckDataService {
+public class InventoryCheckDataController extends UnicastRemoteObject implements InventoryCheckDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    public InventoryCheckDataController() throws RemoteException {
+        super();
+    }
     /**
      * Checks the invenntory change between the begintime and endtime
      * @param beginTime
@@ -14,7 +23,7 @@ public class InventoryCheckDataController implements InventoryCheckDataService {
      * @return The inventoryView during specified time range
      */
     @Override
-    public InventoryViewPo submit(Date beginTime, Date endTime) {
+    public InventoryViewPo submit(Date beginTime, Date endTime) throws RemoteException{
         return null;
     }
     /**
@@ -22,12 +31,12 @@ public class InventoryCheckDataController implements InventoryCheckDataService {
      * @return The inventory snapshot during that day
      */
     @Override
-    public InventoryPicturePo submit(Date time) {
+    public InventoryPicturePo submit(Date time)throws RemoteException {
         return null;
     }
 
     @Override
-    public void init() {
+    public void init() throws RemoteException{
 
     }
 }

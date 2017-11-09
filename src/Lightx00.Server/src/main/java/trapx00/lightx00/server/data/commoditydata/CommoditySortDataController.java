@@ -5,8 +5,19 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class CommoditySortDataController implements CommoditySortDataService {
+
+public class CommoditySortDataController extends UnicastRemoteObject implements CommoditySortDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    public CommoditySortDataController() throws RemoteException {
+        super();
+    }
+
     /**
      * Create a new commoditySort attaching to a parentSort
      * @param newCSort
@@ -14,7 +25,7 @@ public class CommoditySortDataController implements CommoditySortDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort) {
+    public ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort)throws RemoteException {
         return null;
     }
     /**
@@ -23,7 +34,7 @@ public class CommoditySortDataController implements CommoditySortDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage modify(CommoditySortPo commoditySort) {
+    public ResultMessage modify(CommoditySortPo commoditySort)throws RemoteException {
         return null;
     }
     /**
@@ -32,16 +43,16 @@ public class CommoditySortDataController implements CommoditySortDataService {
      * @return the list of the commoditySort
      */
     @Override
-    public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
+    public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) throws RemoteException{
         return new CommoditySortPo[0];
     }
     /**
      *  Delete a commoditySort
      * @param commoditySort
-     * @return whether the operation is done successfully
+     * @return whether the operation is done
      */
     @Override
-    public ResultMessage delete(CommoditySortPo commoditySort) {
+    public ResultMessage delete(CommoditySortPo commoditySort)throws RemoteException {
         return null;
     }
     /**
@@ -49,7 +60,7 @@ public class CommoditySortDataController implements CommoditySortDataService {
      * @return the list of commoditySort
      */
     @Override
-    public CommoditySortPo[] display() {
+    public CommoditySortPo[] display()throws RemoteException {
         return new CommoditySortPo[0];
     }
     /**
@@ -58,12 +69,12 @@ public class CommoditySortDataController implements CommoditySortDataService {
      * @return the childCommoditySort
      */
     @Override
-    public CommoditySortPo[] dispaly(CommoditySortPo commoditySort) {
+    public CommoditySortPo[] dispaly(CommoditySortPo commoditySort)throws RemoteException {
         return new CommoditySortPo[0];
     }
 
     @Override
-    public void init() {
+    public void init()throws RemoteException {
 
     }
 }

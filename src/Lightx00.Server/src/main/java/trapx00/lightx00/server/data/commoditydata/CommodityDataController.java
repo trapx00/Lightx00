@@ -5,15 +5,24 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
-public class CommodityDataController implements CommodityDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
+public class CommodityDataController extends UnicastRemoteObject implements CommodityDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    public CommodityDataController() throws RemoteException {
+        super();
+    }
     /**
      *  Create a new commodity
      * @param newCommodity
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommodityPo newCommodity) {
+    public ResultMessage add(CommodityPo newCommodity) throws RemoteException {
         return null;
     }
     /**
@@ -22,7 +31,7 @@ public class CommodityDataController implements CommodityDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage modify(CommodityPo updateCommodity) {
+    public ResultMessage modify(CommodityPo updateCommodity)throws RemoteException {
         return null;
     }
     /**
@@ -31,7 +40,7 @@ public class CommodityDataController implements CommodityDataService {
      * @return the list of the commodity
      */
     @Override
-    public CommodityPo[] query(CommodityQueryVo commodityQueryVo) {
+    public CommodityPo[] query(CommodityQueryVo commodityQueryVo) throws RemoteException{
         return new CommodityPo[0];
     }
     /**
@@ -40,12 +49,12 @@ public class CommodityDataController implements CommodityDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(CommodityPo commodity) {
+    public ResultMessage delete(CommodityPo commodity)throws RemoteException {
         return null;
     }
 
     @Override
-    public void init() {
+    public void init() throws RemoteException{
 
     }
 }
