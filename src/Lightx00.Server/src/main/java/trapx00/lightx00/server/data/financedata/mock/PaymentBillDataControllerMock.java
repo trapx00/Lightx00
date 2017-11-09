@@ -3,10 +3,26 @@ package trapx00.lightx00.server.data.financedata.mock;
 import trapx00.lightx00.server.data.financedata.PaymentBillDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
+
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
 
 public class PaymentBillDataControllerMock extends PaymentBillDataController {
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected PaymentBillDataControllerMock() throws RemoteException {
+    }
+
     /**
      * Submits a bill or saves a bill as a draft
      *
@@ -47,7 +63,7 @@ public class PaymentBillDataControllerMock extends PaymentBillDataController {
      * @return PaymentBillVos that match query condition
      */
     @Override
-    public PaymentBillVo[] query(PaymentBillQueryVo query) {
+    public PaymentBillPo[] query(PaymentBillQueryVo query) {
         return super.query(query);
     }
 

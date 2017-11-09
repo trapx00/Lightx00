@@ -1,11 +1,14 @@
 package trapx00.lightx00.shared.dataservice.logdataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.vo.log.LogQueryVo;
-import trapx00.lightx00.shared.vo.log.LogVo;
+import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
-public interface LogDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface LogDataService extends Remote {
 
     /**
      * Writes log.
@@ -13,12 +16,12 @@ public interface LogDataService {
      * @param content content
      * @return whether the operation is done successfully
      */
-    ResultMessage log(LogSeverity severity, String content);
+    ResultMessage log(LogSeverity severity, String content) throws RemoteException;
 
     /**
      * Queries log.
      * @param query query
      * @return LogVos that match query condition
      */
-    LogVo[] query(LogQueryVo query);
+    LogPo[] query(LogQueryVo query) throws RemoteException;
 }

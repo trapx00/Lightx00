@@ -3,10 +3,26 @@ package trapx00.lightx00.server.data.financedata;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
-public class ReceivalBillDataController implements ReceivalBillDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
+
+public class ReceivalBillDataController extends UnicastRemoteObject implements ReceivalBillDataService {
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected ReceivalBillDataController() throws RemoteException {
+    }
+
     /**
      * Submits a ReceivalBill or save it as a draft.
      *
@@ -47,8 +63,8 @@ public class ReceivalBillDataController implements ReceivalBillDataService {
      * @return ReceivalBillVos that match query condition
      */
     @Override
-    public ReceivalBillVo[] query(ReceivalBillQueryVo query) {
-        return new ReceivalBillVo[0];
+    public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
+        return new ReceivalBillPo[0];
     }
 
     /**

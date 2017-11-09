@@ -1,0 +1,58 @@
+package trapx00.lightx00.shared.bldriver.commoditydataservice;
+
+import org.junit.Test;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
+import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommoditySortDataServiceStub;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
+
+import static org.junit.Assert.*;
+
+public class CommoditySortDataServiceDriver {
+    CommoditySortDataService service=new CommoditySortDataServiceStub();
+    CommoditySortPo commoditySortPo=null;
+    CommoditySortPo fatheCommoditySortPo=null;
+    String commodityIdList[]={""};
+    String nextIds[]={"S0002"};
+    CommoditySortPo Led=new CommoditySortPo("S0001","Led", null,
+            "",  nextIds);
+
+    @Test
+    public void add() throws Exception {
+        assertEquals(ResultMessage.Success,service.add(commoditySortPo,fatheCommoditySortPo));
+    }
+
+    @Test
+    public void modify() throws Exception {
+        assertEquals(ResultMessage.Success,service.modify(commoditySortPo));
+    }
+
+    @Test
+    public void query() throws Exception {
+        CommoditySortQueryVo commoditySortQueryVo=new CommoditySortQueryVo();
+        commoditySortQueryVo.setId("S0001");
+        commoditySortQueryVo.setName("Led");
+        assertEquals("S0001",service.query(commoditySortQueryVo)[0].getId());
+    }
+
+    @Test
+    public void delete() throws Exception {
+        assertEquals(ResultMessage.Success,service.delete(commoditySortPo));
+    }
+
+    @Test
+    public void display() throws Exception {
+        assertEquals("S0001",service.display()[0].getId());
+    }
+
+    @Test
+    public void dispaly() throws Exception {
+        assertEquals("S0002",service.dispaly(Led)[0].getId());
+    }
+
+    //@Test
+   // public void init() throws Exception {
+   // }
+
+}

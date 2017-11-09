@@ -5,7 +5,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.financeblservice.TradeSituationBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.TradeSituationBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.financestaff.TradeSituationVo;
+import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 
 import java.util.Date;
 

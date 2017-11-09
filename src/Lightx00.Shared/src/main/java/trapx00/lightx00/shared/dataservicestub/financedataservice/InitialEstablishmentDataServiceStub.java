@@ -3,8 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
 public class InitialEstablishmentDataServiceStub implements InitialEstablishmentDataService {
     /**
@@ -15,6 +14,17 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
      */
     @Override
     public ResultMessage submit(SystemSnapshotPo snapshot) {
+        return null;
+    }
+
+    /**
+     * Activates a SystemSnapshot.
+     *
+     * @param id id for the SystemSnapshot
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage activate(String id) {
         return null;
     }
 
@@ -46,7 +56,9 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
      * @return SystemSnapshotVos that match the condition
      */
     @Override
-    public SystemSnapshotVo query(SystemSnapshotQueryVo query) {
-        return null;
+    public SystemSnapshotPo[] query(SystemSnapshotQueryVo query) {
+        return new SystemSnapshotPo[0];
     }
+
+
 }

@@ -4,10 +4,10 @@ import trapx00.lightx00.client.blservice.promotionblservice.PromotionManagementB
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.vo.manager.promotion.CommodityQueryVo;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionQueryVo;
-import trapx00.lightx00.shared.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.manager.promotion.CommodityQueryVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionQueryVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 
 import java.util.Date;
 

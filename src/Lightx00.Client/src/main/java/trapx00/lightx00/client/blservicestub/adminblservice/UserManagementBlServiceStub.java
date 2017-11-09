@@ -3,8 +3,8 @@ package trapx00.lightx00.client.blservicestub.adminblservice;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
-import trapx00.lightx00.shared.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.admin.UserAccountQueryVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
 
 import java.util.Date;
 

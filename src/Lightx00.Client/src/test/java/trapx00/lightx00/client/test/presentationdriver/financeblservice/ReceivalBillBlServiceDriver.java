@@ -6,7 +6,7 @@ import trapx00.lightx00.client.blservice.financeblservice.ReceivalBillBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.ReceivalBillBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 
 import java.util.Date;
 

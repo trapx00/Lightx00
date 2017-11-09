@@ -2,16 +2,17 @@ package trapx00.lightx00.shared.dataservice.draftdataservice;
 
 import trapx00.lightx00.shared.po.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillPo;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.Draftable;
+import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 
-public interface DraftManagementDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface DraftManagementDataService extends Remote {
     /**
      * Updates current user's drafts.
      * @return curent user's drafts
      */
-    DraftPo[] update();
+    DraftPo[] update(DraftQueryVo query) throws RemoteException;
 
     /**
      * Deletes a draft.
@@ -19,12 +20,12 @@ public interface DraftManagementDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage delete(String draftId);
+    ResultMessage delete(String draftId) throws RemoteException;
 
     /**
      * Adds a draft.
      * @param draft draft to be added
      * @return whether the operation is done successfully
      */
-    ResultMessage add(String draft);
+    ResultMessage add(String draft) throws RemoteException;
 }

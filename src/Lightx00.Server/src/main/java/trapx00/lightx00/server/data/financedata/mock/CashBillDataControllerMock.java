@@ -3,10 +3,26 @@ package trapx00.lightx00.server.data.financedata.mock;
 import trapx00.lightx00.server.data.financedata.CashBillDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
+
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
 
 public class CashBillDataControllerMock extends CashBillDataController {
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected CashBillDataControllerMock() throws RemoteException {
+    }
+
     /**
      * Submits a CashBill or save it as a draft.
      *
@@ -47,7 +63,7 @@ public class CashBillDataControllerMock extends CashBillDataController {
      * @return CashBillVos that match the query condition
      */
     @Override
-    public CashBillVo[] query(CashBillQueryVo query) {
+    public CashBillPo[] query(CashBillQueryVo query) {
         return super.query(query);
     }
 

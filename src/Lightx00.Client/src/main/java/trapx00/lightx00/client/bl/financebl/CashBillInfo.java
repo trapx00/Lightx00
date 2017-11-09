@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.financebl;
 
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 
 public interface CashBillInfo {
     /**

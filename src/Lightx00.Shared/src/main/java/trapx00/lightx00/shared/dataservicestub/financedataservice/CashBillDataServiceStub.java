@@ -3,8 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
 public class CashBillDataServiceStub implements CashBillDataService {
 
@@ -41,6 +40,7 @@ public class CashBillDataServiceStub implements CashBillDataService {
         return null;
     }
 
+
     /**
      * Queries CashBill.
      *
@@ -48,8 +48,8 @@ public class CashBillDataServiceStub implements CashBillDataService {
      * @return CashBillVos that match the query condition
      */
     @Override
-    public CashBillVo[] query(CashBillQueryVo query) {
-        return new CashBillVo[0];
+    public CashBillPo[] query(CashBillQueryVo query) {
+        return new CashBillPo[0];
     }
 
     /**

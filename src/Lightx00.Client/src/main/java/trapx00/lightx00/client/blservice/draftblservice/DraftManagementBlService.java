@@ -1,9 +1,8 @@
 package trapx00.lightx00.client.blservice.draftblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.DraftVo;
-import trapx00.lightx00.shared.vo.Draftable;
+import trapx00.lightx00.client.vo.DraftVo;
+import trapx00.lightx00.client.vo.Draftable;
 
 public interface DraftManagementBlService {
     /**

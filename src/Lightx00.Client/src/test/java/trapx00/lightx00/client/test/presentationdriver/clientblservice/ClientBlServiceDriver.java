@@ -4,7 +4,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservicestub.clientblservice.ClientBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.ClientVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
 import static org.junit.Assert.*;
 

@@ -1,20 +1,15 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.effects.JFXDepthManager;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -24,10 +19,7 @@ import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
 import trapx00.lightx00.client.presentation.helpui.UiUtil;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.shared.util.DateHelper;
-import trapx00.lightx00.shared.vo.EmployeeVo;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import trapx00.lightx00.client.vo.EmployeeVo;
 
 public class FrameworkUiController {
     public StackPane dialogContainer;

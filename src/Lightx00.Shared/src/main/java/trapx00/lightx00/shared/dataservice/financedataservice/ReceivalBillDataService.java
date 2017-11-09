@@ -2,24 +2,26 @@ package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.ReceivalBillVo;
+import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
-public interface ReceivalBillDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface ReceivalBillDataService extends Remote {
 
     /**
      * Submits a ReceivalBill or save it as a draft.
      * @param bill ReceivalBill
      * @return whether the operation is done successfully
      */
-    ResultMessage submit(ReceivalBillPo bill);
+    ResultMessage submit(ReceivalBillPo bill) throws RemoteException;
 
     /**
      * Activates a ReceivalBill.
      * @param id id for the ReceivalBill that have been approved of
      * @return whether the operation is done successfully
      */
-    ResultMessage activate(String id);
+    ResultMessage activate(String id) throws RemoteException;
 
     /**
      * Abandons a ReceivalBill.
@@ -27,19 +29,19 @@ public interface ReceivalBillDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage abandon(String id);
+    ResultMessage abandon(String id) throws RemoteException;
 
     /**
      * Queries bills
      * @param query query
      * @return ReceivalBillVos that match query condition
      */
-    ReceivalBillVo[] query(ReceivalBillQueryVo query);
+    ReceivalBillPo[] query(ReceivalBillQueryVo query) throws RemoteException;
 
     /**
      * Gets the id for the next bill.
      * @return id for the next bill
      */
-    String getId();
+    String getId() throws RemoteException;
 
 }

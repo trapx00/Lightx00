@@ -3,11 +3,9 @@ package trapx00.lightx00.client.test.presentationdriver.inventoryblservice;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.client.blservicestub.inventoryblservice.InventoryGiftBlServiceStub;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class InventoryGiftBlServiceDriver {
     InventoryGiftBlService service=new InventoryGiftBlServiceStub();

@@ -2,14 +2,18 @@ package trapx00.lightx00.shared.dataservice.notificationdataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
+import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
-public interface NotificationDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface NotificationDataService extends Remote {
 
     /**
      * Updates current user's notification.
      * @return current user's notification
      */
-    NotificationPo[] update();
+    NotificationPo[] update(NotificationQueryVo query) throws RemoteException;
 
     /**
      * Acknowledges a notification.
@@ -17,5 +21,5 @@ public interface NotificationDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage acknowledge(NotificationPo notification);
+    ResultMessage acknowledge(NotificationPo notification) throws RemoteException;
 }

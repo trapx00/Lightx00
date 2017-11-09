@@ -17,15 +17,15 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 ##### 2.1.6.3.2 各个类的职责
 
-| 类名 | 职责 |
-|-----| -----|
-| PaymentBillUiController | 负责管理填写付款单界面的展示和功能。|
-| ReceivalBillUiController | 负责管理填写收款单界面的展示和功能。|
-| CashBillUiController | 负责管理填写现金费用单界面的展示和功能。 |
-| SystemSnapshotUiController | 负责管理期初建账界面的展示和功能。 |
-| SaleDetailUiController | 负责管理销售明细表界面的展示和功能。|
-| TradeHistoryUiController | 负责管理经营历程表界面的展示和功能（包括红冲功能）。 |
-| TradeSituationUiController | 负责管理经营情况表界面的展示和功能。|
+| 类名                         | 职责                         |
+| -------------------------- | -------------------------- |
+| PaymentBillUiController    | 负责管理填写付款单界面的展示和功能。         |
+| ReceivalBillUiController   | 负责管理填写收款单界面的展示和功能。         |
+| CashBillUiController       | 负责管理填写现金费用单界面的展示和功能。       |
+| SystemSnapshotUiController | 负责管理期初建账界面的展示和功能。          |
+| SaleDetailUiController     | 负责管理销售明细表界面的展示和功能。         |
+| TradeHistoryUiController   | 负责管理经营历程表界面的展示和功能（包括红冲功能）。 |
+| TradeSituationUiController | 负责管理经营情况表界面的展示和功能。         |
 
 ##### 2.1.6.3.3 内部类的接口规范
 
@@ -33,82 +33,82 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 提供的接口
 
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| ContinueWritable.continueWriting | `public PaymentBillUiController continueWriting(PaymentBillVo bill);` | 输入有效的用于继续填写单据。| 初始化传入单据的内容。 |
+| 接口名称                             | 语法                                       | 前置条件           | 后置条件        |
+| -------------------------------- | ---------------------------------------- | -------------- | ----------- |
+| ContinueWritable.continueWriting | `public PaymentBillUiController continueWriting(PaymentBillVo bill);` | 输入有效的用于继续填写单据。 | 初始化传入单据的内容。 |
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `bankaccountui.BankAccountInfoUi.showBankAccountSelectDialog()` | 选择银行账户。|
-| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。|
-| `financeblservice.PaymentBillBlService.submit(PaymentBillVo bill)` | 提交单据。|
-| `financeblservice.PaymentBillBlService.saveAsDraft(PaymentBillVo bill)` | 保存草稿。|
-| `financeblservice.PaymentBillBlService.getId()` | 获得当前单据的ID。|
+| 接口名称                                     | 服务名        |
+| ---------------------------------------- | ---------- |
+| `bankaccountui.BankAccountInfoUi.showBankAccountSelectDialog()` | 选择银行账户。    |
+| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。      |
+| `financeblservice.PaymentBillBlService.submit(PaymentBillVo bill)` | 提交单据。      |
+| `financeblservice.PaymentBillBlService.saveAsDraft(PaymentBillVo bill)` | 保存草稿。      |
+| `financeblservice.PaymentBillBlService.getId()` | 获得当前单据的ID。 |
 
 
 **ReceivalBillUiController**
 
 提供的接口
 
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| ContinueWritable.continueWriting | `public ReceivalBillUiController continueWriting(ReceivalBillVo bill);` | 输入有效的用于继续填写的单据。| 初始化传入单据的内容。 |
+| 接口名称                             | 语法                                       | 前置条件            | 后置条件        |
+| -------------------------------- | ---------------------------------------- | --------------- | ----------- |
+| ContinueWritable.continueWriting | `public ReceivalBillUiController continueWriting(ReceivalBillVo bill);` | 输入有效的用于继续填写的单据。 | 初始化传入单据的内容。 |
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `bankaccountui.BankAccountInfoUi.showBankAccountSelectDialog()` | 选择银行账户。|
-| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。|
-| `financeblservice.ReceivalBillBlService.submit(ReceivalBillVo bill)` | 提交单据。|
-| `financeblservice.ReceivalBillBlService.saveAsDraft(ReceivalBillVo bill)` | 保存草稿。|
-| `financeblservice.ReceivalBillBlService.getId()` | 获得当前单据的ID。|
+| 接口名称                                     | 服务名        |
+| ---------------------------------------- | ---------- |
+| `bankaccountui.BankAccountInfoUi.showBankAccountSelectDialog()` | 选择银行账户。    |
+| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。      |
+| `financeblservice.ReceivalBillBlService.submit(ReceivalBillVo bill)` | 提交单据。      |
+| `financeblservice.ReceivalBillBlService.saveAsDraft(ReceivalBillVo bill)` | 保存草稿。      |
+| `financeblservice.ReceivalBillBlService.getId()` | 获得当前单据的ID。 |
 
 **CashBillUiController**
 
 提供的接口
 
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| ContinueWritable.continueWriting | `public CashBillUiController continueWriting(CashBillVo bill);` | 输入有效的用于继续填写的单据。| 初始化传入单据的内容。 |
+| 接口名称                             | 语法                                       | 前置条件            | 后置条件        |
+| -------------------------------- | ---------------------------------------- | --------------- | ----------- |
+| ContinueWritable.continueWriting | `public CashBillUiController continueWriting(CashBillVo bill);` | 输入有效的用于继续填写的单据。 | 初始化传入单据的内容。 |
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `bankaccountui.BankAccountInfoUi.showBankAccountSelectDialog()` | 选择银行账户。|
-| `financeblservice.CashBillBlService.submit(CashBillVo bill)` | 提交单据。|
-| `financeblservice.CashBillBlService.saveAsDraft(CashBillVo bill)` | 保存草稿。|
-| `financeblservice.CashBillBlService.getId() ` | 获得当前单据的ID。|
+| 接口名称                                     | 服务名        |
+| ---------------------------------------- | ---------- |
+| `bankaccountui.BankAccountInfoUi.showBankAccountSelectDialog()` | 选择银行账户。    |
+| `financeblservice.CashBillBlService.submit(CashBillVo bill)` | 提交单据。      |
+| `financeblservice.CashBillBlService.saveAsDraft(CashBillVo bill)` | 保存草稿。      |
+| `financeblservice.CashBillBlService.getId() ` | 获得当前单据的ID。 |
 
 **InitialEstablishmentUiController**
 
 提供的接口
 
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| ContinueWritable.continueWriting | `public InitialEstablishmentUiController continueWriting(SystemSnapshotVo bill);` | 输入有效的用于继续填写的账。| 初始化传入单据的内容。 |
+| 接口名称                             | 语法                                       | 前置条件           | 后置条件        |
+| -------------------------------- | ---------------------------------------- | -------------- | ----------- |
+| ContinueWritable.continueWriting | `public InitialEstablishmentUiController continueWriting(SystemSnapshotVo bill);` | 输入有效的用于继续填写的账。 | 初始化传入单据的内容。 |
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `financeblservice.InitialEstablishmentBlService.autofill()` | 返回现有系统信息（所有商品信息、单据信息、银行账户信息）。|
-| `financeblservice.InitialEstablishmentBlService.submit(SystemSnapshotVo snapshot)`     | 提交账。|
-| `financeblservice.InitialEstablishmentBlService.saveAsDraft(SystemSnapshotVo snapshot)` | `public ResultMessage saveAsDraft(SystemSnapshotVo snapshot);` | 提交单据。|
+| 接口名称                                     | 服务名                                      |
+| ---------------------------------------- | ---------------------------------------- |
+| `financeblservice.InitialEstablishmentBlService.autofill()` | 返回现有系统信息（所有商品信息、单据信息、银行账户信息）。            |
+| `financeblservice.InitialEstablishmentBlService.submit(SystemSnapshotVo snapshot)` | 提交账。                                     |
+| `financeblservice.InitialEstablishmentBlService.saveAsDraft(SystemSnapshotVo snapshot)` | `public ResultMessage saveAsDraft(SystemSnapshotVo snapshot);` |
 
 **SaleDetailUiController**
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。|
-| `adminui.AdminInfoUi.showEmployeeSelectDialog()` | 选择操作员。|
-| `financeblservice.SaleDetailBlService.query(SaleDetailQueryVo query)` | 查询销售情况。|
-| `financeblservice.SaleDetailBlService.export(SaleDetailVo detail)` | 导出报表。|
+| 接口名称                                     | 服务名     |
+| ---------------------------------------- | ------- |
+| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。   |
+| `adminui.AdminInfoUi.showEmployeeSelectDialog()` | 选择操作员。  |
+| `financeblservice.SaleDetailBlService.query(SaleDetailQueryVo query)` | 查询销售情况。 |
+| `financeblservice.SaleDetailBlService.export(SaleDetailVo detail)` | 导出报表。   |
 
 **TradeHistoryUiController**
 
@@ -116,20 +116,20 @@ financeui包负责财务人员除了银行账户管理外的用例（制定收�
 
 | 接口名称                                     | 服务名          |
 | ---------------------------------------- | ------------ |
-| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。|
-| `adminui.AdminInfoUi.showEmployeeSelectDialog()` | 选择操作员。|
-| `financeblservice.TradeHistoryBlService.query(TradeHistoryQueryVo query)` | 查询经营历程。|
-| `financeblservice.TradeHistoryBlService.export(TradeHistoryVo history)` | 查询经营历程。|
-| `helpui.ContinueWritable.continueWriting(T bill)` | 用于红冲时继续填写单据。|
+| `clientui.ClientInfoUi.showClientSelectDialog() ` | 选择客户。        |
+| `adminui.AdminInfoUi.showEmployeeSelectDialog()` | 选择操作员。       |
+| `financeblservice.TradeHistoryBlService.query(TradeHistoryQueryVo query)` | 查询经营历程。      |
+| `financeblservice.TradeHistoryBlService.export(TradeHistoryVo history)` | 查询经营历程。      |
+| `helpui.ContinueWritable.continueWriting(T bill)` | 用于红冲时继续填写单据。 |
 
 **TradeSituationUiController**
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `financeblservice.TradeSituationBlService.query(TradeSituationQueryVo query)` | 查询经营情况。|
-| `financeblservice.TradeSituationBlService.export(TradeSituationVo situation)` | 导出。|
+| 接口名称                                     | 服务名     |
+| ---------------------------------------- | ------- |
+| `financeblservice.TradeSituationBlService.query(TradeSituationQueryVo query)` | 查询经营情况。 |
+| `financeblservice.TradeSituationBlService.export(TradeSituationVo situation)` | 导出。     |
 
 ##### 2.1.6.3.4 展示层的动态模型
 
@@ -155,9 +155,9 @@ bankaccountui包负责银行账户管理相关的UI的展示和功能实现。�
 
 ##### 2.1.7.3.2 各个类的职责
 
-| 类名 | 职责 |
-|-----| -----|
-| BankAccountUiController | 负责管理银行账户的展示和功能实现。|
+| 类名                      | 职责                |
+| ----------------------- | ----------------- |
+| BankAccountUiController | 负责管理银行账户的展示和功能实现。 |
 
 ##### 2.1.7.3.3 内部类的接口规范
 
@@ -165,15 +165,15 @@ bankaccountui包负责银行账户管理相关的UI的展示和功能实现。�
 
 提供的接口
 
-| 接口名称                                     | 语法                                       | 前置条件                         | 后置条件                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------- |
-| BankAccountInfoUi.showBankAccountSelectDialog | `public BankAccountVo[] showBankAccountSelectDialog();` | 无。| 弹出选择银行账户的窗口。|
+| 接口名称                                     | 语法                                       | 前置条件 | 后置条件         |
+| ---------------------------------------- | ---------------------------------------- | ---- | ------------ |
+| BankAccountInfoUi.showBankAccountSelectDialog | `public BankAccountVo[] showBankAccountSelectDialog();` | 无。   | 弹出选择银行账户的窗口。 |
 
 需要的接口
 
-| 接口名称                                     | 服务名          |
-| ---------------------------------------- | ------------ |
-| `bankaccountblservice.BankAccountManagementBlService.add(BankAccountVo newAccount)` | 添加账户信息。| 
-| `bankaccountblservice.BankAccountManagementBlService.modify(BankAccountVo newAccount)` | 修改账户信息。|
-| `bankaccountblservice.BankAccountManagementBlService.query(BankAccountQueryVo query)` | 查询账户信息。|
-| `bankaccountblservice.BankAccountManagementBlService.delete(BankAccountVo account)` | 删除账户信息。|
+| 接口名称                                     | 服务名     |
+| ---------------------------------------- | ------- |
+| `bankaccountblservice.BankAccountManagementBlService.add(BankAccountVo newAccount)` | 添加账户信息。 |
+| `bankaccountblservice.BankAccountManagementBlService.modify(BankAccountVo newAccount)` | 修改账户信息。 |
+| `bankaccountblservice.BankAccountManagementBlService.query(BankAccountQueryVo query)` | 查询账户信息。 |
+| `bankaccountblservice.BankAccountManagementBlService.delete(BankAccountVo account)` | 删除账户信息。 |

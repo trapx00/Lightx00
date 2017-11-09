@@ -3,10 +3,26 @@ package trapx00.lightx00.server.data.financedata;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 
-public class PaymentBillDataController implements PaymentBillDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
+
+public class PaymentBillDataController extends UnicastRemoteObject implements PaymentBillDataService {
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected PaymentBillDataController() throws RemoteException {
+    }
+
     /**
      * Submits a bill or saves a bill as a draft
      *
@@ -47,8 +63,8 @@ public class PaymentBillDataController implements PaymentBillDataService {
      * @return PaymentBillVos that match query condition
      */
     @Override
-    public PaymentBillVo[] query(PaymentBillQueryVo query) {
-        return new PaymentBillVo[0];
+    public PaymentBillPo[] query(PaymentBillQueryVo query) {
+        return new PaymentBillPo[0];
     }
 
     /**

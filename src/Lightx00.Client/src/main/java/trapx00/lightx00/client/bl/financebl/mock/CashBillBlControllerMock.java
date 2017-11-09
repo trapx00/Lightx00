@@ -4,8 +4,8 @@ import trapx00.lightx00.client.bl.financebl.CashBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
-import trapx00.lightx00.shared.vo.financestaff.CashBillQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.CashBillVo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 
 import java.util.Date;
 

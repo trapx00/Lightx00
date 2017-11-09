@@ -4,7 +4,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
 import trapx00.lightx00.client.blservicestub.inventoryblservice.PurchaseRefundBillBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 
 import static org.junit.Assert.*;
 

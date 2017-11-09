@@ -1,18 +1,27 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
-public interface InitialEstablishmentDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface InitialEstablishmentDataService extends Remote {
     /**
      * Submits a snapshot.
      * @param snapshot snapshot to be submitted
      * @return whether the operation is done successfully
      */
-    ResultMessage submit(SystemSnapshotPo snapshot);
+    ResultMessage submit(SystemSnapshotPo snapshot) throws RemoteException;
+
+
+    /**
+     * Activates a SystemSnapshot.
+     * @param id id for the SystemSnapshot
+     * @return whether the operation is done successfully
+     */
+    ResultMessage activate(String id) throws RemoteException;
 
     /**
      * Deletes a draft.
@@ -20,18 +29,18 @@ public interface InitialEstablishmentDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage abandon(String id);
+    ResultMessage abandon(String id) throws RemoteException;
 
     /**
      * Gets the id for the next snapshot.
      * @return id for the next snapshot
      */
-    String getId();
+    String getId() throws RemoteException;
 
     /**
      * Queries SystemSnapshot.
      * @param query query
      * @return SystemSnapshotVos that match the condition
      */
-    SystemSnapshotVo query(SystemSnapshotQueryVo query);
+    SystemSnapshotPo[] query(SystemSnapshotQueryVo query) throws RemoteException;
 }

@@ -2,12 +2,8 @@ package trapx00.lightx00.client.blservicestub.draftblservice;
 
 import trapx00.lightx00.client.blservice.draftblservice.DraftManagementBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.DraftVo;
-import trapx00.lightx00.shared.vo.Draftable;
-import trapx00.lightx00.shared.vo.financestaff.FinanceBillVo;
+import trapx00.lightx00.client.vo.DraftVo;
+import trapx00.lightx00.client.vo.Draftable;
 
 import java.util.Date;
 
