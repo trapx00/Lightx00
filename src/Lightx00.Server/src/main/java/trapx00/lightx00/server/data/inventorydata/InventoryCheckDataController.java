@@ -13,7 +13,7 @@ public class InventoryCheckDataController extends UnicastRemoteObject implements
      *
      * @throws RemoteException
      */
-    public InventoryCheckDataController() throws RemoteException {
+    protected InventoryCheckDataController() throws RemoteException {
         super();
     }
     /**
@@ -23,7 +23,7 @@ public class InventoryCheckDataController extends UnicastRemoteObject implements
      * @return The inventoryView during specified time range
      */
     @Override
-    public InventoryViewPo submit(Date beginTime, Date endTime) throws RemoteException{
+    public InventoryViewPo submit(Date beginTime, Date endTime) {
         return null;
     }
     /**
@@ -31,12 +31,12 @@ public class InventoryCheckDataController extends UnicastRemoteObject implements
      * @return The inventory snapshot during that day
      */
     @Override
-    public InventoryPicturePo submit(Date time)throws RemoteException {
+    public InventoryPicturePo submit(Date time) {
         return null;
     }
 
     @Override
-    public void init() throws RemoteException{
+    public void init() {
 
     }
 }

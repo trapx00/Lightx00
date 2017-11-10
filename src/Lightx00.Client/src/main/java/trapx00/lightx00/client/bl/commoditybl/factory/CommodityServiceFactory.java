@@ -1,4 +1,7 @@
-package trapx00.lightx00.client.bl.commoditybl;
+package trapx00.lightx00.client.bl.commoditybl.factory;
+
+import trapx00.lightx00.client.bl.commoditybl.CommodityBlController;
+import trapx00.lightx00.client.bl.commoditybl.CommodityService;
 
 public class CommodityServiceFactory {
 

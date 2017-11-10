@@ -5,8 +5,23 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+
 
 public class CommoditySortDataControllerMock extends CommoditySortDataController {
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected CommoditySortDataControllerMock() throws RemoteException {
+    }
     /**
      * Create a new commoditySort attaching to a parentSort
      * @param newCSort

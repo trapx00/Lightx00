@@ -14,7 +14,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      *
      * @throws RemoteException
      */
-    public CommoditySortDataController() throws RemoteException {
+    protected CommoditySortDataController() throws RemoteException {
         super();
     }
 
@@ -25,7 +25,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort)throws RemoteException {
+    public ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort) {
         return null;
     }
     /**
@@ -34,7 +34,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage modify(CommoditySortPo commoditySort)throws RemoteException {
+    public ResultMessage modify(CommoditySortPo commoditySort) {
         return null;
     }
     /**
@@ -43,7 +43,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      * @return the list of the commoditySort
      */
     @Override
-    public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) throws RemoteException{
+    public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
         return new CommoditySortPo[0];
     }
     /**
@@ -52,7 +52,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      * @return whether the operation is done
      */
     @Override
-    public ResultMessage delete(CommoditySortPo commoditySort)throws RemoteException {
+    public ResultMessage delete(CommoditySortPo commoditySort) {
         return null;
     }
     /**
@@ -60,7 +60,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      * @return the list of commoditySort
      */
     @Override
-    public CommoditySortPo[] display()throws RemoteException {
+    public CommoditySortPo[] display() {
         return new CommoditySortPo[0];
     }
     /**
@@ -69,12 +69,12 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
      * @return the childCommoditySort
      */
     @Override
-    public CommoditySortPo[] dispaly(CommoditySortPo commoditySort)throws RemoteException {
+    public CommoditySortPo[] dispaly(CommoditySortPo commoditySort) {
         return new CommoditySortPo[0];
     }
 
     @Override
-    public void init()throws RemoteException {
+    public void init(){
 
     }
 }

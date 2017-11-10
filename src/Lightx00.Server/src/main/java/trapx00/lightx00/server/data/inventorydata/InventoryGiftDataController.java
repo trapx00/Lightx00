@@ -12,7 +12,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      *
      * @throws RemoteException
      */
-    public InventoryGiftDataController() throws RemoteException {
+    protected InventoryGiftDataController() throws RemoteException {
         super();
     }
     /**

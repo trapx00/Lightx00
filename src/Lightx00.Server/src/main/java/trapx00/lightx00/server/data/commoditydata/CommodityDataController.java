@@ -13,7 +13,7 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
      *
      * @throws RemoteException
      */
-    public CommodityDataController() throws RemoteException {
+    protected CommodityDataController() throws RemoteException {
         super();
     }
     /**
@@ -22,7 +22,7 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommodityPo newCommodity) throws RemoteException {
+    public ResultMessage add(CommodityPo newCommodity)  {
         return null;
     }
     /**
@@ -31,7 +31,7 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage modify(CommodityPo updateCommodity)throws RemoteException {
+    public ResultMessage modify(CommodityPo updateCommodity) {
         return null;
     }
     /**
@@ -40,7 +40,7 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
      * @return the list of the commodity
      */
     @Override
-    public CommodityPo[] query(CommodityQueryVo commodityQueryVo) throws RemoteException{
+    public CommodityPo[] query(CommodityQueryVo commodityQueryVo) {
         return new CommodityPo[0];
     }
     /**
@@ -49,12 +49,12 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(CommodityPo commodity)throws RemoteException {
+    public ResultMessage delete(CommodityPo commodity) {
         return null;
     }
 
     @Override
-    public void init() throws RemoteException{
+    public void init() {
 
     }
 }

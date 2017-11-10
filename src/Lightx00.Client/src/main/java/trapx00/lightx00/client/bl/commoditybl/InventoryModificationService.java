@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.bl.commoditybl;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 
 public interface InventoryModificationService {
     /**
