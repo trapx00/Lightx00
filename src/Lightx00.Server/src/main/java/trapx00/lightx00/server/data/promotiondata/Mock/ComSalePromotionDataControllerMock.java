@@ -5,7 +5,24 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+
 public class ComSalePromotionDataControllerMock extends ComSalePromotionDataController {
+
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     *
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected ComSalePromotionDataControllerMock() throws RemoteException {
+    }
 
     /**
      * submit a completed ComSalePromotionPo

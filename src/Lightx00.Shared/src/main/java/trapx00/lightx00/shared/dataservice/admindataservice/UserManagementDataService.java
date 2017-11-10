@@ -2,14 +2,17 @@ package trapx00.lightx00.shared.dataservice.admindataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
-import trapx00.lightx00.client.vo.admin.UserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
-public interface UserManagementDataService {
-    EmployeePo[] query(UserAccountQueryVo query);
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-    ResultMessage add(EmployeePo account);
+public interface UserManagementDataService extends Remote {
+    EmployeePo[] query(UserAccountQueryVo query) throws RemoteException;
 
-    ResultMessage modify(EmployeePo account);
+    ResultMessage add(EmployeePo account) throws RemoteException;
 
-    ResultMessage delete(EmployeePo account);
+    ResultMessage modify(EmployeePo account) throws RemoteException;
+
+    ResultMessage delete(EmployeePo account) throws RemoteException;
 }

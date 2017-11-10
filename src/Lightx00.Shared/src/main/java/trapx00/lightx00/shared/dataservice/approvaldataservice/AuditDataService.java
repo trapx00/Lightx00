@@ -1,35 +1,38 @@
 package trapx00.lightx00.shared.dataservice.approvaldataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.client.vo.manager.BillQueryVo;
+import trapx00.lightx00.shared.po.bill.BillPo;
+import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
-public interface AuditDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface AuditDataService extends Remote {
     /**
      * filter some bills
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
-    BillVo[] query(BillQueryVo query);
+    BillPo[] query(BillQueryVo query) throws RemoteException;
 
     /**
      * reject to approve the bill
      * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
-    ResultMessage reject(BillVo bill);
+    ResultMessage reject(BillPo bill) throws RemoteException;
 
     /**
      * approve the bill
      * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
-    ResultMessage pass(BillVo bill);
+    ResultMessage pass(BillPo bill) throws RemoteException;
 
     /**
      * save the submitted bill
      * @param bill the bill has been submitted
      * @return whether the operation is done successfully
      */
-    ResultMessage requestApproval(BillVo bill);
+    ResultMessage requestApproval(BillPo bill) throws RemoteException;
 }
