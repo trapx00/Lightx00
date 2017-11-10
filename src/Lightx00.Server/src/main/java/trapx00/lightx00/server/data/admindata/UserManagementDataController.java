@@ -7,8 +7,9 @@ import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
 
-public class UserManagementDataController implements UserManagementDataService {
+public class UserManagementDataController extends UnicastRemoteObject implements UserManagementDataService {
 
     /**
      * Creates and exports a new UnicastRemoteObject object using an

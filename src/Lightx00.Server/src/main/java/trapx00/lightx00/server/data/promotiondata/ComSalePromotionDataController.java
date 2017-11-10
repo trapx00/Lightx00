@@ -7,8 +7,9 @@ import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
 
-public class ComSalePromotionDataController implements ComSalePromotionDataService {
+public class ComSalePromotionDataController extends UnicastRemoteObject implements ComSalePromotionDataService {
 
     /**
      * Creates and exports a new UnicastRemoteObject object using an

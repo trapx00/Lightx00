@@ -7,8 +7,9 @@ import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
 
-public class AuditDataController implements AuditDataService {
+public class AuditDataController extends UnicastRemoteObject implements AuditDataService {
 
     /**
      * Creates and exports a new UnicastRemoteObject object using an
