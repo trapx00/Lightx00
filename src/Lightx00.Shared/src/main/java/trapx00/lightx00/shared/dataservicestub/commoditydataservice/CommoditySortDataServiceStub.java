@@ -3,7 +3,8 @@ package trapx00.lightx00.shared.dataservicestub.commoditydataservice;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
-import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
+import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
+
 
 public class CommoditySortDataServiceStub implements CommoditySortDataService {
     String commodityIdList[]={"C0001","C0002"};
@@ -23,8 +24,8 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
     @Override
     public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
         return new CommoditySortPo[]{
-                new CommoditySortPo(commoditySortQueryVo.getId(),commoditySortQueryVo.getName(), null,
-                        "", nextIds)
+                new CommoditySortPo("S0001","Led", null,
+                "", nextIds)
         };
     }
 
