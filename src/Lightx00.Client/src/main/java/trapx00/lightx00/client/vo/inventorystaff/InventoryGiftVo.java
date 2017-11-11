@@ -5,22 +5,21 @@ import java.util.HashMap;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.PaymentBillFactory;
+import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
-public class InventoryGiftVo extends BillVo{
-
-
-
+public class InventoryGiftVo extends InventoryBillBaseVo{
     PromotionCommodity[] gifts;
 
     public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts) {
-        super(BillType.InventoryBill, id, date, state);
+        super(id, date, state, InventoryBillType.Gift);
         this.gifts = gifts;
     }
 
@@ -33,10 +32,6 @@ public class InventoryGiftVo extends BillVo{
         this.gifts = gifts;
     }
 
-    public void revert() { ;}
-
-
-
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -44,7 +39,7 @@ public class InventoryGiftVo extends BillVo{
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return PaymentBillFactory.getNotificationActivateService();
+        return InventoryGiftFactory.getNotificationActivateService();
     }
 
     /**
@@ -54,7 +49,7 @@ public class InventoryGiftVo extends BillVo{
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return PaymentBillFactory.getNotificationAbandonService();
+        return InventoryGiftFactory.getNotificationAbandonService();
     }
 
     /**
@@ -74,7 +69,7 @@ public class InventoryGiftVo extends BillVo{
      */
     @Override
     public DraftDeleteService deleteService() {
-        return PaymentBillFactory.getDraftDeleteService();
+        return InventoryGiftFactory.getDraftDeleteService();
     }
 
     /**

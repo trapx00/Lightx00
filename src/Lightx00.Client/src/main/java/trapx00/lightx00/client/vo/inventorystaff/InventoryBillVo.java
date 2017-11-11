@@ -5,15 +5,19 @@ import java.util.HashMap;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.PaymentBillFactory;
+import trapx00.lightx00.client.bl.inventorybl.InventoryBillServiceFactor;
+import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
-public  class InventoryBillVo extends BillVo {
+public  class InventoryBillVo extends InventoryBillBaseVo {
     //报损报溢报警
     String operatorId;
     CommodityVo[] commodities;//商品
@@ -23,7 +27,7 @@ public  class InventoryBillVo extends BillVo {
 
     public InventoryBillVo(String id, Date date, BillState state, String operatorId,
                            CommodityVo[] commodities, double[] amountList, InventoryBillType type) {
-        super(BillType.InventoryBill, id, date, state);
+        super(id, date, state,type);
         this.operatorId = operatorId;
         this.commodities = commodities;
         this.amountList = amountList;
@@ -32,10 +36,6 @@ public  class InventoryBillVo extends BillVo {
 
     public  String getOperatorId() {
         return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public CommodityVo[] getCommodities() {
@@ -58,9 +58,6 @@ public  class InventoryBillVo extends BillVo {
         return type;
     }
 
-    public void setType(InventoryBillType type) {
-        this.type = type;
-    }
 
 
     /**
@@ -70,7 +67,7 @@ public  class InventoryBillVo extends BillVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return PaymentBillFactory.getNotificationActivateService();
+        return InventoryWarningFactory.getNotificationActivateService();
     }
 
     /**
@@ -80,7 +77,7 @@ public  class InventoryBillVo extends BillVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return PaymentBillFactory.getNotificationAbandonService();
+        return InventoryWarningFactory.getNotificationAbandonService();
     }
 
     /**
@@ -100,7 +97,7 @@ public  class InventoryBillVo extends BillVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return PaymentBillFactory.getDraftDeleteService();
+        return InventoryWarningFactory.getDraftDeleteService();
     }
 
     /**
