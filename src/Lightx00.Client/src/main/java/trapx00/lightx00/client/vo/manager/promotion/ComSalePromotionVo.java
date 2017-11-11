@@ -12,7 +12,7 @@ public class ComSalePromotionVo extends PromotionVoBase {
 
     public ComSalePromotionVo(String id, Date startDate, Date endDate, PromotionState state,
                               PromotionCommodity[] commodityOnSale, double onSalePrice) {
-        super(id, PromotionType.CommodityOnSale, startDate, endDate, state);
+        super(id, PromotionType.ComSalePromotion, startDate, endDate, PromotionState.Waiting);
         this.commodityOnSale = commodityOnSale;
         this.onSalePrice = onSalePrice;
     }

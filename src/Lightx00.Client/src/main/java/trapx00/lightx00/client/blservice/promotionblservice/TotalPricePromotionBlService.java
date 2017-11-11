@@ -27,13 +27,6 @@ public interface TotalPricePromotionBlService {
     ResultMessage delete(TotalPricePromotionVo promotion);
 
     /**
-     * filter TotalPricePromotionVo
-     * @param query the filter conditions
-     * @return array of TotalPricePromotionVo which match the conditions
-     */
-    TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query);
-
-    /**
      * get id for the next promotion
      * @return id for the next promotion
      */

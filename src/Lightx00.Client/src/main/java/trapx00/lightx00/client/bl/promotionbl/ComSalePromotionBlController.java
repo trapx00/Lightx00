@@ -39,16 +39,6 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * filter some CommodityOnSaleVos
-     * @param query the filter conditions
-     * @return array of CommodityOnSaleVos which match the conditions
-     */
-    @Override
-    public ComSalePromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return new ComSalePromotionVo[0];
-    }
-
-    /**
      * get id for the next ComSalePromotionVo
      * @return id for the next ComSalePromotionVo
      */

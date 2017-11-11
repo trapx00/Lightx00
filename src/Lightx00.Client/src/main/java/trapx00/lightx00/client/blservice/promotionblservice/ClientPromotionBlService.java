@@ -27,13 +27,6 @@ public interface ClientPromotionBlService {
     ResultMessage delete(ClientPromotionVo promotion);
 
     /**
-     * filter ClientPromotionVo
-     * @param query the filter conditions
-     * @return array of ClientPromotionVo which match the conditions
-     */
-    ClientPromotionVo[] queryPromotion(PromotionQueryVo query);
-
-    /**
      * get id for the next promotion
      * @return id for the next promotion
      */

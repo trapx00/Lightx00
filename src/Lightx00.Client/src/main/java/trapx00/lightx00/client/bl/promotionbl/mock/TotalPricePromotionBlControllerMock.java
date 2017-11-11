@@ -34,15 +34,6 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
     }
 
     /**
-     * filter some TotalPriceCouponVos
-     * @param query the filter conditions
-     * @return array of TotalPriceCouponVos which match the conditions
-     */
-    public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return super.queryPromotion(query);
-    }
-
-    /**
      * get id for the next TotalPricePromotionVo
      * @return id for the next TotalPricePromotionVo
      */

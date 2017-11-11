@@ -11,7 +11,7 @@ public class TotalPricePromotionVo extends PromotionVoBase {
 
     public TotalPricePromotionVo(String id, Date startDate, Date endDate,
                                  PromotionState state, double couponPrice, double totalPrice) {
-        super(id, PromotionType.TotalPriceCoupon, startDate, endDate, state);
+        super(id, PromotionType.TotalPricePromotion, startDate, endDate, PromotionState.Waiting);
         this.couponPrice = couponPrice;
         this.totalPrice = totalPrice;
     }

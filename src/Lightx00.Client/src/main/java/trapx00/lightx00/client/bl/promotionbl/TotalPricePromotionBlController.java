@@ -38,16 +38,6 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
     }
 
     /**
-     * filter some TotalPriceGiftVos
-     * @param query the filter conditions
-     * @return array of TotalPriceGiftVos which match the conditions
-     */
-    @Override
-    public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return new TotalPricePromotionVo[0];
-    }
-
-    /**
      * get id for the next TotalPriceGiftVo
      * @return id for the next TotalPriceGiftVo
      */

@@ -34,15 +34,6 @@ public class ComSalePromotionBlControllerMock extends ComSalePromotionBlControll
     }
 
     /**
-     * filter some CommodityOnSaleVos
-     * @param query the filter conditions
-     * @return array of CommodityOnSaleVos which match the conditions
-     */
-    public ComSalePromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return super.queryPromotion(query);
-    }
-
-    /**
      * get id for the next ComSalePromotionVo
      * @return id for the next ComSalePromotionVo
      */

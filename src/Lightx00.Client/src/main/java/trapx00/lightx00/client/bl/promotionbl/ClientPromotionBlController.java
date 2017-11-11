@@ -39,16 +39,6 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
     }
 
     /**
-     * filter some ClientCouponVos
-     * @param query the filter conditions
-     * @return array of ClientCouponVos which match the conditions
-     */
-    @Override
-    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return new ClientPromotionVo[0];
-    }
-
-    /**
      * get id for the next ClientPromotionVo
      * @return id for the next ClientPromotionVo
      */

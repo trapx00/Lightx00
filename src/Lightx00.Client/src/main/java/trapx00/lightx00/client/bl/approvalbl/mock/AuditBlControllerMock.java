@@ -6,15 +6,6 @@ import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
 public class AuditBlControllerMock extends AuditBlController {
-    /**
-     * filter some bills to audit
-     * @param query the filter conditions
-     * @return array of bills which match the conditions
-     */
-    @Override
-    public BillVo[] query(BillQueryVo query) {
-        return super.query(query);
-    }
 
     /**
      * reject to approve the bill

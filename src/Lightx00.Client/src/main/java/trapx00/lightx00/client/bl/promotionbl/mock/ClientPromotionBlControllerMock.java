@@ -35,15 +35,6 @@ public class ClientPromotionBlControllerMock extends ClientPromotionBlController
     }
 
     /**
-     * filter some ClientCouponVos
-     * @param query the filter conditions
-     * @return array of ClientCouponVos which match the conditions
-     */
-    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return super.queryPromotion(query);
-    }
-
-    /**
      * get id for the next ClientPromotionVo
      * @return id for the next ClientPromotionVo
      */

@@ -11,7 +11,7 @@ public class ClientPromotionVo extends PromotionVoBase {
 
     public ClientPromotionVo(String id, Date startDate, Date endDate, PromotionState state,
                              int clientLevel, double couponPrice) {
-        super(id, PromotionType.ClientPromotion, startDate, endDate, state);
+        super(id, PromotionType.ClientPromotion, startDate, endDate, PromotionState.Waiting);
         this.clientLevel = clientLevel;
         this.couponPrice = couponPrice;
     }

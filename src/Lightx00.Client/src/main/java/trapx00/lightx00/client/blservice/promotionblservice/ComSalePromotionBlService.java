@@ -27,13 +27,6 @@ public interface ComSalePromotionBlService {
     ResultMessage delete(ComSalePromotionVo promotion);
 
     /**
-     * filter ComSalePromotionVo
-     * @param query the filter conditions
-     * @return array of ComSalePromotionVo which match the conditions
-     */
-    ComSalePromotionVo[] queryPromotion(PromotionQueryVo query);
-
-    /**
      * get id for the next promotion
      * @return id for the next promotion
      */
