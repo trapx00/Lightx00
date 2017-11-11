@@ -2,8 +2,12 @@ package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.ReceivalBillBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
+
+import java.util.Date;
 
 public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
     /**
@@ -14,7 +18,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return super.deleteDraft(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -25,7 +29,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return super.abandon(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -36,7 +40,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public ResultMessage activate(String id) {
-        return super.activate(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -47,7 +51,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public ResultMessage submit(ReceivalBillVo bill) {
-        return super.submit(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -58,7 +62,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public ResultMessage saveAsDraft(ReceivalBillVo bill) {
-        return super.saveAsDraft(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -68,7 +72,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public String getId() {
-        return super.getId();
+        return "SCD-20171111-00001";
     }
 
     /**
@@ -79,6 +83,8 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public ReceivalBillVo[] query(ReceivalBillQueryVo query) {
-        return super.query(query);
+        return new ReceivalBillVo[]{
+                new ReceivalBillVo("123",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
+        };
     }
 }

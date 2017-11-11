@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.data.logdata.mock;
 
 import trapx00.lightx00.server.data.logdata.LogDataController;
+import trapx00.lightx00.shared.dataservicestub.logdataservice.LogDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
@@ -9,40 +10,6 @@ import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 
-public class LogDataControllerMock extends LogDataController {
-    /**
-     * Creates and exports a new UnicastRemoteObject object using an
-     * anonymous port.
-     * <p>
-     * <p>The object is exported with a server socket
-     * created using the {@link RMISocketFactory} class.
-     *
-     * @throws RemoteException if failed to export object
-     * @since JDK1.1
-     */
-    protected LogDataControllerMock() throws RemoteException {
-    }
+public class LogDataControllerMock extends LogDataServiceStub {
 
-    /**
-     * Writes log.
-     *
-     * @param severity Log severity
-     * @param content  content
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage log(LogSeverity severity, String content) {
-        return super.log(severity, content);
-    }
-
-    /**
-     * Queries log.
-     *
-     * @param query query
-     * @return LogVos that match query condition
-     */
-    @Override
-    public LogPo[] query(LogQueryVo query) {
-        return super.query(query);
-    }
 }

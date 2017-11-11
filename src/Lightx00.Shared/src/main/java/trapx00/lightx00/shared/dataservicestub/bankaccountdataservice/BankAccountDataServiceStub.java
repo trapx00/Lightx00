@@ -3,7 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.bankaccountdataservice;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
-import trapx00.lightx00.client.vo.financestaff.BankAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import java.util.Date;
 

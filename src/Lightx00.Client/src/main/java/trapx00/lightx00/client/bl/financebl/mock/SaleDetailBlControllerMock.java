@@ -1,9 +1,12 @@
 package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.SaleDetailBlController;
+import trapx00.lightx00.client.vo.financestaff.SaleRecordVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.financestaff.SaleDetailQueryVo;
 import trapx00.lightx00.client.vo.financestaff.SaleDetailVo;
+
+import java.util.Date;
 
 public class SaleDetailBlControllerMock extends SaleDetailBlController {
     /**
@@ -14,7 +17,11 @@ public class SaleDetailBlControllerMock extends SaleDetailBlController {
      */
     @Override
     public SaleDetailVo query(SaleDetailQueryVo query) {
-        return super.query(query);
+        return new SaleDetailVo(
+                new SaleRecordVo[] {
+                        new SaleRecordVo(new Date(),"123","123",0,0,0)
+                }
+        );
     }
 
     /**
@@ -25,7 +32,7 @@ public class SaleDetailBlControllerMock extends SaleDetailBlController {
      */
     @Override
     public ResultMessage export(SaleDetailVo detail) {
-        return super.export(detail);
+        return ResultMessage.Success;
     }
 
 
