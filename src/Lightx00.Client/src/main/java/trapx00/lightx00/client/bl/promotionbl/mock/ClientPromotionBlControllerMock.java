@@ -36,7 +36,7 @@ public class ClientPromotionBlControllerMock extends ClientPromotionBlController
     @Override
     public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
         return new ClientPromotionVo[]{
-                new ClientPromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,1,200)
+                new ClientPromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0)
         };
     }
 
@@ -56,5 +56,15 @@ public class ClientPromotionBlControllerMock extends ClientPromotionBlController
      */
     public String getId() {
         return super.getId();
+    }
+
+    /**
+     * delete a draft
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
+        return ResultMessage.Success;
     }
 }

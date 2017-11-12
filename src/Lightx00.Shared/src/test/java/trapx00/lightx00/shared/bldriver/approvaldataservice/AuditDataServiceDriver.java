@@ -4,14 +4,17 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservicestub.approvaldataservice.AuditDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.shared.po.bill.BillPo;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
+
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class AuditDataServiceDriver {
     AuditDataService service = new AuditDataServiceStub();
-    BillVo bill = service.query("0001", BillType.FinanceBill,null,null)[0];
+    BillPo bill = new CashBillPo("0001",new Date(), BillState.Draft, "123","123",null);
     @Test
     public void query() throws Exception {
         assertEquals("0001",bill.getId());

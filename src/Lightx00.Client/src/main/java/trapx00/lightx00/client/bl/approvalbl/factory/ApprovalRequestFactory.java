@@ -4,10 +4,9 @@ import trapx00.lightx00.client.bl.approvalbl.ApprovalRequest;
 import trapx00.lightx00.client.bl.approvalbl.AuditBlController;
 
 public class ApprovalRequestFactory {
-    private static AuditBlController controller = new AuditBlController();
-    private static ApprovalRequest approvalRequest = controller;
+    private static ApprovalRequest service = new AuditBlController();
 
-    public static ApprovalRequest getApprovalRequest(){
-        return approvalRequest;
+    public static ApprovalRequest getService(){
+        return service;
     }
 }

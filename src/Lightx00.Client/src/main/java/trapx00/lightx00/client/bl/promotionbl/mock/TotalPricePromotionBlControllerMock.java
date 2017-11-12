@@ -34,7 +34,7 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
      */
     public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
         return new TotalPricePromotionVo[]{
-                new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000)
+                new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null)
         };
     }
 
@@ -54,4 +54,15 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
     public String getId() {
         return super.getId();
     }
+
+    /**
+     * delete a draft
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
+        return ResultMessage.Success;
+    }
+
 }

@@ -56,4 +56,14 @@ public class ComSalePromotionBlControllerMock extends ComSalePromotionBlControll
         return super.getId();
     }
 
+    /**
+     * delete a draft
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
+        return ResultMessage.Success;
+    }
+
 }
