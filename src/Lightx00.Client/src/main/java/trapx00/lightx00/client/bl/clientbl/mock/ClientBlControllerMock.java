@@ -2,8 +2,10 @@ package trapx00.lightx00.client.bl.clientbl.mock;
 
 import trapx00.lightx00.client.bl.clientbl.ClientBlController;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.client.ClientType;
 
 public class ClientBlControllerMock extends ClientBlController {
 
@@ -14,7 +16,7 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -24,7 +26,19 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ClientVo[] query(String query) {
-        return new ClientVo[0];
+        ClientVo[] clientVos=new ClientVo[1];
+        clientVos[0]=new ClientVo("0",
+                ClientType.Retailer,
+                1,
+                "xiaoming",
+                "12345678",
+                "12345678",
+                "210000",
+                "12345679@qq.com",
+                123,
+                456,
+                new SaleStaffVo(null,null,null,null,null));
+        return clientVos;
     }
 
     /**
@@ -35,7 +49,7 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ResultMessage saveAsDraft(ClientVo client) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -45,7 +59,7 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public String getId() {
-        return null;
+        return "0";
     }
 
     /**
@@ -55,7 +69,7 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ResultMessage modify(ClientVo client) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -65,7 +79,7 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ResultMessage add(ClientVo client) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -75,7 +89,7 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ResultMessage delete(String[] id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -88,6 +102,6 @@ public class ClientBlControllerMock extends ClientBlController {
      */
     @Override
     public ResultMessage modifyClient(String clientId, ClientModificationFlag flag, double delta) {
-        return null;
+        return ResultMessage.Success;
     }
 }

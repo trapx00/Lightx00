@@ -2,6 +2,9 @@ package trapx00.lightx00.client.datafactory.clientdataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
+import trapx00.lightx00.shared.dataservicestub.clientdataservice.ClientDataServiceStub;
+import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleBillDataServiceStub;
+import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -10,11 +13,11 @@ import java.rmi.RemoteException;
 
 public class ClientDataServiceFactory {
 
-    private ClientDataService clientDataService;
+    private static ClientDataService service=new ClientDataServiceStub();
 
-    public ClientDataServiceFactory(){
+    public static void initRmi(){
         try {
-            clientDataService =(ClientDataService) Naming.lookup("rmi://localhost:8888/ClientDataService");
+            service =(ClientDataService)Naming.lookup(RmiHelper.generateRmiUrl(ClientDataService.class));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -25,6 +28,7 @@ public class ClientDataServiceFactory {
     }
 
     public ClientDataService getInstance() {
-        return clientDataService;
+        //initRmi();
+        return service;
     }
 }

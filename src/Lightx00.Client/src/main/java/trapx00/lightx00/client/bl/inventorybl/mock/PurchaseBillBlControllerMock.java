@@ -5,6 +5,8 @@ import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 
+import java.util.Date;
+
 public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
 
     /**
@@ -15,7 +17,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -26,7 +28,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -37,7 +39,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -47,7 +49,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public ResultMessage submit(PurchaseBillVo purchaseBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -58,7 +60,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public ResultMessage saveAsDraft(PurchaseBillVo purchaseBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -68,7 +70,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public String getId() {
-        return null;
+        return "0";
     }
 
     /**
@@ -79,6 +81,8 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
      */
     @Override
     public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query) {
-        return new PurchaseBillVo[0];
+        PurchaseBillVo[] purchaseBillVos=new PurchaseBillVo[1];
+        purchaseBillVos[0]=new PurchaseBillVo("0",null,null,null,1,null,null,100,null);
+        return purchaseBillVos;
     }
 }

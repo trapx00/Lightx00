@@ -1,16 +1,18 @@
-package trapx00.lightx00.client.bl.salebl;
+package trapx00.lightx00.client.bl.salebl.mock;
 
+import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlInfoController;
+import trapx00.lightx00.client.bl.salebl.SaleRefundBillBlController;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
-import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 
-public class SaleBillInfoController implements SaleBillBlInfo{
-
-    SaleBillBlService saleBillBlService=new SaleBillBlController();
-    SaleRefundBillBlService saleRefundBillBlService=new SaleRefundBillBlController();
+public class SaleBillBlInfoControllerMock extends SaleBillBlInfoController {
+    SaleBillBlService saleBillBlService = new SaleBillBlController();
+    SaleRefundBillBlService saleRefundBillBlService = new SaleRefundBillBlController();
 
     /**
      * query for SaleBills
@@ -18,7 +20,6 @@ public class SaleBillInfoController implements SaleBillBlInfo{
      * @param query function
      * @return array of SaleBillVo
      */
-    @Override
     public SaleBillVo[] querySaleBill(SaleBillQueryVo query) {
         return saleBillBlService.querySaleBill(query);
     }
@@ -29,7 +30,6 @@ public class SaleBillInfoController implements SaleBillBlInfo{
      * @param query function
      * @return array of SaleRefundBillVo
      */
-    @Override
     public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query) {
         return saleRefundBillBlService.querySaleRefundBill(query);
     }

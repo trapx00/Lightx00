@@ -1,7 +1,10 @@
 package trapx00.lightx00.client.datafactory.inventorydataservicefactory;
 
+import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
+import trapx00.lightx00.shared.dataservicestub.inventorydataservice.PurchaseBillDataServiceStub;
+import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -10,11 +13,11 @@ import java.rmi.RemoteException;
 
 public class PurchaseBillDataServiceFactory {
 
-    private PurchaseBillDataService purchaseBillDataService;
+    private static PurchaseBillDataService service=new PurchaseBillDataServiceStub();
 
-    public PurchaseBillDataServiceFactory(){
+    public static void initRmi(){
         try {
-            purchaseBillDataService =(PurchaseBillDataService) Naming.lookup("rmi://localhost:8888/PurchaseBillDataService");
+            service =(PurchaseBillDataService)Naming.lookup(RmiHelper.generateRmiUrl(PurchaseBillDataService.class));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -25,6 +28,7 @@ public class PurchaseBillDataServiceFactory {
     }
 
     public PurchaseBillDataService getInstance() {
-        return purchaseBillDataService;
+        //initRmi();
+        return service;
     }
 }

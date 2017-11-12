@@ -14,7 +14,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -25,7 +25,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -36,7 +36,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -47,7 +47,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public ResultMessage submit(PurchaseRefundBillVo purchaseRefundBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -58,7 +58,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public ResultMessage saveAsDraft(PurchaseRefundBillVo purchaseRefundBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -68,7 +68,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public String getId() {
-        return null;
+        return "0";
     }
 
     /**
@@ -79,6 +79,8 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      */
     @Override
     public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
-        return new PurchaseRefundBillVo[0];
+        PurchaseRefundBillVo[] purchaseRefundBillVos=new PurchaseRefundBillVo[1];
+        purchaseRefundBillVos[0]=new PurchaseRefundBillVo("0",null,null,null,1,null,null,100,null);
+        return purchaseRefundBillVos;
     }
 }

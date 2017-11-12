@@ -14,4 +14,25 @@ public class PurchaseRefundBillBlServiceStub implements PurchaseRefundBillBlServ
     public ResultMessage saveAsDraft(PurchaseRefundBillVo purchaseRefundBill) {
         return ResultMessage.Success;
     }
+
+    /**
+     * Gets the id for the next purchaseRefundBill
+     *
+     * @return id for the next purchaseRefundBill
+     */
+    @Override
+    public String getId() {
+        return null;
+    }
+
+    /**
+     * query for PurchaseRefundBills
+     *
+     * @param query function
+     * @return array of PurchaseRefundBillVo
+     */
+    @Override
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
+        return new PurchaseRefundBillVo[0];
+    }
 }

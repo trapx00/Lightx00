@@ -16,7 +16,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -27,7 +27,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -38,7 +38,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -49,7 +49,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public ResultMessage submit(SaleBillVo saleBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -60,7 +60,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public ResultMessage saveAsDraft(SaleBillVo saleBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -70,7 +70,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public String getId() {
-        return null;
+        return "0";
     }
 
     /**
@@ -81,6 +81,8 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
      */
     @Override
     public SaleBillVo[] querySaleBill(SaleBillQueryVo query) {
-        return new SaleBillVo[0];
+        SaleBillVo[] saleBillVos=new SaleBillVo[1];
+        saleBillVos[0]=new SaleBillVo("0",null,null,null,null,null,1,null,100,100,100,100,null);
+        return saleBillVos;
     }
 }
