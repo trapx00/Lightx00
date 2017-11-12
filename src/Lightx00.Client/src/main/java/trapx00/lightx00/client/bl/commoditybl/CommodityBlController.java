@@ -3,12 +3,14 @@ package trapx00.lightx00.client.bl.commoditybl;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+
+
 
 public class CommodityBlController implements CommodityBlService,CommodityService,InventoryModificationService {
     /**
-     * Add a new commodity
+     * Add a new commoditybl
      * @param newCommodity
      * @return whether the operation is done successfully
      */
@@ -18,7 +20,7 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
     }
 
     /**
-     *  Modifys a commodity
+     *  Modifys a commoditybl
      * @param updateCommodity
      * @return whether the operation is done successfully
      */
@@ -28,9 +30,9 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
     }
 
     /**
-     * Querys a commodity
+     * Querys a commoditybl
      * @param commodityQueryVo
-     * @return The commodity that match to the requirement
+     * @return The commoditybl that match to the requirement
      */
     @Override
     public CommodityVo[] query(CommodityQueryVo commodityQueryVo) {
@@ -38,7 +40,7 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
     }
 
     /**
-     * Deltes the existed commodity
+     * Deltes the existed commoditybl
      * @param commodity
      * @return whether the operation is done successfully
      */
@@ -48,7 +50,7 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
     }
 
     /**
-     * Query a commodity
+     * Query a commoditybl
      * @param commodityQueryVo
      * @return Commodity that match query condition
      */

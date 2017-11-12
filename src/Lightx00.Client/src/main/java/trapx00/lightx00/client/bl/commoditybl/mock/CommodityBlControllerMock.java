@@ -3,13 +3,13 @@ package trapx00.lightx00.client.bl.commoditybl.mock;
 import trapx00.lightx00.client.bl.commoditybl.CommodityBlController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 
 
 public class CommodityBlControllerMock extends CommodityBlController {
 
     /**
-     * Add a new commodity
+     * Add a new commoditybl
      * @param newCommodity
      * @return whether the operation is done successfully
      */
@@ -19,7 +19,7 @@ public class CommodityBlControllerMock extends CommodityBlController {
     }
 
     /**
-     *  Modifys a commodity
+     *  Modifys a commoditybl
      * @param updateCommodity
      * @return whether the operation is done successfully
      */
@@ -29,9 +29,9 @@ public class CommodityBlControllerMock extends CommodityBlController {
     }
 
     /**
-     * Querys a commodity
-     * @param id
-     * @return The commodity that match to the requirement
+     * Querys a commoditybl
+     * @param commodityQueryVo
+     * @return The commoditybl that match to the requirement
      */
     @Override
     public CommodityVo[] query(CommodityQueryVo commodityQueryVo) {
@@ -39,7 +39,7 @@ public class CommodityBlControllerMock extends CommodityBlController {
     }
 
     /**
-     * Deltes the existed commodity
+     * Deltes the existed commoditybl
      * @param commodity
      * @return whether the operation is done successfully
      */

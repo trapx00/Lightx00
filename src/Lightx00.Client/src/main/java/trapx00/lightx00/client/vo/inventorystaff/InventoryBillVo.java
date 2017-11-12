@@ -4,18 +4,12 @@ import java.util.Date;
 import java.util.HashMap;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.financebl.factory.PaymentBillFactory;
-import trapx00.lightx00.client.bl.inventorybl.InventoryBillServiceFactor;
-import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningFactory;
+import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
-import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 public  class InventoryBillVo extends InventoryBillBaseVo {
     //报损报溢报警
@@ -67,7 +61,7 @@ public  class InventoryBillVo extends InventoryBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return InventoryWarningFactory.getNotificationActivateService();
+        return InventoryWarningServiceFactory.getNotificationActivateService();
     }
 
     /**
@@ -77,7 +71,7 @@ public  class InventoryBillVo extends InventoryBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return InventoryWarningFactory.getNotificationAbandonService();
+        return InventoryWarningServiceFactory.getNotificationAbandonService();
     }
 
     /**
@@ -97,7 +91,7 @@ public  class InventoryBillVo extends InventoryBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return InventoryWarningFactory.getDraftDeleteService();
+        return InventoryWarningServiceFactory.getDraftDeleteService();
     }
 
     /**

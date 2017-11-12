@@ -2,7 +2,7 @@ package trapx00.lightx00.client.bl.commoditybl.mock;
 
 import trapx00.lightx00.client.bl.commoditybl.CommoditySortBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 
 public class CommoditySortBlControllerMock extends CommoditySortBlController {

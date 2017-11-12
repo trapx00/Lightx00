@@ -4,14 +4,11 @@ import java.util.Date;
 import java.util.HashMap;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.financebl.factory.PaymentBillFactory;
-import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftFactory;
+import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
-import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
@@ -39,7 +36,7 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return InventoryGiftFactory.getNotificationActivateService();
+        return InventoryGiftServiceFactory.getNotificationActivateService();
     }
 
     /**
@@ -49,7 +46,7 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return InventoryGiftFactory.getNotificationAbandonService();
+        return InventoryGiftServiceFactory.getNotificationAbandonService();
     }
 
     /**
@@ -69,7 +66,7 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
      */
     @Override
     public DraftDeleteService deleteService() {
-        return InventoryGiftFactory.getDraftDeleteService();
+        return InventoryGiftServiceFactory.getDraftDeleteService();
     }
 
     /**

@@ -1,6 +1,8 @@
 package trapx00.lightx00.client.datafactory.commoditydataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
+import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommodityDataServiceStub;
+import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -8,11 +10,12 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class CommodityDataServiceFactory {
-    private CommodityDataService commodityDataService;
+    private static CommodityDataService service = new CommodityDataServiceStub();
 
-    public CommodityDataServiceFactory(){
+    private static void initRmi() {
+
         try {
-            commodityDataService =(CommodityDataService) Naming.lookup("rmi://localhost:8888/CommodityDataService");
+            service = (CommodityDataService) Naming.lookup(RmiHelper.generateRmiUrl(CommodityDataService.class));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -22,7 +25,8 @@ public class CommodityDataServiceFactory {
         }
     }
 
-    public  CommodityDataService getInstance() {
-        return commodityDataService;
+    public static CommodityDataService getService() {
+        //initRmi(); //when the rmi is functional, uncomment this to use rmi instead of stub.
+        return service;
     }
 }

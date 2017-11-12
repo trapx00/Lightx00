@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 
 public interface InventoryModificationService {
     /**
-     * Modify the num of the commodity
+     * Modify the num of the commoditybl
      * @param commodityId
      * @param flag
      * @param delta

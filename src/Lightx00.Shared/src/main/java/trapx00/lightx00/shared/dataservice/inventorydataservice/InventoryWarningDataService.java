@@ -16,7 +16,7 @@ public interface InventoryWarningDataService extends Remote {
     ResultMessage submit(InventoryBillPo bill);
 
     /**
-     *  Modifys the warning value of the commodity
+     *  Modifys the warning value of the commoditybl
      * @param id
      * @param warningValue
      * @return  whether the operation is done successfully

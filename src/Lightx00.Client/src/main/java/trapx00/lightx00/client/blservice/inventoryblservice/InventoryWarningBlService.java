@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 public interface InventoryWarningBlService {
@@ -22,7 +22,7 @@ public interface InventoryWarningBlService {
     ResultMessage saveAsDraft(InventoryBillVo bill);//保存草稿
 
     /**
-     *  Modifys the warning value of the commodity
+     *  Modifys the warning value of the commoditybl
      * @param id
      * @param modifyWarning
      * @return  whether the operation is done successfully

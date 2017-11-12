@@ -11,28 +11,28 @@ import java.rmi.RemoteException;
 public interface CommodityDataService extends Remote {
 
     /**
-     *  Create a new commodity
+     *  Create a new commoditybl
      * @param newCommodity
      * @return whether the operation is done successfully
      */
     ResultMessage add(CommodityPo newCommodity) throws RemoteException;//新建商品
 
     /**
-     *  odiyf a commodity
+     *  odiyf a commoditybl
      * @param updateCommodity
      * @return whether the operation is done successfully
      */
     ResultMessage modify(CommodityPo updateCommodity)throws RemoteException;//修改
 
     /**
-     * uery for a commodity
+     * uery for a commoditybl
      * @param commodityQueryVo
-     * @return the list of the commodity
+     * @return the list of the commoditybl
      */
     CommodityPo[] query(CommodityQueryVo commodityQueryVo)throws RemoteException;//查询
 
     /**
-     * Delete a commodity
+     * Delete a commoditybl
      * @param commodity
      * @return whether the operation is done successfully
      */

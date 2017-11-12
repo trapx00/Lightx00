@@ -6,7 +6,7 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 
@@ -43,7 +43,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
     }
 
     /**
-     * Query a commodity
+     * Query a commoditybl
      * @param commodityQueryVo
      * @return CommodityVo that match to the requirement
      */

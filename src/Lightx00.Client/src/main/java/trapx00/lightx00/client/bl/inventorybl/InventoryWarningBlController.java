@@ -6,9 +6,9 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 public class InventoryWarningBlController implements InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService,InventoryBillService {
@@ -33,8 +33,8 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
     }
 
     /**
-     * Modifys the warning value of the commodity
-     * @param id ,the id of the commodity
+     * Modifys the warning value of the commoditybl
+     * @param id ,the id of the commoditybl
      * @param modifyWarning
      * @return whether the operation is done successfully
      */
@@ -102,7 +102,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
     }
 
     /**
-     * Query a commodity
+     * Query a commoditybl
      * @return CommodityVo
      */
     @Override

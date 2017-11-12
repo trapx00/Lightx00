@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 public interface InventoryBillService {

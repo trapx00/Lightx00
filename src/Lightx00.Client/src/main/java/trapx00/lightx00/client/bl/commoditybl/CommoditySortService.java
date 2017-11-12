@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.bl.commoditybl;
 
-import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
+
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 
 public interface CommoditySortService {

@@ -3,9 +3,8 @@ package trapx00.lightx00.client.blservicestub.inventoryblservice;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 
 import java.util.Date;
 
