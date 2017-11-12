@@ -17,7 +17,7 @@ public class TradeSituationBlControllerMock extends TradeSituationBlController {
      */
     @Override
     public TradeSituationVo query(Date start, Date end) {
-        return super.query(start, end);
+        return new TradeSituationVo(0,0,0,0,0);
     }
 
     /**
@@ -28,7 +28,7 @@ public class TradeSituationBlControllerMock extends TradeSituationBlController {
      */
     @Override
     public ResultMessage export(TradeSituationVo situation) {
-        return super.export(situation);
+        return ResultMessage.Success;
     }
 
 

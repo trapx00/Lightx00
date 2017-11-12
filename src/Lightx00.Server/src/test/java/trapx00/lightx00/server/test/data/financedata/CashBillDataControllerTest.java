@@ -10,11 +10,7 @@ public class CashBillDataControllerTest {
     }
 
     @Test
-    public void activate1() throws Exception {
-    }
-
-    @Test
-    public void activate2() throws Exception {
+    public void activate() throws Exception {
     }
 
     @Test

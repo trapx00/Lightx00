@@ -15,7 +15,7 @@ public class CashBillDataServiceStub implements CashBillDataService {
      */
     @Override
     public ResultMessage submit(CashBillPo bill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -26,7 +26,7 @@ public class CashBillDataServiceStub implements CashBillDataService {
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -37,7 +37,7 @@ public class CashBillDataServiceStub implements CashBillDataService {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
 

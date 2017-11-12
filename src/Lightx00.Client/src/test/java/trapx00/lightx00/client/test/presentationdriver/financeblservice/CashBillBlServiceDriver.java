@@ -13,8 +13,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class CashBillBlServiceDriver {
-    CashBillBlService service = new CashBillBlServiceStub();
-    CashBillVo cashBill = null;
+    private CashBillBlService service = new CashBillBlServiceStub();
+    private CashBillVo cashBill = null;
     @Before
     public void setUp() throws Exception {
         cashBill = new CashBillVo("123",new Date(), BillState.Draft,"123","123",null);
@@ -30,9 +30,5 @@ public class CashBillBlServiceDriver {
         assertEquals(ResultMessage.Success, service.saveAsDraft(cashBill));
     }
 
-    @Test
-    public void resume() throws Exception {
-        assertNotNull(cashBill);
-    }
 
 }

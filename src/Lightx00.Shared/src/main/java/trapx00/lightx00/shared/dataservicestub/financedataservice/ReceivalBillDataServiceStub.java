@@ -2,10 +2,14 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
+import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
-public class ReceivalDataServiceStub implements ReceivalBillDataService {
+import java.util.Date;
+
+public class ReceivalBillDataServiceStub implements ReceivalBillDataService {
     /**
      * Submits a ReceivalBill or save it as a draft.
      *
@@ -14,7 +18,7 @@ public class ReceivalDataServiceStub implements ReceivalBillDataService {
      */
     @Override
     public ResultMessage submit(ReceivalBillPo bill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -25,7 +29,7 @@ public class ReceivalDataServiceStub implements ReceivalBillDataService {
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -36,7 +40,7 @@ public class ReceivalDataServiceStub implements ReceivalBillDataService {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -47,7 +51,9 @@ public class ReceivalDataServiceStub implements ReceivalBillDataService {
      */
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
-        return new ReceivalBillPo[0];
+        return new ReceivalBillPo[]{
+                new ReceivalBillPo("123",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
+        };
     }
 
     /**
@@ -57,6 +63,6 @@ public class ReceivalDataServiceStub implements ReceivalBillDataService {
      */
     @Override
     public String getId() {
-        return null;
+        return "SCD-20171111-00001";
     }
 }

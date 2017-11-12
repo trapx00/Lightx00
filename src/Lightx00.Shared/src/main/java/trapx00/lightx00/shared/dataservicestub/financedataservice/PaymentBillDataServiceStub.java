@@ -2,8 +2,12 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
+import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
+
+import java.util.Date;
 
 public class PaymentBillDataServiceStub implements PaymentBillDataService {
     /**
@@ -14,7 +18,7 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService {
      */
     @Override
     public ResultMessage submit(PaymentBillPo bill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -25,7 +29,7 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService {
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -36,7 +40,7 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -47,7 +51,9 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService {
      */
     @Override
     public PaymentBillPo[] query(PaymentBillQueryVo query) {
-        return new PaymentBillPo[0];
+        return new PaymentBillPo[]{
+                new PaymentBillPo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)
+        };
     }
 
     /**
@@ -57,6 +63,6 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService {
      */
     @Override
     public String getId() {
-        return null;
+        return "FXD-20171111-00001";
     }
 }
