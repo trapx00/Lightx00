@@ -97,8 +97,8 @@ public class SaleBillPo extends SaleBillBasePo {
         this.comment = comment;
     }
 
-    public SaleBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType);
+    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.Sale);
         this.supplier = supplier;
         this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;

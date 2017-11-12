@@ -1,8 +1,8 @@
-package trapx00.lightx00.client.datafactory.saledataservicefactory;
+package trapx00.lightx00.client.datafactory.clientdataservicefactory;
 
-import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
+import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
-import trapx00.lightx00.shared.dataservicestub.inventorydataservice.PurchaseBillDataServiceStub;
+import trapx00.lightx00.shared.dataservicestub.clientdataservice.ClientDataServiceStub;
 import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleBillDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;
 
@@ -11,13 +11,13 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class SaleBillDataServiceFactory {
+public class ClientDataServiceFactory {
 
-    private static SaleBillDataService service=new SaleBillDataServiceStub();
+    private static ClientDataService service=new ClientDataServiceStub();
 
     public static void initRmi(){
         try {
-            service =(SaleBillDataService)Naming.lookup(RmiHelper.generateRmiUrl(SaleBillDataService.class));
+            service =(ClientDataService)Naming.lookup(RmiHelper.generateRmiUrl(ClientDataService.class));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -27,7 +27,7 @@ public class SaleBillDataServiceFactory {
         }
     }
 
-    public SaleBillDataService getInstance() {
+    public ClientDataService getInstance() {
         //initRmi();
         return service;
     }

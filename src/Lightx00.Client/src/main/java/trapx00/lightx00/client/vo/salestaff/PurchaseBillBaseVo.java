@@ -7,15 +7,11 @@ import trapx00.lightx00.client.vo.BillVo;
 
 import java.util.Date;
 
-public class PurchaseBillBaseVo extends BillVo {
+public abstract class PurchaseBillBaseVo extends BillVo {
     private PurchaseBillType purchaseBillType;
 
     public PurchaseBillType getPurchaseBillType() {
         return purchaseBillType;
-    }
-
-    public void setPurchaseBillType(PurchaseBillType purchaseBillType) {
-        this.purchaseBillType = purchaseBillType;
     }
 
     public PurchaseBillBaseVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType) {

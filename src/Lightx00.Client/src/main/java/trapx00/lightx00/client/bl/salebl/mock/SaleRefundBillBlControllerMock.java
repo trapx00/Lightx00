@@ -1,14 +1,11 @@
-package trapx00.lightx00.client.bl.salebl;
+package trapx00.lightx00.client.bl.salebl.mock;
 
-import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
+import trapx00.lightx00.client.bl.salebl.SaleRefundBillBlController;
+import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 
-public class SaleRefundBillBlController implements SaleRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+public class SaleRefundBillBlControllerMock extends SaleRefundBillBlController {
 
     /**
      * Deletes a draft.
@@ -18,7 +15,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -29,7 +26,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -40,7 +37,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -51,7 +48,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public ResultMessage submit(SaleRefundBillVo saleRefundBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -62,7 +59,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public ResultMessage saveAsDraft(SaleRefundBillVo saleRefundBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -72,7 +69,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public String getId() {
-        return null;
+        return "0";
     }
 
     /**
@@ -83,6 +80,8 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query) {
-        return new SaleRefundBillVo[0];
+        SaleRefundBillVo[] saleRefundBillVos=new SaleRefundBillVo[1];
+        saleRefundBillVos[0]=new SaleRefundBillVo("0",null,null,null,null,null,1,null,100,100,100,100,null);
+        return saleRefundBillVos;
     }
 }

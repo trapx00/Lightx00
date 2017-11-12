@@ -6,15 +6,11 @@ import trapx00.lightx00.client.vo.BillVo;
 
 import java.util.Date;
 
-public class SaleBillBaseVo extends BillVo {
+public abstract class SaleBillBaseVo extends BillVo {
     private SaleBillType saleBillType;
 
     public SaleBillType getSaleBillType() {
         return saleBillType;
-    }
-
-    public void setSaleBillType(SaleBillType saleBillType) {
-        this.saleBillType = saleBillType;
     }
 
     public SaleBillBaseVo(String id, Date date, BillState state, SaleBillType saleBillType) {

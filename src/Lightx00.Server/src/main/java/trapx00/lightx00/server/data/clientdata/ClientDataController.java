@@ -4,7 +4,19 @@ import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientPo;
 
-public class ClientDataController implements ClientDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class ClientDataController extends UnicastRemoteObject implements ClientDataService {
+
+    /**
+     *
+     * @throws RemoteException
+     */
+    public ClientDataController() throws RemoteException {
+        super();
+    }
+
     /**
      * Query clients which includes the words
      *

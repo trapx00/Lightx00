@@ -1,14 +1,13 @@
-package trapx00.lightx00.client.bl.inventorybl;
+package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
-import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
+import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlController;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 
-public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService {
+import java.util.Date;
+
+public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
 
     /**
      * Deletes a draft.
@@ -18,7 +17,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -29,7 +28,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -40,7 +39,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -50,7 +49,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage submit(PurchaseBillVo purchaseBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -61,7 +60,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage saveAsDraft(PurchaseBillVo purchaseBill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -71,7 +70,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public String getId() {
-        return null;
+        return "0";
     }
 
     /**
@@ -82,8 +81,8 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query) {
-        return new PurchaseBillVo[0];
+        PurchaseBillVo[] purchaseBillVos=new PurchaseBillVo[1];
+        purchaseBillVos[0]=new PurchaseBillVo("0",null,null,null,1,null,null,100,null);
+        return purchaseBillVos;
     }
 }
-
-
