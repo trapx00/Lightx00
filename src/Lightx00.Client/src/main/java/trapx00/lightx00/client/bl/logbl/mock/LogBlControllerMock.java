@@ -6,6 +6,8 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.client.vo.log.LogVo;
 
+import java.util.Date;
+
 public class LogBlControllerMock extends LogBlController {
     /**
      * Writes log.
@@ -16,7 +18,7 @@ public class LogBlControllerMock extends LogBlController {
      */
     @Override
     public ResultMessage log(LogSeverity severity, String content) {
-        return super.log(severity, content);
+        return ResultMessage.Success;
     }
 
     /**
@@ -27,6 +29,6 @@ public class LogBlControllerMock extends LogBlController {
      */
     @Override
     public LogVo[] query(LogQueryVo query) {
-        return super.query(query);
+        return new LogVo[]{ new LogVo(new Date(), LogSeverity.Success,"123")};
     }
 }

@@ -4,13 +4,16 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
-public interface CashBillDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface CashBillDataService extends Remote {
     /**
      * Submits a CashBill or save it as a draft.
      * @param bill CashBill
      * @return whether the operation is done successfully
      */
-    ResultMessage submit(CashBillPo bill);
+    ResultMessage submit(CashBillPo bill) throws RemoteException;
 
 
     /**
@@ -19,7 +22,7 @@ public interface CashBillDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage activate(String id);
+    ResultMessage activate(String id) throws RemoteException;
 
     /**
      * Abandons a CashBill.
@@ -27,7 +30,7 @@ public interface CashBillDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage abandon(String id);
+    ResultMessage abandon(String id) throws RemoteException;
 
     /**
      * Queries CashBill.
@@ -35,11 +38,11 @@ public interface CashBillDataService {
      * @return CashBillVos that match the query condition
      */
 
-    CashBillPo[] query(CashBillQueryVo query);
+    CashBillPo[] query(CashBillQueryVo query) throws RemoteException;
 
     /**
      * Gets the id for the next bill.
      * @return id for the next bill
      */
-    String getId();
+    String getId() throws RemoteException;
 }

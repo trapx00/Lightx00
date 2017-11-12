@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.bankaccountbl.BankAccountBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+import java.util.Date;
 
 public class BankAccountBlControllerMock extends BankAccountBlController {
     /**
@@ -15,7 +16,7 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      */
     @Override
     public ResultMessage modifyBankAccount(String id, double delta) {
-        return super.modifyBankAccount(id, delta);
+        return ResultMessage.Success;
     }
 
     /**
@@ -26,7 +27,7 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      */
     @Override
     public ResultMessage add(BankAccountVo newAccount) {
-        return super.add(newAccount);
+        return ResultMessage.Success;
     }
 
     /**
@@ -37,7 +38,7 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      */
     @Override
     public ResultMessage modify(BankAccountVo newAccount) {
-        return super.modify(newAccount);
+        return ResultMessage.Success;
     }
 
     /**
@@ -48,7 +49,9 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      */
     @Override
     public BankAccountVo[] query(BankAccountQueryVo query) {
-        return super.query(query);
+        return new BankAccountVo[] {
+                new BankAccountVo("123","现金1",10.0,new Date())
+        };
     }
 
     /**
@@ -59,6 +62,6 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      */
     @Override
     public ResultMessage delete(BankAccountVo account) {
-        return super.delete(account);
+        return ResultMessage.Success;
     }
 }

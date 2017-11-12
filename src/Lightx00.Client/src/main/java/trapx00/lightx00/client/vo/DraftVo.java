@@ -5,16 +5,14 @@ import java.util.Date;
 public class DraftVo {
     private Date saveTime;
     private String id;
-    private String saverId;
+    private EmployeeVo saver;
     private Draftable draft;
-    private String billTypePoClassName;
 
-    public DraftVo(Date saveTime, String id, String saverId, Draftable draft, String billTypePoClassName) {
+    public DraftVo(Date saveTime, String id, EmployeeVo saver, Draftable draft) {
         this.saveTime = saveTime;
         this.id = id;
-        this.saverId = saverId;
+        this.saver = saver;
         this.draft = draft;
-        this.billTypePoClassName = billTypePoClassName;
     }
 
     public Date getSaveTime() {
@@ -33,12 +31,12 @@ public class DraftVo {
         this.id = id;
     }
 
-    public String getSaverId() {
-        return saverId;
+    public EmployeeVo getSaver() {
+        return saver;
     }
 
-    public void setSaverId(String saverId) {
-        this.saverId = saverId;
+    public void setSaver(EmployeeVo saver) {
+        this.saver = saver;
     }
 
     public Draftable getDraft() {
@@ -49,11 +47,4 @@ public class DraftVo {
         this.draft = draft;
     }
 
-    public String getBillTypePoClassName() {
-        return billTypePoClassName;
-    }
-
-    public void setBillTypePoClassName(String billTypePoClassName) {
-        this.billTypePoClassName = billTypePoClassName;
-    }
 }

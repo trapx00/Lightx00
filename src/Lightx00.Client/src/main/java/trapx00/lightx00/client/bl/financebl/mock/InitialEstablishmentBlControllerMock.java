@@ -1,9 +1,16 @@
 package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.InitialEstablishmentBlController;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
+
+import java.util.Date;
 
 public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBlController {
     /**
@@ -13,7 +20,11 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
      */
     @Override
     public SystemSnapshotVo autofill() {
-        return super.autofill();
+        return new SystemSnapshotVo("123",new Date(), BillState.Approved,
+                new CommodityVo[] {new CommodityVo("123","123","123",10.0,new Date(),"123","123",10.0,10.0,10.0,10.0,10.0 )},
+                new ClientVo[] { new ClientVo("123", ClientType.Retailer,5,"123","123","123","123","123@gmail.com",10.0,10.0,null)},
+                new BankAccountVo[] { new BankAccountVo("123","123",10.0, new Date())}
+                );
     }
 
     /**
@@ -24,7 +35,7 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
      */
     @Override
     public ResultMessage submit(SystemSnapshotVo snapshot) {
-        return super.submit(snapshot);
+        return ResultMessage.Success;
     }
 
     /**
@@ -35,7 +46,7 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
      */
     @Override
     public ResultMessage saveAsDraft(SystemSnapshotVo snapshot) {
-        return super.saveAsDraft(snapshot);
+        return ResultMessage.Success;
     }
 
     /**
@@ -46,7 +57,7 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return super.deleteDraft(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -57,6 +68,12 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
      */
     @Override
     public SystemSnapshotVo[] query(SystemSnapshotQueryVo query) {
-        return super.query(query);
+        return  new SystemSnapshotVo[]{
+                new SystemSnapshotVo("123", new Date(), BillState.Approved,
+                        new CommodityVo[]{new CommodityVo("123", "123", "123", 10.0, new Date(), "123", "123", 10.0, 10.0, 10.0, 10.0, 10.0)},
+                        new ClientVo[]{new ClientVo("123", ClientType.Retailer, 5, "123", "123", "123", "123", "123@gmail.com", 10.0, 10.0, null)},
+                        new BankAccountVo[]{new BankAccountVo("123", "123", 10.0, new Date())}
+                )
+        };
     }
 }

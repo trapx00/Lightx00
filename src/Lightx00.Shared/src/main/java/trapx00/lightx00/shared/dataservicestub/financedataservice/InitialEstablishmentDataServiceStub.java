@@ -2,9 +2,15 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.client.vo.financestaff.SystemSnapshotQueryVo;
-import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
+import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
+
+import java.util.Date;
 
 public class InitialEstablishmentDataServiceStub implements InitialEstablishmentDataService {
     /**
@@ -15,7 +21,18 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
      */
     @Override
     public ResultMessage submit(SystemSnapshotPo snapshot) {
-        return null;
+        return ResultMessage.Success;
+    }
+
+    /**
+     * Activates a SystemSnapshot.
+     *
+     * @param id id for the SystemSnapshot
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage activate(String id) {
+        return ResultMessage.Success;
     }
 
     /**
@@ -26,7 +43,7 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -36,7 +53,7 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
      */
     @Override
     public String getId() {
-        return null;
+        return "QCJZ-20171111-00020";
     }
 
     /**
@@ -46,7 +63,15 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
      * @return SystemSnapshotVos that match the condition
      */
     @Override
-    public SystemSnapshotVo query(SystemSnapshotQueryVo query) {
-        return null;
+    public SystemSnapshotPo[] query(SystemSnapshotQueryVo query) {
+        return  new SystemSnapshotPo[]{
+                new SystemSnapshotPo("123", new Date(), BillState.Approved,
+                        new CommodityPo[]{new CommodityPo("123", "123", "123", 10.0, new Date(), "123", "123", 10.0, 10.0, 10.0, 10.0, 10.0)},
+                        new ClientPo[]{new ClientPo("123", ClientType.Retailer, 5, "123", "123", "123", "123", "123@gmail.com", 10.0, 10.0, null)},
+                        new BankAccountPo[]{new BankAccountPo("123", "123", 10.0, new Date())}
+                )
+        };
     }
+
+
 }

@@ -4,13 +4,16 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 
-public interface PaymentBillDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface PaymentBillDataService extends Remote{
     /**
      * Submits a bill or saves a bill as a draft
      * @param bill PaymentBill
      * @return whether the operation is done successfully
      */
-    ResultMessage submit(PaymentBillPo bill);
+    ResultMessage submit(PaymentBillPo bill) throws RemoteException;
 
     /**
      * Activates a bill.
@@ -18,7 +21,7 @@ public interface PaymentBillDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage activate(String id);
+    ResultMessage activate(String id) throws RemoteException;
 
     /**
      * Abandons a bill.
@@ -26,7 +29,7 @@ public interface PaymentBillDataService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage abandon(String id);
+    ResultMessage abandon(String id) throws RemoteException;
 
     /**
      * Queries bills
@@ -34,11 +37,11 @@ public interface PaymentBillDataService {
      * @return PaymentBillVos that match query condition
      */
 
-    PaymentBillPo[] query(PaymentBillQueryVo query);
+    PaymentBillPo[] query(PaymentBillQueryVo query) throws RemoteException;
 
     /**
      * Gets the id for the next bill.
      * @return id for the next bill
      */
-    String getId();
+    String getId() throws RemoteException;
 }
