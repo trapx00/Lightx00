@@ -3,9 +3,27 @@ package trapx00.lightx00.server.data.admindata;
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
-import trapx00.lightx00.shared.vo.admin.UserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
-public class UserManagementDataController implements UserManagementDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
+
+public class UserManagementDataController extends UnicastRemoteObject implements UserManagementDataService {
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     *
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected UserManagementDataController() throws RemoteException {
+    }
+
     /**
      * filter some user accounts
      * @param query the filter conditions

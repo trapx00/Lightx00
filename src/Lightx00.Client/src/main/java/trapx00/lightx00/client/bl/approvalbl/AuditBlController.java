@@ -1,21 +1,10 @@
 package trapx00.lightx00.client.bl.approvalbl;
 
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.client.vo.manager.BillQueryVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
 public class AuditBlController implements AuditBlService,ApprovalRequest {
-
-    /**
-     * filter some bills to audit
-     * @param query the filter conditions
-     * @return array of bills whitch match the conditions
-     */
-    @Override
-    public BillVo[] query(BillQueryVo query) {
-        return new BillVo[0];
-    }
 
     /**
      * reject to approve the bill

@@ -3,7 +3,7 @@ package trapx00.lightx00.shared.po.manager.promotion;
 
 import java.util.Date;
 
-public class PromotionPoBase{
+public abstract class PromotionPoBase{
     private String id;
     private PromotionType type;
     private Date startDate;
@@ -18,14 +18,6 @@ public class PromotionPoBase{
         this.state = state;
     }
 
-    public PromotionState getState() {
-        return state;
-    }
-
-    public PromotionType getType() {
-        return type;
-    }
-
     public Date getEndDate() {
         return endDate;
     }
@@ -37,6 +29,10 @@ public class PromotionPoBase{
     public Date getStartDate() {
         return startDate;
     }
+
+    public PromotionType getPromotionType(){return type;}
+
+    public PromotionState getPromotionState(){return state;}
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
@@ -54,7 +50,4 @@ public class PromotionPoBase{
         this.state = state;
     }
 
-    public void setType(PromotionType type) {
-        this.type = type;
-    }
 }

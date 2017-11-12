@@ -2,10 +2,27 @@ package trapx00.lightx00.server.data.approvaldata;
 
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.vo.BillVo;
-import trapx00.lightx00.shared.vo.manager.BillQueryVo;
+import trapx00.lightx00.shared.po.bill.BillPo;
+import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
-public class AuditDataController implements AuditDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
+
+public class AuditDataController extends UnicastRemoteObject implements AuditDataService {
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     *
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected AuditDataController() throws RemoteException {
+    }
 
     /**
      * filter some bills
@@ -13,8 +30,8 @@ public class AuditDataController implements AuditDataService {
      * @return array of bills which match the conditions
      */
     @Override
-    public BillVo[] query(BillQueryVo query) {
-        return new BillVo[0];
+    public BillPo[] query(BillQueryVo query) {
+        return new BillPo[0];
     }
 
     /**
@@ -23,7 +40,7 @@ public class AuditDataController implements AuditDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage reject(BillVo bill) {
+    public ResultMessage reject(BillPo bill) {
         return null;
     }
 
@@ -33,7 +50,7 @@ public class AuditDataController implements AuditDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage pass(BillVo bill) {
+    public ResultMessage pass(BillPo bill) {
         return null;
     }
 
@@ -43,7 +60,7 @@ public class AuditDataController implements AuditDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestApproval(BillVo bill) {
+    public ResultMessage requestApproval(BillPo bill) {
         return null;
     }
 }

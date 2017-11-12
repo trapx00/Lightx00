@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.promotionbl;
 
 public class PromotionInfoFactory {
-    private static PromotionInfo instance = new PromotionBlController();
+    private static PromotionInfo instance = new PromotionInfoController();
 
     /**
      * get a PromotionInfo instance

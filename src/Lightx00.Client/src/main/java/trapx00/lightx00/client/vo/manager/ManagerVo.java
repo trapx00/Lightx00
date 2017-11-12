@@ -5,9 +5,9 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 
 import java.util.Date;
 
-public class ManagerVo extends EmployeeVo{
+public class ManagerVo extends EmployeeVo {
 
-    public ManagerVo(String name, String Id, Date workSince, String username) {
-        super(name, Id, workSince, username, EmployeePosition.Manager);
+    public ManagerVo(String name, String id, Date workSince, String username) {
+        super(name, id, workSince, username, EmployeePosition.Manager);
     }
 }
