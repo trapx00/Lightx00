@@ -6,6 +6,8 @@ import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommodityBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
+
 
 
 import java.util.Date;
@@ -25,7 +27,8 @@ public class CommodityBlServiceDriver {
 
     @Before
     public void setup()throws Exception{
-        commoditys=service.query("C0001");
+
+        commoditys=service.query(new CommodityQueryVo("C0001","LedLight"));
     }
     @Test
     public void add() throws Exception {

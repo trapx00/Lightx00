@@ -1,17 +1,18 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.bl.commoditybl.CommodityService;
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 
 import javax.xml.crypto.Data;
 
-public class InventoryGiftBlController implements InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,CommodityService {
+public class InventoryGiftBlController implements InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityService {
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo
@@ -42,7 +43,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
     }
 
     /**
-     * Query a commodity
+     * Query a commoditybl
      * @param commodityQueryVo
      * @return CommodityVo that match to the requirement
      */
@@ -66,6 +67,16 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage activate(String id) {
+        return null;
+    }
+    /**
+     * Deletes a draft.
+     *
+     * @param id id of the draft to be deleted
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage deleteDraft(String id) {
         return null;
     }
 }

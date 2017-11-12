@@ -3,9 +3,18 @@ package trapx00.lightx00.server.data.inventorydata;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
-public class InventoryGiftDataController implements InventoryGiftDataService {
+public class InventoryGiftDataController extends UnicastRemoteObject implements InventoryGiftDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    protected InventoryGiftDataController() throws RemoteException {
+        super();
+    }
     /**
      * Gets the giftBill during specified time range
      * @param time

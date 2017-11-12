@@ -3,17 +3,26 @@ package trapx00.lightx00.server.data.commoditydata;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
-import trapx00.lightx00.shared.vo.inventorystaff.CommodityQueryVo;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
-public class CommodityDataController implements CommodityDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
+public class CommodityDataController extends UnicastRemoteObject implements CommodityDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    protected CommodityDataController() throws RemoteException {
+        super();
+    }
     /**
      *  Create a new commodity
      * @param newCommodity
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommodityPo newCommodity) {
+    public ResultMessage add(CommodityPo newCommodity)  {
         return null;
     }
     /**

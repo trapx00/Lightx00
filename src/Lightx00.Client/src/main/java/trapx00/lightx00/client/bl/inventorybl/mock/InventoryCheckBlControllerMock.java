@@ -8,7 +8,7 @@ import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
 import java.io.File;
 import java.util.Date;
 
-public class InventoryCheckBlContronllerMock extends InventoryCheckBlController {
+public class InventoryCheckBlControllerMock extends InventoryCheckBlController {
     /**
      * Checks the invenntory change during specified time range
      * @param beginTime

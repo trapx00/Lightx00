@@ -17,6 +17,11 @@ public class InventoryGiftDataServiceStub implements InventoryGiftDataService {
     }
 
     @Override
+    public String getId() {
+        return "X0001";
+    }
+
+    @Override
     public void init() {
 
     }

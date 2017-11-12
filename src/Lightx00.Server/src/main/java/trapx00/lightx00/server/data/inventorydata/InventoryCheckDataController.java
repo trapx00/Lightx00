@@ -4,9 +4,18 @@ import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDa
 import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
-public class InventoryCheckDataController implements InventoryCheckDataService {
+public class InventoryCheckDataController extends UnicastRemoteObject implements InventoryCheckDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    protected InventoryCheckDataController() throws RemoteException {
+        super();
+    }
     /**
      * Checks the invenntory change between the begintime and endtime
      * @param beginTime

@@ -23,14 +23,10 @@ public class InventoryWarningBlServiceDriver {
         assertEquals(ResultMessage.Success,service.submit(inventoryBillVo));
     }
 
-    @Test
-    public void resume() throws Exception {
-        assertEquals("B0001",service.resume().getId());
-    }
 
     @Test
     public void modify() throws Exception {
-        assertEquals(ResultMessage.Success,service.modify(commodityVo,100));
+        assertEquals(ResultMessage.Success,service.modify("01111",100));
     }
 
     @Test

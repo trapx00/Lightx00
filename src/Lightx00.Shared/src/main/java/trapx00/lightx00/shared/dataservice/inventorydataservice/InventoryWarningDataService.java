@@ -2,10 +2,12 @@ package trapx00.lightx00.shared.dataservice.inventorydataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-public interface InventoryWarningDataService {
+import java.rmi.Remote;
+
+
+public interface InventoryWarningDataService extends Remote {
     /**
      * Submits a bill
      * @param bill
@@ -14,7 +16,7 @@ public interface InventoryWarningDataService {
     ResultMessage submit(InventoryBillPo bill);
 
     /**
-     *  Modifys the warning value of the commodity
+     *  Modifys the warning value of the commoditybl
      * @param id
      * @param warningValue
      * @return  whether the operation is done successfully

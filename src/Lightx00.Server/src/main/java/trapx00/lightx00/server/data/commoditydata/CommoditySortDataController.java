@@ -3,9 +3,21 @@ package trapx00.lightx00.server.data.commoditydata;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
-import trapx00.lightx00.shared.vo.inventorystaff.CommoditySortQueryVo;
+import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
-public class CommoditySortDataController implements CommoditySortDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+
+public class CommoditySortDataController extends UnicastRemoteObject implements CommoditySortDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    protected CommoditySortDataController() throws RemoteException {
+        super();
+    }
+
     /**
      * Create a new commoditySort attaching to a parentSort
      * @param newCSort
@@ -37,7 +49,7 @@ public class CommoditySortDataController implements CommoditySortDataService {
     /**
      *  Delete a commoditySort
      * @param commoditySort
-     * @return whether the operation is done successfully
+     * @return whether the operation is done
      */
     @Override
     public ResultMessage delete(CommoditySortPo commoditySort) {
@@ -62,7 +74,7 @@ public class CommoditySortDataController implements CommoditySortDataService {
     }
 
     @Override
-    public void init() {
+    public void init(){
 
     }
 }

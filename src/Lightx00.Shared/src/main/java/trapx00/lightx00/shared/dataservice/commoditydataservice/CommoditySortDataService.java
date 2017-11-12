@@ -2,9 +2,13 @@ package trapx00.lightx00.shared.dataservice.commoditydataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
-import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
+import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
-public interface CommoditySortDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+
+public interface CommoditySortDataService extends Remote {
 
     /**
      * Create a new commoditySort attaching to a parentSort
@@ -12,42 +16,42 @@ public interface CommoditySortDataService {
      * @param parentSort
      * @return whether the operation is done successfully
      */
-    ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort);//增加分类
+    ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort) throws RemoteException;//增加分类
 
     /**
      * Modify a commoditySort
      * @param commoditySort
      * @return whether the operation is done successfully
      */
-    ResultMessage modify(CommoditySortPo commoditySort);//修改分类
+    ResultMessage modify(CommoditySortPo commoditySort) throws RemoteException;//修改分类
 
     /**
      *  Query a commodifySort
      * @param commoditySortQueryVo
      * @return the list of the commoditySort
      */
-    CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo);//查询
+    CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) throws RemoteException;//查询
 
     /**
      *  Delete a commoditySort
      * @param commoditySort
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(CommoditySortPo commoditySort);//删除
+    ResultMessage delete(CommoditySortPo commoditySort) throws RemoteException;//删除
 
     /**
      * Display all commoditySorts
      * @return the list of commoditySort
      */
-    CommoditySortPo[] display();//
+    CommoditySortPo[] display() throws RemoteException;//
 
     /**
      *  Get the childsoft of a commoditySort
      * @param commoditySort
      * @return the childCommoditySort
      */
-    CommoditySortPo[] dispaly(CommoditySortPo commoditySort);
+    CommoditySortPo[] dispaly(CommoditySortPo commoditySort) throws RemoteException;
 
-    void init();
+    void init() throws RemoteException;
 
 }

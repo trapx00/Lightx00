@@ -2,9 +2,9 @@ package trapx00.lightx00.client.bl.inventorybl.mock;
 
 import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 
 public class InventoryWarningBlControllerMock extends InventoryWarningBlController{
@@ -29,8 +29,8 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
     }
 
     /**
-     * Modifys the warning value of the commodity
-     * @param id ,the id of the commodity
+     * Modifys the warning value of the commoditybl
+     * @param id ,the id of the commoditybl
      * @param modifyWarning
      * @return whether the operation is done successfully
      */
@@ -98,7 +98,7 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
     }
 
     /**
-     * Query a commodity
+     * Query a commoditybl
      * @return Commodity that match query condition
      */
     @Override

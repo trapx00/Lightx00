@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 import java.util.Date;
 
@@ -17,7 +17,12 @@ public class InventoryWarningDataServiceStub implements InventoryWarningDataServ
     }
 
     @Override
-    public ResultMessage modify(CommodityPo commodity, double warningValue) {
+    public String getId() {
+        return null;
+    }
+
+    @Override
+   public ResultMessage modify(String id, double warningValue) {
         return ResultMessage.Success;
     }
 
@@ -38,6 +43,13 @@ public class InventoryWarningDataServiceStub implements InventoryWarningDataServ
     @Override
     public InventoryBillPo[] getLossByIds(String... ids) {
         InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Loss);
+        InventoryBillPo[]input={inventoryBillVo};
+        return  input;
+    }
+
+    @Override
+    public InventoryBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
+        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow);
         InventoryBillPo[]input={inventoryBillVo};
         return  input;
     }

@@ -3,9 +3,20 @@ package trapx00.lightx00.server.data.inventorydata;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
-import trapx00.lightx00.shared.vo.inventorystaff.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-public class InventoryWarningDataController implements InventoryWarningDataService{
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class InventoryWarningDataController extends UnicastRemoteObject implements InventoryWarningDataService {
+    /**
+     *
+     * @throws RemoteException
+     */
+    protected InventoryWarningDataController() throws RemoteException {
+        super();
+    }
     /**
      * Submits a bill
      * @param bill
@@ -60,6 +71,8 @@ public class InventoryWarningDataController implements InventoryWarningDataServi
     public InventoryBillPo[] getLossByIds(String... ids) {
         return new InventoryBillPo[0];
     }
+
+
     /**
      *  Querys a bill
      * @param inventoryBillQueryVo
