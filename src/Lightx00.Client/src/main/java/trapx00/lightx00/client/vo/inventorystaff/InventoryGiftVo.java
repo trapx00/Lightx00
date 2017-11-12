@@ -13,6 +13,7 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
 public class InventoryGiftVo extends InventoryBillBaseVo{
+
     PromotionCommodity[] gifts;
 
     public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts) {

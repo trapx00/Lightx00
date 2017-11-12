@@ -9,6 +9,7 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 
 import java.util.Date;
 
@@ -50,12 +51,14 @@ public class CommodityBlControllerTest {
         assertEquals(ResultMessage.Success,commodityBlController.delete(LedLight) );
     }
 
-    @Test
-    public void queryCommodity() throws Exception {
-    }
+  //  @Test
+  //  public void queryCommodity() throws Exception {
+   //
+  //  }
 
     @Test
     public void modifyInventory() throws Exception {
+        assertEquals(ResultMessage.Success,commodityBlController.modifyInventory("C0001", InventoryModificationFlag.Up,0.1));
     }
 
 }

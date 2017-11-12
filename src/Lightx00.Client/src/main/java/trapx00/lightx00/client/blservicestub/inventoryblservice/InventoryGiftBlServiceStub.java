@@ -23,11 +23,11 @@ public class InventoryGiftBlServiceStub implements InventoryGiftBlService {
 
     @Override
     public String getId() {
-        return null;
+        return "123";
     }
 
     @Override
-    public InventoryGiftVo getGift(Data time) {
+    public InventoryGiftVo getGift(Date time) {
         return null;
     }
 

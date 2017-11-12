@@ -4,6 +4,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 
 import javax.xml.crypto.Data;
+import java.util.Date;
 
 public interface InventoryGiftBlService {
     /**
@@ -24,7 +25,7 @@ public interface InventoryGiftBlService {
      * @param time
      * @return the giftBill
      */
-    InventoryGiftVo getGift(Data time);
+    InventoryGiftVo getGift(Date time);
 
 
 

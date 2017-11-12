@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.commoditybl.CommodityBlController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 
 
 public class CommodityBlControllerMock extends CommodityBlController {
@@ -47,5 +48,15 @@ public class CommodityBlControllerMock extends CommodityBlController {
     public ResultMessage delete(CommodityVo commodity) {
         return super.delete(commodity);
     }
-
+    /**
+     * Modify the inventoryNum
+     * @param commodityId
+     * @param flag
+     * @param delta
+     * @return ResultMessage
+     */
+    @Override
+    public ResultMessage modifyInventory(String commodityId, InventoryModificationFlag flag, double delta) {
+        return super.modifyInventory(commodityId, flag, delta);
+    }
 }
