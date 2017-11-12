@@ -9,7 +9,7 @@ public class RmiHelper {
     private static final String port = "8888";
 
     public static String generateRmiUrl(Class... interfaces) {
-        return "rmi://" + url + "/" + port + "/" + Arrays.stream(interfaces).map(Class::getName).collect(Collectors.joining("/"));
+        return "rmi://" + url + ":" + port + "/" + Arrays.stream(interfaces).map(Class::getName).collect(Collectors.joining("/"));
 
     }
 }

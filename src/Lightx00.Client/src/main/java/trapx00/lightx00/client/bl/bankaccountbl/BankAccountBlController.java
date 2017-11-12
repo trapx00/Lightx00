@@ -54,11 +54,11 @@ public class BankAccountBlController implements BankAccountManagementBlService, 
     /**
      * Deletes a bank account.
      *
-     * @param account BankAccountQueryVo
+     * @param id BankAccountQueryVo
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(BankAccountVo account) {
+    public ResultMessage delete(String id) {
         return null;
     }
 }

@@ -30,9 +30,9 @@ public interface BankAccountManagementBlService {
 
     /**
      * Deletes a bank account.
-     * @param account BankAccountQueryVo
+     * @param id id for the account to be deleted
      * @return whether the operation is done successfully
      */
 
-    ResultMessage delete(BankAccountVo account);
+    ResultMessage delete(String id);
 }

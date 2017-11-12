@@ -8,5 +8,5 @@ import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import java.rmi.RemoteException;
 
-public class NotificatioDataControllerMock extends NotificationDataServiceStub {
+public class NotificationDataControllerMock extends NotificationDataServiceStub {
 }
