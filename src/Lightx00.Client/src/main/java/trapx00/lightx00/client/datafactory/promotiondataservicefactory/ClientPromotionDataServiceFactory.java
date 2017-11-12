@@ -1,6 +1,7 @@
-package trapx00.lightx00.shared.dataservice.promotiondataservice.factory;
+package trapx00.lightx00.client.datafactory.promotiondataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionDataService;
+import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -13,7 +14,7 @@ public class ClientPromotionDataServiceFactory {
 
     public ClientPromotionDataServiceFactory() {
         try {
-            clientPromotionDataService = (ClientPromotionDataService) Naming.lookup("rmi://localhost:8888/ClientPromotionDataService");
+            clientPromotionDataService = (ClientPromotionDataService) Naming.lookup(RmiHelper.generateRmiUrl(ClientPromotionDataService.class));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {

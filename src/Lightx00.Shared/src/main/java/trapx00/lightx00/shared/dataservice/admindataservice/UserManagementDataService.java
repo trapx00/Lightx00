@@ -15,4 +15,5 @@ public interface UserManagementDataService extends Remote {
     ResultMessage modify(EmployeePo account) throws RemoteException;
 
     ResultMessage delete(EmployeePo account) throws RemoteException;
+
 }

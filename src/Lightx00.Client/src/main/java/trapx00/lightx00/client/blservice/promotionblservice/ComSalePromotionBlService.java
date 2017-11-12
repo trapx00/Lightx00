@@ -4,6 +4,8 @@ import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
+import java.rmi.RemoteException;
+
 public interface ComSalePromotionBlService {
     /**
      * submit a ComSalePromotionVo
@@ -18,6 +20,13 @@ public interface ComSalePromotionBlService {
      * @return whether the operation is done successfully
      */
     ResultMessage saveAsDraft(ComSalePromotionVo promotion);
+
+    /**
+     * filter ComSalePromotionVo
+     * @param query the filter conditions
+     * @return array of ComSalePromotionVo which match the conditions
+     */
+    ComSalePromotionVo[] queryPromotion(PromotionQueryVo query);
 
     /**
      * delete a overdue or needless ComSalePromotionVo

@@ -28,6 +28,16 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
     }
 
     /**
+     * filter TotalPricePromotionVo
+     * @param query the filter conditions
+     * @return array of TotalPricePromotionVo which match the conditions
+     */
+    @Override
+    public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
+        return new TotalPricePromotionVo[0];
+    }
+
+    /**
      * delete a overdue or needless TotalPriceGiftVo
      * @param promotion the TotalPriceGiftVo to be deleted
      * @return whether the operation is done successfully

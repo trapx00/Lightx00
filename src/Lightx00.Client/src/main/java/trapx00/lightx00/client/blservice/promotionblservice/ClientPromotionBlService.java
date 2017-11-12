@@ -4,6 +4,8 @@ import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
+import java.rmi.RemoteException;
+
 public interface ClientPromotionBlService {
     /**
      * submit a ClientPromotionVo
@@ -18,6 +20,13 @@ public interface ClientPromotionBlService {
      * @return whether the operation is done successfully
      */
     ResultMessage saveAsDraft(ClientPromotionVo promotion);
+
+    /**
+     * filter ClientPromotionVo
+     * @param query the filter conditions
+     * @return array of ClientPromotionVo which match the conditions
+     */
+    ClientPromotionVo[] queryPromotion(PromotionQueryVo query);
 
     /**
      * delete a overdue or needless ClientPromotionVo

@@ -3,7 +3,11 @@ package trapx00.lightx00.client.bl.promotionbl.mock;
 import trapx00.lightx00.client.bl.promotionbl.ComSalePromotionBlController;
 import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+
+import java.util.Date;
 
 public class ComSalePromotionBlControllerMock extends ComSalePromotionBlController {
     /**
@@ -12,7 +16,7 @@ public class ComSalePromotionBlControllerMock extends ComSalePromotionBlControll
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(ComSalePromotionVo newPromotion) {
-        return super.submit(newPromotion);
+        return ResultMessage.Success;
     }
 
     /**
@@ -21,7 +25,18 @@ public class ComSalePromotionBlControllerMock extends ComSalePromotionBlControll
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(ComSalePromotionVo promotion) {
-        return super.saveAsDraft(promotion);
+        return ResultMessage.Success;
+    }
+
+    /**
+     * filter ComSalePromotionVo
+     * @param query the filter conditions
+     * @return array of ComSalePromotionVo which match the conditions
+     */
+    public ComSalePromotionVo[] queryPromotion(PromotionQueryVo query) {
+        return new ComSalePromotionVo[]{
+                new ComSalePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,new PromotionCommodity[0],200)
+        };
     }
 
     /**
@@ -30,7 +45,7 @@ public class ComSalePromotionBlControllerMock extends ComSalePromotionBlControll
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(ComSalePromotionVo promotion) {
-        return super.delete(promotion);
+        return ResultMessage.Success;
     }
 
     /**

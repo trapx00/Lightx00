@@ -3,7 +3,10 @@ package trapx00.lightx00.client.bl.promotionbl.mock;
 import trapx00.lightx00.client.bl.promotionbl.ClientPromotionBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+
+import java.util.Date;
 
 public class ClientPromotionBlControllerMock extends ClientPromotionBlController {
 
@@ -13,7 +16,7 @@ public class ClientPromotionBlControllerMock extends ClientPromotionBlController
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(ClientPromotionVo promotion) {
-        return super.submit(promotion);
+        return ResultMessage.Success;
     }
 
     /**
@@ -22,8 +25,21 @@ public class ClientPromotionBlControllerMock extends ClientPromotionBlController
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(ClientPromotionVo promotion) {
-        return super.saveAsDraft(promotion);
+        return ResultMessage.Success;
     }
+
+    /**
+     * filter ClientPromotionVo
+     * @param query the filter conditions
+     * @return array of ClientPromotionVo which match the conditions
+     */
+    @Override
+    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
+        return new ClientPromotionVo[]{
+                new ClientPromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,1,200)
+        };
+    }
+
 
     /**
      * delete a overdue or needless ClientPromotionVo
@@ -31,7 +47,7 @@ public class ClientPromotionBlControllerMock extends ClientPromotionBlController
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(ClientPromotionVo promotion) {
-        return super.delete(promotion);
+        return ResultMessage.Success;
     }
 
     /**

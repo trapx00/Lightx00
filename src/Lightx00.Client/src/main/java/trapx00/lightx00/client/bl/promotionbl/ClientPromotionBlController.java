@@ -29,6 +29,16 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
     }
 
     /**
+     * filter ClientPromotionVo
+     * @param query the filter conditions
+     * @return array of ClientPromotionVo which match the conditions
+     */
+    @Override
+    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
+        return new ClientPromotionVo[0];
+    }
+
+    /**
      * delete a overdue or needless ClientPromotionVo
      * @param promotion the ClientPromotionVo to be deleted
      * @return whether the operation is done successfully

@@ -29,6 +29,16 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
+     * filter ComSalePromotionVo
+     * @param query the filter conditions
+     * @return array of ComSalePromotionVo which match the conditions
+     */
+    @Override
+    public ComSalePromotionVo[] queryPromotion(PromotionQueryVo query) {
+        return new ComSalePromotionVo[0];
+    }
+
+    /**
      * delete a overdue or needless ComSalePromotionVo
      * @param promotion the ComSalePromotionVo to be deleted
      * @return whether the operation is done successfully

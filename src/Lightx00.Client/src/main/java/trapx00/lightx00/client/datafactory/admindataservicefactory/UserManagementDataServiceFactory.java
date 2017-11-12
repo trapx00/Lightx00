@@ -1,6 +1,7 @@
-package trapx00.lightx00.shared.dataservice.admindataservice.factory;
+package trapx00.lightx00.client.datafactory.admindataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -13,7 +14,7 @@ public class UserManagementDataServiceFactory {
 
     public UserManagementDataServiceFactory() {
         try {
-            userManagementDataService = (UserManagementDataService) Naming.lookup("rmi://localhost:8888/UserManagementDataService");
+            userManagementDataService = (UserManagementDataService) Naming.lookup(RmiHelper.generateRmiUrl(UserManagementDataService.class));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {

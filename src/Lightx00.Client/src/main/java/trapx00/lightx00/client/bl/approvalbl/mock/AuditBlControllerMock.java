@@ -14,7 +14,7 @@ public class AuditBlControllerMock extends AuditBlController {
      */
     @Override
     public ResultMessage reject(BillVo bill) {
-        return super.reject(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -24,7 +24,7 @@ public class AuditBlControllerMock extends AuditBlController {
      */
     @Override
     public ResultMessage pass(BillVo bill) {
-        return super.pass(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -34,6 +34,6 @@ public class AuditBlControllerMock extends AuditBlController {
      */
     @Override
     public ResultMessage requestMessage(BillVo bill) {
-        return super.requestMessage(bill);
+        return ResultMessage.Success;
     }
 }
