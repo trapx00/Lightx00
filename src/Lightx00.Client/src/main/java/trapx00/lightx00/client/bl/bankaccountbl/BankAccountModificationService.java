@@ -2,7 +2,7 @@ package trapx00.lightx00.client.bl.bankaccountbl;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 
-public interface BankAccoutModificationService {
+public interface BankAccountModificationService {
     /**
      * Modifies a bank account's balance.
      * @param id bank account's id

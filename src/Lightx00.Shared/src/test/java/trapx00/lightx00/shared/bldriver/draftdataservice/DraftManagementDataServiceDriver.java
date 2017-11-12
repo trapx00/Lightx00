@@ -11,12 +11,12 @@ public class DraftManagementDataServiceDriver {
     DraftManagementDataService service = new DraftManagementDataServiceStub();
     @Test
     public void update() throws Exception {
-        assertEquals("123",service.update()[0].getId());
+        assertEquals("123",service.update(x->true)[0].getId());
     }
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success, service.delete(service.update()[0].getId()));
+        assertEquals(ResultMessage.Success, service.delete(service.update(x->true)[0].getId()));
     }
 
 }

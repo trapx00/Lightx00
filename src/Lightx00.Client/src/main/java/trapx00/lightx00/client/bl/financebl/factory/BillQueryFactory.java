@@ -1,12 +1,16 @@
 package trapx00.lightx00.client.bl.financebl.factory;
 
-import trapx00.lightx00.client.bl.financebl.*;
+
+import trapx00.lightx00.client.bl.financebl.CashBillInfo;
+import trapx00.lightx00.client.bl.financebl.PaymentBillInfo;
+import trapx00.lightx00.client.bl.financebl.ReceivalBillInfo;
+import trapx00.lightx00.client.bl.financebl.SystemSnapshotInfo;
 
 public class BillQueryFactory {
-    private static CashBillInfo cashbillInfo = new CashBillBlController();
-    private static PaymentBillInfo paymentBillInfo = new PaymentBillBlController();
-    private static ReceivalBillInfo receivalBillInfo = new ReceivalBillBlController();
-    private static SystemSnapshotInfo systemSnapshotInfo = new InitialEstablishmentBlController();
+    private static CashBillInfo cashbillInfo = CashBillFactory.getCashBillInfo();
+    private static PaymentBillInfo paymentBillInfo = PaymentBillFactory.getPaymentBillInfo();
+    private static ReceivalBillInfo receivalBillInfo = ReceivalBillFactory.getReceivalBillInfo();
+    private static SystemSnapshotInfo systemSnapshotInfo = InitialEstablishmentBillFactory.getSystemSnapshotInfo();
 
 
     public static CashBillInfo getCashbillInfo() {

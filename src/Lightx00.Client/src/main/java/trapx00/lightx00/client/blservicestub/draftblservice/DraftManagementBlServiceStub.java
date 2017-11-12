@@ -11,7 +11,7 @@ public class DraftManagementBlServiceStub implements DraftManagementBlService {
     @Override
     public DraftVo[] update() {
         return new DraftVo[]{
-                new DraftVo(new Date(), "","",null,"")
+                new DraftVo(new Date(), "",null,null)
         };
     }
 
