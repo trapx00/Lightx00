@@ -6,17 +6,17 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 import java.rmi.RemoteException;
 
 public class ClientPromotionDataControllerFactory {
-    private static ClientPromotionDataService controller;
+    private static ClientPromotionDataService service;
 
     static {
         try{
-            controller = new ClientPromotionDataControllerMock();
+            service = new ClientPromotionDataControllerMock();
         }catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    public static ClientPromotionDataService getController() {
-        return controller;
+    public static ClientPromotionDataService getService() {
+        return service;
     }
 }

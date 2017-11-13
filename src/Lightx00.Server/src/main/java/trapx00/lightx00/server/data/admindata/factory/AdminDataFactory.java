@@ -6,17 +6,17 @@ import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataSe
 import java.rmi.RemoteException;
 
 public class AdminDataFactory {
-    private static UserManagementDataService controller;
+    private static UserManagementDataService service;
 
     static {
         try{
-            controller = new UserManagementDataControllerMock();
+            service = new UserManagementDataControllerMock();
         }catch (RemoteException e){
             e.printStackTrace();
         }
     }
 
-    public static UserManagementDataService getController() {
-        return controller;
+    public static UserManagementDataService getService() {
+        return service;
     }
 }

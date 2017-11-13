@@ -6,17 +6,17 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotion
 import java.rmi.RemoteException;
 
 public class ComSalePromotionDataControllerFactory {
-    private static ComSalePromotionDataService controller;
+    private static ComSalePromotionDataService service;
 
     static {
         try{
-            controller = new ComSalePromotionDataControllerMock();
+            service = new ComSalePromotionDataControllerMock();
         }catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    public static ComSalePromotionDataService getController() {
-        return controller;
+    public static ComSalePromotionDataService getService() {
+        return service;
     }
 }

@@ -7,17 +7,17 @@ import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import java.rmi.RemoteException;
 
 public class AuditDataControllerFactory {
-    private static AuditDataService controller;
+    private static AuditDataService service;
 
     static {
         try{
-            controller = new AuditDataControllerMock();
+            service = new AuditDataControllerMock();
         }catch (RemoteException e){
             e.printStackTrace();
         }
     }
 
-    public static AuditDataService getController() {
-        return controller;
+    public static AuditDataService getService() {
+        return service;
     }
 }

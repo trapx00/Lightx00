@@ -6,17 +6,17 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromot
 import java.rmi.RemoteException;
 
 public class TotalPricePromotionDataControllerFactory {
-    private static TotalPricePromotionDataService controller;
+    private static TotalPricePromotionDataService service;
 
     static {
         try{
-            controller = new TotalPricePromotionDataControllerMock();
+            service = new TotalPricePromotionDataControllerMock();
         }catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    public static TotalPricePromotionDataService getController() {
-        return controller;
+    public static TotalPricePromotionDataService getService() {
+        return service;
     }
 }
