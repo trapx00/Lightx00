@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 
 import java.rmi.RemoteException;
 
-public class ClientPromotionDataControllerFactory {
+public class ClientPromotionDataFactory {
     private static ClientPromotionDataService service;
 
     static {

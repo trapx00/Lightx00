@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 
 import java.rmi.RemoteException;
 
-public class AuditDataControllerFactory {
+public class AuditDataFactory {
     private static AuditDataService service;
 
     static {

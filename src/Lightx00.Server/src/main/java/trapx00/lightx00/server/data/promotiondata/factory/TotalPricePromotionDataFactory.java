@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromot
 
 import java.rmi.RemoteException;
 
-public class TotalPricePromotionDataControllerFactory {
+public class TotalPricePromotionDataFactory {
     private static TotalPricePromotionDataService service;
 
     static {
