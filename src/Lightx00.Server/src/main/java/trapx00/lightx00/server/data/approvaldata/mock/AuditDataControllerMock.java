@@ -1,12 +1,15 @@
-package trapx00.lightx00.server.data.approvaldata.Mock;
+package trapx00.lightx00.server.data.approvaldata.mock;
 
 import trapx00.lightx00.server.data.approvaldata.AuditDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillPo;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.util.Date;
 
 public class AuditDataControllerMock extends AuditDataController {
     /**
@@ -19,7 +22,7 @@ public class AuditDataControllerMock extends AuditDataController {
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected AuditDataControllerMock() throws RemoteException {
+    public AuditDataControllerMock() throws RemoteException {
     }
 
     /**
@@ -28,7 +31,9 @@ public class AuditDataControllerMock extends AuditDataController {
      * @return array of bills which match the conditions
      */
     public BillPo[] query(BillQueryVo query) {
-        return super.query(query);
+        return new BillPo[]{
+                new CashBillPo("0001",new Date(), BillState.Draft, "123","123",null)
+        };
     }
 
     /**
@@ -37,7 +42,7 @@ public class AuditDataControllerMock extends AuditDataController {
      * @return whether the operation is done successfully
      */
     public ResultMessage reject(BillPo bill) {
-        return super.reject(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -46,7 +51,7 @@ public class AuditDataControllerMock extends AuditDataController {
      * @return whether the operation is done successfully
      */
     public ResultMessage pass(BillPo bill) {
-        return super.pass(bill);
+        return ResultMessage.Success;
     }
 
     /**
@@ -56,6 +61,6 @@ public class AuditDataControllerMock extends AuditDataController {
      */
     @Override
     public ResultMessage requestApproval(BillPo bill) {
-        return super.requestApproval(bill);
+        return ResultMessage.Success;
     }
 }
