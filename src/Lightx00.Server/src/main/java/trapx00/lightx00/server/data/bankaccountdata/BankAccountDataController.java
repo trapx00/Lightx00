@@ -5,7 +5,24 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
-public class BankAccountDataController implements BankAccountDataService {
+import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
+import java.rmi.server.UnicastRemoteObject;
+
+public class BankAccountDataController extends UnicastRemoteObject implements BankAccountDataService {
+
+    /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
+     *
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
+     */
+    protected BankAccountDataController() throws RemoteException {
+    }
 
     /**
      * Queries bank account.

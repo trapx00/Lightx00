@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.datafactory.financedataservicefactory;
 
-import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBillFactory;
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.dataservicestub.financedataservice.InitialEstablishmentDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;

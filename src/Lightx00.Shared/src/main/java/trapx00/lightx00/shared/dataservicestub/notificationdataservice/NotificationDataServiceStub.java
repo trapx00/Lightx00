@@ -21,7 +21,7 @@ public class NotificationDataServiceStub implements NotificationDataService {
      * @return current user's notification
      */
     @Override
-    public NotificationPo[] update(NotificationQueryVo query) throws RemoteException {
+    public NotificationPo[] update(NotificationQueryVo query) {
         return new NotificationPo[] {
                 new OtherNotificationPo("123",new Date(), "","","123"),
                 new BillApprovalNotificationPo("123", new Date(), "","","")
@@ -35,7 +35,7 @@ public class NotificationDataServiceStub implements NotificationDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage acknowledge(NotificationPo notification) throws RemoteException {
+    public ResultMessage acknowledge(NotificationPo notification) {
         return ResultMessage.Success;
     }
 }

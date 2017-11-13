@@ -16,7 +16,7 @@ public class LoginDataServiceStub implements LoginDataService {
      * @return EmployeePo if login is successful
      */
     @Override
-    public EmployeePo login(String username, String password) throws RemoteException {
+    public EmployeePo login(String username, String password) {
         return new EmployeePo(username, "123", new Date(),
                 username,password, EmployeePosition.Admin);
     }
