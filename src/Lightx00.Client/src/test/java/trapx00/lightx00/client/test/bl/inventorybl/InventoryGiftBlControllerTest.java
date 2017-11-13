@@ -34,21 +34,21 @@ public class InventoryGiftBlControllerTest {
         assertEquals(null,service.getGift(date));
     }
 
-  //  @Test
-  //  public void queryCommodity() throws Exception {
-  //  }
+   @Test
+    public void queryCommodity() throws Exception {
+   }
 
     @Test
-    public void abandon() throws Exception {
+   public void abandon() throws Exception {
         assertEquals(ResultMessage.Success, service.abandon("SKD-20171112-00001"));
     }
 
-    @Test
+   @Test
     public void activate() throws Exception {
         assertEquals(ResultMessage.Success, service.activate("SKD-20171112-00001"));
-    }
+   }
 
-    @Test
+   @Test
     public void deleteDraft() throws Exception {
         assertEquals(ResultMessage.Success, service.deleteDraft("SKD-20171112-00001"));
     }

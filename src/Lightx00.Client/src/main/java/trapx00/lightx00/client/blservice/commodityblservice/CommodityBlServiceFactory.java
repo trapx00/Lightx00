@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.blservice.commodityblservice;
 
-import trapx00.lightx00.client.bl.commoditybl.CommodityBlController;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
 
 public class CommodityBlServiceFactory {

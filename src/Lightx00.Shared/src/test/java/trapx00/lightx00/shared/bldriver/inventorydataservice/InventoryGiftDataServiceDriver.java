@@ -3,7 +3,6 @@ package trapx00.lightx00.shared.bldriver.inventorydataservice;
 import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.dataservicestub.inventorydataservice.InventoryGiftDataServiceStub;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 
 import java.util.Date;
 

@@ -2,7 +2,6 @@ package trapx00.lightx00.shared.dataservicestub.inventorydataservice;
 
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
-import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 

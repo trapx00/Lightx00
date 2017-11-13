@@ -3,7 +3,6 @@ package trapx00.lightx00.shared.dataservicestub.inventorydataservice;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;

@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.datafactory.inventorydataservicefactory;
 
-import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 
 import java.net.MalformedURLException;
