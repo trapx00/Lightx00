@@ -5,7 +5,6 @@ import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
 import trapx00.lightx00.shared.dataservicestub.logdataservice.LogDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.client.vo.log.LogQueryVo;
 
 import static org.junit.Assert.*;
 
