@@ -1,7 +1,22 @@
 package trapx00.lightx00.server.data.saledata.mock;
 
+import trapx00.lightx00.server.data.saledata.SaleRefundBillDataController;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleRefundBillDataServiceStub;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
 
-public class SaleRefundBillDataControllerMock extends SaleRefundBillDataServiceStub {
+import java.rmi.RemoteException;
+
+public class SaleRefundBillDataControllerMock extends SaleRefundBillDataController {
+    /**
+     * @throws RemoteException
+     */
+    public SaleRefundBillDataControllerMock() throws RemoteException {
+    }
+
+    @Override
+    public ResultMessage submit(SaleRefundBillPo saleRefundBill) {
+        return ResultMessage.Success;
+    }
 }

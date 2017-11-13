@@ -3,10 +3,20 @@ package trapx00.lightx00.server.data.clientdata.factory;
 import trapx00.lightx00.server.data.clientdata.mock.ClientDataControllerMock;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 
-public class ClientDataFactory {
-    private static ClientDataService clientDataController = new ClientDataControllerMock();
+import java.rmi.RemoteException;
 
-    public static ClientDataService getClientDataController() {
-        return clientDataController;
+public class ClientDataFactory {
+    private static ClientDataService service;
+
+    static {
+        try {
+            service = new ClientDataControllerMock();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ClientDataService getService() {
+        return service;
     }
 }

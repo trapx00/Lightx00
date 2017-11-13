@@ -1,11 +1,11 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
-import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlController;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlFactory;
 
 public class PurchaseBillBlServiceFactory {
-    PurchaseBillBlService purchaseBillBlService=new PurchaseBillBlController();
+    private static PurchaseBillBlService purchaseBillBlService= PurchaseBillBlFactory.getPurchaseBillBlController();
 
-    public PurchaseBillBlService getInstance(){
+    public static PurchaseBillBlService getInstance(){
         return purchaseBillBlService;
     }
 }

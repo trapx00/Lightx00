@@ -34,8 +34,8 @@ public class ClientDataServiceDriver {
     }
 
     @Test
-    public void detail() throws Exception {
-        assertEquals("12345678",service.detail(clientPo).getPhone());
+    public void getId() throws Exception {
+        assertEquals("0",service.getId());
     }
 
 }

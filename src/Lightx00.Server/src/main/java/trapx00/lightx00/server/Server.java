@@ -1,15 +1,16 @@
 package trapx00.lightx00.server;
 
-import trapx00.lightx00.server.data.clientdata.ClientDataController;
-import trapx00.lightx00.server.data.inventorydata.PurchaseBillDataController;
-import trapx00.lightx00.server.data.inventorydata.PurchaseRefundBillDataController;
-import trapx00.lightx00.server.data.saledata.SaleBillDataController;
-import trapx00.lightx00.server.data.saledata.SaleRefundBillDataController;
+import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
+import trapx00.lightx00.server.data.saledata.factory.SaleBillDataFactory;
+import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataFactory;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
+import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
@@ -21,22 +22,23 @@ public class Server {
 
     /**
      * Server runner
+     *
      * @param args command line args
      */
     public static void main(String[] args) {
         try {
-            SaleBillDataService saleBillDataService = new SaleBillDataController();
-            SaleRefundBillDataService saleRefundBillDataService = new SaleRefundBillDataController();
-            PurchaseBillDataService purchaseBillDataService = new PurchaseBillDataController();
-            PurchaseRefundBillDataService purchaseRefundBillDataService = new PurchaseRefundBillDataController();
-            ClientDataService clientDataService = new ClientDataController();
+            SaleBillDataService saleBillDataService = SaleBillDataFactory.getService();
+            SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
+            PurchaseBillDataService purchaseBillDataService = PurchaseBillDataFactory.getService();
+            PurchaseRefundBillDataService purchaseRefundBillDataService = PurchaseRefundBillDataFactory.getService();
+            ClientDataService clientDataService = ClientDataFactory.getService();
 
             LocateRegistry.createRegistry(8888);
-            Naming.bind("rmi://localhost:8888/SaleBillDataService", saleBillDataService);
-            Naming.bind("rmi://localhost:8888/SaleRefundBillDataService", saleRefundBillDataService);
-            Naming.bind("rmi://localhost:8888/PurchaseBillDataService", purchaseBillDataService);
-            Naming.bind("rmi://localhost:8888/PurchaseRefundBillDataService", purchaseRefundBillDataService);
-            Naming.bind("rmi://localhost:8888/ClientDataService", clientDataService);
+            Naming.bind(RmiHelper.generateRmiUrl(SaleBillDataService.class), saleBillDataService);
+            Naming.bind(RmiHelper.generateRmiUrl(SaleRefundBillDataService.class), saleRefundBillDataService);
+            Naming.bind(RmiHelper.generateRmiUrl(PurchaseBillDataService.class), purchaseBillDataService);
+            Naming.bind(RmiHelper.generateRmiUrl(PurchaseRefundBillDataService.class), purchaseRefundBillDataService);
+            Naming.bind(RmiHelper.generateRmiUrl(ClientDataService.class), clientDataService);
             System.out.println(">>>>>INFO:远程对象绑定成功！");
         } catch (RemoteException e) {
             System.out.println("创建远程对象发生异常！");
