@@ -13,7 +13,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TotalPricePromotionDataServiceDriver {
     TotalPricePromotionDataService service = new TotalPricePromotionDataServiceStub();
-    TotalPricePromotionPo promtion = new TotalPricePromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,0,0);
+    TotalPricePromotionPo promtion = new TotalPricePromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
 
     @Test
     public void submit() throws Exception {

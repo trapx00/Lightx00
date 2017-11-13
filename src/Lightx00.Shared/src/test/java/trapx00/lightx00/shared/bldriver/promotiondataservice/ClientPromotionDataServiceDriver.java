@@ -13,14 +13,14 @@ import static junit.framework.TestCase.assertEquals;
 
 public class ClientPromotionDataServiceDriver {
     ClientPromotionDataService service = new ClientPromotionDataServiceStub();
-    ClientPromotionPo promtion = new ClientPromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,0,0);
+    ClientPromotionPo promtion = new ClientPromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0);
 
     @Test
     public void submit() throws Exception {
         assertEquals(ResultMessage.Success,service.submit(promtion));
     }
 
-   /* @Test
+   /*@Test
     public void queryPromotion() throws Exception {
         assertEquals("0001",service.queryPromotion(query)[0].getId());
     }*/
