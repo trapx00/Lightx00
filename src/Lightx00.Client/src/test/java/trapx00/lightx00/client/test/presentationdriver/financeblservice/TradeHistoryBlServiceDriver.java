@@ -14,8 +14,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class TradeHistoryBlServiceDriver {
-    TradeHistoryBlService service = new TradeHistoryBlServiceStub();
-    BillVo bill;
+    private TradeHistoryBlService service = new TradeHistoryBlServiceStub();
+    private BillVo bill;
 
     @Before
     public void setUp() throws Exception {

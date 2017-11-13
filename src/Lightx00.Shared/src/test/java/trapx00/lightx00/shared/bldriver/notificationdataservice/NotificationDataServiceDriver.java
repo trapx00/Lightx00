@@ -10,11 +10,11 @@ import trapx00.lightx00.shared.po.notification.NotificationPo;
 import static org.junit.Assert.*;
 
 public class NotificationDataServiceDriver {
-    NotificationDataService service = new NotificationDataServiceStub();
-    NotificationPo[] notifications;
+    private NotificationDataService service = new NotificationDataServiceStub();
+    private NotificationPo[] notifications;
     @Before
     public void setUp() throws Exception {
-        notifications = service.update();
+        notifications = service.update(x->true);
     }
 
     @Test

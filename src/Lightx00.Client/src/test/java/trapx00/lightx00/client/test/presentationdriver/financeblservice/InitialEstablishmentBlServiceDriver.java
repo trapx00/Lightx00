@@ -10,9 +10,9 @@ import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import static org.junit.Assert.*;
 
 public class InitialEstablishmentBlServiceDriver {
-    InitialEstablishmentBlService service = new InitialEstablishmentBlServiceStub();
+    private InitialEstablishmentBlService service = new InitialEstablishmentBlServiceStub();
 
-    SystemSnapshotVo systemSnapshotVo = null;
+    private SystemSnapshotVo systemSnapshotVo = null;
 
     @Before
     public void setUp() throws Exception {
