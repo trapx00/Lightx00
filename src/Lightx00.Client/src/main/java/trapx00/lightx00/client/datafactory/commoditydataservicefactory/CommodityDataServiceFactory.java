@@ -10,9 +10,9 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class CommodityDataServiceFactory {
-    private static CommodityDataService service = new CommodityDataServiceStub();
+    private static CommodityDataService service ;
 
-    private static void initRmi() {
+    static void initRmi() {
 
         try {
             service = (CommodityDataService) Naming.lookup(RmiHelper.generateRmiUrl(CommodityDataService.class));
