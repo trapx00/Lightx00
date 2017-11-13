@@ -7,10 +7,10 @@ import trapx00.lightx00.client.bl.financebl.ReceivalBillInfo;
 import trapx00.lightx00.client.bl.financebl.SystemSnapshotInfo;
 
 public class BillQueryFactory {
-    private static CashBillInfo cashbillInfo = CashBillFactory.getCashBillInfo();
-    private static PaymentBillInfo paymentBillInfo = PaymentBillFactory.getPaymentBillInfo();
-    private static ReceivalBillInfo receivalBillInfo = ReceivalBillFactory.getReceivalBillInfo();
-    private static SystemSnapshotInfo systemSnapshotInfo = InitialEstablishmentBillFactory.getSystemSnapshotInfo();
+    private static CashBillInfo cashbillInfo = CashBillBlFactory.getCashBillInfo();
+    private static PaymentBillInfo paymentBillInfo = PaymentBillBlFactory.getPaymentBillInfo();
+    private static ReceivalBillInfo receivalBillInfo = ReceivalBillBlFactory.getReceivalBillInfo();
+    private static SystemSnapshotInfo systemSnapshotInfo = InitialEstablishmentBlFactory.getSystemSnapshotInfo();
 
 
     public static CashBillInfo getCashbillInfo() {

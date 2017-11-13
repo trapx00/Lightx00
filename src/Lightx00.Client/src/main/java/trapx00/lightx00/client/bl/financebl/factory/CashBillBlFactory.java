@@ -7,7 +7,7 @@ import trapx00.lightx00.client.bl.financebl.mock.CashBillBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 
-public class CashBillFactory {
+public class CashBillBlFactory {
     private static CashBillBlController controller = new CashBillBlControllerMock();
     private static NotificationActivateService notificationActivateService = controller;
     private static NotificationAbandonService notificationAbandonService = controller;

@@ -19,7 +19,7 @@ public class LogDataServiceStub implements LogDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage log(LogSeverity severity, String content) throws RemoteException {
+    public ResultMessage log(LogSeverity severity, String content) {
         return ResultMessage.Success;
     }
 
@@ -30,7 +30,7 @@ public class LogDataServiceStub implements LogDataService {
      * @return LogVos that match query condition
      */
     @Override
-    public LogPo[] query(LogQueryVo query) throws RemoteException {
+    public LogPo[] query(LogQueryVo query)  {
         return new LogPo[] {
                 new LogPo(new Date(), LogSeverity.Success,"123")
         };

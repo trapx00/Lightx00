@@ -2,8 +2,12 @@ package trapx00.lightx00.shared.dataservicestub.financedataservice;
 
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
+
+import java.util.Date;
 
 public class CashBillDataServiceStub implements CashBillDataService {
 
@@ -49,7 +53,11 @@ public class CashBillDataServiceStub implements CashBillDataService {
      */
     @Override
     public CashBillPo[] query(CashBillQueryVo query) {
-        return new CashBillPo[0];
+        return new CashBillPo[]{
+                new CashBillPo("123", new Date(), BillState.Draft, "123","123",new CashBillItem[]{
+                        new CashBillItem("123", 0.0, "123")
+                })
+        };
     }
 
     /**
@@ -59,6 +67,6 @@ public class CashBillDataServiceStub implements CashBillDataService {
      */
     @Override
     public String getId() {
-        return null;
+        return "XJFKD-20171111-00001";
     }
 }

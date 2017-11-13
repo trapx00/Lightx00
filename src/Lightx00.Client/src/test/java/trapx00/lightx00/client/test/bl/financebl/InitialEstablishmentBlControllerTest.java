@@ -2,21 +2,15 @@ package trapx00.lightx00.client.test.bl.financebl;
 
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.client.bl.financebl.CashBillBlController;
 import trapx00.lightx00.client.bl.financebl.InitialEstablishmentBlController;
-import trapx00.lightx00.client.bl.financebl.factory.CashBillFactory;
-import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBillFactory;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
+import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillState;
-
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class InitialEstablishmentBlControllerTest {
-    private InitialEstablishmentBlController controller = InitialEstablishmentBillFactory.getController();
+    private InitialEstablishmentBlController controller = InitialEstablishmentBlFactory.getController();
     private SystemSnapshotVo snapshotVo = null;
     @Before
     public void setUp() {

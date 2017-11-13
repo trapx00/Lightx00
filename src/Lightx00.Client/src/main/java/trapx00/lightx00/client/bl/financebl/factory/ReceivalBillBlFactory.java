@@ -7,12 +7,12 @@ import trapx00.lightx00.client.bl.financebl.mock.ReceivalBillBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 
-public class ReceivalBillFactory {
+public class ReceivalBillBlFactory {
     private static ReceivalBillBlController controller = new ReceivalBillBlControllerMock();
     private static NotificationActivateService notificationActivateService = controller;
     private static NotificationAbandonService notificationAbandonService = controller;
     private static DraftDeleteService draftDeleteService = controller;
-    private static ReceivalBillInfo receivalBillInfo;
+    private static ReceivalBillInfo receivalBillInfo = controller;
 
 
     public static ReceivalBillInfo getReceivalBillInfo() {

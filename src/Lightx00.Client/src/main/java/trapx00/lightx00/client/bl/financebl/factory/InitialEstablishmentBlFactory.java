@@ -8,7 +8,7 @@ import trapx00.lightx00.client.bl.financebl.mock.InitialEstablishmentBlControlle
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 
-public class InitialEstablishmentBillFactory {
+public class InitialEstablishmentBlFactory {
     private static InitialEstablishmentBlController controller = new InitialEstablishmentBlControllerMock();
     private static DraftDeleteService draftDeleteService = controller;
     private static NotificationAbandonService notificationAbandonService = controller;

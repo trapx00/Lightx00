@@ -52,7 +52,7 @@ public class ReceivalBillDataServiceStub implements ReceivalBillDataService {
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
         return new ReceivalBillPo[]{
-                new ReceivalBillPo("123",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
+                new ReceivalBillPo("SKD-20171111-00001",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
         };
     }
 
@@ -63,6 +63,6 @@ public class ReceivalBillDataServiceStub implements ReceivalBillDataService {
      */
     @Override
     public String getId() {
-        return "SCD-20171111-00001";
+        return "SKD-20171111-00002";
     }
 }
