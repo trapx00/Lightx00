@@ -9,25 +9,42 @@ import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 import java.util.Date;
 
 public class ComSalePromotionDataServiceStub implements ComSalePromotionDataService {
-    @Override
-    public ResultMessage submit(ComSalePromotionPo promotion) {
+    /**
+     * submit a completed ComSalePromotionPo
+     * @param promotion the ComSalePromotionPo to be submitted
+     * @return whether the operation is done successfully
+     */
+    public ResultMessage submit(ComSalePromotionPo promotion){
         return ResultMessage.Success;
     }
 
-    @Override
+    /**
+     * filter ComSalePromotionPo
+     * @param query the filter conditions
+     * @return array of ComSalePromotionPo which match the conditions
+     */
     public ComSalePromotionPo[] queryPromotion(PromotionQueryVo query) {
         return new ComSalePromotionPo[]{
-                new ComSalePromotionPo(query.getId(), query.getType(),new Date(),new Date(), PromotionState.Waiting)
+                new ComSalePromotionPo("0001",new Date(),new Date(),PromotionState.Waiting,null,0)
         };
     }
 
-    @Override
+
+    /**
+     * delete a useless ComSalePromotionPo
+     * @param promotion the ComSalePromotionPo to be deleted
+     * @return whether the operation is done successfully
+     */
     public ResultMessage delete(ComSalePromotionPo promotion) {
         return ResultMessage.Success;
     }
 
-    @Override
+    /**
+     * get id for the next promotion
+     *
+     * @return id for the next promotion
+     */
     public String getId(){
-        return null;
+        return "0001";
     }
 }
