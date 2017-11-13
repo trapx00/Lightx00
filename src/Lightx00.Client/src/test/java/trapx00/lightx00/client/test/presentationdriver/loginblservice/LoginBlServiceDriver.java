@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginBlServiceDriver {
 
-    LoginBlService service = new LoginBlServiceStub();
+    private LoginBlService service = new LoginBlServiceStub();
     @Test
     public void testLogin(){
         EmployeeVo expected = service.login("123","123");

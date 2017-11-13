@@ -3,8 +3,18 @@ package trapx00.lightx00.server.data.logdata.factory;
 import trapx00.lightx00.server.data.logdata.mock.LogDataControllerMock;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
 
+import java.rmi.RemoteException;
+
 public class LogDataFactory {
-    private static LogDataService service = new LogDataControllerMock();
+    private static LogDataService service;
+
+    static {
+        try {
+            service = new LogDataControllerMock();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static LogDataService getService() {
         return service;

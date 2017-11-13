@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.dataservicestub.logindataservice.LoginDataService
 import static org.junit.Assert.*;
 
 public class LoginDataServiceDriver {
-    LoginDataService service = new LoginDataServiceStub();
+    private LoginDataService service = new LoginDataServiceStub();
     @Test
     public void login() throws Exception {
         assertEquals("123", service.login("123","123").getId());

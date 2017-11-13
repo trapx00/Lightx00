@@ -65,7 +65,7 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
     @Override
     public SystemSnapshotPo[] query(SystemSnapshotQueryVo query) {
         return  new SystemSnapshotPo[]{
-                new SystemSnapshotPo("123", new Date(), BillState.Approved,
+                new SystemSnapshotPo("QCJZ-20171111-00001", new Date(), BillState.Approved,
                         new CommodityPo[]{new CommodityPo("123", "123", "123", 10.0, new Date(), "123", "123", 10.0, 10.0, 10.0, 10.0, 10.0)},
                         new ClientPo[]{new ClientPo("123", ClientType.Retailer, 5, "123", "123", "123", "123", "123@gmail.com", 10.0, 10.0, null)},
                         new BankAccountPo[]{new BankAccountPo("123", "123", 10.0, new Date())}

@@ -11,6 +11,7 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 
 import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class InventoryGiftBlController implements InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityService {
     /**
@@ -31,14 +32,13 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
     public String getId() {
         return null;
     }
-
     /**
      * Gets the giftBill during specified time range
      * @param time
      * @return The bill during specified time range
      */
     @Override
-    public InventoryGiftVo getGift(Data time) {
+    public InventoryGiftVo getGift(Date time) {
         return null;
     }
 

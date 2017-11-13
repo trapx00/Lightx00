@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.financebl.factory.CashBillFactory;
+import trapx00.lightx00.client.bl.financebl.factory.CashBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
@@ -55,7 +55,7 @@ public class CashBillVo extends FinanceBillVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return CashBillFactory.getNotificationActivateService();
+        return CashBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -65,7 +65,7 @@ public class CashBillVo extends FinanceBillVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return CashBillFactory.getNotificationAbandonService();
+        return CashBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -85,7 +85,7 @@ public class CashBillVo extends FinanceBillVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return CashBillFactory.getDraftDeleteService();
+        return CashBillBlFactory.getDraftDeleteService();
     }
 
     /**

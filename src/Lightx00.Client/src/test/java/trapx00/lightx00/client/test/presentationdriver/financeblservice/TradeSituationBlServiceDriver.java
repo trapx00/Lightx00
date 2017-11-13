@@ -12,8 +12,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class TradeSituationBlServiceDriver {
-    TradeSituationBlService service = new TradeSituationBlServiceStub();
-    TradeSituationVo situationVo;
+    private TradeSituationBlService service = new TradeSituationBlServiceStub();
+    private TradeSituationVo situationVo;
 
     @Before
     public void setUp() throws Exception {

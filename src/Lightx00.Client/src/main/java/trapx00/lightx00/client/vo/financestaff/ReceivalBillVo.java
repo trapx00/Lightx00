@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.vo.financestaff;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillFactory;
+import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
@@ -24,7 +24,7 @@ public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return ReceivalBillFactory.getNotificationActivateService();
+        return ReceivalBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -34,7 +34,7 @@ public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return ReceivalBillFactory.getNotificationAbandonService();
+        return ReceivalBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -54,7 +54,7 @@ public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return ReceivalBillFactory.getDraftDeleteService();
+        return ReceivalBillBlFactory.getDraftDeleteService();
     }
 
     /**

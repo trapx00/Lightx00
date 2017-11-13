@@ -12,4 +12,12 @@ public class RmiHelper {
         return "rmi://" + url + ":" + port + "/" + Arrays.stream(interfaces).map(Class::getName).collect(Collectors.joining("/"));
 
     }
+
+    public static String getUrl() {
+        return url;
+    }
+
+    public static String getPort() {
+        return port;
+    }
 }

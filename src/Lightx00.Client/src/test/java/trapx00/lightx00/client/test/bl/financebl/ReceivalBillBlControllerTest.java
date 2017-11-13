@@ -2,24 +2,15 @@ package trapx00.lightx00.client.test.bl.financebl;
 
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.client.bl.financebl.CashBillBlController;
-import trapx00.lightx00.client.bl.financebl.PaymentBillBlController;
 import trapx00.lightx00.client.bl.financebl.ReceivalBillBlController;
-import trapx00.lightx00.client.bl.financebl.factory.CashBillFactory;
-import trapx00.lightx00.client.bl.financebl.factory.PaymentBillFactory;
-import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillFactory;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
-import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillBlFactory;
 import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillState;
-
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class ReceivalBillBlControllerTest {
-    private ReceivalBillBlController controller = ReceivalBillFactory.getController();
+    private ReceivalBillBlController controller = ReceivalBillBlFactory.getController();
     private ReceivalBillVo bill = null;
     @Before
     public void setUp() {

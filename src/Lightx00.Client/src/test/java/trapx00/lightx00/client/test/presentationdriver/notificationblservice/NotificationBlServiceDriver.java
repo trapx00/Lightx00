@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 
 public class NotificationBlServiceDriver {
 
-    NotificationBlService service = new NotificationBlServiceStub();
-    NotificationVo[] notifications;
+    private NotificationBlService service = new NotificationBlServiceStub();
+    private NotificationVo[] notifications;
 
     @Before
     public void setUp() throws Exception {
