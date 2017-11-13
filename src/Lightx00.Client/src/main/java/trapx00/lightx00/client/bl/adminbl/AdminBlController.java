@@ -12,11 +12,11 @@ public class AdminBlController implements UserManagementBlService {
 
     /**
      * create a user account for a new employee
-     * @param newUserAccount a user account to be created
+     * @param account a user account to be created
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(EmployeeVo newUserAccount) {
+    public ResultMessage add(EmployeeVo account) {
         return null;
     }
 

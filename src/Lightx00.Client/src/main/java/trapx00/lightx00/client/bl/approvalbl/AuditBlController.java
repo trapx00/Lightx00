@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.approvalbl;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
 public class AuditBlController implements AuditBlService,ApprovalRequest {
 
@@ -25,6 +26,17 @@ public class AuditBlController implements AuditBlService,ApprovalRequest {
     public ResultMessage pass(BillVo bill) {
         return null;
     }
+
+    /**
+     * filter bills
+     * @param query the filter conditions
+     * @return array of bills which match the conditions
+     */
+    @Override
+    public BillVo[] query(BillQueryVo query) {
+        return new BillVo[0];
+    }
+
 
     /**
      * submitted bills request approval
