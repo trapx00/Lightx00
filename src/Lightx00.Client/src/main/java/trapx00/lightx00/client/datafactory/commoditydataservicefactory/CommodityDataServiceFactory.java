@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.datafactory.commoditydataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
-import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommodityDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;

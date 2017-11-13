@@ -1,12 +1,8 @@
 package trapx00.lightx00.client.test.bl.inventorybl;
 
 import org.junit.Test;
-import trapx00.lightx00.client.bl.commoditybl.CommodityBlController;
-import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
 import trapx00.lightx00.client.bl.inventorybl.InventoryCheckBlController;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryCheckServiceFactory;
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
-import trapx00.lightx00.client.blservicestub.inventoryblservice.InventoryCheckBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 
 import java.io.File;

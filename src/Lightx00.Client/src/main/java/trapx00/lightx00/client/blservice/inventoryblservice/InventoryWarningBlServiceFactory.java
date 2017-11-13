@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
-import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 
 public class InventoryWarningBlServiceFactory {
