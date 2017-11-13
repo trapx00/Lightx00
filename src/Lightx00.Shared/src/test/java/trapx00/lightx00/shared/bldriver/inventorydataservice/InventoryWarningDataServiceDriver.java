@@ -22,7 +22,7 @@ public class InventoryWarningDataServiceDriver {
 
     @Test
     public void modify() throws Exception {
-        assertEquals(ResultMessage.Success,service.modify(commodityPo,100));
+        assertEquals(ResultMessage.Success,service.modify("C0001",100));
 
     }
 

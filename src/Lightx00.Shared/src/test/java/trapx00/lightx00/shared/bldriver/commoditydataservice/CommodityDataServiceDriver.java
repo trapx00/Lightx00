@@ -7,6 +7,8 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class CommodityDataServiceDriver {
@@ -24,10 +26,8 @@ public class CommodityDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        CommodityQueryVo commodityQueryVo=new CommodityQueryVo();
-        commodityQueryVo.setId("C0001");
-        commodityQueryVo.setName("LedLight");
-        assertEquals("C0001",service.query(commodityQueryVo)[0].getId());
+        CommodityPo commodityPo=new CommodityPo("C0001","Led","Led",34,new Date(),"1","2",34,34,34,34,34);
+        assertEquals("C0001",commodityPo.getId());
     }
 
     @Test
