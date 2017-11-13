@@ -9,8 +9,8 @@ import trapx00.lightx00.client.vo.log.LogVo;
 import static org.junit.Assert.*;
 
 public class LogBlServiceDriver {
-    LogBlService service = new LogBlServiceStub();
-    LogVo[] logs;
+    private LogBlService service = new LogBlServiceStub();
+    private LogVo[] logs;
     @Before
     public void setUp() throws Exception {
         logs = service.query(x->true);

@@ -13,8 +13,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class PaymentBillBlServiceDriver {
-    PaymentBillBlService service = new PaymentBillBlServiceStub();
-    PaymentBillVo bill = null;
+    private PaymentBillBlService service = new PaymentBillBlServiceStub();
+    private PaymentBillVo bill = null;
     @Before
     public void setUp() throws Exception {
         bill = new PaymentBillVo("123",new Date(), BillState.Draft,"123","123",null,0);

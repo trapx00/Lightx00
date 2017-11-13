@@ -6,15 +6,14 @@ import trapx00.lightx00.shared.dataservicestub.financedataservice.InitialEstabli
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
 import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class InitialEstablishmentDataServiceDriver {
-    InitialEstablishmentDataService service = new InitialEstablishmentDataServiceStub();
-    final SystemSnapshotPo snapshot = new SystemSnapshotPo("123",new Date(), BillState.Draft,null,null,null);
+    private InitialEstablishmentDataService service = new InitialEstablishmentDataServiceStub();
+    private final SystemSnapshotPo snapshot = new SystemSnapshotPo("123",new Date(), BillState.Draft,null,null,null);
     @Test
     public void submit() throws Exception {
         //assertEquals(service.submit(snapshot), ResultMessage.Success);

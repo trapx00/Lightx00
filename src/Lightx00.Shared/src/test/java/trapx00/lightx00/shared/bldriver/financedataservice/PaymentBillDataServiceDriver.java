@@ -13,8 +13,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class PaymentBillDataServiceDriver {
-    PaymentBillDataService service= new PaymentBillDataServiceStub();
-    final PaymentBillPo bill = new PaymentBillPo("123", new Date(), BillState.Draft,"","",null,0);
+    private PaymentBillDataService service= new PaymentBillDataServiceStub();
+    private final PaymentBillPo bill = new PaymentBillPo("123", new Date(), BillState.Draft,"","",null,0);
     @Test
     public void submit() throws Exception {
         assertEquals(ResultMessage.Success, service.submit(bill));

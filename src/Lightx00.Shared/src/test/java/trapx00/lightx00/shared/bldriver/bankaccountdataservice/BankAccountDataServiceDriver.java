@@ -10,8 +10,8 @@ import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import static org.junit.Assert.*;
 
 public class BankAccountDataServiceDriver {
-    BankAccountDataService service = new BankAccountDataServiceStub();
-    BankAccountPo account = service.query(x->true)[0];
+    private BankAccountDataService service = new BankAccountDataServiceStub();
+    private BankAccountPo account = service.query(x->true)[0];
     @Test
     public void query() throws Exception {
         assertEquals("123", account.getId());

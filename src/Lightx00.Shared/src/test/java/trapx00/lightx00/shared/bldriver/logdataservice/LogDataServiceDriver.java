@@ -9,7 +9,7 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import static org.junit.Assert.*;
 
 public class LogDataServiceDriver {
-    LogDataService service = new LogDataServiceStub();
+    private LogDataService service = new LogDataServiceStub();
     @Test
     public void log() throws Exception {
         assertEquals(ResultMessage.Success, service.log(LogSeverity.Success,"123"));

@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import static org.junit.Assert.*;
 
 public class BankAccountManagementBlServiceDriver {
-    BankAccountManagementBlService service = new BankAccountManagementBlServiceStub();
+    private BankAccountManagementBlService service = new BankAccountManagementBlServiceStub();
 
     @Test
     public void add() throws Exception {

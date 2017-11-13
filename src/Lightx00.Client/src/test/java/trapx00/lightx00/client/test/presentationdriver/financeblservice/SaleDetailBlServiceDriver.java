@@ -11,8 +11,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class SaleDetailBlServiceDriver {
-    SaleDetailBlService service = new SaleDetailBlServiceStub();
-    SaleDetailQueryVo query = new SaleDetailQueryVo(new Date(), new Date(),
+    private SaleDetailBlService service = new SaleDetailBlServiceStub();
+    private SaleDetailQueryVo query = new SaleDetailQueryVo(new Date(), new Date(),
             "123",null,null,1);
     @Test
     public void query() throws Exception {
