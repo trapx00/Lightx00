@@ -1,0 +1,16 @@
+package trapx00.lightx00.client.presentation.financeui.factory;
+
+import trapx00.lightx00.client.presentation.financeui.CashBillUiController;
+import trapx00.lightx00.client.presentation.financeui.mock.CashBillUiControllerMock;
+import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+
+public class CashBillUiFactory {
+    private static CashBillUiController cashBillUiController = new CashBillUiControllerMock();
+    static {
+        // 以后要改，controller应该是用fxmlloader拿
+    }
+
+    public static ContinueWritable getCashBillContinueWritable() {
+        return cashBillUiController;
+    }
+}
