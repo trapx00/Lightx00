@@ -1,12 +1,14 @@
-package trapx00.lightx00.server.data.promotiondata.Mock;
+package trapx00.lightx00.server.data.promotiondata.mock;
 
 import trapx00.lightx00.server.data.promotiondata.TotalPricePromotionDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.util.Date;
 
 public class TotalPricePromotionDataControllerMock extends TotalPricePromotionDataController {
 
@@ -20,7 +22,7 @@ public class TotalPricePromotionDataControllerMock extends TotalPricePromotionDa
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected TotalPricePromotionDataControllerMock() throws RemoteException {
+    public TotalPricePromotionDataControllerMock() throws RemoteException {
     }
 
     /**
@@ -29,7 +31,7 @@ public class TotalPricePromotionDataControllerMock extends TotalPricePromotionDa
      * @return whether the operation is done successfully
      */
     public ResultMessage submit(TotalPricePromotionPo promotion){
-        return super.submit(promotion);
+        return ResultMessage.Success;
     }
 
     /**
@@ -38,7 +40,9 @@ public class TotalPricePromotionDataControllerMock extends TotalPricePromotionDa
      * @return array of TotalPricePromotionPo which match the conditions
      */
     public TotalPricePromotionPo[] queryPromotion(PromotionQueryVo query) {
-        return super.queryPromotion(query);
+        return new TotalPricePromotionPo[]{
+                new TotalPricePromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null)
+        };
     }
 
     /**
@@ -47,7 +51,7 @@ public class TotalPricePromotionDataControllerMock extends TotalPricePromotionDa
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(TotalPricePromotionPo promotion) {
-        return super.delete(promotion);
+        return ResultMessage.Success;
     }
 
     /**
@@ -56,6 +60,7 @@ public class TotalPricePromotionDataControllerMock extends TotalPricePromotionDa
      * @return id for the next promotion
      */
     public String getId(){
-        return super.getId();
+        return "0001";
     }
+
 }

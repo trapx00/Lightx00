@@ -1,12 +1,14 @@
-package trapx00.lightx00.server.data.promotiondata.Mock;
+package trapx00.lightx00.server.data.promotiondata.mock;
 
 import trapx00.lightx00.server.data.promotiondata.ClientPromotionDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.util.Date;
 
 public class ClientPromotionDataControllerMock extends ClientPromotionDataController {
 
@@ -20,7 +22,7 @@ public class ClientPromotionDataControllerMock extends ClientPromotionDataContro
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected ClientPromotionDataControllerMock() throws RemoteException {
+    public ClientPromotionDataControllerMock() throws RemoteException {
     }
 
     /**
@@ -28,8 +30,8 @@ public class ClientPromotionDataControllerMock extends ClientPromotionDataContro
      * @param promotion the ClientPromotionPo to be submitted
      * @return whether the operation is done successfully
      */
-    public ResultMessage submit(ClientPromotionPo promotion){
-        return super.submit(promotion);
+    public ResultMessage submit(ClientPromotionPo promotion) {
+        return ResultMessage.Success;
     }
 
     /**
@@ -38,7 +40,9 @@ public class ClientPromotionDataControllerMock extends ClientPromotionDataContro
      * @return array of ClientPromotionPo which match the conditions
      */
     public ClientPromotionPo[] queryPromotion(PromotionQueryVo query) {
-        return super.queryPromotion(query);
+        return new ClientPromotionPo[]{
+                new ClientPromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0)
+        };
     }
 
     /**
@@ -47,7 +51,7 @@ public class ClientPromotionDataControllerMock extends ClientPromotionDataContro
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(ClientPromotionPo promotion) {
-        return super.delete(promotion);
+        return ResultMessage.Success;
     }
 
     /**
@@ -56,6 +60,6 @@ public class ClientPromotionDataControllerMock extends ClientPromotionDataContro
      * @return id for the next promotion
      */
     public String getId(){
-        return super.getId();
+        return "0001";
     }
 }

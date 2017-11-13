@@ -1,12 +1,14 @@
-package trapx00.lightx00.server.data.admindata.Mock;
+package trapx00.lightx00.server.data.admindata.mock;
 
 import trapx00.lightx00.server.data.admindata.UserManagementDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
+import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
+import java.util.Date;
 
 public class UserManagementDataControllerMock extends UserManagementDataController {
 
@@ -20,7 +22,7 @@ public class UserManagementDataControllerMock extends UserManagementDataControll
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected UserManagementDataControllerMock() throws RemoteException {
+    public UserManagementDataControllerMock() throws RemoteException {
     }
 
     /**
@@ -30,7 +32,9 @@ public class UserManagementDataControllerMock extends UserManagementDataControll
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        return super.query(query);
+        return new EmployeePo[]{
+                new FinanceStaffPo("张三","0001",new Date(),"张三","123456")
+        };
     }
 
     /**
@@ -40,7 +44,7 @@ public class UserManagementDataControllerMock extends UserManagementDataControll
      */
     @Override
     public ResultMessage add(EmployeePo account) {
-        return super.add(account);
+        return ResultMessage.Success;
     }
 
     /**
@@ -50,7 +54,7 @@ public class UserManagementDataControllerMock extends UserManagementDataControll
      */
     @Override
     public ResultMessage modify(EmployeePo account) {
-        return super.modify(account);
+        return ResultMessage.Success;
     }
 
     /**
@@ -60,6 +64,6 @@ public class UserManagementDataControllerMock extends UserManagementDataControll
      */
     @Override
     public ResultMessage delete(EmployeePo account) {
-        return super.delete(account);
+        return ResultMessage.Success;
     }
 }
