@@ -18,7 +18,8 @@
 # Gradle:
 **/.idea/**/gradle.xml
 **/.idea/**/libraries
-
+**/.gradle
+**/.vscode
 
 ## Plugin-specific files:
 
