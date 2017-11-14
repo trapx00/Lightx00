@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import sun.plugin.javascript.navig.Anchor;
 
 import java.util.ArrayList;
 import java.util.Collections;

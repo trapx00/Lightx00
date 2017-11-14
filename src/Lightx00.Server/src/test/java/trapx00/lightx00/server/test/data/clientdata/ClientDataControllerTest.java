@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import static org.junit.Assert.assertEquals;
 
 public class ClientDataControllerTest {
-    ClientDataService service = ClientDataFactory.getClientDataController();
+    ClientDataService service = ClientDataFactory.getService();
 
     @org.junit.Test
     public void query() throws Exception {

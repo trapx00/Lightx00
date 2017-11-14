@@ -1,15 +1,14 @@
 package trapx00.lightx00.client.test.bl.salebl;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.salebl.SaleRefundBillBlController;
 import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SaleRefundBillBlControllerMockTest {
-    SaleRefundBillBlController saleRefundBillBlController= SaleRefundBillBlFactory.getSaleRefundBillBlController();
+    private SaleRefundBillBlController saleRefundBillBlController= SaleRefundBillBlFactory.getSaleRefundBillBlController();
 
     @Test
     public void deleteDraft() throws Exception {

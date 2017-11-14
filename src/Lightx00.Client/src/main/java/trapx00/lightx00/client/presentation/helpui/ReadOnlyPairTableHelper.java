@@ -11,16 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import java.util.Map;
 
-class Pair extends RecursiveTreeObject<Pair>{
-    public String key;
 
-    public Pair(String key, String value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public String value;
-}
 
 public class ReadOnlyPairTableHelper {
     private JFXTreeTableView<Pair> table = new JFXTreeTableView<>();
@@ -32,18 +23,18 @@ public class ReadOnlyPairTableHelper {
         return new ReadOnlyPairTableHelper(contentList);
     }
 
-    public static ReadOnlyPairTableHelper start(){
+    public static ReadOnlyPairTableHelper start() {
         return new ReadOnlyPairTableHelper();
     }
 
 
-    public ReadOnlyPairTableHelper addPair(String key, String value){
+    public ReadOnlyPairTableHelper addPair(String key, String value) {
         contentList.add(new Pair(key, value));
         return this;
     }
 
-    public ReadOnlyPairTableHelper addMap(Map<String, String> dict){
-        for(Map.Entry<String, String> s : dict.entrySet()){
+    public ReadOnlyPairTableHelper addMap(Map<String, String> dict) {
+        for (Map.Entry<String, String> s : dict.entrySet()) {
             contentList.add(new Pair(s.getKey(), s.getValue()));
         }
         return this;
@@ -54,7 +45,7 @@ public class ReadOnlyPairTableHelper {
         this.contentList.addAll(contentList);
     }
 
-    public ReadOnlyPairTableHelper(){
+    public ReadOnlyPairTableHelper() {
         keyColumn.setText("键");
         valueColumn.setText("值");
         keyColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().key));
@@ -73,4 +64,15 @@ public class ReadOnlyPairTableHelper {
     }
 
 
+}
+
+class Pair extends RecursiveTreeObject<Pair> {
+    public String key;
+
+    public Pair(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String value;
 }

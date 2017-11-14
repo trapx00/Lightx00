@@ -1,13 +1,13 @@
 package trapx00.lightx00.client.test.bl.logbl;
 
 import org.junit.Test;
-import sun.rmi.runtime.Log;
 import trapx00.lightx00.client.bl.logbl.LogBlController;
 import trapx00.lightx00.client.bl.logbl.factory.LogBlFactory;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class LogBlControllerTest {
     private LogBlController controller = LogBlFactory.getController();

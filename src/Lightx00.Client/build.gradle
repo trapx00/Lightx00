@@ -2,6 +2,8 @@ group 'trapx00'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'application'
+mainClassName  = 'trapx00.lightx00.client.Client'
 
 sourceCompatibility = 1.8
 
@@ -26,7 +28,6 @@ jar {
     }
 }
 
-task taskJar(type:Jar, dependsOn: compileJava) {
-    from 'build/classes'
-    destinationDir = file('build/libs')
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }

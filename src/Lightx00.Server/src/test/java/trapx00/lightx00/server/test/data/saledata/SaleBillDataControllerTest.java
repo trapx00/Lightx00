@@ -7,7 +7,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import static org.junit.Assert.assertEquals;
 
 public class SaleBillDataControllerTest {
-    SaleBillDataService service = SaleBillDataFactory.getSaleBillDataService();
+    SaleBillDataService service = SaleBillDataFactory.getService();
 
     @org.junit.Test
     public void submit() throws Exception {
