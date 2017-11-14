@@ -9,14 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.presentation.Client;
+import trapx00.lightx00.client.Client;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
-import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.util.DateHelper;
-import trapx00.lightx00.client.vo.EmployeeVo;
 
 import java.io.IOException;
 import java.util.Date;
@@ -45,10 +44,10 @@ public class NotificationUiController {
 
     public void updateItems(){
         notificationModels.clear();
-        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, "TEST1", new EmployeeVo("李二",  "test", new Date(),
-                "张三", EmployeePosition.Admin),"未读"));
-        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, "TEST2", new EmployeeVo("李二",  "test", new Date(),
-                 "张三", EmployeePosition.Admin),"未读"));
+        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, "TEST1", new FinanceStaffVo("李二",  "test", new Date(),
+                "张三"),"未读"));
+        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, "TEST2", new FinanceStaffVo("李二",  "test", new Date(),
+                 "张三"),"未读"));
     }
 
     public void initNotifyItem() {

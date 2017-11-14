@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation;
+package trapx00.lightx00.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

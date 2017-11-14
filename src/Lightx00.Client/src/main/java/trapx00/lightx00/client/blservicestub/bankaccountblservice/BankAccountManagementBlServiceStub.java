@@ -25,8 +25,15 @@ public class BankAccountManagementBlServiceStub implements BankAccountManagement
         };
     }
 
+    /**
+     * Deletes a bank account.
+     *
+     * @param id id for the account to be deleted
+     * @return whether the operation is done successfully
+     */
     @Override
-    public ResultMessage delete(BankAccountVo account) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
+
 }

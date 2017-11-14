@@ -14,6 +14,7 @@ import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 import java.util.Date;
 
@@ -22,17 +23,16 @@ import static org.junit.Assert.*;
 public class PromotionInfoControllerTest {
     private PromotionInfoController controller = new PromotionInfoControllerMock();
     private SaleBillVo sale = null;
-    private TotalPricePromotionVo promotion = null;
     private PromotionVoBase[] promotions = null;
     @Before
     public void setUp(){
-        sale = new SaleBillVo("0001",new Date(), BillState.Approved, SaleBillType.Sale,"opple", null, null,22,null,1000,0,0,0,"");
-        promotion = new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
+        sale = new SaleBillVo("0001",new Date(), BillState.Approved, "123",null, null, 1,new CommodityItem[0],100.0,1000,0,0," ");
+        TotalPricePromotionVo promotion = new TotalPricePromotionVo("0001", new Date(), new Date(), PromotionState.Waiting, 200, 1000, null);
         promotions[0] = promotion;
     }
     @Test
     public void queryPromotion() throws Exception {
-        assertEquals(promotions[0],controller.queryPromotion(sale));
+        assertEquals(promotions[0],controller.queryPromotion(sale)[0]);
     }
 
 }

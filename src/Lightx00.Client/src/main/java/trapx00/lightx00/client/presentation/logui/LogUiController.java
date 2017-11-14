@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.presentation.Client;
+import trapx00.lightx00.client.Client;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.util.DateHelper;

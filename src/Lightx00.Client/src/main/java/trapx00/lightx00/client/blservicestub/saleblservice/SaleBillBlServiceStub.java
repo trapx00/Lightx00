@@ -27,6 +27,7 @@ public class SaleBillBlServiceStub implements SaleBillBlService {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        return ResultMessage.Failure;
     }
 
     /**

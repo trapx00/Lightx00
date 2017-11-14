@@ -2,21 +2,23 @@ package trapx00.lightx00.client.test.presentationdriver.promotionblservice;
 
 import org.junit.Before;
 import org.junit.Test;
+import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
+import trapx00.lightx00.client.blservicestub.promotionblservice.ClientPromotionBlServiceStub;
+import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
 import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class PromotionManagementBlServieDriver {
-    PromotionManagementBlService service = new PromotionManagementBlServieStub();
-    PromotionVoBase promotion = null;
-    @Before
-    public void setUp() throws Exception{
-        promotion = service.resume();
-    }
+public class PromotionManagementBlServiceDriver {
+    private ClientPromotionBlService service = new ClientPromotionBlServiceStub();
+    private ClientPromotionVo promotion = null;
+
     @Test
     public void submit() throws Exception {
         assertEquals(ResultMessage.Success,service.submit(promotion));
@@ -33,20 +35,8 @@ public class PromotionManagementBlServieDriver {
     }
 
     @Test
-    public void resume() throws Exception {
-        assertNotNull(service.resume());
-    }
-
-    @Test
     public void queryPromotion() throws Exception {
-        PromotionQueryVo query = new PromotionQueryVo("0001",PromotionType.CommodityOnSale,new Date(),new Date(),0,0,0);
-        assertEquals("0001",service.queryPromotion(query)[0].getid());
-    }
 
-    @Test
-    public void queryCommodity() throws Exception {
-        CommodityQueryVo query = new CommodityQueryVo("00001","落地灯",null);
-        assertEquals("00001",service.queryCommodity(query)[0].getId());
+        assertEquals("0001",service.queryPromotion(x->true)[0].getId());
     }
-
 }
