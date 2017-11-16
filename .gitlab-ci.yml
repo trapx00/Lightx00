@@ -18,6 +18,9 @@ buildjob:
     - cd ../../src/Lightx00.Server
     - chmod +x gradlew
     - ./gradlew assemble
+  only:
+    - develop
+    - master
 
 testjob:
   stage: test
@@ -26,3 +29,4 @@ testjob:
     - ./src/Lightx00.Server/gradlew check
   only:
     - develop
+    - master
