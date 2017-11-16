@@ -1,14 +1,17 @@
 # Light x00
 
+
+
 Light x00 is a light product purchasing-selling-stacking system under active development by Trap x00.
 
 ## Feature
 
 - Complete and well-written documents
-- Automated Build & Continuous Integration
+- **Gradle** for dependency management, automated build and test 
+- **Gitlab CI/CD** for continuous integration with server on `DigitalOcean`
+- **Checkstyle** for coding style check with [Google Java Coding Style](http://google.github.io/styleguide/javaguide.html) based custom configuration
 - Java 8 + JavaFX + SQLite
 - Intellij IDEA Project
-- Checkstyle integrated with [Google Java Style](http://google.github.io/styleguide/javaguide.html) based custom configuration
 - to be added...
 
 ## Copyright Notice

@@ -1,0 +1,28 @@
+stages:
+  - build
+  - test
+  
+cache:
+  paths:
+     - ./src/Lightx00.Client/.gradle/wrapper
+     - ./src/Lightx00.Client/.gradle/caches
+     - ./src/Lightx00.Server/.gradle/wrapper
+     - ./src/Lightx00.Server/.gradle/caches
+
+buildjob:
+  stage: build
+  script:
+    - cd ./src/Lightx00.Client
+    - chmod +x gradlew
+    - ./gradlew assemble
+    - cd ../../src/Lightx00.Server
+    - chmod +x gradlew
+    - ./gradlew assemble
+
+testjob:
+  stage: test
+  script:
+    - ./src/Lightx00.Client/gradlew check
+    - ./src/Lightx00.Server/gradlew check
+  only:
+    - develop
