@@ -61,7 +61,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public ResultMessage abandon(String id) {
-        return super.abandon(id);
+        return ResultMessage.Success;
     }
 
     /**

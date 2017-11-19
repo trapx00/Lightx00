@@ -11,7 +11,7 @@ public class DraftManagementDataServiceDriver {
     private DraftManagementDataService service = new DraftManagementDataServiceStub();
     @Test
     public void update() throws Exception {
-        assertEquals("123",service.update(x->true)[0].getId());
+        assertEquals("FXD-123",service.update(x->true)[0].getId());
     }
 
     @Test

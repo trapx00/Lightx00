@@ -8,10 +8,10 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import static org.junit.Assert.*;
 
 public class DraftDataControllerTest {
-    DraftManagementDataService service = new DraftManagementDataServiceStub();
+    private DraftManagementDataService service = new DraftManagementDataServiceStub();
     @Test
     public void update() throws Exception {
-        assertEquals("123",service.update(x->true)[0].getId());
+        assertEquals("FXD-123",service.update(x->true)[0].getId());
     }
 
     @Test
