@@ -12,12 +12,12 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class UserManagementDataControllerTest {
-    UserManagementDataService service = AdminDataFactory.getService();
-    EmployeePo account = new ManagerPo("张三","001",new Date(),"张三","123456");
+    private UserManagementDataService service = AdminDataFactory.getService();
+    private EmployeePo account = new ManagerPo("张三","0001",new Date(),"张三","123456");
 
     @Test
     public void query() throws Exception {
-        assertEquals("001",account.getId());
+        assertEquals("0001",service.query(x->true)[0].getId());
     }
 
     @Test

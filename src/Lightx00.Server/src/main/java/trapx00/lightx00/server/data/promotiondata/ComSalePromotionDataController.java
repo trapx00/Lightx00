@@ -10,7 +10,6 @@ import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 
 public class ComSalePromotionDataController extends UnicastRemoteObject implements ComSalePromotionDataService {
-
     /**
      * Creates and exports a new UnicastRemoteObject object using an
      * anonymous port.
@@ -25,16 +24,16 @@ public class ComSalePromotionDataController extends UnicastRemoteObject implemen
     }
 
     /**
-     * submit a completed ComSalePromotionPo
+     * Submit a completed ComSalePromotionPo.
      * @param promotion the ComSalePromotionPo to be submitted
      * @return whether the operation is done successfully
      */
-    public ResultMessage submit(ComSalePromotionPo promotion){
+    public ResultMessage submit(ComSalePromotionPo promotion) {
         return null;
     }
 
     /**
-     * filter ComSalePromotionPo
+     * Filter ComSalePromotionPo.
      * @param query the filter conditions
      * @return array of ComSalePromotionPo which match the conditions
      */
@@ -43,7 +42,7 @@ public class ComSalePromotionDataController extends UnicastRemoteObject implemen
     }
 
     /**
-     * delete a useless ComSalePromotionPo
+     * Delete a useless ComSalePromotionPo.
      * @param promotion the ComSalePromotionPo to be deleted
      * @return whether the operation is done successfully
      */
@@ -52,11 +51,11 @@ public class ComSalePromotionDataController extends UnicastRemoteObject implemen
     }
 
     /**
-     * get id for the next promotion
+     * Get id for the next promotion.
      *
      * @return id for the next promotion
      */
-    public String getId(){
+    public String getId() {
         return null;
     }
 }

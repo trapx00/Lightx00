@@ -4,7 +4,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.promotionbl.TotalPricePromotionBlController;
 import trapx00.lightx00.client.bl.promotionbl.mock.TotalPricePromotionBlControllerMock;
 
-public class TotalPricePromotionFactory {
+public class TotalPricePromotionBlFactory {
     private static TotalPricePromotionBlController controller = new TotalPricePromotionBlControllerMock();
     private static DraftDeleteService draftDeleteService = controller;
 

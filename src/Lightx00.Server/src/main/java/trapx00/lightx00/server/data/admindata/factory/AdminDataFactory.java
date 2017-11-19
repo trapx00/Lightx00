@@ -9,9 +9,9 @@ public class AdminDataFactory {
     private static UserManagementDataService service;
 
     static {
-        try{
+        try {
             service = new UserManagementDataControllerMock();
-        }catch (RemoteException e){
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }

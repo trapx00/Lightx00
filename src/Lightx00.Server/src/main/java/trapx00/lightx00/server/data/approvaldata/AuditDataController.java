@@ -25,7 +25,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * filter some bills
+     * Filter some bills.
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
@@ -35,7 +35,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * reject to approve the bill
+     * Reject to approve the bill.
      * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
@@ -45,7 +45,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * approve the bill
+     * Approve the bill.
      * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
@@ -55,7 +55,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * save the submitted bill
+     * Save the submitted bill.
      * @param bill the bill has been submitted
      * @return whether the operation is done successfully
      */

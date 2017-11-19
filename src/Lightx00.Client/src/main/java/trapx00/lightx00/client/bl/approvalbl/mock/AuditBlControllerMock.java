@@ -10,9 +10,8 @@ import trapx00.lightx00.shared.queryvo.BillQueryVo;
 import java.util.Date;
 
 public class AuditBlControllerMock extends AuditBlController {
-
     /**
-     * reject to approve the bill
+     * Reject to approve the bill.
      * @param bill bill to be audited
      * @return whether the operation is done successfully
      */
@@ -22,7 +21,7 @@ public class AuditBlControllerMock extends AuditBlController {
     }
 
     /**
-     * approve the bill
+     * Approve the bill.
      * @param bill bill to be audited
      * @return whether the operation is done successfully
      */
@@ -32,25 +31,23 @@ public class AuditBlControllerMock extends AuditBlController {
     }
 
     /**
-     * filter bills
+     * Filter bills.
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
     @Override
     public BillVo[] query(BillQueryVo query) {
-        return new BillVo[]{
-                new CashBillVo("0001", new Date(), BillState.WaitingForApproval, "0001", "0001", null)
+        return new BillVo[] { new CashBillVo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"0001","0002",null)
         };
     }
 
     /**
-     * submitted bills request approval
+     * Submitted bills request approval.
      * @param bill bill has been submitted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestMessage(BillVo bill) {
+    public ResultMessage requestApproval(BillVo bill) {
         return ResultMessage.Success;
     }
-
 }

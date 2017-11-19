@@ -9,9 +9,9 @@ public class ComSalePromotionDataFactory {
     private static ComSalePromotionDataService service;
 
     static {
-        try{
+        try {
             service = new ComSalePromotionDataControllerMock();
-        }catch (RemoteException e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }

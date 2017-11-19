@@ -3,31 +3,34 @@ package trapx00.lightx00.client.blservicestub.promotionblservice;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+
+import java.util.Date;
 
 public class ClientPromotionBlServiceStub implements ClientPromotionBlService {
     @Override
     public ResultMessage submit(ClientPromotionVo promotion) {
-        return null;
+        return ResultMessage.Success;
     }
 
     @Override
     public ResultMessage saveAsDraft(ClientPromotionVo promotion) {
-        return null;
+        return ResultMessage.Success;
     }
 
     @Override
     public ResultMessage delete(ClientPromotionVo promotion) {
-        return null;
+        return ResultMessage.Success;
     }
 
     @Override
     public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return new ClientPromotionVo[0];
+        return new ClientPromotionVo[]{new ClientPromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0)};
     }
 
     @Override
     public String getId() {
-        return null;
+        return "0001";
     }
 }

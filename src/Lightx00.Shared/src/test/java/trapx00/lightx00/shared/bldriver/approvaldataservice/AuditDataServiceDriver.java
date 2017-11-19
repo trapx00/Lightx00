@@ -4,7 +4,6 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservicestub.approvaldataservice.AuditDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 
@@ -13,11 +12,11 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class AuditDataServiceDriver {
-    AuditDataService service = new AuditDataServiceStub();
-    BillPo bill = new CashBillPo("0001",new Date(), BillState.Draft, "123","123",null);
+    private AuditDataService service = new AuditDataServiceStub();
+    private CashBillPo bill = new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"0001","0002",null);
     @Test
     public void query() throws Exception {
-        assertEquals("0001",bill.getId());
+        assertEquals("XJFYD-20171112-00001",service.query(x->true)[0].getId());
     }
 
     @Test
@@ -30,4 +29,8 @@ public class AuditDataServiceDriver {
         assertEquals(ResultMessage.Success,service.pass(bill));
     }
 
+    @Test
+    public void requestApproval() throws Exception {
+        assertEquals(ResultMessage.Success,service.requestApproval(bill));
+    }
 }

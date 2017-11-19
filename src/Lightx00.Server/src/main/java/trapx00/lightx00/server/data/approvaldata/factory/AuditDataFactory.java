@@ -10,9 +10,9 @@ public class AuditDataFactory {
     private static AuditDataService service;
 
     static {
-        try{
+        try {
             service = new AuditDataControllerMock();
-        }catch (RemoteException e){
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }

@@ -11,21 +11,18 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 public class AuditDataServiceStub implements AuditDataService {
-
     /**
-     * filter some bills
+     * Filter some bills.
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
     @Override
     public BillPo[] query(BillQueryVo query) {
-        return new BillPo[]{
-          new CashBillPo("0001",new Date(), BillState.Draft, "123","123",null)
-        };
+        return new BillPo[]{new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"0001","0002",null)};
     }
 
     /**
-     * reject to approve the bill
+     * Reject to approve the bill.
      * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
@@ -35,7 +32,7 @@ public class AuditDataServiceStub implements AuditDataService {
     }
 
     /**
-     * approve the bill
+     * Approve the bill.
      * @param bill the bill to be approved
      * @return whether the operation is done successfully
      */
@@ -45,7 +42,7 @@ public class AuditDataServiceStub implements AuditDataService {
     }
 
     /**
-     * save the submitted bill
+     * Save the submitted bill.
      * @param bill the bill has been submitted
      * @return whether the operation is done successfully
      */
@@ -53,6 +50,4 @@ public class AuditDataServiceStub implements AuditDataService {
     public ResultMessage requestApproval(BillPo bill) throws RemoteException {
         return ResultMessage.Success;
     }
-
-
 }

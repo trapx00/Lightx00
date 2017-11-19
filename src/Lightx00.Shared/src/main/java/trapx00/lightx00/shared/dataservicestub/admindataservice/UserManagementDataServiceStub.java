@@ -9,21 +9,18 @@ import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 import java.util.Date;
 
 public class UserManagementDataServiceStub implements UserManagementDataService {
-
     /**
-     * filter some user accounts
+     * Filter some user accounts.
      * @param query the filter conditions
      * @return array of user accounts which match the conditions
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        return new EmployeePo[]{
-                new FinanceStaffPo("张三","0001",new Date(),"张三","123456")
-        };
+        return new EmployeePo[]{new FinanceStaffPo("张三","0001",new Date(),"10081","123456")};
     }
 
     /**
-     * create a user account for a new employee
+     * Create a user account for a new employee.
      * @param account the account to be created
      * @return whether the operation is done successfully
      */
@@ -33,7 +30,7 @@ public class UserManagementDataServiceStub implements UserManagementDataService 
     }
 
     /**
-     * modify a user account
+     * Modify a user account.
      * @param account the account to be modified
      * @return whether the operation is done successfully
      */
@@ -43,7 +40,7 @@ public class UserManagementDataServiceStub implements UserManagementDataService 
     }
 
     /**
-     * delete a user account
+     * Delete a user account.
      * @param account the account to be deleted
      * @return whether the operation is done successfully
      */

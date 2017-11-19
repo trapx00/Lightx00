@@ -10,7 +10,6 @@ import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 
 public class ClientPromotionDataController extends UnicastRemoteObject implements ClientPromotionDataService {
-
     /**
      * Creates and exports a new UnicastRemoteObject object using an
      * anonymous port.
@@ -25,16 +24,16 @@ public class ClientPromotionDataController extends UnicastRemoteObject implement
     }
 
     /**
-     * submit a completed ClientPromotionPo
+     * Submit a completed ClientPromotionPo.
      * @param promotion the ClientPromotionPo to be submitted
      * @return whether the operation is done successfully
      */
-    public ResultMessage submit(ClientPromotionPo promotion){
+    public ResultMessage submit(ClientPromotionPo promotion) {
         return null;
     }
 
     /**
-     * filter ClientPromotionPo
+     * Filter ClientPromotionPo.
      * @param query the filter conditions
      * @return array of ClientPromotionPo which match the conditions
      */
@@ -43,7 +42,7 @@ public class ClientPromotionDataController extends UnicastRemoteObject implement
     }
 
     /**
-     * delete a useless promotion
+     * Delete a useless promotion.
      * @param promotion the promotion to be deleted
      * @return whether the operation is done successfully
      */
@@ -52,11 +51,11 @@ public class ClientPromotionDataController extends UnicastRemoteObject implement
     }
 
     /**
-     * get id for the next promotion
+     * Get id for the next promotion.
      *
      * @return id for the next promotion
      */
-    public String getId(){
+    public String getId() {
         return null;
     }
 }

@@ -25,7 +25,7 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     }
 
     /**
-     * filter some user accounts
+     * Filter some user accounts.
      * @param query the filter conditions
      * @return array of user accounts which match the conditions
      */
@@ -35,7 +35,7 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     }
 
     /**
-     * create a user account for a new employee
+     * Create a user account for a new employee.
      * @param account the account to be created
      * @return whether the operation is done successfully
      */
@@ -45,7 +45,7 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     }
 
     /**
-     * modify a user account
+     * Modify a user account.
      * @param account the account to be modified
      * @return whether the operation is done successfully
      */
@@ -55,7 +55,7 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     }
 
     /**
-     * delete a user account
+     * Delete a user account.
      * @param account the account to be deleted
      * @return whether the operation is done successfully
      */

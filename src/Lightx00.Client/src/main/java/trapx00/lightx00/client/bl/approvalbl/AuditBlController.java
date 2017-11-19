@@ -6,9 +6,8 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.BillQueryVo;
 
 public class AuditBlController implements AuditBlService,ApprovalRequest {
-
     /**
-     * reject to approve the bill
+     * Reject to approve the bill.
      * @param bill bill to be audited
      * @return whether the operation is done successfully
      */
@@ -18,7 +17,7 @@ public class AuditBlController implements AuditBlService,ApprovalRequest {
     }
 
     /**
-     * approve the bill
+     * Approve the bill.
      * @param bill bill to be audited
      * @return whether the operation is done successfully
      */
@@ -28,7 +27,7 @@ public class AuditBlController implements AuditBlService,ApprovalRequest {
     }
 
     /**
-     * filter bills
+     * Filter bills.
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
@@ -37,14 +36,13 @@ public class AuditBlController implements AuditBlService,ApprovalRequest {
         return new BillVo[0];
     }
 
-
     /**
-     * submitted bills request approval
+     * Submitted bills request approval.
      * @param bill bill has been submitted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestMessage(BillVo bill) {
+    public ResultMessage requestApproval(BillVo bill) {
         return null;
     }
 }
