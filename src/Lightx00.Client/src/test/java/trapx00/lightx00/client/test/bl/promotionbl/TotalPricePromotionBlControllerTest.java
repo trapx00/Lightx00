@@ -1,10 +1,8 @@
 package trapx00.lightx00.client.test.bl.promotionbl;
 
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.promotionbl.TotalPricePromotionBlController;
 import trapx00.lightx00.client.bl.promotionbl.mock.TotalPricePromotionBlControllerMock;
-import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
