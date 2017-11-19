@@ -10,6 +10,9 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.shared.po.bill.BillState;
+
+import java.util.Date;
 
 public class InventoryWarningBlController implements InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService,InventoryBillService {
     /**
@@ -19,7 +22,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage submit(InventoryBillVo bill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -29,7 +32,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage saveAsDraft(InventoryBillVo bill) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -40,7 +43,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage modify(String id, double modifyWarning) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -49,7 +52,8 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public InventoryBillVo getCurrentBill() {
-        return null;
+        InventoryBillVo inventoryBillVo=new InventoryBillVo("123",new Date(), BillState.Approved,null,null,null,null);
+        return inventoryBillVo;
     }
 
     /**
@@ -68,7 +72,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public String getId() {
-        return null;
+        return "123";
     }
 
     /**
@@ -78,7 +82,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -88,7 +92,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -98,7 +102,7 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**

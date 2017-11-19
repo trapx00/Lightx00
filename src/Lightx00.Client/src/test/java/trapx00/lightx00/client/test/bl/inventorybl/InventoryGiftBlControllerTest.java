@@ -38,7 +38,7 @@ public class InventoryGiftBlControllerTest {
     public void queryCommodity() throws Exception {
    }
 
-    @Test
+   @Test
    public void abandon() throws Exception {
         assertEquals(ResultMessage.Success, service.abandon("SKD-20171112-00001"));
     }

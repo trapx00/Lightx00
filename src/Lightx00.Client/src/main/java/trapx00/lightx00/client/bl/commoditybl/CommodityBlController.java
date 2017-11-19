@@ -16,7 +16,7 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
      */
     @Override
     public ResultMessage add(CommodityVo newCommodity) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -26,7 +26,7 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
      */
     @Override
     public ResultMessage modify(CommodityVo updateCommodity) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -46,7 +46,7 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
      */
     @Override
     public ResultMessage delete(CommodityVo commodity) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -68,6 +68,6 @@ public class CommodityBlController implements CommodityBlService,CommodityServic
      */
     @Override
     public ResultMessage modifyInventory(String commodityId, InventoryModificationFlag flag, double delta) {
-        return null;
+        return ResultMessage.Success;
     }
 }

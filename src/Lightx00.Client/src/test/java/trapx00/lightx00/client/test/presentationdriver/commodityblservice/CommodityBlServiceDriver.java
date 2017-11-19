@@ -25,11 +25,7 @@ public class CommodityBlServiceDriver {
 
     CommodityVo[] commoditys;
 
-    @Before
-    public void setup()throws Exception{
 
-        commoditys=service.query(new CommodityQueryVo("C0001","LedLight"));
-    }
     @Test
     public void add() throws Exception {
         assertEquals(ResultMessage.Success,service.add(LedLight));

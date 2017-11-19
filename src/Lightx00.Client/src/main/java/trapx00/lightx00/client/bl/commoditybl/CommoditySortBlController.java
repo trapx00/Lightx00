@@ -14,7 +14,7 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
      */
     @Override
     public ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -24,7 +24,7 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
      */
     @Override
     public ResultMessage modify(CommoditySortVo sort) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -44,7 +44,7 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
      */
     @Override
     public ResultMessage delete(CommoditySortVo sort) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**

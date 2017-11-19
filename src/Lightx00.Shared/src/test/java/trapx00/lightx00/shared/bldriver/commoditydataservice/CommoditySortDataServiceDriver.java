@@ -45,7 +45,7 @@ public class CommoditySortDataServiceDriver {
 
     @Test
     public void dispaly() throws Exception {
-        assertEquals("S0002",service.dispaly(Led)[0].getId());
+        assertEquals("S0001",service.dispaly(Led)[0].getId());
     }
 
     //@Test

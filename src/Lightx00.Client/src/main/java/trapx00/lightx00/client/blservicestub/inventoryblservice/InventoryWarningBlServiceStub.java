@@ -21,7 +21,7 @@ public class InventoryWarningBlServiceStub implements InventoryWarningBlService 
 
     @Override
     public ResultMessage modify(String id, double modifyWarning) {
-        return null;
+        return ResultMessage.Success;
     }
 
     @Override

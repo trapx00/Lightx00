@@ -20,7 +20,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage sumbit(InventoryGiftVo inventoryGiftVo) {
-        return null;
+        return ResultMessage.Success;
     }
 
     /**
@@ -29,7 +29,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public String getId() {
-        return null;
+        return "123";
     }
     /**
      * Gets the giftBill during specified time range
@@ -57,7 +57,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return ResultMessage.Success;
     }
     /**
      *  Activates a bill that has been approved of.
@@ -66,7 +66,7 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return ResultMessage.Success;
     }
     /**
      * Deletes a draft.
@@ -76,6 +76,6 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return ResultMessage.Success;
     }
 }
