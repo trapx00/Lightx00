@@ -25,16 +25,16 @@ public class TotalPricePromotionDataController extends UnicastRemoteObject imple
     }
 
     /**
-     * submit a completed TotalPricePromotionPo
+     * Submit a completed TotalPricePromotionPo.
      * @param promotion the TotalPricePromotionPo to be submitted
      * @return whether the operation is done successfully
      */
-    public ResultMessage submit(TotalPricePromotionPo promotion){
+    public ResultMessage submit(TotalPricePromotionPo promotion) {
         return null;
     }
 
     /**
-     * filter TotalPricePromotionPo
+     * Filter TotalPricePromotionPo.
      * @param query the filter conditions
      * @return array of TotalPricePromotionPo which match the conditions
      */
@@ -43,7 +43,7 @@ public class TotalPricePromotionDataController extends UnicastRemoteObject imple
     }
 
     /**
-     * delete a useless TotalPricePromotionPo
+     * Delete a useless TotalPricePromotionPo.
      * @param promotion the TotalPricePromotionPo to be deleted
      * @return whether the operation is done successfully
      */
@@ -52,11 +52,11 @@ public class TotalPricePromotionDataController extends UnicastRemoteObject imple
     }
 
     /**
-     * get id for the next promotion
+     * Get id for the next promotion.
      *
      * @return id for the next promotion
      */
-    public String getId(){
+    public String getId() {
         return null;
     }
 }

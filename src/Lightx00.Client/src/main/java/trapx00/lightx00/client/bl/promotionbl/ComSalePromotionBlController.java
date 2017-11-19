@@ -7,9 +7,8 @@ import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
 public class ComSalePromotionBlController implements ComSalePromotionBlService, DraftDeleteService {
-
     /**
-     * submit a ComSalePromotionVo
+     * Submit a ComSalePromotionVo.
      * @param promotion the ComSalePromotionVo to be submitted
      * @return whether the operation is done successfully
      */
@@ -19,7 +18,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * save a half-completed ComSalePromotionVo as a draft
+     * Save a half-completed ComSalePromotionVo as a draft.
      * @param promotion the ComSalePromotionVo to be saved as a draft
      * @return whether the operation is done successfully
      */
@@ -29,7 +28,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * filter ComSalePromotionVo
+     * Filter ComSalePromotionVo.
      * @param query the filter conditions
      * @return array of ComSalePromotionVo which match the conditions
      */
@@ -39,7 +38,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * delete a overdue or needless ComSalePromotionVo
+     * Delete a overdue or needless ComSalePromotionVo.
      * @param promotion the ComSalePromotionVo to be deleted
      * @return whether the operation is done successfully
      */
@@ -49,7 +48,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * get id for the next ComSalePromotionVo
+     * Get id for the next ComSalePromotionVo.
      * @return id for the next ComSalePromotionVo
      */
     @Override
@@ -58,7 +57,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * delete a draft
+     * Delete a draft.
      * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */

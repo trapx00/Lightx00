@@ -9,9 +9,9 @@ public class TotalPricePromotionDataFactory {
     private static TotalPricePromotionDataService service;
 
     static {
-        try{
+        try {
             service = new TotalPricePromotionDataControllerMock();
-        }catch (RemoteException e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }

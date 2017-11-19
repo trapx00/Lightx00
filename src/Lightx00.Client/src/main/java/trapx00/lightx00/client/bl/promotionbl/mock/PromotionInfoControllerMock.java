@@ -11,14 +11,13 @@ import java.util.Date;
 
 public class PromotionInfoControllerMock extends PromotionInfoController {
     /**
-     * give promotion information to the saleman
-     * @param saleBill SallBillVo which asks for useable promotion in this sale beheavior
+     * Give promotion information to the salesman.
+     * @param saleBill SaleBillVo which asks for usable promotion in this sale activity
      * @return array of promotions that can be used in this sale
      */
     @Override
     public PromotionVoBase[] queryPromotion(SaleBillVo saleBill) {
-        return new PromotionVoBase[] {
-                new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,new CommodityPo[0])
+        return new PromotionVoBase[] {new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,new CommodityPo[0])
         };
     }
 

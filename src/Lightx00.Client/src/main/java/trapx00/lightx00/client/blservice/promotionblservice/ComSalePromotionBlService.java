@@ -4,39 +4,37 @@ import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
 
-import java.rmi.RemoteException;
-
 public interface ComSalePromotionBlService {
     /**
-     * submit a ComSalePromotionVo
+     * Submit a ComSalePromotionVo.
      * @param promotion the ComSalePromotionVo to be submitted
      * @return whether the operation is done successfully
      */
     ResultMessage submit(ComSalePromotionVo promotion);
 
     /**
-     * save a half-completed ComSalePromotionVo as a draft
+     * Save a half-completed ComSalePromotionVo as a draft.
      * @param promotion the ComSalePromotionVo to be saved as a draft
      * @return whether the operation is done successfully
      */
     ResultMessage saveAsDraft(ComSalePromotionVo promotion);
 
     /**
-     * filter ComSalePromotionVo
+     * Filter ComSalePromotionVo.
      * @param query the filter conditions
      * @return array of ComSalePromotionVo which match the conditions
      */
     ComSalePromotionVo[] queryPromotion(PromotionQueryVo query);
 
     /**
-     * delete a overdue or needless ComSalePromotionVo
+     * Delete a overdue or needless ComSalePromotionVo.
      * @param promotion the ComSalePromotionVo to be deleted
      * @return whether the operation is done successfully
      */
     ResultMessage delete(ComSalePromotionVo promotion);
 
     /**
-     * get id for the next promotion
+     * Get id for the next promotion.
      * @return id for the next promotion
      */
     String getId();

@@ -4,7 +4,6 @@ import org.junit.Test;
 import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 
@@ -13,12 +12,12 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
 public class AuditDataControllerTest {
-    AuditDataService service = AuditDataFactory.getService();
-    CashBillPo bill = new CashBillPo("0001",new Date(), BillState.Draft, "123","123",null);
-    BillPo[] bills = {bill};
+    private AuditDataService service = AuditDataFactory.getService();
+    private CashBillPo bill = new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"0001","0002",null);
+
     @Test
     public void query() throws Exception {
-        assertEquals(bills[0],service.query(x->true));
+        assertEquals("XJFYD-20171112-00001",service.query(x->true)[0].getId());
     }
 
     @Test

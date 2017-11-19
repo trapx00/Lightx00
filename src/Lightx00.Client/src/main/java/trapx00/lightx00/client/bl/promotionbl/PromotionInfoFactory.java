@@ -4,9 +4,12 @@ public class PromotionInfoFactory {
     private static PromotionInfo instance = new PromotionInfoController();
 
     /**
-     * get a PromotionInfo instance
+     * get a PromotionInfo instance.
      * @return PromotionInfo instance
      */
-    public static PromotionInfo getInstance(){return instance;}
+
+    public static PromotionInfo getInstance() {
+        return instance;
+    }
 }
 

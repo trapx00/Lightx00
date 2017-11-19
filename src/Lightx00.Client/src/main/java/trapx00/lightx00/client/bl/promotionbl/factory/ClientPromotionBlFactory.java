@@ -4,7 +4,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.promotionbl.ClientPromotionBlController;
 import trapx00.lightx00.client.bl.promotionbl.mock.ClientPromotionBlControllerMock;
 
-public class ClientPromotionFactory {
+public class ClientPromotionBlFactory {
     private static ClientPromotionBlController controller = new ClientPromotionBlControllerMock();
     private static DraftDeleteService draftDeleteService = controller;
 

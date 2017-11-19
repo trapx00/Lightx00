@@ -15,13 +15,8 @@ import static org.junit.Assert.*;
 
 public class TotalPricePromotionBlControllerTest {
     private TotalPricePromotionBlController controller = new TotalPricePromotionBlControllerMock();
-    private TotalPricePromotionVo promotion = null;
-    private PromotionVoBase[] promotions = null;
-    @Before
-    public void setUp() {
-        promotion = new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
-        promotions[0] = promotion;
-    }
+    private TotalPricePromotionVo promotion = new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
+
     @Test
     public void submit() throws Exception {
         assertEquals(ResultMessage.Success,controller.submit(promotion));
@@ -34,7 +29,7 @@ public class TotalPricePromotionBlControllerTest {
 
     @Test
     public void queryPromotion() throws Exception {
-        assertEquals(promotions[0],controller.queryPromotion(x->true));
+        assertEquals("0001",controller.queryPromotion(x->true)[0].getId());
     }
 
     @Test
@@ -44,7 +39,7 @@ public class TotalPricePromotionBlControllerTest {
 
     @Test
     public void getId() throws Exception {
-        assertEquals(ResultMessage.Success,controller.getId());
+        assertEquals("0001",controller.getId());
     }
 
     @Test

@@ -9,9 +9,9 @@ public class ClientPromotionDataFactory {
     private static ClientPromotionDataService service;
 
     static {
-        try{
+        try {
             service = new ClientPromotionDataControllerMock();
-        }catch (RemoteException e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
