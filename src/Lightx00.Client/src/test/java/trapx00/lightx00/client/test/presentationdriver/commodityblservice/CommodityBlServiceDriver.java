@@ -36,10 +36,10 @@ public class CommodityBlServiceDriver {
         assertEquals(ResultMessage.Success,service.modify(LedLight));
     }
 
-    @Test
-    public void query() throws Exception {
-        assertEquals("C0001",commoditys[0].getId() );
-    }
+ //   @Test
+  //  public void query() throws Exception {
+  //      assertEquals("C0001",commoditys[0].getId() );
+  //  }
 
     @Test
     public void delete() throws Exception {
