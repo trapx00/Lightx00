@@ -32,7 +32,7 @@ public class CashBillBlControllerTest {
 
     @Test
     public void getId() throws Exception {
-        assertEquals("XJFYD-20171112-00001", controller.getId());
+        assertEquals("XJFYD-20171107-00001", controller.getId());
     }
 
     @Test
@@ -47,12 +47,12 @@ public class CashBillBlControllerTest {
 
     @Test
     public void activate() throws Exception {
-        assertEquals(ResultMessage.Success, controller.activate("XJFYD-20171112-00001"));
+        assertEquals(ResultMessage.Success, controller.activate("XJFYD-20171107-00001"));
     }
 
     @Test
     public void query() throws Exception {
-        assertEquals(2, controller.query(x->true).length);
+        assertEquals(1, controller.query(x->true).length);
     }
 
 }

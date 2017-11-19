@@ -18,7 +18,7 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return super.deleteDraft(id);
+        return ResultMessage.Success;
     }
 
     /**
@@ -72,7 +72,7 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
      */
     @Override
     public String getId() {
-        return "FXD-20171111-00001";
+        return "FXD-20171112-00001";
     }
 
     /**
