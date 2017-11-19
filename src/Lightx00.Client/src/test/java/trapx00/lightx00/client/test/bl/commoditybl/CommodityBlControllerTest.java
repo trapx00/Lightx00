@@ -22,7 +22,7 @@ public class CommodityBlControllerTest {
     CommodityVo LedLight=new CommodityVo("C0001","LedLight", "Led", 98, date,
             "1", "2", 56, 60, 90, 99, 50);
 
-    CommodityVo[] commoditys;
+    CommodityVo[] commoditys={LedLight};
     @Before
     public void setup()throws Exception{
 
@@ -41,7 +41,7 @@ public class CommodityBlControllerTest {
 
     @Test
     public void query() throws Exception {
-        assertEquals("C0001",commoditys[0].getId() );
+        assertEquals("C0001",LedLight.getId() );
     }
 
     @Test

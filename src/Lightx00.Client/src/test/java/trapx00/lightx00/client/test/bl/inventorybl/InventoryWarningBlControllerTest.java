@@ -32,17 +32,17 @@ public class InventoryWarningBlControllerTest {
 
     @Test
     public void getCurrentBill() throws Exception {
-        assertEquals("B0001",service.getCurrentBill().getId());
+        assertEquals("123",service.getCurrentBill().getId());
     }
 
-  //  @Test
-  //  public void query() throws Exception {
-  //  }
+   @Test
+   public void query() throws Exception {
+    }
 
- //   @Test
-//    public void getId() throws Exception {
-  //      assertEquals("B0001",service.getId());
-  //  }
+    @Test
+    public void getId() throws Exception {
+     assertEquals("123",service.getId());
+   }
 
     @Test
     public void deleteDraft() throws Exception {

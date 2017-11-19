@@ -29,7 +29,7 @@ public class InventoryGiftBlServiceDriver {
     }
 
     @Test
-    public void getGift(Date time) throws Exception {
+    public void getGift() throws Exception {
         assertEquals(null,service.getGift(date));
     }
 

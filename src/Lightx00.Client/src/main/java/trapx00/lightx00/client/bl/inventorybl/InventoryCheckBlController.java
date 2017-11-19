@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
@@ -17,7 +18,9 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public InventoryViewVo check(Date beginTime, Date endTime) {
-        return null;
+        InventoryViewVo inventoryViewVo=new InventoryViewVo(beginTime,123,123,123,12,208,123,123);
+
+        return inventoryViewVo;
     }
 
     /**
@@ -26,7 +29,13 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public InventoryPictureVo picture() {
-        return null;
+
+        CommodityVo LedLight=new CommodityVo("C0001","LedLight", "Led", 98, new Date(),
+                "1", "2", 56, 60, 90, 99, 50);
+
+        CommodityVo[] commoditys={LedLight};
+
+        return new InventoryPictureVo(new Date(),commoditys);
     }
 
     /**
@@ -36,6 +45,6 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public ResultMessage export(File newfile) {
-        return null;
+        return ResultMessage.Success;
     }
 }
