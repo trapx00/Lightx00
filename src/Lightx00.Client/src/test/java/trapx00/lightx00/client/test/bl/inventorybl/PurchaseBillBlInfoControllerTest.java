@@ -12,12 +12,12 @@ public class PurchaseBillBlInfoControllerTest {
 
     @Test
     public void queryPurchaseBillVo() throws Exception {
-        assertEquals("0",purchaseBillBlInfo.queryPurchaseBillVo(null));
+        assertEquals("0",purchaseBillBlInfo.queryPurchaseBillVo(null)[0].getId());
     }
 
     @Test
     public void queryPurchaseRefundBillVo() throws Exception {
-        assertEquals("0",purchaseBillBlInfo.queryPurchaseRefundBillVo(null));
+        assertEquals("0",purchaseBillBlInfo.queryPurchaseRefundBillVo(null)[0].getId());
     }
 
 }

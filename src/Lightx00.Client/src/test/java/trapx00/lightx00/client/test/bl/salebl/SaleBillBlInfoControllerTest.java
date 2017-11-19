@@ -6,8 +6,8 @@ import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 
 import static org.junit.Assert.*;
 
-public class SaleBillBlInfoControllerMockTest {
-    SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
+public class SaleBillBlInfoControllerTest {
+    private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
 
     @Test
     public void querySaleBill() throws Exception {
