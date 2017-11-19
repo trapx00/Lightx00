@@ -25,7 +25,7 @@ public class NotificationBlControllerTest {
 
     @Test
     public void update() throws Exception {
-        assertEquals(1, controller.update().length);
+        assertEquals(2, controller.update().length);
     }
 
     @Test

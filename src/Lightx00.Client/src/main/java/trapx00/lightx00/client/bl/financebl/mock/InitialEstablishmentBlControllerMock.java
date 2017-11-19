@@ -76,4 +76,26 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
                 )
         };
     }
+
+    /**
+     * Abandons a bill.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage abandon(String id) {
+        return ResultMessage.Success;
+    }
+
+    /**
+     * Activates a bill that has been approved of.
+     *
+     * @param id id for the bill
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage activate(String id) {
+        return ResultMessage.Success;
+    }
 }

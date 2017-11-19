@@ -72,7 +72,7 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
      */
     @Override
     public String getId() {
-        return "SCD-20171111-00001";
+        return "SKD-20171112-00001";
     }
 
     /**
