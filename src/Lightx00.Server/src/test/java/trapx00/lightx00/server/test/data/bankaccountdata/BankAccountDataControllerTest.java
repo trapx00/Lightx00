@@ -15,7 +15,7 @@ public class BankAccountDataControllerTest {
     private BankAccountPo account = service.query(x->true)[0];
     @Test
     public void query() throws Exception {
-        assertEquals(1, account.getId());
+        assertEquals("123", account.getId());
     }
 
     @Test

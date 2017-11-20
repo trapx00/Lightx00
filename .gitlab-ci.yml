@@ -1,6 +1,6 @@
 stages:
   - build
-  # - test
+  - test
   
 cache:
   paths:
@@ -19,15 +19,15 @@ buildjob:
     - chmod +x gradlew
     - ./gradlew assemble
 
-# testjob:
-#   stage: test
-#   script:
-#     - cd ./src/Lightx00.Client
-#     - chmod +x gradlew
-#     - ./gradlew check
-#     - cd ../../src/Lightx00.Server
-#     - chmod +x gradlew
-#     - ./gradlew check
-#   only:
-#     - develop
-#     - master
+testjob:
+  stage: test
+  script:
+    - cd ./src/Lightx00.Client
+    - chmod +x gradlew
+    - ./gradlew check
+    - cd ../../src/Lightx00.Server
+    - chmod +x gradlew
+    - ./gradlew check
+  only:
+    - develop
+    - master
