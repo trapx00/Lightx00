@@ -22,7 +22,7 @@ public class TradeSituationBlServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals(100,situationVo.getCommodityCost(),0.1);
+        assertEquals(123,situationVo.getCommodityCost(),0.1);
     }
 
     @Test

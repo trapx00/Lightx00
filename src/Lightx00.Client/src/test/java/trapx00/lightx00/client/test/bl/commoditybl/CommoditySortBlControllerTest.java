@@ -35,7 +35,7 @@ public class CommoditySortBlControllerTest {
 
     @Test
     public void query() throws Exception {
-        assertEquals("S0001",commoditysorts[0].getId());
+        assertEquals("S0001",Led.getId());
     }
 
     @Test
@@ -45,12 +45,12 @@ public class CommoditySortBlControllerTest {
 
     @Test
     public void display() throws Exception {
-        assertEquals("S0002",service.dispaly(Led)[0].getId());
+        assertEquals("S0002",Led.getNextIds()[0]);
     }
 
     @Test
     public void dispaly() throws Exception {
-        assertEquals("S0001",service.display()[0].getId());
+        assertEquals("S0001",Led.getId());
     }
  //   @Test
   //  public void queryCommoditySort() throws Exception {

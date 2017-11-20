@@ -34,5 +34,5 @@ public interface PurchaseBillBlService {
      * @param query function
      * @return array of PurchaseBillVo
      */
-    public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query);
+    PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query);
 }

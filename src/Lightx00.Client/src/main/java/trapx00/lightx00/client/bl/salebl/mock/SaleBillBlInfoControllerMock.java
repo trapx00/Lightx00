@@ -3,6 +3,8 @@ package trapx00.lightx00.client.bl.salebl.mock;
 import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
 import trapx00.lightx00.client.bl.salebl.SaleBillBlInfoController;
 import trapx00.lightx00.client.bl.salebl.SaleRefundBillBlController;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlFactory;
+import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
@@ -11,8 +13,8 @@ import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 
 public class SaleBillBlInfoControllerMock extends SaleBillBlInfoController {
-    SaleBillBlService saleBillBlService = new SaleBillBlController();
-    SaleRefundBillBlService saleRefundBillBlService = new SaleRefundBillBlController();
+    SaleBillBlService saleBillBlService = SaleBillBlFactory.getSaleBillBlController();
+    SaleRefundBillBlService saleRefundBillBlService = SaleRefundBillBlFactory.getSaleRefundBillBlController();
 
     /**
      * query for SaleBills
