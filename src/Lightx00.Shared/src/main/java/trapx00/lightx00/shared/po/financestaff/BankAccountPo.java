@@ -7,8 +7,8 @@ import java.util.Date;
 
 @DatabaseTable(tableName = "BankAccount")
 public class BankAccountPo {
-    @DatabaseField(id = true)
-    private String id;
+    @DatabaseField(generatedId = true)
+    private int id;
     @DatabaseField
     private String name;
     @DatabaseField
@@ -16,18 +16,16 @@ public class BankAccountPo {
     @DatabaseField
     private Date createTime;
 
-    public BankAccountPo(String id, String name, double amount, Date createTime) {
-        this.id = id;
+    public BankAccountPo(String name, double amount, Date createTime) {
         this.name = name;
         this.amount = amount;
         this.createTime = createTime;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) { this.id = id; }
 
     public String getName() {
         return name;

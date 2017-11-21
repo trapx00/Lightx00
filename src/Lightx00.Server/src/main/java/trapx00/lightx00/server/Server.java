@@ -63,7 +63,6 @@ public class Server {
 
         try {
             BaseDatabaseFactory.init();
-            Dao<LogPo, Integer> log = LogDataDaoFactory.getLogDao();
             log.create(new LogPo(new Date(), LogSeverity.Success,"123"));
 
             Dao<CashBillPo, String> cashBillDao = FinanceDataDaoFactory.getCashBillDao();

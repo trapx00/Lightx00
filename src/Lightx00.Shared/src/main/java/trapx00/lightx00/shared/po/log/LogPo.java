@@ -26,6 +26,10 @@ public class LogPo {
         this.content = content;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Date getDate() {
         return date;
     }

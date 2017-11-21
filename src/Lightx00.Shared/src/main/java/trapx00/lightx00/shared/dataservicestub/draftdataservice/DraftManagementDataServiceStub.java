@@ -19,7 +19,7 @@ public class DraftManagementDataServiceStub implements DraftManagementDataServic
     @Override
     public DraftPo[] update(DraftQueryVo query) throws RemoteException {
         return new DraftPo[] {
-                new DraftPo("FXD-123",new Date(),"123","FXD-20171111-00001")
+                new DraftPo(new Date(),"123","FXD-20171111-00001")
         };
     }
 
@@ -30,7 +30,7 @@ public class DraftManagementDataServiceStub implements DraftManagementDataServic
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String draftId) {
+    public ResultMessage delete(int draftId) {
         return ResultMessage.Success;
     }
 

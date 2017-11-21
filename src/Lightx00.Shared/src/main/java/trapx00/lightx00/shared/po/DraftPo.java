@@ -9,9 +9,13 @@ import java.util.Date;
 public class DraftPo {
     @DatabaseField(generatedId = true)
     private int id;
+    @DatabaseField
     private Date saveTime;
+    @DatabaseField
     private String saverId;
+    @DatabaseField
     private String billId;
+    @DatabaseField
     private String billTypePoClassName;
 
     public DraftPo(Date saveTime, String saverId, String billId) {

@@ -17,7 +17,7 @@ public class BankAccountDataServiceStub implements BankAccountDataService {
     @Override
     public BankAccountPo[] query(BankAccountQueryVo query) {
         return new BankAccountPo[] {
-                new BankAccountPo("123","123",10,new Date())
+                new BankAccountPo("123",10,new Date())
         };
     }
 
