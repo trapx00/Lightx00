@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromot
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
+import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
 
 import java.util.Date;
 
@@ -13,7 +14,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TotalPricePromotionDataControllerTest {
     private TotalPricePromotionDataService service = TotalPricePromotionDataFactory.getService();
-    private TotalPricePromotionPo promotion = new TotalPricePromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
+    private TotalPricePromotionPo promotion = service.queryPromotion(new TotalPricePromotionQueryVo())[0];
 
     @Test
     public void submit() throws Exception {
@@ -22,7 +23,7 @@ public class TotalPricePromotionDataControllerTest {
 
     @Test
     public void queryPromotion() throws Exception {
-        assertEquals("0001",service.queryPromotion(x->true)[0].getId());
+        assertEquals("0001",promotion.getId());
     }
 
     @Test

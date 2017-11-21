@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotion
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.ComSalePromotionQueryVo;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class ComSalePromotionDataServiceStub implements ComSalePromotionDataServ
      * @param query the filter conditions
      * @return array of ComSalePromotionPo which match the conditions
      */
-    public ComSalePromotionPo[] queryPromotion(PromotionQueryVo query) {
+    public ComSalePromotionPo[] queryPromotion(ComSalePromotionQueryVo query) {
         return new ComSalePromotionPo[]{new ComSalePromotionPo("0001",new Date(),new Date(),PromotionState.Waiting,null,0)};
     }
 

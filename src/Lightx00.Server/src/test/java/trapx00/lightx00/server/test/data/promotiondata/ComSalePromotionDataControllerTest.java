@@ -5,15 +5,13 @@ import trapx00.lightx00.server.data.promotiondata.factory.ComSalePromotionDataFa
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotionDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-
-import java.util.Date;
+import trapx00.lightx00.shared.queryvo.ComSalePromotionQueryVo;
 
 import static org.junit.Assert.*;
 
 public class ComSalePromotionDataControllerTest {
     private ComSalePromotionDataService service = ComSalePromotionDataFactory.getService();
-    private ComSalePromotionPo promotion = new ComSalePromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,null,0);
+    private ComSalePromotionPo promotion = service.queryPromotion(new ComSalePromotionQueryVo())[0];
 
     @Test
     public void submit() throws Exception {
@@ -22,7 +20,7 @@ public class ComSalePromotionDataControllerTest {
 
     @Test
     public void queryPromotion() throws Exception {
-        assertEquals("0001",service.queryPromotion(x->true)[0].getId());
+        assertEquals("0001",promotion.getId());
     }
 
     @Test

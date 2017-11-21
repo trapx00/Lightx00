@@ -47,7 +47,7 @@ public class AuditDataServiceStub implements AuditDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestApproval(BillPo bill) throws RemoteException {
+    public ResultMessage requestApproval(BillPo bill) {
         return ResultMessage.Success;
     }
 }

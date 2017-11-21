@@ -1,22 +1,27 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
+@DatabaseTable(tableName = "ClientPromotion")
 public class ClientPromotionPo extends PromotionPoBase {
+    @DatabaseField
     private int clientLevel;
+    @DatabaseField
     private double couponPrice;
-    private CommodityPo[] promotionCommodity;
+    @DatabaseField
     private double salePrice;
 
-    public ClientPromotionPo(String id, Date startDate, Date endDate, PromotionState state, int clientLevel, double couponPrice,CommodityPo[] promotionCommodity,double salePrice) {
-        super(id, PromotionType.ClientPromotion, startDate, endDate, PromotionState.Waiting);
+    public ClientPromotionPo(String id, Date startDate, Date endDate, PromotionState state, int clientLevel, double couponPrice,PromotionCommodity[] promotionCommodities,double salePrice) {
+        super(id, PromotionType.ClientPromotion, startDate, endDate, PromotionState.Waiting,promotionCommodities);
         this.clientLevel = clientLevel;
         this.couponPrice = couponPrice;
-        this.promotionCommodity = promotionCommodity;
         this.salePrice = salePrice;
     }
+
+    public ClientPromotionPo() {}
 
     public int getClientLevel() {
         return clientLevel;
@@ -34,16 +39,8 @@ public class ClientPromotionPo extends PromotionPoBase {
         this.couponPrice = couponPrice;
     }
 
-    public CommodityPo[] getPromotionCommodity() {
-        return promotionCommodity;
-    }
-
     public double getSalePrice() {
         return salePrice;
-    }
-
-    public void setPromotionCommodity() {
-        this.promotionCommodity = promotionCommodity;
     }
 
     public void setSalePrice() {

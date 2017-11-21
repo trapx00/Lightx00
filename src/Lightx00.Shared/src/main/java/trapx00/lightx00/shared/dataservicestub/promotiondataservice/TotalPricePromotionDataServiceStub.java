@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromot
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class TotalPricePromotionDataServiceStub implements TotalPricePromotionDa
      * @param query the filter conditions
      * @return array of TotalPricePromotionPo which match the conditions
      */
-    public TotalPricePromotionPo[] queryPromotion(PromotionQueryVo query) {
+    public TotalPricePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) {
         return new TotalPricePromotionPo[]{new TotalPricePromotionPo("0001",new Date(),new Date(),PromotionState.Waiting,200,1000,null)};
     }
 

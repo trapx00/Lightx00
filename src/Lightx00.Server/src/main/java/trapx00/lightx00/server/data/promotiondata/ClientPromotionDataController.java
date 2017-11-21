@@ -3,7 +3,7 @@ package trapx00.lightx00.server.data.promotiondata;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -37,7 +37,7 @@ public class ClientPromotionDataController extends UnicastRemoteObject implement
      * @param query the filter conditions
      * @return array of ClientPromotionPo which match the conditions
      */
-    public ClientPromotionPo[] queryPromotion(PromotionQueryVo query) {
+    public ClientPromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) {
         return new ClientPromotionPo[0];
     }
 

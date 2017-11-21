@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataSe
 
 import java.rmi.RemoteException;
 
-public class AdminDataFactory {
+public class UserManagementDataFactory {
     private static UserManagementDataService service;
 
     static {

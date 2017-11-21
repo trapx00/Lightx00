@@ -3,7 +3,8 @@ package trapx00.lightx00.server.data.promotiondata;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotionDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.ComSalePromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -37,7 +38,7 @@ public class ComSalePromotionDataController extends UnicastRemoteObject implemen
      * @param query the filter conditions
      * @return array of ComSalePromotionPo which match the conditions
      */
-    public ComSalePromotionPo[] queryPromotion(PromotionQueryVo query) {
+    public ComSalePromotionPo[] queryPromotion(ComSalePromotionQueryVo query) {
         return new ComSalePromotionPo[0];
     }
 

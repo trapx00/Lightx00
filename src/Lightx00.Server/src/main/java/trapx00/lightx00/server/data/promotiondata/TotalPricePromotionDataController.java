@@ -3,7 +3,7 @@ package trapx00.lightx00.server.data.promotiondata;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -38,7 +38,7 @@ public class TotalPricePromotionDataController extends UnicastRemoteObject imple
      * @param query the filter conditions
      * @return array of TotalPricePromotionPo which match the conditions
      */
-    public TotalPricePromotionPo[] queryPromotion(PromotionQueryVo query) {
+    public TotalPricePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) {
         return new TotalPricePromotionPo[0];
     }
 

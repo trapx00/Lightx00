@@ -4,7 +4,7 @@ import trapx00.lightx00.server.data.promotiondata.ComSalePromotionDataController
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -38,7 +38,7 @@ public class ComSalePromotionDataControllerMock extends ComSalePromotionDataCont
      * @param query the filter conditions
      * @return array of ComSalePromotionPo which match the conditions
      */
-    public ComSalePromotionPo[] queryPromotion(PromotionQueryVo query) {
+    public ComSalePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) {
         return new ComSalePromotionPo[]{new ComSalePromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,null,0)};
     }
 

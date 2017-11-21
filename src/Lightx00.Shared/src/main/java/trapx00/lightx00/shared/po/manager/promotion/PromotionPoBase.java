@@ -1,22 +1,36 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
-public abstract class PromotionPoBase{
+@DatabaseTable(tableName = "Promotion")
+public class PromotionPoBase {
+    @DatabaseField
     private String id;
+    @DatabaseField
     private PromotionType type;
+    @DatabaseField
     private Date startDate;
+    @DatabaseField
     private Date endDate;
+    @DatabaseField
     private PromotionState state;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private PromotionCommodity[] promotionCommodities;
 
-    public PromotionPoBase(String id, PromotionType type, Date startDate, Date endDate, PromotionState state) {
+    public PromotionPoBase(String id, PromotionType type, Date startDate, Date endDate, PromotionState state,PromotionCommodity[] promotionCommodities) {
         this.id = id;
         this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
         this.state = state;
+        this.promotionCommodities = promotionCommodities;
     }
+
+    public PromotionPoBase() {}
 
     public Date getEndDate() {
         return endDate;
@@ -30,9 +44,17 @@ public abstract class PromotionPoBase{
         return startDate;
     }
 
-    public PromotionType getPromotionType(){return type;}
+    public PromotionType getPromotionType() {
+        return type;
+    }
 
-    public PromotionState getPromotionState(){return state;}
+    public PromotionState getPromotionState() {
+        return state;
+    }
+
+    public PromotionCommodity[] getPromotionCommodities() {
+        return promotionCommodities;
+    }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
@@ -50,4 +72,7 @@ public abstract class PromotionPoBase{
         this.state = state;
     }
 
+    public void setPromotionCommodities(PromotionCommodity[] promotionCommodities) {
+        this.promotionCommodities = promotionCommodities;
+    }
 }
