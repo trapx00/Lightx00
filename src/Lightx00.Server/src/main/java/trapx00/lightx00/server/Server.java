@@ -1,6 +1,7 @@
 package trapx00.lightx00.server;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
 import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
@@ -9,9 +10,11 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
+import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
 import java.util.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Server {
 
@@ -45,13 +48,31 @@ public class Server {
 //            System.out.println("发生URL畸形异常！");
 //            e.printStackTrace();
 //        }
+        Dao<LogPo, Integer> log = LogDataDaoFactory.getLogDao();
+        //用户构造查询条件
+        LogQueryVo query = new LogQueryVo(q ->q.where().eq("id", 1).prepare());
+
+        //data层使用查询条件
+        try {
+            PreparedQuery<LogPo> preparedQuery = query.getQueryBuilder(log);
+            List<LogPo> logs = log.query(preparedQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         try {
             BaseDatabaseFactory.init();
             Dao<LogPo, Integer> log = LogDataDaoFactory.getLogDao();
             log.create(new LogPo(new Date(), LogSeverity.Success,"123"));
+
             Dao<CashBillPo, String> cashBillDao = FinanceDataDaoFactory.getCashBillDao();
 //            cashBillDao.create(new CashBillPo("123",new Date(), BillState.Rejected,"123","123",new CashBillItem[] { new CashBillItem("123",0,"123")}));
             System.out.println(cashBillDao.queryForAll().get(0).getItems()[0].getAmount());
+
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

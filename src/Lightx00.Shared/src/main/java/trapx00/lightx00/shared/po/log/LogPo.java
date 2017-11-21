@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
-@DatabaseTable(tableName = "Log")
+@DatabaseTable(tableName = "log")
 public class LogPo {
     @DatabaseField(generatedId = true)
     private int id;

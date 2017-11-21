@@ -4,5 +4,8 @@ import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 
 import java.util.function.Predicate;
 
-public interface PaymentBillQueryVo extends Predicate<PaymentBillPo> {
+public class PaymentBillQueryVo extends BaseQueryVo<PaymentBillPo,String> {
+    public PaymentBillQueryVo(QueryBuilderPreparation<PaymentBillPo, String> preparation) {
+        super(preparation);
+    }
 }

@@ -1,27 +1,27 @@
 package trapx00.lightx00.shared.po;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
+@DatabaseTable(tableName = "Draft")
 public class DraftPo {
-    private String id;
+    @DatabaseField(generatedId = true)
+    private int id;
     private Date saveTime;
     private String saverId;
     private String billId;
     private String billTypePoClassName;
 
-    public DraftPo(String id, Date saveTime, String saverId, String billId) {
-        this.id = id;
+    public DraftPo(Date saveTime, String saverId, String billId) {
         this.saveTime = saveTime;
         this.saverId = saverId;
         this.billId = billId;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Date getSaveTime() {
