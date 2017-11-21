@@ -4,6 +4,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlService;
 import trapx00.lightx00.client.blservicestub.bankaccountblservice.BankAccountManagementBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +23,7 @@ public class BankAccountManagementBlServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals("123",service.query(x->true)[0].getId());
+        assertEquals("123",service.query(new BankAccountQueryVo())[0].getId());
     }
 
     @Test

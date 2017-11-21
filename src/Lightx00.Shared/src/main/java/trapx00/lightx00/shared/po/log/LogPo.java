@@ -1,16 +1,33 @@
 package trapx00.lightx00.shared.po.log;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
+@DatabaseTable(tableName = "Log")
 public class LogPo {
+    @DatabaseField(generatedId = true)
+    private int id;
+    @DatabaseField
     private Date date;
-    private  LogSeverity severity;
+    @DatabaseField
+    private LogSeverity severity;
+    @DatabaseField
     private String content;
+
+    public LogPo() {
+
+    }
 
     public LogPo(Date date, LogSeverity severity, String content) {
         this.date = date;
         this.severity = severity;
         this.content = content;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Date getDate() {

@@ -23,6 +23,6 @@ public class DraftManagementBlServiceStub implements DraftManagementBlService {
      */
     @Override
     public ResultMessage delete(Draftable draft) {
-        return null;
+        return ResultMessage.Success;
     }
 }

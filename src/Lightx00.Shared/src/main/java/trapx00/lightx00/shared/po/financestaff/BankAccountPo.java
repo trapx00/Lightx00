@@ -1,27 +1,35 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class BankAccountPo {
-    private String id;
+@DatabaseTable(tableName = "BankAccount")
+public class BankAccountPo implements Serializable {
+    @DatabaseField(generatedId = true)
+    private int id;
+    @DatabaseField
     private String name;
+    @DatabaseField
     private double amount;
+    @DatabaseField
     private Date createTime;
 
-    public BankAccountPo(String id, String name, double amount, Date createTime) {
-        this.id = id;
+    public BankAccountPo(String name, double amount, Date createTime) {
         this.name = name;
         this.amount = amount;
         this.createTime = createTime;
     }
 
-    public String getId() {
+    public BankAccountPo() {
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

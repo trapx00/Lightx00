@@ -1,12 +1,21 @@
 package trapx00.lightx00.shared.po.notification;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
+
 public class NotificationPo {
+    @DatabaseField(id=true)
     private String id;
+    @DatabaseField
     private Date date;
+    @DatabaseField
     private String senderId;
+    @DatabaseField
     private String receiverId;
+    @DatabaseField
     private NotificationType type;
 
     public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type) {
@@ -15,6 +24,9 @@ public class NotificationPo {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.type = type;
+    }
+
+    public NotificationPo() {
     }
 
     public String getId() {

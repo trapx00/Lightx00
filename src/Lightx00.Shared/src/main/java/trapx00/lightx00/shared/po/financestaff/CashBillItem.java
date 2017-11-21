@@ -1,6 +1,8 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-public class CashBillItem {
+import java.io.Serializable;
+
+public class CashBillItem implements Serializable {
     private String name;
     private double amount;
     private String comment;
