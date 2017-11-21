@@ -1,13 +1,18 @@
 package trapx00.lightx00.server.data.financedata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.failuremessage.database.DatabaseFailureMessage;
+import trapx00.lightx00.shared.po.failuremessage.database.DatabaseFailureType;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class CashBillDataController extends UnicastRemoteObject implements CashBillDataService {
     /**
@@ -21,7 +26,10 @@ public class CashBillDataController extends UnicastRemoteObject implements CashB
      * @since JDK1.1
      */
     protected CashBillDataController() throws RemoteException {
+
     }
+
+    private Dao<CashBillPo, String> cashBillDao = FinanceDataDaoFactory.getCashBillDao();
 
     /**
      * Submits a CashBill or save it as a draft.
@@ -31,7 +39,12 @@ public class CashBillDataController extends UnicastRemoteObject implements CashB
      */
     @Override
     public ResultMessage submit(CashBillPo bill) {
-        return null;
+        try {
+            cashBillDao.create(bill);
+            return ResultMessage.Success;
+        } catch (SQLException ex) {
+            return ResultMessage.failureWithInformation(new DatabaseFailureMessage(DatabaseFailureType.IDAlreadyExists));
+        }
     }
 
     /**
