@@ -33,7 +33,7 @@ public class BankAccountDataControllerMock extends BankAccountDataController {
     @Override
     public BankAccountPo[] query(BankAccountQueryVo query) {
         return new BankAccountPo[] {
-            new BankAccountPo("123","123",0,new Date())
+            new BankAccountPo("123",0,new Date())
         };
     }
 

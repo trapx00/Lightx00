@@ -43,9 +43,10 @@ public class DraftDataController extends UnicastRemoteObject implements DraftMan
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String draftId) {
+    public ResultMessage delete(int draftId) throws RemoteException {
         return null;
     }
+
 
     /**
      * Adds a draft.

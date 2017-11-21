@@ -12,6 +12,8 @@ import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.queryvo.FinanceBillQueryVo;
+
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -25,7 +27,7 @@ public class TradeHistoryBlControllerTest {
     public void setUp() throws Exception {
         tradeHistoryVo = service.query(
                 new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1));
-        financeBillVos = service.query(x->true);
+        financeBillVos = service.query(new FinanceBillQueryVo());
     }
 
     @Test

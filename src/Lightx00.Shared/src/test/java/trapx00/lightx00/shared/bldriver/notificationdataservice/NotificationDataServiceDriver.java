@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationD
 import trapx00.lightx00.shared.dataservicestub.notificationdataservice.NotificationDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
+import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +15,7 @@ public class NotificationDataServiceDriver {
     private NotificationPo[] notifications;
     @Before
     public void setUp() throws Exception {
-        notifications = service.update(x->true);
+        notifications = service.update(new NotificationQueryVo());
     }
 
     @Test
