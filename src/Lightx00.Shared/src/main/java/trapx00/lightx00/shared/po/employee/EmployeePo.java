@@ -1,14 +1,24 @@
 package trapx00.lightx00.shared.po.employee;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
+@DatabaseTable(tableName = "Employee")
 public class EmployeePo {
+    @DatabaseField
     private String name;
+    @DatabaseField(id=true)
     private String id;
+    @DatabaseField
     private Date workSince;
+    @DatabaseField
     private String username;
+    @DatabaseField
     private String password;
-    EmployeePosition position;
+    @DatabaseField
+    private EmployeePosition position;
 
     public EmployeePo(String name, String id, Date workSince, String username,
                       String password, EmployeePosition position) {
@@ -18,6 +28,9 @@ public class EmployeePo {
         this.username = username;
         this.password = password;
         this.position = position;
+    }
+
+    public EmployeePo() {
     }
 
     public String getName() {

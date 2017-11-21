@@ -5,8 +5,6 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
-import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
@@ -54,7 +52,7 @@ public class Server {
 
         //data层使用查询条件
         try {
-            PreparedQuery<LogPo> preparedQuery = query.getQueryBuilder(log);
+            PreparedQuery<LogPo> preparedQuery = query.prepareQuery(log);
             List<LogPo> logs = log.query(preparedQuery);
         } catch (SQLException e) {
             e.printStackTrace();

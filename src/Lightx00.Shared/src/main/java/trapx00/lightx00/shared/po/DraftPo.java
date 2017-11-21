@@ -24,6 +24,9 @@ public class DraftPo {
         this.billId = billId;
     }
 
+    public DraftPo() {
+    }
+
     public int getId() {
         return id;
     }

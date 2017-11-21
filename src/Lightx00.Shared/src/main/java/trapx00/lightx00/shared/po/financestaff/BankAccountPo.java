@@ -3,10 +3,11 @@ package trapx00.lightx00.shared.po.financestaff;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @DatabaseTable(tableName = "BankAccount")
-public class BankAccountPo {
+public class BankAccountPo implements Serializable {
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField
@@ -20,6 +21,9 @@ public class BankAccountPo {
         this.name = name;
         this.amount = amount;
         this.createTime = createTime;
+    }
+
+    public BankAccountPo() {
     }
 
     public int getId() {

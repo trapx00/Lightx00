@@ -7,7 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 
-@DatabaseTable(tableName = "cashBill")
+@DatabaseTable(tableName = "CashBill")
 public class CashBillPo extends FinanceBillPo {
     @DatabaseField
     private String operatorId;

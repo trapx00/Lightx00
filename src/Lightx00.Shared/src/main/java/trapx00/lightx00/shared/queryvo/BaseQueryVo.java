@@ -24,7 +24,7 @@ public class BaseQueryVo<Po,PK> {
      * @return prepared query
      * @throws SQLException if the QueryBuilderPreparation were not valid, SQLException would be thrown.
      */
-    public PreparedQuery<Po> getQueryBuilder(Dao<Po, PK> dao) throws SQLException {
+    public PreparedQuery<Po> prepareQuery(Dao<Po, PK> dao) throws SQLException {
         return preparation.prepareQuery(dao.queryBuilder());
     }
 
