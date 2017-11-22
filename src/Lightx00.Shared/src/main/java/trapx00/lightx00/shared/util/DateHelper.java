@@ -29,10 +29,22 @@ public class DateHelper {
     }
 
     /**
-     * Get formalized current date string.
+     * Get formalized current date string with default DATE_PATTERN.
      * @return formalized current date string
      */
-    public static String getCurrentTime() {
+    public static String currentDateString() {
         return fromTimestamp(System.currentTimeMillis());
     }
+
+    /**
+     * Get formalized current date string with custom DATE_PATTERN.
+     * @return formalized current date string in custom date pattern
+     */
+    public static String currentDateString(String DATE_PATTERN) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN).withZone(ZoneId.systemDefault());
+        return formatter.format(Instant.ofEpochMilli(System.currentTimeMillis()));
+    }
+
+
+
 }

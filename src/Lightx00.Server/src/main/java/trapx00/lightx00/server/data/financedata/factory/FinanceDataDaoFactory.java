@@ -16,7 +16,7 @@ public class FinanceDataDaoFactory extends BaseDatabaseFactory {
         initTable(CashBillPo.class);
         initTable(PaymentBillPo.class);
         initTable(ReceivalBillPo.class);
-        initTable(SystemSnapshotQueryVo.class);
+        initTable(SystemSnapshotPo.class);
     }
 
     private static Dao<CashBillPo, String> cashBillDao;
