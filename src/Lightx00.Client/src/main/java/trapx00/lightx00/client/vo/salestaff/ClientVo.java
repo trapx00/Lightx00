@@ -1,11 +1,9 @@
 package trapx00.lightx00.client.vo.salestaff;
 
-
-import trapx00.lightx00.client.bl.draftbl.DraftQueryService;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
 
-public class ClientVo implements DraftQueryService {
+public class ClientVo {
     private String id;
     private ClientType clientType;
     private int clientLevel;
@@ -118,17 +116,6 @@ public class ClientVo implements DraftQueryService {
         this.receivableQuota = receivableQuota;
         this.payableQuota = payableQuota;
         this.defaultOperator = defaultOperator;
-    }
-
-    /**
-     * Queries draft with id.
-     *
-     * @param id id
-     * @return draft
-     */
-    @Override
-    public Draftable queryDraft(String id) {
-        return null;
     }
 }
  

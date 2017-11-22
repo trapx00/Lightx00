@@ -1,15 +1,18 @@
 package trapx00.lightx00.client.bl.clientbl;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
-public class ClientBlController implements ClientBlService, DraftDeleteService,ClientModificationService {
+public class ClientBlController implements ClientBlService, DraftDeleteService, ClientModificationService, DraftableQueryService, ClientQueryService {
 
     /**
      * Deletes a draft.
+     *
      * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */
@@ -20,6 +23,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
 
     /**
      * Query clients which includes the words
+     *
      * @param query condition
      * @return the clients which corresponds to the query
      */
@@ -51,6 +55,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
 
     /**
      * modify a client
+     *
      * @param client to be modified
      * @return whether the operation is done successfully
      */
@@ -61,6 +66,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
 
     /**
      * add a client
+     *
      * @param client to be added
      * @return whether the operation is done successfully
      */
@@ -71,6 +77,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
 
     /**
      * delete some clients
+     *
      * @param id of the client to be deleted
      * @return whether the operation is done successfully
      */
@@ -89,6 +96,17 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
      */
     @Override
     public ResultMessage modifyClient(String clientId, ClientModificationFlag flag, double delta) {
+        return null;
+    }
+
+    /**
+     * Queries draft with id.
+     *
+     * @param id id
+     * @return draft
+     */
+    @Override
+    public Draftable queryDraft(String id) {
         return null;
     }
 }
