@@ -46,6 +46,8 @@ public class NotificationBlController implements NotificationBlService, Notifica
      */
     @Override
     public ResultMessage abandon(BillApprovalNotificationVo notification) {
-        return null;
+        NotificationAbandonService service = notification.getBill().notificationAbandonService();
+        service.abandon(notification.getBill().getId());
+        return ResultMessage.Success;
     }
 }

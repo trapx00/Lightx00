@@ -1,6 +1,6 @@
 package trapx00.lightx00.shared.dataservice.draftdataservice;
 
-import trapx00.lightx00.shared.po.DraftPo;
+import trapx00.lightx00.shared.po.draft.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 

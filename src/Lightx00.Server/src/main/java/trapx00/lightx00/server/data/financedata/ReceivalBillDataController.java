@@ -1,5 +1,8 @@
 package trapx00.lightx00.server.data.financedata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
+import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
@@ -21,59 +24,70 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
      * @since JDK1.1
      */
     protected ReceivalBillDataController() throws RemoteException {
+
     }
 
+    private Dao<ReceivalBillPo, String> dao = FinanceDataDaoFactory.getReceivalBillDao();
+    private CommonBillDataController<ReceivalBillPo> commonBillDataController = new CommonBillDataController<>(dao);
     /**
-     * Submits a ReceivalBill or save it as a draft.
+     * Submits a ReceivalBillPo or save it as a draft.
+     * If there is a bill with the same id as passed-in parameter do,
+     *    if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
+     *    otherwise a IdExistsException would be thrown.
      *
-     * @param bill ReceivalBill
+     * @param bill bill
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage submit(ReceivalBillPo bill) {
-        return null;
+        return commonBillDataController.submit(bill);
     }
 
     /**
-     * Activates a ReceivalBill.
+     * Activates a ReceivalBillPo.
+     * The bill must be in BillState.WaitingForApproval state.
+     * Otherwise a BillInvalidStateException will be thrown.
      *
-     * @param id id for the ReceivalBill that have been approved of
+     * @param id id for the bill that have been approved of
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return commonBillDataController.activate(id);
     }
 
     /**
-     * Abandons a ReceivalBill.
-     *
-     * @param id id for the ReceivalBill to be abandoned
+     * Abandons a ReceivalBillPo.
+     * If a Bill is in BillState.Draft, it will be deleted.
+     * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
+     * If a bill is in other state, a BillInvalidStateException will be thrown.
+     * @param id id for the CashBill to be abandoned
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return commonBillDataController.abandon(id);
     }
 
     /**
-     * Queries bills
+     * Queries ReceivalBillPos.
      *
      * @param query query
      * @return ReceivalBillVos that match query condition
      */
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
-        return new ReceivalBillPo[0];
+        return commonBillDataController.query(query);
     }
 
     /**
      * Gets the id for the next bill.
+     * If there are already 99999 bills for this day, a NoMoreBillException will be thrown.
      *
      * @return id for the next bill
      */
     @Override
     public String getId() {
-        return null;
+        return commonBillDataController.getId("SKD");
     }
 }
