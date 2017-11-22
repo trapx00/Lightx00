@@ -1,11 +1,11 @@
 package trapx00.lightx00.client.bl.financebl.factory;
 
-import trapx00.lightx00.client.bl.draftbl.DraftQueryService;
+import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
 
 public class BillDraftQueryServiceFactory {
-    private static DraftQueryService queryService = TradeHistoryBlFactory.getController();
+    private static DraftableQueryService queryService = TradeHistoryBlFactory.getController();
 
-    public static DraftQueryService getQueryService() {
+    public static DraftableQueryService getQueryService() {
         return queryService;
     }
 }
