@@ -136,10 +136,9 @@ public class CommonBillDataController<Po extends BillPo> {
      * @return bills that match the query condition
      */
     @SuppressWarnings("unchecked")
-    public <Q extends BaseQueryVo> Po[] query(Q query) {
+    public <Q extends BaseQueryVo> List<Po> query(Q query) {
         try {
-            List<Po> cashBillPoList = dao.query(query.prepareQuery(dao));
-            return (Po[])cashBillPoList.toArray();
+            return (List<Po>) dao.query(query.prepareQuery(dao));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DbSqlException(e);

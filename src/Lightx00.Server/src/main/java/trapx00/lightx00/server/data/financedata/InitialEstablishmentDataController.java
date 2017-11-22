@@ -11,6 +11,7 @@ import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class InitialEstablishmentDataController extends UnicastRemoteObject implements InitialEstablishmentDataService {
     /**
@@ -88,6 +89,7 @@ public class InitialEstablishmentDataController extends UnicastRemoteObject impl
      */
     @Override
     public SystemSnapshotPo[] query(SystemSnapshotQueryVo query) {
-        return commonBillDataController.query(query);
+        List<SystemSnapshotPo> results = commonBillDataController.query(query);
+        return results.toArray(new SystemSnapshotPo[results.size()]);
     }
 }

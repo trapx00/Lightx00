@@ -11,6 +11,7 @@ import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class CashBillDataController extends UnicastRemoteObject implements CashBillDataService {
     /**
@@ -79,7 +80,8 @@ public class CashBillDataController extends UnicastRemoteObject implements CashB
      */
     @Override
     public CashBillPo[] query(CashBillQueryVo query) {
-        return commonBillDataController.query(query);
+        List<CashBillPo> result = commonBillDataController.query(query);
+        return result.toArray(new CashBillPo[result.size()]);
     }
 
 

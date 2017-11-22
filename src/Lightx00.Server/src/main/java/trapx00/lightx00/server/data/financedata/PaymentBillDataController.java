@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.List;
 
 public class PaymentBillDataController extends UnicastRemoteObject implements PaymentBillDataService {
     /**
@@ -84,7 +85,8 @@ public class PaymentBillDataController extends UnicastRemoteObject implements Pa
      */
     @Override
     public PaymentBillPo[] query(PaymentBillQueryVo query) {
-        return commonBillDataController.query(query);
+        List<PaymentBillPo> results = commonBillDataController.query(query);
+        return results.toArray(new PaymentBillPo[results.size()]);
     }
 
     /**

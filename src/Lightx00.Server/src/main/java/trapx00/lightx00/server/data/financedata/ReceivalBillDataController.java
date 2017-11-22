@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.data.financedata;
 
 import com.j256.ormlite.dao.Dao;
+import com.sun.org.apache.regexp.internal.RE;
 import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
@@ -11,6 +12,7 @@ import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class ReceivalBillDataController extends UnicastRemoteObject implements ReceivalBillDataService {
     /**
@@ -77,7 +79,8 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
      */
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
-        return commonBillDataController.query(query);
+        List<ReceivalBillPo> results = commonBillDataController.query(query);
+        return results.toArray(new ReceivalBillPo[results.size()]);
     }
 
     /**
