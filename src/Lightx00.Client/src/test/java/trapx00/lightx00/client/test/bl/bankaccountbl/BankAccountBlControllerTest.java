@@ -5,6 +5,7 @@ import trapx00.lightx00.client.bl.bankaccountbl.BankAccountBlController;
 import trapx00.lightx00.client.bl.bankaccountbl.factory.BankAccountFactory;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import java.util.Date;
 
@@ -29,7 +30,7 @@ public class BankAccountBlControllerTest {
 
     @Test
     public void query() throws Exception {
-        assertEquals("123", controller.query(x->x.getId().equals("123"))[0].getId());
+        assertEquals("123", controller.query(new BankAccountQueryVo(q->q.where().eq("id",1).prepare()))[0].getId());
     }
 
     @Test

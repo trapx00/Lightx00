@@ -1,8 +1,9 @@
 package trapx00.lightx00.shared.dataservicestub.draftdataservice;
 
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftManagementDataService;
-import trapx00.lightx00.shared.po.DraftPo;
+import trapx00.lightx00.shared.po.draft.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.draft.DraftType;
 import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 
 import java.rmi.RemoteException;
@@ -19,7 +20,7 @@ public class DraftManagementDataServiceStub implements DraftManagementDataServic
     @Override
     public DraftPo[] update(DraftQueryVo query) throws RemoteException {
         return new DraftPo[] {
-                new DraftPo("FXD-123",new Date(),"123","FXD-20171111-00001")
+                new DraftPo(new Date(),"123","FXD-20171111-00001", DraftType.Bill)
         };
     }
 
@@ -30,7 +31,7 @@ public class DraftManagementDataServiceStub implements DraftManagementDataServic
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String draftId) {
+    public ResultMessage delete(int draftId) {
         return ResultMessage.Success;
     }
 

@@ -1,6 +1,6 @@
 package trapx00.lightx00.shared.dataservice.draftdataservice;
 
-import trapx00.lightx00.shared.po.DraftPo;
+import trapx00.lightx00.shared.po.draft.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 
@@ -20,7 +20,7 @@ public interface DraftManagementDataService extends Remote {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage delete(String draftId) throws RemoteException;
+    ResultMessage delete(int draftId) throws RemoteException;
 
     /**
      * Adds a draft.

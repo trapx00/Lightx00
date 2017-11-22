@@ -1,7 +1,9 @@
 package trapx00.lightx00.server.data.draftdata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.draftdata.factory.DraftDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftManagementDataService;
-import trapx00.lightx00.shared.po.DraftPo;
+import trapx00.lightx00.shared.po.draft.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 
@@ -25,10 +27,12 @@ public class DraftDataController extends UnicastRemoteObject implements DraftMan
     protected DraftDataController() throws RemoteException {
     }
 
+    private Dao<DraftPo, Integer> dao = DraftDataDaoFactory.getDao();
+
     /**
      * Updates current user's drafts.
      *
-     * @param query
+     * @param query query
      * @return curent user's drafts
      */
     @Override
@@ -43,9 +47,10 @@ public class DraftDataController extends UnicastRemoteObject implements DraftMan
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String draftId) {
+    public ResultMessage delete(int draftId) throws RemoteException {
         return null;
     }
+
 
     /**
      * Adds a draft.

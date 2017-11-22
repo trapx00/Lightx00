@@ -1,6 +1,8 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-public class  Transcation {
+import java.io.Serializable;
+
+public class  Transcation implements Serializable {
     private String accountId;
     private double total;
     private String comment;
