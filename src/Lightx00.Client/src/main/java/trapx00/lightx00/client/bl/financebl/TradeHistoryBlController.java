@@ -1,13 +1,16 @@
 package trapx00.lightx00.client.bl.financebl;
 
+import trapx00.lightx00.client.bl.draftbl.DraftQueryService;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
+import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.FinanceBillQueryVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceBillVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 
-public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo {
+public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, DraftQueryService {
     /**
      * Queries FinanceBill
      *
@@ -38,6 +41,17 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
      */
     @Override
     public ResultMessage export(TradeHistoryVo tradeHistory) {
+        return null;
+    }
+
+    /**
+     * Queries draft with id.
+     *
+     * @param id id
+     * @return draft
+     */
+    @Override
+    public Draftable queryDraft(String id) {
         return null;
     }
 }
