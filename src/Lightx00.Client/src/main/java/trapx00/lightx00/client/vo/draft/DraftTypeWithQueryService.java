@@ -1,11 +1,12 @@
 package trapx00.lightx00.client.vo.draft;
 
+import trapx00.lightx00.client.bl.clientbl.factory.ClientDraftQueryServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftQueryService;
 import trapx00.lightx00.client.bl.financebl.factory.BillDraftQueryServiceFactory;
 import trapx00.lightx00.shared.po.draft.DraftType;
 
 public enum DraftTypeWithQueryService {
-    //Client
+    Client(ClientDraftQueryServiceFactory.getQueryService());
     //Promotion
     Bill(BillDraftQueryServiceFactory.getQueryService());
 
