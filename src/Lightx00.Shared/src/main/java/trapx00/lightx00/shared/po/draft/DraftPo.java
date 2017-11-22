@@ -1,4 +1,4 @@
-package trapx00.lightx00.shared.po;
+package trapx00.lightx00.shared.po.draft;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -14,17 +14,30 @@ public class DraftPo {
     @DatabaseField
     private String saverId;
     @DatabaseField
-    private String billId;
+    private String draftId;
     @DatabaseField
-    private String billTypePoClassName;
+    private DraftType draftType;
 
-    public DraftPo(Date saveTime, String saverId, String billId) {
+    public DraftPo(Date saveTime, String saverId, String billId, DraftType draftType) {
         this.saveTime = saveTime;
         this.saverId = saverId;
-        this.billId = billId;
+        this.draftId = billId;
+        this.draftType = draftType;
     }
 
     public DraftPo() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public DraftType getDraftType() {
+        return draftType;
+    }
+
+    public void setDraftType(DraftType draftType) {
+        this.draftType = draftType;
     }
 
     public int getId() {
@@ -47,11 +60,11 @@ public class DraftPo {
         this.saverId = saverId;
     }
 
-    public String getBillId() {
-        return billId;
+    public String getDraftId() {
+        return draftId;
     }
 
-    public void setBillId(String billId) {
-        this.billId = billId;
+    public void setDraftId(String draftId) {
+        this.draftId = draftId;
     }
 }
