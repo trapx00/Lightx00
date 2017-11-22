@@ -1,6 +1,6 @@
 package trapx00.lightx00.shared.po.client;
 
-public class ClientPo {
+public class ClientPo implements DraftQueryService {
     String id;
     ClientType clientType;
     int clientLevel;
