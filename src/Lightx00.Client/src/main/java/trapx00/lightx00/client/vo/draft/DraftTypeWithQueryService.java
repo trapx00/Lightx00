@@ -1,7 +1,8 @@
 package trapx00.lightx00.client.vo.draft;
 
-import trapx00.lightx00.client.bl.draftbl.DraftQueryService;
+import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
 import trapx00.lightx00.client.bl.financebl.factory.BillDraftQueryServiceFactory;
+import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.draft.DraftType;
 
 public enum DraftTypeWithQueryService {
@@ -9,9 +10,9 @@ public enum DraftTypeWithQueryService {
     //Promotion
     Bill(BillDraftQueryServiceFactory.getQueryService());
 
-    private DraftQueryService queryService;
+    private DraftableQueryService queryService;
 
-    DraftTypeWithQueryService(DraftQueryService queryService) {
+    DraftTypeWithQueryService(DraftableQueryService queryService) {
         this.queryService = queryService;
     }
 
@@ -19,8 +20,12 @@ public enum DraftTypeWithQueryService {
         return DraftTypeWithQueryService.valueOf(draftType.toString());
     }
 
+    public Draftable query(String id) {
+        return this.queryService.queryDraft(id);
+    }
 
-    public DraftQueryService getQueryService() {
+
+    public DraftableQueryService getQueryService() {
         return queryService;
     }
 }
