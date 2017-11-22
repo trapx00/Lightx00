@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.po.inventorystaff;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class CommodityPo {

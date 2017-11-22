@@ -1,20 +1,34 @@
 package trapx00.lightx00.shared.po.salestaff;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 import java.util.Date;
 
+@DatabaseTable(tableName = "SaleRefundBill")
 public class SaleRefundBillPo extends SaleBillBasePo {
+    @DatabaseField
     private String supplier;
+    @DatabaseField
     private String defaultOperatorId;
+    @DatabaseField
     private String operatorId;
+    @DatabaseField
     private int repository;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommodityItem[] commodityList;
+    @DatabaseField
     private double originTotal;
+    @DatabaseField
     private double minusProfits;
+    @DatabaseField
     private double token;
+    @DatabaseField
     private double ultiTotal;
+    @DatabaseField
     private String comment;
 
     public String getSupplier() {
