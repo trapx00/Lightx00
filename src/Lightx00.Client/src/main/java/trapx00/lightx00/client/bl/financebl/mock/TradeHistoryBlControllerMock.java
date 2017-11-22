@@ -2,6 +2,7 @@ package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.TradeHistoryBlController;
 import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -52,5 +53,14 @@ public class TradeHistoryBlControllerMock extends TradeHistoryBlController {
         };
     }
 
-
+    /**
+     * Queries draft with id.
+     *
+     * @param id id
+     * @return draft
+     */
+    @Override
+    public Draftable queryDraft(String id) {
+        return super.queryDraft(id);
+    }
 }

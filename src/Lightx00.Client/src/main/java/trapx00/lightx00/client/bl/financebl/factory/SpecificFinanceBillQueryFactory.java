@@ -6,7 +6,7 @@ import trapx00.lightx00.client.bl.financebl.PaymentBillInfo;
 import trapx00.lightx00.client.bl.financebl.ReceivalBillInfo;
 import trapx00.lightx00.client.bl.financebl.SystemSnapshotInfo;
 
-public class BillQueryFactory {
+public class SpecificFinanceBillQueryFactory {
     private static CashBillInfo cashbillInfo = CashBillBlFactory.getCashBillInfo();
     private static PaymentBillInfo paymentBillInfo = PaymentBillBlFactory.getPaymentBillInfo();
     private static ReceivalBillInfo receivalBillInfo = ReceivalBillBlFactory.getReceivalBillInfo();

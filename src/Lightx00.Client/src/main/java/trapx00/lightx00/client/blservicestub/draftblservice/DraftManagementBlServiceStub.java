@@ -2,7 +2,7 @@ package trapx00.lightx00.client.blservicestub.draftblservice;
 
 import trapx00.lightx00.client.blservice.draftblservice.DraftManagementBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.DraftVo;
+import trapx00.lightx00.client.vo.draft.DraftVo;
 import trapx00.lightx00.client.vo.Draftable;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ public class DraftManagementBlServiceStub implements DraftManagementBlService {
     @Override
     public DraftVo[] update() {
         return new DraftVo[]{
-                new DraftVo(new Date(), "",null,null)
+                new DraftVo(new Date(), null,null,null)
         };
     }
 
