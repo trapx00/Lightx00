@@ -1,6 +1,11 @@
 package trapx00.lightx00.server.data.bankaccountdata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
+import trapx00.lightx00.shared.exception.database.DbSqlException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
+import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
@@ -8,6 +13,8 @@ import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
+import java.util.List;
 
 public class BankAccountDataController extends UnicastRemoteObject implements BankAccountDataService {
 
@@ -21,9 +28,10 @@ public class BankAccountDataController extends UnicastRemoteObject implements Ba
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected BankAccountDataController() throws RemoteException {
+    public BankAccountDataController() throws RemoteException {
     }
 
+    private Dao<BankAccountPo, Integer> dao = BankAccountDataDaoFactory.getBankAccountDao();
     /**
      * Queries bank account.
      *
@@ -32,7 +40,29 @@ public class BankAccountDataController extends UnicastRemoteObject implements Ba
      */
     @Override
     public BankAccountPo[] query(BankAccountQueryVo query) {
-        return new BankAccountPo[0];
+        try {
+            List<BankAccountPo> results = dao.query(query.prepareQuery(dao));
+            return results.toArray(new BankAccountPo[results.size()]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
+    }
+
+    private BankAccountPo assertExists(int id, boolean expectedExists) {
+        try {
+            BankAccountPo bankAccountPo = dao.queryForId(id);
+            boolean actualExists = bankAccountPo != null;
+            if (actualExists && !expectedExists) {
+                throw new IdExistsException(String.valueOf(id));
+            } else if (!actualExists && expectedExists) {
+                throw new IdNotExistsException(String.valueOf(id));
+            }
+            return bankAccountPo;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
     }
 
     /**
@@ -43,7 +73,14 @@ public class BankAccountDataController extends UnicastRemoteObject implements Ba
      */
     @Override
     public ResultMessage add(BankAccountPo account) {
-        return null;
+        assertExists(account.getId(), false);
+        try {
+            dao.create(account);
+            return ResultMessage.Success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
     }
 
     /**
@@ -54,7 +91,15 @@ public class BankAccountDataController extends UnicastRemoteObject implements Ba
      */
     @Override
     public ResultMessage modify(BankAccountPo account) {
-        return null;
+        try {
+            BankAccountPo existence = assertExists(account.getId(), true);
+            account.setId(existence.getId());
+            dao.update(account);
+            return ResultMessage.Success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
     }
 
     /**
@@ -64,7 +109,14 @@ public class BankAccountDataController extends UnicastRemoteObject implements Ba
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String id) {
-        return null;
+    public ResultMessage delete(int id) {
+        assertExists(id, true);
+        try {
+            dao.deleteById(id);
+            return ResultMessage.Success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
     }
 }

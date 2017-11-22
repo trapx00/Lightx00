@@ -24,7 +24,7 @@ public class InitialEstablishmentDataController extends UnicastRemoteObject impl
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected InitialEstablishmentDataController() throws RemoteException {
+    public InitialEstablishmentDataController() throws RemoteException {
     }
 
     private Dao<SystemSnapshotPo, String> dao = FinanceDataDaoFactory.getSystemSnapshotDao();

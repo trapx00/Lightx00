@@ -1,11 +1,15 @@
 package trapx00.lightx00.server.data.logindata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.logindata.factory.LoginDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class LoginDataController extends UnicastRemoteObject implements LoginDataService {
     /**
@@ -18,8 +22,10 @@ public class LoginDataController extends UnicastRemoteObject implements LoginDat
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected LoginDataController() throws RemoteException {
+    public LoginDataController() throws RemoteException {
     }
+
+    private Dao<EmployeePo, String> dao = LoginDataDaoFactory.getDao();
 
     /**
      * Login.
@@ -30,6 +36,18 @@ public class LoginDataController extends UnicastRemoteObject implements LoginDat
      */
     @Override
     public EmployeePo login(String username, String password) {
-        return null;
+        try {
+            EmployeePo employeePo = dao.queryBuilder().where().eq("username",username).queryForFirst();
+            if (employeePo == null) {
+                return null;
+            }
+            if (!employeePo.getPassword().equals(password)) {
+                return null;
+            }
+            return employeePo;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.vo.notification;
 
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 
 
@@ -19,6 +20,10 @@ public class NotificationVo {
         this.sender = sender;
         this.receiver = receiver;
         this.type = type;
+    }
+
+    public static NotificationVo convertFromPo(NotificationPo notificationPo) {
+        return NotificationConverterRegistry.convert(notificationPo);
     }
 
     public Date getDate() {

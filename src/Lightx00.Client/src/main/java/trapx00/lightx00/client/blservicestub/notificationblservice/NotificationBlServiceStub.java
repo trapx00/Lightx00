@@ -7,9 +7,9 @@ import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
-import trapx00.lightx00.client.vo.notification.BillApprovalNotificationVo;
+import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
-import trapx00.lightx00.client.vo.notification.OtherNotificationVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 

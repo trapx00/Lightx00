@@ -27,7 +27,7 @@ public class DraftVo {
 
         this.draftType = draftPo.getDraftType();
 
-        this.draft = DraftTypeWithQueryService.fromDraftType(draftPo.getDraftType()).query(draftPo.getDraftId());
+        this.draft = DraftableQueryServiceRegistry.queryDraftable(draftType, draftPo.getDraftId());
         //this.saver = query client
     }
 

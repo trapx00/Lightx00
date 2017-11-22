@@ -30,7 +30,7 @@ public class PaymentBillDataController extends UnicastRemoteObject implements Pa
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected PaymentBillDataController() throws RemoteException {
+    public PaymentBillDataController() throws RemoteException {
     }
 
     private Dao<PaymentBillPo, String> dao = FinanceDataDaoFactory.getPaymentBillDao();

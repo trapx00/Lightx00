@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 public class NotificationPo {
-    @DatabaseField(id=true)
+    @DatabaseField(id = true)
     private String id;
     @DatabaseField
     private Date date;
@@ -17,16 +17,16 @@ public class NotificationPo {
     private String receiverId;
     @DatabaseField
     private NotificationType type;
+    @DatabaseField
+    private String content;
 
-    public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type) {
+    public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type, String content) {
         this.id = id;
         this.date = date;
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.type = type;
-    }
-
-    public NotificationPo() {
+        this.content = content;
     }
 
     public String getId() {
@@ -67,5 +67,13 @@ public class NotificationPo {
 
     public void setType(NotificationType type) {
         this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

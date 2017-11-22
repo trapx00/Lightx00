@@ -1,15 +1,11 @@
 package trapx00.lightx00.shared.dataservicestub.notificationdataservice;
 
-import java.rmi.RemoteException;
 import java.util.Date;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.notification.BillApprovalNotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
-import trapx00.lightx00.shared.po.notification.OtherNotificationPo;
+import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
-
-import javax.management.NotificationBroadcaster;
 
 public class NotificationDataServiceStub implements NotificationDataService {
 
@@ -23,8 +19,8 @@ public class NotificationDataServiceStub implements NotificationDataService {
     @Override
     public NotificationPo[] update(NotificationQueryVo query) {
         return new NotificationPo[] {
-                new OtherNotificationPo("123",new Date(), "","","123"),
-                new BillApprovalNotificationPo("123", new Date(), "","","")
+                new NotificationPo("123",new Date(), "","", NotificationType.BillApproval,"FXD-20171122-00001"),
+                new NotificationPo("123", new Date(), "","",NotificationType.Others,"hahaha")
         };
     }
 

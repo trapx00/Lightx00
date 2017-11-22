@@ -25,7 +25,7 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected ReceivalBillDataController() throws RemoteException {
+    public ReceivalBillDataController() throws RemoteException {
 
     }
 

@@ -1,11 +1,9 @@
 package trapx00.lightx00.server.data.notificationdata.mock;
 
 import trapx00.lightx00.server.data.notificationdata.NotificationDataController;
-import trapx00.lightx00.shared.dataservicestub.notificationdataservice.NotificationDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.notification.BillApprovalNotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
-import trapx00.lightx00.shared.po.notification.OtherNotificationPo;
+import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import java.rmi.RemoteException;
@@ -36,8 +34,8 @@ public class NotificationDataControllerMock extends NotificationDataController {
     @Override
     public NotificationPo[] update(NotificationQueryVo query) {
         return new NotificationPo[] {
-                new OtherNotificationPo("123",new Date(), "","","123"),
-                new BillApprovalNotificationPo("123", new Date(), "","","")
+                new NotificationPo("123",new Date(), "","", NotificationType.BillApproval,"FKD-20171122-00001"),
+                new NotificationPo("123", new Date(), "","",NotificationType.Others,"hahaha")
         };
     }
 

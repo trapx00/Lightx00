@@ -1,6 +1,9 @@
 package trapx00.lightx00.server.data.notificationdata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
+import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
@@ -8,6 +11,8 @@ import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
+import java.util.List;
 
 public class NotificationDataController extends UnicastRemoteObject implements NotificationDataService {
     /**
@@ -20,9 +25,10 @@ public class NotificationDataController extends UnicastRemoteObject implements N
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected NotificationDataController() throws RemoteException {
+    public NotificationDataController() throws RemoteException {
     }
 
+    private Dao<NotificationPo, String> dao = NotificationDataDaoFactory.getDao();
     /**
      * Updates current user's notification.
      *
@@ -31,7 +37,13 @@ public class NotificationDataController extends UnicastRemoteObject implements N
      */
     @Override
     public NotificationPo[] update(NotificationQueryVo query) throws RemoteException {
-        return new NotificationPo[0];
+        try {
+            List<NotificationPo> results = dao.query(query.prepareQuery(dao));
+            return results.toArray(new NotificationPo[results.size()]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbSqlException(e);
+        }
     }
 
     /**
