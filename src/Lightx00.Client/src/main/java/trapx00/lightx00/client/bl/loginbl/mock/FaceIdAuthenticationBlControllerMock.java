@@ -5,6 +5,7 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 
 import java.util.Date;
+import java.util.Random;
 
 public class FaceIdAuthenticationBlControllerMock extends FaceIdAuthenticationBlController {
     /**
@@ -15,6 +16,12 @@ public class FaceIdAuthenticationBlControllerMock extends FaceIdAuthenticationBl
      */
     @Override
     public EmployeeVo authenticate(byte[] bytes) {
-        return new FinanceStaffVo("face id test","1", new Date(), "123");
+        Random random = new Random();
+        if (random.nextBoolean()) {
+            return new FinanceStaffVo("face id test","1", new Date(), "123");
+        } else {
+            return null;
+        }
+
     }
 }
