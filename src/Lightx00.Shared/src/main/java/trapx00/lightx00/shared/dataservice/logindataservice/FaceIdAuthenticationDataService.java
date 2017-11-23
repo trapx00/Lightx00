@@ -9,7 +9,7 @@ public interface FaceIdAuthenticationDataService extends Remote {
     /**
      * Login with face image.
      * @param faceImage face image in binary
-     * @return EmployeePo if login is successful. null otherwise
+     * @return id if login is successful. null otherwise
      */
-    EmployeePo authenticate(byte[] faceImage) throws RemoteException;
+    String authenticate(byte[] faceImage) throws RemoteException;
 }

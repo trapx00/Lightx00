@@ -13,7 +13,7 @@ public class FaceIdAuthenticationBlServiceStub implements FaceIdAuthenticationDa
      * @return EmployeePo if login is successful. null otherwise
      */
     @Override
-    public EmployeePo authenticate(byte[] faceImage) throws RemoteException {
-        return null;
+    public String authenticate(byte[] faceImage) throws RemoteException {
+        return "1";
     }
 }

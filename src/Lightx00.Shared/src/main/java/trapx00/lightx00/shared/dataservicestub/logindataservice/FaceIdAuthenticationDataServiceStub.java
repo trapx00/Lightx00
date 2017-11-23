@@ -14,8 +14,7 @@ public class FaceIdAuthenticationDataServiceStub implements FaceIdAuthentication
      * @return EmployeePo if login is successful. null otherwise
      */
     @Override
-    public EmployeePo authenticate(byte[] faceImage) {
-        return new EmployeePo("face id test", "1", new Date(),
-            "face id test","123", EmployeePosition.Admin);
+    public String authenticate(byte[] faceImage) {
+        return "123";
     }
 }

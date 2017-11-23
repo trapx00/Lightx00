@@ -1,6 +1,8 @@
 package trapx00.lightx00.server.data.logindata;
 
 import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.admindata.LoginService;
+import trapx00.lightx00.server.data.admindata.factory.LoginServiceFactory;
 import trapx00.lightx00.server.data.faceid.FaceIdAuthenticationService;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdAuthenticationServiceFactory;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
@@ -29,8 +31,6 @@ public class FaceIdDataController extends UnicastRemoteObject implements FaceIdA
     }
 
     private FaceIdAuthenticationService service = FaceIdAuthenticationServiceFactory.getService();
-    private Dao<EmployeePo, String> employeeDao = LoginDataDaoFactory.getDao();
-    private Dao<EmployeeFaceIdInfo, Integer> faceIdInfoDao = FaceIdDaoFactory.getDao();
 
     /**
      * Authenticate with image.
@@ -39,17 +39,7 @@ public class FaceIdDataController extends UnicastRemoteObject implements FaceIdA
      * @return registered employee id if login is successful. null otherwise
      */
     @Override
-    public EmployeePo authenticate(byte[] image) {
-        String employeeId = service.authenticate(image);
-        if (employeeId != null) {
-            try {
-                return employeeDao.queryForId(employeeId);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
-            }
-        } else {
-            return null;
-        }
+    public String authenticate(byte[] image) {
+        return service.authenticate(image);
     }
 }
