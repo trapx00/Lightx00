@@ -6,6 +6,7 @@ import trapx00.lightx00.client.bl.financebl.InitialEstablishmentBlController;
 import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
 import static org.junit.Assert.*;
 
@@ -44,7 +45,7 @@ public class InitialEstablishmentBlControllerTest {
 
     @Test
     public void query() throws Exception {
-        assertEquals(1, controller.query(x->true).length);
+        assertEquals(1, controller.query(new SystemSnapshotQueryVo()).length);
     }
 
 }

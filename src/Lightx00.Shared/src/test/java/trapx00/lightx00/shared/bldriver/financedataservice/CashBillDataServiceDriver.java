@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class CashBillDataServiceDriver {
 
     private CashBillDataService service = new CashBillDataServiceStub();
-    private final CashBillPo bill = new CashBillPo("123",new Date(), BillState.Draft, "123","123",null);
+    private final CashBillPo bill = new CashBillPo("XJFYD-20171122-00001",new Date(), BillState.Draft, "123","123",null);
     @Test
     public void submit() throws Exception {
         assertEquals(ResultMessage.Success, service.submit(bill));

@@ -10,12 +10,41 @@ public class DateHelper {
     private static final DateTimeFormatter dateFormatter =
             DateTimeFormatter.ofPattern(DATE_PATTERN).withZone(ZoneId.systemDefault());
 
+    /**
+     * Get formalized date string according to the millisecond.
+     * @param millisecond timestamp in millisecond
+     * @return formalized date string
+     */
     public static String fromTimestamp(long millisecond) {
         return dateFormatter.format(Instant.ofEpochMilli(millisecond));
     }
 
-
-    public static String fromDate(Date date){
+    /**
+     * Formalize data according to the date.
+     * @param date date
+     * @return formalized date string
+     */
+    public static String fromDate(Date date) {
         return dateFormatter.format(date.toInstant());
     }
+
+    /**
+     * Get formalized current date string with default DATE_PATTERN.
+     * @return formalized current date string
+     */
+    public static String currentDateString() {
+        return fromTimestamp(System.currentTimeMillis());
+    }
+
+    /**
+     * Get formalized current date string with custom DATE_PATTERN.
+     * @return formalized current date string in custom date pattern
+     */
+    public static String currentDateString(String DATE_PATTERN) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN).withZone(ZoneId.systemDefault());
+        return formatter.format(Instant.ofEpochMilli(System.currentTimeMillis()));
+    }
+
+
+
 }
