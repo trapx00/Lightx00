@@ -1,6 +1,8 @@
 package trapx00.lightx00.server.data.logindata;
 
 import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.admindata.LoginService;
+import trapx00.lightx00.server.data.admindata.factory.LoginServiceFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
@@ -25,7 +27,7 @@ public class LoginDataController extends UnicastRemoteObject implements LoginDat
     public LoginDataController() throws RemoteException {
     }
 
-    private Dao<EmployeePo, String> dao = LoginDataDaoFactory.getDao();
+    private LoginService service = LoginServiceFactory.getService();
 
     /**
      * Login.
@@ -35,19 +37,7 @@ public class LoginDataController extends UnicastRemoteObject implements LoginDat
      * @return EmployeePo if login is successful
      */
     @Override
-    public EmployeePo login(String username, String password) {
-        try {
-            EmployeePo employeePo = dao.queryBuilder().where().eq("username",username).queryForFirst();
-            if (employeePo == null) {
-                return null;
-            }
-            if (!employeePo.getPassword().equals(password)) {
-                return null;
-            }
-            return employeePo;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
-        }
+    public String login(String username, String password) {
+        return service.login(username,password);
     }
 }

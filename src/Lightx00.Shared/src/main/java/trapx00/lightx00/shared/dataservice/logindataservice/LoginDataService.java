@@ -10,7 +10,7 @@ public interface LoginDataService extends Remote {
      * Login.
      * @param username username
      * @param password password
-     * @return EmployeePo if login is successful
+     * @return Employee ID if login is successful
      */
-    EmployeePo login(String username, String password) throws RemoteException;
+    String login(String username, String password) throws RemoteException;
 }
