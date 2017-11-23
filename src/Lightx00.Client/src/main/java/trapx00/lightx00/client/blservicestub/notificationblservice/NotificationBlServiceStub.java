@@ -18,8 +18,8 @@ public class NotificationBlServiceStub implements NotificationBlService {
     public NotificationVo[] update() {
         EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123");
         return new NotificationVo[] {
-                new OtherNotificationVo("123",new Date(), employeeVo, employeeVo, "test"),
-                new BillApprovalNotificationVo("123",new Date(),employeeVo, employeeVo,
+                new OtherNotificationVo(1,new Date(), employeeVo, employeeVo, "test"),
+                new BillApprovalNotificationVo(1,new Date(),employeeVo, employeeVo,
                         new PaymentBillVo("123",new Date(),
                                 BillState.Approved, "123", "123",new Transcation[]{ new Transcation("123",1,"123")},0))};
     }

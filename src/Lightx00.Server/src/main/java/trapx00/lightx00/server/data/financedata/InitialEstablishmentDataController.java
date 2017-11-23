@@ -28,7 +28,7 @@ public class InitialEstablishmentDataController extends UnicastRemoteObject impl
     }
 
     private Dao<SystemSnapshotPo, String> dao = FinanceDataDaoFactory.getSystemSnapshotDao();
-    private CommonBillDataController<SystemSnapshotPo> commonBillDataController = new CommonBillDataController<>(dao);
+    private CommonBillDataController<SystemSnapshotPo> commonBillDataController = new CommonBillDataController<>(dao, this);
 
     /**
      * Submits a SystemSnapshotPo or save it as a draft.

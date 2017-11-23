@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import com.j256.ormlite.field.DataType;
@@ -61,5 +62,15 @@ public class  ReceivalPaymentBillPoBase extends FinanceBillPo {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "ReceivalPaymentBillPoBase{" +
+            "clientId='" + clientId + '\'' +
+            ", operatorId='" + operatorId + '\'' +
+            ", transcations=" + Arrays.toString(transcations) +
+            ", total=" + total +
+            "} " + super.toString();
     }
 }

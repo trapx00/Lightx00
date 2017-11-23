@@ -5,13 +5,13 @@ import trapx00.lightx00.shared.po.notification.NotificationType;
 
 import java.util.function.Predicate;
 
-public class NotificationQueryVo extends BaseQueryVo<NotificationPo, String> {
+public class NotificationQueryVo extends BaseQueryVo<NotificationPo, Integer> {
     /**
      * Instantiate a QueryVo with prepration method.
      *
      * @param preparation QueryBuilderPreparation method
      */
-    public NotificationQueryVo(QueryBuilderPreparation<NotificationPo, String> preparation) {
+    public NotificationQueryVo(QueryBuilderPreparation<NotificationPo, Integer> preparation) {
         super(preparation);
     }
 

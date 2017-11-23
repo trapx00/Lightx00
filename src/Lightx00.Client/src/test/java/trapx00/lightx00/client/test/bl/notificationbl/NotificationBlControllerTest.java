@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class NotificationBlControllerTest {
     private NotificationBlController controller = NotificationBlFactory.getController();
-    private BillApprovalNotificationVo commonUsedNotification = new BillApprovalNotificationVo("123",new Date(),null,null,null);
+    private BillApprovalNotificationVo commonUsedNotification = new BillApprovalNotificationVo(1,new Date(),null,null,null);
     @Test
     public void addNotification() throws Exception {
         assertEquals(ResultMessage.Success, controller.addNotification(commonUsedNotification));

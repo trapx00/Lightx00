@@ -14,7 +14,7 @@ public class OtherNotificationVo extends NotificationVo {
     }
     private String content;
 
-    public OtherNotificationVo(String id, Date date, EmployeeVo sender, EmployeeVo receiver, String content) {
+    public OtherNotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo receiver, String content) {
         super(id, date, sender, receiver, NotificationType.Others);
         this.content = content;
     }

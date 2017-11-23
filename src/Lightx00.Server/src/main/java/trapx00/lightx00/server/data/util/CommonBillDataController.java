@@ -1,6 +1,9 @@
 package trapx00.lightx00.server.data.util;
 
 import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.Server;
+import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
+import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.exception.database.*;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillPo;
@@ -9,16 +12,34 @@ import trapx00.lightx00.shared.queryvo.BaseQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
 public class CommonBillDataController<Po extends BillPo> {
+    private static final int MAX_BILL_NUM_FOR_A_DAY = 99999;
     private Dao<Po,String> dao;
+    private Object delegate = this;
+    private ServerLogService logService = ServerLogServiceFactory.getService();
 
     public CommonBillDataController(Dao<Po, String> dao) {
         this.dao = dao;
     }
 
+    /**
+     * Constructor with delegate. Pass in (this) directly to log with actual caller.
+     * @param dao dao
+     * @param delegate delegate object. Pass in (this) directly to log with actual caller.
+     */
+    public CommonBillDataController(Dao<Po, String> dao, Object delegate) {
+        this.dao = dao;
+        this.delegate = delegate;
+    }
+
+    private void handleSQLException(SQLException e) {
+        logService.printLog(delegate, "failed at a database operation. Error message: " + e.getMessage());
+        throw new DbSqlException(e);
+    }
 
     /**
      * This function is a util to assert whether the id is used.
@@ -42,8 +63,8 @@ public class CommonBillDataController<Po extends BillPo> {
             }
             return cashBillPo;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
+            handleSQLException(e);
+            return null;
         }
     }
 
@@ -61,16 +82,19 @@ public class CommonBillDataController<Po extends BillPo> {
             Po po = dao.queryForId(bill.getId());
             if (po != null && po.getState().equals(BillState.Draft)) {
                 dao.update(bill);
+                logService.printLog(delegate,String.format("updated a draft %s (id: %s). New content: %s", bill.getState().toString(), bill.getId(), bill.toString()));
                 return ResultMessage.Success;
             }
             if (po != null) {
                 throw new IdExistsException(bill.getId());
             }
             dao.create(bill);
+            bill.setId(dao.extractId(bill));
+            logService.printLog(delegate, String.format("created a %s (id: %s). Content: %s", bill.getBillType().toString(), bill.getId(), bill.toString()));
             return ResultMessage.Success;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
+            handleSQLException(e);
+            return ResultMessage.Failure;
         }
     }
 
@@ -88,13 +112,14 @@ public class CommonBillDataController<Po extends BillPo> {
             if (po.getState() == BillState.WaitingForApproval) {
                 po.setState(BillState.Approved);
                 dao.update(po);
+                logService.printLog(delegate, String.format("activated a bill (id: %s)", id));
                 return ResultMessage.Success;
             } else {
                 throw new BillInvalidStateException(po.getState(), BillState.WaitingForApproval);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
+            handleSQLException(e);
+            return ResultMessage.Failure;
         }
     }
 
@@ -112,19 +137,22 @@ public class CommonBillDataController<Po extends BillPo> {
             switch (po.getState()) {
                 case Draft:
                     dao.deleteById(id);
+                    logService.printLog(delegate, String.format("deletes a draft %s (id: %s)", po.getBillType(), id));
                     return ResultMessage.Success;
                 case Rejected:
                 case Approved:
                 case WaitingForApproval:
+                    BillState previousState = po.getState();
                     po.setState(BillState.Abandoned);
                     dao.update(po);
+                    logService.printLog(delegate, String.format("marked a %s (id: %s) as Abandoned (previously %s)", po.getBillType(), po.getId(), previousState));
                     return ResultMessage.Success;
                 default:
                     throw new BillInvalidStateException(po.getState(),BillState.Draft, BillState.Rejected, BillState.Approved,BillState.WaitingForApproval);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
+            handleSQLException(e);
+            return ResultMessage.Failure;
         }
     }
 
@@ -138,10 +166,12 @@ public class CommonBillDataController<Po extends BillPo> {
     @SuppressWarnings("unchecked")
     public <Q extends BaseQueryVo> List<Po> query(Q query) {
         try {
-            return (List<Po>) dao.query(query.prepareQuery(dao));
+            List<Po> results = (List<Po>) dao.query(query.prepareQuery(dao));
+            logService.printLog(delegate, String.format("queried bills and got %d results.", results.size()));
+            return results;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
+            handleSQLException(e);
+            return new ArrayList<>();
         }
     }
 
@@ -161,13 +191,16 @@ public class CommonBillDataController<Po extends BillPo> {
                 .map(x -> x.split("-")[2])
                 .mapToInt(Integer::parseInt)
                 .max();
-            if (maxId.orElse(-1) == 99999) {
+            if (maxId.orElse(-1) == MAX_BILL_NUM_FOR_A_DAY) {
+                logService.printLog(delegate, "got a new id and it has been full.");
                 throw new NoMoreBillException();
             }
-            return leadingText + "-" + BillHelper.currentDateStringForBill() + "-" + BillHelper.formatId(maxId.orElse(0) + 1);
+            String newId = leadingText + "-" + BillHelper.currentDateStringForBill() + "-" + BillHelper.formatId(maxId.orElse(0) + 1);
+            logService.printLog(delegate, "got a new id " + newId);
+            return newId;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DbSqlException(e);
+            handleSQLException(e);
+            return "";
         }
     }
 

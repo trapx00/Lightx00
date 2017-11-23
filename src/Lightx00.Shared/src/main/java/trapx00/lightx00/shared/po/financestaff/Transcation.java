@@ -36,4 +36,13 @@ public class  Transcation implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "Transcation{" +
+            "accountId='" + accountId + '\'' +
+            ", total=" + total +
+            ", comment='" + comment + '\'' +
+            '}';
+    }
 }

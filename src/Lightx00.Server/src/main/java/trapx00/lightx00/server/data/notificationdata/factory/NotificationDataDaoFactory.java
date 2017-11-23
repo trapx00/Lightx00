@@ -12,9 +12,9 @@ public class NotificationDataDaoFactory extends BaseDatabaseFactory {
         initTable(NotificationPo.class);
     }
 
-    private static Dao<NotificationPo, String> dao;
+    private static Dao<NotificationPo, Integer> dao;
 
-    public static Dao<NotificationPo, String> getDao() {
+    public static Dao<NotificationPo, Integer> getDao() {
         try {
             dao = DaoManager.createDao(connectionSource, NotificationPo.class);
         } catch (SQLException e) {

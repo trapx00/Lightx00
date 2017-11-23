@@ -35,7 +35,7 @@ public class PaymentBillDataController extends UnicastRemoteObject implements Pa
 
     private Dao<PaymentBillPo, String> dao = FinanceDataDaoFactory.getPaymentBillDao();
 
-    private CommonBillDataController<PaymentBillPo> commonBillDataController = new CommonBillDataController<>(dao);
+    private CommonBillDataController<PaymentBillPo> commonBillDataController = new CommonBillDataController<>(dao, this);
 
     /**
      * Submits a PaymentBill or save it as a draft.

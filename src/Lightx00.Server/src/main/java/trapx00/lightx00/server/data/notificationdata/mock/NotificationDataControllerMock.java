@@ -32,21 +32,23 @@ public class NotificationDataControllerMock extends NotificationDataController {
      * @return current user's notification
      */
     @Override
-    public NotificationPo[] update(NotificationQueryVo query) {
+    public NotificationPo[] query(NotificationQueryVo query) {
         return new NotificationPo[] {
-                new NotificationPo("123",new Date(), "","", NotificationType.BillApproval,"FKD-20171122-00001"),
-                new NotificationPo("123", new Date(), "","",NotificationType.Others,"hahaha")
+                new NotificationPo(new Date(), "","", NotificationType.BillApproval,"FKD-20171122-00001"),
+                new NotificationPo(new Date(), "","",NotificationType.Others,"hahaha")
         };
     }
 
     /**
      * Acknowledges a notification.
      *
-     * @param notification notification to be acknowledged
+     * @param id id for the notification to be acknowledged
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage acknowledge(NotificationPo notification) {
+    public ResultMessage acknowledge(int id) {
         return ResultMessage.Success;
     }
+
+
 }

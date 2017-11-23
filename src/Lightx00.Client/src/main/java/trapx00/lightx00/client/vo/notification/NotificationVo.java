@@ -8,13 +8,13 @@ import trapx00.lightx00.shared.po.notification.NotificationType;
 import java.util.Date;
 
 public class NotificationVo {
-    private String id;
+    private int id;
     private Date date;
     private EmployeeVo sender;
     private EmployeeVo receiver;
     private NotificationType type;
 
-    public NotificationVo(String id, Date date, EmployeeVo sender, EmployeeVo receiver, NotificationType type) {
+    public NotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo receiver, NotificationType type) {
         this.id = id;
         this.date = date;
         this.sender = sender;
@@ -58,12 +58,12 @@ public class NotificationVo {
         this.type = type;
     }
 
-    public String getId() {
+    public int getId() {
 
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

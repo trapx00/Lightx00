@@ -30,7 +30,7 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
     }
 
     private Dao<ReceivalBillPo, String> dao = FinanceDataDaoFactory.getReceivalBillDao();
-    private CommonBillDataController<ReceivalBillPo> commonBillDataController = new CommonBillDataController<>(dao);
+    private CommonBillDataController<ReceivalBillPo> commonBillDataController = new CommonBillDataController<>(dao, this);
     /**
      * Submits a ReceivalBillPo or save it as a draft.
      * If there is a bill with the same id as passed-in parameter do,

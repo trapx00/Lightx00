@@ -1,11 +1,10 @@
 package trapx00.lightx00.client.blservice.draftblservice;
 
-import trapx00.lightx00.client.bl.draftbl.DraftBlController;
 import trapx00.lightx00.client.bl.draftbl.factory.DraftServiceFactory;
 
-public class DraftManagementBlServiceFactory {
+public class DraftBlServiceFactory {
 
-    public static DraftManagementBlService getInstance() {
+    public static DraftBlService getInstance() {
         return DraftServiceFactory.getController();
     }
 }
