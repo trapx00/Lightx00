@@ -1,16 +1,23 @@
 package trapx00.lightx00.client.vo;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.financebl.factory.BillDraftQueryServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.vo.draft.DraftableQueryServiceRegistry;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.draft.DraftType;
 
 import java.util.Date;
 import java.util.HashMap;
 
 public abstract class BillVo implements Draftable {
+    static {
+        DraftableQueryServiceRegistry.register(DraftType.Bill, BillDraftQueryServiceFactory.getQueryService());
+    }
+
     private BillType billType;
     private String id;
     private Date date;

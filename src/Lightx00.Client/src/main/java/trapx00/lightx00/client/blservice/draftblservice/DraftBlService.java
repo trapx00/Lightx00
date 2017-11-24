@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.draft.DraftVo;
 import trapx00.lightx00.client.vo.Draftable;
 
-public interface DraftManagementBlService {
+public interface DraftBlService {
     /**
      * Updates current user's draft.
      * @return Current User's draft

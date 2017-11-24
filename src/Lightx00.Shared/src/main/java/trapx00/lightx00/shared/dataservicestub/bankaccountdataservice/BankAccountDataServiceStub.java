@@ -50,7 +50,7 @@ public class BankAccountDataServiceStub implements BankAccountDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String id) {
+    public ResultMessage delete(int id) {
         return ResultMessage.Success;
     }
 }

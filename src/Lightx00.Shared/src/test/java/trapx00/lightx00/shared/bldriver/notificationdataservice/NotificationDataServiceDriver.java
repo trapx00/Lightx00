@@ -15,17 +15,17 @@ public class NotificationDataServiceDriver {
     private NotificationPo[] notifications;
     @Before
     public void setUp() throws Exception {
-        notifications = service.update(new NotificationQueryVo());
+        notifications = service.query(new NotificationQueryVo());
     }
 
     @Test
     public void update() throws Exception {
-        assertEquals("123", notifications[0].getId());
+        assertEquals(1, notifications[0].getId());
     }
 
     @Test
     public void acknowledge() throws Exception {
-        assertEquals(ResultMessage.Success, service.acknowledge(notifications[0]));
+        assertEquals(ResultMessage.Success, service.acknowledge(notifications[0].getId()));
     }
 
 }

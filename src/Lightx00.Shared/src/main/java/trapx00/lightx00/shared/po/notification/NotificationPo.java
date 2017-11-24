@@ -7,8 +7,8 @@ import java.util.Date;
 
 
 public class NotificationPo {
-    @DatabaseField(id=true)
-    private String id;
+    @DatabaseField(generatedId = true)
+    private int id;
     @DatabaseField
     private Date date;
     @DatabaseField
@@ -17,23 +17,26 @@ public class NotificationPo {
     private String receiverId;
     @DatabaseField
     private NotificationType type;
+    @DatabaseField
+    private String content;
 
-    public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type) {
-        this.id = id;
+    public NotificationPo(Date date, String senderId, String receiverId, NotificationType type, String content) {
         this.date = date;
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.type = type;
+        this.content = content;
     }
 
     public NotificationPo() {
+
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,5 +70,25 @@ public class NotificationPo {
 
     public void setType(NotificationType type) {
         this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "NotificationPo{" +
+            "id=" + id +
+            ", date=" + date +
+            ", senderId='" + senderId + '\'' +
+            ", receiverId='" + receiverId + '\'' +
+            ", type=" + type +
+            ", content='" + content + '\'' +
+            '}';
     }
 }

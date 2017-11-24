@@ -5,9 +5,9 @@ import trapx00.lightx00.server.data.util.serverlogservice.ServerLogServiceContro
 import trapx00.lightx00.server.data.util.serverlogservice.mock.ServerLogServiceControllerMock;
 
 public class ServerLogServiceFactory {
-    private ServerLogServiceController controller = new ServerLogServiceControllerMock();
+    private static ServerLogServiceController controller = new ServerLogServiceController();
 
-    public ServerLogService getService() {
+    public static ServerLogService getService() {
         return controller;
     }
 }
