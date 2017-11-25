@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.List;
 
 public class PaymentBillDataController extends UnicastRemoteObject implements PaymentBillDataService {
     /**
@@ -29,12 +30,12 @@ public class PaymentBillDataController extends UnicastRemoteObject implements Pa
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected PaymentBillDataController() throws RemoteException {
+    public PaymentBillDataController() throws RemoteException {
     }
 
     private Dao<PaymentBillPo, String> dao = FinanceDataDaoFactory.getPaymentBillDao();
 
-    private CommonBillDataController<PaymentBillPo> commonBillDataController = new CommonBillDataController<>(dao);
+    private CommonBillDataController<PaymentBillPo> commonBillDataController = new CommonBillDataController<>(dao, this);
 
     /**
      * Submits a PaymentBill or save it as a draft.
@@ -64,6 +65,18 @@ public class PaymentBillDataController extends UnicastRemoteObject implements Pa
     }
 
     /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return commonBillDataController.approvalComplete(billId, billState);
+    }
+
+    /**
      * Abandons a PaymentBill.
      * If a Bill is in BillState.Draft, it will be deleted.
      * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
@@ -84,7 +97,8 @@ public class PaymentBillDataController extends UnicastRemoteObject implements Pa
      */
     @Override
     public PaymentBillPo[] query(PaymentBillQueryVo query) {
-        return commonBillDataController.query(query);
+        List<PaymentBillPo> results = commonBillDataController.query(query);
+        return results.toArray(new PaymentBillPo[results.size()]);
     }
 
     /**

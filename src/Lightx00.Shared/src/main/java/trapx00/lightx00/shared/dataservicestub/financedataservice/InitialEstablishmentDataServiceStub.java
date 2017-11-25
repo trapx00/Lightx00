@@ -10,6 +10,7 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 public class InitialEstablishmentDataServiceStub implements InitialEstablishmentDataService {
@@ -54,6 +55,18 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
     @Override
     public String getId() {
         return "QCJZ-20171111-00020";
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
     }
 
     /**

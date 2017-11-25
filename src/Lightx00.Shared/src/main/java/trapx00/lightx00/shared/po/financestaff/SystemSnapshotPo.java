@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import com.j256.ormlite.field.DataType;
@@ -52,5 +53,14 @@ public class  SystemSnapshotPo extends FinanceBillPo { //账
 
     public void setBankAccounts(BankAccountPo[] bankAccounts) {
         this.bankAccounts = bankAccounts;
+    }
+
+    @Override
+    public String toString() {
+        return "SystemSnapshotPo{" +
+            "commodities=" + Arrays.toString(commodities) +
+            ", clients=" + Arrays.toString(clients) +
+            ", bankAccounts=" + Arrays.toString(bankAccounts) +
+            "} " + super.toString();
     }
 }

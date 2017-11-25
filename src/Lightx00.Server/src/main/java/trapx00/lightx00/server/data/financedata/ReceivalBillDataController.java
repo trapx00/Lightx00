@@ -1,16 +1,19 @@
 package trapx00.lightx00.server.data.financedata;
 
 import com.j256.ormlite.dao.Dao;
+import com.sun.org.apache.regexp.internal.RE;
 import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class ReceivalBillDataController extends UnicastRemoteObject implements ReceivalBillDataService {
     /**
@@ -23,12 +26,12 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected ReceivalBillDataController() throws RemoteException {
+    public ReceivalBillDataController() throws RemoteException {
 
     }
 
     private Dao<ReceivalBillPo, String> dao = FinanceDataDaoFactory.getReceivalBillDao();
-    private CommonBillDataController<ReceivalBillPo> commonBillDataController = new CommonBillDataController<>(dao);
+    private CommonBillDataController<ReceivalBillPo> commonBillDataController = new CommonBillDataController<>(dao, this);
     /**
      * Submits a ReceivalBillPo or save it as a draft.
      * If there is a bill with the same id as passed-in parameter do,
@@ -57,6 +60,18 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
     }
 
     /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return commonBillDataController.approvalComplete(billId, billState);
+    }
+
+    /**
      * Abandons a ReceivalBillPo.
      * If a Bill is in BillState.Draft, it will be deleted.
      * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
@@ -77,7 +92,8 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
      */
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
-        return commonBillDataController.query(query);
+        List<ReceivalBillPo> results = commonBillDataController.query(query);
+        return results.toArray(new ReceivalBillPo[results.size()]);
     }
 
     /**

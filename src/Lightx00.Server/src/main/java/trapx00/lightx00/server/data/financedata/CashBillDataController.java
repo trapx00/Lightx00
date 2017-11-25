@@ -1,16 +1,21 @@
 package trapx00.lightx00.server.data.financedata;
 
 import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
+import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
+import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class CashBillDataController extends UnicastRemoteObject implements CashBillDataService {
     /**
@@ -29,7 +34,7 @@ public class CashBillDataController extends UnicastRemoteObject implements CashB
 
 
     private Dao<CashBillPo, String> cashBillDao = FinanceDataDaoFactory.getCashBillDao();
-    private CommonBillDataController<CashBillPo> commonBillDataController = new CommonBillDataController<>(cashBillDao);
+    private CommonBillDataController<CashBillPo> commonBillDataController = new CommonBillDataController<>(cashBillDao, this);
 
     /**
      * Submits a CashBill or save it as a draft.
@@ -79,10 +84,21 @@ public class CashBillDataController extends UnicastRemoteObject implements CashB
      */
     @Override
     public CashBillPo[] query(CashBillQueryVo query) {
-        return commonBillDataController.query(query);
+        List<CashBillPo> result = commonBillDataController.query(query);
+        return result.toArray(new CashBillPo[result.size()]);
     }
 
-
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return commonBillDataController.approvalComplete(billId, billState);
+    }
 
     /**
      * Gets the id for the next bill.

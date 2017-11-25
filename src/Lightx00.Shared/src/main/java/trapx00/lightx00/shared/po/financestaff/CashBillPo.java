@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import com.j256.ormlite.field.DataType;
@@ -50,6 +51,15 @@ public class CashBillPo extends FinanceBillPo {
 
     public void setItems(CashBillItem[] items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "CashBillPo{" +
+            "operatorId='" + operatorId + '\'' +
+            ", accountId='" + accountId + '\'' +
+            ", items=" + Arrays.toString(items) +
+            "} " + super.toString();
     }
 }
 

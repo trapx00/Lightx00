@@ -2,8 +2,8 @@ package trapx00.lightx00.client.test.presentationdriver.draftblservice;
 
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.client.blservice.draftblservice.DraftManagementBlService;
-import trapx00.lightx00.client.blservicestub.draftblservice.DraftManagementBlServiceStub;
+import trapx00.lightx00.client.blservice.draftblservice.DraftBlService;
+import trapx00.lightx00.client.blservicestub.draftblservice.DraftBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.client.vo.Draftable;
@@ -13,8 +13,8 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class DraftManagementBlServiceDriver {
-    private DraftManagementBlService service = new DraftManagementBlServiceStub();
+public class DraftBlServiceDriver {
+    private DraftBlService service = new DraftBlServiceStub();
     private Draftable[] draftables = null;
     @Before
     public void setUp() throws Exception {

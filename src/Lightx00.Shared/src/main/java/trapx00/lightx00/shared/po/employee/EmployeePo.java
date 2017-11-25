@@ -5,11 +5,10 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
-@DatabaseTable(tableName = "Employee")
 public class EmployeePo {
     @DatabaseField
     private String name;
-    @DatabaseField(id=true)
+    @DatabaseField(id = true)
     private String id;
     @DatabaseField
     private Date workSince;

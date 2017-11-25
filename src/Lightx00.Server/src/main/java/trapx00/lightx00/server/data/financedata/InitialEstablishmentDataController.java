@@ -5,12 +5,14 @@ import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class InitialEstablishmentDataController extends UnicastRemoteObject implements InitialEstablishmentDataService {
     /**
@@ -23,11 +25,11 @@ public class InitialEstablishmentDataController extends UnicastRemoteObject impl
      * @throws RemoteException if failed to export object
      * @since JDK1.1
      */
-    protected InitialEstablishmentDataController() throws RemoteException {
+    public InitialEstablishmentDataController() throws RemoteException {
     }
 
     private Dao<SystemSnapshotPo, String> dao = FinanceDataDaoFactory.getSystemSnapshotDao();
-    private CommonBillDataController<SystemSnapshotPo> commonBillDataController = new CommonBillDataController<>(dao);
+    private CommonBillDataController<SystemSnapshotPo> commonBillDataController = new CommonBillDataController<>(dao, this);
 
     /**
      * Submits a SystemSnapshotPo or save it as a draft.
@@ -70,6 +72,18 @@ public class InitialEstablishmentDataController extends UnicastRemoteObject impl
     }
 
     /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return commonBillDataController.approvalComplete(billId, billState);
+    }
+
+    /**
      * Gets the id for the next snapshot.
      * If there are already 99999 snapshot for this day, a NoMoreBillException will be thrown.
      *
@@ -88,6 +102,7 @@ public class InitialEstablishmentDataController extends UnicastRemoteObject impl
      */
     @Override
     public SystemSnapshotPo[] query(SystemSnapshotQueryVo query) {
-        return commonBillDataController.query(query);
+        List<SystemSnapshotPo> results = commonBillDataController.query(query);
+        return results.toArray(new SystemSnapshotPo[results.size()]);
     }
 }

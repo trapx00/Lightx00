@@ -44,9 +44,9 @@ public class NotificationUiController {
 
     public void updateItems(){
         notificationModels.clear();
-        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, "TEST1", new FinanceStaffVo("李二",  "test", new Date(),
+        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, 1, new FinanceStaffVo("李二",  "test", new Date(),
                 "张三"),"未读"));
-        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, "TEST2", new FinanceStaffVo("李二",  "test", new Date(),
+        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, 2, new FinanceStaffVo("李二",  "test", new Date(),
                  "张三"),"未读"));
     }
 

@@ -11,7 +11,7 @@ public class BankAccountDataFactory {
 
     static {
         try {
-            controller = new BankAccountDataControllerMock();
+            controller = new BankAccountDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
