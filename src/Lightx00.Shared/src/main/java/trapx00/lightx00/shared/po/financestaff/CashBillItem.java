@@ -36,4 +36,13 @@ public class CashBillItem implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "CashBillItem{" +
+            "name='" + name + '\'' +
+            ", amount=" + amount +
+            ", comment='" + comment + '\'' +
+            '}';
+    }
 }

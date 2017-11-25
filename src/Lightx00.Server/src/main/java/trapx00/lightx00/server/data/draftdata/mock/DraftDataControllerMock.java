@@ -28,11 +28,11 @@ public class DraftDataControllerMock extends DraftDataController {
     /**
      * Updates current user's drafts.
      *
-     * @param query
+     * @param query query
      * @return curent user's drafts
      */
     @Override
-    public DraftPo[] update(DraftQueryVo query) throws RemoteException {
+    public DraftPo[] query(DraftQueryVo query) throws RemoteException {
         return new DraftPo[] {
                 new DraftPo(new Date(),"123","FXD-20171111-00001", DraftType.Bill)
         };
@@ -56,7 +56,7 @@ public class DraftDataControllerMock extends DraftDataController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(String draft) {
+    public ResultMessage add(DraftPo draft) {
         return ResultMessage.Success;
     }
 

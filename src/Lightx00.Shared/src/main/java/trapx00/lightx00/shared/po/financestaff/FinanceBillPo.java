@@ -28,4 +28,11 @@ public class FinanceBillPo extends BillPo {
     public void setFinanceBillType(FinanceBillType financeBillType) {
         this.financeBillType = financeBillType;
     }
+
+    @Override
+    public String toString() {
+        return "FinanceBillPo{" +
+            "financeBillType=" + financeBillType +
+            "} " + super.toString();
+    }
 }

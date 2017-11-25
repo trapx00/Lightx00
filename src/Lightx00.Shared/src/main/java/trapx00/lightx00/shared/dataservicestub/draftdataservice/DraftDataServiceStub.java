@@ -1,6 +1,6 @@
 package trapx00.lightx00.shared.dataservicestub.draftdataservice;
 
-import trapx00.lightx00.shared.dataservice.draftdataservice.DraftManagementDataService;
+import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
 import trapx00.lightx00.shared.po.draft.DraftPo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.draft.DraftType;
@@ -9,16 +9,16 @@ import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-public class DraftManagementDataServiceStub implements DraftManagementDataService {
+public class DraftDataServiceStub implements DraftDataService {
 
     /**
      * Updates current user's drafts.
      *
-     * @param query
+     * @param query query
      * @return curent user's drafts
      */
     @Override
-    public DraftPo[] update(DraftQueryVo query) throws RemoteException {
+    public DraftPo[] query(DraftQueryVo query) throws RemoteException {
         return new DraftPo[] {
                 new DraftPo(new Date(),"123","FXD-20171111-00001", DraftType.Bill)
         };
@@ -42,7 +42,7 @@ public class DraftManagementDataServiceStub implements DraftManagementDataServic
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(String draft) {
+    public ResultMessage add(DraftPo draft) throws RemoteException {
         return ResultMessage.Success;
     }
 }

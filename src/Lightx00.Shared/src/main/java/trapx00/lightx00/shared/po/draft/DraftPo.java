@@ -14,14 +14,14 @@ public class DraftPo {
     @DatabaseField
     private String saverId;
     @DatabaseField
-    private String draftId;
+    private String draftableId;
     @DatabaseField
     private DraftType draftType;
 
-    public DraftPo(Date saveTime, String saverId, String billId, DraftType draftType) {
+    public DraftPo(Date saveTime, String saverId, String draftableId, DraftType draftType) {
         this.saveTime = saveTime;
         this.saverId = saverId;
-        this.draftId = billId;
+        this.draftableId = draftableId;
         this.draftType = draftType;
     }
 
@@ -60,11 +60,22 @@ public class DraftPo {
         this.saverId = saverId;
     }
 
-    public String getDraftId() {
-        return draftId;
+    public String getDraftableId() {
+        return draftableId;
     }
 
-    public void setDraftId(String draftId) {
-        this.draftId = draftId;
+    public void setDraftableId(String draftableId) {
+        this.draftableId = draftableId;
+    }
+
+    @Override
+    public String toString() {
+        return "DraftPo{" +
+            "id=" + id +
+            ", saveTime=" + saveTime +
+            ", saverId='" + saverId + '\'' +
+            ", draftableId='" + draftableId + '\'' +
+            ", draftType=" + draftType +
+            '}';
     }
 }

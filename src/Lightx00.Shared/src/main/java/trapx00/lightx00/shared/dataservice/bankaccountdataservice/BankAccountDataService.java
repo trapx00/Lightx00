@@ -33,5 +33,5 @@ public interface BankAccountDataService {
      * @param id id for the account to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(String id);
+    ResultMessage delete(int id);
 }

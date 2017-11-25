@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import com.j256.ormlite.table.DatabaseTable;
@@ -13,5 +14,15 @@ public class  ReceivalBillPo extends ReceivalPaymentBillPoBase {
     }
 
     public ReceivalBillPo() {
+    }
+
+    @Override
+    public String toString() {
+        return "ReceivalBillPo{" +
+            "clientId='" + clientId + '\'' +
+            ", operatorId='" + operatorId + '\'' +
+            ", transcations=" + Arrays.toString(transcations) +
+            ", total=" + total +
+            "} " + super.toString();
     }
 }

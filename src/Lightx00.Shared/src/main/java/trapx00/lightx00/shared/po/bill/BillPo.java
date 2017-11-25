@@ -56,5 +56,15 @@ public class BillPo {
     public void setState(BillState state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "BillPo{" +
+            "billType=" + billType +
+            ", id='" + id + '\'' +
+            ", date=" + date +
+            ", state=" + state +
+            '}';
+    }
 }
 

@@ -9,16 +9,23 @@ import java.rmi.RemoteException;
 
 public interface InitialEstablishmentDataService extends Remote {
     /**
-     * Submits a snapshot.
-     * @param snapshot snapshot to be submitted
+     * Submits a SystemSnapshotPo or save it as a draft.
+     * If there is a SystemSnapshotPo with the same id as passed-in parameter do,
+     *    if the existing SystemSnapshotPo is in BillState.Draft state, it will be updated/replaced by parameter.
+     *    otherwise a IdExistsException would be thrown.
+     *
+     * @param snapshot snapshot
      * @return whether the operation is done successfully
      */
     ResultMessage submit(SystemSnapshotPo snapshot) throws RemoteException;
 
 
     /**
-     * Activates a SystemSnapshot.
-     * @param id id for the SystemSnapshot
+     * Abandons a SystemSnapshotPo.
+     * If a snapshot is in BillState.Draft, it will be deleted.
+     * If a snapshot is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
+     * If a snapshot is in other state, a BillInvalidStateException will be thrown.
+     * @param id id for the CashBill to be abandoned
      * @return whether the operation is done successfully
      */
     ResultMessage activate(String id) throws RemoteException;
@@ -33,14 +40,17 @@ public interface InitialEstablishmentDataService extends Remote {
 
     /**
      * Gets the id for the next snapshot.
+     * If there are already 99999 snapshot for this day, a NoMoreBillException will be thrown.
+     *
      * @return id for the next snapshot
      */
     String getId() throws RemoteException;
 
     /**
-     * Queries SystemSnapshot.
+     * Queries SystemSnapshotPos.
+     *
      * @param query query
-     * @return SystemSnapshotVos that match the condition
+     * @return SystemSnapshotPos that match query condition
      */
     SystemSnapshotPo[] query(SystemSnapshotQueryVo query) throws RemoteException;
 }
