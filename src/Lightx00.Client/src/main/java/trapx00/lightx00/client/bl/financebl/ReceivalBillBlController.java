@@ -93,7 +93,7 @@ public class ReceivalBillBlController implements ReceivalBillBlService, Notifica
      * When bill is approved, this method is called to modify the state of the bill.
      *
      * @param billId id for the bill
-     * @param state  newState. Only BillState.Approved and BillState
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
      * @return whether the operation is done successfully
      */
     @Override

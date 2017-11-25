@@ -108,7 +108,7 @@ public class CommonBillDataController<Po extends BillPo> {
     public ResultMessage activate(String id) {
         try {
             Po po = assertIdExistence(id,true);
-            if (po.getState() == BillState.Approved) {
+            if (po.getState().equals(BillState.Approved)) {
                 po.setState(BillState.Activated);
                 dao.update(po);
                 logService.printLog(delegate, String.format("activated a bill (id: %s)", id));
@@ -183,7 +183,7 @@ public class CommonBillDataController<Po extends BillPo> {
     public ResultMessage approvalComplete(String billId, BillState billState) {
         try {
             Po bill = assertIdExistence(billId, true);
-            if (bill.getState().equals(BillState.WaitingForApproval)) {
+            if (!bill.getState().equals(BillState.WaitingForApproval)) {
                 throw new BillInvalidStateException(bill.getState(), BillState.WaitingForApproval);
             }
             switch (billState) {
