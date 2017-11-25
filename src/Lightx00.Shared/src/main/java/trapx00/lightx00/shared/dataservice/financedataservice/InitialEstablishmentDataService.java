@@ -1,6 +1,7 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 
@@ -46,6 +47,13 @@ public interface InitialEstablishmentDataService extends Remote {
      */
     String getId() throws RemoteException;
 
+    /**
+     * Changes the state of a bill if approval is completed.
+     * @param billId the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException;
     /**
      * Queries SystemSnapshotPos.
      *

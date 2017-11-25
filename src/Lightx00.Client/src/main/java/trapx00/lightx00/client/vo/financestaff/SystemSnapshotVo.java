@@ -5,6 +5,7 @@ import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactor
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.vo.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
@@ -67,6 +68,16 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
+        return null;
+    }
+
+    /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return BillApprovalCompleteService
+     */
+    @Override
+    public BillApprovalCompleteService billApprovalCompleteService() {
         return null;
     }
 

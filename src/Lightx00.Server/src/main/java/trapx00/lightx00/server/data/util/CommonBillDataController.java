@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.util;
 
 import com.j256.ormlite.dao.Dao;
-import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.exception.database.*;
@@ -100,7 +99,7 @@ public class CommonBillDataController<Po extends BillPo> {
 
     /**
      * Activates a bill.
-     * The bill must be in BillState.WaitingForApproval state.
+     * The bill must be in BillState.Approved state.
      * Otherwise a BillInvalidStateException will be thrown.
      *
      * @param id id for the bill that have been approved of
@@ -109,8 +108,8 @@ public class CommonBillDataController<Po extends BillPo> {
     public ResultMessage activate(String id) {
         try {
             Po po = assertIdExistence(id,true);
-            if (po.getState() == BillState.WaitingForApproval) {
-                po.setState(BillState.Approved);
+            if (po.getState() == BillState.Approved) {
+                po.setState(BillState.Activated);
                 dao.update(po);
                 logService.printLog(delegate, String.format("activated a bill (id: %s)", id));
                 return ResultMessage.Success;
@@ -172,6 +171,35 @@ public class CommonBillDataController<Po extends BillPo> {
         } catch (SQLException e) {
             handleSQLException(e);
             return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     * @param billId id for the bill
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    public ResultMessage approvalComplete(String billId, BillState billState) {
+        try {
+            Po bill = assertIdExistence(billId, true);
+            if (bill.getState().equals(BillState.WaitingForApproval)) {
+                throw new BillInvalidStateException(bill.getState(), BillState.WaitingForApproval);
+            }
+            switch (billState) {
+                case Approved:
+                case Rejected:
+                    bill.setState(billState);
+                    break;
+                default:
+                    throw new BillInvalidStateException(bill.getState(), BillState.Rejected, BillState.Approved);
+            }
+            logService.printLog(this, String.format("changed bill (id: %s) state to %s", billId, billState.toString()));
+            dao.update(bill);
+            return ResultMessage.Success;
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return ResultMessage.Failure;
         }
     }
 

@@ -5,5 +5,6 @@ public enum BillState {
     WaitingForApproval,
     Rejected,
     Approved,
+    Activated,
     Abandoned
 }

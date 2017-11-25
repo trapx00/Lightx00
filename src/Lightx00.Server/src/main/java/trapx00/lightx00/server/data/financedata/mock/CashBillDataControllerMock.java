@@ -61,6 +61,17 @@ public class CashBillDataControllerMock extends CashBillDataController {
         return ResultMessage.Success;
     }
 
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
+    }
 
     /**
      * Queries CashBill.

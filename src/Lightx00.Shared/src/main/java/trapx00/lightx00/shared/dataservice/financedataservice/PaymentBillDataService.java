@@ -1,6 +1,7 @@
 package trapx00.lightx00.shared.dataservice.financedataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 
@@ -47,6 +48,14 @@ public interface PaymentBillDataService extends Remote {
      * @return PaymentBillVos that match query condition
      */
     PaymentBillPo[] query(PaymentBillQueryVo query) throws RemoteException;
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     * @param billId the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException;
 
     /**
      * Gets the id for the next bill.

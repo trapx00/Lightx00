@@ -6,6 +6,7 @@ import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
@@ -56,6 +57,18 @@ public class ReceivalBillDataController extends UnicastRemoteObject implements R
     @Override
     public ResultMessage activate(String id) {
         return commonBillDataController.activate(id);
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return commonBillDataController.approvalComplete(billId, billState);
     }
 
     /**

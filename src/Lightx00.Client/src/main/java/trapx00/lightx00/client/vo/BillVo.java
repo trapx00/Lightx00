@@ -76,6 +76,12 @@ public abstract class BillVo implements Draftable {
     public abstract NotificationAbandonService notificationAbandonService();
 
     /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     * @return BillApprovalCompleteService
+     */
+    public abstract BillApprovalCompleteService billApprovalCompleteService();
+
+    /**
      * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
      *
      * @return key-value maps for the properties
@@ -98,4 +104,6 @@ public abstract class BillVo implements Draftable {
      */
     @Override
     public abstract ContinueWritable continueWriteService();
+
+
 }

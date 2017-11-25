@@ -7,6 +7,7 @@ import trapx00.lightx00.client.bl.financebl.SystemSnapshotInfo;
 import trapx00.lightx00.client.bl.financebl.mock.InitialEstablishmentBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.vo.BillApprovalCompleteService;
 
 public class InitialEstablishmentBlFactory {
     private static InitialEstablishmentBlController controller = new InitialEstablishmentBlControllerMock();
@@ -14,6 +15,11 @@ public class InitialEstablishmentBlFactory {
     private static NotificationAbandonService notificationAbandonService = controller;
     private static NotificationActivateService notificationActivateService = controller;
     private static SystemSnapshotInfo systemSnapshotInfo = controller;
+    private static BillApprovalCompleteService billApprovalCompleteService = controller;
+
+    public static BillApprovalCompleteService getBillApprovalCompleteService() {
+        return billApprovalCompleteService;
+    }
 
     public static SystemSnapshotInfo getSystemSnapshotInfo() {
         return systemSnapshotInfo;

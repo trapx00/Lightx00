@@ -87,4 +87,16 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
                 new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)
         };
     }
+
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return ResultMessage.Success;
+    }
 }
