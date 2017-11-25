@@ -1,21 +1,34 @@
 package trapx00.lightx00.server.data.commoditydata;
 
+import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataDaoFactory;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
 import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 
 public class CommodityDataController extends UnicastRemoteObject implements CommodityDataService {
     /**
+     * Creates and exports a new UnicastRemoteObject object using an
+     * anonymous port.
+     * <p>
+     * <p>The object is exported with a server socket
+     * created using the {@link RMISocketFactory} class.
      *
-     * @throws RemoteException
+     * @throws RemoteException if failed to export object
+     * @since JDK1.1
      */
-    protected CommodityDataController() throws RemoteException {
-        super();
+    public CommodityDataController() throws RemoteException {
+
     }
+
+    private Dao<CommodityPo, String> cashBillDao = CommodityDataDaoFactory.getCommodityDao();
+
+
     /**
      *  Create a new commodity
      * @param newCommodity

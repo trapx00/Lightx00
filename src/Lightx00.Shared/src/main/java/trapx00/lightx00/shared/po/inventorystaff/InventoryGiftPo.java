@@ -2,11 +2,19 @@ package trapx00.lightx00.shared.po.inventorystaff;
 
 import java.util.Date;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
+
+@DatabaseTable(tableName = "InventoryGiftBill")
 public class InventoryGiftPo {
+    @DatabaseField
     private Date time;
+    @DatabaseField
     private String id;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private  PromotionCommodity[] gifts;
 
     public InventoryGiftPo(Date time, String id, PromotionCommodity[] gifts) {

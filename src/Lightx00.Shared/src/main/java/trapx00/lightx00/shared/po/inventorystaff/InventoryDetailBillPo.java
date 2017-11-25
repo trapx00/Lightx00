@@ -2,14 +2,22 @@ package trapx00.lightx00.shared.po.inventorystaff;
 
 import java.util.Date;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 
+
+@DatabaseTable(tableName = "InventoryDetailBill")
 public class InventoryDetailBillPo extends InventoryBillPo {
     //报损报溢报警
+    @DatabaseField
     private  String operatorId;//操作员编号
+    @DatabaseField
     private String[] commodityIdList;//商品
+    @DatabaseField
     private  double[] amounts;//报损/报溢/报警数量
+    @DatabaseField
     private  Date time;
 
     public InventoryDetailBillPo(String id, Date date, BillState state,
