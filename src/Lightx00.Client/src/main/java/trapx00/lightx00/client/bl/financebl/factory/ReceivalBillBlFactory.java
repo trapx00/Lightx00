@@ -6,7 +6,7 @@ import trapx00.lightx00.client.bl.financebl.ReceivalBillInfo;
 import trapx00.lightx00.client.bl.financebl.mock.ReceivalBillBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.vo.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 
 public class ReceivalBillBlFactory {
     private static ReceivalBillBlController controller = new ReceivalBillBlControllerMock();

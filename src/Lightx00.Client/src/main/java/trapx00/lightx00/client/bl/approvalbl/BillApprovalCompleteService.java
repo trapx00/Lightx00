@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.vo;
+package trapx00.lightx00.client.bl.approvalbl;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
