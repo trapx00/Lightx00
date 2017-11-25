@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -78,7 +79,7 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return InitialEstablishmentBlFactory.getBillApprovalCompleteService();
     }
 
     /**

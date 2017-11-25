@@ -76,7 +76,7 @@ public class CashBillVo extends FinanceBillVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return CashBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**

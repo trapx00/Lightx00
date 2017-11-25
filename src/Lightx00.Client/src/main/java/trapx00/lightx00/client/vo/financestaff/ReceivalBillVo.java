@@ -45,7 +45,7 @@ public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return ReceivalBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
