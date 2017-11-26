@@ -18,7 +18,7 @@ public class InventoryWarningDataServiceDriver {
     CommodityPo commodityPo=null;
     @Test
     public void submit() throws Exception {
-        assertEquals(ResultMessage.Success,service.submit(new InventoryDetailBillPo("S0001",new Date(), BillState.Approved,null,null,null)));
+        assertEquals(ResultMessage.Success,service.submit(new InventoryDetailBillPo("S0001",new Date(), BillState.Approved,null,null)));
     }
 
     @Test
