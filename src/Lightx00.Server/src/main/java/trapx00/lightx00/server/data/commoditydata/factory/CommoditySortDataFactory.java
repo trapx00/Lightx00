@@ -1,5 +1,6 @@
 package trapx00.lightx00.server.data.commoditydata.factory;
 
+import trapx00.lightx00.server.data.commoditydata.CommoditySortDataController;
 import trapx00.lightx00.server.data.commoditydata.mock.CommodityDataControllerMock;
 import trapx00.lightx00.server.data.commoditydata.mock.CommoditySortDataControllerMock;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
@@ -11,7 +12,7 @@ public class CommoditySortDataFactory {
 
     static {
         try {
-            controller = new CommoditySortDataControllerMock();
+            controller = new CommoditySortDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

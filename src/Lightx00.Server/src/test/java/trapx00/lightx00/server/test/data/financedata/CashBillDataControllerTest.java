@@ -58,7 +58,6 @@ public class CashBillDataControllerTest {
             bill.setState(BillState.Draft);
             dao.deleteById(bill.getId());
         }
-
     }
 
     @Test
@@ -69,8 +68,6 @@ public class CashBillDataControllerTest {
         } finally {
             dao.deleteById(bill.getId());
         }
-
-
     }
 
     @Test

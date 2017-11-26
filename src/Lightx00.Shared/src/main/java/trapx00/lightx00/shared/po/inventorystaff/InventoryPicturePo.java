@@ -10,6 +10,8 @@ import java.util.Date;
 @DatabaseTable(tableName = "InventoryPicture")
 public class InventoryPicturePo {
     //名称，型号，库存数量，库存均价，批次，批号，出厂日期
+    @DatabaseField(id=true)
+    private String id;
     @DatabaseField
     private  Date time;
     @DatabaseField(dataType = DataType.SERIALIZABLE)

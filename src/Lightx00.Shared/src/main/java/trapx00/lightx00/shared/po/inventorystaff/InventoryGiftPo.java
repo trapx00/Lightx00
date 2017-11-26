@@ -12,7 +12,7 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 public class InventoryGiftPo {
     @DatabaseField
     private Date time;
-    @DatabaseField
+    @DatabaseField(id=true)
     private String id;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private  PromotionCommodity[] gifts;

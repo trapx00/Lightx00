@@ -38,9 +38,6 @@ public class CommodityDataControllerMock extends CommodityDataController {
         return ResultMessage.Success;
     }
 
-    @Override
-    public void init() {
 
-    }
 
 }

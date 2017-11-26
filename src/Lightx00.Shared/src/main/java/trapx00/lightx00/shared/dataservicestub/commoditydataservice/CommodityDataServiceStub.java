@@ -34,8 +34,5 @@ public class CommodityDataServiceStub implements CommodityDataService {
         return ResultMessage.Success;
     }
 
-    @Override
-    public void init() {
 
-    }
 }

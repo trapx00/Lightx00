@@ -56,8 +56,4 @@ public class CommoditySortDataControllerMock extends CommoditySortDataServiceStu
         };
     }
 
-    @Override
-    public void init() {
-
-    }
 }

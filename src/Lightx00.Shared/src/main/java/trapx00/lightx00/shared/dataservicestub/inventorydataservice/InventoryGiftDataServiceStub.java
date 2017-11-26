@@ -21,8 +21,5 @@ public class InventoryGiftDataServiceStub implements InventoryGiftDataService {
         return "X0001";
     }
 
-    @Override
-    public void init() {
 
-    }
 }

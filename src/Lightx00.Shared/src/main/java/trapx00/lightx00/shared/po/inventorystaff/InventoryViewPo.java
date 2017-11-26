@@ -8,6 +8,8 @@ import java.util.Date;
 
 @DatabaseTable(tableName = "InventoryViewBill")
 public class InventoryViewPo {
+    @DatabaseField(id=true)
+    private String id;
     @DatabaseField
     private  Date time;
     @DatabaseField

@@ -25,9 +25,6 @@ public class InventoryGiftDataControllerMock extends InventoryGiftDataServiceStu
         return "X0001";
     }
 
-    @Override
-    public void init() {
 
-    }
 
 }

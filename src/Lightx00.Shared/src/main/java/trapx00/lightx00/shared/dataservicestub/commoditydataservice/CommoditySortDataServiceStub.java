@@ -50,8 +50,5 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
         };
     }
 
-    @Override
-    public void init() {
 
-    }
 }

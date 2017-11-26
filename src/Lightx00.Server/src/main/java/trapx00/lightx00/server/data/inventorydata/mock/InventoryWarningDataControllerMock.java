@@ -5,6 +5,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 import java.rmi.RemoteException;
@@ -16,7 +17,7 @@ public class InventoryWarningDataControllerMock extends InventoryWarningDataServ
     }
 
     @Override
-    public ResultMessage submit(InventoryBillPo bill) {
+    public ResultMessage submit(InventoryDetailBillPo bill) {
         return ResultMessage.Success;
     }
 
@@ -30,37 +31,16 @@ public class InventoryWarningDataControllerMock extends InventoryWarningDataServ
         return ResultMessage.Success;
     }
 
+
+
     @Override
-    public InventoryBillPo[] getAlarmByIds(String... ids) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(), BillState.Approved, InventoryBillType.Warning);
-        InventoryBillPo[]input={inventoryBillVo};
+    public InventoryDetailBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
+        InventoryDetailBillPo inventoryBillVo=new InventoryDetailBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow
+        ,null,null,null,null);
+        InventoryDetailBillPo[]input={inventoryBillVo};
         return  input;
     }
 
-    @Override
-    public InventoryBillPo[] getOverflowByIds(String... ids) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow);
-        InventoryBillPo[]input={inventoryBillVo};
-        return  input;
-    }
 
-    @Override
-    public InventoryBillPo[] getLossByIds(String... ids) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Loss);
-        InventoryBillPo[]input={inventoryBillVo};
-        return  input;
-    }
-
-    @Override
-    public InventoryBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow);
-        InventoryBillPo[]input={inventoryBillVo};
-        return  input;
-    }
-
-    @Override
-    public void init() {
-
-    }
 
 }

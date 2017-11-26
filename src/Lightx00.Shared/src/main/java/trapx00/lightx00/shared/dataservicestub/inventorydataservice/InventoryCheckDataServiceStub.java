@@ -23,8 +23,5 @@ public class InventoryCheckDataServiceStub implements InventoryCheckDataService 
         return new InventoryPicturePo(new Date(),commoditys);
     }
 
-    @Override
-    public void init() {
 
-    }
 }

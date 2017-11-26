@@ -52,6 +52,5 @@ public interface CommoditySortDataService extends Remote {
      */
     CommoditySortPo[] dispaly(CommoditySortPo commoditySort) throws RemoteException;
 
-    void init() throws RemoteException;
 
 }

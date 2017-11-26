@@ -22,5 +22,4 @@ public interface InventoryCheckDataService extends Remote {
      */
     InventoryPicturePo submit(Date time) throws RemoteException;
 
-    void init() throws RemoteException;
 }

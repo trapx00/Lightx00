@@ -19,5 +19,4 @@ public interface InventoryGiftDataService extends Remote {
      */
     String getId();
 
-    void init();
 }

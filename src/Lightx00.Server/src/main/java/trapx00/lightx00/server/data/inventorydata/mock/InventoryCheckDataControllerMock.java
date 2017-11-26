@@ -28,8 +28,5 @@ public class InventoryCheckDataControllerMock extends InventoryCheckDataServiceS
         return new InventoryPicturePo(new Date(),commoditys);
     }
 
-    @Override
-    public void init() {
 
-    }
 }
