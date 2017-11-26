@@ -5,13 +5,16 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 public class InventoryWarningDataServiceStub implements InventoryWarningDataService {
+
     @Override
-    public ResultMessage submit(InventoryBillPo bill) {
+    public ResultMessage submit(InventoryDetailBillPo bill) {
         return ResultMessage.Success;
     }
 
@@ -21,40 +24,41 @@ public class InventoryWarningDataServiceStub implements InventoryWarningDataServ
     }
 
     @Override
-   public ResultMessage modify(String id, double warningValue) {
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
         return ResultMessage.Success;
     }
 
     @Override
-    public InventoryBillPo[] getAlarmByIds(String... ids) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved, InventoryBillType.Warning);
-        InventoryBillPo[]input={inventoryBillVo};
+   public ResultMessage modify(String id, double warningValue) {
+        return ResultMessage.Success;
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+
+
+    @Override
+    public InventoryDetailBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
+        InventoryDetailBillPo inventoryBillVo=new InventoryDetailBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow,null
+       );
+        InventoryDetailBillPo[]input={inventoryBillVo};
         return  input;
     }
 
     @Override
-    public InventoryBillPo[] getOverflowByIds(String... ids) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow);
-        InventoryBillPo[]input={inventoryBillVo};
-        return  input;
+    public ResultMessage activate(String id) throws RemoteException {
+        return ResultMessage.Success;
     }
 
     @Override
-    public InventoryBillPo[] getLossByIds(String... ids) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Loss);
-        InventoryBillPo[]input={inventoryBillVo};
-        return  input;
+    public ResultMessage abandon(String id) throws RemoteException {
+        return ResultMessage.Success;
     }
 
-    @Override
-    public InventoryBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
-        InventoryBillPo inventoryBillVo=new InventoryBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow);
-        InventoryBillPo[]input={inventoryBillVo};
-        return  input;
-    }
 
-    @Override
-    public void init() {
-
-    }
 }

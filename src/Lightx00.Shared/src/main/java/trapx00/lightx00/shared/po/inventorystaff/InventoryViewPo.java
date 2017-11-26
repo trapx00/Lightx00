@@ -1,20 +1,38 @@
 package trapx00.lightx00.shared.po.inventorystaff;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
-public class InventoryViewPo {
-    private  Date time;
-    private  double inventoryAmount;//入库数量
-    private  double inventoryMoney;//入库金额
-    private  double outOfInventoryAmount;//出库数量
-    private  double outOfInVentoryMoney;//出库金额
-    private  double sum;//合计
-    private  double inSoldPrice;//最近进价
-    private  double outSoldPrice;//最近售价
 
-    public InventoryViewPo(Date time, double inventoryAmount, double inventoryMoney,
+@DatabaseTable(tableName = "InventoryViewBill")
+public class InventoryViewPo {
+    @DatabaseField(id=true)
+    private String id;
+    @DatabaseField
+    private  Date time;
+    @DatabaseField
+    private  double inventoryAmount;//入库数量
+    @DatabaseField
+    private  double inventoryMoney;//入库金额
+    @DatabaseField
+    private  double outOfInventoryAmount;//出库数量
+    @DatabaseField
+    private  double outOfInVentoryMoney;//
+    @DatabaseField
+    private  double sum;//合计
+    @DatabaseField
+    private  double inSoldPrice;//最近进价
+    @DatabaseField
+    private  double outSoldPrice;//最近售价
+    public InventoryViewPo(){
+
+    }
+    public InventoryViewPo(String id,Date time, double inventoryAmount, double inventoryMoney,
                            double outOfInventoryAmount, double outOfInVentoryMoney, double sum,
                            double inSoldPrice, double outSoldPrice) {
+        this.id=id;
         this.time = time;
         this.inventoryAmount = inventoryAmount;
         this.inventoryMoney = inventoryMoney;

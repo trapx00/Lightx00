@@ -5,10 +5,22 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.po.bill.BillState;
 
 import java.util.Date;
 
 public class InventoryGiftBlControllerMock extends InventoryGiftBlController{
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return ResultMessage.Success;
+    }
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo

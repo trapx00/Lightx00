@@ -1,5 +1,6 @@
 package trapx00.lightx00.server.data.inventorydata.factory;
 
+import trapx00.lightx00.server.data.inventorydata.InventoryCheckDataController;
 import trapx00.lightx00.server.data.inventorydata.mock.InventoryCheckDataControllerMock;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
 
@@ -11,7 +12,7 @@ public class InventoryCheckDataFactory {
 
     static{
         try {
-            controller = new InventoryCheckDataControllerMock();
+            controller = new InventoryCheckDataController();
         }catch (RemoteException e){
             e.printStackTrace();
         }

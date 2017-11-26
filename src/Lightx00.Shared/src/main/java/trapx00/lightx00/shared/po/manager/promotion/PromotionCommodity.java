@@ -1,8 +1,15 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
-public class PromotionCommodity {
+import com.j256.ormlite.field.DatabaseField;
+
+import java.io.Serializable;
+
+public class PromotionCommodity implements Serializable {
+    @DatabaseField
     private String id;
+    @DatabaseField
     private String commodityId;
+    @DatabaseField
     private double amount;
 
     public double getAmount() {

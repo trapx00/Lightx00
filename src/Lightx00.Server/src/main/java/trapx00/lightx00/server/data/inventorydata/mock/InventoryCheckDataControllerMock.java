@@ -4,6 +4,8 @@ import trapx00.lightx00.shared.dataservicestub.inventorydataservice.InventoryChe
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
+import trapx00.lightx00.shared.queryvo.InventoryPictureQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryViewQueryVo;
 
 import java.rmi.RemoteException;
 import java.util.Date;
@@ -18,18 +20,13 @@ public class InventoryCheckDataControllerMock extends InventoryCheckDataServiceS
                     "1", "2", 56, 60, 90, 99, 50)
     };
     @Override
-    public InventoryViewPo submit(Date beginTime, Date endTime) {
-        return new InventoryViewPo(new Date(), 90, 80,
-                50, 100, 208,
-                60, 100);    }
+    public InventoryViewPo[] getInventoryView(InventoryViewQueryVo inventoryViewQueryVo) {
+        return null;    }
 
     @Override
-    public InventoryPicturePo submit(Date time) {
-        return new InventoryPicturePo(new Date(),commoditys);
+    public InventoryPicturePo[] getInventoryPicture(InventoryPictureQueryVo inventoryPictureQueryVo) {
+        return null;
     }
 
-    @Override
-    public void init() {
 
-    }
 }
