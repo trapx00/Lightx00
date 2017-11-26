@@ -15,7 +15,7 @@ public class LogBackupBlServiceStub implements LogBackupBlService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage backupLog() throws RemoteException {
+    public ResultMessage backupLog() {
         return ResultMessage.Success;
     }
 
@@ -25,7 +25,7 @@ public class LogBackupBlServiceStub implements LogBackupBlService {
      * @return the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() throws RemoteException {
+    public URI fetchCloudLog() {
         URI uri = null;
         try {
             uri = new URI("www.123.com");
