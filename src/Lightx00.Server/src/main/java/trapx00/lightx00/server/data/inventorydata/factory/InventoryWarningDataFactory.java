@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.inventorydata.factory;
 
 import trapx00.lightx00.server.data.inventorydata.InventoryWarningDataController;
-import trapx00.lightx00.server.data.inventorydata.mock.InventoryWarningDataControllerMock;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
 
 import java.rmi.RemoteException;

@@ -18,7 +18,7 @@ public interface InventoryWarningDataService extends Remote {
      * @param warningValue
      * @return  whether the operation is done successfully
      */
-    ResultMessage modify(String id, double warningValue);//修改警戒值
+    ResultMessage modify(String id, double warningValue)throws RemoteException;//修改警戒值
     /**
      * Submits a BillPo or save it as a draft.
      * If there is a bill with the same id as passed-in parameter do,
