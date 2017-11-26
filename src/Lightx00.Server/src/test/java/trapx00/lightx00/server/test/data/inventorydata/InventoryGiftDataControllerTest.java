@@ -14,7 +14,6 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.util.BillHelper;
 

@@ -80,7 +80,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage submit(InventoryGiftPo bill) {
+    public ResultMessage submit(InventoryGiftPo bill)throws RemoteException  {
         return commonBillDataController.submit(bill);
     }
 
@@ -93,7 +93,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage activate(String id) {
+    public ResultMessage activate(String id)throws RemoteException  {
         return commonBillDataController.activate(id);
     }
 
@@ -106,7 +106,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage abandon(String id) {
+    public ResultMessage abandon(String id)throws RemoteException  {
         return commonBillDataController.abandon(id);
     }
 
@@ -129,7 +129,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      * @return id for the next bill
      */
     @Override
-    public String getId() {
+    public String getId() throws RemoteException  {
         return commonBillDataController.getId("GIFT");
     }
 

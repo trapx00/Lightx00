@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.data.inventorydata;
 
 import com.j256.ormlite.dao.Dao;
+import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataDaoFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
@@ -11,6 +12,7 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
@@ -36,7 +38,6 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      * @since JDK1.1
      */
     public InventoryWarningDataController() throws RemoteException {
-
     }
 
     private Dao<InventoryDetailBillPo, String> dao = InventoryDataDaoFactory.getInventoryDetailBillDao();
@@ -85,13 +86,31 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage submit(InventoryDetailBillPo bill) {
+    public ResultMessage submit(InventoryDetailBillPo bill)  {
         return commonBillDataController.submit(bill);
     }
 
     @Override
-    public ResultMessage modify(String id, double warningValue) {
-        return ResultMessage.Success;
+    public ResultMessage modify(String id, double warningValue)   {
+
+         Dao<CommodityPo, String> commodityDao = CommodityDataDaoFactory.getCommodityDao();
+         ServerLogService logService = ServerLogServiceFactory.getService();
+
+        try{
+            CommodityPo po= commodityDao.queryForId(id);
+            if (po != null) {
+                commodityDao.update(po);
+                logService.printLog(delegate,String.format("modify a commodity warningValue %s (id: %s).",po.getName() ,po.getId()));
+                return ResultMessage.Success;
+            }
+            commodityDao.create(po);
+            //commodityPo.setId(commodityDao.extractId(commodityPo));
+            logService.printLog(delegate, String.format("created a %s (id: %s).", po.getName() , po.getId()));
+            return ResultMessage.Success;
+        }catch (SQLException e) {
+            handleSQLException(e);
+            return ResultMessage.Failure;
+        }
     }
 
     /**
@@ -116,7 +135,7 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage abandon(String id) {
+    public ResultMessage abandon(String id)  {
         return commonBillDataController.abandon(id);
     }
 
@@ -127,7 +146,7 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      * @return CashBillVos that match the query condition
      */
     @Override
-    public InventoryDetailBillPo[] query(InventoryBillQueryVo query) {
+    public InventoryDetailBillPo[] query(InventoryBillQueryVo query)  {
         List<InventoryDetailBillPo> result = commonBillDataController.query(query);
         return result.toArray(new InventoryDetailBillPo[result.size()]);
     }
