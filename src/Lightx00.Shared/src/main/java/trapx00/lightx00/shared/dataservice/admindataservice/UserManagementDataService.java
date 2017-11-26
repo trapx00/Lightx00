@@ -5,7 +5,6 @@ import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 public interface UserManagementDataService extends Remote {
     /**
@@ -13,27 +12,27 @@ public interface UserManagementDataService extends Remote {
      * @param query the filter conditions
      * @return array of user accounts which match the conditions
      */
-    EmployeePo[] query(UserAccountQueryVo query) throws RemoteException;
+    EmployeePo[] query(UserAccountQueryVo query);
 
     /**
      * Create a user account for a new employee.
      * @param account the account to be created
      * @return whether the operation is done successfully
      */
-    ResultMessage add(EmployeePo account) throws RemoteException;
+    ResultMessage add(EmployeePo account);
 
     /**
      * Modify a user account.
      * @param account the account to be modified
      * @return whether the operation is done successfully
      */
-    ResultMessage modify(EmployeePo account) throws RemoteException;
+    ResultMessage modify(EmployeePo account);
 
     /**
      * Delete a user account.
      * @param account the account to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(EmployeePo account) throws RemoteException;
+    ResultMessage delete(EmployeePo account);
 
 }

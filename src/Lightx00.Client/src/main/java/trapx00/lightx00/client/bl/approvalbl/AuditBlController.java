@@ -42,7 +42,7 @@ public class AuditBlController implements AuditBlService,ApprovalRequest {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestApproval(BillVo bill) {
+    public ResultMessage requestApproval(BillVo  bill) {
         return null;
     }
 }

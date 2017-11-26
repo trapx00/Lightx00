@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 import java.util.Date;
 
@@ -23,16 +23,16 @@ public class ClientPromotionDataServiceStub implements ClientPromotionDataServic
      * @param query the filter conditions
      * @return array of ClientPromotionPo which match the conditions
      */
-    public ClientPromotionPo[] queryPromotion(PromotionQueryVo query) {
-        return new ClientPromotionPo[]{new ClientPromotionPo("0001",new Date(),new Date(),PromotionState.Waiting,1,200,null,0)};
+    public ClientPromotionPo[] queryPromotion(ClientPromotionQueryVo query) {
+        return new ClientPromotionPo[]{new ClientPromotionPo("KHCXCL-20171112-00001",new Date(),new Date(),PromotionState.Waiting,1,200,null,0)};
     }
 
     /**
      * Delete a useless ClientPromotionPo.
-     * @param promotion the ClientPromotionPo to be deleted
+     * @param id id of the ClientPromotionPo to be deleted
      * @return whether the operation is done successfully
      */
-    public ResultMessage delete(ClientPromotionPo promotion) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
 
@@ -42,6 +42,6 @@ public class ClientPromotionDataServiceStub implements ClientPromotionDataServic
      * @return id for the next promotion
      */
     public String getId() {
-        return "0001";
+        return "KHCXCL-20171112-00001";
     }
 }

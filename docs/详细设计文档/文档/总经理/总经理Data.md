@@ -30,18 +30,18 @@ promtiondata包负责总经理制定促销策略（包括组合商品降价、�
 
 | 接口名称                                     | 语法                                       | 前置条件                     | 后置条件                    |
 | ---------------------------------------- | ---------------------------------------- | ------------------------ | ----------------------- |
-| ComSalePromotionDataService.submit       | `public ResultMessage submit(ComSalePromotionVo promotion);` | 促销策略所有属性有效，与已有促销策略不产生冲突。 | 保存组合商品降价促销策略持久化对象数据。    |
-| ComSalePromotionDataService.queryPromotion; | `public ComSalePromotionPo[] queryPromotion(PromotionQueryVo query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
-| ComSalePromotionDataService.delete       | `public ResultMessage delete(ComSalePromotionVo promotion);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
+| ComSalePromotionDataService.submit       | `public ResultMessage submit(ComSalePromotionPo promotion);` | 促销策略所有属性有效，与已有促销策略不产生冲突。 | 保存组合商品降价促销策略持久化对象数据。    |
+| ComSalePromotionDataService.queryPromotion; | `public ComSalePromotionPo[] queryPromotion(ComSalePromotionQueryVo query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
+| ComSalePromotionDataService.delete       | `public ResultMessage delete(String id);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
 | ComSalePromotionDataService.getId        | `public String getId();`                 | 无。                       | 返回当前促销策略对象的ID。          |
 
 **TotalPricePromotionDataController**
 
 | 接口名称                                     | 语法                                       | 前置条件                     | 后置条件                    |
 | ---------------------------------------- | ---------------------------------------- | ------------------------ | ----------------------- |
-| TotalPricePromotionDataService.submit    | `public ResultMessage submit(TotalPricePromotionVo promotion);` | 促销策略所有属性有效，与已有促销策略不产生冲突。 | 保存组合商品降价促销策略持久化对象数据。    |
-| TotalPricePromotionDataService.queryPromotion | `public TotalPricePromotionPo[] queryPromotion(PromotionQueryVo query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
-| TotalPricePromotionDataService.delete    | `public ResultMessage delete(TotalPricePromotionVo promotion);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
+| TotalPricePromotionDataService.submit    | `public ResultMessage submit(TotalPricePromotionPo promotion);` | 促销策略所有属性有效，与已有促销策略不产生冲突。 | 保存组合商品降价促销策略持久化对象数据。    |
+| TotalPricePromotionDataService.queryPromotion | `public TotalPricePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
+| TotalPricePromotionDataService.delete    | `public ResultMessage delete(String id);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
 | TotalPricePromotionDataService.getId     | `public String getId();`                 | 无。                       | 返回当前促销策略对象的ID。          |
 
 **ClientPromotionDataController**
@@ -50,9 +50,9 @@ promtiondata包负责总经理制定促销策略（包括组合商品降价、�
 
 | 接口名称                                     | 语法                                       | 前置条件                     | 后置条件                    |
 | ---------------------------------------- | ---------------------------------------- | ------------------------ | ----------------------- |
-| ClientPromotionDataService.submit        | `public ResultMessage submit(ClientPromotionVo promotion);` | 促销策略所有属性有效，与已有促销策略不产生冲突。 | 保存组合商品降价促销策略持久化对象数据。    |
-| ClientPromotionDataService.queryPromotion | `public ClientPromotionPo[] queryPromotion(PromotionQueryVO query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
-| ClientPromotionDataService.delete        | `public ResultMessage delete(ClientPromotionVo promotion);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
+| ClientPromotionDataService.submit        | `public ResultMessage submit(ClientPromotionPo promotion);` | 促销策略所有属性有效，与已有促销策略不产生冲突。 | 保存组合商品降价促销策略持久化对象数据。    |
+| ClientPromotionDataService.queryPromotion | `public ClientPromotionPo[] queryPromotion(ClientPromotionQueryVO query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
+| ClientPromotionDataService.delete        | `public ResultMessage delete(String id);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
 | ClientPromotionDataService.getId         | `public String getId();`                 | 无。                       | 返回当前促销策略对象的ID。          |
 
 ### 2.3.13 approvaldata包
@@ -83,10 +83,10 @@ approvaldata包负责总经理审批单据用例的数据操作。具体功能�
 
 提供的接口
 
-| 接口名称                                | 语法                                       | 前置条件              | 后置条件            |
-| ----------------------------------- | ---------------------------------------- | ----------------- | --------------- |
-| ApprovalDataService.query           | `public BillVO[] query(BillQueryVo query)` | po中存在处于提交状态的单据数据。 | 返回待审批单据。        |
-| ApprovalDataService.reject          | `public ResultMessage reject(BillVO bill);` | 无。                | 修改并保存单据持久化对象数据。 |
-| ApprovalDataService.pass            | `public ResultMessage pass(BillVO bill);` | 无。                | 修改并保存单据持久化对象数据。 |
-| ApprovalDataService.requestApproval | `public ResultMessage requestApproval(BillVo bill);` | 有单据被提交。           | 返回保存结果。         |
+| 接口名称                                | 语法                                       | 前置条件              | 后置条件                |
+| ----------------------------------- | ---------------------------------------- | ----------------- | ------------------- |
+| ApprovalDataService.query           | `public BillInfoPO[] query(BillInfoQueryVo query)` | po中存在处于提交状态的单据数据。 | 返回待审批单据简要信息。        |
+| ApprovalDataService.reject          | `public ResultMessage reject(BillInfoPo billInfo);` | 无。                | 修改并保存单据简要信息持久化对象数据。 |
+| ApprovalDataService.pass            | `public ResultMessage pass(BillInfoPo billInfo);` | 无。                | 修改并保存单据简要信息持久化对象数据。 |
+| ApprovalDataService.requestApproval | `public ResultMessage requestApproval(BillPo bill);` | 有单据被提交。           | 返回保存结果。             |
 

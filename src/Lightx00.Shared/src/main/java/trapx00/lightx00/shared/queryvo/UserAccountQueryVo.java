@@ -2,7 +2,19 @@ package trapx00.lightx00.shared.queryvo;
 
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 
-import java.util.function.Predicate;
+public class UserAccountQueryVo extends BaseQueryVo<EmployeePo,String> {
+    /**
+     * Instantiate a QueryVo with preparation method.
+     * @param preparation QueryBuilderPreparation method
+     */
+    public UserAccountQueryVo(QueryBuilderPreparation<EmployeePo,String> preparation) {
+        super(preparation);
+    }
 
-public interface UserAccountQueryVo extends Predicate<EmployeePo> {
+    /**
+     * Instantiate a QueryVo with a method which returns all rows.
+     */
+    public UserAccountQueryVo() {
+        super();
+    }
 }

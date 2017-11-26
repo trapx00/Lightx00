@@ -39,8 +39,8 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 | `commodityui.CommodityInfoUi.showCommoditySelectDialog()` | 选择商品。            |
 | `promotionblservice.ComSalePromotionBlService.submit(ComSalePromotionVo promotion) ` | 提交促销策略。          |
 | `promotionblservice.ComSalePromotionBlService.saveAsDraft(CComSalePromotionVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.ComSalePromotionBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.ComSalePromotionBlService.delete(CommodityOnSaleVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.ComSalePromotionBlService.queryPromotion(ComSalePromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.ComSalePromotionBlService.delete(String id)` | 删除单一持久化对象。       |
 | `promotionblservice.ComSalePromotionBlService.getId()` | 获得当前促销策略的ID。     |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。            |
 
@@ -58,8 +58,8 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 | ---------------------------------------- | ---------------- |
 | `promotionblservice.TotalPricePromotionBlService.submit(TotalPricePromotionVo promotion) ` | 提交促销策略。          |
 | `promotionblservice.TotalPricePromotionBlService.saveAsDraft(TotalPricePromotionVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.TotalPricePromotionBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.TotalPricePromotionBlService.delete(TotalPricePromotionVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.TotalPricePromotionBlService.queryPromotion(TotalPricePromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.TotalPricePromotionBlService.delete(String id)` | 删除单一持久化对象。       |
 | `promotionblservice.TotalPricePromotionBlService.getId()` | 获得当前促销策略的ID。     |
 
 **ClientPromotionUiController**
@@ -76,8 +76,8 @@ promtionui包负责总经理制定促销策略（包括组合商品降价、满�
 | ---------------------------------------- | ---------------- |
 | `promotionblservice.ClientPromotionBlService.submit(ClientPromotionVo promotion) ` | 提交促销策略。          |
 | `promotionblservice.ClientPromotionBlService.saveAsDraft(ClientPromotionVo promotion)` | 保存促销策略草稿。        |
-| `promotionblservice.ClientPromotionBlService.queryPromotion(PromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
-| `promotionblservice.ClientPromotionBlService.delete(ClientPromotionVo promotion)` | 删除单一持久化对象。       |
+| `promotionblservice.ClientPromotionBlService.queryPromotion(ClientPromotionQueryVO query)` | 根据不同的筛选条件查找促销策略。 |
+| `promotionblservice.ClientPromotionBlService.delete(String id)` | 删除单一持久化对象。       |
 | `promotionblservice.ClientPromotionBlService.getId()` | 获得当前促销策略的ID。     |
 
 ### 2.1.13 approvalui包
@@ -114,7 +114,7 @@ approvalui包负责总经理单据审批用例的UI界面以及响应控制代�
 
 | 接口名称                                     | 服务名     |
 | ---------------------------------------- | ------- |
-| `approvalblservice.AuditBlService.query(BillQueryVO query)` | 查询单据信息。 |
-| `approvalblservice.AuditBlService.reject(BillVO bill)` | 拒绝通过审批。 |
-| `approvalblservice.AuditBlService.pass(BillVO bill)` | 通过审批。   |
+| `approvalblservice.AuditBlService.query(BillInfoQueryVO query)` | 查询单据信息。 |
+| `approvalblservice.AuditBlService.reject(BillInfoVO billInfo)` | 拒绝通过审批。 |
+| `approvalblservice.AuditBlService.pass(BillInfoVO billInfo)` | 通过审批。   |
 

@@ -1,5 +1,5 @@
 ```java
-class AdminPO extends EmpolyeePO{
+class AdminPo extends EmpolyeePo{
 }
 ```
 
