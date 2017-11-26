@@ -11,12 +11,15 @@ public class SaleBillBasePo extends BillPo {
     @DatabaseField
     private SaleBillType saleBillType;
 
-    public SaleBillType getSaleBillType() {
-        return saleBillType;
-    }
-
     public SaleBillBasePo(String id, Date date, BillState state, SaleBillType saleBillType) {
         super(BillType.SaleBill, id, date, state);
         this.saleBillType = saleBillType;
+    }
+
+    public SaleBillBasePo() {
+    }
+
+    public SaleBillType getSaleBillType() {
+        return saleBillType;
     }
 }

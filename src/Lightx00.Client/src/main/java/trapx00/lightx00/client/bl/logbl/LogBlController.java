@@ -6,6 +6,8 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.client.vo.log.LogVo;
 
+import java.net.URI;
+
 public class LogBlController implements LogBlService, LogService {
     /**
      * Writes log.
@@ -16,6 +18,26 @@ public class LogBlController implements LogBlService, LogService {
      */
     @Override
     public ResultMessage log(LogSeverity severity, String content) {
+        return null;
+    }
+
+    /**
+     * back up the log information on the server to oos and clear the log
+     *
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage backupLog() {
+        return null;
+    }
+
+    /**
+     * get the log backed up on the cloud
+     *
+     * @return the temp uri of the log resources
+     */
+    @Override
+    public URI fetchCloudLog() {
         return null;
     }
 

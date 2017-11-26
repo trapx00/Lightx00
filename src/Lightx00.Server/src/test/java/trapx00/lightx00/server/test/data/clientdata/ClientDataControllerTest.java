@@ -20,32 +20,48 @@ public class ClientDataControllerTest {
         }
     }
 
+    String[] ids = new String[1];
+    ClientPo clientPo = new ClientPo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, "0");
     ClientDataService service = ClientDataFactory.getService();
 
     @org.junit.Test
     public void query() throws Exception {
-        assertEquals("0", service.query(null)[0].getId());
+        ids[0] = "0";
+        service.add(clientPo);
+        assertEquals("0", service.query("xiaoming")[0].getId());
+        service.delete(ids);
     }
 
     @org.junit.Test
     public void modify() throws Exception {
-        assertEquals(ResultMessage.Success, service.modify(null));
+        ids[0] = "0";
+        service.add(clientPo);
+        clientPo.setClientLevel(4);
+        service.modify(clientPo);
+        assertEquals(4, service.query("xiaoming")[0].getClientLevel());
+        service.delete(ids);
     }
 
     @org.junit.Test
     public void getId() throws Exception {
-        assertEquals("0", service.getId());
+        ids[0] = "0";
+        service.add(clientPo);
+        assertEquals("1", service.getId());
+        service.delete(ids);
     }
 
     @org.junit.Test
     public void add() throws Exception {
-        ClientPo clientPo=new ClientPo("0", ClientType.Retailer,5,"xiaoming","123456789","123456789","215000","12345679@qq.com",43.7,37.5,"0");
+        ids[0] = "0";
         assertEquals(ResultMessage.Success, service.add(clientPo));
+        service.delete(ids);
     }
 
     @org.junit.Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success, service.delete(null));
+        ids[0] = "0";
+        service.add(clientPo);
+        assertEquals(ResultMessage.Success, service.delete(ids));
     }
 
 }

@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Client")
 public class ClientPo {
-    @DatabaseField(id=true)
+    @DatabaseField(id = true)
     private String id;
     @DatabaseField
     private ClientType clientType;
@@ -27,6 +27,23 @@ public class ClientPo {
     private double payableQuota;
     @DatabaseField
     private String defaultOperatorId;
+
+    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId) {
+        this.id = id;
+        this.clientType = clientType;
+        this.clientLevel = clientLevel;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.email = email;
+        this.receivableQuota = receivableQuota;
+        this.payableQuota = payableQuota;
+        this.defaultOperatorId = defaultOperatorId;
+    }
+
+    public ClientPo() {
+    }
 
     public String getId() {
         return id;
@@ -113,20 +130,6 @@ public class ClientPo {
     }
 
     public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
-    }
-
-    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId) {
-        this.id = id;
-        this.clientType = clientType;
-        this.clientLevel = clientLevel;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.email = email;
-        this.receivableQuota = receivableQuota;
-        this.payableQuota = payableQuota;
         this.defaultOperatorId = defaultOperatorId;
     }
 }

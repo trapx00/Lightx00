@@ -4,7 +4,6 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 import java.util.Date;
 
@@ -30,6 +29,22 @@ public class SaleBillPo extends SaleBillBasePo {
     private double ultiTotal;
     @DatabaseField
     private String comment;
+
+    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.Sale);
+        this.supplier = supplier;
+        this.defaultOperatorId = defaultOperatorId;
+        this.operatorId = operatorId;
+        this.repository = repository;
+        this.commodityList = commodityList;
+        this.originTotal = originTotal;
+        this.minusProfits = minusProfits;
+        this.token = token;
+        this.ultiTotal = ultiTotal;
+        this.comment = comment;
+    }
+
+    public SaleBillPo() {}
 
     public String getSupplier() {
         return supplier;
@@ -108,20 +123,6 @@ public class SaleBillPo extends SaleBillBasePo {
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
-        this.supplier = supplier;
-        this.defaultOperatorId = defaultOperatorId;
-        this.operatorId = operatorId;
-        this.repository = repository;
-        this.commodityList = commodityList;
-        this.originTotal = originTotal;
-        this.minusProfits = minusProfits;
-        this.token = token;
-        this.ultiTotal = ultiTotal;
         this.comment = comment;
     }
 }
