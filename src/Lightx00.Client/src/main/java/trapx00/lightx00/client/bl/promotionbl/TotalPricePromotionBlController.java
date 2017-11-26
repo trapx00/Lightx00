@@ -4,7 +4,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
 public class TotalPricePromotionBlController implements TotalPricePromotionBlService, DraftDeleteService {
     /**
@@ -33,7 +33,7 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
      * @return array of TotalPricePromotionVo which match the conditions
      */
     @Override
-    public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public TotalPricePromotionVo[] queryPromotion(TotalPricePromotionQueryVo query) {
         return new TotalPricePromotionVo[0];
     }
 

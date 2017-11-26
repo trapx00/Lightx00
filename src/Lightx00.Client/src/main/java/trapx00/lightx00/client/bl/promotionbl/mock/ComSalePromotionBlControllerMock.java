@@ -5,7 +5,7 @@ import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ComSalePromotionQueryVo;
 
 import java.util.Date;
 
@@ -33,7 +33,7 @@ public class ComSalePromotionBlControllerMock extends ComSalePromotionBlControll
      * @param query the filter conditions
      * @return array of ComSalePromotionVo which match the conditions
      */
-    public ComSalePromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public ComSalePromotionVo[] queryPromotion(ComSalePromotionQueryVo query) {
         return new ComSalePromotionVo[]{new ComSalePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,new PromotionCommodity[0],200)
         };
     }

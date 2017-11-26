@@ -4,7 +4,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 public class ClientPromotionBlController implements ClientPromotionBlService, DraftDeleteService {
     /**
@@ -33,7 +33,7 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
      * @return array of ClientPromotionVo which match the conditions
      */
     @Override
-    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public ClientPromotionVo[] queryPromotion(ClientPromotionQueryVo query) {
         return new ClientPromotionVo[0];
     }
 

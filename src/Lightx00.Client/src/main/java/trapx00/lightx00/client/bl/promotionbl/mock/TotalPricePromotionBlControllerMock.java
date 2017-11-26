@@ -4,7 +4,7 @@ import trapx00.lightx00.client.bl.promotionbl.TotalPricePromotionBlController;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
 import java.util.Date;
 
@@ -32,7 +32,7 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
      * @param query the filter conditions
      * @return array of TotalPricePromotionVo which match the conditions
      */
-    public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public TotalPricePromotionVo[] queryPromotion(TotalPricePromotionQueryVo query) {
         return new TotalPricePromotionVo[]{new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null)
         };
     }

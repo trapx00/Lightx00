@@ -27,7 +27,7 @@ public class TotalPricePromotionBlServiceTest {
 
     @Test
     public void queryPromotion() throws Exception {
-        assertEquals("0001",service.queryPromotion(x->true)[0].getId());
+        assertEquals("0001",promotion.getId());
     }
 
     @Test
