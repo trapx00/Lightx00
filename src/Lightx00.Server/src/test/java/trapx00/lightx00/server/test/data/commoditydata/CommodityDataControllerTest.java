@@ -56,6 +56,7 @@ public class CommodityDataControllerTest {
 
     @Test
     public void delete() throws Exception {
+        dao.create(commodityPo);
         assertEquals(ResultMessage.Success,service.delete(commodityPo) );
     }
 
