@@ -13,8 +13,8 @@ public interface CashBillDataService extends Remote {
     /**
      * Submits a CashBillPo or save it as a draft.
      * If there is a bill with the same id as passed-in parameter do,
-     *    if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
-     *    otherwise a IdExistsException would be thrown.
+     * if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
+     * otherwise a IdExistsException would be thrown.
      *
      * @param bill bill
      * @return whether the operation is done successfully
@@ -37,6 +37,7 @@ public interface CashBillDataService extends Remote {
      * If a Bill is in BillState.Draft, it will be deleted.
      * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
      * If a bill is in other state, a BillInvalidStateException will be thrown.
+     *
      * @param id id for the CashBill to be abandoned
      * @return whether the operation is done successfully
      */
@@ -44,10 +45,10 @@ public interface CashBillDataService extends Remote {
 
     /**
      * Queries CashBill.
+     *
      * @param query query condition
      * @return CashBillVos that match the query condition
      */
-
     CashBillPo[] query(CashBillQueryVo query) throws RemoteException;
 
     /**
