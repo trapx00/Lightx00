@@ -2,7 +2,7 @@ package trapx00.lightx00.client.bl.notificationbl;
 
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.notification.BillApprovalNotificationVo;
+import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
 
 public class NotificationBlController implements NotificationBlService, NotificationService {
@@ -46,6 +46,8 @@ public class NotificationBlController implements NotificationBlService, Notifica
      */
     @Override
     public ResultMessage abandon(BillApprovalNotificationVo notification) {
-        return null;
+        NotificationAbandonService service = notification.getBill().notificationAbandonService();
+        service.abandon(notification.getBill().getId());
+        return ResultMessage.Success;
     }
 }

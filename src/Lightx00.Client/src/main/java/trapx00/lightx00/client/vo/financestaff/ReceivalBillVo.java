@@ -5,6 +5,7 @@ import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
@@ -35,6 +36,16 @@ public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
     @Override
     public NotificationAbandonService notificationAbandonService() {
         return ReceivalBillBlFactory.getNotificationAbandonService();
+    }
+
+    /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return BillApprovalCompleteService
+     */
+    @Override
+    public BillApprovalCompleteService billApprovalCompleteService() {
+        return ReceivalBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**

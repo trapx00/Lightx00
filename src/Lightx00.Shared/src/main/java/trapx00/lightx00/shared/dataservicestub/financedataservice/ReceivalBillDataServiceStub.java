@@ -7,6 +7,7 @@ import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 public class ReceivalBillDataServiceStub implements ReceivalBillDataService {
@@ -54,6 +55,18 @@ public class ReceivalBillDataServiceStub implements ReceivalBillDataService {
         return new ReceivalBillPo[]{
                 new ReceivalBillPo("SKD-20171111-00001",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
         };
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
     }
 
     /**

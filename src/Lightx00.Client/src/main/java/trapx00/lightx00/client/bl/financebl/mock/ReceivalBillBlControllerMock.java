@@ -87,4 +87,16 @@ public class ReceivalBillBlControllerMock extends ReceivalBillBlController {
                 new ReceivalBillVo("123",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
         };
     }
+
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return ResultMessage.Success;
+    }
 }

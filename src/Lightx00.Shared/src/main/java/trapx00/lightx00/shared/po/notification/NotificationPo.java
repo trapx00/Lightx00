@@ -1,27 +1,42 @@
 package trapx00.lightx00.shared.po.notification;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
-public class NotificationPo {
-    private String id;
-    private Date date;
-    private String senderId;
-    private String receiverId;
-    private NotificationType type;
 
-    public NotificationPo(String id, Date date, String senderId, String receiverId, NotificationType type) {
-        this.id = id;
+public class NotificationPo {
+    @DatabaseField(generatedId = true)
+    private int id;
+    @DatabaseField
+    private Date date;
+    @DatabaseField
+    private String senderId;
+    @DatabaseField
+    private String receiverId;
+    @DatabaseField
+    private NotificationType type;
+    @DatabaseField
+    private String content;
+
+    public NotificationPo(Date date, String senderId, String receiverId, NotificationType type, String content) {
         this.date = date;
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.type = type;
+        this.content = content;
     }
 
-    public String getId() {
+    public NotificationPo() {
+
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,5 +70,25 @@ public class NotificationPo {
 
     public void setType(NotificationType type) {
         this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "NotificationPo{" +
+            "id=" + id +
+            ", date=" + date +
+            ", senderId='" + senderId + '\'' +
+            ", receiverId='" + receiverId + '\'' +
+            ", type=" + type +
+            ", content='" + content + '\'' +
+            '}';
     }
 }

@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.bankaccountdata.mock;
 
 import trapx00.lightx00.server.data.bankaccountdata.BankAccountDataController;
-import trapx00.lightx00.shared.dataservicestub.bankaccountdataservice.BankAccountDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
@@ -33,7 +32,7 @@ public class BankAccountDataControllerMock extends BankAccountDataController {
     @Override
     public BankAccountPo[] query(BankAccountQueryVo query) {
         return new BankAccountPo[] {
-            new BankAccountPo("123","123",0,new Date())
+            new BankAccountPo("123",0,new Date())
         };
     }
 
@@ -66,7 +65,7 @@ public class BankAccountDataControllerMock extends BankAccountDataController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String id) {
+    public ResultMessage delete(int id) {
         return ResultMessage.Success;
     }
 }

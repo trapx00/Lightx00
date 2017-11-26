@@ -7,6 +7,7 @@ import trapx00.lightx00.client.bl.financebl.factory.CashBillBlFactory;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
 import java.util.Date;
 
@@ -52,7 +53,7 @@ public class CashBillBlControllerTest {
 
     @Test
     public void query() throws Exception {
-        assertEquals(1, controller.query(x->true).length);
+        assertEquals(1, controller.query(new CashBillQueryVo()).length);
     }
 
 }

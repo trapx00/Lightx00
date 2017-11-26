@@ -1,11 +1,9 @@
 package trapx00.lightx00.server.data.notificationdata.mock;
 
 import trapx00.lightx00.server.data.notificationdata.NotificationDataController;
-import trapx00.lightx00.shared.dataservicestub.notificationdataservice.NotificationDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.notification.BillApprovalNotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
-import trapx00.lightx00.shared.po.notification.OtherNotificationPo;
+import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import java.rmi.RemoteException;
@@ -34,21 +32,23 @@ public class NotificationDataControllerMock extends NotificationDataController {
      * @return current user's notification
      */
     @Override
-    public NotificationPo[] update(NotificationQueryVo query) {
+    public NotificationPo[] query(NotificationQueryVo query) {
         return new NotificationPo[] {
-                new OtherNotificationPo("123",new Date(), "","","123"),
-                new BillApprovalNotificationPo("123", new Date(), "","","")
+                new NotificationPo(new Date(), "","", NotificationType.BillApproval,"FKD-20171122-00001"),
+                new NotificationPo(new Date(), "","",NotificationType.Others,"hahaha")
         };
     }
 
     /**
      * Acknowledges a notification.
      *
-     * @param notification notification to be acknowledged
+     * @param id id for the notification to be acknowledged
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage acknowledge(NotificationPo notification) {
+    public ResultMessage acknowledge(int id) {
         return ResultMessage.Success;
     }
+
+
 }

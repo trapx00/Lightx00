@@ -83,9 +83,20 @@ public class CashBillBlControllerMock extends CashBillBlController {
      */
     @Override
     public CashBillVo[] query(CashBillQueryVo query) {
-        return new CashBillVo[]
-                {
-                        new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "","",new CashBillItem[0])
-                };
+        return new CashBillVo[] {
+            new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "","",new CashBillItem[0])
+        };
+    }
+
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return ResultMessage.Success;
     }
 }

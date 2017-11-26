@@ -19,10 +19,10 @@ public class NotificationModel extends RecursiveTreeObject<NotificationModel> {
         this(notificationVo.getDate(), notificationVo.getType(),notificationVo.getId(),notificationVo.getReceiver(),"未读");
     }
 
-    public NotificationModel(Date date, NotificationType type, String id, EmployeeVo reveiver,String readType) {
+    public NotificationModel(Date date, NotificationType type, int id, EmployeeVo reveiver, String readType) {
         this.date = new SimpleObjectProperty<>(date);
         this.type = new SimpleObjectProperty<>(type);
-        this.id = new SimpleStringProperty(id);
+        this.id = new SimpleStringProperty(String.valueOf(id));
         this.receiver = new SimpleObjectProperty<>(reveiver);
         this.readType = new SimpleStringProperty(readType);
     }
