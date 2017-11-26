@@ -11,6 +11,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class LogBackupDataController extends UnicastRemoteObject implements LogBackupDataService {
+    private final static String ACCESS_KEY_ID = "c4582dec5d0809103126";
+    private final static String SECRET_KEY_ID = "d966349658aafbfbf177";
+    private final static String BUCKET_NAME = "lightx00";
+    private final static String FILE_PATH="/temp.txt";
     private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
 
     /**
