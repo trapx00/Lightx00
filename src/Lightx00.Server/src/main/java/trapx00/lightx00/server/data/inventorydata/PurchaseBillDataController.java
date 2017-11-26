@@ -5,6 +5,7 @@ import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataDaoFac
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 
@@ -88,5 +89,17 @@ public class PurchaseBillDataController extends UnicastRemoteObject implements P
     @Override
     public String getId() {
         return commonBillDataController.getId("JHD");
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) {
+        return commonBillDataController.approvalComplete(billId, billState);
     }
 }

@@ -5,6 +5,7 @@ import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataDaoFactor
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 
@@ -81,5 +82,17 @@ public class SaleRefundBillDataController extends UnicastRemoteObject implements
     @Override
     public String getId() {
         return commonBillDataController.getId("XSTHD");
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) {
+        return commonBillDataController.approvalComplete(billId, billState);
     }
 }

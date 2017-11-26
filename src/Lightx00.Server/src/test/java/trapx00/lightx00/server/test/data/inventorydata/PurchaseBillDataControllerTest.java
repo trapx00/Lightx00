@@ -137,4 +137,29 @@ public class PurchaseBillDataControllerTest {
             bill.setId("JHD-20171122-00001");
         }
     }
+
+    @Test
+    public void changeState() throws Exception {
+        bill.setState(BillState.WaitingForApproval);
+        dao.create(bill);
+        String id = dao.extractId(bill);
+        try {
+            service.approvalComplete(bill.getId(),BillState.Approved);
+            assertEquals(BillState.Approved, dao.queryForId(bill.getId()).getState());
+        } finally {
+            dao.deleteById(id);
+            bill.setState(BillState.Draft);
+        }
+    }
+
+    @Test(expected = BillInvalidStateException.class)
+    public void changeStateInvalidState() throws Exception {
+        dao.create(bill);
+        String id = dao.extractId(bill);
+        try {
+            service.approvalComplete(bill.getId(),BillState.Approved);
+        } finally {
+            dao.deleteById(id);
+        }
+    }
 }

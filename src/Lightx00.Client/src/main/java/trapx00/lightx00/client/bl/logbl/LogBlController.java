@@ -22,26 +22,6 @@ public class LogBlController implements LogBlService, LogService {
     }
 
     /**
-     * back up the log information on the server to oos and clear the log
-     *
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage backupLog() {
-        return null;
-    }
-
-    /**
-     * get the log backed up on the cloud
-     *
-     * @return the temp uri of the log resources
-     */
-    @Override
-    public URI fetchCloudLog() {
-        return null;
-    }
-
-    /**
      * Queries Log with LogQueryVo.
      *
      * @param query query

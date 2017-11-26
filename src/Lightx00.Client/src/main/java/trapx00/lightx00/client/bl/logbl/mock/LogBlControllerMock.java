@@ -33,30 +33,4 @@ public class LogBlControllerMock extends LogBlController {
     public LogVo[] query(LogQueryVo query) {
         return new LogVo[]{new LogVo(new Date(), LogSeverity.Success, "123")};
     }
-
-    /**
-     * back up the log information on the server to oos and clear the log
-     *
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage backupLog() {
-        return ResultMessage.Success;
-    }
-
-    /**
-     * get the log backed up on the cloud
-     *
-     * @return the temp uri of the log resources
-     */
-    @Override
-    public URI fetchCloudLog() {
-        URI uri = null;
-        try {
-            uri = new URI("www.123.com");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return uri;
-    }
 }

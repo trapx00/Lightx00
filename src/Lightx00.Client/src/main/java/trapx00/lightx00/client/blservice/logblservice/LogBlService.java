@@ -14,18 +14,4 @@ public interface LogBlService {
      * @return LogVos that match query
      */
     LogVo[] query(LogQueryVo query);
-
-    /**
-     * back up the log information on the server to oos and clear the log
-     *
-     * @return whether the operation is done successfully
-     */
-    ResultMessage backupLog();
-
-    /**
-     * get the log backed up on the cloud
-     *
-     * @return the temp uri of the log resources
-     */
-    URI fetchCloudLog();
 }

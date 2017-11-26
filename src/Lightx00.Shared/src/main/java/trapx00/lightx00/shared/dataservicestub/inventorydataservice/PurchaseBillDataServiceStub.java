@@ -2,8 +2,11 @@ package trapx00.lightx00.shared.dataservicestub.inventorydataservice;
 
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+
+import java.rmi.RemoteException;
 
 public class PurchaseBillDataServiceStub implements PurchaseBillDataService {
 
@@ -58,5 +61,17 @@ public class PurchaseBillDataServiceStub implements PurchaseBillDataService {
     @Override
     public String getId() {
         return null;
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
     }
 }
