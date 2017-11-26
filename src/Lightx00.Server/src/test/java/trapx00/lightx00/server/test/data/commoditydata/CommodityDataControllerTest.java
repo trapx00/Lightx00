@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.test.data.commoditydata;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.table.TableUtils;
 import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataDaoFactory;
@@ -34,33 +35,38 @@ public class CommodityDataControllerTest {
     public void setUp() throws Exception {
         dao.deleteById(commodityPo.getId());
     }
+    private void resetTable() throws Exception {
+        TableUtils.dropTable(dao.getConnectionSource(),CommodityPo.class,true);
+        TableUtils.createTable(dao.getConnectionSource(), CommodityPo.class);
+    }
 
     @Test
     public void add() throws Exception {
         try {
             assertEquals(ResultMessage.Success,service.add(commodityPo));
         } finally {
-            dao.delete(commodityPo);
+            resetTable();
         }
     }
 
     @Test
     public void modify() throws Exception {
         assertEquals(ResultMessage.Success,service.modify(commodityPo));
-        dao.delete(commodityPo);
+        resetTable();
     }
 
     @Test
     public void query() throws Exception {
         dao.create(commodityPo);
         assertEquals(1, service.query(new CommodityQueryVo(q->q.where().eq("id","PRO-0001-0001").prepare())).length);
-        dao.delete(commodityPo);
+        resetTable();
     }
 
     @Test
     public void delete() throws Exception {
         dao.create(commodityPo);
         assertEquals(ResultMessage.Success,service.delete(commodityPo) );
+        resetTable();
     }
 
 }

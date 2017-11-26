@@ -15,11 +15,11 @@ public class InventoryGiftDataControllerMock extends InventoryGiftDataServiceStu
     }
 
     @Override
-    public InventoryGiftPo getGift(Date time) {
+    public ResultMessage submit(InventoryGiftPo inventoryGiftPo) {
         Date date=new Date();
         PromotionCommodity pCommodity=new PromotionCommodity();
         PromotionCommodity[] input={null};
-        return new InventoryGiftPo(date, "G0001",input);
+        return ResultMessage.Success;
     }
 
     @Override

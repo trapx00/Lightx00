@@ -6,20 +6,21 @@ import java.util.Date;
 
 import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
+import trapx00.lightx00.shared.queryvo.InventoryPictureQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryViewQueryVo;
 
 public interface InventoryCheckDataService extends Remote {
     /**
      * Checks the invenntory change between the begintime and endtime
-     * @param beginTime
-     * @param endTime
+     * @param inventoryViewQueryVo
      * @return The inventoryView during specified time range
      */
-    InventoryViewPo submit(Date beginTime,Date endTime) throws RemoteException;
+    InventoryViewPo[] getInventoryView(InventoryViewQueryVo inventoryViewQueryVo) throws RemoteException;
 
     /**
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
-    InventoryPicturePo submit(Date time) throws RemoteException;
+    InventoryPicturePo[] getInventoryPicture(InventoryPictureQueryVo inventoryPictureQueryVo) throws RemoteException;
 
 }

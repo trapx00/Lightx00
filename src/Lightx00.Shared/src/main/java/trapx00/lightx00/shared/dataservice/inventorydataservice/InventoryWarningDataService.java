@@ -11,12 +11,6 @@ import java.rmi.RemoteException;
 
 
 public interface InventoryWarningDataService extends Remote {
-    /**
-     * Submits a bill
-     * @param bill
-     * @return  whether the operation is done successfully
-     */
-    ResultMessage submit(InventoryDetailBillPo bill);
 
     /**
      *  Modifys the warning value of the commoditybl
@@ -26,25 +20,16 @@ public interface InventoryWarningDataService extends Remote {
      */
     ResultMessage modify(String id, double warningValue);//修改警戒值
     /**
-     * Gets the id for the next bill.
-     * @return id for the next bill
+     * Submits a BillPo or save it as a draft.
+     * If there is a bill with the same id as passed-in parameter do,
+     *    if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
+     *    otherwise a IdExistsException would be thrown.
+     *
+     * @param bill bill
+     * @return whether the operation is done successfully
      */
-    String getId();
-    /**
-     * Changes the state of a bill if approval is completed.
-     * @param billId the id of the bill.
-     * @param billState new bill state. Only Approved and Rejected is allowed.
-     * @return whether the operation is done successfully.
-     */
-    ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException;
+    ResultMessage submit(InventoryDetailBillPo bill) throws RemoteException;
 
-
-    /**
-     *  Querys a bill
-     * @param inventoryBillQueryVo
-     * @return InventoryBillVo
-     */
-    InventoryDetailBillPo[]query(InventoryBillQueryVo inventoryBillQueryVo);
 
     /**
      * Activates a Bill.
@@ -66,5 +51,27 @@ public interface InventoryWarningDataService extends Remote {
      */
     ResultMessage abandon(String id) throws RemoteException;
 
+    /**
+     * Changes the state of a bill if approval is completed.
+     * @param billId the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException;
+
+    /**
+     * Gets the id for the next bill.
+     * If there are already 99999 bills for this day, a NoMoreBillException will be thrown.
+     *
+     * @return id for the next bill
+     */
+    String getId() throws RemoteException;
+    /**
+     * Queries Bill.
+     * @param query query condition
+     * @return BillVos that match the query condition
+     */
+
+    InventoryDetailBillPo[] query(InventoryBillQueryVo query) throws RemoteException;
 
 }

@@ -29,9 +29,10 @@ public class InventoryViewPo {
     public InventoryViewPo(){
 
     }
-    public InventoryViewPo(Date time, double inventoryAmount, double inventoryMoney,
+    public InventoryViewPo(String id,Date time, double inventoryAmount, double inventoryMoney,
                            double outOfInventoryAmount, double outOfInVentoryMoney, double sum,
                            double inSoldPrice, double outSoldPrice) {
+        this.id=id;
         this.time = time;
         this.inventoryAmount = inventoryAmount;
         this.inventoryMoney = inventoryMoney;

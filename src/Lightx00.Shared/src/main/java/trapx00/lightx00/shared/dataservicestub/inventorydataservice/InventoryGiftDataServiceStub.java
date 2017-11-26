@@ -12,16 +12,28 @@ import java.util.Date;
 public class InventoryGiftDataServiceStub implements InventoryGiftDataService {
 
     @Override
-    public InventoryGiftPo getGift(Date time) {
+    public ResultMessage submit(InventoryGiftPo inventoryGiftPo) {
         Date date=new Date();
         PromotionCommodity pCommodity=new PromotionCommodity();
         PromotionCommodity[] input={null};
-        return new InventoryGiftPo(date, "G0001",input);
+        return ResultMessage.Success;
     }
 
     @Override
     public String getId() {
         return "X0001";
+    }
+
+
+
+    @Override
+    public ResultMessage activate(String id) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage abandon(String id) throws RemoteException {
+        return null;
     }
 
     /**

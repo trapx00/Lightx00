@@ -11,16 +11,37 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 public interface InventoryGiftDataService extends Remote {
 
     /**
-     * Gets the giftBill during specified time range
-     * @param time
-     * @return The bill during specified time range
+     * Submits a BillPo or save it as a draft.
+     * If there is a bill with the same id as passed-in parameter do,
+     *    if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
+     *    otherwise a IdExistsException would be thrown.
+     *
+     * @param bill bill
+     * @return whether the operation is done successfully
      */
-    InventoryGiftPo getGift(Date time);
+    ResultMessage submit(InventoryGiftPo bill) throws RemoteException;
+
+
     /**
-     * Gets the id for the next bill.
-     * @return id for the next bill
+     * Activates a CashBill.
+     * The bill must be in BillState.WaitingForApproval state.
+     * Otherwise a BillInvalidStateException will be thrown.
+     *
+     * @param id id for the bill that have been approved of
+     * @return whether the operation is done successfully
      */
-    String getId();
+    ResultMessage activate(String id) throws RemoteException;
+
+    /**
+     * Abandons a Bill.
+     * If a Bill is in BillState.Draft, it will be deleted.
+     * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
+     * If a bill is in other state, a BillInvalidStateException will be thrown.
+     * @param id id for the CashBill to be abandoned
+     * @return whether the operation is done successfully
+     */
+    ResultMessage abandon(String id) throws RemoteException;
+
     /**
      * Changes the state of a bill if approval is completed.
      * @param billId the id of the bill.
@@ -28,5 +49,13 @@ public interface InventoryGiftDataService extends Remote {
      * @return whether the operation is done successfully.
      */
     ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException;
+
+    /**
+     * Gets the id for the next bill.
+     * If there are already 99999 bills for this day, a NoMoreBillException will be thrown.
+     *
+     * @return id for the next bill
+     */
+    String getId() throws RemoteException;
 
 }

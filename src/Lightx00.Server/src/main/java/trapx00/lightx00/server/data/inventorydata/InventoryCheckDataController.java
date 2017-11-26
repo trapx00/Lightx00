@@ -2,6 +2,7 @@ package trapx00.lightx00.server.data.inventorydata;
 
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryDataDaoFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryOtherDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
@@ -10,12 +11,15 @@ import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
+import trapx00.lightx00.shared.queryvo.InventoryPictureQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryViewQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public class InventoryCheckDataController extends UnicastRemoteObject implements InventoryCheckDataService {  /**
  /**
@@ -32,8 +36,8 @@ public class InventoryCheckDataController extends UnicastRemoteObject implements
 
     }
 
-    private Dao<InventoryViewPo, String> invnetoryViewDao = InventoryDataDaoFactory.getInventoryViewDao();
-    private Dao<InventoryPicturePo, String> inventoryPictureDao = InventoryDataDaoFactory.getInventoryPictureDao();
+    private Dao<InventoryViewPo, String> invnetoryViewDao = InventoryOtherDataDaoFactory.getInventoryViewDao();
+    private Dao<InventoryPicturePo, String> inventoryPictureDao = InventoryOtherDataDaoFactory.getInventoryPictureDao();
     private Object delegate = this;
     private ServerLogService logService = ServerLogServiceFactory.getService();
 
@@ -45,22 +49,39 @@ public class InventoryCheckDataController extends UnicastRemoteObject implements
 
     /**
      * Checks the invenntory change between the begintime and endtime
-     * @param beginTime
-     * @param endTime
+     * @param inventoryViewQueryVo
      * @return The inventoryView during specified time range
      */
     @Override
-    public InventoryViewPo submit(Date beginTime, Date endTime) {
+    public InventoryViewPo[] getInventoryView(InventoryViewQueryVo inventoryViewQueryVo) {
 
-       return  null;
+        List<InventoryViewPo> result=null;
+        try {
+            List<InventoryViewPo> results = (List<InventoryViewPo>) invnetoryViewDao.query(inventoryViewQueryVo.prepareQuery(invnetoryViewDao));
+            logService.printLog(delegate, String.format("queried inventoryView and got %d results.", results.size()));
+            result=results;
+            return result.toArray(new InventoryViewPo[result.size()]);
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return result.toArray(new InventoryViewPo[result.size()]);
+        }
     }
     /**
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
     @Override
-    public InventoryPicturePo submit(Date time) {
-        return null;
+    public InventoryPicturePo[] getInventoryPicture(InventoryPictureQueryVo inventoryPicturePo) {
+        List<InventoryPicturePo> result=null;
+        try {
+            List<InventoryPicturePo> results = (List<InventoryPicturePo>) inventoryPictureDao.query(inventoryPicturePo.prepareQuery(inventoryPictureDao));
+            logService.printLog(delegate, String.format("queried inventoryPicture and got %d results.", results.size()));
+            result=results;
+            return result.toArray(new InventoryPicturePo[result.size()]);
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return result.toArray(new InventoryPicturePo[result.size()]);
+        }
     }
 
 

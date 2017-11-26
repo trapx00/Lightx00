@@ -2,6 +2,8 @@ package trapx00.lightx00.server.data.inventorydata;
 
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryDataDaoFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryOtherDataDaoFactory;
+import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
@@ -35,6 +37,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
     private Dao<InventoryGiftPo, String> inventoryGiftDao = InventoryDataDaoFactory.getInventoryGiftDao();
     private Object delegate = this;
     private ServerLogService logService = ServerLogServiceFactory.getService();
+    private CommonBillDataController<InventoryGiftPo> commonBillDataController = new CommonBillDataController<>(inventoryGiftDao, this);
 
     private void handleSQLException(SQLException e) {
         logService.printLog(delegate, "failed at a database operation. Error message: " + e.getMessage());
@@ -68,27 +71,69 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
     }
 
     /**
-     * Gets the giftBill during specified time range
-     * @param time
-     * @return The bill during specified time range
+     * Submits a CashBill or save it as a draft.
+     * If there is a bill with the same id as passed-in parameter do,
+     *    if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
+     *    otherwise a IdExistsException would be thrown.
+     *
+     * @param bill CashBill
+     * @return whether the operation is done successfully
      */
     @Override
-    public InventoryGiftPo getGift(Date time) {
-        return null;
+    public ResultMessage submit(InventoryGiftPo bill) {
+        return commonBillDataController.submit(bill);
     }
+
+    /**
+     * Activates a Bill.
+     * The bill must be in BillState.WaitingForApproval state.
+     * Otherwise a BillInvalidStateException will be thrown.
+     *
+     * @param id id for the CashBill that have been approved of
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage activate(String id) {
+        return commonBillDataController.activate(id);
+    }
+
+    /**
+     * Abandons a Bill.
+     * If a Bill is in BillState.Draft, it will be deleted.
+     * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
+     * If a bill is in other state, a BillInvalidStateException will be thrown.
+     * @param id id for the CashBill to be abandoned
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage abandon(String id) {
+        return commonBillDataController.abandon(id);
+    }
+
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return commonBillDataController.approvalComplete(billId, billState);
+    }
+
     /**
      * Gets the id for the next bill.
+     * If there are already 99999 bills for this day, a NoMoreBillException will be thrown.
+     *
      * @return id for the next bill
      */
     @Override
     public String getId() {
-        return null;
+        return commonBillDataController.getId("GIFT");
     }
 
-    @Override
-    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
-        return null;
-    }
+
 
 
 }
