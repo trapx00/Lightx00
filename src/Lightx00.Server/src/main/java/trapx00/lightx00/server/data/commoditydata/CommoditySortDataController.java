@@ -157,7 +157,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
         try {
             List<CommoditySortPo> results = (List<CommoditySortPo>) commoditySortDao.queryForAll();
             for(CommoditySortPo commoditySortPo:results){
-                if(commoditySortPo.getPreId()==commoditySort.getId())
+                if(commoditySortPo.getPreId().equals(commoditySort.getId()))
                     result.add(commoditySortPo);
             }
             logService.printLog(delegate, String.format("queried commoditySort from a commodityParentSort and got %d results.", results.size()));

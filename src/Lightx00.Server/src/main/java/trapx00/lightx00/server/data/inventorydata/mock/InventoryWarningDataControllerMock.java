@@ -32,11 +32,21 @@ public class InventoryWarningDataControllerMock extends InventoryWarningDataServ
     }
 
 
-
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
+    }
     @Override
     public InventoryDetailBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
         InventoryDetailBillPo inventoryBillVo=new InventoryDetailBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow
-        ,null,null,null,null);
+        ,null,null,null);
         InventoryDetailBillPo[]input={inventoryBillVo};
         return  input;
     }

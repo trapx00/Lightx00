@@ -2,44 +2,49 @@ package trapx00.lightx00.shared.po.inventorystaff;
 
 import java.util.Date;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
-
 
 @DatabaseTable(tableName = "InventoryDetailBill")
+
 public class InventoryDetailBillPo extends InventoryBillPo {
     //报损报溢报警
     @DatabaseField
     private  String operatorId;//操作员编号
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private CommodityPo[] commodityList;//商品
     @DatabaseField
-    private String[] commodityIdList;//商品
-    @DatabaseField
-    private  double[] amounts;//报损/报溢/报警数量
-    @DatabaseField
-    private  Date time;
+    private Date time;
+
+
 
     public InventoryDetailBillPo(String id, Date date, BillState state,
                                  InventoryBillType inventoryBillType, String operatorId,
-                                 String[] commodityIdList, double[] amounts, Date time) {
+                                 CommodityPo[] commodityIdList, Date time) {
         super(id, date, state, inventoryBillType);
         this.operatorId = operatorId;
-        this.commodityIdList = commodityIdList;
-        this.amounts = amounts;
+        this.commodityList = commodityIdList;
         this.time = time;
+    }
+    public InventoryDetailBillPo(){
+
     }
 
     public String getOperatorId() {
         return operatorId;
     }
 
-    public String[] getCommodityIdList() {
-        return commodityIdList;
+    public CommodityPo[] getCommodityIdList() {
+        return commodityList;
     }
 
-    public double[] getAmounts() {
-        return amounts;
+    public void setNum(double num,CommodityPo commodityPo){
+        commodityPo.setInventoryNum(num);
+    }
+    public double getNum(CommodityPo commodityPo){
+        return commodityPo.getInventoryNum();
     }
 
     public Date getTime() {
@@ -50,13 +55,10 @@ public class InventoryDetailBillPo extends InventoryBillPo {
         this.operatorId = operatorId;
     }
 
-    public void setCommodityIdList(String[] commodityIdList) {
-        this.commodityIdList = commodityIdList;
+    public void setCommodityIdList(CommodityPo[] commodityIdList) {
+        this.commodityList = commodityIdList;
     }
 
-    public void setAmounts(double[] amounts) {
-        this.amounts = amounts;
-    }
 
     public void setTime(Date time) {
         this.time = time;

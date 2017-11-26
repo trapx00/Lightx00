@@ -22,7 +22,9 @@ public class InventoryGiftPo {
         this.id = id;
         this.gifts = gifts;
     }
-
+    public InventoryGiftPo(){
+        ;
+    }
     public Date getTime() {
         return time;
     }

@@ -1,9 +1,12 @@
 package trapx00.lightx00.shared.dataservicestub.inventorydataservice;
 
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 public class InventoryGiftDataServiceStub implements InventoryGiftDataService {
@@ -21,5 +24,15 @@ public class InventoryGiftDataServiceStub implements InventoryGiftDataService {
         return "X0001";
     }
 
-
+    /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
+    }
 }

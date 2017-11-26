@@ -11,6 +11,7 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 
+import javax.xml.transform.Result;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
@@ -51,7 +52,7 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      */
     @Override
     public ResultMessage modify(String id, double warningValue) {
-        return null;
+        return ResultMessage.Success;
     }
     /**
      * Gets the id for the next bill.
@@ -59,7 +60,7 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      */
     @Override
     public String getId() {
-        return commonBillDataController.getId("in");
+        return commonBillDataController.getId("Inventory");
     }
 
     /**

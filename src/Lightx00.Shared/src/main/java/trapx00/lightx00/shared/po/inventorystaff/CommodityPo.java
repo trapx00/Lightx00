@@ -5,6 +5,8 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.util.Date;
+
+
 @DatabaseTable(tableName = "Commodity")
 public class CommodityPo implements Serializable {
     //商品
@@ -33,6 +35,17 @@ public class CommodityPo implements Serializable {
     @DatabaseField
     private double warningValue;//警戒值
 
+    public double getInventoryNum() {
+        return inventoryNum;
+    }
+
+    public void setInventoryNum(double inventoryNum) {
+        this.inventoryNum = inventoryNum;
+    }
+
+    @DatabaseField
+    private double inventoryNum;//报警报溢数量
+
     public CommodityPo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
                        double recentPurchasePrice, double retailPrice, double recentRetailPrice,
@@ -51,6 +64,9 @@ public class CommodityPo implements Serializable {
         this.warningValue = warningValue;
     }
 
+    public CommodityPo(){
+
+    }
     public String getId() {
         return id;
     }

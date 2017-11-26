@@ -8,6 +8,8 @@ import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDat
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 
 import java.rmi.RemoteException;
@@ -80,6 +82,11 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      */
     @Override
     public String getId() {
+        return null;
+    }
+
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
         return null;
     }
 

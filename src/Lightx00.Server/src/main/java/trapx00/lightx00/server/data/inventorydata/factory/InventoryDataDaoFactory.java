@@ -13,7 +13,7 @@ public class InventoryDataDaoFactory extends BaseDatabaseFactory {
         initTable(InventoryDetailBillPo.class);
         initTable(InventoryGiftPo.class);
         initTable(InventoryViewPo.class);
-        initTable(InventoryPicturePo.class);
+       initTable(InventoryPicturePo.class);
     }
 
     private static Dao<InventoryDetailBillPo, String> inventoryDetailBillDao;

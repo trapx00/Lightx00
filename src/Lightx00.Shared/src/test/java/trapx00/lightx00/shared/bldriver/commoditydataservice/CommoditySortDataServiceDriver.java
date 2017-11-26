@@ -15,7 +15,7 @@ public class CommoditySortDataServiceDriver {
     String commodityIdList[]={""};
     String nextIds[]={"S0002"};
     CommoditySortPo Led=new CommoditySortPo("S0001","Led", null,
-            "",  nextIds);
+            "");
 
     @Test
     public void add() throws Exception {
@@ -29,7 +29,7 @@ public class CommoditySortDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        CommoditySortPo commoditySortPo=new CommoditySortPo("S0001","Led",null,"123",null);
+        CommoditySortPo commoditySortPo=new CommoditySortPo("S0001","Led",null,"123");
         assertEquals("S0001",commoditySortPo.getId());
     }
 

@@ -26,7 +26,9 @@ public class InventoryViewPo {
     private  double inSoldPrice;//最近进价
     @DatabaseField
     private  double outSoldPrice;//最近售价
+    public InventoryViewPo(){
 
+    }
     public InventoryViewPo(Date time, double inventoryAmount, double inventoryMoney,
                            double outOfInventoryAmount, double outOfInVentoryMoney, double sum,
                            double inSoldPrice, double outSoldPrice) {

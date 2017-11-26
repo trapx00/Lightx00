@@ -19,6 +19,10 @@ public class InventoryBillPo extends BillPo {
         this.inventoryBillType = inventoryBillType;
     }
 
+    public InventoryBillPo(){
+
+    }
+
     public InventoryBillType getInventoryBillType() {
         return inventoryBillType;
     }

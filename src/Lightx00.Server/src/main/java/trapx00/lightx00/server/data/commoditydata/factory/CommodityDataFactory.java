@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataSer
 
 import java.rmi.RemoteException;
 
-public class CommodityDataFactory {
+public class CommodityDataFactory  {
 
     private static CommodityDataService controller;
 

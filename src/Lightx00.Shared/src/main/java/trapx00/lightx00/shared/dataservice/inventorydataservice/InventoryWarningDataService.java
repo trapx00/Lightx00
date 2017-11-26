@@ -65,4 +65,6 @@ public interface InventoryWarningDataService extends Remote {
      * @return whether the operation is done successfully
      */
     ResultMessage abandon(String id) throws RemoteException;
+
+
 }

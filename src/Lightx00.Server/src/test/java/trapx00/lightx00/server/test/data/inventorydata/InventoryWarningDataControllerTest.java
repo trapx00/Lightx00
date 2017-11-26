@@ -26,8 +26,6 @@ import static org.junit.Assert.*;
 
 public class InventoryWarningDataControllerTest {
 
-    InventoryWarningDataService service= InventoryWarningDataFactory.getService();
-
     CommodityPo commodityPo=null;
 
     static {
@@ -38,8 +36,9 @@ public class InventoryWarningDataControllerTest {
         }
     }
     private Dao<InventoryDetailBillPo, String> dao = InventoryDataDaoFactory.getInventoryDetailBillDao();
-    private final InventoryDetailBillPo bill = new InventoryDetailBillPo("B0001",new Date(), BillState.Approved, InventoryBillType.Loss
-            ,null,null,null,null);
+    private InventoryWarningDataService service = InventoryWarningDataFactory.getService();
+    private final InventoryDetailBillPo bill = new InventoryDetailBillPo("Inventory-20171122-00001",new Date(), BillState.Approved, InventoryBillType.Loss
+            ,null,null,null);
     @Before
     public void setUp() throws Exception {
         dao.deleteById(bill.getId());
@@ -47,13 +46,8 @@ public class InventoryWarningDataControllerTest {
 
     @Test
     public void submitOne() throws Exception {
-        try {
-            service.submit(bill);
-            assertTrue(dao.idExists(bill.getId()));
-        } finally {
-            dao.deleteById(bill.getId());
-        }
-
+       assertEquals(ResultMessage.Success,service.submit(bill));
+       dao.deleteById(bill.getId());
     }
 
     @Test(expected = IdExistsException.class)

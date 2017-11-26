@@ -37,8 +37,11 @@ public class CommodityDataControllerTest {
 
     @Test
     public void add() throws Exception {
-       assertEquals(ResultMessage.Success,service.add(commodityPo));
-       dao.delete(commodityPo);
+        try {
+            assertEquals(ResultMessage.Success,service.add(commodityPo));
+        } finally {
+            dao.delete(commodityPo);
+        }
     }
 
     @Test

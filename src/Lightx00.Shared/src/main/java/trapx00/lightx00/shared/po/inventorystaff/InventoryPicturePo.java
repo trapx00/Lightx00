@@ -13,7 +13,7 @@ public class InventoryPicturePo {
     @DatabaseField(id=true)
     private String id;
     @DatabaseField
-    private  Date time;
+    private Date time;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommodityPo[] items;
 
@@ -21,7 +21,9 @@ public class InventoryPicturePo {
         this.time = time;
         this.items = items;
     }
+    public InventoryPicturePo(){
 
+    }
     public Date getTime() {
         return time;
     }
