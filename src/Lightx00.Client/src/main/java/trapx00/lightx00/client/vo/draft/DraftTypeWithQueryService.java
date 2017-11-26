@@ -7,7 +7,7 @@ import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.draft.DraftType;
 
 public enum DraftTypeWithQueryService {
-    Client(ClientDraftQueryServiceFactory.getQueryService());
+    Client(ClientDraftQueryServiceFactory.getQueryService()),
     //Promotion
     Bill(BillDraftQueryServiceFactory.getQueryService());
 

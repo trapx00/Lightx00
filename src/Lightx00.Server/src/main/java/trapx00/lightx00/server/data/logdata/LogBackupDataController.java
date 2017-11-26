@@ -11,17 +11,16 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class LogBackupDataController extends UnicastRemoteObject implements LogBackupDataService {
-    private final static String ACCESS_KEY_ID = "c4582dec5d0809103126";
-    private final static String SECRET_KEY_ID = "d966349658aafbfbf177";
-    private final static String BUCKET_NAME = "lightx00";
-    private final static String FILE_PATH="/temp.txt";
+    private static final String ACCESS_KEY_ID = "c4582dec5d0809103126";
+    private static final String SECRET_KEY_ID = "d966349658aafbfbf177";
+    private static final String BUCKET_NAME = "lightx00";
+    private static final String FILE_PATH = "/temp.txt";
     private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
 
     /**
      * Creates and exports a new UnicastRemoteObject object using an
      * anonymous port.
-     * <p>
-     * <p>The object is exported with a server socket
+     * The object is exported with a server socket
      * created using the {@link RMISocketFactory} class.
      *
      * @throws RemoteException if failed to export object
@@ -37,7 +36,7 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
      */
     @Override
     public ResultMessage backupLog() throws RemoteException {
-        
+
         return null;
     }
 
