@@ -1,22 +1,22 @@
-package trapx00.lightx00.shared.queryvo.Promotion;
+package trapx00.lightx00.shared.queryvo.promotion;
 
-import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
+import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.queryvo.BaseQueryVo;
 import trapx00.lightx00.shared.queryvo.QueryBuilderPreparation;
 
-public class ClientPromotionQueryVo extends BaseQueryVo<ClientPromotionPo,String> {
+public class TotalPricePromotionQueryVo extends BaseQueryVo<TotalPricePromotionPo,String> {
     /**
      * Instantiate a QueryVo with prepration method.
      * @param preparation QueryBuilderPreparation method
      */
-    public ClientPromotionQueryVo(QueryBuilderPreparation<ClientPromotionPo,String> preparation) {
+    public TotalPricePromotionQueryVo(QueryBuilderPreparation<TotalPricePromotionPo,String> preparation) {
         super(preparation);
     }
 
     /**
      * Instantiate a QueryVo with a method which returns all rows.
      */
-    public ClientPromotionQueryVo() {
+    public TotalPricePromotionQueryVo() {
         super();
     }
 }

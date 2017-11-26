@@ -8,10 +8,9 @@ import trapx00.lightx00.server.data.promotiondata.factory.PromotionDataDaoFactor
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotionDataService;
 import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.Promotion.ComSalePromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ComSalePromotionQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;

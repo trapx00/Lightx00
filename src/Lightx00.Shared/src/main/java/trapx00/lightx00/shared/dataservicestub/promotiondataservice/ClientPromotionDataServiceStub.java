@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.Promotion.ClientPromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 import java.util.Date;
 

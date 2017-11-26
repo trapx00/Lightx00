@@ -3,28 +3,26 @@
 
 
 ```java
-class ManagerStaffPO extends EmployeePO{
+class ManagerPo extends EmployeePo{
 }
 ```
 
 ```java
-class PromotionPOBase{
-  String ID;
+class PromotionPoBase{
+  String id;
   PromotionType type;
   String startDate;
   String endDate; 
   PromotionState state;
+  PromotionCommodity[] promotionCommodities;
 }
 ```
 
 ```java
  enum PromotionType{
-   CommodityOnSale,//组合商品降价
-   TotalPriceGift,//满额赠送礼品
-   TotalPriceCoupon,//满额赠送代金券
-   ClientGift,//客户赠送礼品
-   ClientCoupon,//客户赠送代金券
-   ClientOnSale;//客户价格这让
+   ComSalePromotion,//组合商品降价
+   TotalPricePromotion,//满额促销策略（满额赠送礼品、满额赠送代金券）
+   ClientPromotion,//客户促销策略（客户赠送礼品、客户赠送代金券、客户价格这让）
 }
 ```
 
@@ -34,59 +32,45 @@ enum PromotionState{
    Waiting,
    Active,
    Overdue,
-   Abondoned;
+   Abandoned;
 }
 ```
 
 ```java
 class PromotionCommodity{
-    String ID;
-    String commodityID;
-    double amout;
+    String id;
+    String commodityId;
+    double amount;
 }
 ```
 
 ```java
-class CommodityOnSalePO extends PromotionPOBase{
-    PromotionCommodity[] commodityOnSale;
+class ComSalePromotionPo extends PromotionPoBase{
     double onSalePrice;
 }
 ```
 
 ```java
-class TotalPriceGiftPO extends PromotionPOBase{
-    PromotionCommodity[] gifts;
-    double totalPrice;
-}
-```
-
-```java
-class TotalPriceCouponPO extends PromotionPOBase{
+class TotalPriceGiftPromotionPo extends PromotionPoBase{
     double couponPrice;
     double totalPrice;
 }
 ```
 
 ```java
-class ClientGiftPO extends PromotionPOBase{
-    int clientLevel;
-    PromotionCommodity[] gifts;
-}
-```
-
-```java
-class ClientCouponPO extends PromotionPOBase{
+class ClientPromotionPo extends PromotionPoBase{
     int clientLevel;
     double couponPrice;
-}
-```
-
-```java
-class ClientOnSalePO extends PromotionPOBase{
-    int clientLevel;
     double onSalePrice;
 }
 ```
 
-
+```java
+class BillInfoPo{
+  String id;
+  BillType type;
+  Date approveTime;
+  BillState state;
+}
+```
 

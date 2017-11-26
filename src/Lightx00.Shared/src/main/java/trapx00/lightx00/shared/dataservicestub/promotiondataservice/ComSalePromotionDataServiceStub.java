@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotion
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.Promotion.ComSalePromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ComSalePromotionQueryVo;
 
 import java.util.Date;
 

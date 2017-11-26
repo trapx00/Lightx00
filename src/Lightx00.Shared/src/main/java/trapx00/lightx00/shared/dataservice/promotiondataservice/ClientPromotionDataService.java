@@ -2,7 +2,7 @@ package trapx00.lightx00.shared.dataservice.promotiondataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
-import trapx00.lightx00.shared.queryvo.Promotion.ClientPromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

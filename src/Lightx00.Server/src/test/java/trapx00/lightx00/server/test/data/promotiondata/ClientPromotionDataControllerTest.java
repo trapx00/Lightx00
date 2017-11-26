@@ -10,7 +10,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.Promotion.ClientPromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;
