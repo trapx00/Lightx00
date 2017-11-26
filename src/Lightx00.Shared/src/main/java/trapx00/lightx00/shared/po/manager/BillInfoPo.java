@@ -25,6 +25,8 @@ public class BillInfoPo {
         this.state = state;
     }
 
+    public BillInfoPo() {}
+
     public String getId() {
         return id;
     }

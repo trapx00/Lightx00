@@ -13,26 +13,26 @@ public interface TotalPricePromotionDataService extends Remote {
      * @param promotion the TotalPricePromotionPo to be submitted
      * @return whether the operation is done successfully
      */
-    ResultMessage submit(TotalPricePromotionPo promotion);
+    ResultMessage submit(TotalPricePromotionPo promotion) throws RemoteException;
 
     /**
      * Filter TotalPricePromotionPo.
      * @param query the filter conditions
      * @return array of TotalPricePromotionPo which match the conditions
      */
-    TotalPricePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query);
+    TotalPricePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) throws RemoteException;
 
     /**
      * Delete a useless TotalPricePromotionPo.
      * @param id id of the TotalPricePromotionPo to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(String id);
+    ResultMessage delete(String id) throws RemoteException;
 
     /**
      * Get id for the next promotion.
      *
      * @return id for the next promotion
      */
-    String getId();
+    String getId() throws RemoteException;
 }

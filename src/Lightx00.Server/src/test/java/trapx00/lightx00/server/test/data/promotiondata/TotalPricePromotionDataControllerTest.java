@@ -8,14 +8,16 @@ import trapx00.lightx00.server.data.promotiondata.factory.PromotionDataDaoFactor
 import trapx00.lightx00.server.data.promotiondata.factory.TotalPricePromotionDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
+import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.queryvo.Promotion.TotalPricePromotionQueryVo;
+import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TotalPricePromotionDataControllerTest {
@@ -28,7 +30,7 @@ public class TotalPricePromotionDataControllerTest {
     }
     private Dao<TotalPricePromotionPo, String> dao = PromotionDataDaoFactory.getTotalPricePromotionDao();
     private TotalPricePromotionDataService service = TotalPricePromotionDataFactory.getService();
-    private final TotalPricePromotionPo promotion = new TotalPricePromotionPo("ZJCXCL-20171112-00001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
+    private final TotalPricePromotionPo promotion = new TotalPricePromotionPo("ZJCXCL-20171112-00001",new Date(),new Date(), PromotionState.Draft,200,1000,null);
 
     @Before
     public void setUp() throws Exception {
@@ -48,37 +50,59 @@ public class TotalPricePromotionDataControllerTest {
 
     @Test
     public void deleteWaitingPromotion() throws Exception {
-        dao.create(promotion);
-        service.delete(promotion.getId());
-        Assert.assertEquals(PromotionState.Abandoned, dao.queryForEq("id", promotion.getId()).get(0).getState());
+        try {
+            promotion.setState(PromotionState.Waiting);
+            dao.create(promotion);
+            service.delete(promotion.getId());
+            assertEquals(PromotionState.Abandoned, dao.queryForEq("id", promotion.getId()).get(0).getState());
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
-    @Test
+    @Test (expected = PromotionInvalidStateException.class)
     public void deleteActivePromotion() throws Exception {
-        dao.create(promotion);
-        service.delete(promotion.getId());
-        assertFalse(dao.idExists(promotion.getId()));
+        try {
+            promotion.setState(PromotionState.Active);
+            dao.create(promotion);
+            service.delete(promotion.getId());
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
     @Test
     public void deleteOverduePromotion() throws Exception {
-        promotion.setState(PromotionState.Overdue);
-        dao.create(promotion);
-        service.delete(promotion.getId());
-        assertFalse(dao.idExists(promotion.getId()));
+        try {
+            promotion.setState(PromotionState.Overdue);
+            dao.create(promotion);
+            service.delete(promotion.getId());
+            assertEquals(PromotionState.Abandoned, dao.queryForEq("id", promotion.getId()).get(0).getState());
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
     @Test
     public void query() throws Exception {
-        service.submit(promotion);
+        try {
+        dao.create(promotion);
         Assert.assertEquals(1, service.queryPromotion(new TotalPricePromotionQueryVo(q->q.where().eq("id",promotion.getId()).prepare())).length);
-        Assert.assertEquals(0, service.queryPromotion(new TotalPricePromotionQueryVo(q->q.where().eq("operatorId","12").prepare())).length);
+        Assert.assertEquals(0, service.queryPromotion(new TotalPricePromotionQueryVo(q->q.where().eq("id","12").prepare())).length);
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
     @Test
     public void getId() throws Exception {
-        service.submit(promotion);
-        Assert.assertEquals("00002", service.getId().split("-")[2]);
+        try {
+            promotion.setId(String.format("KHCXCL-%s-00001", BillHelper.currentDateStringForBill()));
+            service.submit(promotion);
+            assertEquals("00002", service.getId().split("-")[2]);
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
 }

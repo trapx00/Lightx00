@@ -123,6 +123,7 @@ public class PromotionDataController<Po extends PromotionPoBase> {
                     logService.printLog(delegate, String.format("marked a %s (id: %s) as Abandoned (previously %s)", po.getPromotionType(), po.getId(), previousState));
                     return ResultMessage.Success;
                 case Active:
+                    throw new PromotionInvalidStateException(previousState,PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
                 case Waiting:
                     po.setState(PromotionState.Abandoned);
                     dao.update(po);

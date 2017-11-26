@@ -35,7 +35,8 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     private Dao<BillInfoPo, String> dao = AuditDataDaoFactory.getAuditDao();
-    private ServerLogService serverLogService = ServerLogServiceFactory.getService();
+    private ServerLogService logService = ServerLogServiceFactory.getService();
+    private Object delegate = this;
 
     /**
      * Filter some BillInfoPo.
@@ -45,7 +46,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     public BillInfoPo[] query(BillInfoQueryVo query) {
         try {
             List<BillInfoPo> results = dao.query(query.prepareQuery(dao));
-            serverLogService.printLog(this,String.format("queried BillInfoPos and got %d results", results.size()));
+            logService.printLog(delegate,String.format("queried BillInfoPos and got %d results", results.size()));
             return results.toArray(new BillInfoPo[results.size()]);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,7 +63,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
         assertExists(billInfo.getId(), true);
         try {
             dao.deleteById(billInfo.getId());
-            serverLogService.printLog(this, String.format("approved BillPo (id: %s)",billInfo.getId()));
+            logService.printLog(delegate, String.format("approved BillPo (id: %s)",billInfo.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,7 +80,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
         assertExists(billInfo.getId(), true);
         try {
             dao.deleteById(billInfo.getId());
-            serverLogService.printLog(this, String.format("rejected to approve BillPo (id: %s)",billInfo.getId()));
+            logService.printLog(delegate, String.format("rejected to approve BillPo (id: %s)",billInfo.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +100,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
         try {
             BillInfoPo billInfo = new BillInfoPo(bill.getId(),bill.getBillType(),new Date(),bill.getState());
             dao.create(billInfo);
-            serverLogService.printLog(this, String.format("submit Bill (id: %s)",bill.getId()));
+            logService.printLog(delegate, String.format("submit Bill (id: %s)",bill.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,9 +113,9 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
             BillInfoPo billInfo = dao.queryForId(id);
             boolean actualExists = billInfo != null;
             if (actualExists && !expectedExists) {
-                throw new IdExistsException(String.valueOf(id));
+                throw new IdExistsException(id);
             } else if (!actualExists && expectedExists) {
-                throw new IdNotExistsException(String.valueOf(id));
+                throw new IdNotExistsException(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();

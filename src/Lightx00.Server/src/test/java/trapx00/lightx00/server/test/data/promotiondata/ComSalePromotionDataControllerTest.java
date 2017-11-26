@@ -7,10 +7,12 @@ import trapx00.lightx00.server.data.promotiondata.factory.ComSalePromotionDataFa
 import trapx00.lightx00.server.data.promotiondata.factory.PromotionDataDaoFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotionDataService;
+import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.queryvo.Promotion.ComSalePromotionQueryVo;
+import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -47,37 +49,59 @@ public class ComSalePromotionDataControllerTest {
 
     @Test
     public void deleteWaitingPromotion() throws Exception {
-        dao.create(promotion);
-        service.delete(promotion.getId());
-        assertEquals(PromotionState.Abandoned, dao.queryForEq("id", promotion.getId()).get(0).getState());
+        try {
+            promotion.setState(PromotionState.Waiting);
+            dao.create(promotion);
+            service.delete(promotion.getId());
+            assertEquals(PromotionState.Abandoned, dao.queryForEq("id", promotion.getId()).get(0).getState());
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
-    @Test
+    @Test (expected = PromotionInvalidStateException.class)
     public void deleteActivePromotion() throws Exception {
-        dao.create(promotion);
-        service.delete(promotion.getId());
-        assertFalse(dao.idExists(promotion.getId()));
+        try {
+            promotion.setState(PromotionState.Active);
+            dao.create(promotion);
+            service.delete(promotion.getId());
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
     @Test
     public void deleteOverduePromotion() throws Exception {
-        promotion.setState(PromotionState.Overdue);
-        dao.create(promotion);
-        service.delete(promotion.getId());
-        assertFalse(dao.idExists(promotion.getId()));
+        try {
+            promotion.setState(PromotionState.Overdue);
+            dao.create(promotion);
+            service.delete(promotion.getId());
+            assertEquals(PromotionState.Abandoned, dao.queryForEq("id", promotion.getId()).get(0).getState());
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
     @Test
     public void query() throws Exception {
-        service.submit(promotion);
-        assertEquals(1, service.queryPromotion(new ComSalePromotionQueryVo(q->q.where().eq("id",promotion.getId()).prepare())).length);
-        assertEquals(0, service.queryPromotion(new ComSalePromotionQueryVo(q->q.where().eq("operatorId","12").prepare())).length);
+        try {
+            dao.create(promotion);
+            assertEquals(1, service.queryPromotion(new ComSalePromotionQueryVo(q -> q.where().eq("id", promotion.getId()).prepare())).length);
+            assertEquals(0, service.queryPromotion(new ComSalePromotionQueryVo(q -> q.where().eq("id", "12").prepare())).length);
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
     @Test
     public void getId() throws Exception {
-        service.submit(promotion);
-        assertEquals("00002", service.getId().split("-")[2]);
+        try {
+            promotion.setId(String.format("KHCXCL-%s-00001", BillHelper.currentDateStringForBill()));
+            service.submit(promotion);
+            assertEquals("00002", service.getId().split("-")[2]);
+        } finally {
+            dao.deleteById(promotion.getId());
+        }
     }
 
 }
