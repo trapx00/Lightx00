@@ -2,7 +2,7 @@ package trapx00.lightx00.server.data.approvaldata.mock;
 
 import trapx00.lightx00.server.data.approvaldata.AuditDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.admin.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.BillInfoPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;

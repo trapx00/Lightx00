@@ -5,6 +5,7 @@ import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.queryvo.Promotion.TotalPricePromotionQueryVo;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 public interface TotalPricePromotionDataService extends Remote {
     /**

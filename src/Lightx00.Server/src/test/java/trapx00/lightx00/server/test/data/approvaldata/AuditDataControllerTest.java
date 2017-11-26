@@ -6,7 +6,7 @@ import trapx00.lightx00.server.data.approvaldata.factory.AuditDataDaoFactory;
 import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
-import trapx00.lightx00.shared.po.admin.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.BillInfoPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
-public class PromotionDataController< Po extends PromotionPoBase> {
+public class PromotionDataController<Po extends PromotionPoBase> {
     private static final int MAX_PROMOTION_NUM_FOR_A_DAY = 99999;
     private Dao<Po,String> dao;
     private Object delegate = this;
@@ -35,7 +35,7 @@ public class PromotionDataController< Po extends PromotionPoBase> {
         this.delegate = delegate;
     }
 
-    private void handleSQLException(SQLException e) {
+    private void handleSqlException(SQLException e) {
         logService.printLog(delegate, "failed at a database operation. Error message: " + e.getMessage());
         throw new DbSqlException(e);
     }
@@ -48,21 +48,21 @@ public class PromotionDataController< Po extends PromotionPoBase> {
      * If assertExists is false and the id is not used, null will be returned and no exception is thrown.
      * @param id id
      * @param assertExists assert exists flag
-     * @return PromotionPoBase if assertExists is true and the id is used.
+     * @return PromotionPo if assertExists is true and the id is used.
      */
     public Po assertIdExistence(String id, boolean assertExists) {
         try {
-            Po cashBillPo = dao.queryForId(id);
-            boolean actualExistence = cashBillPo != null;
+            Po promotion = dao.queryForId(id);
+            boolean actualExistence = promotion != null;
             if (actualExistence && !assertExists) {
                 throw new IdExistsException(id);
             }
             if (!actualExistence && assertExists) {
                 throw new IdNotExistsException(id);
             }
-            return cashBillPo;
+            return promotion;
         } catch (SQLException e) {
-            handleSQLException(e);
+            handleSqlException(e);
             return null;
         }
     }
@@ -79,56 +79,60 @@ public class PromotionDataController< Po extends PromotionPoBase> {
     public ResultMessage submit(Po promotion) {
         try {
             Po po = dao.queryForId(promotion.getId());
+            //promotion是草稿状态（数据库已经有了id）
             if (po != null && po.getState().equals(PromotionState.Draft)) {
                 dao.update(promotion);
                 logService.printLog(delegate,String.format("updated a draft %s (id: %s). New content: %s", promotion.getState().toString(), promotion.getId(), promotion.toString()));
                 return ResultMessage.Success;
             }
+            //id被占用
             if (po != null) {
                 throw new IdExistsException(promotion.getId());
             }
+            //id没有占用
             dao.create(promotion);
             promotion.setId(dao.extractId(promotion));
             logService.printLog(delegate, String.format("created a %s (id: %s). Content: %s", promotion.getPromotionType().toString(), promotion.getId(), promotion.toString()));
             return ResultMessage.Success;
         } catch (SQLException e) {
-            handleSQLException(e);
+            handleSqlException(e);
             return ResultMessage.Failure;
         }
     }
 
     /**
-     * Abandons a bill.
-     * If a Bill is in BillState.Draft, it will be deleted.
-     * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
-     * If a bill is in other state, a BillInvalidStateException will be thrown.
-     * @param id id for the CashBill to be abandoned
+     * Abandons a promotion.
+     * If a promotion is in PromotionState.Draft, it will be deleted.
+     * If a promotion is in PromotionState.Waiting/Overdue, it will be changed as Abandoned.
+     * If a promotion is in other state, a PromotionInvalidStateException will be thrown.
+     * @param id id for the promotion to be abandoned
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(String id) {
         try {
             Po po = assertIdExistence(id,true);
-            switch (po.getState()) {
+            PromotionState previousState = po.getState();
+            switch (previousState) {
                 case Draft:
                     dao.deleteById(id);
                     logService.printLog(delegate, String.format("deletes a draft %s (id: %s)", po.getPromotionType(), id));
                     return ResultMessage.Success;
                 case Overdue:
-                    dao.deleteById(id);
-                    logService.printLog(delegate, String.format("deletes an overdue %s (id: %s)", po.getPromotionType(), id));
+                    po.setState(PromotionState.Abandoned);
+                    dao.update(po);
+                    logService.printLog(delegate, String.format("marked a %s (id: %s) as Abandoned (previously %s)", po.getPromotionType(), po.getId(), previousState));
                     return ResultMessage.Success;
                 case Active:
                 case Waiting:
-                    PromotionState previousState = po.getState();
                     po.setState(PromotionState.Abandoned);
                     dao.update(po);
                     logService.printLog(delegate, String.format("marked a %s (id: %s) as Abandoned (previously %s)", po.getPromotionType(), po.getId(), previousState));
                     return ResultMessage.Success;
                 default:
-                    throw new PromotionInvalidStateException(po.getState(),PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
+                    throw new PromotionInvalidStateException(previousState,PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
             }
         } catch (SQLException e) {
-            handleSQLException(e);
+            handleSqlException(e);
             return ResultMessage.Failure;
         }
     }
@@ -147,7 +151,7 @@ public class PromotionDataController< Po extends PromotionPoBase> {
             logService.printLog(delegate, String.format("queried promotions and got %d results.", results.size()));
             return results;
         } catch (SQLException e) {
-            handleSQLException(e);
+            handleSqlException(e);
             return new ArrayList<>();
         }
     }
@@ -175,7 +179,7 @@ public class PromotionDataController< Po extends PromotionPoBase> {
             logService.printLog(delegate, "got a new id " + newId);
             return newId;
         } catch (SQLException e) {
-            handleSQLException(e);
+            handleSqlException(e);
             return "";
         }
     }

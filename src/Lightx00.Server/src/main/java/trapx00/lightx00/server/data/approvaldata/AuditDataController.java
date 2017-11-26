@@ -9,7 +9,7 @@ import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.admin.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.BillInfoPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
 

@@ -2,7 +2,7 @@ package trapx00.lightx00.shared.dataservicestub.approvaldataservice;
 
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.admin.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.BillInfoPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;

@@ -1,7 +1,7 @@
 package trapx00.lightx00.shared.dataservice.approvaldataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.admin.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.BillInfoPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
 

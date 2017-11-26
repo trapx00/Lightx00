@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.Promotion.TotalPricePromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.Promotion.ClientPromotionQueryVo;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class ClientPromotionDataServiceStub implements ClientPromotionDataServic
      * @param query the filter conditions
      * @return array of ClientPromotionPo which match the conditions
      */
-    public ClientPromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) {
+    public ClientPromotionPo[] queryPromotion(ClientPromotionQueryVo query) {
         return new ClientPromotionPo[]{new ClientPromotionPo("KHCXCL-20171112-00001",new Date(),new Date(),PromotionState.Waiting,1,200,null,0)};
     }
 
