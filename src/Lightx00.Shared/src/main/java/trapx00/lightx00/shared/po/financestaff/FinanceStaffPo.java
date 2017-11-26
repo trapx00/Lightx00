@@ -13,7 +13,8 @@ public class FinanceStaffPo extends EmployeePo {
         super(name, id, workSince, username, password, EmployeePosition.FinanceStaff);
     }
 
-
+    public FinanceStaffPo() {
+    }
 }
 
 
