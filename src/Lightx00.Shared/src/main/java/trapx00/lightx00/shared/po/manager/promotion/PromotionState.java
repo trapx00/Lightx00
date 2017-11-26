@@ -5,5 +5,5 @@ public enum PromotionState{
     Waiting,
     Active,
     Overdue,
-    Abondoned
+    Abandoned
 }

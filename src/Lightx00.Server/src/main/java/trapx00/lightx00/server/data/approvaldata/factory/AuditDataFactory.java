@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.approvaldata.factory;
 
-
-import trapx00.lightx00.server.data.approvaldata.mock.AuditDataControllerMock;
+import trapx00.lightx00.server.data.approvaldata.AuditDataController;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 
 import java.rmi.RemoteException;
@@ -11,7 +10,7 @@ public class AuditDataFactory {
 
     static {
         try {
-            service = new AuditDataControllerMock();
+            service = new AuditDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

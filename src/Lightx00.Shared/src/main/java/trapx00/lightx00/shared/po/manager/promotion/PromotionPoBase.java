@@ -8,7 +8,7 @@ import java.util.Date;
 
 @DatabaseTable(tableName = "Promotion")
 public class PromotionPoBase {
-    @DatabaseField
+    @DatabaseField(id = true)
     private String id;
     @DatabaseField
     private PromotionType type;
@@ -74,5 +74,9 @@ public class PromotionPoBase {
 
     public void setPromotionCommodities(PromotionCommodity[] promotionCommodities) {
         this.promotionCommodities = promotionCommodities;
+    }
+
+    public PromotionState getState() {
+        return state;
     }
 }

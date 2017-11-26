@@ -4,7 +4,7 @@ import trapx00.lightx00.server.data.promotiondata.ComSalePromotionDataController
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.TotalPricePromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.Promotion.TotalPricePromotionQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;

@@ -1,6 +1,8 @@
-package trapx00.lightx00.shared.queryvo;
+package trapx00.lightx00.shared.queryvo.Promotion;
 
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
+import trapx00.lightx00.shared.queryvo.BaseQueryVo;
+import trapx00.lightx00.shared.queryvo.QueryBuilderPreparation;
 
 public class ComSalePromotionQueryVo extends BaseQueryVo<ComSalePromotionPo,String> {
     /**

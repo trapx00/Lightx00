@@ -4,7 +4,7 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotion
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.ComSalePromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.Promotion.ComSalePromotionQueryVo;
 
 import java.util.Date;
 
@@ -24,16 +24,16 @@ public class ComSalePromotionDataServiceStub implements ComSalePromotionDataServ
      * @return array of ComSalePromotionPo which match the conditions
      */
     public ComSalePromotionPo[] queryPromotion(ComSalePromotionQueryVo query) {
-        return new ComSalePromotionPo[]{new ComSalePromotionPo("0001",new Date(),new Date(),PromotionState.Waiting,null,0)};
+        return new ComSalePromotionPo[]{new ComSalePromotionPo("SPJJCXCL-20171112-00001",new Date(),new Date(),PromotionState.Waiting,null,0)};
     }
 
 
     /**
      * Delete a useless ComSalePromotionPo.
-     * @param promotion the ComSalePromotionPo to be deleted
+     * @param id id of the ComSalePromotionPo to be deleted
      * @return whether the operation is done successfully
      */
-    public ResultMessage delete(ComSalePromotionPo promotion) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
 
@@ -43,6 +43,6 @@ public class ComSalePromotionDataServiceStub implements ComSalePromotionDataServ
      * @return id for the next promotion
      */
     public String getId() {
-        return "0001";
+        return "SPJJCXCL-20171112-00001";
     }
 }

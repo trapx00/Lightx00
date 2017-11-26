@@ -1,6 +1,6 @@
 package trapx00.lightx00.server.data.promotiondata.factory;
 
-import trapx00.lightx00.server.data.promotiondata.mock.ComSalePromotionDataControllerMock;
+import trapx00.lightx00.server.data.promotiondata.ComSalePromotionDataController;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotionDataService;
 
 import java.rmi.RemoteException;
@@ -10,7 +10,7 @@ public class ComSalePromotionDataFactory {
 
     static {
         try {
-            service = new ComSalePromotionDataControllerMock();
+            service = new ComSalePromotionDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
