@@ -1,7 +1,11 @@
 package trapx00.lightx00.client.blservice.financeblservice;
 
+import trapx00.lightx00.client.bl.financebl.CashBillInfo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
+import java.util.Date;
+
+import java.util.ArrayList;
 
 public interface CashBillBlService {
 
@@ -22,7 +26,7 @@ public interface CashBillBlService {
     ResultMessage saveAsDraft(CashBillVo bill);
 
     /**
-     * Gets the id for the next bill
+     * Gets the id for the next bill.
      * @return id for the next bill
      */
     String getId();

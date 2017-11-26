@@ -4,11 +4,13 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 
-public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, CashBillInfo {
+public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, CashBillInfo, BillApprovalCompleteService {
 
 
 
@@ -86,5 +88,17 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
     @Override
     public CashBillVo[] query(CashBillQueryVo query) {
         return new CashBillVo[0];
+    }
+
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return null;
     }
 }

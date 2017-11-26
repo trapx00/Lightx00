@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.vo;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.BillDraftQueryServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
@@ -76,6 +77,12 @@ public abstract class BillVo implements Draftable {
     public abstract NotificationAbandonService notificationAbandonService();
 
     /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     * @return BillApprovalCompleteService
+     */
+    public abstract BillApprovalCompleteService billApprovalCompleteService();
+
+    /**
      * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
      *
      * @return key-value maps for the properties
@@ -98,4 +105,6 @@ public abstract class BillVo implements Draftable {
      */
     @Override
     public abstract ContinueWritable continueWriteService();
+
+
 }

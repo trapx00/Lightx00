@@ -6,6 +6,7 @@ import trapx00.lightx00.client.bl.financebl.PaymentBillInfo;
 import trapx00.lightx00.client.bl.financebl.mock.PaymentBillBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 
 public class PaymentBillBlFactory {
     private static PaymentBillBlController controller = new PaymentBillBlControllerMock();
@@ -13,6 +14,11 @@ public class PaymentBillBlFactory {
     private static NotificationAbandonService notificationAbandonService = controller;
     private static DraftDeleteService draftDeleteService = controller;
     private static PaymentBillInfo paymentBillInfo = controller;
+    private static BillApprovalCompleteService billApprovalCompleteService = controller;
+
+    public static BillApprovalCompleteService getBillApprovalCompleteService() {
+        return billApprovalCompleteService;
+    }
 
     public static NotificationActivateService getNotificationActivateService() {
         return notificationActivateService;

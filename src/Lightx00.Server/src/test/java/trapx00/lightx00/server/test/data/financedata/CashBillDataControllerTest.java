@@ -78,7 +78,7 @@ public class CashBillDataControllerTest {
         try {
             bill.setState(BillState.WaitingForApproval);
             service.submit(bill);
-            service.activate(bill.getId());
+            service.approvalComplete(bill.getId(),BillState.Approved);
             assertEquals(BillState.Approved, dao.queryForEq("id",bill.getId()).get(0).getState());
         } finally {
             bill.setState(BillState.Draft);
@@ -134,6 +134,31 @@ public class CashBillDataControllerTest {
         } finally {
             dao.deleteById(bill.getId());
             bill.setId("XJFYD-20171122-00001");
+        }
+    }
+
+    @Test
+    public void changeState() throws Exception {
+        bill.setState(BillState.WaitingForApproval);
+        dao.create(bill);
+        String id = dao.extractId(bill);
+        try {
+            service.approvalComplete(bill.getId(),BillState.Approved);
+            assertEquals(BillState.Approved, dao.queryForId(bill.getId()).getState());
+        } finally {
+            dao.deleteById(id);
+            bill.setState(BillState.Draft);
+        }
+    }
+
+    @Test(expected = BillInvalidStateException.class)
+    public void changeStateInvalidState() throws Exception {
+        dao.create(bill);
+        String id = dao.extractId(bill);
+        try {
+            service.approvalComplete(bill.getId(),BillState.Approved);
+        } finally {
+            dao.deleteById(id);
         }
     }
 }
