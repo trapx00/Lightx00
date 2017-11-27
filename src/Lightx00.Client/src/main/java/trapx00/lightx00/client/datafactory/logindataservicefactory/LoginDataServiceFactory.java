@@ -13,10 +13,9 @@ import java.rmi.RemoteException;
 public class LoginDataServiceFactory {
     private static LoginDataService service = new LoginDataServiceStub();
 
-    public static void initRmi() {
+    private static void initRmi() {
         try {
             service = (LoginDataService) Naming.lookup(RmiHelper.generateRmiUrl(LoginDataService.class));
-
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
@@ -26,8 +25,8 @@ public class LoginDataServiceFactory {
         }
     }
 
-    public LoginDataService getService() {
-        //initRmi();
+    public static LoginDataService getService() {
+        initRmi();
         return service;
     }
 }

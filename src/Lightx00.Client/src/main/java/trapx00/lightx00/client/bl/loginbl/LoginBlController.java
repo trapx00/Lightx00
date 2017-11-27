@@ -1,10 +1,13 @@
 package trapx00.lightx00.client.bl.loginbl;
 
 import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
+import trapx00.lightx00.client.datafactory.logindataservicefactory.LoginDataServiceFactory;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 
 public class LoginBlController implements LoginBlService, CurrentUserService {
     private EmployeeVo currentUser;
+    private LoginDataService dataService = LoginDataServiceFactory.getService();
     /**
      * Login with username and password provided.
      *

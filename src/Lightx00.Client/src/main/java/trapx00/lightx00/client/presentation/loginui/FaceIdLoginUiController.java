@@ -1,210 +1,105 @@
 package trapx00.lightx00.client.presentation.loginui;
 
-import com.github.sarxos.webcam.Webcam;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXProgressBar;
 import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import trapx00.lightx00.client.bl.loginbl.factory.FaceIdAuthenticationBlServiceFactory;
 import trapx00.lightx00.client.blservice.loginblservice.FaceIdAuthenticationBlService;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView;
 import trapx00.lightx00.client.vo.EmployeeVo;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
+import trapx00.lightx00.shared.exception.faceid.NetworkException;
+import trapx00.lightx00.shared.exception.faceid.NoFaceDetectedException;
 
 public class FaceIdLoginUiController {
     public JFXButton loginButton;
     public JFXButton cancelButton;
-    public VBox cameraPane;
-    public ImageView cameraImage;
-    public JFXComboBox cbCameraOptions;
     public StackPane rootPane;
-    private BufferedImage grabbedImage;
-    private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
+    public WebCamView webCamView;
     private FaceIdAuthenticationBlService blService = FaceIdAuthenticationBlServiceFactory.getService();
 
-    private Webcam selWebCam;
-    private boolean stopCamera = false;
-    private String cameraListPromptText = "选择一个相机";
-
-    private class WebCamInfo {
-
-        private String webCamName;
-        private int webCamIndex;
-
-        public String getWebCamName() {
-            return webCamName;
-        }
-
-        public void setWebCamName(String webCamName) {
-            this.webCamName = webCamName;
-        }
-
-        public int getWebCamIndex() {
-            return webCamIndex;
-        }
-
-        public void setWebCamIndex(int webCamIndex) {
-            this.webCamIndex = webCamIndex;
-        }
-
-        @Override
-        public String toString() {
-            return webCamName;
-        }
-    }
-
     public void initialize() {
-        initializeCamera();
-    }
-
-    public void initializeCamera() {
-        ObservableList<WebCamInfo> options = FXCollections.observableArrayList();
-        int webCamCounter = 0;
-        for (Webcam webcam : Webcam.getWebcams()) {
-            WebCamInfo webCamInfo = new WebCamInfo();
-            webCamInfo.setWebCamIndex(webCamCounter);
-            webCamInfo.setWebCamName(webcam.getName());
-            options.add(webCamInfo);
-            webCamCounter++;
-        }
-        cbCameraOptions.setItems(options);
-        cbCameraOptions.setPromptText(cameraListPromptText);
-        cbCameraOptions.getSelectionModel().selectedItemProperty().addListener((ChangeListener<WebCamInfo>) (arg0, arg1, arg2) -> {
-            if (arg2 != null) {
-                System.out.println("WebCam Index: " + arg2.getWebCamIndex() + ": WebCam Name:" + arg2.getWebCamName());
-                initializeWebCam(arg2.getWebCamIndex());
-            }
-        });
-    }
-
-    public byte[] acquireImage() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(grabbedImage, "jpg", baos);
-            return baos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new byte[0];
-        }
+        loginButton.setDisable(true);
+        webCamView.setOnCameraInitialized(() -> loginButton.setDisable(false));
     }
 
     public void onLoginButtonClicked(ActionEvent actionEvent) {
         stopCamera(actionEvent);
         JFXDialog dialog = PromptDialogHelper.start("登录中","登录中")
             .create(rootPane);
-        dialog.show();
-        EmployeeVo employeeVo = blService.authenticate(acquireImage());
-        dialog.close();
-        if (employeeVo == null) {
-            PromptDialogHelper.start("登录失败","登录失败！请重新尝试！")
-                .addCloseButton("好", "CHECK", e -> startCamera(actionEvent))
-                .create(rootPane).show();
-        } else {
-            closeCamera();
-            disposeCamera(actionEvent);
-            FinishLoginLogic.finishLogin(employeeVo);
-
-        }
-    }
-
-    protected void initializeWebCam(final int webCamIndex) {
-
-        Task<Void> webCamInitializer = new Task<Void>() {
-
-            @Override
-            protected Void call() throws Exception {
-
-                if (selWebCam == null) {
-                    selWebCam = Webcam.getWebcams().get(webCamIndex);
-                    selWebCam.open();
-                } else {
-                    closeCamera();
-                    selWebCam = Webcam.getWebcams().get(webCamIndex);
-                    selWebCam.open();
-                }
-                startWebCamStream();
-                return null;
-            }
-
-        };
-
-        new Thread(webCamInitializer).start();
-        loginButton.setDisable(false);
-    }
-
-    protected void startWebCamStream() {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                try {
+                    EmployeeVo employeeVo = blService.authenticate(webCamView.acquireImage());
+                    dialog.close();
+                    if (employeeVo == null) {
+                        showPromptDialog("登录失败！","未知错误！");
+                    } else {
+                        Platform.runLater(() -> {
+                            PromptDialogHelper.start("登录成功", String.format("登录成功！确认将以%s（id: %s）的身份登录！", employeeVo.getName(), employeeVo.getId()))
+                                .addCloseButton("好", "CHECK", e -> {
+                                    closeCamera();
+                                    disposeCamera(actionEvent);
+                                    FinishLoginLogic.finishLogin(employeeVo);
+                                })
+                                .addCloseButton("不对！这不是我！","CLOSE", e -> startCamera())
+                                .create(rootPane).show();
+                        });
 
-                while (!stopCamera) {
-                    try {
-                        if ((grabbedImage = selWebCam.getImage()) != null) {
-
-                            Platform.runLater(() -> {
-                                final Image mainiamge = SwingFXUtils
-                                    .toFXImage(grabbedImage, null);
-                                imageProperty.set(mainiamge);
-                            });
-
-                            grabbedImage.flush();
-
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                } catch (MultipleFacesException e) {
+                    dialog.close();
+                    Platform.runLater(() -> showPromptDialog("登录失败！", String.format("检测到%d张脸。只允许一张脸！", e.getNumOfFaces())));
+                } catch (NoFaceDetectedException e) {
+                    dialog.close();
+                    Platform.runLater(() -> showPromptDialog("登录失败！", "未检测到脸！"));
+                } catch (NetworkException e) {
+                    dialog.close();
+                    Platform.runLater(() -> showPromptDialog("网络错误！", "请联系技术人员。HTTP响应码：" + e.getStatusCode()));
                 }
-
                 return null;
             }
-
         };
         Thread th = new Thread(task);
         th.setDaemon(true);
+        dialog.show();
+        th.setUncaughtExceptionHandler((eh, x) -> System.out.println(x.toString()));
         th.start();
-        cameraImage.imageProperty().bind(imageProperty);
 
     }
 
-    private void setStage(Stage stage) {
-
+    public void showPromptDialog(String title, String content) {
+        PromptDialogHelper.start(title, content)
+            .addCloseButton("好","CHECK",e -> startCamera())
+            .create(rootPane)
+            .show();
     }
 
     private void closeCamera() {
-        if (selWebCam != null) {
-            selWebCam.close();
-        }
+        webCamView.closeCamera();
     }
 
     public void stopCamera(ActionEvent event) {
-        stopCamera = true;
+        webCamView.stopCamera();
     }
 
-    public void startCamera(ActionEvent event) {
-        stopCamera = false;
-        startWebCamStream();
+    public void startCamera() {
+        webCamView.startCamera();
     }
 
     public void disposeCamera(ActionEvent event) {
-        stopCamera = true;
-        closeCamera();
+        webCamView.disposeCamera();
+    }
+
+    public void onCancelButtonClicked(ActionEvent actionEvent) {
+        UiUtil.closeStage();
     }
 }

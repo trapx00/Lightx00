@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthentication
 
 import java.rmi.RemoteException;
 
-public class FaceIdDataFactory {
+public class FaceIdAuthenticationDataFactory {
     private static FaceIdAuthenticationDataService dataService;
 
     static {

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class BaseDatabaseFactory {
 
-    private static final String connectionString = "jdbc:sqlite:"+ getDbFilePath();
+    private static final String connectionString = "jdbc:sqlite:" + getDbFilePath();
     protected static ConnectionSource connectionSource;
 
     private static String getDbFilePath() {

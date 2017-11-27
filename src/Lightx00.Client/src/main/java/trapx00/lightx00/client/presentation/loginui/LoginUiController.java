@@ -3,20 +3,17 @@ package trapx00.lightx00.client.presentation.loginui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import trapx00.lightx00.client.bl.loginbl.factory.LoginBlFactory;
+import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
 import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiUtil;
-import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.admin.AdminVo;
 
-import java.io.IOException;
 import java.util.Date;
 
 public class LoginUiController {
@@ -29,6 +26,8 @@ public class LoginUiController {
 
 
     private JFXDepthManager depthManager;
+    private LoginBlService blService = LoginBlFactory.getController();
+
     int depth = 5;
 
     public void setStage(Stage stage) {
@@ -55,27 +54,7 @@ public class LoginUiController {
     }
 
     public void finishLogin(EmployeeVo employeeVo) {
-        try {
-            UiUtil.getStage().close();
-            Stage newStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/mainui/FrameworkUi.fxml"));
-            Scene scene = new Scene(loader.load());
-
-            FrameworkUiController controller = loader.getController();
-
-            newStage.initStyle(StageStyle.UNDECORATED);
-
-            newStage.setScene(scene);
-            newStage.setHeight(900);
-            newStage.setWidth(1600);
-
-            controller.setEmployee(employeeVo);
-            controller.setStage(newStage);
-            newStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FinishLoginLogic.finishLogin(employeeVo);
     }
 
 }
