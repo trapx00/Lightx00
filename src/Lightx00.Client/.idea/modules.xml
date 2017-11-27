@@ -6,9 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.client.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.client.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.client_main.iml" group="lightx00.client" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.client_test.iml" group="lightx00.client" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/108341213/lightx00.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/108341213/lightx00.shared.iml" group="lightx00.shared" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/108341213/lightx00.shared_main.iml" filepath="$PROJECT_DIR$/.idea/modules/108341213/lightx00.shared_main.iml" group="lightx00.shared" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/108341213/lightx00.shared_test.iml" filepath="$PROJECT_DIR$/.idea/modules/108341213/lightx00.shared_test.iml" group="lightx00.shared" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-910661212/lightx00.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/-910661212/lightx00.shared.iml" group="lightx00.shared" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-910661212/lightx00.shared_main.iml" filepath="$PROJECT_DIR$/.idea/modules/-910661212/lightx00.shared_main.iml" group="lightx00.shared" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-910661212/lightx00.shared_test.iml" filepath="$PROJECT_DIR$/.idea/modules/-910661212/lightx00.shared_test.iml" group="lightx00.shared" />
     </modules>
   </component>
 </project>
