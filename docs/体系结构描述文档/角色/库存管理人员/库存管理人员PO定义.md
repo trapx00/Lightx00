@@ -1,13 +1,13 @@
 ###库存管理人员
 
 ```java
-class InvetoryStaffPO extends EmployeePO {
+class InvetoryStaffPo extends EmployeePo {
   ;
 }
 ```
 
 ```java
-class CommodityPO {//商品
+class CommodityPo {//商品
   String ID;//型号+名称生成
   String name;
   String type;
@@ -20,51 +20,49 @@ class CommodityPO {//商品
   double retailPrice;//售价
   double recentRetailPrice;//最近售价
   double warningValue;//警戒值
+  double inventoryNum;//报警报损报溢数量
 }
 ```
 
 
 ```java
-class CommoditySortPO{//商品分类
+class CommoditySortPo{//商品分类
   String ID;
   String name;
-  String []commodityIDList;
+  CommodityPo []commodityList;//子类
   String preID;//父类
-  String[] nextID; //子类
 }
 ```
 ```java
-class InventoryDetailBillPO extends InventoryBillPO{//报损报溢报警
-  String ID;//单据编号
-  String operatorID;//操作员编号
-  String[] commodityIDList;//商品
-  double[] amounts;//报损/报溢/报警数量
-  Date time;
+class InventoryDetailBillPo extends InventoryBillPo{//报损报溢报警
+   CommodityPo [] commodityList;//商品
 }
 ```
 
 ```java
 enum InventoryBillType{
-  Loss,Overflow,Warning//单据类型
+  Loss,Overflow,Warning,Gift//单据类型
 }
 ```
 
 ```java
-class InventoryBillPO extends BillPO{
-  InventoryBillTypePO inventoryBillType;
+class InventoryBillPo extends BillPo{
+  InventoryBillType inventoryBillType;
 }
 ```
 
 ```java
-class InventoryPicturePO {
+class InventoryPicturePo {
 //名称，型号，库存数量，库存均价，批次，批号，出厂日期
+  String id;
   Date time;
   CommodityPO[] items;
 }
 ```
 
 ```java
-class InventoryViewPO {
+class InventoryViewPo {
+  String id;
   Date time;
   double inventoryAmount;//入库数量
   double inventoryMoney;//入库金额
@@ -78,9 +76,7 @@ class InventoryViewPO {
 
 
 ```java
-class InventoryGiftPO{
-   Date time;
-   String ID;
+class InventoryGiftPo extends InventoryBillPo {
    PromotionCommodity[] gifts;
 }
 ```

@@ -1,7 +1,7 @@
 ###库存管理人员
 
  ```java
- class InvetoryStaffVO extends EmployeeVO {
+ class InvetoryStaffVo extends EmployeeVO {
    ;
  }
  ```
