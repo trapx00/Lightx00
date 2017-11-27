@@ -6,6 +6,8 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.client.vo.log.LogVo;
 
+import java.net.URI;
+
 public class LogBlController implements LogBlService, LogService {
     /**
      * Writes log.

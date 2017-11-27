@@ -2,7 +2,20 @@ package trapx00.lightx00.shared.queryvo;
 
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 
-import java.util.function.Predicate;
+public class SaleBillQueryVo extends BaseQueryVo<SaleBillPo, String> {
+    /**
+     * Instantiate a QueryVo with prepration method.
+     *
+     * @param preparation QueryBuilderPreparation method
+     */
+    public SaleBillQueryVo(QueryBuilderPreparation<SaleBillPo, String> preparation) {
+        super(preparation);
+    }
 
-public interface SaleBillQueryVo extends Predicate<SaleBillPo> {
+    /**
+     * Instantiate a QueryVo with a method which returns all rows.
+     */
+    public SaleBillQueryVo() {
+        super();
+    }
 }

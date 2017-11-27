@@ -1,17 +1,22 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.Date;
 
+@DatabaseTable(tableName = "ComSalePromotion")
 public class ComSalePromotionPo extends PromotionPoBase {
-    private PromotionCommodity[] commodityOnSale;
+    @DatabaseField
     private double onSalePrice;
 
     public ComSalePromotionPo(String id, Date startDate, Date endDate, PromotionState state,
-                              PromotionCommodity[] commodityOnSale, double onSalePrice) {
-        super(id, PromotionType.ComSalePromotion, startDate, endDate, PromotionState.Waiting);
-        this.commodityOnSale = commodityOnSale;
+                              PromotionCommodity[] promotionCommodities, double onSalePrice) {
+        super(id, PromotionType.ComSalePromotion, startDate, endDate, PromotionState.Waiting,promotionCommodities);
         this.onSalePrice = onSalePrice;
     }
+
+    public ComSalePromotionPo() {}
 
     public double getOnSalePrice() {
         return onSalePrice;
@@ -21,11 +26,4 @@ public class ComSalePromotionPo extends PromotionPoBase {
         this.onSalePrice = onSalePrice;
     }
 
-    public PromotionCommodity[] getCommodityOnSale() {
-        return commodityOnSale;
-    }
-
-    public void setCommodityOnSale(PromotionCommodity[] commodityOnSale) {
-        this.commodityOnSale = commodityOnSale;
-    }
 }

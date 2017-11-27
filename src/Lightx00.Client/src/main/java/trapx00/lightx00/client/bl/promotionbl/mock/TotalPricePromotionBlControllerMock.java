@@ -4,13 +4,13 @@ import trapx00.lightx00.client.bl.promotionbl.TotalPricePromotionBlController;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
 import java.util.Date;
 
 public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlController {
     /**
-     * submit a TotalPricePromotionVo
+     * Submit a TotalPricePromotionVo.
      * @param promotion the TotalPricePromotionVo to be submitted
      * @return whether the operation is done successfully
      */
@@ -19,7 +19,7 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
     }
 
     /**
-     * save a half-completed TotalPricePromotionVo as a draft
+     * Save a half-completed TotalPricePromotionVo as a draft.
      * @param promotion the TotalPricePromotionVo to be saved as a draft
      * @return whether the operation is done successfully
      */
@@ -28,18 +28,17 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
     }
 
     /**
-     * filter TotalPricePromotionVo
+     * Filter TotalPricePromotionVo.
      * @param query the filter conditions
      * @return array of TotalPricePromotionVo which match the conditions
      */
-    public TotalPricePromotionVo[] queryPromotion(PromotionQueryVo query) {
-        return new TotalPricePromotionVo[]{
-                new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null)
+    public TotalPricePromotionVo[] queryPromotion(TotalPricePromotionQueryVo query) {
+        return new TotalPricePromotionVo[]{new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null)
         };
     }
 
     /**
-     * delete a overdue or needless TotalPricePromotionVo
+     * Delete a overdue or needless TotalPricePromotionVo.
      * @param promotion the TotalPricePromotionVo to be deleted
      * @return whether the operation is done successfully
      */
@@ -48,15 +47,15 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
     }
 
     /**
-     * get id for the next TotalPricePromotionVo
+     * Get id for the next TotalPricePromotionVo.
      * @return id for the next TotalPricePromotionVo
      */
     public String getId() {
-        return super.getId();
+        return "0001";
     }
 
     /**
-     * delete a draft
+     * Delete a draft.
      * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */
@@ -64,5 +63,4 @@ public class TotalPricePromotionBlControllerMock extends TotalPricePromotionBlCo
     public ResultMessage deleteDraft(String id) {
         return ResultMessage.Success;
     }
-
 }

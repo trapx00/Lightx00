@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 
@@ -34,5 +35,5 @@ public interface PurchaseBillBlService {
      * @param query function
      * @return array of PurchaseBillVo
      */
-    public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query);
+    PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query);
 }

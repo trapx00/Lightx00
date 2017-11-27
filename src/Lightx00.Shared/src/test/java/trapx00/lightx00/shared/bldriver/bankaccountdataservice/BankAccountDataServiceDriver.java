@@ -15,7 +15,7 @@ public class BankAccountDataServiceDriver {
     private BankAccountPo account = service.query(new BankAccountQueryVo())[0];
     @Test
     public void query() throws Exception {
-        assertEquals(1, account.getId());
+        assertEquals(0, account.getId());
     }
 
     @Test

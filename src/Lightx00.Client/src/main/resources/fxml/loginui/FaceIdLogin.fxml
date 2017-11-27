@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="trapx00.lightx00.client.presentation.loginui.FaceIdLoginUiController"
+           prefHeight="800.0" prefWidth="800.0">
+    <BorderPane  prefHeight="780.0" prefWidth="780.0" style="-fx-background-color: #FFFFFF">
+        <BorderPane.margin>
+            <Insets bottom="10.0" right="20.0" top="10.0" />
+        </BorderPane.margin>
+        <top>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="300.0">
+                <Label text="Light x00" textFill="#5e5e5e">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Label>
+                <Label text="Face ID" textFill="#5e5e5e">
+                    <VBox.margin>
+                        <Insets left="120.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <BorderPane.margin>
+                    <Insets />
+                </BorderPane.margin>
+                <padding>
+                    <Insets bottom="20.0" />
+                </padding>
+            </VBox>
+        </top>
+        <center>
+            <VBox alignment="CENTER" fx:id="cameraPane" spacing="20">
+                <JFXComboBox fx:id="cbCameraOptions"/>
+                <ImageView fx:id="cameraImage" fitWidth="600" fitHeight="600"/>
+            </VBox>
+        </center>
+        <bottom>
+            <HBox alignment="CENTER" prefHeight="40.0" spacing="40.0">
+                <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#onLoginButtonClicked" disable="true" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="登 录">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin></JFXButton>
+                <JFXButton fx:id="cancelButton" buttonType="RAISED" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取 消" />
+                <BorderPane.margin>
+                    <Insets top="20.0" />
+                </BorderPane.margin>
+                <padding>
+                    <Insets top="10.0" />
+                </padding>
+            </HBox>
+        </bottom>
+        <StackPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </StackPane.margin>
+        <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+        </padding>
+    </BorderPane>
+
+</StackPane>

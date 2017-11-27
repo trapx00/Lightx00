@@ -12,13 +12,13 @@ public class FinanceBillPo extends BillPo {
     @DatabaseField
     private FinanceBillType financeBillType;
 
+
+    public FinanceBillPo() {
+    }
+
     public FinanceBillPo(String id, Date date, BillState state, FinanceBillType financeBillType) {
         super(BillType.FinanceBill, id, date, state);
         this.financeBillType = financeBillType;
-    }
-
-    public FinanceBillPo() {
-
     }
 
     public FinanceBillType getFinanceBillType() {

@@ -9,5 +9,8 @@ public class ManagerPo extends EmployeePo {
     public ManagerPo(String name, String id, Date workSince, String username, String password) {
         super(name, id, workSince, username, password, EmployeePosition.Manager);
     }
+
+    public ManagerPo() {
+    }
 }
 

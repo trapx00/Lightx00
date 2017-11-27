@@ -4,46 +4,44 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromot
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
 import java.util.Date;
 
 public class TotalPricePromotionDataServiceStub implements TotalPricePromotionDataService {
     /**
-     * submit a completed TotalPricePromotionPo
+     * Submit a completed TotalPricePromotionPo.
      * @param promotion the TotalPricePromotionPo to be submitted
      * @return whether the operation is done successfully
      */
-    public ResultMessage submit(TotalPricePromotionPo promotion){
+    public ResultMessage submit(TotalPricePromotionPo promotion) {
         return ResultMessage.Success;
     }
 
     /**
-     * filter TotalPricePromotionPo
+     * Filter TotalPricePromotionPo.
      * @param query the filter conditions
      * @return array of TotalPricePromotionPo which match the conditions
      */
-    public TotalPricePromotionPo[] queryPromotion(PromotionQueryVo query) {
-        return new TotalPricePromotionPo[]{
-                new TotalPricePromotionPo("0001",new Date(),new Date(),PromotionState.Waiting,200,1000,null)
-        };
+    public TotalPricePromotionPo[] queryPromotion(TotalPricePromotionQueryVo query) {
+        return new TotalPricePromotionPo[]{new TotalPricePromotionPo("ZJCXCL-20171112-00001",new Date(),new Date(),PromotionState.Waiting,200,1000,null)};
     }
 
     /**
-     * delete a useless TotalPricePromotionPo
-     * @param promotion the TotalPricePromotionPo to be deleted
+     * Delete a useless TotalPricePromotionPo.
+     * @param id id of the TotalPricePromotionPo to be deleted
      * @return whether the operation is done successfully
      */
-    public ResultMessage delete(TotalPricePromotionPo promotion) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
 
     /**
-     * get id for the next promotion
+     * Get id for the next promotion.
      *
      * @return id for the next promotion
      */
-    public String getId(){
-        return "0001";
+    public String getId() {
+        return "ZJCXCL-20171112-00001";
     }
 }

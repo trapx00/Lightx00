@@ -4,12 +4,11 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 public class ClientPromotionBlController implements ClientPromotionBlService, DraftDeleteService {
-
     /**
-     * submit a ClientPromotionVo
+     * Submit a ClientPromotionVo.
      * @param promotion the ClientPromotionVo to be submitted
      * @return whether the operation is done successfully
      */
@@ -19,7 +18,7 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
     }
 
     /**
-     * save a half-completed ClientPromotionVo as a draft
+     * Save a half-completed ClientPromotionVo as a draft.
      * @param promotion the ClientPromotionVo to be saved as a draft
      * @return whether the operation is done successfully
      */
@@ -29,17 +28,17 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
     }
 
     /**
-     * filter ClientPromotionVo
+     * Filter ClientPromotionVo.
      * @param query the filter conditions
      * @return array of ClientPromotionVo which match the conditions
      */
     @Override
-    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public ClientPromotionVo[] queryPromotion(ClientPromotionQueryVo query) {
         return new ClientPromotionVo[0];
     }
 
     /**
-     * delete a overdue or needless ClientPromotionVo
+     * Delete a overdue or needless ClientPromotionVo.
      * @param promotion the ClientPromotionVo to be deleted
      * @return whether the operation is done successfully
      */
@@ -49,7 +48,7 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
     }
 
     /**
-     * get id for the next ClientPromotionVo
+     * Get id for the next ClientPromotionVo.
      * @return id for the next ClientPromotionVo
      */
     @Override
@@ -58,7 +57,7 @@ public class ClientPromotionBlController implements ClientPromotionBlService, Dr
     }
 
     /**
-     * delete a draft
+     * Delete a draft.
      * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */

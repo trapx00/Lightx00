@@ -7,26 +7,32 @@ import trapx00.lightx00.client.bl.clientbl.mock.ClientBlControllerMock;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.client.ClientState;
+import trapx00.lightx00.shared.po.client.ClientType;
 
 import static org.junit.Assert.*;
 
 public class ClientBlControllerTest {
-
     ClientBlController clientBlController= ClientBlFactory.getClientBlController();
+    ClientVo clientVo=new ClientVo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, null);
 
     @Test
     public void deleteDraft() throws Exception {
-        assertEquals(ResultMessage.Success,clientBlController.delete(new String[]{"1","0"}));
+        clientBlController.add(clientVo);
+        assertEquals(ResultMessage.Success,clientBlController.delete(new String[]{"0"}));
     }
 
     @Test
     public void query() throws Exception {
-        assertEquals("0",clientBlController.query("123")[0].getId());
+        clientBlController.add(clientVo);
+        assertEquals("0",clientBlController.query("0")[0].getId());
+        clientBlController.delete(new String[]{"0"});
     }
 
     @Test
     public void saveAsDraft() throws Exception {
-        assertEquals(ResultMessage.Success,clientBlController.saveAsDraft(null));
+        assertEquals(ResultMessage.Success,clientBlController.saveAsDraft(clientVo));
+        clientBlController.deleteDraft("0");
     }
 
     @Test
@@ -36,16 +42,22 @@ public class ClientBlControllerTest {
 
     @Test
     public void modify() throws Exception {
-        assertEquals(ResultMessage.Success,clientBlController.modify(null));
+        clientBlController.add(clientVo);
+        clientVo.setAddress("123");
+        clientBlController.modify(clientVo)
+        assertEquals("123",clientBlController.query("0")[0].getAddress());
+        clientBlController.delete(new String[]{"0"});
     }
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,clientBlController.add(null));
+        assertEquals(ResultMessage.Success,clientBlController.add(clientVo));
+        clientBlController.delete(new String[]{"0"});
     }
 
     @Test
     public void delete() throws Exception {
+        clientBlController.add(clientVo);
         assertEquals(ResultMessage.Success,clientBlController.delete(new String[]{"0","1"}));
     }
 

@@ -27,8 +27,8 @@ public class ClientDataServiceFactory {
         }
     }
 
-    public ClientDataService getInstance() {
-        //initRmi();
+    public static ClientDataService getInstance() {
+        initRmi();
         return service;
     }
 }

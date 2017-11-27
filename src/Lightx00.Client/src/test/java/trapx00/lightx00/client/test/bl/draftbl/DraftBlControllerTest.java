@@ -21,7 +21,7 @@ public class DraftBlControllerTest {
 
     @Test
     public void update() throws Exception {
-        assertEquals("123", controller.update()[0].getId());
+        assertEquals(0, controller.update()[0].getId());
     }
 
     @Test

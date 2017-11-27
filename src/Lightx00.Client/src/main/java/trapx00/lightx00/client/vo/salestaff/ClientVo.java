@@ -1,9 +1,13 @@
 package trapx00.lightx00.client.vo.salestaff;
 
-
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
 
-public class ClientVo {
+import java.util.HashMap;
+
+public class ClientVo implements Draftable {
     private String id;
     private ClientType clientType;
     private int clientLevel;
@@ -15,6 +19,20 @@ public class ClientVo {
     private double receivableQuota;
     private double payableQuota;
     private SaleStaffVo defaultOperator;
+
+    public ClientVo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, SaleStaffVo defaultOperator) {
+        this.id = id;
+        this.clientType = clientType;
+        this.clientLevel = clientLevel;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.email = email;
+        this.receivableQuota = receivableQuota;
+        this.payableQuota = payableQuota;
+        this.defaultOperator = defaultOperator;
+    }
 
     public String getId() {
         return id;
@@ -104,18 +122,34 @@ public class ClientVo {
         this.defaultOperator = defaultOperator;
     }
 
-    public ClientVo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, SaleStaffVo defaultOperator) {
-        this.id = id;
-        this.clientType = clientType;
-        this.clientLevel = clientLevel;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.email = email;
-        this.receivableQuota = receivableQuota;
-        this.payableQuota = payableQuota;
-        this.defaultOperator = defaultOperator;
+    /**
+     * Gets the key-value maps to display the properties.
+     *
+     * @return key-value maps for the properties
+     */
+    @Override
+    public HashMap<String, String> properties() {
+        return null;
+    }
+
+    /**
+     * Gets DeleteService corresponding to this type of draft.
+     *
+     * @return DeleteService
+     */
+    @Override
+    public DraftDeleteService deleteService() {
+        return null;
+    }
+
+    /**
+     * Gets the ContinueWritable service corresponding to this type of draft.
+     *
+     * @return ContinueWritable
+     */
+    @Override
+    public ContinueWritable continueWriteService() {
+        return null;
     }
 }
  

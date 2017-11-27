@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 
 public class LogDataController extends UnicastRemoteObject implements LogDataService {
+    private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
+
     /**
      * Creates and exports a new UnicastRemoteObject object using an
      * anonymous port.
@@ -29,8 +31,6 @@ public class LogDataController extends UnicastRemoteObject implements LogDataSer
      */
     public LogDataController() throws RemoteException {
     }
-
-    private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
 
     /**
      * Writes log.

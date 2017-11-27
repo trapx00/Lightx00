@@ -8,7 +8,7 @@ import java.util.Date;
 
 @DatabaseTable(tableName = "InventoryViewBill")
 public class InventoryViewPo {
-    @DatabaseField(id=true)
+    @DatabaseField(id = true)
     private String id;
     @DatabaseField
     private  Date time;
@@ -26,13 +26,13 @@ public class InventoryViewPo {
     private  double inSoldPrice;//最近进价
     @DatabaseField
     private  double outSoldPrice;//最近售价
-    public InventoryViewPo(){
+    public InventoryViewPo() {
 
     }
     public InventoryViewPo(String id,Date time, double inventoryAmount, double inventoryMoney,
                            double outOfInventoryAmount, double outOfInVentoryMoney, double sum,
                            double inSoldPrice, double outSoldPrice) {
-        this.id=id;
+        this.id = id;
         this.time = time;
         this.inventoryAmount = inventoryAmount;
         this.inventoryMoney = inventoryMoney;

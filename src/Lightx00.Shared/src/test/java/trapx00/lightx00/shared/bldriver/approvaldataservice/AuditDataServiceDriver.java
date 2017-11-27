@@ -4,30 +4,36 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservicestub.approvaldataservice.AuditDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.manager.BillInfoPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
+import trapx00.lightx00.shared.po.bill.BillType;
 
 import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class AuditDataServiceDriver {
-    AuditDataService service = new AuditDataServiceStub();
-    BillPo bill = new CashBillPo("0001",new Date(), BillState.Draft, "123","123",null);
+    private AuditDataService service = new AuditDataServiceStub();
+    private BillPo bill = new BillPo(BillType.FinanceBill,"XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval);
+    private BillInfoPo billInfo = new BillInfoPo("XJFYD-20171112-00001", BillType.FinanceBill,new Date(), BillState.WaitingForApproval);
     @Test
     public void query() throws Exception {
-        assertEquals("0001",bill.getId());
+        assertEquals("XJFYD-20171112-00001",billInfo.getId());
     }
 
     @Test
     public void reject() throws Exception {
-        assertEquals(ResultMessage.Success,service.reject(bill));
+        assertEquals(ResultMessage.Success,service.reject(billInfo));
     }
 
     @Test
     public void pass() throws Exception {
-        assertEquals(ResultMessage.Success,service.pass(bill));
+        assertEquals(ResultMessage.Success,service.pass(billInfo));
     }
 
+    @Test
+    public void requestApproval() throws Exception {
+        assertEquals(ResultMessage.Success,service.requestApproval(bill));
+    }
 }

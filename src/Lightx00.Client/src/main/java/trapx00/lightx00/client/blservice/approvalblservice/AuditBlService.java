@@ -1,31 +1,29 @@
 package trapx00.lightx00.client.blservice.approvalblservice;
 
-import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.manager.BillInfoVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.shared.queryvo.BillQueryVo;
+import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
+
 
 public interface AuditBlService {
-
     /**
-     * reject to approve the bill
+     * Reject to approve the bill.
      * @param bill bill to be audited
      * @return whether the operation is done successfully
      */
-    ResultMessage reject(BillVo bill);
+    ResultMessage reject(BillInfoVo bill);
 
     /**
-     * approve the bill
+     * Approve the bill.
      * @param bill bill to be audited
      * @return whether the operation is done successfully
      */
-    ResultMessage pass(BillVo bill);
+    ResultMessage pass(BillInfoVo bill);
 
     /**
-     * filter bills
+     * Filter bills.
      * @param query the filter conditions
      * @return array of bills which match the conditions
      */
-    BillVo[] query(BillQueryVo query);
-
+    BillInfoVo[] query(BillInfoQueryVo query);
 }

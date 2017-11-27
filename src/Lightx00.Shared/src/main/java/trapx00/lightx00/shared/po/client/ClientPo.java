@@ -1,17 +1,60 @@
 package trapx00.lightx00.shared.po.client;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "Client")
 public class ClientPo {
-    String id;
-    ClientType clientType;
-    int clientLevel;
-    String name;
-    String phone;
-    String address;
-    String zipCode;
-    String email;
-    double receivableQuota;
-    double payableQuota;
-    String defaultOperatorId;
+    @DatabaseField(id = true)
+    private String id;
+    @DatabaseField
+    private ClientType clientType;
+    @DatabaseField
+    private int clientLevel;
+    @DatabaseField
+    private String name;
+    @DatabaseField
+    private String phone;
+    @DatabaseField
+    private String address;
+    @DatabaseField
+    private String zipCode;
+    @DatabaseField
+    private String email;
+    @DatabaseField
+    private double receivableQuota;
+    @DatabaseField
+    private double payableQuota;
+    @DatabaseField
+    private String defaultOperatorId;
+    @DatabaseField
+    private ClientState clientState;
+
+    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId, ClientState clientState) {
+        this.id = id;
+        this.clientType = clientType;
+        this.clientLevel = clientLevel;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.email = email;
+        this.receivableQuota = receivableQuota;
+        this.payableQuota = payableQuota;
+        this.defaultOperatorId = defaultOperatorId;
+        this.clientState = clientState;
+    }
+
+    public ClientPo() {
+    }
+
+    public ClientState getClientState() {
+        return clientState;
+    }
+
+    public void setClientState(ClientState clientState) {
+        this.clientState = clientState;
+    }
 
     public String getId() {
         return id;
@@ -98,20 +141,6 @@ public class ClientPo {
     }
 
     public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
-    }
-
-    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId) {
-        this.id = id;
-        this.clientType = clientType;
-        this.clientLevel = clientLevel;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.email = email;
-        this.receivableQuota = receivableQuota;
-        this.payableQuota = payableQuota;
         this.defaultOperatorId = defaultOperatorId;
     }
 }

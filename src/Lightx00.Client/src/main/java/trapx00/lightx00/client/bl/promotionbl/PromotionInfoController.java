@@ -4,11 +4,10 @@ import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 public class PromotionInfoController implements PromotionInfo {
-
     /**
-     * give useable promotions to the sale
-     * @param saleBill the salebill which represents current sale behaviour
-     * @return useable promotions to the sale
+     * Give usable promotions to the sale.
+     * @param saleBill the saleBill which represents current sale activity
+     * @return usable promotions to the sale
      */
     @Override
     public PromotionVoBase[] queryPromotion(SaleBillVo saleBill) {

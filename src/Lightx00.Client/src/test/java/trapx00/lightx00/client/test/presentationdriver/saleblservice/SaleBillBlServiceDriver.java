@@ -24,4 +24,14 @@ public class SaleBillBlServiceDriver {
         assertEquals(ResultMessage.Success,service.saveAsDraft(saleBillVo));
     }
 
+    @Test
+    public void getId() throws Exception{
+        assertEquals("0",service.getId());
+    }
+
+    @Test
+    public void querySaleBill() throws Exception{
+        assertEquals("0",service.querySaleBill(null)[0].getId());
+    }
+
 }

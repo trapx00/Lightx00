@@ -5,9 +5,9 @@ import trapx00.lightx00.client.vo.BillVo;
 
 public interface ApprovalRequest {
     /**
-     * submitted bills request approval
+     * Submitted bills request approval.
      * @param bill bill has been submitted
      * @return whether the operation is done successfully
      */
-    ResultMessage requestMessage(BillVo bill);
+    ResultMessage requestApproval(BillVo bill);
 }

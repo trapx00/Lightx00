@@ -4,12 +4,11 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ComSalePromotionQueryVo;
 
 public class ComSalePromotionBlController implements ComSalePromotionBlService, DraftDeleteService {
-
     /**
-     * submit a ComSalePromotionVo
+     * Submit a ComSalePromotionVo.
      * @param promotion the ComSalePromotionVo to be submitted
      * @return whether the operation is done successfully
      */
@@ -19,7 +18,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * save a half-completed ComSalePromotionVo as a draft
+     * Save a half-completed ComSalePromotionVo as a draft.
      * @param promotion the ComSalePromotionVo to be saved as a draft
      * @return whether the operation is done successfully
      */
@@ -29,17 +28,17 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * filter ComSalePromotionVo
+     * Filter ComSalePromotionVo.
      * @param query the filter conditions
      * @return array of ComSalePromotionVo which match the conditions
      */
     @Override
-    public ComSalePromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public ComSalePromotionVo[] queryPromotion(ComSalePromotionQueryVo query) {
         return new ComSalePromotionVo[0];
     }
 
     /**
-     * delete a overdue or needless ComSalePromotionVo
+     * Delete a overdue or needless ComSalePromotionVo.
      * @param promotion the ComSalePromotionVo to be deleted
      * @return whether the operation is done successfully
      */
@@ -49,7 +48,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * get id for the next ComSalePromotionVo
+     * Get id for the next ComSalePromotionVo.
      * @return id for the next ComSalePromotionVo
      */
     @Override
@@ -58,7 +57,7 @@ public class ComSalePromotionBlController implements ComSalePromotionBlService, 
     }
 
     /**
-     * delete a draft
+     * Delete a draft.
      * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */

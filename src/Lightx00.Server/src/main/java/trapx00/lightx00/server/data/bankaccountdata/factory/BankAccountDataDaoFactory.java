@@ -14,9 +14,9 @@ public class BankAccountDataDaoFactory extends BaseDatabaseFactory {
     private static Dao<BankAccountPo, Integer> bankAccountDao;
 
     public static Dao<BankAccountPo, Integer> getBankAccountDao() {
-        if (bankAccountDao==null) {
+        if (bankAccountDao == null) {
             try {
-                bankAccountDao = DaoManager.createDao(connectionSource,BankAccountPo.class);
+                bankAccountDao = DaoManager.createDao(connectionSource, BankAccountPo.class);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

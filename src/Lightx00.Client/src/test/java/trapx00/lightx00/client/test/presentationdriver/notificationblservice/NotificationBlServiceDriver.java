@@ -22,7 +22,7 @@ public class NotificationBlServiceDriver {
 
     @Test
     public void update() throws Exception {
-        assertEquals("123",notifications[0].getId());
+        assertEquals(1,notifications[0].getId());
     }
 
     @Test

@@ -1,31 +1,80 @@
 package trapx00.lightx00.client.bl.clientbl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.draftbl.DraftService;
+import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
+import trapx00.lightx00.client.bl.draftbl.factory.DraftServiceFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.datafactory.clientdataservicefactory.ClientDataServiceFactory;
+import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
 
-public class ClientBlController implements ClientBlService, DraftDeleteService,ClientModificationService {
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+public class ClientBlController implements ClientBlService, DraftDeleteService, ClientModificationService, DraftableQueryService, ClientQueryService {
+
+    ClientDataService clientDataService = ClientDataServiceFactory.getInstance();
+    EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
+    DraftService draftService = DraftServiceFactory.getDraftService();
+
+    private ClientPo convertToClientPo(ClientVo clientVo, ClientState clientState) {
+        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getPayableQuota(), clientVo.getDefaultOperator().getId(), clientState);
+        return clientPo;
+    }
+
+    private ClientVo convertToClientVo(ClientPo clientPo) {
+        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getPayableQuota(), (SaleStaffVo) employeeInfo.queryById(clientPo.getId()));
+        return clientVo;
+    }
 
     /**
      * Deletes a draft.
+     *
      * @param id id of the draft to be deleted
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        try {
+            String[] ids = new String[1];
+            ids[0] = id;
+            return clientDataService.delete(ids);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
      * Query clients which includes the words
+     *
      * @param query condition
      * @return the clients which corresponds to the query
      */
     @Override
     public ClientVo[] query(String query) {
-        return new ClientVo[0];
+        try {
+            ClientPo[] clientPos = clientDataService.query(query);
+            ArrayList<ClientVo> clientVos = new ArrayList<ClientVo>();
+            for (int i = 0; i < clientPos.length; i++) {
+                if (clientPos[i].getClientState() == ClientState.Real) {
+                    clientVos.add(convertToClientVo(clientPos[i]));
+                }
+            }
+            return clientVos.toArray(new ClientVo[clientVos.size()]);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -36,7 +85,24 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
      */
     @Override
     public ResultMessage saveAsDraft(ClientVo client) {
-        return null;
+        try {
+            ResultMessage resultMessage;
+            ResultMessage resultMessage1 = draftService.saveAsDraft(client);
+            ResultMessage resultMessage2 = clientDataService.add(convertToClientPo(client, ClientState.Draft));
+            if (resultMessage1 == resultMessage2) {
+                if (resultMessage1 == ResultMessage.Success) {
+                    resultMessage = ResultMessage.Success;
+                } else {
+                    resultMessage = ResultMessage.Failure;
+                }
+            } else {
+                resultMessage = ResultMessage.Failure;
+            }
+            return resultMessage;
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
@@ -46,37 +112,64 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
      */
     @Override
     public String getId() {
-        return null;
+        String result;
+        try {
+            result = clientDataService.getId();
+        } catch (RemoteException e) {
+            result = "";
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
      * modify a client
+     *
      * @param client to be modified
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage modify(ClientVo client) {
-        return null;
+        try {
+            ClientPo clientPo = convertToClientPo(client, ClientState.Real);
+            return clientDataService.modify(clientPo);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
      * add a client
+     *
      * @param client to be added
      * @return whether the operation is done successfully
      */
     @Override
     public ResultMessage add(ClientVo client) {
-        return null;
+        try {
+            ClientPo clientPo = convertToClientPo(client, ClientState.Real);
+            return clientDataService.add(clientPo);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
      * delete some clients
+     *
      * @param id of the client to be deleted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String[] id) {
-        return null;
+    public ResultMessage delete(String[] ids) {
+        try {
+            return clientDataService.delete(ids);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
@@ -89,6 +182,57 @@ public class ClientBlController implements ClientBlService, DraftDeleteService,C
      */
     @Override
     public ResultMessage modifyClient(String clientId, ClientModificationFlag flag, double delta) {
-        return null;
+        ClientPo clientPo = new ClientPo();
+        try {
+            ClientPo[] clientPos = clientDataService.query(clientId);
+            for (ClientPo client : clientPos) {
+                if (client.getId().equals(clientId)) {
+                    clientPo = client;
+                    break;
+                }
+            }
+            if (clientPo.getId() == null || clientPo.getId().length() == 0) {
+                return ResultMessage.Failure;
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
+        try {
+            if (flag == ClientModificationFlag.PAYABLE) {
+                clientPo.setPayableQuota(clientPo.getPayableQuota() + delta);
+            } else {
+                clientPo.setReceivableQuota(clientPo.getReceivableQuota() + delta);
+            }
+            clientDataService.modify(clientPo);
+            return ResultMessage.Success;
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
+    }
+
+    /**
+     * Queries draft with id.
+     *
+     * @param id i  d
+     * @return draft
+     */
+    @Override
+    public Draftable queryDraft(String id) {
+        try {
+            ClientPo[] clientPos = clientDataService.query(id);
+            ClientPo clientPo = new ClientPo();
+            for (ClientPo client : clientPos) {
+                if (client.getId().equals(id)) {
+                    clientPo = client;
+                    break;
+                }
+            }
+            return convertToClientVo(clientPo);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
