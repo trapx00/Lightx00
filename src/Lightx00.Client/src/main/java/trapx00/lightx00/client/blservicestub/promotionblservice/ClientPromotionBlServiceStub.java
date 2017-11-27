@@ -4,7 +4,7 @@ import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlSer
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 import java.util.Date;
 
@@ -25,7 +25,7 @@ public class ClientPromotionBlServiceStub implements ClientPromotionBlService {
     }
 
     @Override
-    public ClientPromotionVo[] queryPromotion(PromotionQueryVo query) {
+    public ClientPromotionVo[] queryPromotion(ClientPromotionQueryVo query) {
         return new ClientPromotionVo[]{new ClientPromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0)};
     }
 

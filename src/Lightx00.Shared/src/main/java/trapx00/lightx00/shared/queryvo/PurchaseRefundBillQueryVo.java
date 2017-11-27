@@ -2,7 +2,20 @@ package trapx00.lightx00.shared.queryvo;
 
 import trapx00.lightx00.shared.po.salestaff.PurchaseRefundBillPo;
 
-import java.util.function.Predicate;
+public class PurchaseRefundBillQueryVo extends BaseQueryVo<PurchaseRefundBillPo, String> {
+    /**
+     * Instantiate a QueryVo with prepration method.
+     *
+     * @param preparation QueryBuilderPreparation method
+     */
+    public PurchaseRefundBillQueryVo(QueryBuilderPreparation<PurchaseRefundBillPo, String> preparation) {
+        super(preparation);
+    }
 
-public interface PurchaseRefundBillQueryVo extends Predicate<PurchaseRefundBillPo> {
+    /**
+     * Instantiate a QueryVo with a method which returns all rows.
+     */
+    public PurchaseRefundBillQueryVo() {
+        super();
+    }
 }

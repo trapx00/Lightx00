@@ -3,8 +3,10 @@ package trapx00.lightx00.client.vo.inventorystaff;
 import java.util.Date;
 import java.util.HashMap;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftServiceFactory;
+import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
@@ -78,5 +80,14 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
     @Override
     public ContinueWritable continueWriteService() {
         return null;
+    }
+    /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return BillApprovalCompleteService
+     */
+    @Override
+    public BillApprovalCompleteService billApprovalCompleteService() {
+        return InventoryWarningServiceFactory.getBillApprovalCompleteService();
     }
 }

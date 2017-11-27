@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.commoditybl.CommodityService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
@@ -14,7 +15,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 
 import java.util.Date;
 
-public class InventoryWarningBlController implements InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService,InventoryBillService {
+public class InventoryWarningBlController implements BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService,InventoryBillService {
     /**
      * Submits a Bill.
      * @param bill
@@ -122,4 +123,17 @@ public class InventoryWarningBlController implements InventoryWarningBlService,D
     public InventoryBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo) {
         return new InventoryBillVo[0];
     }
+
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return null;
+    }
+
 }

@@ -2,7 +2,7 @@ package trapx00.lightx00.client.blservice.promotionblservice;
 
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.PromotionQueryVo;
+import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 public interface ClientPromotionBlService {
     /**
@@ -24,7 +24,7 @@ public interface ClientPromotionBlService {
      * @param query the filter conditions
      * @return array of ClientPromotionVo which match the conditions
      */
-    ClientPromotionVo[] queryPromotion(PromotionQueryVo query);
+    ClientPromotionVo[] queryPromotion(ClientPromotionQueryVo query);
 
     /**
      * Delete a overdue or needless ClientPromotionVo.

@@ -1,21 +1,50 @@
 package trapx00.lightx00.shared.po.salestaff;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 import java.util.Date;
 
+@DatabaseTable(tableName = "SaleBill")
 public class SaleBillPo extends SaleBillBasePo {
+    @DatabaseField
     private String supplier;
+    @DatabaseField
     private String defaultOperatorId;
+    @DatabaseField
     private String operatorId;
+    @DatabaseField
     private int repository;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommodityItem[] commodityList;
+    @DatabaseField
     private double originTotal;
+    @DatabaseField
     private double minusProfits;
+    @DatabaseField
     private double token;
+    @DatabaseField
     private double ultiTotal;
+    @DatabaseField
     private String comment;
+
+    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.Sale);
+        this.supplier = supplier;
+        this.defaultOperatorId = defaultOperatorId;
+        this.operatorId = operatorId;
+        this.repository = repository;
+        this.commodityList = commodityList;
+        this.originTotal = originTotal;
+        this.minusProfits = minusProfits;
+        this.token = token;
+        this.ultiTotal = ultiTotal;
+        this.comment = comment;
+    }
+
+    public SaleBillPo() {}
 
     public String getSupplier() {
         return supplier;
@@ -94,20 +123,6 @@ public class SaleBillPo extends SaleBillBasePo {
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
-        this.supplier = supplier;
-        this.defaultOperatorId = defaultOperatorId;
-        this.operatorId = operatorId;
-        this.repository = repository;
-        this.commodityList = commodityList;
-        this.originTotal = originTotal;
-        this.minusProfits = minusProfits;
-        this.token = token;
-        this.ultiTotal = ultiTotal;
         this.comment = comment;
     }
 }

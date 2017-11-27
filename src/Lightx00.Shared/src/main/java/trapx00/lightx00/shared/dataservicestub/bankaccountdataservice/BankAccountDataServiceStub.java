@@ -17,7 +17,7 @@ public class BankAccountDataServiceStub implements BankAccountDataService {
     @Override
     public BankAccountPo[] query(BankAccountQueryVo query) {
         return new BankAccountPo[] {
-                new BankAccountPo("123","123",10,new Date())
+                new BankAccountPo("123",10,new Date())
         };
     }
 
@@ -50,7 +50,7 @@ public class BankAccountDataServiceStub implements BankAccountDataService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String id) {
+    public ResultMessage delete(int id) {
         return ResultMessage.Success;
     }
 }

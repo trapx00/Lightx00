@@ -1,6 +1,8 @@
 package trapx00.lightx00.shared.po.salestaff;
 
-public class CommodityItem {
+import java.io.Serializable;
+
+public class CommodityItem implements Serializable {
 
     private String commodityId;
     private double number;
@@ -14,12 +16,12 @@ public class CommodityItem {
         return commodityId;
     }
 
-    public double getNumber() {
-        return number;
-    }
-
     public void setCommodityId(String commodityId) {
         commodityId = commodityId;
+    }
+
+    public double getNumber() {
+        return number;
     }
 
     public void setNumber(double number) {

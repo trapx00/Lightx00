@@ -13,7 +13,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class ClientPromotionDataServiceDriver {
     private ClientPromotionDataService service = new ClientPromotionDataServiceStub();
-    private ClientPromotionPo promotion = new ClientPromotionPo("0001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0);
+    private ClientPromotionPo promotion = new ClientPromotionPo("KHCXCL-20171112-00001",new Date(),new Date(), PromotionState.Waiting,1,200,null,0);
 
     @Test
     public void submit() throws Exception {
@@ -22,12 +22,12 @@ public class ClientPromotionDataServiceDriver {
 
    @Test
     public void queryPromotion() throws Exception {
-        assertEquals("0001",service.queryPromotion(x->true)[0].getId());
+        assertEquals("KHCXCL-20171112-00001",promotion.getId());
     }
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success,service.delete(promotion));
+        assertEquals(ResultMessage.Success,service.delete(promotion.getId()));
     }
 
 }

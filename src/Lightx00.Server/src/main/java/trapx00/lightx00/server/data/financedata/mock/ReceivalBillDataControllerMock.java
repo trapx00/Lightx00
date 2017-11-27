@@ -60,6 +60,18 @@ public class ReceivalBillDataControllerMock extends ReceivalBillDataController {
     }
 
     /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
+    }
+
+    /**
      * Queries bills
      *
      * @param query query

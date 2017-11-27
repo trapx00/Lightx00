@@ -10,6 +10,7 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 public class InitialEstablishmentDataServiceStub implements InitialEstablishmentDataService {
@@ -57,6 +58,18 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
     }
 
     /**
+     * Changes the state of a bill if approval is completed.
+     *
+     * @param billId    the id of the bill.
+     * @param billState new bill state. Only Approved and Rejected is allowed.
+     * @return whether the operation is done successfully.
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState billState) throws RemoteException {
+        return ResultMessage.Success;
+    }
+
+    /**
      * Queries SystemSnapshot.
      *
      * @param query query
@@ -68,7 +81,7 @@ public class InitialEstablishmentDataServiceStub implements InitialEstablishment
                 new SystemSnapshotPo("QCJZ-20171111-00001", new Date(), BillState.Approved,
                         new CommodityPo[]{new CommodityPo("123", "123", "123", 10.0, new Date(), "123", "123", 10.0, 10.0, 10.0, 10.0, 10.0)},
                         new ClientPo[]{new ClientPo("123", ClientType.Retailer, 5, "123", "123", "123", "123", "123@gmail.com", 10.0, 10.0, null)},
-                        new BankAccountPo[]{new BankAccountPo("123", "123", 10.0, new Date())}
+                        new BankAccountPo[]{new BankAccountPo("123", 10.0, new Date())}
                 )
         };
     }

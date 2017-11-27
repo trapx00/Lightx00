@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.inventorybl.factory;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.client.bl.inventorybl.mock.InventoryWarningBlControllerMock;
@@ -11,6 +12,11 @@ public class InventoryWarningServiceFactory {
     private static NotificationActivateService notificationActivateService = controller;
     private static NotificationAbandonService notificationAbandonService = controller;
     private static DraftDeleteService draftDeleteService = controller;
+    private static BillApprovalCompleteService billApprovalCompleteService = controller;
+
+    public static BillApprovalCompleteService getBillApprovalCompleteService() {
+        return billApprovalCompleteService;
+    }
 
     public static InventoryWarningBlController getInventoryWarningBlController(){
         return controller;

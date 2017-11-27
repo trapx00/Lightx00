@@ -1,14 +1,22 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.util.Arrays;
 import java.util.Date;
+
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 import trapx00.lightx00.shared.po.bill.BillState;
 
 
 public class  ReceivalPaymentBillPoBase extends FinanceBillPo {
     //收款单格式是SKD-yyyyMMDD-00001，付款单格式是FKD-yyyyMMDD-00001
+    @DatabaseField
     protected String clientId;
+    @DatabaseField
     protected String operatorId;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     protected Transcation[] transcations;
+    @DatabaseField
     protected double total;
 
     public ReceivalPaymentBillPoBase(String id, Date date, BillState state,
@@ -19,6 +27,9 @@ public class  ReceivalPaymentBillPoBase extends FinanceBillPo {
         this.operatorId = operatorId;
         this.transcations = transcations;
         this.total = total;
+    }
+
+    public ReceivalPaymentBillPoBase() {
     }
 
     public String getClientId() {
@@ -51,5 +62,15 @@ public class  ReceivalPaymentBillPoBase extends FinanceBillPo {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "ReceivalPaymentBillPoBase{" +
+            "clientId='" + clientId + '\'' +
+            ", operatorId='" + operatorId + '\'' +
+            ", transcations=" + Arrays.toString(transcations) +
+            ", total=" + total +
+            "} " + super.toString();
     }
 }

@@ -1,20 +1,24 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
+@DatabaseTable(tableName = "TotalPricePromotion")
 public class TotalPricePromotionPo extends PromotionPoBase {
+    @DatabaseField
     private double couponPrice;
+    @DatabaseField
     private double totalPrice;
-    private CommodityPo[] promotionCommodity;
 
-    public TotalPricePromotionPo(String id, Date startDate, Date endDate, PromotionState state, double couponPrice, double totalPrice,CommodityPo[] promotionCommodity) {
-        super(id, PromotionType.TotalPricePromotion, startDate, endDate, PromotionState.Waiting);
+    public TotalPricePromotionPo(String id, Date startDate, Date endDate, PromotionState state, double couponPrice, double totalPrice,PromotionCommodity[] promotionCommodities) {
+        super(id, PromotionType.TotalPricePromotion, startDate, endDate, PromotionState.Waiting,promotionCommodities);
         this.couponPrice = couponPrice;
         this.totalPrice = totalPrice;
-        this.promotionCommodity = promotionCommodity;
     }
+
+    public TotalPricePromotionPo() {}
 
     public void setCouponPrice(double couponPrice) {
         this.couponPrice = couponPrice;
@@ -30,14 +34,6 @@ public class TotalPricePromotionPo extends PromotionPoBase {
 
     public double getTotalPrice() {
         return totalPrice;
-    }
-
-    public CommodityPo[] getPromotionCommodity() {
-        return promotionCommodity;
-    }
-
-    public void setPromotionCommodity() {
-        this.promotionCommodity = promotionCommodity;
     }
 
 }

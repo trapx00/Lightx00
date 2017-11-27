@@ -8,7 +8,6 @@ import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
 public class CommoditySortDataServiceStub implements CommoditySortDataService {
     String commodityIdList[]={"C0001","C0002"};
-    String nextIds[]={"S0002"};
     String lowNextIds[]={""};
 
     @Override
@@ -25,7 +24,7 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
     public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
         return new CommoditySortPo[]{
                 new CommoditySortPo("S0001","Led", null,
-                "", nextIds)
+                "")
         };
     }
 
@@ -38,7 +37,7 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
     public CommoditySortPo[] display() {
         return new CommoditySortPo[]{
                 new CommoditySortPo("S0001","Led", null,
-                        "", nextIds)
+                        "")
         };
     }
 
@@ -46,12 +45,9 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
     public CommoditySortPo[] dispaly(CommoditySortPo commoditySort) {
         return new CommoditySortPo[]{
                 new CommoditySortPo(commoditySort.getId(),commoditySort.getName(), null,
-                        "", nextIds)
+                        "")
         };
     }
 
-    @Override
-    public void init() {
 
-    }
 }

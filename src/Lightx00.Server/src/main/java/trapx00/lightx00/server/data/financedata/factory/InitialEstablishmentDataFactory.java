@@ -1,5 +1,6 @@
 package trapx00.lightx00.server.data.financedata.factory;
 
+import trapx00.lightx00.server.data.financedata.InitialEstablishmentDataController;
 import trapx00.lightx00.server.data.financedata.mock.InitialEstablishmentDataControllerMock;
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 
@@ -10,7 +11,7 @@ public class InitialEstablishmentDataFactory {
 
     static {
         try {
-            service = new InitialEstablishmentDataControllerMock();
+            service = new InitialEstablishmentDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

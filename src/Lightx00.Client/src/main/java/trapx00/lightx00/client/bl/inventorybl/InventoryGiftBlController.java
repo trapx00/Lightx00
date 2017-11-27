@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.commoditybl.CommodityService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
@@ -9,10 +10,11 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.po.bill.BillState;
 
 import java.util.Date;
 
-public class InventoryGiftBlController implements InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityService {
+public class InventoryGiftBlController implements BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityService {
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo
@@ -78,4 +80,17 @@ public class InventoryGiftBlController implements InventoryGiftBlService,Notific
     public ResultMessage deleteDraft(String id) {
         return ResultMessage.Success;
     }
+
+    /**
+     * When bill is approved, this method is called to modify the state of the bill.
+     *
+     * @param billId id for the bill
+     * @param state  newState. Only BillState.Approved and BillState.Rejected are allowed.
+     * @return whether the operation is done successfully
+     */
+    @Override
+    public ResultMessage approvalComplete(String billId, BillState state) {
+        return null;
+    }
+
 }

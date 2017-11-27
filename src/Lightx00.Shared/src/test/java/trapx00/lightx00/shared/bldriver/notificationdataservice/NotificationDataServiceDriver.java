@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationD
 import trapx00.lightx00.shared.dataservicestub.notificationdataservice.NotificationDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
+import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import static org.junit.Assert.*;
 
@@ -14,17 +15,17 @@ public class NotificationDataServiceDriver {
     private NotificationPo[] notifications;
     @Before
     public void setUp() throws Exception {
-        notifications = service.update(x->true);
+        notifications = service.query(new NotificationQueryVo());
     }
 
     @Test
     public void update() throws Exception {
-        assertEquals("123", notifications[0].getId());
+        assertEquals(0, notifications[0].getId());
     }
 
     @Test
     public void acknowledge() throws Exception {
-        assertEquals(ResultMessage.Success, service.acknowledge(notifications[0]));
+        assertEquals(ResultMessage.Success, service.acknowledge(notifications[0].getId()));
     }
 
 }

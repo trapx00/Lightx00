@@ -6,15 +6,16 @@ import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDat
 import trapx00.lightx00.shared.dataservicestub.bankaccountdataservice.BankAccountDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import static org.junit.Assert.*;
 
 public class BankAccountDataServiceDriver {
     private BankAccountDataService service = new BankAccountDataServiceStub();
-    private BankAccountPo account = service.query(x->true)[0];
+    private BankAccountPo account = service.query(new BankAccountQueryVo())[0];
     @Test
     public void query() throws Exception {
-        assertEquals("123", account.getId());
+        assertEquals(0, account.getId());
     }
 
     @Test

@@ -8,12 +8,15 @@ import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import java.sql.SQLException;
 
 public class BankAccountDataDaoFactory extends BaseDatabaseFactory {
-    private static Dao<BankAccountPo, String> bankAccountDao;
+    static {
+        initTable(BankAccountPo.class);
+    }
+    private static Dao<BankAccountPo, Integer> bankAccountDao;
 
-    public static Dao<BankAccountPo, String> getBankAccountDao() {
-        if (bankAccountDao==null) {
+    public static Dao<BankAccountPo, Integer> getBankAccountDao() {
+        if (bankAccountDao == null) {
             try {
-                bankAccountDao = DaoManager.createDao(connectionSource,BankAccountPo.class);
+                bankAccountDao = DaoManager.createDao(connectionSource, BankAccountPo.class);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

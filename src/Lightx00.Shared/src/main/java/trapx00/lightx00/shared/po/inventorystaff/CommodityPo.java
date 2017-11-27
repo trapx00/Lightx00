@@ -1,21 +1,50 @@
 package trapx00.lightx00.shared.po.inventorystaff;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class CommodityPo {
+
+@DatabaseTable(tableName = "Commodity")
+public class CommodityPo implements Serializable {
     //商品
+    @DatabaseField(id=true)
     private String id;//型号+名称生成
+    @DatabaseField
     private String name;
+    @DatabaseField
     private String type;
+    @DatabaseField
     private  double amount;
+    @DatabaseField
     private  Date productionDate;//生产日期
+    @DatabaseField
     private String batch;//批次
+    @DatabaseField
     private String batchNo;//批号
+    @DatabaseField
     private double purchasePrice;//进价
+    @DatabaseField
     private  double recentPurchasePrice;//最近进价
+    @DatabaseField
     private double retailPrice;//售价
+    @DatabaseField
     private double recentRetailPrice;//最近售价
+    @DatabaseField
     private double warningValue;//警戒值
+
+    public double getInventoryNum() {
+        return inventoryNum;
+    }
+
+    public void setInventoryNum(double inventoryNum) {
+        this.inventoryNum = inventoryNum;
+    }
+
+    @DatabaseField
+    private double inventoryNum;//报警报溢数量
 
     public CommodityPo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
@@ -35,6 +64,9 @@ public class CommodityPo {
         this.warningValue = warningValue;
     }
 
+    public CommodityPo(){
+
+    }
     public String getId() {
         return id;
     }

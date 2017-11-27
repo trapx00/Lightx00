@@ -5,6 +5,7 @@ import trapx00.lightx00.client.bl.financebl.factory.PaymentBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
@@ -13,6 +14,19 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class PaymentBillVo extends ReceivalPaymentBillVoBase {
+
+    /**
+     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return ContinueWritable
+     */
+    @Override
+    public ContinueWritable continueWriteService() {
+        return null;
+        //not initialized
+    }
+
+
     public PaymentBillVo(String id, Date date, BillState state, String clientId, String operatorId, Transcation[] transcations, double total) {
         super(FinanceBillType.PaymentBill, id, date, state, clientId, operatorId, transcations, total);
     }
@@ -38,6 +52,16 @@ public class PaymentBillVo extends ReceivalPaymentBillVoBase {
     }
 
     /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return BillApprovalCompleteService
+     */
+    @Override
+    public BillApprovalCompleteService billApprovalCompleteService() {
+        return PaymentBillBlFactory.getBillApprovalCompleteService();
+    }
+
+    /**
      * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
      *
      * @return key-value maps for the properties
@@ -57,13 +81,5 @@ public class PaymentBillVo extends ReceivalPaymentBillVoBase {
         return PaymentBillBlFactory.getDraftDeleteService();
     }
 
-    /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
-     *
-     * @return ContinueWritable
-     */
-    @Override
-    public ContinueWritable continueWriteService() {
-        return null;
-    }
+
 }

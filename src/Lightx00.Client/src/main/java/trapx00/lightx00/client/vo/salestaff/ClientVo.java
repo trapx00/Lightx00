@@ -1,6 +1,6 @@
 package trapx00.lightx00.client.vo.salestaff;
 
-
+import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
 
 public class ClientVo {

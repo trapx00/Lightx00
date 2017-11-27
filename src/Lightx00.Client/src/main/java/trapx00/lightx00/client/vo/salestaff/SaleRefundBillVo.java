@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.vo.salestaff;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
@@ -134,6 +135,16 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
+        return null;
+    }
+
+    /**
+     * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
+     *
+     * @return BillApprovalCompleteService
+     */
+    @Override
+    public BillApprovalCompleteService billApprovalCompleteService() {
         return null;
     }
 

@@ -7,6 +7,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 
 import java.util.Date;
 
@@ -17,7 +18,7 @@ public class InventoryWarningDataServiceDriver {
     CommodityPo commodityPo=null;
     @Test
     public void submit() throws Exception {
-        assertEquals(ResultMessage.Success,service.submit(new InventoryBillPo("S0001",new Date(), BillState.Approved,null)));
+        assertEquals(ResultMessage.Success,service.submit(new InventoryDetailBillPo("S0001",new Date(), BillState.Approved,null,null)));
     }
 
     @Test
@@ -26,23 +27,5 @@ public class InventoryWarningDataServiceDriver {
 
     }
 
-    @Test
-    public void getAlarmByIds() throws Exception {
-        assertEquals("L0001",service.getAlarmByIds("L0001")[0].getId());
-    }
-
-    @Test
-    public void getOverflowByIds() throws Exception {
-        assertEquals("L0001",service.getOverflowByIds("L0001")[0].getId());
-    }
-
-    @Test
-    public void getLossByIds() throws Exception {
-        assertEquals("L0001",service.getLossByIds("L0001")[0].getId());
-    }
-
-   // @Test
-    //public void init() throws Exception {
-   // }
 
 }

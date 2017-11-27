@@ -6,7 +6,10 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import java.util.Date;
 
 public class InventoryStaffPo extends EmployeePo {
-    public InventoryStaffPo(String name, String Id, Date workSince, String username, String password) {
-        super(name, Id, workSince, username, password, EmployeePosition.InventoryStaff);
+    public InventoryStaffPo(String name, String id, Date workSince, String username, String password) {
+        super(name, id, workSince, username, password, EmployeePosition.InventoryStaff);
+    }
+
+    public InventoryStaffPo() {
     }
 }

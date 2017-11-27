@@ -6,6 +6,7 @@ import trapx00.lightx00.client.bl.financebl.PaymentBillBlController;
 import trapx00.lightx00.client.bl.financebl.factory.PaymentBillBlFactory;
 import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +15,7 @@ public class PaymentBillBlControllerTest {
     private PaymentBillVo bill = null;
     @Before
     public void setUp() {
-        bill = controller.query(x->true)[0];
+        bill = controller.query(new PaymentBillQueryVo())[0];
     }
 
     @Test

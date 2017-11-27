@@ -1,5 +1,6 @@
 package trapx00.lightx00.server.data.financedata.factory;
 
+import trapx00.lightx00.server.data.financedata.PaymentBillDataController;
 import trapx00.lightx00.server.data.financedata.mock.PaymentBillDataControllerMock;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 
@@ -10,7 +11,7 @@ public class PaymentBillDataFactory {
 
     static {
         try {
-            service = new PaymentBillDataControllerMock();
+            service = new PaymentBillDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

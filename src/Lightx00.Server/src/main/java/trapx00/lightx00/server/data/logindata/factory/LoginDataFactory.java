@@ -1,5 +1,6 @@
 package trapx00.lightx00.server.data.logindata.factory;
 
+import trapx00.lightx00.server.data.logindata.LoginDataController;
 import trapx00.lightx00.server.data.logindata.mock.LoginDataControllerMock;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 
@@ -10,7 +11,7 @@ public class LoginDataFactory {
 
     static {
         try {
-            service = new LoginDataControllerMock();
+            service = new LoginDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
