@@ -27,8 +27,10 @@ public class ClientPo {
     private double payableQuota;
     @DatabaseField
     private String defaultOperatorId;
+    @DatabaseField
+    private ClientState clientState;
 
-    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId) {
+    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId, ClientState clientState) {
         this.id = id;
         this.clientType = clientType;
         this.clientLevel = clientLevel;
@@ -40,9 +42,18 @@ public class ClientPo {
         this.receivableQuota = receivableQuota;
         this.payableQuota = payableQuota;
         this.defaultOperatorId = defaultOperatorId;
+        this.clientState = clientState;
     }
 
     public ClientPo() {
+    }
+
+    public ClientState getClientState() {
+        return clientState;
+    }
+
+    public void setClientState(ClientState clientState) {
+        this.clientState = clientState;
     }
 
     public String getId() {
