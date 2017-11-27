@@ -5,6 +5,7 @@ import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
 
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class ClientDataControllerTest {
     }
 
     String[] ids = new String[1];
-    ClientPo clientPo = new ClientPo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, "0");
+    ClientPo clientPo = new ClientPo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, "0", ClientState.Real);
     ClientDataService service = ClientDataFactory.getService();
 
     @org.junit.Test
