@@ -15,6 +15,6 @@ public class EmployeeInfoMock implements EmployeeInfo {
      */
     @Override
     public EmployeeVo queryById(String id) {
-        return new FinanceStaffVo("123","1",new Date(),"123");
+        return new FinanceStaffVo("123",id,new Date(),"123");
     }
 }

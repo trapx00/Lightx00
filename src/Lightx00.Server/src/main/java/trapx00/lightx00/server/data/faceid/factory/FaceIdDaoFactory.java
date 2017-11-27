@@ -12,13 +12,14 @@ public class FaceIdDaoFactory extends BaseDatabaseFactory {
         initTable(EmployeeFaceIdInfo.class);
     }
 
-    private static Dao<EmployeeFaceIdInfo, Integer> dao;
+    private static Dao<EmployeeFaceIdInfo, String> dao;
+
 
     /**
      * Gets dao.
      * @return dao
      */
-    public static Dao<EmployeeFaceIdInfo, Integer> getDao() {
+    public static Dao<EmployeeFaceIdInfo, String> getDao() {
         if (dao == null) {
             try {
                 dao = DaoManager.createDao(connectionSource,EmployeeFaceIdInfo.class);

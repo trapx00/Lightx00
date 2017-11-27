@@ -11,7 +11,7 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 public class AdminPo extends EmployeePo {
 
     public AdminPo(String name, String id, Date workSince, String username,
-                   String password, EmployeePosition position) {
+                   String password) {
         super(name, id, workSince, username, password, EmployeePosition.Admin);
     }
 

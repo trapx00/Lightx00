@@ -14,7 +14,7 @@ import java.io.IOException;
 public class FinishLoginLogic {
     public static void finishLogin(EmployeeVo employeeVo) {
         try {
-            UiUtil.getStage().close();
+            UiUtil.closeStage();
             Stage newStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Client.class.getResource("/fxml/mainui/FrameworkUi.fxml"));

@@ -26,7 +26,7 @@ public class FaceIdAuthenticationDataServiceFactory {
     }
 
     public static FaceIdAuthenticationDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }
