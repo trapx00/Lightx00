@@ -37,7 +37,7 @@ public class DraftBlControllerMock extends DraftBlController {
                         new PaymentBillVo("FKD-20171111-00001",new Date(), BillState.Draft, "123", "123",
                                 new Transcation[] { new Transcation("123",10.0,"123")},
                                 10.0),
-                    DraftType.Bill
+                        DraftType.Bill
                         )
                 };
     }
