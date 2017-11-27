@@ -2,17 +2,17 @@ package trapx00.lightx00.server.test.data.logindata;
 
 import com.j256.ormlite.dao.Dao;
 import org.junit.Test;
-import trapx00.lightx00.server.data.logindata.factory.LoginDataDaoFactory;
+import trapx00.lightx00.server.data.admindata.factory.AdminDataDaoFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
-import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class LoginDataControllerTest {
     static {
@@ -22,9 +22,9 @@ public class LoginDataControllerTest {
             e.printStackTrace();
         }
     }
-    private Dao<EmployeePo, String> dao = LoginDataDaoFactory.getDao();
+    private Dao<FinanceStaffPo, String> dao = AdminDataDaoFactory.getFinanceStaffDao();
     private LoginDataService service = LoginDataFactory.getService();
-    private EmployeePo employeePo = new FinanceStaffPo("123","123",new Date(),"123","123");
+    private FinanceStaffPo employeePo = new FinanceStaffPo("123","123",new Date(),"123","123");
     @Test
     public void loginSuccess() throws Exception {
         dao.create(employeePo);

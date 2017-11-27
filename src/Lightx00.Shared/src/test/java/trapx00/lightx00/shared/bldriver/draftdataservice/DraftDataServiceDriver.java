@@ -12,7 +12,7 @@ public class DraftDataServiceDriver {
     private DraftDataService service = new DraftDataServiceStub();
     @Test
     public void update() throws Exception {
-        assertEquals("FXD-123",service.query(new DraftQueryVo())[0].getDraftableId());
+        assertEquals("FXD-20171111-00001",service.query(new DraftQueryVo())[0].getDraftableId());
     }
 
     @Test

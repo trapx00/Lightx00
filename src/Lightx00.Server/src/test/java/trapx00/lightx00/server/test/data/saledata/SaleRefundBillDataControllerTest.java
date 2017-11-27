@@ -83,10 +83,10 @@ public class SaleRefundBillDataControllerTest {
     @Test
     public void activate() throws Exception {
         try {
-            bill.setState(BillState.WaitingForApproval);
+            bill.setState(BillState.Approved);
             service.submit(bill);
             service.activate(bill.getId());
-            assertEquals(BillState.Approved, dao.queryForEq("id", bill.getId()).get(0).getState());
+            assertEquals(BillState.Activated, dao.queryForEq("id", bill.getId()).get(0).getState());
         } finally {
             bill.setState(BillState.Draft);
             dao.deleteById(bill.getId());

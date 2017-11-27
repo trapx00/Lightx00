@@ -109,8 +109,8 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     @Override
     public String login(String username, String password) {
         for (SpecificEmployeeDataController controller : positionDaoMap.values()) {
-            List<EmployeePo> employeePo = controller.query(x -> ((EmployeePo) x).getUsername().equals(username)
-                    && ((EmployeePo) x).getPassword().equals(password));
+            List<EmployeePo> employeePo = controller.query(x ->
+                ((EmployeePo) x).getUsername().equals(username) && ((EmployeePo) x).getPassword().equals(password));
             if (employeePo.size() != 0) {
                 return employeePo.get(0).getId();
             }
