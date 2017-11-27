@@ -5,10 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.plugin.util.UIUtil;
 import trapx00.lightx00.client.presentation.helpui.UiUtil;
 import trapx00.lightx00.client.presentation.loginui.FaceIdLoginUiController;
-import trapx00.lightx00.client.presentation.loginui.LoginUiController;
 
 import java.io.IOException;
 
