@@ -44,7 +44,7 @@ public class ClientBlControllerTest {
     public void modify() throws Exception {
         clientBlController.add(clientVo);
         clientVo.setAddress("123");
-        clientBlController.modify(clientVo)
+        clientBlController.modify(clientVo);
         assertEquals("123",clientBlController.query("0")[0].getAddress());
         clientBlController.delete(new String[]{"0"});
     }

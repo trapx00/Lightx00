@@ -6,6 +6,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlSe
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 public class InventoryBillServiceControllerMock extends InventoryBillServiceController {
     InventoryWarningBlService inventoryWarningBlService=new InventoryWarningBlControllerMock();
@@ -31,7 +32,7 @@ public class InventoryBillServiceControllerMock extends InventoryBillServiceCont
      * @return array of PurchaseRefundBillVo
      */
     @Override
-    public InventoryGiftVo[] queryInventoryGift(InventoryBillQueryVo inventoryBillQueryVo) {
+    public InventoryGiftVo[] queryInventoryGift(InventoryGiftQueryVo inventoryBillQueryVo) {
         return inventoryGiftBlService.query(inventoryBillQueryVo);
     }
 }

@@ -3,6 +3,7 @@ package trapx00.lightx00.shared.dataservicestub.clientdataservice;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
 
 import java.rmi.RemoteException;
@@ -21,7 +22,8 @@ public class ClientDataServiceStub implements ClientDataService {
                 "12345679@qq.com",
                 123,
                 456,
-                "0");
+                "0",
+            ClientState.Real);
         return clientPos;
     }
 
