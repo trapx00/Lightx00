@@ -2,6 +2,7 @@ package trapx00.lightx00.client.blservice.inventoryblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
@@ -26,6 +27,9 @@ public interface InventoryGiftBlService {
      * @return the giftBill
      */
     InventoryGiftVo getGift(Date time);
+
+
+    InventoryGiftVo[] query(InventoryBillQueryVo inventoryBillQueryVo);
 
 
 

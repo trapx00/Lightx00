@@ -7,15 +7,15 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 import java.util.Date;
 
-public class InventoryWarningBlController implements BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService,InventoryBillService {
+public class InventoryWarningBlController implements BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService {
     /**
      * Submits a Bill.
      * @param bill
@@ -119,10 +119,6 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      * @param inventoryBillQueryVo
      * @return  the list of inventoryBIlls that match to the requirement
      */
-    @Override
-    public InventoryBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo) {
-        return new InventoryBillVo[0];
-    }
 
     /**
      * When bill is approved, this method is called to modify the state of the bill.

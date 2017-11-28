@@ -4,6 +4,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServi
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 import java.util.Date;
 
@@ -25,6 +26,11 @@ public class InventoryGiftBlServiceStub implements InventoryGiftBlService {
 
     @Override
     public InventoryGiftVo getGift(Date time) {
+        return null;
+    }
+
+    @Override
+    public InventoryGiftVo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
         return null;
     }
 

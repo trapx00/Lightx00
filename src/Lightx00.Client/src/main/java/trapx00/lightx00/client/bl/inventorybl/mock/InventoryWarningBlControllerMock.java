@@ -2,11 +2,11 @@ package trapx00.lightx00.client.bl.inventorybl.mock;
 
 import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 public class InventoryWarningBlControllerMock extends InventoryWarningBlController{
     /**

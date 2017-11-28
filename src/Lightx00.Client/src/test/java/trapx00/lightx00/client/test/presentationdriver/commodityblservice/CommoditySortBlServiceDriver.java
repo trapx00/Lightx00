@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommoditySortBlServiceStub;
-import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 
@@ -13,17 +12,14 @@ import static org.junit.Assert.*;
 public class CommoditySortBlServiceDriver {
 
     CommoditySortBlService service=new CommoditySortBlServiceStub();
-    CommoditySortVo[] commoditysorts;
+
     String commodityIdList[]={""};
     String nextIds[]={"S0002"};
     CommoditySortVo Led=new CommoditySortVo("S0001","Led", null,
     "",  nextIds);
+    CommoditySortVo[] commoditysorts={Led};
 
 
-    @Before
-    public void setUp() throws Exception {
-        commoditysorts = service.query(new CommoditySortQueryVo("S0001","Led","S0000"));
-    }
     @Test
     public void add() throws Exception {
         assertEquals(ResultMessage.Success,service.add(Led,null));

@@ -77,12 +77,12 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
         }
     }
     /**
-     * Submits a CashBill or save it as a draft.
+     * Submits a InventoryBill or save it as a draft.
      * If there is a bill with the same id as passed-in parameter do,
      *    if the existing bill is in BillState.Draft state, it will be updated/replaced by parameter.
      *    otherwise a IdExistsException would be thrown.
      *
-     * @param bill CashBill
+     * @param bill InventoryBill
      * @return whether the operation is done successfully
      */
     @Override
@@ -114,7 +114,7 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
     }
 
     /**
-     * Activates a CashBill.
+     * Activates a InventoryBill.
      * The bill must be in BillState.WaitingForApproval state.
      * Otherwise a BillInvalidStateException will be thrown.
      *
@@ -127,7 +127,7 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
     }
 
     /**
-     * Abandons a CashBill.
+     * Abandons a InventoryBill.
      * If a Bill is in BillState.Draft, it will be deleted.
      * If a Bill is in BillState.Rejected/Approved/WaitingForApproval, it will be changed as Abandoned.
      * If a bill is in other state, a BillInvalidStateException will be thrown.
@@ -140,10 +140,10 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
     }
 
     /**
-     * Queries CashBill.
+     * Queries InventoryBill.
      *
      * @param query query condition
-     * @return CashBillVos that match the query condition
+     * @return  InventoryBillVos that match the query condition
      */
     @Override
     public InventoryDetailBillPo[] query(InventoryBillQueryVo query)  {
