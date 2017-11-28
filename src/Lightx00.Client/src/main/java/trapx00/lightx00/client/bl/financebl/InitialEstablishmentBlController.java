@@ -3,14 +3,31 @@ package trapx00.lightx00.client.bl.financebl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.datafactory.financedataservicefactory.InitialEstablishmentDataServiceFactory;
+import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
 public class InitialEstablishmentBlController implements InitialEstablishmentBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, SystemSnapshotInfo, BillApprovalCompleteService {
+
+    private InitialEstablishmentDataService dataService = InitialEstablishmentDataServiceFactory.getService();
+
+//    private CommonBillBlController<SystemSnapshotVo, SystemSnapshotPo, SystemSnapshotQueryVo> commonBillBlController
+//        = new CommonBillBlController<>(dataService, "期初建账", );
+//
+//    private SystemSnapshotPo voToPo(SystemSnapshotVo vo) {
+//
+//    }
+//
+//    private SystemSnapshotVo poToVo(SystemSnapshotPo po) {
+//
+//    }
 
     /**
      * Auto fills some contents with current system state.

@@ -13,6 +13,7 @@ import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 public class PaymentBillBlController implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService {
 
 
+
     /**
      * Submits a PaymentBill.
      *

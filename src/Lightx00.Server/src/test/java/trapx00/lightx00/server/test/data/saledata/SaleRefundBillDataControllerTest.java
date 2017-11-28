@@ -121,8 +121,8 @@ public class SaleRefundBillDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new SaleRefundBillQueryVo(q -> q.where().eq("id", bill.getId()).prepare())).length);
-        assertEquals(0, service.query(new SaleRefundBillQueryVo(q -> q.where().eq("operatorId", "12").prepare())).length);
+        assertEquals(1, service.query(new SaleRefundBillQueryVo().eq("id", bill.getId()).castBack()).length);
+        assertEquals(0, service.query(new SaleRefundBillQueryVo().eq("operatorId", "12").castBack()).length);
     }
 
     @Test

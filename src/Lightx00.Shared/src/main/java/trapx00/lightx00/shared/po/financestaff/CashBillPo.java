@@ -1,5 +1,6 @@
 package trapx00.lightx00.shared.po.financestaff;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 
 @DatabaseTable(tableName = "CashBill")
-public class CashBillPo extends FinanceBillPo {
+public class CashBillPo extends FinanceBillPo  {
     @DatabaseField
     private String operatorId;
     @DatabaseField

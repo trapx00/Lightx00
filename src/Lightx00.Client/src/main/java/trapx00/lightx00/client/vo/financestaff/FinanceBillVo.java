@@ -8,7 +8,7 @@ import trapx00.lightx00.client.vo.BillVo;
 
 
 public abstract class FinanceBillVo extends BillVo {
-    private FinanceBillType financeBillType;
+    protected FinanceBillType financeBillType;
     public FinanceBillVo(FinanceBillType financeBillType, String id, Date date,
                          BillState state) {
         super(BillType.FinanceBill, id, date, state);

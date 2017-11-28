@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 
 public class ClientDataServiceFactory {
 
-    private static ClientDataService service=new ClientDataServiceStub();
+    private static ClientDataService service = new ClientDataServiceStub();
 
     public static void initRmi(){
         try {

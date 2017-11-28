@@ -1,14 +1,12 @@
 package trapx00.lightx00.server;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
 import trapx00.lightx00.server.data.admindata.factory.AdminDataDaoFactory;
 import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
 import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
-import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
+import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
-import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
 import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleBillDataFactory;
@@ -18,6 +16,7 @@ import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.admindataservice.FaceIdRegistrationDataService;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
@@ -25,26 +24,18 @@ import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.po.admin.AdminPo;
-import trapx00.lightx00.shared.po.employee.EmployeeFaceIdInfo;
-import trapx00.lightx00.shared.po.employee.EmployeePo;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
-import trapx00.lightx00.shared.po.log.LogPo;
-import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.shared.util.RmiHelper;
 
-import javax.print.attribute.standard.MediaSize;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Date;
-import java.sql.SQLException;
-import java.util.List;
 
 public class Server {
 
@@ -65,7 +56,7 @@ public class Server {
             FaceIdRegistrationDataService faceIdRegistrationDataService = FaceIdRegistrationDataFactory.getService();
             FaceIdAuthenticationDataService faceIdAuthenticationDataService = FaceIdAuthenticationDataFactory.getDataService();
             LoginDataService loginDataService = LoginDataFactory.getService();
-
+            CashBillDataService cashBillDataService = CashBillDataFactory.getService();
             LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
             export(saleBillDataService);
             export(saleRefundBillDataService);
@@ -75,6 +66,7 @@ public class Server {
             export(faceIdRegistrationDataService);
             export(faceIdAuthenticationDataService);
             export(loginDataService);
+            export(cashBillDataService);
             System.out.println(">>>>>INFO:远程对象绑定成功！");
 
             FinanceStaffPo employeePo = new FinanceStaffPo("123","1",new Date(), "123","123");
@@ -116,3 +108,4 @@ public class Server {
     }
 
 }
+

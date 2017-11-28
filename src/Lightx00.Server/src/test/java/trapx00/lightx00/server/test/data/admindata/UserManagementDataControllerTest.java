@@ -10,6 +10,8 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -37,10 +39,9 @@ public class UserManagementDataControllerTest {
         managerDao.create(account);
         managerDao.create(anotherManagerPo);
         try {
-
-            assertEquals(2, service.query(x -> x.getPosition().equals(EmployeePosition.Manager)).length);
-            assertEquals(1, service.query(x -> x.getUsername().equals("123")).length);
-            assertEquals(0, service.query(x -> x.getPosition().equals(EmployeePosition.Admin)).length);
+            assertEquals(2, service.query(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.Manager, new SpecificUserAccountQueryVo())).length);
+            assertEquals(1, service.query(new UserAccountQueryVo().addQueryVoForAllEmployeePosition((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo().eq("username","123"))).length);
+            assertEquals(0, service.query(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.Admin, new SpecificUserAccountQueryVo())).length);
         } finally {
             managerDao.deleteById(account.getId());
             managerDao.deleteById(anotherManagerPo.getId());
@@ -52,9 +53,9 @@ public class UserManagementDataControllerTest {
         managerDao.create(account);
         financeStaffDao.create(financeStaffPo);
         try {
-            assertEquals(2, service.query(x -> true).length);
-            assertEquals("001", service.query(x -> x.getPosition().equals(EmployeePosition.Manager))[0].getId());
-            assertEquals(0, service.query(x -> x.getPosition().equals(EmployeePosition.InventoryStaff)).length);
+            assertEquals(2, service.query(new UserAccountQueryVo().addQueryVoForAllEmployeePosition(new SpecificUserAccountQueryVo())).length);
+            assertEquals("001", service.query(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.Manager, new SpecificUserAccountQueryVo()))[0].getId());
+            assertEquals(0, service.query(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo())).length);
         } finally {
             managerDao.deleteById(account.getId());
             financeStaffDao.deleteById(financeStaffPo.getId());

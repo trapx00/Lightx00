@@ -12,7 +12,7 @@ public class ServerLogServiceController implements ServerLogService {
     @Override
     public void printLog(Object sender, String content) {
         StringBuilder sb = new StringBuilder();
-        sb.append(DateHelper.currentDateString("yyyy-MM-dd HH:mm:ss.SSS"))
+        sb.append(DateHelper.currentDateStringForLog())
                 .append(" [")
                 .append(sender)
                 .append("] ")

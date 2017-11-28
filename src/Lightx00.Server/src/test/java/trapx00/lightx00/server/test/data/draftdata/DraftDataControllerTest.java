@@ -38,8 +38,8 @@ public class DraftDataControllerTest {
         int id1 = dao.extractId(dumbDraftPo), id2 = dao.extractId(anotherDumbDraftPo);
         try {
             assertEquals(2, service.query(new DraftQueryVo()).length);
-            assertEquals(1, service.query(new DraftQueryVo(q->q.where().eq("id",id1).prepare())).length);
-            assertEquals(0, service.query(new DraftQueryVo(q->q.where().eq("draftableId","XJFYD-20171113-00001").prepare())).length);
+            assertEquals(1, service.query(new DraftQueryVo().eq("id",id1).castBack()).length);
+            assertEquals(0, service.query(new DraftQueryVo().eq("draftableId","XJFYD-20171113-00001").castBack()).length);
         } finally {
             dao.deleteById(id1);
             dao.deleteById(id2);

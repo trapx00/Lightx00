@@ -15,27 +15,27 @@ public class BankAccountBlControllerTest {
     private BankAccountBlController controller = BankAccountFactory.getController();
     @Test
     public void modifyBankAccount() throws Exception {
-        assertEquals(ResultMessage.Success, controller.modifyBankAccount("123",-10));
+        assertEquals(ResultMessage.Success, controller.modifyBankAccount(1,-10));
     }
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success, controller.add(new BankAccountVo("123","123",10, new Date())));
+        assertEquals(ResultMessage.Success, controller.add(new BankAccountVo(1,"1",10, new Date())));
     }
 
     @Test
     public void modify() throws Exception {
-        assertEquals(ResultMessage.Success, controller.modify(new BankAccountVo("123","123",10, new Date())));
+        assertEquals(ResultMessage.Success, controller.modify(new BankAccountVo(1,"1",10, new Date())));
     }
 
     @Test
     public void query() throws Exception {
-        assertEquals("123", controller.query(new BankAccountQueryVo(q->q.where().eq("id",1).prepare()))[0].getId());
+        assertEquals(1, controller.query(new BankAccountQueryVo().eq("id",1).castBack())[0].getId());
     }
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success, controller.delete("123"));
+        assertEquals(ResultMessage.Success, controller.delete(1));
     }
 
 }

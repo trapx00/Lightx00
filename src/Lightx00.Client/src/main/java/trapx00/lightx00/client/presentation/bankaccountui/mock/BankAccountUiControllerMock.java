@@ -14,7 +14,7 @@ public class BankAccountUiControllerMock extends BankAccountUiController {
     @Override
     public BankAccountVo[] showBankAccountSelectDialog() {
         return new BankAccountVo[]{
-                new BankAccountVo("123","123",0,new Date())
+                new BankAccountVo(1,"123",0,new Date())
         };
     }
 }

@@ -9,14 +9,17 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
@@ -57,10 +60,12 @@ public class UserManagementDataController extends UnicastRemoteObject implements
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        List<? super EmployeePo> list = positionDaoMap.values().stream()
-            .map(x -> x.query(query))
-            .flatMap(List::stream)
-            .collect(Collectors.toList());
+        List<EmployeePo> list = new ArrayList<>();
+        for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> entry : positionDaoMap.entrySet()) {
+            if (query.getQueryVoForPosition(entry.getKey()) != null) {
+                list.addAll(entry.getValue().query(query.getQueryVoForPosition(entry.getKey())));
+            }
+        }
         return list.toArray(new EmployeePo[list.size()]);
     }
 
@@ -108,9 +113,9 @@ public class UserManagementDataController extends UnicastRemoteObject implements
      */
     @Override
     public String login(String username, String password) {
-        for (SpecificEmployeeDataController controller : positionDaoMap.values()) {
-            List<EmployeePo> employeePo = controller.query(x ->
-                ((EmployeePo) x).getUsername().equals(username) && ((EmployeePo) x).getPassword().equals(password));
+        for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> controller : positionDaoMap.entrySet()) {
+            List<EmployeePo> employeePo = controller.getValue().query((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo()
+                .eq("username", username).and().eq("password", password));
             if (employeePo.size() != 0) {
                 return employeePo.get(0).getId();
             }

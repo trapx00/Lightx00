@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
-
+@DatabaseTable(tableName = "Notification")
 public class NotificationPo {
     @DatabaseField(generatedId = true)
     private int id;

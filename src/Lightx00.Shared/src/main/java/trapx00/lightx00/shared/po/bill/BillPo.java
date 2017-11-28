@@ -2,9 +2,10 @@ package trapx00.lightx00.shared.po.bill;
 
 import com.j256.ormlite.field.DatabaseField;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BillPo {
+public class BillPo implements Serializable {
     @DatabaseField
     private BillType billType;
     @DatabaseField(id = true)

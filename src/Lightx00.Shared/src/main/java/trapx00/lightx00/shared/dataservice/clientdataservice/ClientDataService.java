@@ -30,7 +30,7 @@ public interface  ClientDataService extends Remote {
     public String getId() throws RemoteException;//获得新客户的ID
 
     /**
-     * add a client
+     * addQueryVoForOneEmployeePosition a client
      * @param client to be added
      * @return whether the operation is done successfully
      */
