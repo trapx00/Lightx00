@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.rmi.RemoteException;
 import java.util.Date;
@@ -26,7 +27,7 @@ public class InventoryGiftDataServiceStub implements InventoryGiftDataService {
     }
 
     @Override
-    public InventoryGiftPo[] query(InventoryBillQueryVo query) throws RemoteException {
+    public InventoryGiftPo[] query(InventoryGiftQueryVo query) throws RemoteException {
         return new InventoryGiftPo[0];
     }
 
