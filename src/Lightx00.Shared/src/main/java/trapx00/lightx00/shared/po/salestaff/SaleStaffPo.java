@@ -1,10 +1,12 @@
 package trapx00.lightx00.shared.po.salestaff;
 
+import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 
 import java.util.Date;
 
+@DatabaseTable(tableName = "SaleStaffPo")
 public class SaleStaffPo extends EmployeePo {
     private SaleStaffType saleStaffType;
 

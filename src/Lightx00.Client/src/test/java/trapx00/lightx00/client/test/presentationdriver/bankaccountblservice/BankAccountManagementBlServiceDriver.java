@@ -28,7 +28,7 @@ public class BankAccountManagementBlServiceDriver {
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success, service.delete(null));
+        assertEquals(ResultMessage.Success, service.delete(1));
     }
 
 }

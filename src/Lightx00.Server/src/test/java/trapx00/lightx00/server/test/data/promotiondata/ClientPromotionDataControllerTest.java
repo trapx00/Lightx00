@@ -85,8 +85,8 @@ public class ClientPromotionDataControllerTest {
     public void query() throws Exception {
         try {
             dao.create(promotion);
-            assertEquals(1, service.queryPromotion(new ClientPromotionQueryVo(q -> q.where().eq("id", promotion.getId()).prepare())).length);
-            assertEquals(0, service.queryPromotion(new ClientPromotionQueryVo(q -> q.where().eq("id", "12").prepare())).length);
+            assertEquals(1, service.queryPromotion(new ClientPromotionQueryVo().eq("id", promotion.getId()).castBack()).length);
+            assertEquals(0, service.queryPromotion(new ClientPromotionQueryVo().eq("id", "12").castBack()).length);
         } finally {
             dao.deleteById(promotion.getId());
         }

@@ -5,7 +5,7 @@ import trapx00.lightx00.client.bl.bankaccountbl.BankAccountModificationService;
 import trapx00.lightx00.client.bl.bankaccountbl.mock.BankAccountBlControllerMock;
 
 public class BankAccountFactory {
-    private static BankAccountBlController controller = new BankAccountBlControllerMock();
+    private static BankAccountBlController controller = new BankAccountBlController();
     private static BankAccountModificationService modificationService = controller;
 
     public static BankAccountBlController getController() {

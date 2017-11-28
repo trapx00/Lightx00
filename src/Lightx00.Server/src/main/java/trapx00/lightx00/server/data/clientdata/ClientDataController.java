@@ -132,7 +132,7 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
     }
 
     /**
-     * add a client
+     * addQueryVoForOneEmployeePosition a client
      *
      * @param client to be added
      * @return whether the operation is done successfully
@@ -141,7 +141,7 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
     public ResultMessage add(ClientPo client) {
         try {
             clientDao.createIfNotExists(client);
-            logService.printLog(delegate, "add a new client " + client);
+            logService.printLog(delegate, "addQueryVoForOneEmployeePosition a new client " + client);
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();

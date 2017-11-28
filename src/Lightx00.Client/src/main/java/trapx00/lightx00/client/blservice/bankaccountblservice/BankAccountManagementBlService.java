@@ -34,5 +34,5 @@ public interface BankAccountManagementBlService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage delete(String id);
+    ResultMessage delete(int id);
 }

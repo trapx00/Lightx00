@@ -8,11 +8,10 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public abstract class SpecificEmployeeDataController<T extends EmployeePo> {
     private Dao<T, String> dao;
@@ -68,9 +67,9 @@ public abstract class SpecificEmployeeDataController<T extends EmployeePo> {
         }
     }
 
-    public List<T> query(Predicate<T> predicate) {
+    public List<T> query(SpecificUserAccountQueryVo<T> queryVo) {
         try {
-            return dao.queryForAll().stream().filter(predicate).collect(Collectors.toList());
+            return dao.query(queryVo.prepareQuery(dao));
         } catch (SQLException e) {
             handleSqlException(e);
             return null;

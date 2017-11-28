@@ -39,8 +39,8 @@ public class BankAccountDataControllerTest {
         id2 = dao.extractId(bankAccountPo2);
         try {
             assertEquals(2, service.query(new BankAccountQueryVo()).length);
-            assertEquals(1, service.query(new BankAccountQueryVo(q->q.where().eq("amount",10.0).prepare())).length);
-            assertEquals(0, service.query(new BankAccountQueryVo(q->q.where().eq("amount",1.0).prepare())).length);
+            assertEquals(1, service.query(new BankAccountQueryVo().eq("amount",10.0).castBack()).length);
+            assertEquals(0, service.query(new BankAccountQueryVo().eq("amount",1.0).castBack()).length);
         } finally {
           dao.deleteById(id1);
           dao.deleteById(id2);
