@@ -3,6 +3,7 @@ package trapx00.lightx00.client.blservice.inventoryblservice;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
@@ -29,7 +30,7 @@ public interface InventoryGiftBlService {
     InventoryGiftVo getGift(Date time);
 
 
-    InventoryGiftVo[] query(InventoryBillQueryVo inventoryBillQueryVo);
+    InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo);
 
 
 

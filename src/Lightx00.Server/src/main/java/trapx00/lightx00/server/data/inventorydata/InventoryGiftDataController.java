@@ -14,6 +14,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -142,7 +143,7 @@ public class InventoryGiftDataController extends UnicastRemoteObject implements 
      * @return  InventoryGiftBillVos that match the query condition
      */
     @Override
-    public InventoryGiftPo[] query(InventoryBillQueryVo query)  {
+    public InventoryGiftPo[] query(InventoryGiftQueryVo query)  {
         List<InventoryGiftPo> result = commonBillDataController.query(query);
         return result.toArray(new InventoryGiftPo[result.size()]);
     }

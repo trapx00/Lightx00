@@ -12,6 +12,7 @@ import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.util.Date;
 
@@ -95,7 +96,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
     }
 
     @Override
-    public InventoryGiftVo[] query(InventoryBillQueryVo inventoryBillQueryVo){
+    public InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo){
         return null;
     }
 

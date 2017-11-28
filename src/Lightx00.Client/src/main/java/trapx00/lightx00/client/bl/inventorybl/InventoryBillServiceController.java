@@ -5,6 +5,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlSe
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 public class InventoryBillServiceController implements InventoryBillService {
    InventoryWarningBlService inventoryWarningBlService=new InventoryWarningBlController();
@@ -16,7 +17,7 @@ public class InventoryBillServiceController implements InventoryBillService {
     }
 
     @Override
-    public InventoryGiftVo[] queryInventoryGift(InventoryBillQueryVo inventoryBillQueryVo) {
-        return inventoryGiftBlService.query(inventoryBillQueryVo);
+    public InventoryGiftVo[] queryInventoryGift(InventoryGiftQueryVo inventoryGiftQueryVo) {
+        return inventoryGiftBlService.query(inventoryGiftQueryVo);
     }
 }

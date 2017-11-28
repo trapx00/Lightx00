@@ -4,6 +4,7 @@ package trapx00.lightx00.client.bl.inventorybl;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 public interface InventoryBillService {
     /**
@@ -18,6 +19,6 @@ public interface InventoryBillService {
      * @param inventoryBillQueryVo
      * @return  the list of inventoryBIlls that match to the requirement
      */
-    InventoryGiftVo[] queryInventoryGift (InventoryBillQueryVo inventoryBillQueryVo);
+    InventoryGiftVo[] queryInventoryGift (InventoryGiftQueryVo inventoryBillQueryVo);
 
 }
