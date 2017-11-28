@@ -7,6 +7,7 @@ import java.util.Date;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
+import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 public interface InventoryGiftDataService extends Remote {
 
@@ -58,4 +59,11 @@ public interface InventoryGiftDataService extends Remote {
      */
     String getId() throws RemoteException;
 
+    /**
+     * Queries Bill.
+     * @param query query condition
+     * @return BillVos that match the query condition
+     */
+
+    InventoryGiftPo[] query(InventoryBillQueryVo query) throws RemoteException;
 }
