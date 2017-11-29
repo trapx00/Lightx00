@@ -30,7 +30,7 @@ public class BankAccountBlControllerTest {
 
     @Test
     public void query() throws Exception {
-        assertEquals(1, controller.query(new BankAccountQueryVo().eq("id",1).castBack())[0].getId());
+        assertEquals(1, controller.query(new BankAccountQueryVo().eq("id",1))[0].getId());
     }
 
     @Test

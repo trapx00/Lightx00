@@ -123,8 +123,8 @@ public class PurchaseRefundBillDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new PurchaseRefundBillQueryVo().eq("id", bill.getId()).castBack()).length);
-        assertEquals(0, service.query(new PurchaseRefundBillQueryVo().eq("operatorId", "12").castBack()).length);
+        assertEquals(1, service.query(new PurchaseRefundBillQueryVo().eq("id", bill.getId())).length);
+        assertEquals(0, service.query(new PurchaseRefundBillQueryVo().eq("operatorId", "12")).length);
     }
 
     @Test

@@ -42,14 +42,14 @@ public class InventoryCheckDataControllerTest {
     @Test
     public void picture() throws Exception {
         inventoryPictureDao.create(inventoryPicturePo);
-        assertEquals(0, inventoryCheckDataService.getInventoryPicture(new InventoryPictureQueryVo().eq("id","PICT-0001-0001").castBack()).length);
+        assertEquals(0, inventoryCheckDataService.getInventoryPicture(new InventoryPictureQueryVo().eq("id","PICT-0001-0001")).length);
         inventoryPictureDao.delete(inventoryPicturePo);
     }
 
     @Test
     public void view() throws Exception {
         inventoryViewDao.create(inventoryViewPo);
-        assertEquals(1, inventoryCheckDataService.getInventoryView(new InventoryViewQueryVo().eq("id","VIEW-0001-0001").castBack()).length);
+        assertEquals(1, inventoryCheckDataService.getInventoryView(new InventoryViewQueryVo().eq("id","VIEW-0001-0001")).length);
         inventoryViewDao.delete(inventoryViewPo);
     }
 

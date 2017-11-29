@@ -87,8 +87,8 @@ public class TotalPricePromotionDataControllerTest {
     public void query() throws Exception {
         try {
         dao.create(promotion);
-        Assert.assertEquals(1, service.queryPromotion(new TotalPricePromotionQueryVo().eq("id",promotion.getId()).castBack()).length);
-        Assert.assertEquals(0, service.queryPromotion(new TotalPricePromotionQueryVo().eq("id","12").castBack()).length);
+        Assert.assertEquals(1, service.queryPromotion(new TotalPricePromotionQueryVo().eq("id",promotion.getId())).length);
+        Assert.assertEquals(0, service.queryPromotion(new TotalPricePromotionQueryVo().eq("id","12")).length);
         } finally {
             dao.deleteById(promotion.getId());
         }

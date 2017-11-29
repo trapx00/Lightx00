@@ -50,7 +50,7 @@ public class AuditDataControllerTest {
             dao.create(billInfo2);
             dao.create(billInfo3);
             assertEquals(3, service.query(new BillInfoQueryVo()).length);
-            assertEquals(2, service.query(new BillInfoQueryVo().eq("type",BillType.FinanceBill).castBack()).length);
+            assertEquals(2, service.query(new BillInfoQueryVo().eq("type",BillType.FinanceBill)).length);
         } finally {
             dao.deleteById(billInfo1.getId());
             dao.deleteById(billInfo2.getId());

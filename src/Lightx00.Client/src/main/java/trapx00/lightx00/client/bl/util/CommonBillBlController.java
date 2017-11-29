@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class CommonBillBlController<BillVoType extends BillVo, BillPoType extends BillPo, QueryType extends BaseQueryVo<BillPoType, String>> {
+public class CommonBillBlController<BillVoType extends BillVo, BillPoType extends BillPo, QueryType extends BaseQueryVo<BillPoType, String, QueryType>> {
     private LogService logService = LogServiceFactory.getLogService();
     private CommonBillDataService<BillPoType, QueryType> dataService;
     private DraftService draftService = DraftServiceFactory.getDraftService();

@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.queryvo.BaseQueryVo;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface CommonBillDataService<T extends BillPo, Q extends BaseQueryVo<T, String>> extends Remote {
+public interface CommonBillDataService<T extends BillPo, Q extends BaseQueryVo<T, String, Q>> extends Remote {
     /**
      * Submits a CashBillPo or save it as a draft.
      * If there is a bill with the same id as passed-in parameter do,

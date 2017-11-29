@@ -46,7 +46,7 @@ public class CashBillBlControllerTest {
     @Test
     public void submit() throws Exception {
         controller.submit(cashBill);
-        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()).castBack());
+        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()));
         try {
             assertEquals(1, queryResult.length);
             assertEquals(BillState.Draft, queryResult[0].getState());
@@ -74,7 +74,7 @@ public class CashBillBlControllerTest {
     @Test
     public void saveAsDraft() throws Exception {
         controller.saveAsDraft(cashBill);
-        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()).castBack());
+        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()));
         try {
             assertEquals(1, queryResult.length);
             assertEquals(BillState.Draft, queryResult[0].getState());
@@ -111,7 +111,7 @@ public class CashBillBlControllerTest {
     public void deleteDraft() throws Exception {
         controller.submit(cashBill);
         controller.deleteDraft(cashBill.getId());
-        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()).castBack());
+        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()));
         try {
             assertEquals(0, queryResult.length);
         } finally {
@@ -137,7 +137,7 @@ public class CashBillBlControllerTest {
     public void abandon() throws Exception {
         controller.submit(cashBill);
         controller.abandon(cashBill.getId());
-        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()).castBack());
+        CashBillVo[] queryResult = controller.query(new CashBillQueryVo().idEq(cashBill.getId()));
         assertEquals(0, queryResult.length);
     }
 
@@ -198,8 +198,8 @@ public class CashBillBlControllerTest {
         controller.submit(cashBill);
         try {
             assertEquals(1, controller.query(new CashBillQueryVo()).length);
-            assertEquals(1, controller.query(new CashBillQueryVo().idEq(cashBill.getId()).castBack()).length);
-            assertEquals(0, controller.query(new CashBillQueryVo().eq("operatorId", "1234587986435").castBack()).length);
+            assertEquals(1, controller.query(new CashBillQueryVo().idEq(cashBill.getId())).length);
+            assertEquals(0, controller.query(new CashBillQueryVo().eq("operatorId", "1234587986435")).length);
         } finally {
             controller.abandon(cashBill.getId());
         }

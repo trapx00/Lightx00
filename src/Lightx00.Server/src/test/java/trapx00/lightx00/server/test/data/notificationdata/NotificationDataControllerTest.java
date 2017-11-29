@@ -30,7 +30,7 @@ public class NotificationDataControllerTest {
         dao.create(dumbPo);
         int id = dao.extractId(dumbPo);
         try {
-            assertEquals(1, service.query(new NotificationQueryVo().eq("senderId","123").castBack()).length);
+            assertEquals(1, service.query(new NotificationQueryVo().eq("senderId","123")).length);
             assertEquals(1, service.query(new NotificationQueryVo()).length);
         } finally {
             dao.deleteById(id);

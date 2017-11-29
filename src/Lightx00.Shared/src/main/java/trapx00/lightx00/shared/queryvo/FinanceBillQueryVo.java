@@ -4,6 +4,6 @@ import trapx00.lightx00.shared.po.financestaff.FinanceBillPo;
 
 import java.util.function.Predicate;
 
-public class FinanceBillQueryVo extends BaseQueryVo<FinanceBillPo, String> {
+public class FinanceBillQueryVo extends BaseQueryVo<FinanceBillPo, String, FinanceBillQueryVo> {
 
 }

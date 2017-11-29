@@ -118,7 +118,7 @@ public class InventoryWarningDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new InventoryBillQueryVo().eq("id",bill.getId()).castBack()).length);
+        assertEquals(1, service.query(new InventoryBillQueryVo().eq("id",bill.getId())).length);
         resetTable();
   }
 

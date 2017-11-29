@@ -26,7 +26,7 @@ public class BankAccountBlController implements BankAccountManagementBlService, 
      */
     @Override
     public ResultMessage modifyBankAccount(int id, double delta) {
-        BankAccountVo[] queryResult = query(new BankAccountQueryVo().idEq(id).castBack());
+        BankAccountVo[] queryResult = query(new BankAccountQueryVo().idEq(id));
         if (queryResult == null || queryResult.length == 0) {
             throw new IdNotExistsException(String.valueOf(id));
         }

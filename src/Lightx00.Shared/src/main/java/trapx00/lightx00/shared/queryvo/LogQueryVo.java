@@ -9,6 +9,6 @@ import java.sql.SQLException;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class LogQueryVo extends BaseQueryVo<LogPo, Integer> {
+public class LogQueryVo extends BaseQueryVo<LogPo, Integer, LogQueryVo> {
 
 }

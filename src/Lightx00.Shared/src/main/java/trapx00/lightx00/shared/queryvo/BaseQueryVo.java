@@ -11,92 +11,88 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BaseQueryVo<Po,PK> implements Serializable {
+@SuppressWarnings("unchecked")
+public class BaseQueryVo<Po,PK, T extends BaseQueryVo> implements Serializable {
     private ArrayList<BaseQuery<Po,PK>> queries = new ArrayList<>();
 
-    public BaseQueryVo<Po,PK> idEq(PK id) {
+    public T idEq(PK id) {
         queries.add(new IdEq<>(id));
-        return this;
+        return (T) this;
     }
 
-    public BaseQueryVo<Po,PK> and() {
+    public T and() {
         queries.add(new And<>());
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable> BaseQueryVo<Po,PK> between(String columnName, Obj low, Obj high) {
+    public <Obj extends Serializable> T between(String columnName, Obj low, Obj high) {
         queries.add(new Between<>(columnName, low, high));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable>  BaseQueryVo<Po,PK> eq(String columnName, Obj value) {
+    public <Obj extends Serializable> T eq(String columnName, Obj value) {
         queries.add(new Eq<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable>  BaseQueryVo<Po,PK> ge(String columnName, Obj value) {
+    public <Obj extends Serializable> T ge(String columnName, Obj value) {
         queries.add(new Ge<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable>  BaseQueryVo<Po,PK> gt(String columnName, Obj value) {
+    public <Obj extends Serializable> T gt(String columnName, Obj value) {
         queries.add(new Gt<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable>  BaseQueryVo<Po,PK> in(String columnName, ArrayList<Obj> objects) {
+    public <Obj extends Serializable>  T in(String columnName, ArrayList<Obj> objects) {
         queries.add(new In<>(columnName, objects));
-        return this;
+        return (T) this;
     }
 
-    public BaseQueryVo<Po,PK> isNotNull(String columnName) {
+    public T isNotNull(String columnName) {
         queries.add(new IsNotNull<>(columnName));
-        return this;
+        return (T) this;
     }
 
-    public BaseQueryVo<Po,PK> isNull(String columnName) {
+    public T isNull(String columnName) {
         queries.add(new IsNull<>(columnName));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable> BaseQueryVo<Po,PK> le(String columnName, Obj value) {
+    public <Obj extends Serializable> T le(String columnName, Obj value) {
         queries.add(new Le<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable> BaseQueryVo<Po,PK> like(String columnName, Obj value) {
+    public <Obj extends Serializable> T like(String columnName, Obj value) {
         queries.add(new Like<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable> BaseQueryVo<Po,PK> lt(String columnName, Obj value) {
+    public <Obj extends Serializable> T lt(String columnName, Obj value) {
         queries.add(new Lt<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable> BaseQueryVo<Po,PK> ne(String columnName, Obj value) {
+    public <Obj extends Serializable> T ne(String columnName, Obj value) {
         queries.add(new Ne<>(columnName, value));
-        return this;
+        return (T) this;
     }
 
-    public BaseQueryVo<Po,PK> not() {
+    public T not() {
         queries.add(new Not<>());
-        return this;
+        return (T) this;
     }
 
-    public <Obj extends Serializable> BaseQueryVo<Po,PK> notIn(String columName, ArrayList<Obj> objects) {
+    public <Obj extends Serializable> T notIn(String columName, ArrayList<Obj> objects) {
         queries.add(new NotIn<>(columName,objects));
-        return this;
+        return (T) this;
     }
 
-    public BaseQueryVo<Po,PK> or() {
+    public T or() {
         queries.add(new Or<>());
-        return this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T extends BaseQueryVo<Po, PK>> T castBack() {
-        return (T)this;
+        return (T) this;
     }
 
     public PreparedQuery<Po> prepareQuery(Dao<Po, PK> dao) throws SQLException {
