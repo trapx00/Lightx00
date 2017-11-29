@@ -12,7 +12,7 @@ public class DraftableQueryServiceRegistry {
     private static HashMap<DraftType, DraftableQueryService> registry = new HashMap<>();
 
     /**
-     * Registers DraftType with service
+     * Registers DraftType with service.
      * @param draftType DraftType
      * @param service DraftableQueryService
      */

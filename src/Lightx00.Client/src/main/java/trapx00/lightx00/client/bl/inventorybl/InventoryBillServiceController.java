@@ -8,8 +8,8 @@ import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 public class InventoryBillServiceController implements InventoryBillService {
-   InventoryWarningBlService inventoryWarningBlService=new InventoryWarningBlController();
-   InventoryGiftBlService inventoryGiftBlService=new InventoryGiftBlController();
+   private InventoryWarningBlService inventoryWarningBlService = new InventoryWarningBlController();
+   private InventoryGiftBlService inventoryGiftBlService = new InventoryGiftBlController();
 
     @Override
     public InventoryBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo) {

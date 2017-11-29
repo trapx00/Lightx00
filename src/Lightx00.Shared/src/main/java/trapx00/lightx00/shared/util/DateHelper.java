@@ -37,12 +37,16 @@ public class DateHelper {
     }
 
     /**
-     * Get formalized current date string with custom DATE_PATTERN.
+     * Get formalized current date string with custom dataPattern.
      * @return formalized current date string in custom date pattern
      */
-    public static String currentDateString(String DATE_PATTERN) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN).withZone(ZoneId.systemDefault());
+    public static String currentDateString(String dataPattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dataPattern).withZone(ZoneId.systemDefault());
         return formatter.format(Instant.ofEpochMilli(System.currentTimeMillis()));
+    }
+
+    public static String currentDateStringForLog() {
+        return currentDateString("yyyy-MM-dd HH:mm:ss.SSS");
     }
 
 

@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.admindataservice.UserManagementDa
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.util.Date;
 
@@ -17,7 +18,7 @@ public class UserManagementDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals("0001",service.query(x->true)[0].getId());
+        assertEquals("0001",service.query(new UserAccountQueryVo())[0].getId());
     }
 
     @Test

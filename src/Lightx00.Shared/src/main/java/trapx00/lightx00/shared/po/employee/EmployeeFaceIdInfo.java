@@ -3,47 +3,64 @@ package trapx00.lightx00.shared.po.employee;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.net.URI;
+
+
 @DatabaseTable(tableName = "EmployeeFaceIdInfo")
 public class EmployeeFaceIdInfo {
-    @DatabaseField(generatedId = true)
-    private int id;
+    private static final long updateSpanSec = 12 * 60 * 60;
 
-    @DatabaseField
+    @DatabaseField(id = true)
     private String employeeId;
 
     @DatabaseField
-    private String imgRemoteUrl;
+    private long lastUpdate;
 
-    public EmployeeFaceIdInfo() {
-    }
+    @DatabaseField
+    private String faceId = "";
 
-    public EmployeeFaceIdInfo(int id, String employeeId, String imgRemoteUrl) {
-        this.id = id;
+    @DatabaseField
+    private String imgUri;
+
+    public EmployeeFaceIdInfo(String employeeId) {
         this.employeeId = employeeId;
-        this.imgRemoteUrl = imgRemoteUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getEmployeeId() {
         return employeeId;
     }
 
+    public EmployeeFaceIdInfo() {
+    }
+
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getImgRemoteUrl() {
-        return imgRemoteUrl;
+    public long getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setImgRemoteUrl(String imgRemoteUrl) {
-        this.imgRemoteUrl = imgRemoteUrl;
+
+    public String getFaceId() {
+        return faceId;
     }
+
+    public void setFaceId(String faceId) {
+        this.faceId = faceId;
+        this.lastUpdate = System.currentTimeMillis();
+    }
+
+    public String getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
+    }
+
+    public boolean needUpdate() {
+        return System.currentTimeMillis() - lastUpdate >= updateSpanSec;
+    }
+
 }

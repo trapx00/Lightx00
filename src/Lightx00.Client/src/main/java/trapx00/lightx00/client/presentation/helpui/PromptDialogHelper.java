@@ -30,11 +30,11 @@ public class PromptDialogHelper {
         this.contentNode  = new Text(content);
     }
 
-    public static PromptDialogHelper start(String title, String content){
+    public static PromptDialogHelper start(String title, String content) {
         return new PromptDialogHelper(title, content);
     }
 
-    public PromptDialogHelper addTable(JFXTreeTableView table){
+    public PromptDialogHelper addTable(JFXTreeTableView table) {
         AnchorPane pane = new AnchorPane();
         pane.getChildren().add(table);
         AnchorPane.setTopAnchor(table,24.0);
@@ -66,7 +66,7 @@ public class PromptDialogHelper {
     public PromptDialogHelper addCloseButton(String content, Node icon,  EventHandler<? super MouseEvent> e) {
         JFXButton button = new JFXButton(content, icon);
         button.setOnMouseClicked(event -> {
-            if (e!=null){
+            if (e != null) {
                 e.handle(event);
             }
 
@@ -76,8 +76,8 @@ public class PromptDialogHelper {
         return this;
     }
 
-    public PromptDialogHelper addCloseButton(String content, String glyphName, EventHandler<? super MouseEvent> e){
-        MaterialIconView icon  =new MaterialIconView();
+    public PromptDialogHelper addCloseButton(String content, String glyphName, EventHandler<? super MouseEvent> e) {
+        MaterialIconView icon = new MaterialIconView();
         icon.setGlyphName(glyphName);
         icon.setGlyphSize(24);
         return addCloseButton(content,icon, e);
@@ -91,7 +91,7 @@ public class PromptDialogHelper {
     }
 
     public PromptDialogHelper addButton(String content, String glyphName, EventHandler<? super MouseEvent> e) {
-        MaterialIconView icon  =new MaterialIconView();
+        MaterialIconView icon = new MaterialIconView();
         icon.setGlyphName(glyphName);
         icon.setGlyphSize(24);
         return addButton(content, icon, e);

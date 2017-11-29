@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.vo.financestaff;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -11,6 +12,7 @@ import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 
 public class CashBillVo extends FinanceBillVo {
@@ -24,6 +26,8 @@ public class CashBillVo extends FinanceBillVo {
         this.accountId = accountId;
         this.items = items;
     }
+
+
 
     public String getOperatorId() {
         return operatorId;
@@ -47,6 +51,20 @@ public class CashBillVo extends FinanceBillVo {
 
     public void setItems(CashBillItem[] items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "CashBillVo{" +
+            "operatorId='" + operatorId + '\'' +
+            ", accountId='" + accountId + '\'' +
+            ", items=" + Arrays.toString(items) +
+            ", financeBillType=" + financeBillType +
+            ", billType=" + billType +
+            ", id='" + id + '\'' +
+            ", date=" + date +
+            ", state=" + state +
+            "} " + super.toString();
     }
 
     /**

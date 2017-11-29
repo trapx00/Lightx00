@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.financebl;
 import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
 import trapx00.lightx00.client.bl.financebl.factory.BillDraftQueryServiceFactory;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
+import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.draft.DraftableQueryServiceRegistry;
 import trapx00.lightx00.shared.po.ResultMessage;
@@ -12,7 +13,7 @@ import trapx00.lightx00.client.vo.financestaff.FinanceBillVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 
-public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, DraftableQueryService {
+public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, BillIdQueryService,  DraftableQueryService {
 
 
     /**
@@ -48,6 +49,19 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
         return null;
     }
 
+
+
+    /**
+     * Queries Bill with id.
+     *
+     * @param id bill id
+     * @return BillVos that has the
+     */
+    @Override
+    public BillVo queryBill(String id) {
+        return null;
+    }
+
     /**
      * Queries draft with id.
      *
@@ -56,6 +70,6 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
      */
     @Override
     public Draftable queryDraft(String id) {
-        return null;
+        return queryBill(id);
     }
 }

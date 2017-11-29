@@ -85,8 +85,8 @@ public class ComSalePromotionDataControllerTest {
     public void query() throws Exception {
         try {
             dao.create(promotion);
-            assertEquals(1, service.queryPromotion(new ComSalePromotionQueryVo(q -> q.where().eq("id", promotion.getId()).prepare())).length);
-            assertEquals(0, service.queryPromotion(new ComSalePromotionQueryVo(q -> q.where().eq("id", "12").prepare())).length);
+            assertEquals(1, service.queryPromotion(new ComSalePromotionQueryVo().eq("id", promotion.getId())).length);
+            assertEquals(0, service.queryPromotion(new ComSalePromotionQueryVo().eq("id", "12")).length);
         } finally {
             dao.deleteById(promotion.getId());
         }

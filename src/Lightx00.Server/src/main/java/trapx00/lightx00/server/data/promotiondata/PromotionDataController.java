@@ -148,7 +148,7 @@ public class PromotionDataController<Po extends PromotionPoBase> {
     @SuppressWarnings("unchecked")
     public <Q extends BaseQueryVo> List<Po> query(Q query) {
         try {
-            List<Po> results = (List<Po>) dao.query(query.prepareQuery(dao));
+            List<Po> results = dao.query(query.prepareQuery(dao));
             logService.printLog(delegate, String.format("queried promotions and got %d results.", results.size()));
             return results;
         } catch (SQLException e) {

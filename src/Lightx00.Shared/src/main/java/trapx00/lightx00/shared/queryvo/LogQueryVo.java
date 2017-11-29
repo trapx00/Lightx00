@@ -9,20 +9,6 @@ import java.sql.SQLException;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class LogQueryVo extends BaseQueryVo<LogPo, Integer> {
-    /**
-     * Instantiate a QueryVo with prepration method.
-     *
-     * @param preparation QueryBuilderPreparation method
-     */
-    public LogQueryVo(QueryBuilderPreparation<LogPo, Integer> preparation) {
-        super(preparation);
-    }
+public class LogQueryVo extends BaseQueryVo<LogPo, Integer, LogQueryVo> {
 
-    /**
-     * Instantiate a QueryVo with a method which returns all rows.
-     */
-    public LogQueryVo() {
-        super();
-    }
 }

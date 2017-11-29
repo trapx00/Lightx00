@@ -58,7 +58,7 @@ public class CommodityDataControllerTest {
     @Test
     public void query() throws Exception {
         dao.create(commodityPo);
-        assertEquals(1, service.query(new CommodityQueryVo(q->q.where().eq("id","PRO-0001-0001").prepare())).length);
+        assertEquals(1, service.query(new CommodityQueryVo().eq("id","PRO-0001-0001")).length);
         resetTable();
     }
 

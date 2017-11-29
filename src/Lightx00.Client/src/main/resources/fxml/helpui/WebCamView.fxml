@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         alignment="CENTER" spacing="20">
+    <JFXComboBox fx:id="cbCameraOptions"/>
+    <ImageView fx:id="cameraImage" fitWidth="600" fitHeight="600"/>
+
+</fx:root>

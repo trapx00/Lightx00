@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView?>
 <StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="trapx00.lightx00.client.presentation.loginui.FaceIdLoginUiController"
@@ -42,18 +43,15 @@
             </VBox>
         </top>
         <center>
-            <VBox alignment="CENTER" fx:id="cameraPane" spacing="20">
-                <JFXComboBox fx:id="cbCameraOptions"/>
-                <ImageView fx:id="cameraImage" fitWidth="600" fitHeight="600"/>
-            </VBox>
+            <WebCamView fx:id="webCamView" prefWidth="400" prefHeight="600"/>
         </center>
         <bottom>
             <HBox alignment="CENTER" prefHeight="40.0" spacing="40.0">
-                <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#onLoginButtonClicked" disable="true" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="登 录">
+                <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#onLoginButtonClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="登 录">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin></JFXButton>
-                <JFXButton fx:id="cancelButton" buttonType="RAISED" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取 消" />
+                <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#onCancelButtonClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取 消" />
                 <BorderPane.margin>
                     <Insets top="20.0" />
                 </BorderPane.margin>

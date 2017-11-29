@@ -74,7 +74,7 @@ public class LogDataControllerTest {
             service.log(logPo.getSeverity(), logPo.getContent());
             service.log(LogSeverity.Failure, "failure");
             assertEquals(2, service.query(new LogQueryVo()).length);
-            assertEquals(1, service.query(new LogQueryVo(q->q.where().eq("severity",LogSeverity.Failure).prepare())).length);
+            assertEquals(1, service.query(new LogQueryVo().eq("severity",LogSeverity.Failure)).length);
 
         } finally {
             resetTable();

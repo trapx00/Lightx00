@@ -5,6 +5,8 @@ import trapx00.lightx00.client.blservicestub.adminblservice.UserManagementBlServ
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.util.Date;
 
@@ -26,7 +28,7 @@ public class UserManagementBlServiceDriver {
 
     @Test
     public void query() {
-        assertEquals("0001",service.query(x->true)[0].getId());
+        assertEquals("0001",service.query(new UserAccountQueryVo().addQueryVoForAllEmployeePosition(new SpecificUserAccountQueryVo()))[0].getId());
     }
 
     @Test
