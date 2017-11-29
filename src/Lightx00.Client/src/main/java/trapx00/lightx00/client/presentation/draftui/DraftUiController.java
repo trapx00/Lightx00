@@ -2,6 +2,7 @@ package trapx00.lightx00.client.presentation.draftui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,11 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.Region;
 import trapx00.lightx00.client.Client;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
+import trapx00.lightx00.client.vo.DraftDemoVo;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.draft.DraftType;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.IOException;
@@ -41,14 +45,13 @@ public class DraftUiController {
 
     public void updateItems() {
         draftModels.clear();
-        draftModels.add(new DraftTableItemModel(new Date(), BillType.SaleBill, "TEST"));
-        draftModels.add(new DraftTableItemModel(new Date(), BillType.SaleBill, "TEST2"));
+        draftModels.add(new DraftTableItemModel(new Date(), DraftType.Bill, 1, new DraftDemoVo()));
     }
 
     public void initDraftItem() {
         tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getDate())));
         tableTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
-        tableIdColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
+        tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getId())));
         TreeItem<DraftTableItemModel> root = new RecursiveTreeItem<>(draftModels, RecursiveTreeObject::getChildren);
         draftTable.setRoot(root);
         draftTable.setShowRoot(false);
@@ -78,9 +81,9 @@ public class DraftUiController {
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         int index = draftTable.getSelectionModel().getFocusedIndex();
         DraftTableItemModel model = draftTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个单据吗？","你选择了单据"+model.getId())
+        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个草稿吗？","你选择了单据" + model.getId())
                 .addTable(ReadOnlyPairTableHelper.start()
-                        .addPair("ID", model.getId())
+                        .addPair("ID", String.valueOf(model.getId()))
                         .addPair("单据类型", model.getType().toString())
                         .addPair("时间", DateHelper.fromDate(model.getDate()))
                         .create())
@@ -94,21 +97,27 @@ public class DraftUiController {
         draftModels.remove(index);
     }
 
+    @SuppressWarnings("unchecked")
     public void onContinueWriteButtonClicked(ActionEvent actionEvent) {
         try {
             DraftTableItemModel model = draftTable.getSelectionModel().getSelectedItem().getValue();
             PromptDialogHelper.start("确认继续填写这个单据吗","")
                     .addTable(
                             ReadOnlyPairTableHelper.start()
-                                    .addPair("单据编号",model.getId())
-                                    .addPair("操作员","操作员1")
-                                    .addPair("银行账户","银行账户1")
-                                    .addPair("条目","条目1")
-                                    .addPair("总额","200.00")
-                                    .addPair("备注","备注")
+                                    .addPair("单据编号", String.valueOf(model.getId()))
+                                    .addMap(model.getDraft().properties())
                                     .create())
                     .addCloseButton("取消","CLOSE",null)
-                    .addCloseButton("确定","CHECK",null)
+                    .addCloseButton("确定","CHECK",e -> {
+                        try {
+                            Parent ui = model.getDraft().continueWritableUi().continueWriting(model.getDraft()).getComponent();
+                            JFXDialog dialog = PromptDialogHelper.start("继续填写草稿", "").create(frameworkController.dialogContainer);
+                            dialog.setContent((Region) ui);
+                            dialog.show();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    })
                     .create(frameworkController.dialogContainer).show();
         } catch (Exception ex) {
             PromptDialogHelper.start("错误","请至少选一个条目。")

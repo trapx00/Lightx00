@@ -1,12 +1,15 @@
 package trapx00.lightx00.client;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import trapx00.lightx00.client.presentation.helpui.UiUtil;
 
 public class Client extends Application {
 
     public static void main(String[] args) {
-
+        launch(args);
     }
 
     /**
@@ -26,7 +29,12 @@ public class Client extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/loginui/LoginUi.fxml"));
+        Scene newScene = new Scene(loader.load());
+        UiUtil.setStage(primaryStage);
+        primaryStage.setScene(newScene);
+        primaryStage.show();
     }
 
 }

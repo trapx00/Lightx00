@@ -9,14 +9,15 @@ import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftServiceFactor
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
-public class InventoryGiftVo extends InventoryBillBaseVo{
+public class InventoryGiftVo extends InventoryBillBaseVo {
 
-    PromotionCommodity[] gifts;
+    private PromotionCommodity[] gifts;
 
     public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts) {
         super(id, date, state, InventoryBillType.Gift);
@@ -73,12 +74,12 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
+    public DraftContinueWritableUiController continueWritableUi() {
         return null;
     }
     /**
@@ -89,5 +90,15 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
         return InventoryWarningServiceFactory.getBillApprovalCompleteService();
+    }
+
+    /**
+     * When it is called, it returns a ReversibleUi which can be used to acquire the ui component and controller.
+     *
+     * @return reversible ui service.
+     */
+    @Override
+    public ReversibleUi reversibleUi() {
+        return null;
     }
 }

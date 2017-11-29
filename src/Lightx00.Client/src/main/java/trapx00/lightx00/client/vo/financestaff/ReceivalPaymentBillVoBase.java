@@ -1,12 +1,13 @@
 package trapx00.lightx00.client.vo.financestaff;
 
+import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.Date;
 
-public abstract class ReceivalPaymentBillVoBase extends FinanceBillVo {
+public abstract class ReceivalPaymentBillVoBase extends FinanceBillVo implements Reversible {
     private String clientId;
     private String operatorId;
     private Transcation[] transcations;

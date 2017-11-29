@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class CommodityVo {
     //商品
-    String id;//型号+名称生成
-    String name;
-    String type;
-    double amount;
-    Date productionDate;//生产日期
-    String batch;//批次
-    String batchNo;//批号
-    double purchasePrice;//进价
-    double recentPurchasePrice;//最近进价
-    double retailPrice;//售价
-    double recentRetailPrice;//最近售价
-    double warningValue;//警戒值
+    private String id;//型号+名称生成
+    private String name;
+    private String type;
+    private double amount;
+    private Date productionDate;//生产日期
+    private String batch;//批次
+    private String batchNo;//批号
+    private double purchasePrice;//进价
+    private double recentPurchasePrice;//最近进价
+    private double retailPrice;//售价
+    private double recentRetailPrice;//最近售价
+    private double warningValue;//警戒值
 
     public CommodityVo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,

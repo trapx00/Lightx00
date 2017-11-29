@@ -1,12 +1,12 @@
 package trapx00.lightx00.client.presentation.clientui.factory;
 
-import trapx00.lightx00.client.presentation.clientui.ClientUiController;
-import trapx00.lightx00.client.presentation.clientui.mock.ClientUiControllerMock;
+import trapx00.lightx00.client.presentation.clientui.ClientUiControllerControllerDraftController;
+import trapx00.lightx00.client.presentation.clientui.mock.ClientUiControllerControllerMockDraftController;
 
 public class ClientUiFactory {
-    private static ClientUiController clientUiController=new ClientUiControllerMock();
+    private static ClientUiControllerControllerDraftController clientUiController=new ClientUiControllerControllerMockDraftController();
 
-    public static ClientUiController getClientUiController() {
+    public static ClientUiControllerControllerDraftController getClientUiController() {
         return clientUiController;
     }
 }
