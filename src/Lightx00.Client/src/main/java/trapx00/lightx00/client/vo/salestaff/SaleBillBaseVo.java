@@ -1,12 +1,13 @@
 package trapx00.lightx00.client.vo.salestaff;
 
+import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.client.vo.BillVo;
 
 import java.util.Date;
 
-public abstract class SaleBillBaseVo extends BillVo {
+public abstract class SaleBillBaseVo extends BillVo implements Reversible {
     private SaleBillType saleBillType;
 
     public SaleBillType getSaleBillType() {

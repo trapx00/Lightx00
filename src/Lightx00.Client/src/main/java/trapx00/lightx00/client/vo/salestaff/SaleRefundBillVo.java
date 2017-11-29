@@ -4,7 +4,8 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -13,16 +14,16 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class SaleRefundBillVo extends SaleBillBaseVo {
-    String supplier;
-    EmployeeVo defaultOperator;
-    SaleStaffVo operator;
-    int repository;
-    CommodityItem[] commodityList;
-    double originTotal;
-    double minusProfits;
-    double token;
-    double ultiTotal;
-    String comment;
+    private String supplier;
+    private EmployeeVo defaultOperator;
+    private SaleStaffVo operator;
+    private int repository;
+    private CommodityItem[] commodityList;
+    private double originTotal;
+    private double minusProfits;
+    private double token;
+    private double ultiTotal;
+    private String comment;
 
     public String getSupplier() {
         return supplier;
@@ -169,12 +170,22 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
+    public DraftContinueWritableUiController continueWritableUi() {
+        return null;
+    }
+
+    /**
+     * When it is called, it returns a ReversibleUi which can be used to acquire the ui component and controller.
+     *
+     * @return reversible ui service.
+     */
+    @Override
+    public ReversibleUi reversibleUi() {
         return null;
     }
 }

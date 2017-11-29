@@ -4,11 +4,11 @@ import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 
 public class CommoditySortVo {
     //商品分类
-    String id;
-    String name;
-    String[] commodityIdList;
-    String preId;//父类
-    String[] nextIds; //子类
+    private String id;
+    private String name;
+    private String[] commodityIdList;
+    private String preId;//父类
+    private String[] nextIds; //子类
 
     //public static CommoditySortPo commoditySortVotoPo(CommoditySortVo  commoditySortVo){
    //     return new CommoditySortPo(commoditySortVo.getId(),commoditySortVo.getName(),commoditySortVo.get)

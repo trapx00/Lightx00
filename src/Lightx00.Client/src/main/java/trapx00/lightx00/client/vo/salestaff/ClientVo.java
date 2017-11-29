@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.vo.salestaff;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
 
@@ -143,12 +143,12 @@ public class ClientVo implements Draftable {
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
+    public DraftContinueWritableUiController continueWritableUi() {
         return null;
     }
 }

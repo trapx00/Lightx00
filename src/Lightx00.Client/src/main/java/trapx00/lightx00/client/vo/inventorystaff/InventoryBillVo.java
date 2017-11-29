@@ -8,20 +8,19 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 
 public  class InventoryBillVo extends InventoryBillBaseVo {
     //报损报溢报警
-    String operatorId;
-    CommodityVo[] commodities;//商品
-    double[] amountList;//报损报警报溢数量
-    InventoryBillType type;
-;
+    private String operatorId;
+    private CommodityVo[] commodities;//商品
+    private double[] amountList;//报损报警报溢数量
+    private InventoryBillType type;
 
-    public InventoryBillVo(String id, Date date, BillState state, String operatorId,
-                           CommodityVo[] commodities, double[] amountList, InventoryBillType type) {
+    public InventoryBillVo(String id, Date date, BillState state, String operatorId, CommodityVo[] commodities, double[] amountList, InventoryBillType type) {
         super(id, date, state,type);
         this.operatorId = operatorId;
         this.commodities = commodities;
@@ -104,13 +103,22 @@ public  class InventoryBillVo extends InventoryBillBaseVo {
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
+    public DraftContinueWritableUiController continueWritableUi() {
         return null;
     }
 
+    /**
+     * When it is called, it returns a ReversibleUi which can be used to acquire the ui component and controller.
+     *
+     * @return reversible ui service.
+     */
+    @Override
+    public ReversibleUi reversibleUi() {
+        return null;
+    }
 }
