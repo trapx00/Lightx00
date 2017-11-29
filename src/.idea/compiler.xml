@@ -4,6 +4,10 @@
     <bytecodeTargetLevel>
       <module name="lightx00.client_main" target="1.8" />
       <module name="lightx00.client_test" target="1.8" />
+      <module name="lightx00.root_main" target="1.8" />
+      <module name="lightx00.root_test" target="1.8" />
+      <module name="lightx00.server_main" target="1.8" />
+      <module name="lightx00.server_test" target="1.8" />
       <module name="lightx00.shared_main" target="1.8" />
       <module name="lightx00.shared_test" target="1.8" />
     </bytecodeTargetLevel>

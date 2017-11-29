@@ -3,7 +3,7 @@ version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName  = 'trapx00.lightx00.client.Client'
+mainClassName  = 'trapx00.lightx00.server.Server'
 
 sourceCompatibility = 1.8
 
