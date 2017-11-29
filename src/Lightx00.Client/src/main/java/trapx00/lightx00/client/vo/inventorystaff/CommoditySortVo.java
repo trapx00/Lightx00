@@ -1,5 +1,7 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
+
 public class CommoditySortVo {
     //商品分类
     String id;
@@ -7,6 +9,10 @@ public class CommoditySortVo {
     String[] commodityIdList;
     String preId;//父类
     String[] nextIds; //子类
+
+    //public static CommoditySortPo commoditySortVotoPo(CommoditySortVo  commoditySortVo){
+   //     return new CommoditySortPo(commoditySortVo.getId(),commoditySortVo.getName(),commoditySortVo.get)
+   // }
 
     public CommoditySortVo(String id, String name, String[] commodityIdList,
                            String preId, String[] nextIds) {
