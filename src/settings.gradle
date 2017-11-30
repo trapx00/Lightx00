@@ -14,8 +14,6 @@ include 'shared'
 include 'api'
 include 'services:webservice'
 */
-include 'lightx00.shared'
-include 'lightx00.client'
-include 'lightx00.server'
+include 'Lightx00.Shared', 'Lightx00.Client', 'Lightx00.Server'
 
-rootProject.name = 'lightx00.root'
+rootProject.name = 'Lightx00.Root'

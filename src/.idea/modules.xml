@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.client.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.client.iml" group="lightx00.client" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.client_main.iml" group="lightx00.client" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.client_test.iml" group="lightx00.client" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.root.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.root.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.root_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.root_main.iml" group="lightx00.root" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.root_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.root_test.iml" group="lightx00.root" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.server.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.server.iml" group="lightx00.server" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.server_main.iml" group="lightx00.server" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.server_test.iml" group="lightx00.server" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.shared.iml" group="lightx00.shared" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.shared_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.shared_main.iml" group="lightx00.shared" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lightx00.shared_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lightx00.shared_test.iml" group="lightx00.shared" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Client/Lightx00.Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Client/Lightx00.Client.iml" group="Lightx00.Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Client/Lightx00.Client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Client/Lightx00.Client_main.iml" group="Lightx00.Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Client/Lightx00.Client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Client/Lightx00.Client_test.iml" group="Lightx00.Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Root.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Server/Lightx00.Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Server/Lightx00.Server.iml" group="Lightx00.Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Server/Lightx00.Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Server/Lightx00.Server_main.iml" group="Lightx00.Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Server/Lightx00.Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Server/Lightx00.Server_test.iml" group="Lightx00.Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Shared/Lightx00.Shared.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Shared/Lightx00.Shared.iml" group="Lightx00.Shared" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Shared/Lightx00.Shared_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Shared/Lightx00.Shared_main.iml" group="Lightx00.Shared" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lightx00.Shared/Lightx00.Shared_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lightx00.Shared/Lightx00.Shared_test.iml" group="Lightx00.Shared" />
     </modules>
   </component>
 </project>

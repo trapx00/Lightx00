@@ -1,4 +1,0 @@
-rootProject.name = 'lightx00.client'
-
-include 'lightx00.shared'
-project(':lightx00.shared').projectDir = new File('../Lightx00.Shared')
