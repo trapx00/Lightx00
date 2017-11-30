@@ -9,11 +9,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Lightx00.Shared_main" />
     <orderEntry type="library" name="Gradle: com.j256.ormlite:ormlite-core:5.0" level="project" />
+    <orderEntry type="module" module-name="Lightx00.Shared_main" />
     <orderEntry type="library" name="Gradle: com.jfoenix:jfoenix:1.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-materialicons:2.2.0-5" level="project" />
     <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-commons:8.15" level="project" />
+    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-materialicons:2.2.0-5" level="project" />
     <orderEntry type="library" name="Gradle: com.github.sarxos:webcam-capture:0.3.11" level="project" />
     <orderEntry type="library" name="Gradle: com.nativelibs4java:bridj:0.7.0" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.2" level="project" />
