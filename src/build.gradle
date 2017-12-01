@@ -9,7 +9,6 @@ group 'trapx00'
 version '1.0'
 
 subprojects {
-
     apply plugin: 'java'
     apply plugin: 'application'
     tasks.withType(JavaCompile) {
@@ -20,6 +19,7 @@ subprojects {
         jcenter()
         mavenCentral()
     }
+
 
 }
 
@@ -38,16 +38,28 @@ project(':Lightx00.Server') {
         testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 
-    extensions.add("serverClasspath", sourceSets.main.runtimeClasspath)
-    extensions.add("serverClassName", mainClassName)
-    extensions.add("serverAssembleTask", assemble)
-
 }
 
-project(':Lightx00.Client').extensions.add("serverMainClasspath", project(':Lightx00.Server').sourceSets.main.runtimeClasspath)
-project(':Lightx00.Client').extensions.add("serverMainClassname", project(':Lightx00.Server').mainClassName)
-project(':Lightx00.Client').extensions.add("serverAssembleTask", project(':Lightx00.Server').assemble)
+project(':Lightx00.Client') {
 
+    mainClassName = 'trapx00.lightx00.client.Client'
+    dependencies {
+        compile project(':Lightx00.Shared')
+        compile 'com.jfoenix:jfoenix:1.9.1'
+        compile 'de.jensd:fontawesomefx-commons:8.15'
+        compile 'de.jensd:fontawesomefx-materialicons:2.2.0-5'
+        compile 'com.github.sarxos:webcam-capture:0.3.11'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+}
+
+project(':Lightx00.Shared') {
+    dependencies {
+        compile 'com.j256.ormlite:ormlite-core:5.0'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
