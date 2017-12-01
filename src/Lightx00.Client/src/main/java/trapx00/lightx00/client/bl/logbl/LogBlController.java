@@ -1,14 +1,22 @@
 package trapx00.lightx00.client.bl.logbl;
 
 import trapx00.lightx00.client.blservice.logblservice.LogBlService;
+import trapx00.lightx00.client.datafactory.logdataservicefactory.LogDataServiceFactory;
+import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.client.vo.log.LogVo;
 
 import java.net.URI;
+import java.rmi.RemoteException;
+import java.util.Arrays;
+import java.util.Date;
 
 public class LogBlController implements LogBlService, LogService {
+    private LogDataService logDataService = LogDataServiceFactory.getService();
     /**
      * Writes log.
      *
@@ -18,7 +26,12 @@ public class LogBlController implements LogBlService, LogService {
      */
     @Override
     public ResultMessage log(LogSeverity severity, String content) {
-        return null;
+        try {
+            logDataService.log(severity, content);
+            return ResultMessage.Success;
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     /**
@@ -29,6 +42,14 @@ public class LogBlController implements LogBlService, LogService {
      */
     @Override
     public LogVo[] query(LogQueryVo query) {
-        return new LogVo[0];
+        try {
+            return Arrays.stream(logDataService.query(query)).map(this::fromPo).toArray(LogVo[]::new);
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
+    }
+
+    private LogVo fromPo(LogPo logPo) {
+        return new LogVo(logPo.getDate(), logPo.getSeverity(), logPo.getContent());
     }
 }

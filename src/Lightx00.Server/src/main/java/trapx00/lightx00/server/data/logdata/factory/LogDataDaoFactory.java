@@ -9,19 +9,11 @@ import java.sql.SQLException;
 
 public class LogDataDaoFactory extends BaseDatabaseFactory {
 
-    static {
-        initTable(LogPo.class);
-    }
-
     private static Dao<LogPo, Integer> logDao;
 
     public static Dao<LogPo, Integer> getLogDao() {
-        if (logDao==null) {
-            try {
-                logDao = DaoManager.createDao(connectionSource,LogPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if (logDao == null) {
+            logDao = createDao(LogPo.class);
         }
         return logDao;
     }

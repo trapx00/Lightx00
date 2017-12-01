@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.presentation.helpui;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

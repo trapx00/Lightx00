@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.test.data.inventorydata;
 
 import com.j256.ormlite.dao.Dao;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryCheckDataFactory;
@@ -33,11 +34,6 @@ public class InventoryCheckDataControllerTest {
     private InventoryViewPo inventoryViewPo=new InventoryViewPo("VIEW-0001-0001",new Date(),1,1,
             1,1,1,1,1);
     private InventoryPicturePo inventoryPicturePo=new InventoryPicturePo("PICT-0001-0001",new Date(),null);
-    @Before
-    public void setUp() throws Exception {
-        inventoryViewDao.delete(inventoryViewPo);
-        inventoryPictureDao.delete(inventoryPicturePo);
-    }
 
     @Test
     public void picture() throws Exception {
