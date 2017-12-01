@@ -2,11 +2,31 @@ package trapx00.lightx00.client.bl.promotionbl;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
+import trapx00.lightx00.client.datafactory.promotiondataservicefactory.TotalPricePromotionDataServiceFactory;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
+import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
+import java.util.List;
+
 public class TotalPricePromotionBlController implements TotalPricePromotionBlService, DraftDeleteService {
+    private TotalPricePromotionDataService dataService = TotalPricePromotionDataServiceFactory.getService();
+
+    private CommonPromotionBlController<TotalPricePromotionVo, TotalPricePromotionPo, TotalPricePromotionQueryVo> commonPromotionBlController
+            = new CommonPromotionBlController<>(dataService, "客户促销策略", this::voToPo, this::poToVo);
+
+
+    private TotalPricePromotionVo poToVo(TotalPricePromotionPo po) {
+        return new TotalPricePromotionVo(po.getId(), po.getStartDate(), po.getEndDate(), po.getState(), po.getCouponPrice(),po.getTotalPrice(),po.getPromotionCommodities());
+
+    }
+
+    private TotalPricePromotionPo voToPo(TotalPricePromotionVo vo) {
+        return new TotalPricePromotionPo(vo.getId(), vo.getStartDate(), vo.getEndDate(), vo.getState(), vo.getCouponPrice(), vo.getTotalPrice(),vo.getPromotionCommodities());
+    }
+
     /**
      * Submit a TotalPriceGiftVo.
      * @param promotion the TotalPriceGiftVo to be submitted
@@ -14,7 +34,7 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
      */
     @Override
     public ResultMessage submit(TotalPricePromotionVo promotion) {
-        return null;
+        return commonPromotionBlController.submit(promotion);
     }
 
     /**
@@ -24,7 +44,7 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
      */
     @Override
     public ResultMessage saveAsDraft(TotalPricePromotionVo promotion) {
-        return null;
+        return commonPromotionBlController.saveAsDraft(promotion);
     }
 
     /**
@@ -34,17 +54,18 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
      */
     @Override
     public TotalPricePromotionVo[] queryPromotion(TotalPricePromotionQueryVo query) {
-        return new TotalPricePromotionVo[0];
+        List<TotalPricePromotionVo> result = commonPromotionBlController.queryPromotion(query);
+        return result.toArray(new TotalPricePromotionVo[result.size()]);
     }
 
     /**
      * Delete a overdue or needless TotalPriceGiftVo.
-     * @param promotion the TotalPriceGiftVo to be deleted
+     * @param id id of the TotalPriceGiftVo to be deleted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(TotalPricePromotionVo promotion) {
-        return null;
+    public ResultMessage delete(String id) {
+        return commonPromotionBlController.deleteDraft(id);
     }
 
     /**
@@ -53,7 +74,7 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
      */
     @Override
     public String getId() {
-        return null;
+        return commonPromotionBlController.getId();
     }
 
     /**
@@ -63,6 +84,6 @@ public class TotalPricePromotionBlController implements TotalPricePromotionBlSer
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return commonPromotionBlController.deleteDraft(id);
     }
 }

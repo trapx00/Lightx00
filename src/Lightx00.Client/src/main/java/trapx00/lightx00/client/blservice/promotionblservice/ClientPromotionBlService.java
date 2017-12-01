@@ -28,10 +28,10 @@ public interface ClientPromotionBlService {
 
     /**
      * Delete a overdue or needless ClientPromotionVo.
-     * @param promotion the ClientPromotionVo to be deleted
+     * @param id id of the ClientPromotionVo to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(ClientPromotionVo promotion);
+    ResultMessage delete(String id);
 
     /**
      * Get id for the next promotion.

@@ -2,10 +2,9 @@ package trapx00.lightx00.client.bl.promotionbl.factory;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.promotionbl.ComSalePromotionBlController;
-import trapx00.lightx00.client.bl.promotionbl.mock.ComSalePromotionBlControllerMock;
 
 public class ComSalePromotionBlFactory {
-    private static ComSalePromotionBlController controller = new ComSalePromotionBlControllerMock();
+    private static ComSalePromotionBlController controller = new ComSalePromotionBlController();
     private static DraftDeleteService draftDeleteService = controller;
 
     public static ComSalePromotionBlController getController() {
