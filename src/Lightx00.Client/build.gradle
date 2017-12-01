@@ -1,4 +1,7 @@
-import java.rmi.Naming
+import java.util.concurrent.Callable
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 dependencies {
     compile project(':Lightx00.Shared')
@@ -10,3 +13,65 @@ dependencies {
 }
 
 mainClassName = "trapx00.lightx00.client.Client"
+
+ExecutorService es = Executors.newSingleThreadExecutor()
+OutputStream outputStream = new ServerOutputStream()
+
+def serverAssembleTask = extensions.getByName("serverAssembleTask")
+def serverMainClassname = extensions.getByName("serverMainClassname")
+def serverMainClasspath = extensions.getByName("serverMainClasspath")
+
+
+enum ServerStatus {
+    Initializing,
+    Initialized,
+    PortsInUse
+}
+
+class ServerOutputStream extends OutputStream {
+    private StringBuilder content = new StringBuilder()
+    private static final String initializationCompleteFlag = "Initialization done."
+    @Override
+    void write(int b) throws IOException {
+        content.append((char)(b.intValue()))
+    }
+
+    ServerStatus getStatus() {
+        if (content.contains(initializationCompleteFlag)) {
+            return ServerStatus.Initialized
+        } else if (content.contains("Port already in use")) {
+            return ServerStatus.PortsInUse
+        } else {
+            return ServerStatus.Initializing
+        }
+    }
+}
+
+task initServer(dependsOn: serverAssembleTask) {
+    doLast {
+        es = Executors.newSingleThreadExecutor()
+        outputStream = new ServerOutputStream()
+        es.submit({
+            project.javaexec {
+                standardOutput = outputStream
+                main = serverMainClassname
+                classpath = serverMainClasspath
+            }
+        } as Callable)
+        println 'Waiting for server to initialize...'
+        int timeout = 30
+        while (outputStream.getStatus() == ServerStatus.Initializing) {
+            Thread.sleep 1000
+            timeout -= 1
+            if (timeout == 0) {
+                throw new GradleException("Initialization timed out")
+            }
+        }
+        if (outputStream.getStatus() == ServerStatus.PortsInUse) {
+            throw new GradleException("Ports in use. Retry.")
+        }
+        println 'Server initialized.'
+    }
+}
+
+test.dependsOn initServer

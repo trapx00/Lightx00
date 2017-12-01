@@ -22,7 +22,7 @@ testjob:
     - cd ./src/
     - chmod +x gradlew
     - ./gradlew ':Lightx00.Server:check'
-    - ./gradlew ':Lightx00.Client:assemble'
+    - ./gradlew ':Lightx00.Client:check'
   only:
     - develop
     - master

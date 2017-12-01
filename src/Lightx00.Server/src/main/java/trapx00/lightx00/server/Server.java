@@ -1,7 +1,5 @@
 package trapx00.lightx00.server;
 
-import com.j256.ormlite.dao.Dao;
-import trapx00.lightx00.server.data.admindata.factory.AdminDataDaoFactory;
 import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
 import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
@@ -23,8 +21,6 @@ import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthentication
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
-import trapx00.lightx00.shared.po.admin.AdminPo;
-import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
@@ -35,7 +31,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.Date;
 
 public class Server {
 
@@ -46,7 +41,11 @@ public class Server {
      *
      * @param args command line args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        initRmi();
+    }
+
+    public static void initRmi() {
         try {
             BaseDatabaseFactory.init();
             SaleBillDataService saleBillDataService = SaleBillDataFactory.getService();
@@ -71,7 +70,6 @@ public class Server {
             logService.printLog(caller, "Initialization done.");
         } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
             logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));
-            System.out.println("20171130"); // signal for initialization complete
             e.printStackTrace();
         }
     }
