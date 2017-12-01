@@ -8,17 +8,11 @@ import trapx00.lightx00.shared.po.notification.NotificationPo;
 import java.sql.SQLException;
 
 public class NotificationDataDaoFactory extends BaseDatabaseFactory {
-    static {
-        initTable(NotificationPo.class);
-    }
-
     private static Dao<NotificationPo, Integer> dao;
 
     public static Dao<NotificationPo, Integer> getDao() {
-        try {
-            dao = DaoManager.createDao(connectionSource, NotificationPo.class);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (dao == null) {
+            dao = createDao(NotificationPo.class);
         }
         return dao;
     }

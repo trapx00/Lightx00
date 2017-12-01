@@ -10,17 +10,9 @@ import java.sql.SQLException;
 public class ClientDataDaoFactory extends BaseDatabaseFactory {
     private static Dao<ClientPo, String> clientDao;
 
-    static {
-        initTable(ClientPo.class);
-    }
-
     public static Dao<ClientPo, String> getClientDao() {
         if (clientDao == null) {
-            try {
-                return clientDao = DaoManager.createDao(connectionSource, ClientPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            clientDao = createDao(ClientPo.class);
         }
         return clientDao;
     }

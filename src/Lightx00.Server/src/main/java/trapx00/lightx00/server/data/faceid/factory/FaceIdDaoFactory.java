@@ -8,24 +8,12 @@ import trapx00.lightx00.shared.po.employee.EmployeeFaceIdInfo;
 import java.sql.SQLException;
 
 public class FaceIdDaoFactory extends BaseDatabaseFactory {
-    static {
-        initTable(EmployeeFaceIdInfo.class);
-    }
 
     private static Dao<EmployeeFaceIdInfo, String> dao;
 
-
-    /**
-     * Gets dao.
-     * @return dao
-     */
     public static Dao<EmployeeFaceIdInfo, String> getDao() {
         if (dao == null) {
-            try {
-                dao = DaoManager.createDao(connectionSource,EmployeeFaceIdInfo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dao = createDao(EmployeeFaceIdInfo.class);
         }
         return dao;
     }

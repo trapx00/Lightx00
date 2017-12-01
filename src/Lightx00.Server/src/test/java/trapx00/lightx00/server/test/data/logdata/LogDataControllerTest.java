@@ -1,6 +1,7 @@
 package trapx00.lightx00.server.test.data.logdata;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedDelete;
 import com.j256.ormlite.table.TableUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +21,7 @@ import java.util.OptionalInt;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("unchecked")
 public class LogDataControllerTest {
     static {
         try {
@@ -28,44 +30,21 @@ public class LogDataControllerTest {
             e.printStackTrace();
         }
     }
+
     private LogDataService service = LogDataFactory.getService();
     private Dao<LogPo, Integer> dao = LogDataDaoFactory.getLogDao();
     private LogPo logPo = new LogPo(new Date(), LogSeverity.Success, "123");
 
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
     @Test
     public void log() throws Exception {
+        long previous = dao.countOf();
+        service.log(logPo.getSeverity(), logPo.getContent());
         try {
-            long previous = dao.countOf();
-            service.log(logPo.getSeverity(), logPo.getContent());
             assertEquals(1, dao.countOf()-previous);
         } finally {
-            resetTable();
+            dao.deleteBuilder().delete();
         }
 
-    }
-
-    private void resetTable() throws Exception {
-        TableUtils.dropTable(dao.getConnectionSource(),LogPo.class,true);
-        TableUtils.createTable(dao.getConnectionSource(), LogPo.class);
-    }
-
-    @Test
-    public void logTwiceAndCheckWhetherTheIdForTheSecondIs2() throws Exception {
-        try {
-            service.log(logPo.getSeverity(), logPo.getContent());
-            service.log(logPo.getSeverity(), logPo.getContent());
-            int second = Arrays.stream(service.query(new LogQueryVo()))
-                    .mapToInt(LogPo::getId)
-                    .max().orElse(-1);
-            assertEquals(2, second);
-        } finally {
-            resetTable();
-        }
     }
 
     @Test
@@ -77,7 +56,7 @@ public class LogDataControllerTest {
             assertEquals(1, service.query(new LogQueryVo().eq("severity",LogSeverity.Failure)).length);
 
         } finally {
-            resetTable();
+            dao.deleteBuilder().delete();
         }
     }
 
