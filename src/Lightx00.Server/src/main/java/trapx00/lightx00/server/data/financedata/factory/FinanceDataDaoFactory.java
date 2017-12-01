@@ -3,6 +3,7 @@ package trapx00.lightx00.server.data.financedata.factory;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
+import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
@@ -12,12 +13,6 @@ import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import java.sql.SQLException;
 
 public class FinanceDataDaoFactory extends BaseDatabaseFactory {
-    static {
-        initTable(CashBillPo.class);
-        initTable(PaymentBillPo.class);
-        initTable(ReceivalBillPo.class);
-        initTable(SystemSnapshotPo.class);
-    }
 
     private static Dao<CashBillPo, String> cashBillDao;
     private static Dao<PaymentBillPo, String> paymentBillDao;
@@ -27,44 +22,28 @@ public class FinanceDataDaoFactory extends BaseDatabaseFactory {
 
     public static Dao<CashBillPo, String> getCashBillDao() {
         if (cashBillDao == null) {
-            try {
-                cashBillDao = DaoManager.createDao(connectionSource,CashBillPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            cashBillDao = createDao(CashBillPo.class);
         }
         return cashBillDao;
     }
 
     public static Dao<PaymentBillPo, String> getPaymentBillDao() {
         if (paymentBillDao == null) {
-            try {
-                paymentBillDao = DaoManager.createDao(connectionSource, PaymentBillPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            paymentBillDao = createDao(PaymentBillPo.class);
         }
         return paymentBillDao;
     }
 
     public static Dao<ReceivalBillPo, String> getReceivalBillDao() {
         if (receivalBillDao == null) {
-            try {
-                receivalBillDao = DaoManager.createDao(connectionSource, ReceivalBillPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            receivalBillDao = createDao(ReceivalBillPo.class);
         }
         return receivalBillDao;
     }
 
     public static Dao<SystemSnapshotPo, String> getSystemSnapshotDao() {
         if (systemSnapshotDao == null) {
-            try {
-                systemSnapshotDao = DaoManager.createDao(connectionSource, SystemSnapshotPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            systemSnapshotDao = createDao(SystemSnapshotPo.class);
         }
         return systemSnapshotDao;
     }

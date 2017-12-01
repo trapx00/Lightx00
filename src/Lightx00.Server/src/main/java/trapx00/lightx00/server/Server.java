@@ -40,6 +40,7 @@ import java.util.Date;
 public class Server {
 
     public static ServerLogService logService = ServerLogServiceFactory.getService();
+    public static final String caller = "Main function";
     /**
      * Server runner
      *
@@ -67,30 +68,12 @@ public class Server {
             export(faceIdAuthenticationDataService);
             export(loginDataService);
             export(cashBillDataService);
-            System.out.println(">>>>>INFO:远程对象绑定成功！");
-
-            FinanceStaffPo employeePo = new FinanceStaffPo("123","1",new Date(), "123","123");
-            Dao<FinanceStaffPo, String> dao = AdminDataDaoFactory.getFinanceStaffDao();
-            Dao<AdminPo, String> adminDao = AdminDataDaoFactory.getAdminDao();
-            AdminPo adminPo = new AdminPo("1234","2",new Date(), "123", "123");
-            dao.deleteById("1");
-            adminDao.deleteById("2");
-            adminDao.create(adminPo);
-            dao.create(employeePo);
-        } catch (RemoteException e) {
-            System.out.println("创建远程对象发生异常！");
-            e.printStackTrace();
-        } catch (AlreadyBoundException e) {
-            System.out.println("发生重复绑定对象异常！");
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            System.out.println("发生URL畸形异常！");
-            e.printStackTrace();
-        } catch (SQLException e) {
+            logService.printLog(caller, "Initialization done.");
+        } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
+            logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));
+            System.out.println("20171130"); // signal for initialization complete
             e.printStackTrace();
         }
-
-
     }
 
     public static void export(Remote remoteObj) throws RemoteException, MalformedURLException, AlreadyBoundException {
@@ -101,8 +84,8 @@ public class Server {
             .orElse(null);
         if (remoteInterface != null) {
             String url = RmiHelper.generateRmiUrl(remoteInterface);
-            logService.printLog("Main function", String.format("registered %s to %s", url, remoteObj.toString()));
-            Naming.bind(url, remoteObj);
+            logService.printLog(caller, String.format("registered %s to %s", url, remoteObj.toString()));
+            Naming.rebind(url, remoteObj);
         }
 
     }
