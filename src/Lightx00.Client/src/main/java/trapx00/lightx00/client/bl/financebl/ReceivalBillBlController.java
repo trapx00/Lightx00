@@ -3,12 +3,14 @@ package trapx00.lightx00.client.bl.financebl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.ReceivalBillBlService;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.ReceivalBillDataServiceFactory;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
@@ -16,17 +18,19 @@ import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 
 import java.util.List;
 
-public class ReceivalBillBlController implements ReceivalBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, ReceivalBillInfo, BillApprovalCompleteService {
+public class ReceivalBillBlController
+    implements ReceivalBillBlService, NotificationActivateService, NotificationAbandonService,
+    DraftDeleteService, ReceivalBillInfo, BillApprovalCompleteService, BillPoVoConverter<ReceivalBillPo, ReceivalBillVo> {
 
     private ReceivalBillDataService dataService = ReceivalBillDataServiceFactory.getService();
     private CommonBillBlController<ReceivalBillVo, ReceivalBillPo, ReceivalBillQueryVo> commonBillBlController
-        = new CommonBillBlController<>(dataService, "付款单", this::fromVo, this::fromPo);
+        = new CommonBillBlController<>(dataService, "付款单", this);
 
-    private ReceivalBillVo fromPo(ReceivalBillPo po) {
+    public ReceivalBillVo fromPoToVo(ReceivalBillPo po) {
         return new ReceivalBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getOperatorId(), po.getTranscations(), po.getTotal());
     }
 
-    private ReceivalBillPo fromVo(ReceivalBillVo vo) {
+    public ReceivalBillPo fromVoToPo(ReceivalBillVo vo) {
         return new ReceivalBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getOperatorId(), vo.getTranscations(), vo.getTotal());
     }
     /**
