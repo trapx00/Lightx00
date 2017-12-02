@@ -1,14 +1,13 @@
 package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.inventorybl.InventoryBillServiceController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
-public class InventoryBillServiceControllerMock extends InventoryBillServiceController {
+public class InventoryBillInfoControllerMock extends InventoryBillInfoController {
     InventoryWarningBlService inventoryWarningBlService=new InventoryWarningBlControllerMock();
     InventoryGiftBlService inventoryGiftBlService=new InventoryGiftBlControllerMock();
 
@@ -19,7 +18,7 @@ public class InventoryBillServiceControllerMock extends InventoryBillServiceCont
      * @return array of PurchaseBillVo
      */
     @Override
-    public InventoryBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo) {
+    public InventoryDetailBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo) {
         return inventoryWarningBlService.query(inventoryBillQueryVo);
     }
 

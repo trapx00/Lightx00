@@ -9,8 +9,10 @@ import trapx00.lightx00.shared.po.bill.BillState;
 
 @DatabaseTable(tableName = "InventoryDetailBill")
 public class InventoryDetailBillPo extends InventoryBillPo {
+    @DatabaseField
+    private String operatorId;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private CommodityPo[] commodityList;//商品
+    private InventoryWarningItem[] commodityList;//商品
 
 
     public InventoryDetailBillPo(){
@@ -19,15 +21,26 @@ public class InventoryDetailBillPo extends InventoryBillPo {
 
     public InventoryDetailBillPo(String id, Date date, BillState state,
                                  InventoryBillType inventoryBillType,
-                                 CommodityPo[] commodityIdList) {
+                                 InventoryWarningItem[] inventoryWarningItems,String operatorId) {
         super(id, date, state, inventoryBillType);
-        this.commodityList = commodityIdList;
+        this.commodityList = inventoryWarningItems;
+        this.operatorId=operatorId;
     }
 
 
+    public String getOperatorId() {
+        return operatorId;
+    }
 
-    public CommodityPo[] getCommodityIdList() {
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
+    public InventoryWarningItem[] getCommodityList() {
         return commodityList;
+    }
+
+    public void setCommodityList(InventoryWarningItem[] commodityList) {
+        this.commodityList = commodityList;
     }
 
     public void setNum(double num,CommodityPo commodityPo){
@@ -39,8 +52,6 @@ public class InventoryDetailBillPo extends InventoryBillPo {
     }
 
 
-    public void setCommodityIdList(CommodityPo[] commodityIdList) {
-        this.commodityList = commodityIdList;
-    }
+
 
 }

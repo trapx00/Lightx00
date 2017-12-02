@@ -1,29 +1,50 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
-import trapx00.lightx00.client.bl.commoditybl.CommodityService;
+import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryWarningDataServiceFactory;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-import java.util.Date;
+import java.util.List;
 
-public class InventoryWarningBlController implements BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService,CommodityService {
+
+public class InventoryWarningBlController implements BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService ,BillPoVoConverter<InventoryDetailBillPo, InventoryDetailBillVo> {
+
+    private InventoryWarningDataService dataService= InventoryWarningDataServiceFactory.getService();
+    private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
+
+    private CommonBillBlController<InventoryDetailBillVo, InventoryDetailBillPo, InventoryBillQueryVo> commonBillBlController
+            = new CommonBillBlController<>(dataService, "库存监控单", this);
+
+    public InventoryDetailBillVo fromPoToVo(InventoryDetailBillPo po) {
+        return new InventoryDetailBillVo(po.getId(), po.getDate(), po.getState(), po.getOperatorId(), po.getCommodityList(), po.getInventoryBillType());
+
+    }
+
+    public InventoryDetailBillPo fromVoToPo(InventoryDetailBillVo vo) {
+        return new InventoryDetailBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getInventoryBillType(),vo.getCommodities(),vo.getOperatorId());
+    }
+
     /**
      * Submits a Bill.
      * @param bill
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage submit(InventoryBillVo bill) {
-        return ResultMessage.Success;
+    public ResultMessage submit(InventoryDetailBillVo bill) {
+        return commonBillBlController.submit(bill);
     }
 
     /**
@@ -32,8 +53,8 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage saveAsDraft(InventoryBillVo bill) {
-        return ResultMessage.Success;
+    public ResultMessage saveAsDraft(InventoryDetailBillVo bill) {
+        return  commonBillBlController.saveAsDraft(bill);
     }
 
     /**
@@ -44,27 +65,20 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      */
     @Override
     public ResultMessage modify(String id, double modifyWarning) {
-        return ResultMessage.Success;
+        return commodityInfo.update(id,modifyWarning);
     }
 
-    /**
-     * Gets the current Bill
-     * @return the current BillVo
-     */
-    @Override
-    public InventoryBillVo getCurrentBill() {
-        InventoryBillVo inventoryBillVo=new InventoryBillVo("123",new Date(), BillState.Approved,null,null,null,null);
-        return inventoryBillVo;
-    }
+
 
     /**
      *  Querys a bill
-     * @param inventoryBillQueryVo
-     * @return InventoryBillVo
+     * @param query
+     * @return InventoryDetailBillVo
      */
     @Override
-    public InventoryBillVo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
-        return new InventoryBillVo[0];
+    public InventoryDetailBillVo[] query(InventoryBillQueryVo query) {
+        List<InventoryDetailBillVo> result = commonBillBlController.query(query);
+        return result.toArray(new InventoryDetailBillVo[result.size()]);
     }
 
     /**
@@ -73,7 +87,7 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      */
     @Override
     public String getId() {
-        return "123";
+        return commonBillBlController.getId();
     }
 
     /**
@@ -83,7 +97,7 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return ResultMessage.Success;
+        return commonBillBlController.deleteDraft(id);
     }
 
     /**
@@ -93,7 +107,7 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      */
     @Override
     public ResultMessage abandon(String id) {
-        return ResultMessage.Success;
+        return commonBillBlController.abandon(id);
     }
 
     /**
@@ -103,22 +117,10 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      */
     @Override
     public ResultMessage activate(String id) {
-        return ResultMessage.Success;
+        return commonBillBlController.activate(id);
     }
 
-    /**
-     * Query a commoditybl
-     * @return CommodityVo
-     */
-    @Override
-    public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return new CommodityVo[0];
-    }
-    /**
-     * Querys inventoryBill
-     * @param inventoryBillQueryVo
-     * @return  the list of inventoryBIlls that match to the requirement
-     */
+
 
     /**
      * When bill is approved, this method is called to modify the state of the bill.
@@ -129,7 +131,7 @@ public class InventoryWarningBlController implements BillApprovalCompleteService
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
-        return null;
+        return commonBillBlController.approvalComplete(billId, state);
     }
 
 }

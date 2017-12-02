@@ -10,21 +10,21 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
 
-public  class InventoryBillVo extends InventoryBillBaseVo {
+public  class InventoryDetailBillVo extends InventoryBillBaseVo implements Reversible {
     //报损报溢报警
     private String operatorId;
-    private CommodityVo[] commodities;//商品
-    private double[] amountList;//报损报警报溢数量
+    private InventoryWarningItem[] commodities;//商品
     private InventoryBillType type;
 
-    public InventoryBillVo(String id, Date date, BillState state, String operatorId, CommodityVo[] commodities, double[] amountList, InventoryBillType type) {
+    public InventoryDetailBillVo(String id, Date date, BillState state, String operatorId, InventoryWarningItem[] commodities,  InventoryBillType type) {
         super(id, date, state,type);
         this.operatorId = operatorId;
         this.commodities = commodities;
-        this.amountList = amountList;
         this.type = type;
     }
 
@@ -32,20 +32,12 @@ public  class InventoryBillVo extends InventoryBillBaseVo {
         return operatorId;
     }
 
-    public CommodityVo[] getCommodities() {
+    public InventoryWarningItem[] getCommodities() {
         return commodities;
     }
 
-    public void setCommodities(CommodityVo[] commodities) {
+    public void setCommodities(InventoryWarningItem[] commodities) {
         this.commodities = commodities;
-    }
-
-    public double[] getAmountList() {
-        return amountList;
-    }
-
-    public void setAmountList(double[] amountList) {
-        this.amountList = amountList;
     }
 
     public InventoryBillType getType() {

@@ -34,6 +34,8 @@ public class CommodityPo implements Serializable {
     private double recentRetailPrice;//最近售价
     @DatabaseField
     private double warningValue;//警戒值
+    @DatabaseField
+    private double inventoryNum;//报警报溢数量
 
     public double getInventoryNum() {
         return inventoryNum;
@@ -43,8 +45,7 @@ public class CommodityPo implements Serializable {
         this.inventoryNum = inventoryNum;
     }
 
-    @DatabaseField
-    private double inventoryNum;//报警报溢数量
+
 
     public CommodityPo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
