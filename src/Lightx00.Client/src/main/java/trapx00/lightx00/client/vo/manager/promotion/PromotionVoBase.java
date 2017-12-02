@@ -15,10 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 public abstract class PromotionVoBase implements Draftable, Serializable {
-    static {
-        DraftableQueryServiceRegistry.register(DraftType.Promotion, PromotionDraftQueryServiceFactory.getQueryService());
-    }
-
     private String id;
     private PromotionType type;
     private Date startDate;
