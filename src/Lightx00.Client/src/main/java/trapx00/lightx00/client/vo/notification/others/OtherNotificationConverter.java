@@ -2,10 +2,7 @@ package trapx00.lightx00.client.vo.notification.others;
 
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
-import trapx00.lightx00.client.bl.financebl.BillIdQueryService;
-import trapx00.lightx00.client.bl.financebl.factory.BillIdQueryServiceFactory;
 import trapx00.lightx00.client.vo.notification.NotificationConverterClass;
-import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.client.vo.notification.NotificationConverter;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
