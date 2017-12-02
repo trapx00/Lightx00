@@ -2,10 +2,9 @@ package trapx00.lightx00.client.vo.notification.billapproval;
 
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
-import trapx00.lightx00.client.bl.financebl.BillIdQueryService;
-import trapx00.lightx00.client.bl.financebl.factory.BillIdQueryServiceFactory;
+import trapx00.lightx00.client.bl.financebl.BillInfo;
+import trapx00.lightx00.client.bl.financebl.factory.BillInfoBlFactory;
 import trapx00.lightx00.client.vo.notification.NotificationConverterClass;
-import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.client.vo.notification.NotificationConverter;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
@@ -13,7 +12,7 @@ import trapx00.lightx00.shared.po.notification.NotificationType;
 @NotificationConverterClass(notificationType = NotificationType.BillApproval)
 public class BillApprovalNotificationConverter implements NotificationConverter<BillApprovalNotificationVo> {
 
-    private BillIdQueryService billIdQueryService = BillIdQueryServiceFactory.getBillIdQueryService();
+    private BillInfo billInfo = BillInfoBlFactory.getBillInfo();
     private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
 
     /**
@@ -29,7 +28,7 @@ public class BillApprovalNotificationConverter implements NotificationConverter<
             po.getDate(),
             employeeInfo.queryById(po.getSenderId()),
             employeeInfo.queryById(po.getReceiverId()),
-            billIdQueryService.queryBill(po.getContent())
+            billInfo.queryBill(po.getContent())
         );
     }
 

@@ -28,7 +28,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                 .addTable(
                         ReadOnlyPairTableHelper.start()
                                 .addPair("单据编号", purchaseBillPo.getId())
-                                .addPair("操作员", purchaseBillPo.getOperatorId())
+                                .addPair("操作员", purchaseBillPo.getOperatorIds())
                                 .addPair("供应商", purchaseBillPo.getSupplier())
                                 .addPair("仓库", purchaseBillPo.getRepository() + "")
                                 .addPair("总额合计", purchaseBillPo.getTotal() + "")

@@ -1,15 +1,19 @@
 package trapx00.lightx00.client.bl.notificationbl;
 
+import trapx00.lightx00.client.bl.logbl.LogService;
+import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
 import trapx00.lightx00.client.bl.loginbl.CurrentUserService;
 import trapx00.lightx00.client.bl.loginbl.factory.CurrentUserServiceFactory;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.client.datafactory.notificationdataservicefactory.NotificationDataServiceFactory;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.notification.NotificationConvertRegistry;
+import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
+import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
@@ -21,6 +25,7 @@ import java.util.stream.Collectors;
 public class NotificationBlController implements NotificationBlService, NotificationService {
     private NotificationDataService dataService = NotificationDataServiceFactory.getService();
     private CurrentUserService currentUserService = CurrentUserServiceFactory.getCurrentUserService();
+    private LogService logService = LogServiceFactory.getLogService();
     /**
      * Adds a notification.
      *
@@ -49,8 +54,10 @@ public class NotificationBlController implements NotificationBlService, Notifica
             List<NotificationVo> voList = Arrays.stream(queryResult)
                 .map(NotificationConvertRegistry::convertToVo)
                 .collect(Collectors.toList());
+            logService.log(LogSeverity.Info, String.format("查询了接受者%s(id: %s)的通知，查到%s条通知。", currentUser.getName(), currentUser.getId(), queryResult.length));
             return voList.toArray(new NotificationVo[voList.size()]);
         } catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, "查单子过程中出现了异常，异常信息：" + e.getMessage());
             throw new UncheckedRemoteException(e);
         }
     }
@@ -65,8 +72,15 @@ public class NotificationBlController implements NotificationBlService, Notifica
     public ResultMessage acknowledge(NotificationVo notification) {
         NotificationOperationRegistry.activate(notification);
         try {
-            return dataService.acknowledge(notification.getId());
+            ResultMessage rm =  dataService.acknowledge(notification.getId());
+            if (rm.isSuccess()) {
+                logService.log(LogSeverity.Success, String.format("已读了一条通知(id: %s)。",notification.getId()));
+            } else {
+                logService.log(LogSeverity.Failure, String.format("已读通知(id: %s)过程中失败，原因不明。", notification.getId()));
+            }
+            return rm;
         } catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, "已读通知过程中出现了异常，异常信息：" + e.getMessage());
             throw new UncheckedRemoteException(e);
         }
     }
@@ -81,8 +95,15 @@ public class NotificationBlController implements NotificationBlService, Notifica
     public ResultMessage abandon(NotificationVo notification) {
         NotificationOperationRegistry.abandon(notification);
         try {
-            return dataService.acknowledge(notification.getId());
+            ResultMessage rm =  dataService.acknowledge(notification.getId());
+            if (rm.isSuccess()) {
+                logService.log(LogSeverity.Success, String.format("丢弃了一条通知(id: %s)。",notification.getId()));
+            } else {
+                logService.log(LogSeverity.Failure, String.format("丢弃通知(id: %s)过程中失败，原因不明。", notification.getId()));
+            }
+            return rm;
         } catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, "丢弃通知过程中出现了异常，异常信息：" + e.getMessage());
             throw new UncheckedRemoteException(e);
         }
     }

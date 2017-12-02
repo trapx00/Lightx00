@@ -4,6 +4,6 @@ import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 
 import java.util.function.Predicate;
 
-public class SystemSnapshotQueryVo extends BaseQueryVo<SystemSnapshotPo, String, SystemSnapshotQueryVo> {
+public class SystemSnapshotQueryVo extends SpecificFinanceBillQueryVo<SystemSnapshotPo, SystemSnapshotQueryVo> {
 
 }
