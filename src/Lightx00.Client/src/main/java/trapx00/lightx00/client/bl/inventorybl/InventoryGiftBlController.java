@@ -12,12 +12,10 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServi
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryGiftDataServiceFactory;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
-import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.util.Date;
@@ -57,15 +55,6 @@ public abstract class InventoryGiftBlController implements BillApprovalCompleteS
     @Override
     public String getId() {
         return commonBillBlController.getId();
-    }
-    /**
-     * Gets the giftBill during specified time range
-     * @param time
-     * @return The bill during specified time range
-     */
-    @Override
-    public InventoryGiftVo getGift(Date time) {
-        return null;
     }
 
 

@@ -1,7 +1,9 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
@@ -23,11 +25,11 @@ public interface InventoryGiftBlService {
     String getId();
 
     /**
-     * Gets the giftBill during the time
-     * @param time
-     * @return the giftBill
+     * Saves the current bil
+     * @param bill
+     * @return  whether the operation is done successfully
      */
-    InventoryGiftVo getGift(Date time);
+    ResultMessage saveAsDraft(InventoryGiftVo bill);//保存草稿
 
 
     InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo);
