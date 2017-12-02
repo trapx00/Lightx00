@@ -27,8 +27,8 @@ public class SaleBillDataServiceFactory {
         }
     }
 
-    public SaleBillDataService getInstance() {
-        //initRmi();
+    public static SaleBillDataService getInstance() {
+        initRmi();
         return service;
     }
 }
