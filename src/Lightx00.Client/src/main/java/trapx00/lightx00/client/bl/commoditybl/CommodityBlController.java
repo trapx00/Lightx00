@@ -58,6 +58,11 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
         return new CommodityVo[0];
     }
 
+    @Override
+    public ResultMessage update(String id, double value) {
+        return null;
+    }
+
     /**
      * Modify the inventoryNum
      * @param commodityId

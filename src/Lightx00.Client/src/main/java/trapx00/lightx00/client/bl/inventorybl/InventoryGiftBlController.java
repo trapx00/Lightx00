@@ -2,20 +2,44 @@ package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryGiftDataServiceFactory;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.util.Date;
 
-public class InventoryGiftBlController implements BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityInfo {
+public abstract class InventoryGiftBlController implements BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,BillPoVoConverter<InventoryGiftPo, InventoryGiftVo> {
+
+
+    private InventoryGiftDataService dataService= InventoryGiftDataServiceFactory.getService();
+    private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
+
+    private CommonBillBlController<InventoryGiftVo, InventoryGiftPo, InventoryGiftQueryVo> commonBillBlController
+            = new CommonBillBlController<>(dataService, "库存监控单", this);
+
+    public InventoryGiftVo fromPoToVo(InventoryGiftPo po) {
+        return new InventoryGiftVo(po.getId(), po.getDate(), po.getState(), po.getGifts());
+
+    }
+
+    public InventoryGiftPo fromVoToPo(InventoryGiftVo vo) {
+        return new InventoryGiftPo(BillType.InventoryBill,vo.getId(), vo.getDate(), vo.getState(),vo.getInventoryBillType(),vo.getGifts());
+    }
+
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo
@@ -23,7 +47,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
      */
     @Override
     public ResultMessage sumbit(InventoryGiftVo inventoryGiftVo) {
-        return ResultMessage.Success;
+        return commonBillBlController.submit(inventoryGiftVo);
     }
 
     /**
@@ -32,7 +56,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
      */
     @Override
     public String getId() {
-        return "123";
+        return commonBillBlController.getId();
     }
     /**
      * Gets the giftBill during specified time range
@@ -44,15 +68,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
         return null;
     }
 
-    /**
-     * Query a commoditybl
-     * @param commodityQueryVo
-     * @return CommodityVo that match to the requirement
-     */
-    @Override
-    public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return new CommodityVo[0];
-    }
+
     /**
      * Abandons a bill.
      * @param id id for the bill
@@ -60,7 +76,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
      */
     @Override
     public ResultMessage abandon(String id) {
-        return ResultMessage.Success;
+        return commonBillBlController.abandon(id);
     }
     /**
      *  Activates a bill that has been approved of.
@@ -69,7 +85,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
      */
     @Override
     public ResultMessage activate(String id) {
-        return ResultMessage.Success;
+        return commonBillBlController.activate(id);
     }
     /**
      * Deletes a draft.
@@ -79,7 +95,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return ResultMessage.Success;
+        return commonBillBlController.deleteDraft(id);
     }
 
     /**
@@ -91,7 +107,7 @@ public class InventoryGiftBlController implements BillApprovalCompleteService,In
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
-        return null;
+        return commonBillBlController.approvalComplete(billId, state);
     }
 
     @Override

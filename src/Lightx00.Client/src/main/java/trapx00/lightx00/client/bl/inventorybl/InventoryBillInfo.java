@@ -12,13 +12,8 @@ public interface InventoryBillInfo {
      * @param inventoryBillQueryVo
      * @return  the list of inventoryBIlls that match to the requirement
      */
-    InventoryDetailBillVo[] queryInventoryBill(InventoryBillQueryVo inventoryBillQueryVo);
+    InventoryDetailBillVo[] queryInventoryWarningBill(InventoryBillQueryVo inventoryBillQueryVo);
 
-    /**
-     * Querys inventoryGift
-     * @param inventoryBillQueryVo
-     * @return  the list of inventoryBIlls that match to the requirement
-     */
-    InventoryGiftVo[] queryInventoryGift (InventoryGiftQueryVo inventoryBillQueryVo);
+
 
 }

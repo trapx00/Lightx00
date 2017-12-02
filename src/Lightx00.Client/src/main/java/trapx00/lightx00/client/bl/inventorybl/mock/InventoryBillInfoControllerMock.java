@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.inventorybl.InventoryBillInfoController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
