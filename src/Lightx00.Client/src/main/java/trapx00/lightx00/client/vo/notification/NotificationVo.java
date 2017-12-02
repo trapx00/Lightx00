@@ -1,13 +1,16 @@
 package trapx00.lightx00.client.vo.notification;
 
+import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 
 
 import java.util.Date;
 
-public class NotificationVo {
+public abstract class NotificationVo {
     private int id;
     private Date date;
     private EmployeeVo sender;
@@ -20,10 +23,6 @@ public class NotificationVo {
         this.sender = sender;
         this.receiver = receiver;
         this.type = type;
-    }
-
-    public static NotificationVo convertFromPo(NotificationPo notificationPo) {
-        return NotificationConverterRegistry.convert(notificationPo);
     }
 
     public Date getDate() {
@@ -59,7 +58,6 @@ public class NotificationVo {
     }
 
     public int getId() {
-
         return id;
     }
 

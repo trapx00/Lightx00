@@ -57,7 +57,7 @@ public class NotificationBlControllerMock extends NotificationBlController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage abandon(BillApprovalNotificationVo notification) {
+    public ResultMessage abandon(NotificationVo notification) {
         return ResultMessage.Success;
     }
 }

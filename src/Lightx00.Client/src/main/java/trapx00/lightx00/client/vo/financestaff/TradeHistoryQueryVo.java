@@ -7,17 +7,17 @@ import java.util.Date;
 public class TradeHistoryQueryVo { //经营历程表查询条件
     private Date start;
     private Date end;
-    private BillType billType;
-    private String clientId;
-    private String operatorId;
+    private BillType[] billTypes;
+    private String[] clientIds;
+    private String[] operatorIds;
     private int repository;
 
-    public TradeHistoryQueryVo(Date start, Date end, BillType billType, String clientId, String operatorId, int repository) {
+    public TradeHistoryQueryVo(Date start, Date end, BillType[] billTypes, String[] clientIds, String[] operatorIds, int repository) {
         this.start = start;
         this.end = end;
-        this.billType = billType;
-        this.clientId = clientId;
-        this.operatorId = operatorId;
+        this.billTypes = billTypes;
+        this.clientIds = clientIds;
+        this.operatorIds = operatorIds;
         this.repository = repository;
     }
 
@@ -37,28 +37,28 @@ public class TradeHistoryQueryVo { //经营历程表查询条件
         this.end = end;
     }
 
-    public BillType getBillType() {
-        return billType;
+    public BillType[] getBillTypes() {
+        return billTypes;
     }
 
-    public void setBillType(BillType billType) {
-        this.billType = billType;
+    public void setBillTypes(BillType[] billTypes) {
+        this.billTypes = billTypes;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String[] getClientIds() {
+        return clientIds;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setClientIds(String[] clientIds) {
+        this.clientIds = clientIds;
     }
 
-    public String getOperatorId() {
-        return operatorId;
+    public String[] getOperatorIds() {
+        return operatorIds;
     }
 
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
+    public void setOperatorIds(String[] operatorIds) {
+        this.operatorIds = operatorIds;
     }
 
     public int getRepository() {
