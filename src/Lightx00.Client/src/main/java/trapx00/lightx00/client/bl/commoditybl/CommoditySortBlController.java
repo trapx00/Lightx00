@@ -5,7 +5,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
-public class CommoditySortBlController implements CommoditySortBlService,CommoditySortService {
+public class CommoditySortBlController implements CommoditySortBlService,CommoditySortInfo {
     /**
      * Add a commoditySort
      * @param newSort

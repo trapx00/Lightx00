@@ -4,23 +4,23 @@ import org.junit.Test;
 import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 
 import static org.junit.Assert.*;
 
 public class InventoryWarningBlControllerTest {
     private InventoryWarningBlController service= InventoryWarningServiceFactory.getInventoryWarningBlController();
-    InventoryBillVo inventoryBillVo=null;
+    InventoryDetailBillVo inventoryDetailBillVo =null;
     CommodityVo commodityVo=null;
     @Test
     public void submit() throws Exception {
-        assertEquals(ResultMessage.Success,service.submit(inventoryBillVo));
+        assertEquals(ResultMessage.Success,service.submit(inventoryDetailBillVo));
     }
 
     @Test
     public void saveAsDraft() throws Exception {
-        assertEquals(ResultMessage.Success,service.submit(inventoryBillVo));
+        assertEquals(ResultMessage.Success,service.submit(inventoryDetailBillVo));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
-import trapx00.lightx00.client.bl.commoditybl.CommodityService;
+import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
@@ -11,12 +11,11 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.util.Date;
 
-public class InventoryGiftBlController implements BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityService {
+public class InventoryGiftBlController implements BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,CommodityInfo {
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo

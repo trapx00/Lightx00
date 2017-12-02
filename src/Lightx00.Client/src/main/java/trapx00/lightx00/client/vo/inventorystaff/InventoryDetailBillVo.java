@@ -13,14 +13,14 @@ import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 
-public  class InventoryBillVo extends InventoryBillBaseVo {
+public  class InventoryDetailBillVo extends InventoryBillBaseVo {
     //报损报溢报警
     private String operatorId;
     private CommodityVo[] commodities;//商品
     private double[] amountList;//报损报警报溢数量
     private InventoryBillType type;
 
-    public InventoryBillVo(String id, Date date, BillState state, String operatorId, CommodityVo[] commodities, double[] amountList, InventoryBillType type) {
+    public InventoryDetailBillVo(String id, Date date, BillState state, String operatorId, CommodityVo[] commodities, double[] amountList, InventoryBillType type) {
         super(id, date, state,type);
         this.operatorId = operatorId;
         this.commodities = commodities;

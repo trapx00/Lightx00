@@ -7,8 +7,8 @@ public class CommodityServiceFactory {
 
     private static CommodityBlController instance =new CommodityBlControllerMock();
     /**
-     * Gets a CommodityService instance.
-     * @return CommodityService instance
+     * Gets a CommodityInfo instance.
+     * @return CommodityInfo instance
      */
     public static CommodityBlController getController(){
         return instance;
