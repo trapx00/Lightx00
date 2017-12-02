@@ -10,6 +10,10 @@
       <module name="Lightx00.Server_test" target="1.8" />
       <module name="Lightx00.Shared_main" target="1.8" />
       <module name="Lightx00.Shared_test" target="1.8" />
+      <module name="src-Lightx00.Client_main" target="1.8" />
+      <module name="src-Lightx00.Client_test" target="1.8" />
+      <module name="src-Lightx00.Server_main" target="1.8" />
+      <module name="src-Lightx00.Server_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
