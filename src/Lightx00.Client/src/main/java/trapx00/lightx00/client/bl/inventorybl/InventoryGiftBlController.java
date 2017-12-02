@@ -20,7 +20,7 @@ import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.util.Date;
 
-public abstract class InventoryGiftBlController implements BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,BillPoVoConverter<InventoryGiftPo, InventoryGiftVo> {
+public abstract class InventoryGiftBlController implements InventoryGiftInfo, BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,BillPoVoConverter<InventoryGiftPo, InventoryGiftVo> {
 
 
     private InventoryGiftDataService dataService= InventoryGiftDataServiceFactory.getService();
