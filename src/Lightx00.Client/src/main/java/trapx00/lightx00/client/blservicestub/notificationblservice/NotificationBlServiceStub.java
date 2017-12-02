@@ -32,8 +32,7 @@ public class NotificationBlServiceStub implements NotificationBlService {
 
 
     @Override
-    public ResultMessage abandon(BillApprovalNotificationVo notification) {
-        notification.getBill().setState(BillState.Abandoned);
+    public ResultMessage abandon(NotificationVo notification) {
         return ResultMessage.Success;
     }
 
