@@ -2,7 +2,7 @@ package trapx00.lightx00.client.bl.financebl;
 
 import trapx00.lightx00.client.vo.BillVo;
 
-public interface BillIdQueryService {
+public interface BillInfo {
     /**
      * Queries Bill with id.
      * @param id bill id

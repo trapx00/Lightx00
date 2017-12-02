@@ -26,7 +26,7 @@ public class TradeHistoryBlControllerTest {
     @Before
     public void setUp() throws Exception {
         tradeHistoryVo = service.query(
-                new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1));
+                new TradeHistoryQueryVo(new Date(), new Date(), new BillType[]{BillType.FinanceBill},null,null,1));
         financeBillVos = service.query(new FinanceBillQueryVo());
     }
 
@@ -44,7 +44,7 @@ public class TradeHistoryBlControllerTest {
     public void export() throws Exception {
         assertEquals(ResultMessage.Success,
                 service.export(service.query(
-                        new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1))));
+                        new TradeHistoryQueryVo(new Date(), new Date(), new BillType[]{BillType.FinanceBill},null,null,1))));
     }
 
 }

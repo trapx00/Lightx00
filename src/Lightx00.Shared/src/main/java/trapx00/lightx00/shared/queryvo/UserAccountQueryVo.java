@@ -5,20 +5,20 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import java.util.HashMap;
 
 public class UserAccountQueryVo  {
-    private HashMap<EmployeePosition, SpecificUserAccountQueryVo> specificUserAccoutQueryVoHashMap = new HashMap<>();
+    private HashMap<EmployeePosition, SpecificUserAccountQueryVo> specificUserAccountQueryVoHashMap = new HashMap<>();
 
     public UserAccountQueryVo addQueryVoForOneEmployeePosition(EmployeePosition employeePosition, SpecificUserAccountQueryVo specificUserAccountQueryVo) {
-        specificUserAccoutQueryVoHashMap.put(employeePosition, specificUserAccountQueryVo);
+        specificUserAccountQueryVoHashMap.put(employeePosition, specificUserAccountQueryVo);
         return this;
     }
 
     public SpecificUserAccountQueryVo getQueryVoForPosition(EmployeePosition employeePosition) {
-        return specificUserAccoutQueryVoHashMap.get(employeePosition);
+        return specificUserAccountQueryVoHashMap.get(employeePosition);
     }
 
     public UserAccountQueryVo addQueryVoForAllEmployeePosition(SpecificUserAccountQueryVo queryVo) {
         for (EmployeePosition position : EmployeePosition.values()) {
-            specificUserAccoutQueryVoHashMap.put(position, queryVo);
+            specificUserAccountQueryVoHashMap.put(position, queryVo);
         }
         return this;
     }

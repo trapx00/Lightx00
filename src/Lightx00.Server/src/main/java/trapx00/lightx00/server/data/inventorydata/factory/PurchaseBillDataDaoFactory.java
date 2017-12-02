@@ -11,17 +11,9 @@ import java.sql.SQLException;
 public class PurchaseBillDataDaoFactory extends BaseDatabaseFactory {
     private static Dao<PurchaseBillPo, String> purchaseBillDao;
 
-    static {
-        initTable(PurchaseBillPo.class);
-    }
-
     public static Dao<PurchaseBillPo, String> getPurchaseBillDao() {
         if (purchaseBillDao == null) {
-            try {
-                return purchaseBillDao = DaoManager.createDao(connectionSource, PurchaseBillPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            purchaseBillDao = createDao(PurchaseBillPo.class);
         }
         return purchaseBillDao;
     }

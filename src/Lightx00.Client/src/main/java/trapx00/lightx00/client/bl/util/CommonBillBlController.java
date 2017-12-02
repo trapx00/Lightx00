@@ -30,27 +30,23 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
     private CommonBillDataService<BillPoType, QueryType> dataService;
     private DraftService draftService = DraftServiceFactory.getDraftService();
     private String billName = "";
-
-    private Function<BillVoType, BillPoType> functionFromVoToPo;
-    private Function<BillPoType, BillVoType> functionFromPoToVo;
+    private BillPoVoConverter<BillPoType, BillVoType> converter;
 
     /**
      * Constructor.
      * @param dataService 对应的单据DataService
      * @param billName 单据中文名
-     * @param functionFromVoToPo 从vo到po的函数
-     * @param functionFromPoToVo 从po到vo的函数
+     * @param converter vo/po转换器
      */
-    public CommonBillBlController(CommonBillDataService<BillPoType, QueryType> dataService, String billName, Function<BillVoType, BillPoType> functionFromVoToPo, Function<BillPoType, BillVoType> functionFromPoToVo) {
+    public CommonBillBlController(CommonBillDataService<BillPoType, QueryType> dataService, String billName, BillPoVoConverter<BillPoType, BillVoType> converter) {
         this.dataService = dataService;
         this.billName = billName;
-        this.functionFromVoToPo = functionFromVoToPo;
-        this.functionFromPoToVo = functionFromPoToVo;
+        this.converter = converter;
     }
 
     public ResultMessage submit(BillVoType bill) {
         try {
-            ResultMessage opResult = dataService.submit(functionFromVoToPo.apply(bill));
+            ResultMessage opResult = dataService.submit(converter.fromVoToPo(bill));
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("创建了一张%s，内容是%s。", billName, bill.toString()));
             } else {
@@ -188,7 +184,7 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
         try {
             BillPoType[] queryResult = dataService.query(query);
             logService.log(LogSeverity.Success, String.format(logLeadingText + "成功，查找到%d条记录。", queryResult.length));
-            return Arrays.stream(queryResult).map(x -> functionFromPoToVo.apply(x)).collect(Collectors.toList());
+            return Arrays.stream(queryResult).map(x -> converter.fromPoToVo(x)).collect(Collectors.toList());
         } catch (RemoteException e) {
             logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
             throw new UncheckedRemoteException(e);

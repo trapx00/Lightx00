@@ -19,8 +19,8 @@ public class NotificationDataServiceFactory extends DataServiceFactory {
         service = lookupService(NotificationDataService.class);
     }
 
-    public NotificationDataService getService() {
-        //initRmi();
+    public static NotificationDataService getService() {
+        initRmi();
         return service;
     }
 }

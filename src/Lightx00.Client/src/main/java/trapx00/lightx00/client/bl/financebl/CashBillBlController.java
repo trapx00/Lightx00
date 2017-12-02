@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.CashBillDataServiceFactory;
@@ -16,21 +17,21 @@ import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 
 import java.util.List;
 
-public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, CashBillInfo, BillApprovalCompleteService {
+public class CashBillBlController implements CashBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, CashBillInfo, BillApprovalCompleteService, BillPoVoConverter<CashBillPo, CashBillVo> {
 
 
     private CashBillDataService dataService = CashBillDataServiceFactory.getService();
 
     private CommonBillBlController<CashBillVo, CashBillPo, CashBillQueryVo> commonBillBlController
-        = new CommonBillBlController<>(dataService, "现金费用单", this::voToPo, this::poToVo);
+        = new CommonBillBlController<>(dataService, "现金费用单", this);
 
 
-    private CashBillVo poToVo(CashBillPo po) {
+    public CashBillVo fromPoToVo(CashBillPo po) {
         return new CashBillVo(po.getId(), po.getDate(), po.getState(), po.getOperatorId(), po.getAccountId(), po.getItems());
 
     }
 
-    private CashBillPo voToPo(CashBillVo vo) {
+    public CashBillPo fromVoToPo(CashBillVo vo) {
         return new CashBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getOperatorId(), vo.getAccountId(), vo.getItems());
     }
 

@@ -10,12 +10,6 @@ import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import java.sql.SQLException;
 
 public class PromotionDataDaoFactory extends BaseDatabaseFactory {
-    static {
-        initTable(ClientPromotionPo.class);
-        initTable(ComSalePromotionPo.class);
-        initTable(TotalPricePromotionPo.class);
-    }
-
     private static Dao<ClientPromotionPo,String> clientPromotionDao;
     private static Dao<ComSalePromotionPo,String> comSalePromotionDao;
     private static Dao<TotalPricePromotionPo,String> totalPricePromotionDao;
@@ -26,11 +20,7 @@ public class PromotionDataDaoFactory extends BaseDatabaseFactory {
      */
     public static Dao<ClientPromotionPo,String> getClientPromotionDao() {
         if (clientPromotionDao == null) {
-            try {
-                clientPromotionDao = DaoManager.createDao(connectionSource, ClientPromotionPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            clientPromotionDao = createDao(ClientPromotionPo.class);
         }
         return clientPromotionDao;
     }
@@ -41,11 +31,7 @@ public class PromotionDataDaoFactory extends BaseDatabaseFactory {
      */
     public static Dao<ComSalePromotionPo,String> getComSalePromotionDao() {
         if (comSalePromotionDao == null) {
-            try {
-                comSalePromotionDao = DaoManager.createDao(connectionSource,ComSalePromotionPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            comSalePromotionDao = createDao(ComSalePromotionPo.class);
         }
         return comSalePromotionDao;
     }
@@ -56,11 +42,7 @@ public class PromotionDataDaoFactory extends BaseDatabaseFactory {
      */
     public static Dao<TotalPricePromotionPo,String> getTotalPricePromotionDao() {
         if (totalPricePromotionDao == null) {
-            try {
-                totalPricePromotionDao = DaoManager.createDao(connectionSource,TotalPricePromotionPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            totalPricePromotionDao = createDao(TotalPricePromotionPo.class);
         }
         return totalPricePromotionDao;
     }

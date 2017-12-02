@@ -18,7 +18,7 @@ public class ReceivalBillDataServiceFactory extends DataServiceFactory {
         service = lookupService(ReceivalBillDataService.class);
     }
 
-    public ReceivalBillDataService getService() {
+    public static ReceivalBillDataService getService() {
         //initRmi();
         return service;
     }

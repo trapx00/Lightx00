@@ -8,32 +8,19 @@ import trapx00.lightx00.shared.po.inventorystaff.*;
 import java.sql.SQLException;
 
 public class InventoryDataDaoFactory extends BaseDatabaseFactory {
-
-    static {
-        initTable(InventoryDetailBillPo.class);
-        initTable(InventoryGiftPo.class);
-    }
     private static Dao<InventoryGiftPo, String> inventoryGiftDao;
     private static Dao<InventoryDetailBillPo, String> inventoryDetailBillDao;
 
     public static Dao<InventoryGiftPo, String> getInventoryGiftDao() {
         if (inventoryGiftDao == null) {
-            try {
-                inventoryGiftDao = DaoManager.createDao(connectionSource, InventoryGiftPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            inventoryGiftDao = createDao(InventoryGiftPo.class);
         }
         return inventoryGiftDao;
     }
 
     public static Dao<InventoryDetailBillPo, String> getInventoryDetailBillDao() {
         if (inventoryDetailBillDao == null) {
-            try {
-                inventoryDetailBillDao = DaoManager.createDao(connectionSource,InventoryDetailBillPo.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            inventoryDetailBillDao = createDao(InventoryDetailBillPo.class);
         }
         return inventoryDetailBillDao;
     }

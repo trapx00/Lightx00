@@ -1,17 +1,27 @@
 package trapx00.lightx00.client.bl.financebl;
 
 import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
+import trapx00.lightx00.client.bl.financebl.factory.SpecificFinanceBillQueryFactory;
+import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.queryvo.FinanceBillQueryVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceBillVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 
-public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, BillIdQueryService,  DraftableQueryService {
-
+public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, BillInfo,  DraftableQueryService {
+    private CashBillInfo cashBillInfo = SpecificFinanceBillQueryFactory.getCashbillInfo();
+    private PaymentBillInfo paymentBillInfo = SpecificFinanceBillQueryFactory.getPaymentBillInfo();
+    private ReceivalBillInfo receivalBillInfo = SpecificFinanceBillQueryFactory.getReceivalBillInfo();
+    private PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
+    private SaleBillBlInfo saleBillBlInfo = SaleBillBlInfoFactory.getSaleBillBlInfo();
 
     /**
      * Queries FinanceBill
@@ -21,7 +31,8 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
      */
     @Override
     public FinanceBillVo[] query(FinanceBillQueryVo query) {
-        return null;
+
+        return cashBillInfo.query(query.getSpecificFinanceBillQueryVo(FinanceBillType.CashBill));
     }
 
     /**

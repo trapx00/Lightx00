@@ -20,7 +20,7 @@ public class TradeHistoryBlServiceDriver {
     @Before
     public void setUp() throws Exception {
         bill = service.query(
-                new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1)).getBills()[0];
+                new TradeHistoryQueryVo(new Date(), new Date(), new BillType[]{BillType.FinanceBill},null,null,1)).getBills()[0];
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TradeHistoryBlServiceDriver {
     public void export() throws Exception {
         assertEquals(ResultMessage.Success,
                 service.export(service.query(
-                new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1))));
+                new TradeHistoryQueryVo(new Date(), new Date(), new BillType[]{BillType.FinanceBill},null,null,1))));
     }
 
 }

@@ -3,10 +3,11 @@ package trapx00.lightx00.shared.po.notification;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @DatabaseTable(tableName = "Notification")
-public class NotificationPo {
+public class NotificationPo implements Serializable {
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField
@@ -20,7 +21,17 @@ public class NotificationPo {
     @DatabaseField
     private String content;
 
+
     public NotificationPo(Date date, String senderId, String receiverId, NotificationType type, String content) {
+        this.date = date;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.type = type;
+        this.content = content;
+    }
+
+    public NotificationPo(int id, Date date, String senderId, String receiverId, NotificationType type, String content) {
+        this.id = id;
         this.date = date;
         this.senderId = senderId;
         this.receiverId = receiverId;
