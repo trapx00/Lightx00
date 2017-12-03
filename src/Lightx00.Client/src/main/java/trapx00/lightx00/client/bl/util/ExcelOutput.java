@@ -15,15 +15,6 @@ public class ExcelOutput {
     private static WritableCellFormat normalFormat;
 
 
-    public static void main (String[]args){
-        String[]outputMessage={"名称-型号-库存数量-库存均价-批次-批号","nan-led-123-45-No.1-Batch2",
-                "nan-led-123-45-No.1-Batch2"};
-        String path="C:\\Users\\liangnan\\Desktop";
-        String name="库存盘点";
-        ExcelOutput.createExcel(path,outputMessage,name);
-    }
-
-
     public static ResultMessage createExcel(String path, String[]outputMessage,String name) {
         try {
             path=path+"\\"+name+".xls";
@@ -39,7 +30,6 @@ public class ExcelOutput {
             for(int i=0;i<outputMessage[0].split("-").length;i++){
                 for(int j=0;j<outputMessage.length;j++){
                     sheet.addCell(new Label(i,j,outputMessage[j].split("-")[i],normalFormat));
-                    System.out.println(outputMessage[j].split("-")[i]);
                 }
             }
 

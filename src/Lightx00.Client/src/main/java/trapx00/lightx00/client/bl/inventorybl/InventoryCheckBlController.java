@@ -59,6 +59,14 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public ResultMessage export(String path) {
+        /**  //  public static void main (String[]args){
+         //    String[]outputMessage={"名称-型号-库存数量-库存均价-批次-批号","nan-led-123-45-No.1-Batch2",
+         //            "nan-led-123-45-No.1-Batch2","nan-led-123-45-No.1-Batch2","nan-led-123-45-No.1-Batch2","nan-led-123-45-No.1-Batch2",
+         //            "nan-led-123-45-No.1-Batchqwe","nan-led-12223-45-No.1-Batc123h2","nan-led-123-45-No.1-Batch2"};
+         //    String path="C:\\Users\\liangnan\\Desktop";
+         //    String name="库存盘点";
+         //     ExcelOutput.createExcel(path,outputMessage,name);
+         //  }**/
         InventoryPictureVo[] inventoryPicture=this.getInventoryPicture();
         InventoryPictureVo operPicture=inventoryPicture[0];
         try{
