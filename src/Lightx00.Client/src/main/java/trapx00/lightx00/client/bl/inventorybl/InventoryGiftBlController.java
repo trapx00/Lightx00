@@ -19,15 +19,16 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 import java.util.Date;
+import java.util.List;
 
-public abstract class InventoryGiftBlController implements InventoryGiftInfo, BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,BillPoVoConverter<InventoryGiftPo, InventoryGiftVo> {
+public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprovalCompleteService,InventoryGiftBlService,NotificationAbandonService,NotificationActivateService,DraftDeleteService,BillPoVoConverter<InventoryGiftPo, InventoryGiftVo> {
 
 
     private InventoryGiftDataService dataService= InventoryGiftDataServiceFactory.getService();
     private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
 
     private CommonBillBlController<InventoryGiftVo, InventoryGiftPo, InventoryGiftQueryVo> commonBillBlController
-            = new CommonBillBlController<>(dataService, "库存监控单", this);
+            = new CommonBillBlController<>(dataService, "库存赠送单", this);
 
     public InventoryGiftVo fromPoToVo(InventoryGiftPo po) {
         return new InventoryGiftVo(po.getId(), po.getDate(), po.getState(), po.getGifts());
@@ -100,8 +101,21 @@ public abstract class InventoryGiftBlController implements InventoryGiftInfo, Bi
     }
 
     @Override
-    public InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo){
-        return null;
+    public InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo) {
+        List<InventoryGiftVo> result = commonBillBlController.query(inventoryBillQueryVo);
+        return result.toArray(new InventoryGiftVo[result.size()]);
     }
 
+
+
+    @Override
+    public ResultMessage saveAsDraft(InventoryGiftVo bill) {
+        return  commonBillBlController.saveAsDraft(bill);
+    }
+
+    @Override
+    public InventoryGiftVo[] queryInventoryGiftBill(InventoryGiftQueryVo inventoryBillQueryVo) {
+        List<InventoryGiftVo> result = commonBillBlController.query(inventoryBillQueryVo);
+        return result.toArray(new InventoryGiftVo[result.size()]);
+    }
 }

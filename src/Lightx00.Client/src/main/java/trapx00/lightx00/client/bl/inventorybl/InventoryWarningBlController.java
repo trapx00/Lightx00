@@ -20,7 +20,7 @@ import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import java.util.List;
 
 
-public class InventoryDetailWarningBlController implements InventoryDetailBillInfo,BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService ,BillPoVoConverter<InventoryDetailBillPo, InventoryDetailBillVo> {
+public class InventoryWarningBlController implements InventoryDetailBillInfo,BillApprovalCompleteService, InventoryWarningBlService,DraftDeleteService,NotificationAbandonService,NotificationActivateService ,BillPoVoConverter<InventoryDetailBillPo, InventoryDetailBillVo> {
 
     private InventoryWarningDataService dataService= InventoryWarningDataServiceFactory.getService();
     private CommodityInfo commodityInfo= CommodityServiceFactory.getController();

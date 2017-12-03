@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.test.bl.inventorybl;
 
 import org.junit.Test;
-import trapx00.lightx00.client.bl.inventorybl.InventoryDetailWarningBlController;
+import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
@@ -10,7 +10,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import static org.junit.Assert.*;
 
 public class InventoryWarningBlControllerTest {
-    private InventoryDetailWarningBlController service= InventoryWarningServiceFactory.getInventoryWarningBlController();
+    private InventoryWarningBlController service= InventoryWarningServiceFactory.getInventoryWarningBlController();
     InventoryDetailBillVo inventoryDetailBillVo =null;
     CommodityVo commodityVo=null;
     @Test
