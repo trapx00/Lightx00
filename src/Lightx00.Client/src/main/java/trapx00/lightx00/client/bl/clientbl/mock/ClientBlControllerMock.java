@@ -37,7 +37,7 @@ public class ClientBlControllerMock extends ClientBlController {
                 "12345679@qq.com",
                 123,
                 456,
-                new SaleStaffVo(null,null,null,null,null));
+                new SaleStaffVo(null,null,null,null,null,null));
         return clientVos;
     }
 

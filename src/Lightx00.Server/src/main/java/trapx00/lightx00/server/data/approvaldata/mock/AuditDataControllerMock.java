@@ -2,11 +2,11 @@ package trapx00.lightx00.server.data.approvaldata.mock;
 
 import trapx00.lightx00.server.data.approvaldata.AuditDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.manager.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
+import trapx00.lightx00.shared.queryvo.AuditIdQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -27,39 +27,39 @@ public class AuditDataControllerMock extends AuditDataController {
     }
 
     /**
-     * Filter some BillInfoPo.
+     * Filter some AuditIdPo.
      * @param query the filter conditions
-     * @return array of BillInfoPo which match the conditions
+     * @return array of AuditIdPo which match the conditions
      */
-    public BillInfoPo[] query(BillInfoQueryVo query) {
-        return new BillInfoPo[]{new BillInfoPo("XJFYD-20171112-00001", BillType.FinanceBill,new Date(), BillState.WaitingForApproval)};
+    public AuditIdPo[] query(AuditIdQueryVo query) {
+        return new AuditIdPo[]{new AuditIdPo("XJFYD-20171112-00001",new Date())};
     }
 
     /**
-     * Delete BillInfoPo after rejecting the approval.
-     * @param billInfo the corresponding BillInfoPo to the BillPo
+     * Delete AuditIdPo after rejecting the approval.
+     * @param billInfo the corresponding AuditIdPo to the BillPo
      * @return whether the operation is done successfully
      */
-    public ResultMessage reject(BillInfoPo billInfo) {
+    public ResultMessage reject(AuditIdPo billInfo) {
         return ResultMessage.Success;
     }
 
     /**
-     * Delete BillInfoPo after approving the bill.
-     * @param billInfo the corresponding BillInfoPo to the BillPo
+     * Delete AuditIdPo after approving the bill.
+     * @param billInfo the corresponding AuditIdPo to the BillPo
      * @return whether the operation is done successfully
      */
-    public ResultMessage pass(BillInfoPo billInfo) {
+    public ResultMessage pass(AuditIdPo billInfo) {
         return ResultMessage.Success;
     }
 
     /**
      * Save the submitted bill.
-     * @param bill the bill has been submitted
+     * @param id id of the bill has been submitted
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage requestApproval(BillPo bill) {
+    public ResultMessage requestApproval(String id) {
         return ResultMessage.Success;
     }
 }

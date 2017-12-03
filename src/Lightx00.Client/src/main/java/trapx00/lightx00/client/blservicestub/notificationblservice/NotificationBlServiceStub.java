@@ -16,7 +16,7 @@ import trapx00.lightx00.shared.po.financestaff.Transcation;
 public class NotificationBlServiceStub implements NotificationBlService {
     @Override
     public NotificationVo[] update() {
-        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123");
+        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123","0001");
         return new NotificationVo[] {
                 new OtherNotificationVo(1,new Date(), employeeVo, employeeVo, "test"),
                 new BillApprovalNotificationVo(1,new Date(),employeeVo, employeeVo,

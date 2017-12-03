@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class UserManagementBlControllerTest {
     private UserManagementBlController controller = UserManagementBlFactory.getController();
-    private FinanceStaffVo account = new FinanceStaffVo("张三","0001",new Date(),"10081");
+    private FinanceStaffVo account = new FinanceStaffVo("张三","0001",new Date(),"10081","0001");
 
     @Test
     public void add() throws Exception {

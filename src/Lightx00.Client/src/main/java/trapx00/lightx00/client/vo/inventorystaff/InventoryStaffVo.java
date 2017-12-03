@@ -6,8 +6,8 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import java.util.Date;
 
 public class InventoryStaffVo extends EmployeeVo {
-    public InventoryStaffVo(String name, String Id, Date workSince, String username) {
-        super(name, Id, workSince, username, EmployeePosition.InventoryStaff);
+    public InventoryStaffVo(String name, String Id, Date workSince, String username,String password) {
+        super(name, Id, workSince, username, EmployeePosition.InventoryStaff,password);
     }
 
 }

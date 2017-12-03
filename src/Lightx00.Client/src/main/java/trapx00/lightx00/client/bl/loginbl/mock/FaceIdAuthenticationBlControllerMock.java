@@ -18,7 +18,7 @@ public class FaceIdAuthenticationBlControllerMock extends FaceIdAuthenticationBl
     public EmployeeVo authenticate(byte[] bytes) {
         Random random = new Random();
         if (random.nextBoolean()) {
-            return new FinanceStaffVo("face id test","1", new Date(), "123");
+            return new FinanceStaffVo("face id test","1", new Date(), "123","0001");
         } else {
             return null;
         }

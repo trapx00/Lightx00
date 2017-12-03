@@ -28,10 +28,10 @@ public interface ComSalePromotionBlService {
 
     /**
      * Delete a overdue or needless ComSalePromotionVo.
-     * @param promotion the ComSalePromotionVo to be deleted
+     * @param id id of the ComSalePromotionVo to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(ComSalePromotionVo promotion);
+    ResultMessage delete(String id);
 
     /**
      * Get id for the next promotion.

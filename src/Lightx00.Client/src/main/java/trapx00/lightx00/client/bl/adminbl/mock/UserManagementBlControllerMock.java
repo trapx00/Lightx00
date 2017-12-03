@@ -36,7 +36,7 @@ public class UserManagementBlControllerMock extends UserManagementBlController {
      */
     @Override
     public EmployeeVo[] query(UserAccountQueryVo query) {
-        return new EmployeeVo[] { new FinanceStaffVo("张三","0001",new Date(),"10081")
+        return new EmployeeVo[] { new FinanceStaffVo("张三","0001",new Date(),"10081","0001")
         };
     }
 

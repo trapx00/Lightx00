@@ -10,7 +10,7 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 public class LoginBlServiceStub implements LoginBlService {
     @Override
     public EmployeeVo login(String username, String password) {
-        return new FinanceStaffVo(username,"123", new Date(), username);
+        return new FinanceStaffVo(username,"123", new Date(), username,"0001");
     }
 
 }
