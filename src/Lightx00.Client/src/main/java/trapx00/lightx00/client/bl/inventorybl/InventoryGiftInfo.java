@@ -9,5 +9,5 @@ public interface InventoryGiftInfo {
      * @param inventoryBillQueryVo
      * @return  the list of inventoryBIlls that match to the requirement
      */
-    InventoryGiftVo[] queryInventoryWarningBill(InventoryGiftQueryVo inventoryBillQueryVo);
+    InventoryGiftVo[] queryInventoryGiftBill(InventoryGiftQueryVo inventoryBillQueryVo);
 }
