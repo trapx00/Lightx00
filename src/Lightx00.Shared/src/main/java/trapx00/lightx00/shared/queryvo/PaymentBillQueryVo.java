@@ -6,4 +6,10 @@ import java.util.function.Predicate;
 
 public class PaymentBillQueryVo extends SpecificFinanceBillQueryVo<PaymentBillPo, PaymentBillQueryVo> {
 
+    public PaymentBillQueryVo() {
+    }
+
+    public PaymentBillQueryVo(BaseQueryVo another) {
+        super(another);
+    }
 }

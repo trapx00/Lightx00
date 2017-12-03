@@ -20,7 +20,6 @@ public class  ReceivalBillPo extends ReceivalPaymentBillPoBase {
     public String toString() {
         return "ReceivalBillPo{" +
             "clientId='" + clientId + '\'' +
-            ", operatorId='" + operatorId + '\'' +
             ", transcations=" + Arrays.toString(transcations) +
             ", total=" + total +
             "} " + super.toString();

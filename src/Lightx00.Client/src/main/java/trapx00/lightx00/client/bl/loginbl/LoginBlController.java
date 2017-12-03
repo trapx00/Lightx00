@@ -34,6 +34,10 @@ public class LoginBlController implements LoginBlService, CurrentUserService {
         }
     }
 
+    void setCurrentUser(EmployeeVo employeeVo) {
+        this.currentUser = employeeVo;
+    }
+
     /**
      * Gets current logged-in user.
      *

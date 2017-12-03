@@ -1,33 +1,49 @@
 package trapx00.lightx00.client.bl.financebl;
 
+import trapx00.lightx00.client.bl.bankaccountbl.BankAccountInfo;
+import trapx00.lightx00.client.bl.bankaccountbl.factory.BankAccountFactory;
+import trapx00.lightx00.client.bl.clientbl.ClientQueryService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientPoVoCoverterFactory;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientQueryServiceFactory;
+import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
+import trapx00.lightx00.client.bl.util.PoVoConverter;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.InitialEstablishmentDataServiceFactory;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.client.ClientPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 
-public class InitialEstablishmentBlController implements InitialEstablishmentBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, SystemSnapshotInfo, BillApprovalCompleteService {
+public class InitialEstablishmentBlController
+    implements InitialEstablishmentBlService, NotificationActivateService, NotificationAbandonService,
+    DraftDeleteService, SystemSnapshotInfo, BillApprovalCompleteService, BillPoVoConverter<SystemSnapshotPo, SystemSnapshotVo> {
 
     private InitialEstablishmentDataService dataService = InitialEstablishmentDataServiceFactory.getService();
+    private BankAccountInfo bankAccountInfo = BankAccountFactory.getBankAccountInfo();
+    private PoVoConverter<BankAccountPo, BankAccountVo> bankAccountVoPoVoConverter = BankAccountFactory.getPoVoConverter();
 
-//    private CommonBillBlController<SystemSnapshotVo, SystemSnapshotPo, SystemSnapshotQueryVo> commonBillBlController
-//        = new CommonBillBlController<>(dataService, "期初建账", );
-//
-//    private SystemSnapshotPo voToPo(SystemSnapshotVo vo) {
-//
-//    }
-//
-//    private SystemSnapshotVo poToVo(SystemSnapshotPo po) {
-//
-//    }
+    private ClientQueryService clientInfo = ClientQueryServiceFactory.getQueryService();
+    private PoVoConverter<ClientPo, ClientVo> clientVoPoVoConverter = ClientPoVoCoverterFactory.getClientPoVoConverter();
+
+    private CommodityInfo commodityInfo = CommodityInfoFactory.getCommodityInfo();
+
+    private CommonBillBlController<SystemSnapshotVo, SystemSnapshotPo, SystemSnapshotQueryVo> commonBillBlController
+        = new CommonBillBlController<>(dataService, "期初建账", this);
+
+
 
     /**
      * Auto fills some contents with current system state.
@@ -114,6 +130,28 @@ public class InitialEstablishmentBlController implements InitialEstablishmentBlS
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
+        return null;
+    }
+
+    /**
+     * Convert vo to po.
+     *
+     * @param vo vo
+     * @return po
+     */
+    @Override
+    public SystemSnapshotPo fromVoToPo(SystemSnapshotVo vo) {
+        return null;
+    }
+
+    /**
+     * Convert po to vo.
+     *
+     * @param po po
+     * @return vo
+     */
+    @Override
+    public SystemSnapshotVo fromPoToVo(SystemSnapshotPo po) {
         return null;
     }
 }

@@ -3,7 +3,7 @@ package trapx00.lightx00.client.vo.financestaff;
 public class TradeSituationVo { //经营历程表
     private double saleIncome; //销售收入
     private double commodityIncome; //商品类收入
-    private double saleCost; //销售支出
+    private double saleCost; //销售成本
     private double commodityCost; //商品支出
     private double profit;
 

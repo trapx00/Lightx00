@@ -5,4 +5,10 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 
 public class InventoryViewQueryVo extends BaseQueryVo<InventoryViewPo,String, InventoryViewQueryVo> {
 
+    public InventoryViewQueryVo() {
+    }
+
+    public InventoryViewQueryVo(BaseQueryVo another) {
+        super(another);
+    }
 }

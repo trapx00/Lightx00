@@ -1,11 +1,12 @@
 package trapx00.lightx00.client.vo.manager.promotion;
 
+import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
 
-public abstract class PromotionVoBase {
+public abstract class PromotionVoBase implements Draftable {
     private String id;
     private PromotionType type;
     private Date startDate;

@@ -36,13 +36,11 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      * Checks the invenntory change between the begintime and endtime
      * @param beginTime
      * @param endTime
-     * @return The inventoryView during specified time range
+     * @return The inventoryView during specified time rangeget
      */
     @Override
-    public InventoryViewVo check(Date beginTime, Date endTime) {
-        InventoryViewVo inventoryViewVo=new InventoryViewVo(beginTime,123,123,123,12,208,123,123);
-
-        return inventoryViewVo;
+    public InventoryViewVo[] getInventoryView(Date beginTime, Date endTime) {
+       return null;
     }
 
     /**
@@ -50,14 +48,9 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      * @return The inventory snapshot during that day
      */
     @Override
-    public InventoryPictureVo picture() {
+    public InventoryPictureVo[] getInventoryPicture() {
+             return null;
 
-        CommodityVo LedLight=new CommodityVo("C0001","LedLight", "Led", 98, new Date(),
-                "1", "2", 56, 60, 90, 99, 50);
-
-        CommodityVo[] commoditys={LedLight};
-
-        return new InventoryPictureVo(new Date(),commoditys);
     }
 
     /**

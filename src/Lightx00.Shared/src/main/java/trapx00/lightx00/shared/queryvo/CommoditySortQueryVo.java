@@ -6,5 +6,10 @@ import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import java.util.function.Predicate;
 
 public class CommoditySortQueryVo extends  BaseQueryVo<CommoditySortPo,String, CommoditySortQueryVo> {
+    public CommoditySortQueryVo() {
+    }
 
+    public CommoditySortQueryVo(BaseQueryVo another) {
+        super(another);
+    }
 }

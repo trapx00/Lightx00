@@ -14,7 +14,8 @@ public class DraftVo {
     private Draftable draft;
     private DraftType draftType;
 
-    public DraftVo(Date saveTime, EmployeeVo saver, Draftable draft, DraftType draftType) {
+    public DraftVo(int id, Date saveTime, EmployeeVo saver, Draftable draft, DraftType draftType) {
+        this.id = id;
         this.saveTime = saveTime;
         this.saver = saver;
         this.draft = draft;
