@@ -7,6 +7,7 @@ import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServi
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
+import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
@@ -54,7 +55,7 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
             if (po != null) {
                 commodityDao.update(commodityPo);
                 logService.printLog(delegate,String.format("updated a commodity %s (id: %s).",commodityPo.getName() , commodityPo.getId()));
-                return ResultMessage.Success;
+                throw new IdExistsException(commodityPo.getId());
             }
             commodityDao.create(commodityPo);
             //commodityPo.setId(commodityDao.extractId(commodityPo));
@@ -82,7 +83,7 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
             commodityDao.create(commodityPo);
             //commodityPo.setId(commodityDao.extractId(commodityPo));
             logService.printLog(delegate, String.format("created a %s (id: %s).", commodityPo.getName() , commodityPo.getId()));
-            return ResultMessage.Success;
+            throw new IdNotExistsException(commodityPo.getId());
         }catch (SQLException e) {
             handleSQLException(e);
             return ResultMessage.Failure;

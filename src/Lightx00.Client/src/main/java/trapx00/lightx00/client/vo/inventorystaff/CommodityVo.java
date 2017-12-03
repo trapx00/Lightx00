@@ -20,17 +20,11 @@ public class CommodityVo {
     private double warningValue;//警戒值
 
     public static CommodityPo commodityVoToPo(CommodityVo commodityVo){
-        return new CommodityPo(commodityVo.getId(),commodityVo.getName(),commodityVo.getType(),commodityVo.getAmount(),
-                commodityVo.getProductionDate(),commodityVo.getBatch(),commodityVo.getBatchNo(),commodityVo.getPurchasePrice(),
-                commodityVo.getRecentPurchasePrice(),commodityVo.getRetailPrice(),commodityVo.getRecentRetailPrice(),
-                commodityVo.getWarningValue());
+
     }
 
     public static CommodityVo commodityPotoVo(CommodityPo commodityPo){
-        return new CommodityVo(commodityPo.getId(),commodityPo.getName(),commodityPo.getType(),commodityPo.getAmount(),
-                commodityPo.getProductionDate(),commodityPo.getBatch(),commodityPo.getBatchNo(),commodityPo.getPurchasePrice(),
-                commodityPo.getRecentPurchasePrice(),commodityPo.getRetailPrice(),commodityPo.getRecentRetailPrice(),
-                commodityPo.getWarningValue());
+
     }
 
     public CommodityVo(String id, String name, String type, double amount, Date productionDate,
