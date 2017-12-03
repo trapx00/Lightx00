@@ -1,6 +1,6 @@
 package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
+import trapx00.lightx00.client.bl.inventorybl.InventoryDetailWarningBlController;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-public class InventoryWarningBlControllerMock extends InventoryWarningBlController{
+public class InventoryDetailWarningBlControllerMock extends InventoryDetailWarningBlController {
     /**
      * When bill is approved, this method is called to modify the state of the bill.
      *
