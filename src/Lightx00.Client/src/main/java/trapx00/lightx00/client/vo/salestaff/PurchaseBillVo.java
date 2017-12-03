@@ -2,8 +2,10 @@ package trapx00.lightx00.client.vo.salestaff;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -86,7 +88,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return PurchaseBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -96,7 +98,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return PurchaseBillBlFactory.getNotificationAbandonService();
     }
 
     /**

@@ -1,12 +1,24 @@
 package trapx00.lightx00.client.bl.salebl.factory;
 
+import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
 import trapx00.lightx00.client.bl.salebl.mock.SaleBillBlControllerMock;
 
 public class SaleBillBlFactory {
     private static SaleBillBlController saleBillBlController = new SaleBillBlControllerMock();
+    private static NotificationActivateService notificationActivateService = saleBillBlController;
+    private static NotificationAbandonService notificationAbandonService = saleBillBlController;
 
     public static SaleBillBlController getSaleBillBlController() {
         return saleBillBlController;
+    }
+
+    public static NotificationActivateService getNotificationActivateService(){
+        return notificationActivateService;
+    }
+
+    public static NotificationAbandonService getNotificationAbandonService(){
+        return notificationAbandonService;
     }
 }
