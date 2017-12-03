@@ -80,7 +80,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
     @Override
     public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
         PurchaseRefundBillVo[] purchaseRefundBillVos=new PurchaseRefundBillVo[1];
-        purchaseRefundBillVos[0]=new PurchaseRefundBillVo("0",null,null,null,1,null,null,100,null);
+        purchaseRefundBillVos[0]=new PurchaseRefundBillVo("0",null,null,null,null,1,null,null,100,null);
         return purchaseRefundBillVos;
     }
 }

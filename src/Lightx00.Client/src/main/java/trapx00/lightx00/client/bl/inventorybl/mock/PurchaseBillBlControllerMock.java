@@ -82,7 +82,7 @@ public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
     @Override
     public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query) {
         PurchaseBillVo[] purchaseBillVos=new PurchaseBillVo[1];
-        purchaseBillVos[0]=new PurchaseBillVo("0",null,null,null,1,null,null,100,null);
+        purchaseBillVos[0]=new PurchaseBillVo("0",null,null,null,null,1,null,null,100,null);
         return purchaseBillVos;
     }
 }

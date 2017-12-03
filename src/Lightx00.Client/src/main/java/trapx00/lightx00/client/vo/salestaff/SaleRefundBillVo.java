@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class SaleRefundBillVo extends SaleBillBaseVo {
-    private String supplier;
+    private String clientId;
     private EmployeeVo defaultOperator;
     private SaleStaffVo operator;
     private int repository;
@@ -25,12 +25,26 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public String getSupplier() {
-        return supplier;
+    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType);
+        this.clientId = clientId;
+        this.defaultOperator = defaultOperator;
+        this.operator = operator;
+        this.repository = repository;
+        this.commodityList = commodityList;
+        this.originTotal = originTotal;
+        this.minusProfits = minusProfits;
+        this.token = token;
+        this.ultiTotal = ultiTotal;
+        this.comment = comment;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public EmployeeVo getDefaultOperator() {
@@ -102,20 +116,6 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public SaleRefundBillVo(String id, Date date, BillState state, String supplier, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
-        this.supplier = supplier;
-        this.defaultOperator = defaultOperator;
-        this.operator = operator;
-        this.repository = repository;
-        this.commodityList = commodityList;
-        this.originTotal = originTotal;
-        this.minusProfits = minusProfits;
-        this.token = token;
-        this.ultiTotal = ultiTotal;
         this.comment = comment;
     }
 

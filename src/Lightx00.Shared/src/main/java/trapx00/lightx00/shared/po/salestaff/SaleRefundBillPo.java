@@ -10,7 +10,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "SaleRefundBill")
 public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
-    private String supplier;
+    private String clientId;
     @DatabaseField
     private String defaultOperatorId;
     @DatabaseField
@@ -30,9 +30,12 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
     private String comment;
 
-    public SaleRefundBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
-        this.supplier = supplier;
+    public SaleRefundBillPo() {
+    }
+
+    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType);
+        this.clientId = clientId;
         this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;
         this.repository = repository;
@@ -44,15 +47,12 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         this.comment = comment;
     }
 
-    public SaleRefundBillPo() {
+    public String getClientId() {
+        return clientId;
     }
 
-    public String getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getDefaultOperatorId() {

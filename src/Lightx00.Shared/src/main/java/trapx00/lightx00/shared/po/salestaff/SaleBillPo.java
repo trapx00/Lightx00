@@ -4,13 +4,14 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 
 import java.util.Date;
 
 @DatabaseTable(tableName = "SaleBill")
 public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
-    private String supplier;
+    private String clientId;
     @DatabaseField
     private String defaultOperatorId;
     @DatabaseField
@@ -29,10 +30,17 @@ public class SaleBillPo extends SaleBillBasePo {
     private double ultiTotal;
     @DatabaseField
     private String comment;
+    @DatabaseField
+    private int clientLevel;
+    @DatabaseField
+    private String promotionId;
 
-    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
-        this.supplier = supplier;
+    public SaleBillPo() {
+    }
+
+    public SaleBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
+        super(id, date, state, saleBillType);
+        this.clientId = clientId;
         this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;
         this.repository = repository;
@@ -42,16 +50,16 @@ public class SaleBillPo extends SaleBillBasePo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
+        this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
     }
 
-    public SaleBillPo() {}
-
-    public String getSupplier() {
-        return supplier;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getDefaultOperatorId() {
@@ -124,5 +132,21 @@ public class SaleBillPo extends SaleBillBasePo {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
     }
 }
