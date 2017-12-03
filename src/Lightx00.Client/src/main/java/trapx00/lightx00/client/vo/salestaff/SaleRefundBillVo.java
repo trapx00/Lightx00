@@ -9,6 +9,7 @@ import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -25,8 +26,8 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType);
+    public SaleRefundBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.SaleRefund);
         this.clientId = clientId;
         this.salesman = salesman;
         this.operator = operator;

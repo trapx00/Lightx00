@@ -129,7 +129,7 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public SaleRefundBillPo fromVoToPo(SaleRefundBillVo vo) {
-        return new SaleRefundBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getSupplier(), vo.getDefaultOperator().getId(), vo.getOperator().getId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment());
+        return new SaleRefundBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesman().getId(), vo.getOperator().getId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment());
     }
 
     /**
@@ -140,6 +140,6 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
      */
     @Override
     public SaleRefundBillVo fromPoToVo(SaleRefundBillPo po) {
-        return new SaleRefundBillVo(po.getId(), po.getDate(), po.getState(), po.getSupplier(), (SaleStaffVo) employeeInfo.queryById(po.getDefaultOperatorId()), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment());
+        return new SaleRefundBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), (SaleStaffVo) employeeInfo.queryById(po.getSalesmanId()), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment());
     }
 }

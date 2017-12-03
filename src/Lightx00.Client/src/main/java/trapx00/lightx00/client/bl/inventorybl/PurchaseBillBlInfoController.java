@@ -5,6 +5,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBl
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
 public class PurchaseBillBlInfoController implements PurchaseBillBlInfo {
     PurchaseBillBlService purchaseBillBlService=new PurchaseBillBlController();
@@ -28,7 +29,7 @@ public class PurchaseBillBlInfoController implements PurchaseBillBlInfo {
      * @return array of PurchaseRefundBillVo
      */
     @Override
-    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query) {
         return purchaseRefundBillBlService.queryPurchaseRefundBillVo(query);
     }
 }

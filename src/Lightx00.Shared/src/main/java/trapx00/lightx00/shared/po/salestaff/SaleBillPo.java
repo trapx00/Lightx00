@@ -38,8 +38,8 @@ public class SaleBillPo extends SaleBillBasePo {
     public SaleBillPo() {
     }
 
-    public SaleBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
-        super(id, date, state, saleBillType);
+    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
+        super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.salesmanId = salesmanId;
         this.operatorId = operatorId;

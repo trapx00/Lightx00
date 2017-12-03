@@ -21,8 +21,8 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
     private double total;
     private CommodityItem[] commodityList;
 
-    public PurchaseBillVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, purchaseBillType);
+    public PurchaseBillVo(String id, Date date, BillState state, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, PurchaseBillType.Purchase);
         this.clientId = clientId;
         this.repository = repository;
         this.operator = operator;

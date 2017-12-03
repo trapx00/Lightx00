@@ -128,7 +128,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public PurchaseRefundBillPo fromVoToPo(PurchaseRefundBillVo vo) {
-        return new PurchaseRefundBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getSupplier(), vo.getRepository(), vo.getOperator().getId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
+        return new PurchaseRefundBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getRepository(), vo.getOperator().getId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
     }
 
     /**
@@ -139,6 +139,6 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public PurchaseRefundBillVo fromPoToVo(PurchaseRefundBillPo po) {
-        return new PurchaseRefundBillVo(po.getId(), po.getDate(), po.getState(), po.getSupplier(), po.getRepository(), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getComment(), po.getTotal(), po.getCommodityList());
+        return new PurchaseRefundBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getRepository(), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getComment(), po.getTotal(), po.getCommodityList());
     }
 }

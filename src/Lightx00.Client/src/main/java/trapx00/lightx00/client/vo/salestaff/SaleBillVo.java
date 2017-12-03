@@ -9,6 +9,7 @@ import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -25,9 +26,10 @@ public class SaleBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
     private int clientLevel;
+    private String promotionId;
 
-    public SaleBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel) {
-        super(id, date, state, saleBillType);
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
+        super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.salesman = salesman;
         this.operator = operator;
@@ -39,6 +41,7 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.ultiTotal = ultiTotal;
         this.comment = comment;
         this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
     }
 
     public String getClientId() {
@@ -127,6 +130,14 @@ public class SaleBillVo extends SaleBillBaseVo {
 
     public void setClientLevel(int clientLevel) {
         this.clientLevel = clientLevel;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
     }
 
     /**
