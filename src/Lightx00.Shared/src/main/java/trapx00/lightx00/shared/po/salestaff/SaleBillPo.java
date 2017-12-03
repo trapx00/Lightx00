@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 
 import java.util.Date;
 
@@ -29,9 +30,16 @@ public class SaleBillPo extends SaleBillBasePo {
     private double ultiTotal;
     @DatabaseField
     private String comment;
+    @DatabaseField
+    private int clientLevel;
+    @DatabaseField
+    private String promotionId;
 
-    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
+    public SaleBillPo() {
+    }
+
+    public SaleBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
+        super(id, date, state, saleBillType);
         this.clientId = clientId;
         this.salesmanId = salesmanId;
         this.operatorId = operatorId;
@@ -42,9 +50,8 @@ public class SaleBillPo extends SaleBillBasePo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
-    }
-
-    public SaleBillPo() {
+        this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
     }
 
     public String getClientId() {
@@ -125,5 +132,21 @@ public class SaleBillPo extends SaleBillBasePo {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
     }
 }

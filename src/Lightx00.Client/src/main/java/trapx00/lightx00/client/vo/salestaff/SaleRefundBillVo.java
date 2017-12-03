@@ -25,8 +25,8 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public SaleRefundBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
+    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType);
         this.clientId = clientId;
         this.salesman = salesman;
         this.operator = operator;

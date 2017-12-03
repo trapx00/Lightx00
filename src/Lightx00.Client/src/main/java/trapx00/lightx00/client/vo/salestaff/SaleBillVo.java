@@ -24,9 +24,10 @@ public class SaleBillVo extends SaleBillBaseVo {
     private double token;
     private double ultiTotal;
     private String comment;
+    private int clientLevel;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
+    public SaleBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel) {
+        super(id, date, state, saleBillType);
         this.clientId = clientId;
         this.salesman = salesman;
         this.operator = operator;
@@ -37,6 +38,7 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
+        this.clientLevel = clientLevel;
     }
 
     public String getClientId() {
@@ -117,6 +119,14 @@ public class SaleBillVo extends SaleBillBaseVo {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
     }
 
     /**

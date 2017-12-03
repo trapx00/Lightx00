@@ -14,19 +14,29 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
-    private String supplier;
+    private String clientId;
     private int repository;
     private SaleStaffVo operator;
     private String comment;
     private double total;
     private CommodityItem[] commodityList;
 
-    public String getSupplier() {
-        return supplier;
+    public PurchaseRefundBillVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, purchaseBillType);
+        this.clientId = clientId;
+        this.repository = repository;
+        this.operator = operator;
+        this.comment = comment;
+        this.total = total;
+        this.commodityList = commodityList;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public int getRepository() {
@@ -66,16 +76,6 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
     }
 
     public void setCommodityList(CommodityItem[] commodityList) {
-        this.commodityList = commodityList;
-    }
-
-    public PurchaseRefundBillVo(String id, Date date, BillState state, String supplier, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, PurchaseBillType.PurchaseRefund);
-        this.supplier = supplier;
-        this.repository = repository;
-        this.operator = operator;
-        this.comment = comment;
-        this.total = total;
         this.commodityList = commodityList;
     }
 
