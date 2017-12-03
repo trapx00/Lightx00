@@ -33,7 +33,7 @@ public class DraftBlControllerMock extends DraftBlController {
     public DraftVo[] update() {
         return new DraftVo[]{
                 new DraftVo(new Date(),
-                        new FinanceStaffVo("drafter","123",new Date(), "123"),
+                        new FinanceStaffVo("drafter","123",new Date(), "123","0001"),
                         new PaymentBillVo("FKD-20171111-00001",new Date(), BillState.Draft, "123", "123",
                                 new Transcation[] { new Transcation("123",10.0,"123")},
                                 10.0),

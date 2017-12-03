@@ -28,8 +28,8 @@ import static org.junit.Assert.*;
 public class NotificationBlControllerTest {
     private NotificationBlController controller = NotificationBlFactory.getController();
     private NotificationDataService dataService = NotificationDataServiceFactory.getService();
-    private EmployeeVo receiver = new FinanceStaffVo("Finance receiver", "123", new Date(), "financereceiver");
-    private EmployeeVo sender = new AdminVo("admin sender", "1234", new Date(), "adminsender");
+    private EmployeeVo receiver = new FinanceStaffVo("Finance receiver", "123", new Date(), "financereceiver","0001");
+    private EmployeeVo sender = new AdminVo("admin sender", "1234", new Date(), "adminsender","0001");
     private CashBillVo cashBill = new CashBillVo(String.format("XJFKD-%s-00001", BillHelper.currentDateStringForBill()),
         new Date(), BillState.Draft,"123","123",
         new CashBillItem[] {

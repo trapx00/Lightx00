@@ -13,6 +13,6 @@ public class UserManagementUiControllerMock extends UserManagementUiController {
      */
     @Override
     public EmployeeVo[] showEmployeeSelectDialog() {
-        return new EmployeeVo[]{new FinanceStaffVo("张三","0001",new Date(),"10081")};
+        return new EmployeeVo[]{new FinanceStaffVo("张三","0001",new Date(),"10081","0001")};
     }
 }

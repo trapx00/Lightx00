@@ -11,19 +11,19 @@ import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 
 import java.util.List;
 
-public class ClientPromotionBlController implements ClientPromotionBlService,DraftDeleteService {
+public class ClientPromotionBlController implements ClientPromotionBlService,DraftDeleteService,PromotionPoVoConverter<ClientPromotionPo,ClientPromotionVo> {
     private ClientPromotionDataService dataService = ClientPromotionDataServiceFactory.getService();
 
     private CommonPromotionBlController<ClientPromotionVo, ClientPromotionPo, ClientPromotionQueryVo> commonPromotionBlController
-            = new CommonPromotionBlController<>(dataService, "客户促销策略", this::voToPo, this::poToVo);
+            = new CommonPromotionBlController<>(dataService, "客户促销策略", this);
 
 
-    private ClientPromotionVo poToVo(ClientPromotionPo po) {
+    public ClientPromotionVo fromPoToVo(ClientPromotionPo po) {
         return new ClientPromotionVo(po.getId(), po.getStartDate(), po.getEndDate(), po.getState(), po.getClientLevel(),po.getCouponPrice(),po.getPromotionCommodities(),po.getSalePrice());
 
     }
 
-    private ClientPromotionPo voToPo(ClientPromotionVo vo) {
+    public ClientPromotionPo fromVoToPo(ClientPromotionVo vo) {
         return new ClientPromotionPo(vo.getId(), vo.getStartDate(), vo.getEndDate(), vo.getState(), vo.getClientLevel(), vo.getCouponPrice(),vo.getPromotionCommodities(),vo.getSalePrice());
     }
 

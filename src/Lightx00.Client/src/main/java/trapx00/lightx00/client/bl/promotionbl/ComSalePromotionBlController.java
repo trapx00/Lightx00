@@ -11,19 +11,19 @@ import trapx00.lightx00.shared.queryvo.promotion.ComSalePromotionQueryVo;
 
 import java.util.List;
 
-public class ComSalePromotionBlController implements ComSalePromotionBlService, DraftDeleteService {
+public class ComSalePromotionBlController implements ComSalePromotionBlService, DraftDeleteService, PromotionPoVoConverter<ComSalePromotionPo,ComSalePromotionVo> {
     private ComSalePromotionDataService dataService = ComSalePromotionDataServiceFactory.getService();
 
     private CommonPromotionBlController<ComSalePromotionVo, ComSalePromotionPo, ComSalePromotionQueryVo> commonPromotionBlController
-            = new CommonPromotionBlController<>(dataService, "组合降价促销策略", this::voToPo, this::poToVo);
+            = new CommonPromotionBlController<>(dataService, "组合降价促销策略", this);
 
 
-    private ComSalePromotionVo poToVo(ComSalePromotionPo po) {
+    public ComSalePromotionVo fromPoToVo(ComSalePromotionPo po) {
         return new ComSalePromotionVo(po.getId(), po.getStartDate(), po.getEndDate(), po.getState(), po.getPromotionCommodities(),po.getOnSalePrice());
 
     }
 
-    private ComSalePromotionPo voToPo(ComSalePromotionVo vo) {
+    public ComSalePromotionPo fromVoToPo(ComSalePromotionVo vo) {
         return new ComSalePromotionPo(vo.getId(), vo.getStartDate(), vo.getEndDate(), vo.getState(), vo.getPromotionCommodities(), vo.getOnSalePrice());
     }
 

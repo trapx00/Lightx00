@@ -1,95 +1,88 @@
 package trapx00.lightx00.client.bl.approvalbl;
 
-import trapx00.lightx00.client.bl.draftbl.DraftService;
-import trapx00.lightx00.client.bl.draftbl.factory.DraftServiceFactory;
 import trapx00.lightx00.client.bl.financebl.BillInfo;
 import trapx00.lightx00.client.bl.financebl.factory.BillInfoBlFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
 import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
-import trapx00.lightx00.client.bl.util.BillPoVoConverter;
-import trapx00.lightx00.client.bl.util.PoVoConverter;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
 import trapx00.lightx00.client.datafactory.approvaldataservicefactory.AuditDataServiceFactory;
 import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.client.vo.manager.BillInfoVo;
+import trapx00.lightx00.client.vo.manager.AuditIdVo;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
-import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.po.manager.BillInfoPo;
-import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
+import trapx00.lightx00.shared.po.manager.AuditIdPo;
+import trapx00.lightx00.shared.queryvo.AuditIdQueryVo;
 
 import java.rmi.RemoteException;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.function.Function;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class AuditBlController implements AuditBlService, ApprovalRequest, PoVoConverter<BillInfoPo,BillInfoVo> {
+public class AuditBlController implements AuditBlService {
     private LogService logService = LogServiceFactory.getLogService();
     private AuditDataService dataService = AuditDataServiceFactory.getService();
     private BillInfo billDetailService = BillInfoBlFactory.getBillInfo();
-    private BillPoVoConverter<BillInfoPo, BillInfoVo> converter;
 
-    public BillInfoVo fromPoToVo(BillInfoPo po) {
-        return new BillInfoVo(po.getId(), po.getType(), po.getApprovalTime(), po.getState());
+    private AuditIdVo fromPoToVo(AuditIdPo po) {
+        return new AuditIdVo(po.getId(), po.getApprovalTime());
 
     }
 
-    public BillInfoPo fromVoToPo(BillInfoVo vo) {
-        return new BillInfoPo(vo.getId(), vo.getType(), vo.getApprovalTime(), vo.getState());
+    private AuditIdPo fromVoToPo(AuditIdVo vo) {
+        return new AuditIdPo(vo.getId(), vo.getApprovalTime());
     }
 
     /**
      * Reject to approve the bill.
-     * @param billInfo bill to be audited
+     * @param auditId id of the bill to be rejected
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage reject(BillInfoVo billInfo) {
+    public ResultMessage reject(AuditIdVo auditId) {
         try {
             //查看单据详情时获得billVo
-            BillVo currentBill = query(billInfo.getId());
-            ResultMessage opResult = dataService.reject(fromVoToPo(billInfo));
+            BillVo currentBill = query(auditId.getId());
+            ResultMessage opResult = dataService.reject(fromVoToPo(auditId));
             if (opResult.isSuccess()) {
                 //调用接口，修改bill的状态属性
                 BillApprovalCompleteService approvalService = currentBill.billApprovalCompleteService();
-                approvalService.approvalComplete(billInfo.getId(),BillState.Rejected);
-                logService.log(LogSeverity.Success, String.format("审批并拒绝通过一张%s，单据编号是%s。", billInfo.getType().toString(), billInfo.getId()));
+                approvalService.approvalComplete(auditId.getId(),BillState.Rejected);
+                logService.log(LogSeverity.Success, String.format("审批单据并拒绝通过，单据编号是%s。", auditId.getId()));
             } else {
-                logService.log(LogSeverity.Failure, String.format("审批并拒绝通过一张%s失败，原因不明。单据编号是%s。",billInfo.getType().toString(), billInfo.getId()));
+                logService.log(LogSeverity.Failure, String.format("审批单据并拒绝通过操作失败，原因不明。单据编号是%s。",auditId.getId()));
             }
             return opResult;
         } catch (RemoteException e) {
-            logService.log(LogSeverity.Failure, String.format("审批并拒绝通过一张%s失败，原因网络原因，具体信息是%s，单据编号是%s", billInfo.getType().toString(), e.getMessage(), billInfo.getId()));
+            logService.log(LogSeverity.Failure, String.format("审批单据并拒绝通过操作失败，原因网络原因，具体信息是%s，单据编号是%s",e.getMessage(), auditId.getId()));
             throw new UncheckedRemoteException(e);
         }
     }
 
     /**
      * Approve the bill.
-     * @param billInfo bill to be audited
+     * @param auditId id of the bill to be approved
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage pass(BillInfoVo billInfo) {
+    public ResultMessage pass(AuditIdVo auditId) {
         try {
             //查看单据详情时获得billVo
-            BillVo currentBill = query(billInfo.getId());
-            ResultMessage opResult = dataService.pass(fromVoToPo(billInfo));
+            BillVo currentBill = query(auditId.getId());
+            ResultMessage opResult = dataService.pass(fromVoToPo(auditId));
             if (opResult.isSuccess()) {
                 //调用接口，修改bill的状态属性
                 BillApprovalCompleteService approvalService = currentBill.billApprovalCompleteService();
-                approvalService.approvalComplete(billInfo.getId(),BillState.Approved);
-                logService.log(LogSeverity.Success, String.format("审批并通过一张%s，单据编号是%s。", billInfo.getType().toString(), billInfo.getId()));
+                approvalService.approvalComplete(auditId.getId(),BillState.Approved);
+                logService.log(LogSeverity.Success, String.format("审批单据并通过，单据编号是%s。", auditId.getId()));
             } else {
-                logService.log(LogSeverity.Failure, String.format("审批并通过一张%s失败，原因不明。单据编号是%s。",billInfo.getType().toString(), billInfo.getId()));
+                logService.log(LogSeverity.Failure, String.format("审批单据并通过操作失败，原因不明。单据编号是%s。", auditId.getId()));
             }
             return opResult;
         } catch (RemoteException e) {
-            logService.log(LogSeverity.Failure, String.format("审批并通过一张%s失败，原因网络原因，具体信息是%s，单据编号是%s", billInfo.getType().toString(), e.getMessage(), billInfo.getId()));
+            logService.log(LogSeverity.Failure, String.format("审批单据并通过操作失败，原因网络原因，具体信息是%s，单据编号是%s", e.getMessage(), auditId.getId()));
             throw new UncheckedRemoteException(e);
         }
     }
@@ -100,33 +93,23 @@ public class AuditBlController implements AuditBlService, ApprovalRequest, PoVoC
      * @return array of bills which match the conditions
      */
     @Override
-    public BillInfoVo[] query(BillInfoQueryVo query) {
+    public AuditIdVo[] query(AuditIdQueryVo query) {
         try {
-            BillInfoPo[] queryResult = dataService.query(query);
-            return Arrays.stream(queryResult).map(x -> converter.fromPoToVo(x)).collect(Collectors.toList());
+            AuditIdPo[] queryResult = dataService.query(query);
+            List<AuditIdVo> listResult = Arrays.stream(queryResult).map(x -> fromPoToVo(x)).collect(Collectors.toList());
+            return listResult.toArray(new AuditIdVo[listResult.size()]);
         } catch (RemoteException e) {
             throw new UncheckedRemoteException(e);
         }
     }
 
     /**
-     * Filter bills.
+     * Query for the detail of the bill.
      * @param id id of the bill
-     * @return array of bills which match the conditions
+     * @return detail information of the bill
      */
     private BillVo query(String id) {
         return billDetailService.queryBill(id);
     }
 
-    /**
-     * Submitted bills request approval.
-     * @param bill bill has been submitted
-     * @return whether the operation is done successfully
-     */
-    @Override
-    public ResultMessage requestApproval(BillVo bill) {
-        try {
-
-        }
-    }
 }

@@ -26,38 +26,34 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
     private CommonPromotionDataService<PromotionPo, QueryVo> dataService;
     private DraftService draftService = DraftServiceFactory.getDraftService();
     private String promotionName = "";
-
-    private Function<PromotionVo, PromotionPo> functionFromVoToPo;
-    private Function<PromotionPo, PromotionVo> functionFromPoToVo;
+    private PromotionPoVoConverter<PromotionPo, PromotionVo> converter;
 
     /**
      * Constructor.
      * @param dataService 对应的促销策略DataService
      * @param promotionName 促销策略中文名
-     * @param functionFromVoToPo 从vo到po的函数
-     * @param functionFromPoToVo 从po到vo的函数
+     * @param converter vo/po转换器
      */
-    public CommonPromotionBlController(CommonPromotionDataService<PromotionPo, QueryVo> dataService, String promotionName, Function<PromotionVo, PromotionPo> functionFromVoToPo, Function<PromotionPo, PromotionVo> functionFromPoToVo) {
+    public CommonPromotionBlController(CommonPromotionDataService<PromotionPo, QueryVo> dataService, String promotionName, PromotionPoVoConverter<PromotionPo, PromotionVo> converter) {
         this.dataService = dataService;
         this.promotionName = promotionName;
-        this.functionFromVoToPo = functionFromVoToPo;
-        this.functionFromPoToVo = functionFromPoToVo;
+        this.converter = converter;
     }
 
     public ResultMessage submit(PromotionVo promotion) {
         try {
-            ResultMessage opResult = dataService.submit(functionFromVoToPo.apply(promotion));
+            ResultMessage opResult = dataService.submit(converter.fromVoToPo(promotion));
             if (opResult.isSuccess()) {
-                logService.log(LogSeverity.Success, String.format("创建了一张%s，内容是%s。", promotionName, promotion.toString()));
+                logService.log(LogSeverity.Success, String.format("创建一份%s，内容是%s。", promotionName, promotion.toString()));
             } else {
-                logService.log(LogSeverity.Failure, String.format("创建一张%s失败，原因不明。内容是%s。",promotionName, promotion.toString()));
+                logService.log(LogSeverity.Failure, String.format("创建一份%s失败，原因不明。内容是%s。",promotionName, promotion.toString()));
             }
             return opResult;
         } catch (RemoteException e) { //RemoteException是网络原因的错误。这里记下日志，然后用UncheckedRemoteException包一下继续抛出。
-            logService.log(LogSeverity.Failure, String.format("创建一张%s失败，原因网络原因，具体信息是%s，单子内容是%s", promotionName, e.getMessage(), promotion.toString()));
+            logService.log(LogSeverity.Failure, String.format("创建一份%s失败，原因网络原因，具体信息是%s，促销策略内容是%s", promotionName, e.getMessage(), promotion.toString()));
             throw new UncheckedRemoteException(e);
         } catch (IdExistsException e) { //参考服务器端写的代码，直接抓对应的异常即可，记得如果不在这里处理，需要继续往外抛出。比如这里就需要UI层继续处理这个异常，所以需要继续抛出。
-            logService.log(LogSeverity.Failure, String.format("创建一张%s失败，原因是单据ID（%s）已经存在。单据内容是%s", promotionName, promotion.getId(), promotion.toString()));
+            logService.log(LogSeverity.Failure, String.format("创建一份%s失败，原因是单据ID（%s）已经存在。促销策略内容是%s", promotionName, promotion.getId(), promotion.toString()));
             throw e;
         }
     }
@@ -72,7 +68,7 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
         submit(promotion); //再次强调草稿的逻辑是先提交，再找DraftService记录一下草稿信息。
         ResultMessage opResult = draftService.saveAsDraft(promotion);
         if (opResult.isSuccess()) {
-            logService.log(LogSeverity.Success, "提交草稿成功，单据ID是" + promotion.getId());
+            logService.log(LogSeverity.Success, "提交草稿成功，促销策略ID是" + promotion.getId());
         } else {
             logService.log(LogSeverity.Failure, "提交草稿失败，原因不明。");
         }
@@ -87,7 +83,7 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
     public String getId() {
         try {
             String id = dataService.getId();
-            logService.log(LogSeverity.Info, String.format("获得了一个新的%s单子ID：%s", promotionName, id));
+            logService.log(LogSeverity.Info, String.format("获得了一个新的%s促销策略ID：%s", promotionName, id));
             return id;
         } catch (RemoteException e) { //RemoteException是网络原因的错误。这里记下日志，然后用UncheckedRemoteException包一下继续抛出。
             logService.log(LogSeverity.Failure, String.format("获得新%sID失败，原因是网络原因，具体是%s", promotionName, e.getMessage()));
@@ -130,7 +126,7 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(String id) {
-        String logLeadingText = String.format("丢弃一张%s单据(id: %s)", promotionName, id);
+        String logLeadingText = String.format("丢弃一份%s(id: %s)", promotionName, id);
         try {
             ResultMessage resultMessage = dataService.delete(id);
             if (resultMessage.isSuccess()) {
@@ -155,11 +151,11 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
      * @return bills that match the condition
      */
     public List<PromotionVo> queryPromotion(QueryVo query) {
-        String logLeadingText = String.format("查找%s单据", promotionName);
+        String logLeadingText = String.format("查找%s", promotionName);
         try {
             PromotionPo[] queryResult = dataService.queryPromotion(query);
             logService.log(LogSeverity.Success, String.format(logLeadingText + "成功，查找到%d条记录。", queryResult.length));
-            return Arrays.stream(queryResult).map(x -> functionFromPoToVo.apply(x)).collect(Collectors.toList());
+            return Arrays.stream(queryResult).map(x -> converter.fromPoToVo(x)).collect(Collectors.toList());
         } catch (RemoteException e) {
             logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
             throw new UncheckedRemoteException(e);

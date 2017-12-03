@@ -11,19 +11,19 @@ import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
 import java.util.List;
 
-public class TotalPricePromotionBlController implements TotalPricePromotionBlService, DraftDeleteService {
+public class TotalPricePromotionBlController implements TotalPricePromotionBlService, DraftDeleteService, PromotionPoVoConverter<TotalPricePromotionPo,TotalPricePromotionVo> {
     private TotalPricePromotionDataService dataService = TotalPricePromotionDataServiceFactory.getService();
 
     private CommonPromotionBlController<TotalPricePromotionVo, TotalPricePromotionPo, TotalPricePromotionQueryVo> commonPromotionBlController
-            = new CommonPromotionBlController<>(dataService, "客户促销策略", this::voToPo, this::poToVo);
+            = new CommonPromotionBlController<>(dataService, "客户促销策略", this);
 
 
-    private TotalPricePromotionVo poToVo(TotalPricePromotionPo po) {
+    public TotalPricePromotionVo fromPoToVo(TotalPricePromotionPo po) {
         return new TotalPricePromotionVo(po.getId(), po.getStartDate(), po.getEndDate(), po.getState(), po.getCouponPrice(),po.getTotalPrice(),po.getPromotionCommodities());
 
     }
 
-    private TotalPricePromotionPo voToPo(TotalPricePromotionVo vo) {
+    public TotalPricePromotionPo fromVoToPo(TotalPricePromotionVo vo) {
         return new TotalPricePromotionPo(vo.getId(), vo.getStartDate(), vo.getEndDate(), vo.getState(), vo.getCouponPrice(), vo.getTotalPrice(),vo.getPromotionCommodities());
     }
 
