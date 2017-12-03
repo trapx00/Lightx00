@@ -18,7 +18,7 @@ public class CommodityInfoFactory {
         return commodityInfo;
     }
 
-    public  static PoVoConverter getPoVoConverter(){
+    public  static PoVoConverter<CommodityPo,CommodityVo> getPoVoConverter(){
         return commodityPoVoConverter;
     }
 

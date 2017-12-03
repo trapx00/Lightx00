@@ -1,10 +1,12 @@
 package trapx00.lightx00.shared.po.inventorystaff;
 
+import com.j256.ormlite.field.DatabaseField;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class InventoryViewItem implements Serializable {
-    @DatabaseFiel
+    @DatabaseField
     private Date operaDate;
     @DatabaseField
     private  double inventoryAmount;//入库数量
