@@ -15,19 +15,11 @@ public class InventoryCheckBlControllerMock extends InventoryCheckBlController {
      * @param endTime
      * @return The inventoryView during specified time range
      */
-    @Override
-    public InventoryViewVo check(Date beginTime, Date endTime) {
-        return super.check(beginTime,endTime);
-    }
 
     /**
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
-    @Override
-    public InventoryPictureVo picture() {
-        return super.picture();
-    }
 
     /**
      * Exports the inventory snapshot to the required file by excel
@@ -35,7 +27,7 @@ public class InventoryCheckBlControllerMock extends InventoryCheckBlController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage export(File newfile) {
+    public ResultMessage export(String newfile) {
         return super.export(newfile);
     }
 }

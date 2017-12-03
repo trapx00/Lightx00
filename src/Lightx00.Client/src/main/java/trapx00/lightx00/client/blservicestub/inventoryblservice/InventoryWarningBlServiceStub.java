@@ -24,10 +24,7 @@ public class InventoryWarningBlServiceStub implements InventoryWarningBlService 
         return ResultMessage.Success;
     }
 
-    @Override
-    public InventoryDetailBillVo getCurrentBill() {
-        return new InventoryDetailBillVo("B0001",new Date(), BillState.Draft,null,null,null,null);
-    }
+
 
     @Override
     public InventoryDetailBillVo[] query(InventoryBillQueryVo inventoryBillQueryVo) {

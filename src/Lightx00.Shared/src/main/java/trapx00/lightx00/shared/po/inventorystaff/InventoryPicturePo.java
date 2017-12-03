@@ -15,9 +15,9 @@ public class InventoryPicturePo {
     @DatabaseField
     private Date time;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private CommodityPo[] items;
+    private InventoryPictureItem[] items;
 
-    public InventoryPicturePo(String id, Date time, CommodityPo[] items) {
+    public InventoryPicturePo(String id, Date time, InventoryPictureItem[] items) {
         this.time = time;
         this.items = items;
     }
@@ -28,7 +28,7 @@ public class InventoryPicturePo {
         return time;
     }
 
-    public CommodityPo[] getItems() {
+    public InventoryPictureItem[] getItems() {
         return items;
     }
 
@@ -36,7 +36,7 @@ public class InventoryPicturePo {
         this.time = time;
     }
 
-    public void setItems(CommodityPo[] items) {
+    public void setItems(InventoryPictureItem[] items) {
         this.items = items;
     }
 }

@@ -45,8 +45,7 @@ public class InventoryWarningDataControllerMock extends InventoryWarningDataServ
     }
     @Override
     public InventoryDetailBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
-        InventoryDetailBillPo inventoryBillVo=new InventoryDetailBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow
-        ,null);
+        InventoryDetailBillPo inventoryBillVo=null;
         InventoryDetailBillPo[]input={inventoryBillVo};
         return  input;
     }

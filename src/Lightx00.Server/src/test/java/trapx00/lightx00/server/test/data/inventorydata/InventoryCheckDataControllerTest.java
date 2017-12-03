@@ -31,8 +31,7 @@ public class InventoryCheckDataControllerTest {
     private Dao<InventoryViewPo, String> inventoryViewDao = InventoryOtherDataDaoFactory.getInventoryViewDao();
     private Dao<InventoryPicturePo,String> inventoryPictureDao=InventoryOtherDataDaoFactory.getInventoryPictureDao();
     private InventoryCheckDataService inventoryCheckDataService=InventoryCheckDataFactory.getService();
-    private InventoryViewPo inventoryViewPo=new InventoryViewPo("VIEW-0001-0001",new Date(),1,1,
-            1,1,1,1,1);
+    private InventoryViewPo inventoryViewPo=new InventoryViewPo("VIEW-0001-0001",new Date(),null);
     private InventoryPicturePo inventoryPicturePo=new InventoryPicturePo("PICT-0001-0001",new Date(),null);
 
     @Test

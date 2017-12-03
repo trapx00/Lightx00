@@ -26,9 +26,11 @@ public class InventoryGiftBlServiceStub implements InventoryGiftBlService {
     }
 
     @Override
-    public InventoryGiftVo getGift(Date time) {
+    public ResultMessage saveAsDraft(InventoryGiftVo bill) {
         return null;
     }
+
+
 
     @Override
     public InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo) {

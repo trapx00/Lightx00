@@ -11,25 +11,19 @@ import java.util.Date;
 
 public class InventoryCheckBlServiceStub implements InventoryCheckBlService {
 
+
     @Override
-    public InventoryViewVo check(Date beginTime, Date endTime) {
-        return new InventoryViewVo(new Date(), 90, 80,
-       50, 100, 208,
-       60, 100);
+    public InventoryViewVo[] getInventoryView(Date beginTime, Date endTime) {
+        return new InventoryViewVo[0];
     }
 
     @Override
-    public InventoryPictureVo picture() {
-        Date date=new Date();
-        CommodityVo[] commoditys= new CommodityVo[]{
-                new CommodityVo("C0001", "LedLight", "Led", 98, date,
-                        "1", "2", 56, 60, 90, 99, 50)
-        };
-        return new InventoryPictureVo(date, commoditys);
+    public InventoryPictureVo[] getInventoryPicture() {
+        return new InventoryPictureVo[0];
     }
 
     @Override
-    public ResultMessage export(File newfile) {
+    public ResultMessage export(String newfile) {
         return ResultMessage.Success;
     }
 }

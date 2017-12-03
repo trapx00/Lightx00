@@ -18,5 +18,14 @@
     <orderEntry type="library" name="Gradle: io.github.lukehutch:fast-classpath-scanner:2.9.3" level="project" />
     <orderEntry type="library" name="Gradle: com.nativelibs4java:bridj:0.7.0" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.2" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libs/jxl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
