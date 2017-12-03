@@ -16,5 +16,7 @@ public interface CommodityInfo {
 
     ResultMessage update (String id,double value);
 
+    CommodityVo[] getAllCommodity();
+
 
 }

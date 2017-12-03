@@ -161,6 +161,11 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
         }
     }
 
+    @Override
+    public CommodityVo[] getAllCommodity() {
+        return new CommodityVo[0];
+    }
+
     /**
      * Modify the inventoryNum
      * @param commodityId

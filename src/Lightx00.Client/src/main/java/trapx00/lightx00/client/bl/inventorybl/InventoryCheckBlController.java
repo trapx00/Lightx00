@@ -1,17 +1,12 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
-import trapx00.lightx00.client.bl.inventorybl.factory.InventoryCheckServiceFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
 import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
-import trapx00.lightx00.client.bl.util.ExcelOuput;
-import trapx00.lightx00.client.bl.util.FormatDateTime;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryCheckDataServiceFactory;
-import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryGiftDataServiceFactory;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
-import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
@@ -19,13 +14,13 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 
 
-import java.io.File;
 import java.util.Date;
 
 public class InventoryCheckBlController implements InventoryCheckBlService {
 
     private LogService logService = LogServiceFactory.getLogService();
     private InventoryCheckDataService dataService= InventoryCheckDataServiceFactory.getService();
+    private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
 
     public InventoryViewVo fromPoToVo(InventoryViewPo po) {
         return new InventoryViewVo(po.getId(), po.getTime(),po.getItems());
@@ -67,7 +62,8 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
         InventoryPictureVo[] inventoryPicture=this.getInventoryPicture();
         InventoryPictureVo operPicture=inventoryPicture[0];
         try{
-            ResultMessage opResult= ExcelOuput.createExcel(path,operPicture);
+            ResultMessage opResult=ResultMessage.Success;
+            //= ExcelOutput.createExcel(path,operPicture);
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("导出成功"));
             } else {
