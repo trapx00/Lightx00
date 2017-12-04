@@ -78,6 +78,10 @@ public class SaleDetailBlController implements SaleDetailBlService {
                     .filter(Objects::nonNull).collect(Collectors.toList())));
         }
 
+        return calculateDetailWithFilteredSaleBillsAndCommodities(filtered, concernedCommodities);
+    }
+
+    private SaleDetailVo calculateDetailWithFilteredSaleBillsAndCommodities(List<SaleBillVo> filtered, List<CommodityVo> concernedCommodities) {
         List<SaleRecordVo> saleRecordVos = filtered.stream()
             .map(x -> {
                 List<SaleRecordVo> recordsForDate = new ArrayList<>();
@@ -90,7 +94,6 @@ public class SaleDetailBlController implements SaleDetailBlService {
             }).flatMap(Collection::stream).collect(Collectors.toList());
 
         return new SaleDetailVo(saleRecordVos.toArray(new SaleRecordVo[saleRecordVos.size()]));
-
     }
 
     /**

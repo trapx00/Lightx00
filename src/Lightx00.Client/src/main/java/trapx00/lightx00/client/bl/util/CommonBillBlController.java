@@ -1,5 +1,7 @@
 package trapx00.lightx00.client.bl.util;
 
+import trapx00.lightx00.client.bl.approvalbl.ApprovalRequest;
+import trapx00.lightx00.client.bl.approvalbl.factory.ApprovalRequestFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftService;
 import trapx00.lightx00.client.bl.draftbl.factory.DraftServiceFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
@@ -31,6 +33,7 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
     private DraftService draftService = DraftServiceFactory.getDraftService();
     private String billName = "";
     private BillPoVoConverter<BillPoType, BillVoType> converter;
+    private ApprovalRequest approvalRequest = ApprovalRequestFactory.getService();
 
     /**
      * Constructor.
@@ -49,6 +52,7 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
             ResultMessage opResult = dataService.submit(converter.fromVoToPo(bill));
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("创建了一张%s，内容是%s。", billName, bill.toString()));
+                approvalRequest.requestApproval(bill);
             } else {
                 logService.log(LogSeverity.Failure, String.format("创建一张%s失败，原因不明。内容是%s。",billName, bill.toString()));
             }

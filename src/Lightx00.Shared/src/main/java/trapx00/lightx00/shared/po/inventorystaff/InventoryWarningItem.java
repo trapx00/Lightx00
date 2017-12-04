@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class InventoryWarningItem implements Serializable {
     private String name;
-    private double amount;
-    private double det;
+    private double delta;
+    private double unitPrice;
 
-    public InventoryWarningItem(String name, double amount, double det) {
+    public InventoryWarningItem(String name, double delta, double unitPrice) {
         this.name = name;
-        this.amount = amount;
-        this.det = det;
+        this.delta = delta;
+        this.unitPrice = unitPrice;
     }
 
     public String getName() {
@@ -21,28 +21,19 @@ public class InventoryWarningItem implements Serializable {
         this.name = name;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getDelta() {
+        return delta;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setDelta(double delta) {
+        this.delta = delta;
     }
 
-    public double getDet() {
-        return det;
+    public double getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setDet(double det) {
-        this.det = det;
-    }
-
-    @Override
-    public String toString() {
-        return "CashBillItem{" +
-                "name='" + name + '\'' +
-                ", amount=" + amount +
-                ", det='" + det + '\'' +
-                '}';
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }
