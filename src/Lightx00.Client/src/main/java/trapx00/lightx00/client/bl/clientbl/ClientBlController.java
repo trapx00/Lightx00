@@ -6,6 +6,8 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftService;
 import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
 import trapx00.lightx00.client.bl.draftbl.factory.DraftServiceFactory;
+import trapx00.lightx00.client.bl.util.ClientPoVoConverter;
+import trapx00.lightx00.client.bl.util.PoVoConverter;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.datafactory.clientdataservicefactory.ClientDataServiceFactory;
 import trapx00.lightx00.client.vo.Draftable;
@@ -20,21 +22,11 @@ import trapx00.lightx00.shared.po.client.ClientState;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class ClientBlController implements ClientBlService, DraftDeleteService, ClientModificationService, DraftableQueryService, ClientQueryService {
+public class ClientBlController implements ClientBlService, DraftDeleteService, ClientModificationService, DraftableQueryService, ClientQueryService, ClientPoVoConverter {
 
     ClientDataService clientDataService = ClientDataServiceFactory.getInstance();
     EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
     DraftService draftService = DraftServiceFactory.getDraftService();
-
-    private ClientPo convertToClientPo(ClientVo clientVo, ClientState clientState) {
-        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getPayableQuota(), clientVo.getDefaultOperator().getId(), clientState);
-        return clientPo;
-    }
-
-    private ClientVo convertToClientVo(ClientPo clientPo) {
-        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getPayableQuota(), (SaleStaffVo) employeeInfo.queryById(clientPo.getId()));
-        return clientVo;
-    }
 
     /**
      * Deletes a draft.
@@ -67,7 +59,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
             ArrayList<ClientVo> clientVos = new ArrayList<ClientVo>();
             for (int i = 0; i < clientPos.length; i++) {
                 if (clientPos[i].getClientState() == ClientState.Real) {
-                    clientVos.add(convertToClientVo(clientPos[i]));
+                    clientVos.add(fromPoToVo(clientPos[i]));
                 }
             }
             return clientVos.toArray(new ClientVo[clientVos.size()]);
@@ -88,7 +80,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
         try {
             ResultMessage resultMessage;
             ResultMessage resultMessage1 = draftService.saveAsDraft(client);
-            ResultMessage resultMessage2 = clientDataService.add(convertToClientPo(client, ClientState.Draft));
+            ResultMessage resultMessage2 = clientDataService.add(fromVoToPo(client, ClientState.Draft));
             if (resultMessage1 == resultMessage2) {
                 if (resultMessage1 == ResultMessage.Success) {
                     resultMessage = ResultMessage.Success;
@@ -131,7 +123,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
     @Override
     public ResultMessage modify(ClientVo client) {
         try {
-            ClientPo clientPo = convertToClientPo(client, ClientState.Real);
+            ClientPo clientPo = fromVoToPo(client, ClientState.Real);
             return clientDataService.modify(clientPo);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -148,7 +140,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
     @Override
     public ResultMessage add(ClientVo client) {
         try {
-            ClientPo clientPo = convertToClientPo(client, ClientState.Real);
+            ClientPo clientPo = fromVoToPo(client, ClientState.Real);
             return clientDataService.add(clientPo);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -159,7 +151,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
     /**
      * delete some clients
      *
-     * @param id of the client to be deleted
+     * @param ids of the client to be deleted
      * @return whether the operation is done successfully
      */
     @Override
@@ -229,10 +221,47 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
                     break;
                 }
             }
-            return convertToClientVo(clientPo);
+            return fromPoToVo(clientPo);
         } catch (RemoteException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * Convert vo to po.
+     *
+     * @param clientVo          vo
+     * @param clientState
+     * @return po
+     */
+    @Override
+    public ClientPo fromVoToPo(ClientVo clientVo, ClientState clientState) {
+        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getPayableQuota(), clientVo.getDefaultOperator().getId(), clientState);
+        return clientPo;
+    }
+
+    /**
+     * Convert vo to po, with default clientState=Real.
+     *
+     * @param clientVo vo
+     * @return po
+     */
+    @Override
+    public ClientPo fromVoToPo(ClientVo clientVo) {
+        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getPayableQuota(), clientVo.getDefaultOperator().getId(), ClientState.Real);
+        return clientPo;
+    }
+
+    /**
+     * Convert po to vo.
+     *
+     * @param clientPo po
+     * @return vo
+     */
+    @Override
+    public ClientVo fromPoToVo(ClientPo clientPo) {
+        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getPayableQuota(), (SaleStaffVo) employeeInfo.queryById(clientPo.getId()));
+        return clientVo;
     }
 }

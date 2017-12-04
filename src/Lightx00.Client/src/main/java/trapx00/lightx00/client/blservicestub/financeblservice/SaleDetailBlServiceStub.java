@@ -13,7 +13,7 @@ public class SaleDetailBlServiceStub implements SaleDetailBlService {
     public SaleDetailVo query(SaleDetailQueryVo query) {
         return new SaleDetailVo(new SaleRecordVo[]
                 { new SaleRecordVo(
-                        new Date(),query.getCommodityName(),"123",0,0,0) });
+                        new Date(),query.getCommodityNames(),"123",0,0,0) });
     }
 
     @Override

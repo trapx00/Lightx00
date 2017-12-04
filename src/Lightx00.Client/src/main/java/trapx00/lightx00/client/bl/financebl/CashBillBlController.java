@@ -25,12 +25,13 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
     private CommonBillBlController<CashBillVo, CashBillPo, CashBillQueryVo> commonBillBlController
         = new CommonBillBlController<>(dataService, "现金费用单", this);
 
-
+    @Override
     public CashBillVo fromPoToVo(CashBillPo po) {
         return new CashBillVo(po.getId(), po.getDate(), po.getState(), po.getOperatorId(), po.getAccountId(), po.getItems());
 
     }
 
+    @Override
     public CashBillPo fromVoToPo(CashBillVo vo) {
         return new CashBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getOperatorId(), vo.getAccountId(), vo.getItems());
     }

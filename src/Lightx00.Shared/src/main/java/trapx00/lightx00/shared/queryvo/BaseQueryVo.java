@@ -10,6 +10,8 @@ import trapx00.lightx00.shared.queryvo.querys.*;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class BaseQueryVo<Po,PK, T extends BaseQueryVo> implements Serializable {
@@ -50,6 +52,13 @@ public class BaseQueryVo<Po,PK, T extends BaseQueryVo> implements Serializable {
         return (T) this;
     }
 
+    public <Obj extends Serializable>  T in(String columnName, Obj... objects) {
+        ArrayList<Obj> list = new ArrayList<>();
+        list.addAll(Arrays.stream(objects).collect(Collectors.toList()));
+        queries.add(new In<>(columnName, list));
+        return (T) this;
+    }
+
     public T isNotNull(String columnName) {
         queries.add(new IsNotNull<>(columnName));
         return (T) this;
@@ -85,14 +94,30 @@ public class BaseQueryVo<Po,PK, T extends BaseQueryVo> implements Serializable {
         return (T) this;
     }
 
-    public <Obj extends Serializable> T notIn(String columName, ArrayList<Obj> objects) {
-        queries.add(new NotIn<>(columName,objects));
+    public <Obj extends Serializable> T notIn(String columnName, ArrayList<Obj> objects) {
+        queries.add(new NotIn<>(columnName,objects));
         return (T) this;
     }
 
     public T or() {
         queries.add(new Or<>());
         return (T) this;
+    }
+
+    public BaseQueryVo() {
+
+    }
+
+    public BaseQueryVo(BaseQueryVo another) {
+        this.queries = another.queries;
+    }
+
+    protected void setQueries(ArrayList<BaseQuery<Po, PK>> queries) {
+        this.queries = queries;
+    }
+
+    protected ArrayList<BaseQuery<Po, PK>> getQueries() {
+        return queries;
     }
 
     public PreparedQuery<Po> prepareQuery(Dao<Po, PK> dao) throws SQLException {

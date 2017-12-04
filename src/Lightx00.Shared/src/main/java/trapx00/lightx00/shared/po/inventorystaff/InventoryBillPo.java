@@ -13,6 +13,11 @@ public class InventoryBillPo extends BillPo {
     @DatabaseField
      private  InventoryBillType inventoryBillType;
 
+
+
+    @DatabaseField
+    private String operatorId;
+
     public InventoryBillPo(String id, Date date, BillState state,
                            InventoryBillType inventoryBillType) {
         super(BillType.InventoryBill, id, date, state);
@@ -21,6 +26,13 @@ public class InventoryBillPo extends BillPo {
 
     public InventoryBillPo(){
 
+    }
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 
     public InventoryBillType getInventoryBillType() {

@@ -27,8 +27,8 @@ public class PurchaseRefundBillDataServiceFactory {
         }
     }
 
-    public PurchaseRefundBillDataService getInstance() {
-        //initRmi();
+    public static PurchaseRefundBillDataService getInstance() {
+        initRmi();
         return service;
     }
 }

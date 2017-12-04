@@ -5,6 +5,15 @@ import java.io.Serializable;
 public class PromotionCommodity implements Serializable {
     private String commodityId;
     private double amount;
+    private double unitPrice;
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
 
     public double getAmount() {
         return amount;

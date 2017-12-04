@@ -19,9 +19,10 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
     private CommodityVo[] commodities;
     private ClientVo[] clients;
     private BankAccountVo[] bankAccounts;
+    private String operatorId;
 
-    public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts) {
-        super(FinanceBillType.SystemSnapshot, id, date, state);
+    public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts, String operatorId) {
+        super(FinanceBillType.SystemSnapshot, id, date, state, operatorId);
         this.commodities = commodities;
         this.clients = clients;
         this.bankAccounts = bankAccounts;

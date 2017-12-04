@@ -18,6 +18,10 @@ public interface Draftable extends KeyValueDisplayable {
      */
     DraftContinueWritableUiController continueWritableUi();
 
-
+    /**
+     * Gets the id of a draftable.
+     * @return id
+     */
+    String getId();
 
 }

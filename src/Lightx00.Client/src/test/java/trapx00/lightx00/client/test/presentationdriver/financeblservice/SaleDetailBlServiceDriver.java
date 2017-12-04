@@ -16,7 +16,7 @@ public class SaleDetailBlServiceDriver {
             "123",null,null,1);
     @Test
     public void query() throws Exception {
-        assertEquals(query.getCommodityName(), service.query(query).getRecords()[0].getCommodityName());
+        assertEquals(query.getCommodityNames(), service.query(query).getRecords()[0].getCommodityName());
     }
 
     @Test

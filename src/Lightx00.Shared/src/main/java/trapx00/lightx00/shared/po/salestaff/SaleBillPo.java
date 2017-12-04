@@ -10,9 +10,9 @@ import java.util.Date;
 @DatabaseTable(tableName = "SaleBill")
 public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
-    private String supplier;
+    private String clientId;
     @DatabaseField
-    private String defaultOperatorId;
+    private String salesmanId;
     @DatabaseField
     private String operatorId;
     @DatabaseField
@@ -30,10 +30,10 @@ public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
     private String comment;
 
-    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
         super(id, date, state, SaleBillType.Sale);
-        this.supplier = supplier;
-        this.defaultOperatorId = defaultOperatorId;
+        this.clientId = clientId;
+        this.salesmanId = salesmanId;
         this.operatorId = operatorId;
         this.repository = repository;
         this.commodityList = commodityList;
@@ -44,22 +44,23 @@ public class SaleBillPo extends SaleBillBasePo {
         this.comment = comment;
     }
 
-    public SaleBillPo() {}
-
-    public String getSupplier() {
-        return supplier;
+    public SaleBillPo() {
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getClientId() {
+        return clientId;
     }
 
-    public String getDefaultOperatorId() {
-        return defaultOperatorId;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
+    public String getSalesmanId() {
+        return salesmanId;
+    }
+
+    public void setSalesmanId(String salesmanId) {
+        this.salesmanId = salesmanId;
     }
 
     public String getOperatorId() {

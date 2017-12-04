@@ -17,5 +17,5 @@ public interface DraftBlService {
      * @return whether the operation is done successfully
      */
 
-    ResultMessage delete(Draftable draft);
+    ResultMessage delete(DraftVo draft);
 }
