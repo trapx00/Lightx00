@@ -10,7 +10,7 @@ import trapx00.lightx00.client.bl.loginbl.factory.LoginBlFactory;
 import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
 import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.StageManager;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.admin.AdminVo;
 
@@ -31,7 +31,7 @@ public class LoginUiController {
     int depth = 5;
 
     public void setStage(Stage stage) {
-        UiUtil.setStage(stage);
+        StageManager.setStage(stage);
         BorderlessStageHelper.makeDraggable(stage, rootPane);
         BorderlessStageHelper.makeResizeable(stage);
         cancelButton.setOnMouseClicked(e -> stage.close());

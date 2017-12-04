@@ -3,11 +3,11 @@ package trapx00.lightx00.client.presentation.helpui;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class UiUtil {
+public class StageManager {
     private static Stage stage;
 
     public static void setStage(Stage stage) {
-        UiUtil.stage = stage;
+        StageManager.stage = stage;
     }
 
     public static void closeStage() {
@@ -18,5 +18,6 @@ public class UiUtil {
         stage.setScene(newScene);
         stage.sizeToScene();
     }
+
 
 }

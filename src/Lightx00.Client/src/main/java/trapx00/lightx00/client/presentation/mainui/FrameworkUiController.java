@@ -16,7 +16,8 @@ import javafx.util.Duration;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
 import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.DialogStack;
+import trapx00.lightx00.client.presentation.helpui.StageManager;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -39,10 +40,11 @@ public class FrameworkUiController {
     public Text titleText;
     protected EmployeeVo employeeVo;
     private Object subController;
+    private DialogStack dialogStack = new DialogStack();
 
     public void setStage(Stage stage) {
         this.stage = stage;
-        UiUtil.setStage(stage);
+        StageManager.setStage(stage);
         BorderlessStageHelper.makeResizeable(stage);
         BorderlessStageHelper.makeDraggable(stage, titleBar);
     }
@@ -110,5 +112,9 @@ public class FrameworkUiController {
             subController = NotificationUiController.init(this);
         }
 
+    }
+
+    public DialogStack getDialogStack() {
+        return dialogStack;
     }
 }
