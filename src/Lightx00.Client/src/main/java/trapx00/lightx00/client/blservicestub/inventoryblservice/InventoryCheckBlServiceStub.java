@@ -13,13 +13,13 @@ public class InventoryCheckBlServiceStub implements InventoryCheckBlService {
 
 
     @Override
-    public InventoryViewVo[] getInventoryView(Date beginTime, Date endTime) {
-        return new InventoryViewVo[0];
+    public InventoryViewVo getInventoryView(Date beginTime, Date endTime) {
+        return null;
     }
 
     @Override
-    public InventoryPictureVo[] getInventoryPicture() {
-        return new InventoryPictureVo[0];
+    public InventoryPictureVo getInventoryPicture() {
+        return null;
     }
 
     @Override

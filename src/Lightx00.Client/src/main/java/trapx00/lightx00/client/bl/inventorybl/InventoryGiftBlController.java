@@ -46,10 +46,9 @@ public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprov
         return new InventoryGiftPo(BillType.InventoryBill,vo.getId(), vo.getDate(), vo.getState(),vo.getInventoryBillType(),vo.getGifts());
     }
 
-    @Override
     public CommodityItem[] getPromotionCommodity(String id){
         SaleBillVo saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo().idEq(id))[0];
-        return saleBillVos.getCommodityList();
+        return saleBillVos.getGiftList();
     }
     /**
      * Submits a GiftBill.

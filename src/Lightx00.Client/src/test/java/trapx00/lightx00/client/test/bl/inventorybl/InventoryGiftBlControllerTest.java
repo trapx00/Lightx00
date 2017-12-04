@@ -29,10 +29,6 @@ public class InventoryGiftBlControllerTest {
         assertEquals("123",service.getId());
     }
 
-    @Test
-    public void getGift() throws Exception {
-        assertEquals(null,service.getGift(date));
-    }
 
    @Test
     public void queryCommodity() throws Exception {

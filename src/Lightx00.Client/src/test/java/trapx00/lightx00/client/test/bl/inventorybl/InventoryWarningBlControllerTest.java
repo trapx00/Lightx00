@@ -28,10 +28,6 @@ public class InventoryWarningBlControllerTest {
         assertEquals(ResultMessage.Success,service.modify("01111",100));
     }
 
-    @Test
-    public void getCurrentBill() throws Exception {
-        assertEquals("123",service.getCurrentBill().getId());
-    }
 
    @Test
    public void query() throws Exception {
