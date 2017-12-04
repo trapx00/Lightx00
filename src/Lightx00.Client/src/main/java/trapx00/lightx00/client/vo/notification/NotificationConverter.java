@@ -12,9 +12,9 @@ public interface NotificationConverter<VoType extends NotificationVo> {
     VoType convertToVo(NotificationPo notificationPo);
 
     /**
-     * Convert
-     * @param notificationVo
-     * @return
+     * Convert po from vo.
+     * @param notificationVo notification vo
+     * @return notification po
      */
     NotificationPo convertToPo(VoType notificationVo);
 }

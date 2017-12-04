@@ -28,15 +28,15 @@ import static org.junit.Assert.*;
 public class NotificationBlControllerTest {
     private NotificationBlController controller = NotificationBlFactory.getController();
     private NotificationDataService dataService = NotificationDataServiceFactory.getService();
-    private EmployeeVo receiver = new FinanceStaffVo("Finance receiver", "123", new Date(), "financereceiver","0001");
     private EmployeeVo sender = new AdminVo("admin sender", "1234", new Date(), "adminsender","0001");
+    private EmployeeVo[] receivers = new EmployeeVo[]{new FinanceStaffVo("Finance receiver", "123", new Date(), "financereceiver", "0001"), sender};
     private CashBillVo cashBill = new CashBillVo(String.format("XJFKD-%s-00001", BillHelper.currentDateStringForBill()),
         new Date(), BillState.Draft,"123","123",
         new CashBillItem[] {
         new CashBillItem("123",1,"123")
     });
-    private BillApprovalNotificationVo commonUsedBillNotification = new BillApprovalNotificationVo(9,new Date(),sender,receiver,cashBill);
-    private OtherNotificationVo otherNotificationVo = new OtherNotificationVo(10,new Date(), sender, receiver, "other");
+    private BillApprovalNotificationVo commonUsedBillNotification = new BillApprovalNotificationVo(9,new Date(),sender,receivers,cashBill);
+    private OtherNotificationVo otherNotificationVo = new OtherNotificationVo(10,new Date(), sender, receivers, "other");
 
     @Test
     public void addNotification() throws Exception {

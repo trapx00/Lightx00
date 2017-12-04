@@ -50,12 +50,11 @@ public class NotificationBlController implements NotificationBlService, Notifica
     public NotificationVo[] update() {
         EmployeeVo currentUser = currentUserService.getCurrentUser();
         try {
-            NotificationPo[] queryResult = dataService.query(new NotificationQueryVo().eq("receiverId", currentUser.getId()));
-            List<NotificationVo> voList = Arrays.stream(queryResult)
-                .map(NotificationConvertRegistry::convertToVo)
-                .collect(Collectors.toList());
+            NotificationPo[] queryResult = dataService.query(new NotificationQueryVo());
+            List<NotificationPo> filteredNotificationVo = Arrays.stream(queryResult).filter(x -> Arrays.asList(x.getReceiverIds()).contains(currentUser.getId())).collect(Collectors.toList());
             logService.log(LogSeverity.Info, String.format("查询了接受者%s(id: %s)的通知，查到%s条通知。", currentUser.getName(), currentUser.getId(), queryResult.length));
-            return voList.toArray(new NotificationVo[voList.size()]);
+            return filteredNotificationVo.stream()
+                .map(NotificationConvertRegistry::convertToVo).toArray(NotificationVo[]::new);
         } catch (RemoteException e) {
             logService.log(LogSeverity.Failure, "查单子过程中出现了异常，异常信息：" + e.getMessage());
             throw new UncheckedRemoteException(e);
