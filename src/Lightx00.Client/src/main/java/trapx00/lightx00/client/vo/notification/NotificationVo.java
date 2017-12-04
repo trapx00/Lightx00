@@ -2,6 +2,8 @@ package trapx00.lightx00.client.vo.notification;
 
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationOperationService;
+import trapx00.lightx00.client.presentation.notificationui.NotificationDetailUi;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
@@ -71,4 +73,8 @@ public abstract class NotificationVo {
     public void setId(int id) {
         this.id = id;
     }
+
+    public abstract NotificationDetailUi notificationDetailUi();
+
+    public abstract NotificationOperationService operationService();
 }

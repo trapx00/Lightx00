@@ -11,7 +11,7 @@ public class InitialEstablishmentBlServiceStub implements InitialEstablishmentBl
     @Override
     public SystemSnapshotVo autofill() {
         SystemSnapshotVo vo = new SystemSnapshotVo("123",new Date(),
-                BillState.Draft, null, null, null);
+                BillState.Draft, null, null, null, "123");
         return vo;
     }
 

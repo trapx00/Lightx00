@@ -2,6 +2,10 @@ package trapx00.lightx00.client.vo.notification.billapproval;
 
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationOperationRegistry;
+import trapx00.lightx00.client.bl.notificationbl.NotificationOperationService;
+import trapx00.lightx00.client.presentation.notificationui.BillApprovalNotificationDetailDisplayUiController;
+import trapx00.lightx00.client.presentation.notificationui.NotificationDetailUi;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.notification.NotificationConvertRegistry;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
@@ -38,5 +42,15 @@ public class BillApprovalNotificationVo extends NotificationVo {
 
     public void setBill(BillVo bill) {
         this.bill = bill;
+    }
+
+    @Override
+    public NotificationDetailUi notificationDetailUi() {
+        return new BillApprovalNotificationDetailDisplayUiController();
+    }
+
+    @Override
+    public NotificationOperationService operationService() {
+        return NotificationOperationRegistry.getNotificationOperationService(NotificationType.BillApproval);
     }
 }

@@ -22,7 +22,9 @@ public class DraftBlServiceStub implements DraftBlService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(Draftable draft) {
-        return ResultMessage.Success;
+    public ResultMessage delete(DraftVo draft) {
+        return null;
     }
+
+
 }

@@ -2,6 +2,10 @@ package trapx00.lightx00.client.vo.notification.others;
 
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationOperationRegistry;
+import trapx00.lightx00.client.bl.notificationbl.NotificationOperationService;
+import trapx00.lightx00.client.presentation.notificationui.NotificationDetailUi;
+import trapx00.lightx00.client.presentation.notificationui.OtherNotificationDetailDisplayUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.notification.NotificationConvertRegistry;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
@@ -28,5 +32,15 @@ public class OtherNotificationVo extends NotificationVo {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public NotificationDetailUi notificationDetailUi() {
+        return new OtherNotificationDetailDisplayUiController();
+    }
+
+    @Override
+    public NotificationOperationService operationService() {
+        return NotificationOperationRegistry.getNotificationOperationService(NotificationType.Others);
     }
 }

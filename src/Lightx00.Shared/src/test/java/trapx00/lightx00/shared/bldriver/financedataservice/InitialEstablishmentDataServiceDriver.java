@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class InitialEstablishmentDataServiceDriver {
     private InitialEstablishmentDataService service = new InitialEstablishmentDataServiceStub();
-    private final SystemSnapshotPo snapshot = new SystemSnapshotPo("123",new Date(), BillState.Draft,null,null,null);
+    private final SystemSnapshotPo snapshot = new SystemSnapshotPo("123",new Date(), BillState.Draft,null,null,null, "123");
     @Test
     public void submit() throws Exception {
         //assertEquals(service.submit(snapshot), ResultMessage.Success);

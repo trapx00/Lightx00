@@ -29,9 +29,5 @@ public class InventoryWarningBlServiceDriver {
         assertEquals(ResultMessage.Success,service.modify("01111",100));
     }
 
-    @Test
-    public void getCurrentBill() throws Exception {
-        assertEquals("B0001",service.getCurrentBill().getId());
-    }
 
 }

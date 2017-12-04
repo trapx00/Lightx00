@@ -25,7 +25,7 @@ public class TradeHistoryBlServiceDriver {
 
     @Test
     public void query() throws Exception {
-        assertEquals(BillType.FinanceBill, bill.getBill());
+        assertEquals(BillType.FinanceBill, bill.getBillType());
     }
 
     @Test

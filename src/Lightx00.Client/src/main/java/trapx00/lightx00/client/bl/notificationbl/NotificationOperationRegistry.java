@@ -33,4 +33,8 @@ public class NotificationOperationRegistry {
     public static ResultMessage activate(NotificationVo vo) {
         return map.get(vo.getType()).activate(vo);
     }
+
+    public static <T extends NotificationOperationService> T getNotificationOperationService(NotificationType notificationType) {
+        return (T) map.get(notificationType);
+    }
 }

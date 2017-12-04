@@ -18,6 +18,7 @@ import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
 import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
 import trapx00.lightx00.client.presentation.helpui.UiUtil;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
+import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
 import trapx00.lightx00.client.vo.EmployeeVo;
 
@@ -105,7 +106,9 @@ public class FrameworkUiController {
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-
+        if (!(subController instanceof NotificationUiController)) {
+            subController = NotificationUiController.init(this);
+        }
 
     }
 }
