@@ -28,8 +28,9 @@ public class SaleBillVo extends SaleBillBaseVo {
     private String comment;
     private int clientLevel;
     private String promotionId;
+    private CommodityItem[] giftList;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList) {
         super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.salesman = salesman;
@@ -43,6 +44,7 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.comment = comment;
         this.clientLevel = clientLevel;
         this.promotionId = promotionId;
+        this.giftList = giftList;
     }
 
     public String getClientId() {
@@ -141,6 +143,14 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.promotionId = promotionId;
     }
 
+    public CommodityItem[] getGiftList() {
+        return giftList;
+    }
+
+    public void setGiftList(CommodityItem[] giftList) {
+        this.giftList = giftList;
+    }
+
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -168,7 +178,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return SaleBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**

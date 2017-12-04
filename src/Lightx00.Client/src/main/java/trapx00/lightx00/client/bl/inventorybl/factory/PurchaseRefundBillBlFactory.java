@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.inventorybl.factory;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseRefundBillBlController;
 import trapx00.lightx00.client.bl.inventorybl.mock.PurchaseRefundBillBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
@@ -10,6 +11,7 @@ public class PurchaseRefundBillBlFactory {
     private static PurchaseRefundBillBlController purchaseRefundBillBlController = new PurchaseRefundBillBlControllerMock();
     private static NotificationActivateService notificationActivateService = purchaseRefundBillBlController;
     private static NotificationAbandonService notificationAbandonService = purchaseRefundBillBlController;
+    private static BillApprovalCompleteService billApprovalCompleteService = purchaseRefundBillBlController;
 
     public static PurchaseRefundBillBlController getPurchaseRefundBillBlController() {
         return purchaseRefundBillBlController;
@@ -21,5 +23,9 @@ public class PurchaseRefundBillBlFactory {
 
     public static NotificationAbandonService getNotificationAbandonService() {
         return notificationAbandonService;
+    }
+
+    public static BillApprovalCompleteService getBillApprovalCompleteService() {
+        return billApprovalCompleteService;
     }
 }
