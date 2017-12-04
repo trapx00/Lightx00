@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TradeSituationBlController implements TradeSituationBlService {
     private SaleBillBlInfo saleBillBlInfo = SaleBillBlInfoFactory.getSaleBillBlInfo();
@@ -65,9 +66,10 @@ public class TradeSituationBlController implements TradeSituationBlService {
             0,
             differenceOfPurchaseAndRefund(purchaseBillVos, purchaseRefundBillVoList),
             totalPromotion(saleBillVos, saleRefundBillVos),
-            saleCost()
-
-        )
+            saleCost(purchaseBillVos, purchaseRefundBillVoList),
+            lossCost(lossBills),
+            giveawayCost(giftVos)
+        );
 
     }
 
@@ -95,15 +97,21 @@ public class TradeSituationBlController implements TradeSituationBlService {
     }
 
     private double differenceOfPurchaseAndRefund(List<PurchaseBillVo> purchaseBillVos, List<PurchaseRefundBillVo> purchaseRefundBillVos) {
-        double purchaseCost = purchaseBillVos.stream()
+        List<String> refundedPurchaseCommodityId = purchaseRefundBillVos.stream()
+            .flatMap(x -> Arrays.stream(x.getCommodityList()).map(CommodityItem::getCommodityId))
+            .collect(Collectors.toList());
+
+        double refunded = purchaseRefundBillVos.stream()
             .flatMapToDouble(x -> Arrays.stream(x.getCommodityList()).mapToDouble(c -> c.getPrice() * c.getNumber()))
             .sum();
 
-        double purchaseRefundIncome = purchaseRefundBillVos.stream()
-            .flatMapToDouble(x -> Arrays.stream(x.getCommodityList()).mapToDouble(c -> c.getPrice() * c.getNumber()))
+        double cost = purchaseBillVos.stream()
+            .flatMap(x -> Arrays.stream(x.getCommodityList()))
+            .filter(x -> refundedPurchaseCommodityId.contains(x.getCommodityId()))
+            .mapToDouble(x -> x.getPrice() * x.getNumber())
             .sum();
 
-        return purchaseRefundIncome - purchaseCost;
+        return refunded - cost;
     }
 
     private double lossCost(List<InventoryDetailBillVo> lossBills) {
