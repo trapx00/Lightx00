@@ -70,19 +70,6 @@ public class InventoryCheckDataController extends UnicastRemoteObject implements
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
-    @Override
-    public InventoryPicturePo[] getInventoryPicture(InventoryPictureQueryVo inventoryPicturePo) {
-        List<InventoryPicturePo> result=null;
-        try {
-            List<InventoryPicturePo> results = (List<InventoryPicturePo>) inventoryPictureDao.query(inventoryPicturePo.prepareQuery(inventoryPictureDao));
-            logService.printLog(delegate, String.format("queried inventoryPicture and got %d results.", results.size()));
-            result=results;
-            return result.toArray(new InventoryPicturePo[result.size()]);
-        } catch (SQLException e) {
-            handleSQLException(e);
-            return result.toArray(new InventoryPicturePo[result.size()]);
-        }
-    }
 
 
 }

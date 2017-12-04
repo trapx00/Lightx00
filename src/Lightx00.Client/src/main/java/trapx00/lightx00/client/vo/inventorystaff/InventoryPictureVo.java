@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class InventoryPictureVo {
     //名称，型号，库存数量，库存均价，批次，批号，出厂日期
-    private Date time;//出厂日期
+    private Date time;//生成日期
     private InventoryPictureItem[] items;
 
     public InventoryPictureVo(Date time, InventoryPictureItem[] items) {

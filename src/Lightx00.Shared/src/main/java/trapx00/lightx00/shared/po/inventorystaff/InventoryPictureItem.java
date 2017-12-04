@@ -35,6 +35,7 @@ public class InventoryPictureItem implements Serializable {
         this.batchNo=commodityPo.getBatchNo();
         this.date=commodityPo.getProductionDate();
     }
+
     public String getName() {
         return name;
     }

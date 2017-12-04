@@ -129,6 +129,19 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
         }
     }
 
+    @Override
+    public CommodityPo[] getAllCommodity() {
+        List<CommodityPo> result=null;
+        try {
+            List<CommodityPo> results = (List<CommodityPo>) commodityDao.queryForAll();
+            logService.printLog(delegate, String.format("queried all commodity and got %d results.", results.size()));
+            result=results;
+            return result.toArray(new CommodityPo[result.size()]);
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return result.toArray(new CommodityPo[result.size()]);
+        }
+    }
 
 
 }

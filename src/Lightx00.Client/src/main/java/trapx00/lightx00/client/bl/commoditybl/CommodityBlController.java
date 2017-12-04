@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.commoditybl;
 
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
 import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
 import trapx00.lightx00.client.bl.util.PoVoConverter;
@@ -163,7 +164,13 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
 
     @Override
     public CommodityVo[] getAllCommodity() {
-        return new CommodityVo[0];
+
+        CommodityPo[] commodityPos=dataService.getAllCommodity();
+        CommodityVo[] commodityVos=new CommodityVo[commodityPos.length];
+        for(int i=0;i<commodityPos.length;i++){
+            commodityVos[i]= this.fromPoToVo(commodityPos[i]);
+        }
+        return commodityVos;
     }
 
     /**

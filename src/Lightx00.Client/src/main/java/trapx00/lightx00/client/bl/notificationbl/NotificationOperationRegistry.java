@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.bl.notificationbl;
 
-import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import trapx00.lightx00.client.bl.notificationbl.controller.BillApprovalNotificationOperationController;
 import trapx00.lightx00.client.bl.notificationbl.controller.OtherNotificationOperationController;
 import trapx00.lightx00.client.vo.notification.NotificationVo;

@@ -14,8 +14,13 @@ public class BillApprovalNotificationVo extends NotificationVo {
 
     private BillVo bill;
 
-    public BillApprovalNotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo receiver, BillVo bill) {
-        super(id, date, sender, receiver, NotificationType.BillApproval);
+    public BillApprovalNotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo[] receivers, BillVo bill) {
+        super(id, date, sender, receivers, NotificationType.BillApproval);
+        this.bill = bill;
+    }
+
+    public BillApprovalNotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receivers,  BillVo bill) {
+        super(date, sender, receivers, NotificationType.BillApproval);
         this.bill = bill;
     }
 

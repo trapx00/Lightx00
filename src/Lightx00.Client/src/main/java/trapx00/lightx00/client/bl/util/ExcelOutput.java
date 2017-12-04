@@ -14,7 +14,7 @@ public class ExcelOutput {
     private static WritableFont normalFont;
     private static WritableCellFormat normalFormat;
 
-   
+
     //path为路径(无需带上文件名)
     //outputMessage为你需要输出Excel表格的字符串组
     //name为该表名字，例如为库存盘点就为库存盘点，什么单就是什么单

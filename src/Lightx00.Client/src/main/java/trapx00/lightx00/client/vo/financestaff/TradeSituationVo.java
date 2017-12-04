@@ -6,6 +6,7 @@ public class TradeSituationVo { //经营历程表
     private double overflowIncome; //报溢收
     private double incomeAdjustIncome; //成本调价
     private double differenceOfSaleAndRefundIncome; //进货退货差价
+    private double unusedCouponValue; //未使用的代金卷
 
 
     private double commodityIncome; //商品类收入 = 报溢收 + 成本调价 + 进货退货差价
@@ -22,11 +23,12 @@ public class TradeSituationVo { //经营历程表
 
     private double profit;
 
-    public TradeSituationVo(double saleIncome, double overflowIncome, double incomeAdjustIncome, double differenceOfSaleAndRefundIncome, double promotion, double saleCost, double lossCost, double giveawayCost) {
+    public TradeSituationVo(double saleIncome, double overflowIncome, double incomeAdjustIncome, double differenceOfSaleAndRefundIncome, double unusedCouponValue, double promotion, double saleCost, double lossCost, double giveawayCost) {
         this.saleIncome = saleIncome;
         this.overflowIncome = overflowIncome;
         this.incomeAdjustIncome = incomeAdjustIncome;
         this.differenceOfSaleAndRefundIncome = differenceOfSaleAndRefundIncome;
+        this.unusedCouponValue = unusedCouponValue;
         this.promotion = promotion;
         this.saleCost = saleCost;
         this.lossCost = lossCost;
@@ -36,6 +38,14 @@ public class TradeSituationVo { //经营历程表
         this.totalCost = commodityCost + saleCost;
         this.profit = saleIncome - totalCost;
 
+    }
+
+    public double getUnusedCouponValue() {
+        return unusedCouponValue;
+    }
+
+    public void setUnusedCouponValue(double unusedCouponValue) {
+        this.unusedCouponValue = unusedCouponValue;
     }
 
     public double getSaleIncome() {

@@ -11,7 +11,7 @@ public class FormatDateTime {
     }
 
     public static String toShortDateString(Date dt){
-        SimpleDateFormat myFmt=new SimpleDateFormat("yy年MM月dd日 HH时mm分");
+        SimpleDateFormat myFmt=new SimpleDateFormat("yy年MM月dd日HH时mm分");
         return myFmt.format(dt);
     }
 

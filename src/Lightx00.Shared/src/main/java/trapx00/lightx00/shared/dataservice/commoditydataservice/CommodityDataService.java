@@ -38,5 +38,7 @@ public interface CommodityDataService extends Remote {
      */
     ResultMessage delete(CommodityPo commodity)throws RemoteException;//删除
 
+    CommodityPo[] getAllCommodity();
+
 
 }

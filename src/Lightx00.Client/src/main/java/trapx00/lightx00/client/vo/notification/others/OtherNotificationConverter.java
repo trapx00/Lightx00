@@ -2,10 +2,13 @@ package trapx00.lightx00.client.vo.notification.others;
 
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.notification.NotificationConverterClass;
 import trapx00.lightx00.client.vo.notification.NotificationConverter;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
+
+import java.util.Arrays;
 
 @NotificationConverterClass(notificationType = NotificationType.Others)
 public class OtherNotificationConverter implements NotificationConverter<OtherNotificationVo> {
@@ -24,7 +27,7 @@ public class OtherNotificationConverter implements NotificationConverter<OtherNo
             po.getId(),
             po.getDate(),
             employeeInfo.queryById(po.getSenderId()),
-            employeeInfo.queryById(po.getReceiverId()),
+            Arrays.stream(po.getReceiverIds()).map(x -> employeeInfo.queryById(x)).toArray(EmployeeVo[]::new),
             po.getContent()
         );
     }
@@ -35,7 +38,7 @@ public class OtherNotificationConverter implements NotificationConverter<OtherNo
             vo.getId(),
             vo.getDate(),
             vo.getSender().getId(),
-            vo.getReceiver().getId(),
+            Arrays.stream(vo.getReceivers()).map(EmployeeVo::getId).toArray(String[]::new),
             vo.getType(),
             vo.getContent()
         );

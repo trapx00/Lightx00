@@ -17,10 +17,5 @@ public interface InventoryCheckDataService extends Remote {
      */
     InventoryViewPo[] getInventoryView(InventoryViewQueryVo inventoryViewQueryVo) throws RemoteException;
 
-    /**
-     * Gets the inventory snapshot
-     * @return The inventory snapshot during that day
-     */
-    InventoryPicturePo[] getInventoryPicture(InventoryPictureQueryVo inventoryPictureQueryVo) throws RemoteException;
 
 }

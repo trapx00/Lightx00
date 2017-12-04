@@ -22,7 +22,7 @@ public interface InventoryCheckBlService {
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
-    InventoryPictureVo[] getInventoryPicture();//库存盘点
+    InventoryPictureVo getInventoryPicture();//库存盘点
 
     /**
      * Exports the inventory snapshot to the required file by excel
