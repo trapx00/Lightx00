@@ -44,6 +44,7 @@ project(':Lightx00.Client') {
     mainClassName = 'trapx00.lightx00.client.Client'
     dependencies {
         compile project(':Lightx00.Shared')
+        compile files('libs/jxl.jar')
         compile 'com.jfoenix:jfoenix:1.9.1'
         compile 'de.jensd:fontawesomefx-commons:8.15'
         compile 'de.jensd:fontawesomefx-materialicons:2.2.0-5'
