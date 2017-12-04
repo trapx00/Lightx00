@@ -3,22 +3,22 @@ package trapx00.lightx00.shared.po.inventorystaff;
 import java.io.Serializable;
 
 public class InventoryWarningItem implements Serializable {
-    private String name;
+    private String id;
     private double delta;
     private double unitPrice;
 
-    public InventoryWarningItem(String name, double delta, double unitPrice) {
-        this.name = name;
+    public InventoryWarningItem(String id, double delta, double unitPrice) {
+        this.id = id;
         this.delta = delta;
         this.unitPrice = unitPrice;
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getDelta() {
