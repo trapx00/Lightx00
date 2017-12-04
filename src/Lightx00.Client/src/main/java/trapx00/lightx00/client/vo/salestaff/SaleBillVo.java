@@ -198,7 +198,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleBillBlFactory.getDraftDeleteService();
     }
 
     /**

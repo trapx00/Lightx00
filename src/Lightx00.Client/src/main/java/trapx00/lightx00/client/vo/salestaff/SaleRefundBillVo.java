@@ -148,7 +148,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -168,7 +168,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getDraftDeleteService();
     }
 
     /**

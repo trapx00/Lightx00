@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.bl.inventorybl.factory;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseRefundBillBlController;
 import trapx00.lightx00.client.bl.inventorybl.mock.PurchaseRefundBillBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
@@ -12,6 +13,7 @@ public class PurchaseRefundBillBlFactory {
     private static NotificationActivateService notificationActivateService = purchaseRefundBillBlController;
     private static NotificationAbandonService notificationAbandonService = purchaseRefundBillBlController;
     private static BillApprovalCompleteService billApprovalCompleteService = purchaseRefundBillBlController;
+    private static DraftDeleteService draftDeleteService = purchaseRefundBillBlController;
 
     public static PurchaseRefundBillBlController getPurchaseRefundBillBlController() {
         return purchaseRefundBillBlController;
@@ -27,5 +29,9 @@ public class PurchaseRefundBillBlFactory {
 
     public static BillApprovalCompleteService getBillApprovalCompleteService() {
         return billApprovalCompleteService;
+    }
+
+    public static DraftDeleteService getDraftDeleteService() {
+        return draftDeleteService;
     }
 }

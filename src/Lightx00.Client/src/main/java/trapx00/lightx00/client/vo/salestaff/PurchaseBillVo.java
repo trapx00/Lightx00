@@ -108,7 +108,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return PurchaseBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -128,7 +128,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return PurchaseBillBlFactory.getDraftDeleteService();
     }
 
     /**
