@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class DraftBlControllerTest {
     private DraftBlController controller =  new DraftBlControllerMock();
-    private FinanceStaffVo saver = new FinanceStaffVo("123","123",new Date(),"123");
+    private FinanceStaffVo saver = new FinanceStaffVo("123","123",new Date(),"123","123");
     @Test
     public void saveAsDraft() throws Exception {
         assertEquals(ResultMessage.Success, controller.saveAsDraft( new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)));

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="trapx00.lightx00.client.presentation.notificationui.BillApprovalNotificationDetailDisplayUiController"
+           prefHeight="400.0" prefWidth="500.0" alignment="BASELINE_CENTER" >
+    <VBox prefHeight="400.0" prefWidth="500.0" alignment="BASELINE_CENTER" spacing="30">
+        <padding>
+            <Insets left="20" right="20" top="20" bottom="20"/>
+        </padding>
+
+        <Label text="单据审批通知" textFill="#5e5e5e">
+            <font>
+                <Font name="System Bold" size="32.0" />
+            </font>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </Label>
+
+        <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
+            <HBox alignment="BASELINE_LEFT">
+                <Label text="通知ID"/>
+            </HBox>
+            <HBox alignment="BASELINE_RIGHT">
+                <JFXTextField fx:id="tfId" disable="true"/>
+            </HBox>
+        </HBox>
+
+        <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
+            <HBox alignment="BASELINE_LEFT">
+                <Label text="发送者"/>
+            </HBox>
+            <HBox alignment="BASELINE_RIGHT">
+                <JFXTextField fx:id="tfSender" disable="true"/>
+            </HBox>
+        </HBox>
+
+
+        <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
+            <HBox alignment="BASELINE_LEFT">
+                <Label text="发送时间"/>
+            </HBox>
+            <HBox alignment="BASELINE_RIGHT">
+                <JFXTextField fx:id="tfDate" disable="true"/>
+            </HBox>
+        </HBox>
+
+        <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
+            <HBox alignment="BASELINE_LEFT">
+                <Label text="单据ID"/>
+            </HBox>
+            <HBox alignment="BASELINE_RIGHT" spacing="10">
+                <JFXTextField fx:id="tfBillId" disable="true" prefWidth="100" />
+                <JFXButton fx:id="btnBillDetail" buttonType="RAISED" onAction="#onBtnAcknowledgeClicked" prefHeight="32.0" prefWidth="40.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="查看"/>
+            </HBox>
+        </HBox>
+
+
+        <HBox prefWidth="400" alignment="BASELINE_CENTER" spacing="30">
+            <JFXButton fx:id="btnAcknowledge" buttonType="RAISED" onAction="#onBtnAcknowledgeClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="入账"/>
+            <JFXButton fx:id="btnModify" buttonType="RAISED" onAction="#onBtnModifyClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="修改"/>
+            <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
+        </HBox>
+
+
+    </VBox>
+
+</StackPane>

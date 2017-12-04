@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.vo;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableDemoUiController;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 
@@ -30,18 +31,27 @@ public class DraftDemoVo implements Draftable {
     }
 
     /**
-     * Gets the key-value maps to display the properties.
+     * Gets the id of a draftable.
      *
-     * @return key-value maps for the properties
+     * @return id
      */
     @Override
-    public HashMap<String, String> properties() {
-        HashMap<String, String> content = new HashMap<>();
-        content.put("draftContent", "123");
-        return content;
+    public String getId() {
+        return "1";
     }
+
 
     public String getDraftContent() {
         return draftContent;
+    }
+
+    /**
+     * 显示详细信息UI
+     *
+     * @return 显示详细信息UI
+     */
+    @Override
+    public ContentDisplayUi contentDisplayUi() {
+        return null;
     }
 }

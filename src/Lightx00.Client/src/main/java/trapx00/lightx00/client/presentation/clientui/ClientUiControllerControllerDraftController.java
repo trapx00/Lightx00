@@ -6,6 +6,8 @@ import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
+import java.io.IOException;
+
 public class ClientUiControllerControllerDraftController implements DraftContinueWritableUiController, ClientInfoUi, ExternalLoadableUiController {
     /**
      * get the ui of select client
@@ -26,6 +28,16 @@ public class ClientUiControllerControllerDraftController implements DraftContinu
      */
     @Override
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
+        return null;
+    }
+
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() throws IOException {
         return null;
     }
 }

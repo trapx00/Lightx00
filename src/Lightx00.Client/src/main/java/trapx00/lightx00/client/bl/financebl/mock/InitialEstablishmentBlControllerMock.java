@@ -20,11 +20,7 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
      */
     @Override
     public SystemSnapshotVo autofill() {
-        return new SystemSnapshotVo("123",new Date(), BillState.Approved,
-            new CommodityVo[] {new CommodityVo("123","123","123",10.0,new Date(),"123","123",10.0,10.0,10.0,10.0,10.0)},
-            new ClientVo[] { new ClientVo("123", ClientType.Retailer,5,"123","123","123","123","123@gmail.com",10.0,10.0,null)},
-            new BankAccountVo[] { new BankAccountVo(1, "123",10.0, new Date())}
-        );
+        return super.autofill();
     }
 
     /**
@@ -60,22 +56,7 @@ public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBl
         return ResultMessage.Success;
     }
 
-    /**
-     * Queries SystemSnapshot.
-     *
-     * @param query query
-     * @return SystemSnapshotVos that match the query
-     */
-    @Override
-    public SystemSnapshotVo[] query(SystemSnapshotQueryVo query) {
-        return  new SystemSnapshotVo[]{
-                new SystemSnapshotVo("123", new Date(), BillState.Approved,
-                        new CommodityVo[]{new CommodityVo("123", "123", "123", 10.0, new Date(), "123", "123", 10.0, 10.0, 10.0, 10.0, 10.0)},
-                        new ClientVo[]{new ClientVo("123", ClientType.Retailer, 5, "123", "123", "123", "123", "123@gmail.com", 10.0, 10.0, null)},
-                        new BankAccountVo[]{new BankAccountVo(1, "123", 10.0, new Date())}
-                )
-        };
-    }
+
 
     /**
      * Abandons a bill.

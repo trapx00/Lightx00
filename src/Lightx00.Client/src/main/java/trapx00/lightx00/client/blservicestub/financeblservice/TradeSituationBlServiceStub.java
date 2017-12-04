@@ -9,7 +9,7 @@ import java.util.Date;
 public class TradeSituationBlServiceStub implements TradeSituationBlService {
     @Override
     public TradeSituationVo query(Date start, Date end) {
-        return new TradeSituationVo(123,123,123,123,123);
+        return new TradeSituationVo(123,123,123,123,123,0,0,0,0);
     }
 
     @Override

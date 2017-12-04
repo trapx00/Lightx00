@@ -3,26 +3,40 @@ package trapx00.lightx00.client.bl.inventorybl;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseRefundBillDataServiceFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.notification.NotificationType;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 import trapx00.lightx00.shared.po.salestaff.PurchaseRefundBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
+import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 public class PurchaseRefundBillBlController implements PurchaseRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<PurchaseRefundBillPo, PurchaseRefundBillVo> {
@@ -30,6 +44,23 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
     PurchaseRefundBillDataService dataService = PurchaseRefundBillDataServiceFactory.getInstance();
     private CommonBillBlController<PurchaseRefundBillVo, PurchaseRefundBillPo, PurchaseRefundBillQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "进货退货单", this);
+    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+
+    private String generatePurchaseRefundBillMessage(String id) {
+        String separator = " | ";
+        String result = id + " low:" + System.lineSeparator();
+        try {
+            PurchaseRefundBillPo purchaseRefundBillPo = dataService.query(new PurchaseRefundBillQueryVo().idEq(id))[0];
+            CommodityItem[] commodityList = purchaseRefundBillPo.getCommodityList();
+            for (CommodityItem commodityItem : commodityList) {
+                result += commodityItem.getCommodityId() + separator + commodityItem.getNumber() + System.lineSeparator();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * Deletes a draft.
@@ -61,7 +92,16 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage activate(String id) {
-        return commonBillBlController.activate(id);
+        try {
+            PurchaseRefundBillPo purchaseRefundBillPo = dataService.query(new PurchaseRefundBillQueryVo().idEq(id))[0];
+            EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
+            notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(purchaseRefundBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseRefundBillMessage(id)));
+            clientModificationService.modifyClient(purchaseRefundBillPo.getClientId(), ClientModificationFlag.PAYABLE, purchaseRefundBillPo.getTotal());
+            return commonBillBlController.activate(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**

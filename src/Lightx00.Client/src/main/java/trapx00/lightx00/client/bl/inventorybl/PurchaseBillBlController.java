@@ -3,24 +3,36 @@ package trapx00.lightx00.client.bl.inventorybl;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
+import trapx00.lightx00.shared.po.notification.NotificationType;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
-import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
-import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
+import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
+import trapx00.lightx00.shared.queryvo.*;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +41,23 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
     PurchaseBillDataService dataService = PurchaseBillDataServiceFactory.getInstance();
     private CommonBillBlController<PurchaseBillVo, PurchaseBillPo, PurchaseBillQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "进货单", this);
+    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+
+    private String generatePurchaseBillMessage(String id) {
+        String separator = " | ";
+        String result = id + " up:" + System.lineSeparator();
+        try {
+            PurchaseBillPo purchaseBillPo = dataService.query(new PurchaseBillQueryVo().idEq(id))[0];
+            CommodityItem[] commodityList = purchaseBillPo.getCommodityList();
+            for (CommodityItem commodityItem : commodityList) {
+                result += commodityItem.getCommodityId() + separator + commodityItem.getNumber() + System.lineSeparator();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * Deletes a draft.
@@ -60,7 +89,16 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage activate(String id) {
-        return commonBillBlController.activate(id);
+        try {
+            PurchaseBillPo purchaseBillPo = dataService.query(new PurchaseBillQueryVo().idEq(id))[0];
+            EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
+            notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(purchaseBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseBillMessage(id)));
+            clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, purchaseBillPo.getTotal());
+            return commonBillBlController.activate(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**

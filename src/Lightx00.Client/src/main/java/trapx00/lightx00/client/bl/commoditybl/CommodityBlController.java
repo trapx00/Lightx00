@@ -30,7 +30,7 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public ResultMessage add(CommodityVo newCommodity) {
-        CommodityPo commodityPo=CommodityVo.commodityVoToPo(newCommodity);
+        CommodityPo commodityPo = fromVoToPo(newCommodity);
         try{
             ResultMessage opResult = dataService.add(commodityPo);
             if (opResult.isSuccess()) {
@@ -57,7 +57,7 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public ResultMessage modify(CommodityVo updateCommodity) {
-        CommodityPo commodityPo=CommodityVo.commodityVoToPo(updateCommodity);
+        CommodityPo commodityPo=fromVoToPo(updateCommodity);
         try{
             ResultMessage opResult = dataService.modify(commodityPo);
             if (opResult.isSuccess()) {

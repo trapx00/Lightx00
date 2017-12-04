@@ -34,7 +34,7 @@ public class InventoryWarningDataControllerTest {
     private Dao<InventoryDetailBillPo, String> dao = InventoryDataDaoFactory.getInventoryDetailBillDao();
     private InventoryWarningDataService service = InventoryWarningDataFactory.getService();
     private final InventoryDetailBillPo bill = new InventoryDetailBillPo("LOSS-20171126-00001",new Date(), BillState.Draft, InventoryBillType.Loss
-            ,null);
+            ,null, "123");
    @Before
     public void setUp() throws Exception {
 

@@ -152,16 +152,6 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     }
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService
@@ -178,6 +168,11 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
+        return null;
+    }
+
+    @Override
+    public BillDetailUi billDetailUi() {
         return null;
     }
 

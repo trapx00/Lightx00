@@ -32,4 +32,5 @@ public class PurchaseBillBlInfoController implements PurchaseBillBlInfo {
     public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query) {
         return purchaseRefundBillBlService.queryPurchaseRefundBillVo(query);
     }
+
 }

@@ -17,18 +17,18 @@ public class InventoryCheckBlControllerTest {
     File file=new File("");
     Date date=new Date();
 
-    @Test
-    public void check() throws Exception {
-        Date endtime=new Date();
-        String result=String.valueOf(service.check(date,endtime).getSum());
-        assertEquals("208.0",result);
-    }
-
-    @Test
-    public void picture() throws Exception {
-
-        assertEquals("C0001",service.picture().getItems()[0].getId());
-    }
+//    @Test
+//    public void check() throws Exception {
+//        Date endtime=new Date();
+//        String result=String.valueOf(service.check(date,endtime).getSum());
+//        assertEquals("208.0",result);
+//    }
+//
+//    @Test
+//    public void picture() throws Exception {
+//
+//        assertEquals("C0001",service.picture().getItems()[0].getId());
+//    }
 
     @Test
     public void export() throws Exception {
