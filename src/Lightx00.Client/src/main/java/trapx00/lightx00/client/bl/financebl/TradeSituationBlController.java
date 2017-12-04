@@ -59,8 +59,21 @@ public class TradeSituationBlController implements TradeSituationBlService {
         List<PurchaseBillVo> purchaseBillVos = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo().between("date", start, end))));
         List<PurchaseRefundBillVo> purchaseRefundBillVoList = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo().between("date", start, end))));
 
+        return new TradeSituationVo(
+            saleIncome(saleBillVos, saleRefundBillVos),
+            overflowIncome(overflowBills),
+            0,
+            differenceOfPurchaseAndRefund(purchaseBillVos, purchaseRefundBillVoList),
+            totalPromotion(saleBillVos, saleRefundBillVos),
+            saleCost()
 
+        )
 
+    }
+
+    private double totalPromotion(List<SaleBillVo> saleBillVos, List<SaleRefundBillVo> saleRefundBillVos) {
+        return saleBillVos.stream().mapToDouble(SaleBillVo::getMinusProfits).sum()
+            - saleRefundBillVos.stream().mapToDouble(SaleRefundBillVo::getMinusProfits).sum();
     }
 
     private double saleIncome(List<SaleBillVo> saleBillVos, List<SaleRefundBillVo> saleRefundBillVos) {
@@ -94,10 +107,24 @@ public class TradeSituationBlController implements TradeSituationBlService {
     }
 
     private double lossCost(List<InventoryDetailBillVo> lossBills) {
-        double purchaseCost = lossBills.stream()
+        double lossCost = lossBills.stream()
             .flatMapToDouble(x -> Arrays.stream(x.getCommodities()).mapToDouble(c -> c.getDelta() * c.getUnitPrice()))
             .sum();
+        return lossCost;
     }
+
+    private double saleCost(List<PurchaseBillVo> purchaseBillVos, List<PurchaseRefundBillVo> purchaseRefundBillVos) {
+        double purchaseCost = purchaseBillVos.stream()
+            .flatMapToDouble(x -> Arrays.stream(x.getCommodityList()).mapToDouble(c -> c.getPrice() * c.getNumber()))
+            .sum();
+
+        double purchaseRefundIncome = purchaseRefundBillVos.stream()
+            .flatMapToDouble(x -> Arrays.stream(x.getCommodityList()).mapToDouble(c -> c.getPrice() * c.getNumber()))
+            .sum();
+
+        return purchaseCost - purchaseRefundIncome;
+    }
+
 
     private double giveawayCost(List<InventoryGiftVo> inventoryGiftVos) {
         double giveawayCost = inventoryGiftVos.stream()

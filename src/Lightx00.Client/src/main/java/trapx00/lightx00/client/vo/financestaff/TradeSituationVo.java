@@ -9,7 +9,6 @@ public class TradeSituationVo { //经营历程表
 
 
     private double commodityIncome; //商品类收入 = 报溢收 + 成本调价 + 进货退货差价
-    private double incomeMinusPromotion; //折让后总收入
     private double promotion; //折让
 
 
@@ -23,21 +22,19 @@ public class TradeSituationVo { //经营历程表
 
     private double profit;
 
-    public TradeSituationVo(double saleIncome, double overflowIncome, double incomeAdjustIncome, double differenceOfSaleAndRefundIncome, double incomeMinusPromotion, double saleCost, double lossCost, double giveawayCost) {
+    public TradeSituationVo(double saleIncome, double overflowIncome, double incomeAdjustIncome, double differenceOfSaleAndRefundIncome, double promotion, double saleCost, double lossCost, double giveawayCost) {
         this.saleIncome = saleIncome;
         this.overflowIncome = overflowIncome;
         this.incomeAdjustIncome = incomeAdjustIncome;
         this.differenceOfSaleAndRefundIncome = differenceOfSaleAndRefundIncome;
-        this.incomeMinusPromotion = incomeMinusPromotion;
+        this.promotion = promotion;
         this.saleCost = saleCost;
         this.lossCost = lossCost;
         this.giveawayCost = giveawayCost;
 
-        this.promotion = saleIncome - incomeMinusPromotion;
-
         this.commodityCost = lossCost + giveawayCost;
         this.totalCost = commodityCost + saleCost;
-        this.profit = incomeMinusPromotion - totalCost;
+        this.profit = saleIncome - totalCost;
 
     }
 
@@ -81,13 +78,6 @@ public class TradeSituationVo { //经营历程表
         this.commodityIncome = commodityIncome;
     }
 
-    public double getIncomeMinusPromotion() {
-        return incomeMinusPromotion;
-    }
-
-    public void setIncomeMinusPromotion(double incomeMinusPromotion) {
-        this.incomeMinusPromotion = incomeMinusPromotion;
-    }
 
     public double getPromotion() {
         return promotion;
