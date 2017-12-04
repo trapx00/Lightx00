@@ -34,12 +34,16 @@ public class SaleBillPo extends SaleBillBasePo {
     private int clientLevel;
     @DatabaseField
     private String promotionId;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private CommodityItem[] giftList;
+    @DatabaseField
+    private double giftToken;
 
     public SaleBillPo() {
     }
 
-    public SaleBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId) {
-        super(id, date, state, saleBillType);
+    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
+        super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;
@@ -52,6 +56,8 @@ public class SaleBillPo extends SaleBillBasePo {
         this.comment = comment;
         this.clientLevel = clientLevel;
         this.promotionId = promotionId;
+        this.giftList = giftList;
+        this.giftToken = giftToken;
     }
 
     public String getClientId() {
@@ -148,5 +154,21 @@ public class SaleBillPo extends SaleBillBasePo {
 
     public void setPromotionId(String promotionId) {
         this.promotionId = promotionId;
+    }
+
+    public CommodityItem[] getGiftList() {
+        return giftList;
+    }
+
+    public void setGiftList(CommodityItem[] giftList) {
+        this.giftList = giftList;
+    }
+
+    public double getGiftToken() {
+        return giftToken;
+    }
+
+    public void setGiftToken(double giftToken) {
+        this.giftToken = giftToken;
     }
 }

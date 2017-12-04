@@ -4,14 +4,15 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleBillVo extends SaleBillBaseVo {
     private String clientId;
@@ -25,9 +26,12 @@ public class SaleBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
     private int clientLevel;
+    private String promotionId;
+    private CommodityItem[] giftList;
+    private double giftToken;
 
-    public SaleBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel) {
-        super(id, date, state, saleBillType);
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList,double giftToken) {
+        super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.defaultOperator = defaultOperator;
         this.operator = operator;
@@ -39,6 +43,9 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.ultiTotal = ultiTotal;
         this.comment = comment;
         this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
+        this.giftList = giftList;
+        this.giftToken=giftToken;
     }
 
     public String getClientId() {
@@ -129,6 +136,30 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientLevel = clientLevel;
     }
 
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public CommodityItem[] getGiftList() {
+        return giftList;
+    }
+
+    public void setGiftList(CommodityItem[] giftList) {
+        this.giftList = giftList;
+    }
+
+    public double getGiftToken() {
+        return giftToken;
+    }
+
+    public void setGiftToken(double giftToken) {
+        this.giftToken = giftToken;
+    }
+
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -160,16 +191,6 @@ public class SaleBillVo extends SaleBillBaseVo {
     }
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService
@@ -186,6 +207,11 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
+        return null;
+    }
+
+    @Override
+    public BillDetailUi billDetailUi() {
         return null;
     }
 

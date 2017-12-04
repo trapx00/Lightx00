@@ -1,19 +1,29 @@
 package trapx00.lightx00.client.bl.salebl;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
+import trapx00.lightx00.client.bl.couponbl.SendCouponInfo;
+import trapx00.lightx00.client.bl.couponbl.UseCouponInfo;
+import trapx00.lightx00.client.bl.couponbl.factory.CouponFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationService;
+import trapx00.lightx00.client.bl.promotionbl.PromotionInfo;
+import trapx00.lightx00.client.bl.promotionbl.factory.PromotionInfoFactory;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
+import trapx00.lightx00.client.blservice.couponblservice.CouponBlServiceFactory;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.datafactory.saledataservicefactory.SaleBillDataServiceFactory;
 import trapx00.lightx00.client.datafactory.saledataservicefactory.SaleRefundBillDataServiceFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
@@ -22,13 +32,16 @@ import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
-import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
+import trapx00.lightx00.shared.queryvo.*;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +50,15 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
     private SaleBillDataService dataService = SaleBillDataServiceFactory.getInstance();
     private CommonBillBlController<SaleBillVo, SaleBillPo, SaleBillQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "销售单", this);
-    private NotificationBlService notificationService=NotificationBlServiceFactory.getInstance();
+    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
+    private SendCouponInfo sendCouponInfo = CouponFactory.getSendCouponInfo();
+    private UseCouponInfo useCouponInfo = CouponFactory.getUseCouponInfo();
+    private PromotionInfo promotionInfo = PromotionInfoFactory.getPromotionInfo();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+
+    private String generateSaleBillMessage(String id) {
+        return "销售单 编号:" + id;
+    }
 
     /**
      * Deletes a draft.
@@ -69,8 +90,16 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public ResultMessage activate(String id) {
-        notificationService.acknowledge(new OtherNotificationVo(new Date(),))
-        return commonBillBlController.activate(id);
+        try {
+            SaleBillPo saleBillPo = dataService.query(new SaleBillQueryVo().idEq(id))[0];
+            EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
+            notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(saleBillPo.getOperatorId()), employeeVos, NotificationType.Others, generateSaleBillMessage(id)));
+            clientModificationService.modifyClient(saleBillPo.getClientId(), ClientModificationFlag.PAYABLE, saleBillPo.getUltiTotal());
+            return commonBillBlController.activate(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
@@ -81,6 +110,8 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public ResultMessage submit(SaleBillVo saleBill) {
+        sendCouponInfo.sendCoupon(saleBill.getGiftToken());
+        useCouponInfo.useCoupon(saleBill.getToken());
         return commonBillBlController.submit(saleBill);
     }
 
@@ -125,7 +156,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public PromotionVoBase[] queryPromotion(SaleBillVo saleBillVo) {
-        return new PromotionVoBase[0];
+        return promotionInfo.queryPromotion(saleBillVo);
     }
 
     /**
@@ -148,7 +179,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public SaleBillPo fromVoToPo(SaleBillVo vo) {
-        return new SaleBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesman().getId(), vo.getOperator().getId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment(), vo.getClientLevel(), vo.getPromotionId(),vo.getGiftList());
+        return new SaleBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesman().getId(), vo.getOperator().getId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment(), vo.getClientLevel(), vo.getPromotionId(), vo.getGiftList(), vo.getGiftToken());
     }
 
     /**
@@ -159,6 +190,6 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public SaleBillVo fromPoToVo(SaleBillPo po) {
-        return new SaleBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), (SaleStaffVo) employeeInfo.queryById(po.getSalesmanId()), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment(), po.getClientLevel(), po.getPromotionId(),po.getGiftList());
+        return new SaleBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), (SaleStaffVo) employeeInfo.queryById(po.getSalesmanId()), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment(), po.getClientLevel(), po.getPromotionId(), po.getGiftList(), po.getGiftToken());
     }
 }

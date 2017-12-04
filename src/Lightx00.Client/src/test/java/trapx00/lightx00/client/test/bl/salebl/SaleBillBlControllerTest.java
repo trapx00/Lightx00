@@ -9,40 +9,4 @@ import static org.junit.Assert.assertEquals;
 
 public class SaleBillBlControllerTest {
     private SaleBillBlController saleBillBlController= SaleBillBlFactory.getSaleBillBlController();
-
-    @Test
-    public void deleteDraft() throws Exception {
-        assertEquals(ResultMessage.Success,saleBillBlController.deleteDraft("0"));
-    }
-
-    @Test
-    public void abandon() throws Exception {
-        assertEquals(ResultMessage.Success,saleBillBlController.abandon("0"));
-    }
-
-    @Test
-    public void activate() throws Exception {
-        assertEquals(ResultMessage.Success,saleBillBlController.activate("0"));
-    }
-
-    @Test
-    public void submit() throws Exception {
-        assertEquals(ResultMessage.Success,saleBillBlController.submit(null));
-    }
-
-    @Test
-    public void saveAsDraft() throws Exception {
-        assertEquals(ResultMessage.Success,saleBillBlController.saveAsDraft(null));
-    }
-
-    @Test
-    public void getId() throws Exception {
-        assertEquals("0",saleBillBlController.getId());
-    }
-
-    @Test
-    public void querySaleBill() throws Exception {
-        assertEquals("0",saleBillBlController.querySaleBill(null)[0].getId());
-    }
-
 }
