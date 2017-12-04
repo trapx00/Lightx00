@@ -37,12 +37,7 @@ public class ExcelOutput {
             book.close();
             System.out.println("创建文件成功!");
             return ResultMessage.Success;
-        } catch (NullPointerException e) {
-            throw e;
-        }catch(FileNotFoundException e){
-           // 路径错误;
-            return ResultMessage.Failure;
-        }catch(Exception e){
+        } catch(Exception e){
             return ResultMessage.Failure;
         }
 
