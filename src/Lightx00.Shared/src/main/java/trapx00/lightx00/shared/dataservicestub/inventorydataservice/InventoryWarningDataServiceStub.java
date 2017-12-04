@@ -44,10 +44,11 @@ public class InventoryWarningDataServiceStub implements InventoryWarningDataServ
 
     @Override
     public InventoryDetailBillPo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
-        InventoryDetailBillPo inventoryBillVo=new InventoryDetailBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow,null
-       );
-        InventoryDetailBillPo[]input={inventoryBillVo};
-        return  input;
+//        InventoryDetailBillPo inventoryBillVo=new InventoryDetailBillPo("L0001", new Date(),BillState.Approved,InventoryBillType.Overflow,null
+//       );
+//        InventoryDetailBillPo[]input={inventoryBillVo};
+//        return  input;
+        return null;
     }
 
     @Override

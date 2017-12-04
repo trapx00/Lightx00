@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.financebl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.PaymentBillBlService;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
@@ -18,16 +19,19 @@ import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
 import java.util.List;
 
-public class PaymentBillBlController implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService {
+public class PaymentBillBlController
+    implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService,
+    DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService, BillPoVoConverter<PaymentBillPo, PaymentBillVo> {
+
     private PaymentBillDataService dataService = PaymentBillDataServiceFactory.getService();
     private CommonBillBlController<PaymentBillVo, PaymentBillPo, PaymentBillQueryVo> commonBillBlController =
-        new CommonBillBlController<>(dataService, "付款单", this::fromVoToPo, this::fromPoToVo);
+        new CommonBillBlController<>(dataService, "付款单", this);
 
-    private PaymentBillPo fromVoToPo(PaymentBillVo vo) {
+    public PaymentBillPo fromVoToPo(PaymentBillVo vo) {
         return new PaymentBillPo(vo.getId(),vo.getDate(), vo.getState(), vo.getClientId(), vo.getOperatorId(), vo.getTranscations(), vo.getTotal());
     }
 
-    private PaymentBillVo fromPoToVo(PaymentBillPo po) {
+    public PaymentBillVo fromPoToVo(PaymentBillPo po) {
         return new PaymentBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getOperatorId(), po.getTranscations(), po.getTotal());
     }
 

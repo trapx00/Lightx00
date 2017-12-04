@@ -3,6 +3,7 @@ package trapx00.lightx00.client.bl.inventorybl.mock;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseRefundBillBlController;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
 public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlController {
 
@@ -78,7 +79,7 @@ public class PurchaseRefundBillBlControllerMock extends PurchaseRefundBillBlCont
      * @return array of PurchaseRefundBillVo
      */
     @Override
-    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query) {
         PurchaseRefundBillVo[] purchaseRefundBillVos=new PurchaseRefundBillVo[1];
         purchaseRefundBillVos[0]=new PurchaseRefundBillVo("0",null,null,null,null,1,null,null,100,null);
         return purchaseRefundBillVos;

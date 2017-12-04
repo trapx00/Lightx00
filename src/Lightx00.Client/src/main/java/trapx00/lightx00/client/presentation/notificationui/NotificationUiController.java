@@ -9,17 +9,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.Client;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
-import trapx00.lightx00.shared.po.notification.NotificationType;
+import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
+import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Date;
 
+@SuppressWarnings("unchecked")
 public class NotificationUiController {
 
     public JFXButton selectAllButton;
@@ -28,8 +39,17 @@ public class NotificationUiController {
     public JFXTreeTableColumn<NotificationModel, String> tableDateColumn;
     public JFXTreeTableColumn<NotificationModel, String> tableTypeColumn;
     public JFXTreeTableColumn<NotificationModel, String> tableIdColumn;
-    public JFXTreeTableColumn<NotificationModel,String> tableReadColumn;
     public JFXButton readButton;
+    public JFXTreeTableColumn<NotificationModel, String> tableSenderColumn;
+    public StackPane dialogContainer;
+    private EmployeeVo employeeVo = new FinanceStaffVo("123","123",new Date(),"123","123");
+    private OtherNotificationVo testVo = new OtherNotificationVo(1, new Date(), employeeVo, new EmployeeVo[] {employeeVo}, "test content\n123");
+    private BillApprovalNotificationVo testBillApprovalVo = new BillApprovalNotificationVo(2, new Date(), employeeVo, new EmployeeVo[] {employeeVo},
+        new CashBillVo("123",new Date(), BillState.Approved, "123","123",
+            new CashBillItem[] {
+            new CashBillItem("item1", 10, "test1"),
+                new CashBillItem("item2", 10, "test2")
+            }));
 
     private FrameworkUiController frameworkController;
 
@@ -44,17 +64,15 @@ public class NotificationUiController {
 
     public void updateItems(){
         notificationModels.clear();
-        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, 1, new FinanceStaffVo("李二",  "test", new Date(),
-                "张三"),"未读"));
-        notificationModels.add(new NotificationModel(new Date(), NotificationType.BillApproval, 2, new FinanceStaffVo("李二",  "test", new Date(),
-                 "张三"),"未读"));
+        notificationModels.add(new NotificationModel(testVo));
+        notificationModels.add(new NotificationModel(testBillApprovalVo));
     }
 
     public void initNotifyItem() {
-        tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getDate())));
-        tableTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
-        tableIdColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
-        tableReadColumn.setCellValueFactory(cellData->cellData.getValue().getValue().readTypeProperty());
+        tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getVoObjectProperty().getDate())));
+        tableTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getVoObjectProperty().getType().toString()));
+        tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getVoObjectProperty().getId())));
+        tableSenderColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getVoObjectProperty().getSender().getName()));
         TreeItem<NotificationModel> root = new RecursiveTreeItem<>(notificationModels, RecursiveTreeObject::getChildren);
         notificationTable.setRoot(root);
         notificationTable.setShowRoot(false);
@@ -77,30 +95,24 @@ public class NotificationUiController {
 
 
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-
         updateItems();
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         int index = notificationTable.getSelectionModel().getFocusedIndex();
         NotificationModel model = notificationTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个通知吗？","你选择了通知"+model.getId())
+        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个通知吗？","你选择了通知"+model.getVoObjectProperty().getId())
                 .addTable(ReadOnlyPairTableHelper.start()
-                        .addPair("ID", model.getId())
-                        .addPair("该通知状态", model.getType().toString())
-                        .addPair("时间", DateHelper.fromDate(model.getDate()))
-                        .create())
+                    .addPair("ID", String.valueOf(model.getVoObjectProperty().getId()))
+
+                    .addPair("时间", DateHelper.fromDate(model.getVoObjectProperty().getDate()))
+                    .addPair("类型", model.getVoObjectProperty().getType().toString())
+                    .addPair("发送者", model.getVoObjectProperty().getSender().getName())
+                .create())
                 .addCloseButton("确定", "CHECK",e -> deleteItem(index))
                 .addCloseButton("取消", "CLOSE", null)
                 .create(frameworkController.dialogContainer);
         dialog.show();
-    }
-
-    public void modifyReadType(int index){
-        NotificationModel temp=notificationModels.get(index);
-        temp.setReadType("已读");
-        notificationModels.remove(index);
-        notificationModels.add(temp);
     }
 
     public void deleteItem(int index){
@@ -111,15 +123,10 @@ public class NotificationUiController {
     public void onReadButtonClicked(ActionEvent actionEvent) {
         int index = notificationTable.getSelectionModel().getFocusedIndex();
         NotificationModel model = notificationTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("消息详细内容","你选择了通知"+model.getId())
-                .addTable(ReadOnlyPairTableHelper.start()
-                        .addPair("ID", model.getId())
-                        .addPair("该通知状态", model.getType().toString())
-                        .addPair("时间", DateHelper.fromDate(model.getDate()))
-                        .addPair("详细内容","你的某某某单据通过审查")
-                        .create())
-                .addCloseButton("确定", "CHECK",e->modifyReadType(index))
-                .create(frameworkController.dialogContainer);
+        JFXDialog dialog = PromptDialogHelper.start("消息详细内容","你选择了通知").create(frameworkController.dialogContainer);
+        ExternalLoadedUiPackage uiPackage = model.getVoObjectProperty().notificationDetailUi().showContent(model.getVoObjectProperty());
+        dialog.setContent((Region) uiPackage.getComponent());
+        FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
         dialog.show();
     }
 }

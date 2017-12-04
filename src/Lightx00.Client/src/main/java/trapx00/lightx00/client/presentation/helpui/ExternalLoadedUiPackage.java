@@ -3,8 +3,8 @@ package trapx00.lightx00.client.presentation.helpui;
 import javafx.scene.Parent;
 
 public class ExternalLoadedUiPackage {
-    public ExternalLoadableUiController controller;
-    public Parent component;
+    private ExternalLoadableUiController controller;
+    private Parent component;
 
     public ExternalLoadableUiController getController() {
         return controller;
@@ -14,7 +14,7 @@ public class ExternalLoadedUiPackage {
         return component;
     }
 
-    public ExternalLoadedUiPackage(ExternalLoadableUiController controller, Parent component) {
+    public ExternalLoadedUiPackage(Parent component, ExternalLoadableUiController controller) {
         this.controller = controller;
         this.component = component;
     }

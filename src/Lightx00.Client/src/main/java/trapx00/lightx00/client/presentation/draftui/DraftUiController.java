@@ -105,7 +105,6 @@ public class DraftUiController {
                     .addTable(
                             ReadOnlyPairTableHelper.start()
                                     .addPair("单据编号", String.valueOf(model.getId()))
-                                    .addMap(model.getDraft().properties())
                                     .create())
                     .addCloseButton("取消","CLOSE",null)
                     .addCloseButton("确定","CHECK",e -> {

@@ -5,10 +5,12 @@ import java.io.Serializable;
 public class CommodityItem implements Serializable {
 
     private String commodityId;
+    private double price;
     private double number;
 
-    public CommodityItem(String commodityId, double number) {
-        commodityId = commodityId;
+    public CommodityItem(String commodityId, double price,double number) {
+        this.commodityId = commodityId;
+        this.price=price;
         this.number = number;
     }
 
@@ -17,7 +19,15 @@ public class CommodityItem implements Serializable {
     }
 
     public void setCommodityId(String commodityId) {
-        commodityId = commodityId;
+        this.commodityId = commodityId;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
+    public void setPrice(double price){
+        this.price=price;
     }
 
     public double getNumber() {

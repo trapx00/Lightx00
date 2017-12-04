@@ -5,6 +5,8 @@ import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.vo.Draftable;
 
+import java.io.IOException;
+
 
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     /**
@@ -19,6 +21,16 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         return null;
     }
 
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() throws IOException {
+        return null;
+    }
+
     /*public PurchaseBillPo purchaseBillPo = new PurchaseBillPo("JHD-20171026-00000", null, null, "李四", 1, "16125012323", "无", 200.00, null);
 
     public void onSubmitButtonClicked() {
@@ -28,7 +40,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                 .addTable(
                         ReadOnlyPairTableHelper.start()
                                 .addPair("单据编号", purchaseBillPo.getId())
-                                .addPair("操作员", purchaseBillPo.getOperatorId())
+                                .addPair("操作员", purchaseBillPo.getOperatorIds())
                                 .addPair("供应商", purchaseBillPo.getSupplier())
                                 .addPair("仓库", purchaseBillPo.getRepository() + "")
                                 .addPair("总额合计", purchaseBillPo.getTotal() + "")

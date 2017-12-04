@@ -25,10 +25,17 @@ public class InventoryGiftBlServiceStub implements InventoryGiftBlService {
         return "123";
     }
 
+    /**
+     * Saves the current bil
+     *
+     * @param bill
+     * @return whether the operation is done successfully
+     */
     @Override
-    public InventoryGiftVo getGift(Date time) {
+    public ResultMessage saveAsDraft(InventoryGiftVo bill) {
         return null;
     }
+
 
     @Override
     public InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo) {

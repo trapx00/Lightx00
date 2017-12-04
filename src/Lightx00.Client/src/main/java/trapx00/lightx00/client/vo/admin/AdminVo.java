@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class AdminVo extends EmployeeVo {
 
-    public AdminVo(String name, String id, Date workSince, String username) {
-        super(name, id, workSince, username, EmployeePosition.Admin);
+    public AdminVo(String name, String id, Date workSince, String username,String password) {
+        super(name, id, workSince, username, EmployeePosition.Admin,password);
     }
 }

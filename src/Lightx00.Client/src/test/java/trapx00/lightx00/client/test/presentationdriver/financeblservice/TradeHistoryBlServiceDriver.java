@@ -20,19 +20,19 @@ public class TradeHistoryBlServiceDriver {
     @Before
     public void setUp() throws Exception {
         bill = service.query(
-                new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1)).getBills()[0];
+                new TradeHistoryQueryVo(new Date(), new Date(), new BillType[]{BillType.FinanceBill},null,null,1)).getBills()[0];
     }
 
     @Test
     public void query() throws Exception {
-        assertEquals(BillType.FinanceBill, bill.getBill());
+        assertEquals(BillType.FinanceBill, bill.getBillType());
     }
 
     @Test
     public void export() throws Exception {
         assertEquals(ResultMessage.Success,
                 service.export(service.query(
-                new TradeHistoryQueryVo(new Date(), new Date(), BillType.FinanceBill,null,null,1))));
+                new TradeHistoryQueryVo(new Date(), new Date(), new BillType[]{BillType.FinanceBill},null,null,1))));
     }
 
 }

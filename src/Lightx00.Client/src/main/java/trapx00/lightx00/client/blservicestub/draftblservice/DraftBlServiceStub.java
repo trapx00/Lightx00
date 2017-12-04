@@ -11,7 +11,7 @@ public class DraftBlServiceStub implements DraftBlService {
     @Override
     public DraftVo[] update() {
         return new DraftVo[]{
-                new DraftVo(new Date(), null,null,null)
+                new DraftVo(1, new Date(), null,null,null)
         };
     }
 
@@ -22,7 +22,9 @@ public class DraftBlServiceStub implements DraftBlService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(Draftable draft) {
-        return ResultMessage.Success;
+    public ResultMessage delete(DraftVo draft) {
+        return null;
     }
+
+
 }

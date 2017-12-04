@@ -20,7 +20,7 @@ public class TotalPricePromotionBlServiceStub implements TotalPricePromotionBlSe
     }
 
     @Override
-    public ResultMessage delete(TotalPricePromotionVo promotion) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
 

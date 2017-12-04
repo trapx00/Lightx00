@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class UserManagementBlServiceDriver {
     private UserManagementBlService service = new UserManagementBlServiceStub();
-    private EmployeeVo account = new FinanceStaffVo("张三","0001",new Date(),"10081");
+    private EmployeeVo account = new FinanceStaffVo("张三","0001",new Date(),"10081","0001");
 
     @Test
     public void add() {

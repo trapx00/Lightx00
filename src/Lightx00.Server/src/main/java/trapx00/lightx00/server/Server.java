@@ -7,6 +7,7 @@ import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactor
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
+import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleBillDataFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
@@ -19,10 +20,12 @@ import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillData
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.util.RmiHelper;
 
+import javax.management.Notification;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
@@ -57,6 +60,7 @@ public class Server {
             FaceIdAuthenticationDataService faceIdAuthenticationDataService = FaceIdAuthenticationDataFactory.getDataService();
             LoginDataService loginDataService = LoginDataFactory.getService();
             CashBillDataService cashBillDataService = CashBillDataFactory.getService();
+            NotificationDataService notificationDataService = NotificationDataFactory.getService();
             LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
             export(saleBillDataService);
             export(saleRefundBillDataService);
@@ -67,6 +71,7 @@ public class Server {
             export(faceIdAuthenticationDataService);
             export(loginDataService);
             export(cashBillDataService);
+            export(notificationDataService);
             logService.printLog(caller, "Initialization done.");
         } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
             logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));

@@ -97,7 +97,8 @@ public class InitialEstablishmentDataControllerMock extends InitialEstablishment
                 new SystemSnapshotPo("123", new Date(), BillState.Approved,
                     new CommodityPo[]{new CommodityPo("123", "123", "123", 10.0, new Date(), "123", "123", 10.0, 10.0, 10.0, 10.0, 10.0)},
                     new ClientPo[]{new ClientPo("123", ClientType.Retailer, 5, "123", "123", "123", "123", "123@gmail.com", 10.0, 10.0, null, ClientState.Real)},
-                    new BankAccountPo[]{ new BankAccountPo("123", 10.0, new Date())}
+                    new BankAccountPo[]{ new BankAccountPo("123", 10.0, new Date())},
+                    "123"
                 )
         };
     }

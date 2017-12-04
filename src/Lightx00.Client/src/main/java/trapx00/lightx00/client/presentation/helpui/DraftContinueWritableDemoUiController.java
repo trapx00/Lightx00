@@ -20,11 +20,21 @@ public class DraftContinueWritableDemoUiController implements ExternalLoadableUi
      */
     @Override
     public ExternalLoadedUiPackage continueWriting(DraftDemoVo draft) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Client.class.getResource("/fxml/DraftContinueWritingDemoUi.fxml"));
-        AnchorPane anchorPane = loader.load();
-        DraftContinueWritableDemoUiController controller = loader.getController();
-        controller.lbTest.setText(draft.getDraftContent());
-        return new ExternalLoadedUiPackage(controller, anchorPane);
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        DraftContinueWritableDemoUiController continueWritableDemoUiController = (DraftContinueWritableDemoUiController) externalLoadedUiPackage.getController();
+        continueWritableDemoUiController.lbTest.setText(draft.getDraftContent());
+        return externalLoadedUiPackage;
+
+    }
+
+
+    /**
+     * Loads the controller.
+     *
+     * @return
+     */
+    @Override
+    public ExternalLoadedUiPackage load() throws IOException {
+        return new UiLoader("/fxml/DraftContinueWritingDemoUi.fxml").loadAndGetPackage();
     }
 }

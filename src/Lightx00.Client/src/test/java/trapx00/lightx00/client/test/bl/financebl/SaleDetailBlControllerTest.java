@@ -19,7 +19,7 @@ public class SaleDetailBlControllerTest {
     private SaleDetailVo saleDetailVo;
     @Before
     public void setUp() {
-        saleDetailVo = controller.query( new SaleDetailQueryVo(new Date(), new Date(),"123",null,null,1));
+        saleDetailVo = controller.query( new SaleDetailQueryVo(new Date(), new Date(),new String[] {"123" },null,null,1));
     }
 
     @Test

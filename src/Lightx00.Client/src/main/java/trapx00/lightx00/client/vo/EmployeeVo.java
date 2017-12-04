@@ -9,15 +9,17 @@ public abstract class EmployeeVo {
     private Date workSince;
     private String username;
     private EmployeePosition position;
+    private String password;
     private boolean root;
 
     public EmployeeVo(String name, String id, Date workSince, String username,
-                      EmployeePosition position) {
+                      EmployeePosition position,String password) {
         this.name = name;
         this.id = id;
         this.workSince = workSince;
         this.username = username;
         this.position = position;
+        this.password = password;
     }
 
     public String getName() {
@@ -58,6 +60,14 @@ public abstract class EmployeeVo {
 
     public void setPosition(EmployeePosition position) {
         this.position = position;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public boolean isRoot() {

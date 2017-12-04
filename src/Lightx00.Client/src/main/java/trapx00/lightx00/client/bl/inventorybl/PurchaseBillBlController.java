@@ -1,16 +1,34 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
+import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
+import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 
-public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService {
+import java.util.Date;
+import java.util.List;
+
+public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<PurchaseBillPo, PurchaseBillVo> {
+    EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
+    PurchaseBillDataService dataService = PurchaseBillDataServiceFactory.getInstance();
+    private CommonBillBlController<PurchaseBillVo, PurchaseBillPo, PurchaseBillQueryVo> commonBillBlController
+            = new CommonBillBlController<>(dataService, "进货单", this);
 
     /**
      * Deletes a draft.
@@ -20,7 +38,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return commonBillBlController.deleteDraft(id);
     }
 
     /**
@@ -31,7 +49,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return commonBillBlController.abandon(id);
     }
 
     /**
@@ -42,7 +60,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return commonBillBlController.activate(id);
     }
 
     /**
@@ -53,7 +71,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage submit(PurchaseBillVo purchaseBill) {
-        return null;
+        return commonBillBlController.submit(purchaseBill);
     }
 
     /**
@@ -64,7 +82,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage saveAsDraft(PurchaseBillVo purchaseBill) {
-        return null;
+        return commonBillBlController.saveAsDraft(purchaseBill);
     }
 
     /**
@@ -74,7 +92,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public String getId() {
-        return null;
+        return commonBillBlController.getId();
     }
 
     /**
@@ -85,7 +103,8 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query) {
-        return new PurchaseBillVo[0];
+        List<PurchaseBillVo> list = commonBillBlController.query(query);
+        return list.toArray(new PurchaseBillVo[list.size()]);
     }
 
     /**
@@ -97,7 +116,29 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
-        return null;
+        return commonBillBlController.approvalComplete(billId, state);
+    }
+
+    /**
+     * Convert vo to po.
+     *
+     * @param vo vo
+     * @return po
+     */
+    @Override
+    public PurchaseBillPo fromVoToPo(PurchaseBillVo vo) {
+        return new PurchaseBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getSupplier(), vo.getRepository(), vo.getOperator().getId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
+    }
+
+    /**
+     * Convert po to vo.
+     *
+     * @param po po
+     * @return vo
+     */
+    @Override
+    public PurchaseBillVo fromPoToVo(PurchaseBillPo po) {
+        return new PurchaseBillVo(po.getId(), po.getDate(), po.getState(), po.getSupplier(), po.getRepository(), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getComment(), po.getTotal(), po.getCommodityList());
     }
 }
 

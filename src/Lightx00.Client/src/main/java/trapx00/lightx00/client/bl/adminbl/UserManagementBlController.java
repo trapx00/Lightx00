@@ -1,11 +1,39 @@
 package trapx00.lightx00.client.bl.adminbl;
 
+import trapx00.lightx00.client.bl.adminbl.factory.AdminEmployeeConverterFactory;
+import trapx00.lightx00.client.bl.logbl.LogService;
+import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
+import trapx00.lightx00.client.datafactory.admindataservicefactory.UserManagementDataServiceFactory;
+import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.employee.EmployeePo;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
-public class UserManagementBlController implements UserManagementBlService {
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class UserManagementBlController implements UserManagementBlService,EmployeeInfo {
+    private LogService logService = LogServiceFactory.getLogService();
+    private UserManagementDataService dataService = UserManagementDataServiceFactory.getService();
+    private AdminEmployeeConverter converter = AdminEmployeeConverterFactory.getAdminEmployeeConverter();
+    private static HashMap<EmployeePosition,String> employeeName = new HashMap<>();
+
+    public static void init() {
+        employeeName.put(EmployeePosition.Admin,"系统管理职员");
+        employeeName.put(EmployeePosition.Manager,"总经理");
+        employeeName.put(EmployeePosition.FinanceStaff,"财务管理职员");
+        employeeName.put(EmployeePosition.InventoryStaff,"库存管理职员");
+        employeeName.put(EmployeePosition.SaleStaff,"进货销售职员");
+    }
     /**
      * Create a user account for a new employee.
      * @param account a user account to be created
@@ -13,7 +41,17 @@ public class UserManagementBlController implements UserManagementBlService {
      */
     @Override
     public ResultMessage add(EmployeeVo account) {
-        return null;
+        try {
+            ResultMessage opResult = dataService.add(converter.fromVoToPo(account));
+            if (opResult.isSuccess()) {
+                logService.log(LogSeverity.Success, String.format("创建一名%s，内容是%s。", employeeName.get(account.getPosition()), account.toString()));
+            } else {
+                logService.log(LogSeverity.Failure, String.format("创建一名%s失败，原因不明。内容是%s。",employeeName.get(account.getPosition()), account.toString()));
+            }
+            return opResult;
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     /**
@@ -23,7 +61,17 @@ public class UserManagementBlController implements UserManagementBlService {
      */
     @Override
     public ResultMessage modify(EmployeeVo account) {
-        return null;
+        try {
+            ResultMessage opResult = dataService.modify(converter.fromVoToPo(account));
+            if (opResult.isSuccess()) {
+                logService.log(LogSeverity.Success, String.format("修改一名%s，内容是%s。", employeeName.get(account.getPosition()), account.toString()));
+            } else {
+                logService.log(LogSeverity.Failure, String.format("修改一名%s失败，原因不明。内容是%s。",employeeName.get(account.getPosition()), account.toString()));
+            }
+            return opResult;
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     /**
@@ -33,7 +81,13 @@ public class UserManagementBlController implements UserManagementBlService {
      */
     @Override
     public EmployeeVo[] query(UserAccountQueryVo query) {
-        return new EmployeeVo[0];
+        try {
+            EmployeePo[] poList = dataService.query(query);
+            List<EmployeeVo> temp = Arrays.stream(poList).map(x -> converter.fromPoToVo(x)).collect(Collectors.toList());
+            return temp.toArray(new EmployeeVo[temp.size()]);
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     /**
@@ -43,6 +97,30 @@ public class UserManagementBlController implements UserManagementBlService {
      */
     @Override
     public ResultMessage delete(EmployeeVo account) {
-        return null;
+        try {
+            ResultMessage opResult = dataService.delete(converter.fromVoToPo(account));
+            if (opResult.isSuccess()) {
+                logService.log(LogSeverity.Success, String.format("删除一名%s，内容是%s。", employeeName.get(account.getPosition()), account.toString()));
+            } else {
+                logService.log(LogSeverity.Failure, String.format("删除一名%s失败，原因不明。内容是%s。",employeeName.get(account.getPosition()), account.toString()));
+            }
+            return opResult;
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
+    }
+
+    @Override
+    public EmployeeVo queryById(String id) {
+        try {
+            EmployeePo[] poList = dataService.query(new UserAccountQueryVo());
+            for(EmployeePo po:poList) {
+               if(po.getId().equals(id))
+                   return converter.fromPoToVo(po);
+            }
+            return null;
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
     }
 }

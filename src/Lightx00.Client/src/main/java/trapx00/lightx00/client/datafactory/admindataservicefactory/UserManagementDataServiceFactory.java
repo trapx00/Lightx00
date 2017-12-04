@@ -17,7 +17,7 @@ public class UserManagementDataServiceFactory extends DataServiceFactory {
         userManagementDataService = lookupService(UserManagementDataService.class);
     }
 
-    public UserManagementDataService getService() {
+    public static UserManagementDataService getService() {
         //initRmi();
         return userManagementDataService;
     }

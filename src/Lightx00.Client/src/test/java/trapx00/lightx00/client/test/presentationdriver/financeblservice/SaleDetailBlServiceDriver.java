@@ -13,10 +13,10 @@ import static org.junit.Assert.*;
 public class SaleDetailBlServiceDriver {
     private SaleDetailBlService service = new SaleDetailBlServiceStub();
     private SaleDetailQueryVo query = new SaleDetailQueryVo(new Date(), new Date(),
-            "123",null,null,1);
+            new String[] {"123" },null,null,1);
     @Test
     public void query() throws Exception {
-        assertEquals(query.getCommodityName(), service.query(query).getRecords()[0].getCommodityName());
+        assertEquals(query.getCommodityNames(), service.query(query).getRecords()[0].getCommodityName());
     }
 
     @Test

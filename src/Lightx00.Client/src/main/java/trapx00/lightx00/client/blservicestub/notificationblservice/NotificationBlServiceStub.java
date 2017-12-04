@@ -16,10 +16,11 @@ import trapx00.lightx00.shared.po.financestaff.Transcation;
 public class NotificationBlServiceStub implements NotificationBlService {
     @Override
     public NotificationVo[] update() {
-        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123");
+        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123","0001");
         return new NotificationVo[] {
-                new OtherNotificationVo(1,new Date(), employeeVo, employeeVo, "test"),
-                new BillApprovalNotificationVo(1,new Date(),employeeVo, employeeVo,
+                new OtherNotificationVo(1,new Date(), employeeVo, new EmployeeVo[] { employeeVo }, "test"),
+                new BillApprovalNotificationVo(1,new Date(),employeeVo, new EmployeeVo[] { employeeVo },
+
                         new PaymentBillVo("123",new Date(),
                                 BillState.Approved, "123", "123",new Transcation[]{ new Transcation("123",1,"123")},0))};
     }
@@ -32,8 +33,7 @@ public class NotificationBlServiceStub implements NotificationBlService {
 
 
     @Override
-    public ResultMessage abandon(BillApprovalNotificationVo notification) {
-        notification.getBill().setState(BillState.Abandoned);
+    public ResultMessage abandon(NotificationVo notification) {
         return ResultMessage.Success;
     }
 

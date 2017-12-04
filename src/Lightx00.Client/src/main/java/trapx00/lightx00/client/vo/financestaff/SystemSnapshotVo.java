@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -19,9 +20,10 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
     private CommodityVo[] commodities;
     private ClientVo[] clients;
     private BankAccountVo[] bankAccounts;
+    private String operatorId;
 
-    public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts) {
-        super(FinanceBillType.SystemSnapshot, id, date, state);
+    public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts, String operatorId) {
+        super(FinanceBillType.SystemSnapshot, id, date, state, operatorId);
         this.commodities = commodities;
         this.clients = clients;
         this.bankAccounts = bankAccounts;
@@ -82,16 +84,6 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
     }
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService
@@ -108,6 +100,11 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
+        return null;
+    }
+
+    @Override
+    public BillDetailUi billDetailUi() {
         return null;
     }
 }

@@ -3,12 +3,11 @@ package trapx00.lightx00.client.bl.inventorybl.factory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
-import trapx00.lightx00.client.bl.inventorybl.mock.InventoryWarningBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 
 public class InventoryWarningServiceFactory {
-    private static InventoryWarningBlController controller=new InventoryWarningBlControllerMock();
+    private static InventoryWarningBlController controller=new InventoryWarningBlController();
     private static NotificationActivateService notificationActivateService = controller;
     private static NotificationAbandonService notificationAbandonService = controller;
     private static DraftDeleteService draftDeleteService = controller;

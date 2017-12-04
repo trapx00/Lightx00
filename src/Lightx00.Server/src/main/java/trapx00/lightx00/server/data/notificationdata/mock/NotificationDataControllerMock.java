@@ -34,8 +34,8 @@ public class NotificationDataControllerMock extends NotificationDataController {
     @Override
     public NotificationPo[] query(NotificationQueryVo query) {
         return new NotificationPo[] {
-                new NotificationPo(new Date(), "","", NotificationType.BillApproval,"FKD-20171122-00001"),
-                new NotificationPo(new Date(), "","",NotificationType.Others,"hahaha")
+                new NotificationPo(new Date(), "",new String[]{""}, NotificationType.BillApproval,"FKD-20171122-00001"),
+                new NotificationPo(new Date(), "",new String[]{""},NotificationType.Others,"hahaha")
         };
     }
 

@@ -31,10 +31,10 @@ public class NotificationBlControllerMock extends NotificationBlController {
      * @return current users's notifications
      */
     public NotificationVo[] update() {
-        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123");
+        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123","0001");
         return new NotificationVo[] {
-                new OtherNotificationVo(1,new Date(), employeeVo, employeeVo, "test"),
-                new BillApprovalNotificationVo(2,new Date(),employeeVo, employeeVo,
+                new OtherNotificationVo(1,new Date(), employeeVo, new EmployeeVo[] {employeeVo}, "test"),
+                new BillApprovalNotificationVo(2,new Date(),employeeVo, new EmployeeVo[] {employeeVo},
                         new PaymentBillVo("123",new Date(),
                                 BillState.Approved, "123", "123",new Transcation[]{ new Transcation("123",1,"123")},1))};
     }
@@ -57,7 +57,7 @@ public class NotificationBlControllerMock extends NotificationBlController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage abandon(BillApprovalNotificationVo notification) {
+    public ResultMessage abandon(NotificationVo notification) {
         return ResultMessage.Success;
     }
 }

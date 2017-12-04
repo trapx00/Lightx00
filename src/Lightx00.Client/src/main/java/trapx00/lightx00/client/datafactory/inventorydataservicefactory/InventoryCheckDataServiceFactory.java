@@ -1,28 +1,24 @@
 package trapx00.lightx00.client.datafactory.inventorydataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
+import trapx00.lightx00.shared.dataservicestub.inventorydataservice.InventoryCheckDataServiceStub;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class InventoryCheckDataServiceFactory {
-    private InventoryCheckDataService inventoryCheckDataService;
+import static trapx00.lightx00.client.datafactory.DataServiceFactory.lookupService;
 
-    public InventoryCheckDataServiceFactory(){
-        try {
-            inventoryCheckDataService =(InventoryCheckDataService) Naming.lookup("rmi://localhost:8888/InventoryCheckDataService");
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+public class InventoryCheckDataServiceFactory {
+    private static InventoryCheckDataService service = new InventoryCheckDataServiceStub();
+
+    public static void initRmi() {
+        service = lookupService(InventoryCheckDataService.class);
     }
 
-    public  InventoryCheckDataService getInstance() {
-        return inventoryCheckDataService;
+    public static  InventoryCheckDataService getService() {
+        initRmi();
+        return service;
     }
 }

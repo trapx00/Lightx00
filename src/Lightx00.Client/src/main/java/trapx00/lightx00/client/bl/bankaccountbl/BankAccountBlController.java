@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.bankaccountbl;
 
+import trapx00.lightx00.client.bl.util.PoVoConverter;
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlService;
 import trapx00.lightx00.client.datafactory.bankaccountdataservicefactory.BankAccountDataServiceFactory;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
@@ -14,7 +15,7 @@ import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 
-public class BankAccountBlController implements BankAccountManagementBlService, BankAccountModificationService {
+public class BankAccountBlController implements BankAccountManagementBlService, BankAccountModificationService, BankAccountInfo, PoVoConverter<BankAccountPo, BankAccountVo> {
     private BankAccountDataService dataService = BankAccountDataServiceFactory.getDataService();
 
     /**
@@ -104,5 +105,38 @@ public class BankAccountBlController implements BankAccountManagementBlService, 
         } catch (RemoteException e) {
             throw new UncheckedRemoteException(e);
         }
+    }
+
+    /**
+     * Queries bank accounts.
+     *
+     * @param queryVo bank account.
+     * @return bankaccount vos that match condition
+     */
+    @Override
+    public BankAccountVo[] queryBankAccount(BankAccountQueryVo queryVo) {
+        return query(queryVo);
+    }
+
+    /**
+     * Convert vo to po.
+     *
+     * @param vo vo
+     * @return po
+     */
+    @Override
+    public BankAccountPo fromVoToPo(BankAccountVo vo) {
+        return new BankAccountPo(vo.getId(), vo.getName(), vo.getAmount(), vo.getCreateTime());
+    }
+
+    /**
+     * Convert po to vo.
+     *
+     * @param po po
+     * @return vo
+     */
+    @Override
+    public BankAccountVo fromPoToVo(BankAccountPo po) {
+        return new BankAccountVo(po.getId(), po.getName(), po.getAmount(), po.getCreateTime());
     }
 }

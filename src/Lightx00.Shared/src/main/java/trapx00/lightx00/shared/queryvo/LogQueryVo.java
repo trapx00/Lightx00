@@ -10,5 +10,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class LogQueryVo extends BaseQueryVo<LogPo, Integer, LogQueryVo> {
+    public LogQueryVo() {
+    }
 
+    public LogQueryVo(BaseQueryVo another) {
+        super(another);
+    }
 }

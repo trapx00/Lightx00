@@ -23,6 +23,13 @@ public class BankAccountPo implements Serializable {
         this.createTime = createTime;
     }
 
+    public BankAccountPo(int id, String name, double amount, Date createTime) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.createTime = createTime;
+    }
+
     public BankAccountPo() {
     }
 

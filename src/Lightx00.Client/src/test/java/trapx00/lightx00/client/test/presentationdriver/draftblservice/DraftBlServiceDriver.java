@@ -14,24 +14,5 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class DraftBlServiceDriver {
-    private DraftBlService service = new DraftBlServiceStub();
-    private Draftable[] draftables = null;
-    @Before
-    public void setUp() throws Exception {
-        draftables = new Draftable[]{
-                new PaymentBillVo("123",new Date(), BillState.Rejected, "" ,"" ,null,0)
-        };
-    }
-
-    @Test
-    public void update() throws Exception {
-        assertNotNull(draftables);
-    }
-
-    @Test
-    public void delete() throws Exception {
-        assertEquals(ResultMessage.Success, service.delete(draftables[0]));
-    }
-
 
 }

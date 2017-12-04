@@ -27,10 +27,10 @@ public class InventoryGiftBlServiceDriver {
     public void  getId() throws Exception {
         assertEquals("123",service.getId());
     }
-
-    @Test
-    public void getGift() throws Exception {
-        assertEquals(null,service.getGift(date));
-    }
+//
+//    @Test
+//    public void getGift() throws Exception {
+//        assertEquals(null,service.getGift(date));
+//    }
 
 }

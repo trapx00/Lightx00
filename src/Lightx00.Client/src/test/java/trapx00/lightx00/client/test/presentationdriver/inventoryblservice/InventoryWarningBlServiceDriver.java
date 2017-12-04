@@ -5,22 +5,22 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlSe
 import trapx00.lightx00.client.blservicestub.inventoryblservice.InventoryWarningBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 
 import static org.junit.Assert.*;
 
 public class InventoryWarningBlServiceDriver {
     InventoryWarningBlService service=new InventoryWarningBlServiceStub();
-    InventoryBillVo inventoryBillVo=null;
+    InventoryDetailBillVo inventoryDetailBillVo =null;
     CommodityVo commodityVo=null;
     @Test
     public void submit() throws Exception {
-        assertEquals(ResultMessage.Success,service.submit(inventoryBillVo));
+        assertEquals(ResultMessage.Success,service.submit(inventoryDetailBillVo));
     }
 
     @Test
     public void saveAsDraft() throws Exception {
-        assertEquals(ResultMessage.Success,service.submit(inventoryBillVo));
+        assertEquals(ResultMessage.Success,service.submit(inventoryDetailBillVo));
     }
 
 
@@ -29,9 +29,5 @@ public class InventoryWarningBlServiceDriver {
         assertEquals(ResultMessage.Success,service.modify("01111",100));
     }
 
-    @Test
-    public void getCurrentBill() throws Exception {
-        assertEquals("B0001",service.getCurrentBill().getId());
-    }
 
 }

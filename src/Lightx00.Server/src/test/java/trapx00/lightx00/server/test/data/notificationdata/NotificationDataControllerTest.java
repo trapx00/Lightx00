@@ -23,7 +23,7 @@ public class NotificationDataControllerTest {
         }
     }
     private Dao<NotificationPo, Integer> dao = NotificationDataDaoFactory.getDao();
-    private NotificationPo dumbPo = new NotificationPo(new java.util.Date(),"123","123", NotificationType.Others,"123");
+    private NotificationPo dumbPo = new NotificationPo(new java.util.Date(),"123",new String[]{"123","1234"}, NotificationType.Others,"123");
     private NotificationDataService service = NotificationDataFactory.getService();
     @Test
     public void query() throws Exception {
