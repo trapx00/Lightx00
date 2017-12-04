@@ -14,14 +14,21 @@ public abstract class NotificationVo {
     private int id;
     private Date date;
     private EmployeeVo sender;
-    private EmployeeVo receiver;
+    private EmployeeVo[] receivers;
     private NotificationType type;
 
-    public NotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo receiver, NotificationType type) {
+    public NotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo[] receivers, NotificationType type) {
         this.id = id;
         this.date = date;
         this.sender = sender;
-        this.receiver = receiver;
+        this.receivers = receivers;
+        this.type = type;
+    }
+
+    public NotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receiver, NotificationType type) {
+        this.date = date;
+        this.sender = sender;
+        this.receivers = receivers;
         this.type = type;
     }
 
@@ -41,12 +48,12 @@ public abstract class NotificationVo {
         this.sender = sender;
     }
 
-    public EmployeeVo getReceiver() {
-        return receiver;
+    public EmployeeVo[] getReceivers() {
+        return receivers;
     }
 
-    public void setReceiver(EmployeeVo receiver) {
-        this.receiver = receiver;
+    public void setReceivers(EmployeeVo[] receivers) {
+        this.receivers = receivers;
     }
 
     public NotificationType getType() {

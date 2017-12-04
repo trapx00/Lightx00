@@ -44,6 +44,7 @@ project(':Lightx00.Client') {
     mainClassName = 'trapx00.lightx00.client.Client'
     dependencies {
         compile project(':Lightx00.Shared')
+        compile files('libs/jxl.jar')
         compile 'com.jfoenix:jfoenix:1.9.1'
         compile 'de.jensd:fontawesomefx-commons:8.15'
         compile 'de.jensd:fontawesomefx-materialicons:2.2.0-5'
@@ -54,7 +55,6 @@ project(':Lightx00.Client') {
 
 project(':Lightx00.Shared') {
     dependencies {
-        compile project(':Lightx00.Shared')
         compile 'com.j256.ormlite:ormlite-jdbc:5.0'
         compile 'org.xerial:sqlite-jdbc:3.21.0'
         compile 'com.amazonaws:aws-java-sdk:1.10.6'

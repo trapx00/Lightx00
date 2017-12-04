@@ -12,8 +12,13 @@ import java.util.Date;
 public class OtherNotificationVo extends NotificationVo {
     private String content;
 
-    public OtherNotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo receiver, String content) {
-        super(id, date, sender, receiver, NotificationType.Others);
+    public OtherNotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo[] receivers, String content) {
+        super(id, date, sender, receivers, NotificationType.Others);
+        this.content = content;
+    }
+
+    public OtherNotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receivers, NotificationType type, String content) {
+        super(date, sender, receivers, type);
         this.content = content;
     }
 

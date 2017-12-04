@@ -4,10 +4,17 @@ import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.financebl.BillInfo;
 import trapx00.lightx00.client.bl.financebl.factory.BillInfoBlFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.notification.NotificationConverterClass;
 import trapx00.lightx00.client.vo.notification.NotificationConverter;
+import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NotificationConverterClass(notificationType = NotificationType.BillApproval)
 public class BillApprovalNotificationConverter implements NotificationConverter<BillApprovalNotificationVo> {
@@ -27,7 +34,7 @@ public class BillApprovalNotificationConverter implements NotificationConverter<
             po.getId(),
             po.getDate(),
             employeeInfo.queryById(po.getSenderId()),
-            employeeInfo.queryById(po.getReceiverId()),
+            Arrays.stream(po.getReceiverIds()).map(x -> employeeInfo.queryById(x)).toArray(EmployeeVo[]::new),
             billInfo.queryBill(po.getContent())
         );
     }
@@ -38,7 +45,7 @@ public class BillApprovalNotificationConverter implements NotificationConverter<
             vo.getId(),
             vo.getDate(),
             vo.getSender().getId(),
-            vo.getReceiver().getId(),
+            Arrays.stream(vo.getReceivers()).map(EmployeeVo::getId).toArray(String[]::new),
             vo.getType(),
             vo.getBill().getId()
         );
