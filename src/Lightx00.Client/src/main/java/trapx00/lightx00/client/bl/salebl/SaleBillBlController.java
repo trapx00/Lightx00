@@ -37,7 +37,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
     private SaleBillDataService dataService = SaleBillDataServiceFactory.getInstance();
     private CommonBillBlController<SaleBillVo, SaleBillPo, SaleBillQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "销售单", this);
-    private NotificationBlService notificationService=NotificationBlServiceFactory.getInstance();
+    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
 
     /**
      * Deletes a draft.
@@ -69,7 +69,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public ResultMessage activate(String id) {
-        notificationService.acknowledge(new OtherNotificationVo(new Date(),))
+        notificationService.acknowledge(new OtherNotificationVo())
         return commonBillBlController.activate(id);
     }
 
@@ -148,7 +148,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public SaleBillPo fromVoToPo(SaleBillVo vo) {
-        return new SaleBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesman().getId(), vo.getOperator().getId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment(), vo.getClientLevel(), vo.getPromotionId(),vo.getGiftList());
+        return new SaleBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesman().getId(), vo.getOperator().getId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment(), vo.getClientLevel(), vo.getPromotionId(), vo.getGiftList(), vo.getGiftToken());
     }
 
     /**
@@ -159,6 +159,6 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public SaleBillVo fromPoToVo(SaleBillPo po) {
-        return new SaleBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), (SaleStaffVo) employeeInfo.queryById(po.getSalesmanId()), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment(), po.getClientLevel(), po.getPromotionId(),po.getGiftList());
+        return new SaleBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), (SaleStaffVo) employeeInfo.queryById(po.getSalesmanId()), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment(), po.getClientLevel(), po.getPromotionId(), po.getGiftList(), po.getGiftToken());
     }
 }

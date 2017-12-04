@@ -29,8 +29,9 @@ public class SaleBillVo extends SaleBillBaseVo {
     private int clientLevel;
     private String promotionId;
     private CommodityItem[] giftList;
+    private double giftToken;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList) {
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList,double giftToken) {
         super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.salesman = salesman;
@@ -45,6 +46,7 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientLevel = clientLevel;
         this.promotionId = promotionId;
         this.giftList = giftList;
+        this.giftToken=giftToken;
     }
 
     public String getClientId() {
@@ -149,6 +151,14 @@ public class SaleBillVo extends SaleBillBaseVo {
 
     public void setGiftList(CommodityItem[] giftList) {
         this.giftList = giftList;
+    }
+
+    public double getGiftToken() {
+        return giftToken;
+    }
+
+    public void setGiftToken(double giftToken) {
+        this.giftToken = giftToken;
     }
 
     /**

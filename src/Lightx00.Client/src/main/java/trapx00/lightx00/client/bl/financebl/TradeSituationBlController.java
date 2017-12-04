@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.financebl;
 
-import trapx00.lightx00.client.bl.adminbl.CouponInfo;
-import trapx00.lightx00.client.bl.adminbl.factory.CouponInfoFactory;
+import trapx00.lightx00.client.bl.couponbl.CouponInfo;
+import trapx00.lightx00.client.bl.couponbl.factory.CouponFactory;
 import trapx00.lightx00.client.bl.inventorybl.InventoryDetailBillInfo;
 import trapx00.lightx00.client.bl.inventorybl.InventoryGiftInfo;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;
@@ -33,7 +33,7 @@ public class TradeSituationBlController implements TradeSituationBlService {
     private InventoryDetailBillInfo inventoryDetailBillInfo = InventoryBillInfoFactory.getInventoryDetailBillInfo();
     private InventoryGiftInfo inventoryGiftInfo = InventoryBillInfoFactory.getInventoryGiftInfo();
     private PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
-    private CouponInfo couponInfo = CouponInfoFactory.getCouponInfo();
+    private CouponInfo couponInfo = CouponFactory.getCouponInfo();
     /**
      * Queries TradeSituation during specified time range
      *
