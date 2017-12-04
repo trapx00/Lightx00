@@ -1,14 +1,7 @@
 package trapx00.lightx00.shared.bldriver.inventorydataservice;
 
 import org.junit.Test;
-import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
 import trapx00.lightx00.shared.dataservicestub.inventorydataservice.InventoryCheckDataServiceStub;
-import trapx00.lightx00.shared.queryvo.InventoryPictureQueryVo;
-
-
-import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class InventoryCheckDataServiceDriver {
    InventoryCheckDataService service=new InventoryCheckDataServiceStub();

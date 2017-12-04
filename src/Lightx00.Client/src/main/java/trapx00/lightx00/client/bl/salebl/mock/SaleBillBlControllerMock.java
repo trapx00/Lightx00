@@ -82,7 +82,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
     @Override
     public SaleBillVo[] querySaleBill(SaleBillQueryVo query) {
         SaleBillVo[] saleBillVos=new SaleBillVo[1];
-        saleBillVos[0]=new SaleBillVo("0",null,null,null,null,null,1,null,100,100,100,100,null);
+        saleBillVos[0]=new SaleBillVo("XSD-171203-00000",null,null,null,null,null,null,1,null,100,100,100,100,null,1);
         return saleBillVos;
     }
 }

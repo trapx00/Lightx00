@@ -2,22 +2,13 @@ package trapx00.lightx00.server.test.data.inventorydata;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.table.TableUtils;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.server.data.inventorydata.factory.InventoryCheckDataFactory;
-import trapx00.lightx00.server.data.inventorydata.factory.InventoryOtherDataDaoFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
-import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryPicturePo;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 import trapx00.lightx00.shared.queryvo.InventoryPictureQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryViewQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class InventoryCheckDataControllerTest {
 

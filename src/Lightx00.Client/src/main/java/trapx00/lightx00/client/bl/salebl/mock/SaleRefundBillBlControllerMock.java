@@ -81,7 +81,7 @@ public class SaleRefundBillBlControllerMock extends SaleRefundBillBlController {
     @Override
     public SaleRefundBillVo[] querySaleRefundBill(SaleRefundBillQueryVo query) {
         SaleRefundBillVo[] saleRefundBillVos=new SaleRefundBillVo[1];
-        saleRefundBillVos[0]=new SaleRefundBillVo("0",null,null,null,null,null,1,null,100,100,100,100,null);
+        saleRefundBillVos[0]=new SaleRefundBillVo("0",null,null,null,null,null,null,1,null,100,100,100,100,null);
         return saleRefundBillVos;
     }
 }

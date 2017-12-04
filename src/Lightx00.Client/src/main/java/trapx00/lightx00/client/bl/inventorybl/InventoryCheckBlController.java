@@ -2,6 +2,7 @@ package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
 import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
 import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
@@ -10,16 +11,19 @@ import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.bl.util.FormatDateTime;
 import trapx00.lightx00.client.bl.util.PoVoConverter;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
-import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryCheckDataServiceFactory;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryCheckDataService;
+import trapx00.lightx00.client.vo.inventorystaff.*;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryPictureItem;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryViewPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
+import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 
 
 import java.util.Date;
@@ -27,19 +31,10 @@ import java.util.Date;
 public class InventoryCheckBlController implements InventoryCheckBlService {
 
     private LogService logService = LogServiceFactory.getLogService();
-    private InventoryCheckDataService dataService= InventoryCheckDataServiceFactory.getService();
     private CommodityInfo commodityInfo= CommodityInfoFactory.getCommodityInfo();
     private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
+    private PurchaseBillBlInfo purchaseBillBlInfo= PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
     private PoVoConverter<CommodityPo,CommodityVo> commodityConver=CommodityInfoFactory.getPoVoConverter();
-
-    public InventoryViewVo fromPoToVo(InventoryViewPo po) {
-        return new InventoryViewVo(po.getId(), po.getTime(),po.getItems());
-
-    }
-
-    public InventoryViewPo fromVoToPo(InventoryViewVo vo) {
-        return new InventoryViewPo(vo.getId(),vo.getTime(),vo.getItems());
-    }
 
     /**
      * Checks the invenntory change between the begintime and endtime
@@ -48,8 +43,20 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      * @return The inventoryView during specified time rangeget
      */
     @Override
-    public InventoryViewVo[] getInventoryView(Date beginTime, Date endTime) {
-       return null;
+    public InventoryViewVo getInventoryView(Date beginTime, Date endTime) {
+        PurchaseBillVo [] purchaseBillVos=purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
+        PurchaseRefundBillVo[] purchaseRefundBillVos=purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
+        SaleBillVo[]saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
+        SaleRefundBillVo[] saleRefundBillVos=saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
+        InventoryViewVo inventoryViewVo=new InventoryViewVo("VIew"+FormatDateTime.toShortDateString(new Date()),new Date(),null);
+        InventoryViewItem inventoryViewItem=new InventoryViewItem(new Date(),0,0,0,0,0,0,
+                0);
+        for(int i=0;i<purchaseBillVos.length;i++){
+            inventoryViewItem.setInventoryAmount(inventoryViewItem.getInventoryAmount()+purchaseBillVos[i].get);
+        }
+
+
+
     }
 
     /**

@@ -30,6 +30,9 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
     private String comment;
 
+    public SaleRefundBillPo() {
+    }
+
     public SaleRefundBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
         super(id, date, state, SaleBillType.SaleRefund);
         this.clientId = clientId;
@@ -42,9 +45,6 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
-    }
-
-    public SaleRefundBillPo() {
     }
 
     public String getClientId() {

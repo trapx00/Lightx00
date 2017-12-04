@@ -1,8 +1,5 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
-import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryPictureItem;
-
 import java.util.Date;
 
 public class InventoryPictureVo {

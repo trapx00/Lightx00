@@ -6,17 +6,23 @@ import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryGiftDataServiceFactory;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 
 import java.util.Date;
 import java.util.List;
@@ -26,6 +32,7 @@ public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprov
 
     private InventoryGiftDataService dataService= InventoryGiftDataServiceFactory.getService();
     private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
+    private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
 
     private CommonBillBlController<InventoryGiftVo, InventoryGiftPo, InventoryGiftQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "库存赠送单", this);
@@ -39,6 +46,11 @@ public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprov
         return new InventoryGiftPo(BillType.InventoryBill,vo.getId(), vo.getDate(), vo.getState(),vo.getInventoryBillType(),vo.getGifts());
     }
 
+    @Override
+    public CommodityItem[] getPromotionCommodity(String id){
+        SaleBillVo saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo().idEq(id))[0];
+        return saleBillVos.getCommodityList();
+    }
     /**
      * Submits a GiftBill.
      * @param inventoryGiftVo

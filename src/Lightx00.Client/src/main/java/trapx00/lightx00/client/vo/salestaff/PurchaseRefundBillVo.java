@@ -2,6 +2,7 @@ package trapx00.lightx00.client.vo.salestaff;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseRefundBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
@@ -14,19 +15,29 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
-    private String supplier;
+    private String clientId;
     private int repository;
     private SaleStaffVo operator;
     private String comment;
     private double total;
     private CommodityItem[] commodityList;
 
-    public String getSupplier() {
-        return supplier;
+    public PurchaseRefundBillVo(String id, Date date, BillState state, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, PurchaseBillType.PurchaseRefund);
+        this.clientId = clientId;
+        this.repository = repository;
+        this.operator = operator;
+        this.comment = comment;
+        this.total = total;
+        this.commodityList = commodityList;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public int getRepository() {
@@ -69,16 +80,6 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
         this.commodityList = commodityList;
     }
 
-    public PurchaseRefundBillVo(String id, Date date, BillState state, String supplier, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, PurchaseBillType.PurchaseRefund);
-        this.supplier = supplier;
-        this.repository = repository;
-        this.operator = operator;
-        this.comment = comment;
-        this.total = total;
-        this.commodityList = commodityList;
-    }
-
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -86,7 +87,7 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return PurchaseRefundBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -96,7 +97,7 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return PurchaseRefundBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -106,7 +107,7 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return PurchaseRefundBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -126,7 +127,7 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return PurchaseRefundBillBlFactory.getDraftDeleteService();
     }
 
     /**

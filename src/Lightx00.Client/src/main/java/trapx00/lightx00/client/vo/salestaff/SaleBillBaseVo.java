@@ -4,6 +4,7 @@ import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
 

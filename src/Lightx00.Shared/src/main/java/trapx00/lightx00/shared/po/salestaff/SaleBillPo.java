@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 
 import java.util.Date;
 
@@ -29,8 +30,17 @@ public class SaleBillPo extends SaleBillBasePo {
     private double ultiTotal;
     @DatabaseField
     private String comment;
+    @DatabaseField
+    private int clientLevel;
+    @DatabaseField
+    private String promotionId;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private CommodityItem[] giftList;
 
-    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+    public SaleBillPo() {
+    }
+
+    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList) {
         super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.salesmanId = salesmanId;
@@ -42,9 +52,9 @@ public class SaleBillPo extends SaleBillBasePo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
-    }
-
-    public SaleBillPo() {
+        this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
+        this.giftList = giftList;
     }
 
     public String getClientId() {
@@ -125,5 +135,29 @@ public class SaleBillPo extends SaleBillBasePo {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public CommodityItem[] getGiftList() {
+        return giftList;
+    }
+
+    public void setGiftList(CommodityItem[] giftList) {
+        this.giftList = giftList;
     }
 }

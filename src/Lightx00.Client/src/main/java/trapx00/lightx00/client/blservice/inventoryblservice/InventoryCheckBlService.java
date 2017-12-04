@@ -16,7 +16,7 @@ public interface InventoryCheckBlService {
      * @param endTime
      * @return The inventoryView during specified time range
      */
-    InventoryViewVo[] getInventoryView(Date beginTime, Date endTime);//库存查看
+    InventoryViewVo getInventoryView(Date beginTime, Date endTime);//库存查看
 
     /**
      * Gets the inventory snapshot

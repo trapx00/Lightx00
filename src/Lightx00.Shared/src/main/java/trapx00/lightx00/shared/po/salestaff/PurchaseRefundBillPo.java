@@ -10,7 +10,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "PurchaseRefundBill")
 public class PurchaseRefundBillPo extends PurchaseBillBasePo {
     @DatabaseField
-    private String supplier;
+    private String clientId;
     @DatabaseField
     private int repository;
     @DatabaseField
@@ -22,9 +22,12 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommodityItem[] commodityList;
 
-    public PurchaseRefundBillPo(String id, Date date, BillState state, String supplier, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
+    public PurchaseRefundBillPo() {
+    }
+
+    public PurchaseRefundBillPo(String id, Date date, BillState state, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
         super(id, date, state, PurchaseBillType.PurchaseRefund);
-        this.supplier = supplier;
+        this.clientId = clientId;
         this.repository = repository;
         this.operatorId = operatorId;
         this.comment = comment;
@@ -32,15 +35,12 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
         this.commodityList = commodityList;
     }
 
-    public PurchaseRefundBillPo() {
+    public String getClientId() {
+        return clientId;
     }
 
-    public String getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public int getRepository() {

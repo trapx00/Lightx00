@@ -4,11 +4,13 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -24,8 +26,11 @@ public class SaleBillVo extends SaleBillBaseVo {
     private double token;
     private double ultiTotal;
     private String comment;
+    private int clientLevel;
+    private String promotionId;
+    private CommodityItem[] giftList;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList) {
         super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
         this.salesman = salesman;
@@ -37,6 +42,9 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
+        this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
+        this.giftList = giftList;
     }
 
     public String getClientId() {
@@ -119,6 +127,30 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.comment = comment;
     }
 
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public CommodityItem[] getGiftList() {
+        return giftList;
+    }
+
+    public void setGiftList(CommodityItem[] giftList) {
+        this.giftList = giftList;
+    }
+
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -126,7 +158,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return SaleBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -136,7 +168,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return SaleBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -146,7 +178,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return SaleBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -166,7 +198,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleBillBlFactory.getDraftDeleteService();
     }
 
     /**

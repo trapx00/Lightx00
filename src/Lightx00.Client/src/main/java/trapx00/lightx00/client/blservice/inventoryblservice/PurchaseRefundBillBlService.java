@@ -34,5 +34,5 @@ public interface PurchaseRefundBillBlService {
      * @param query function
      * @return array of PurchaseRefundBillVo
      */
-    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query);
+    PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query);
 }
