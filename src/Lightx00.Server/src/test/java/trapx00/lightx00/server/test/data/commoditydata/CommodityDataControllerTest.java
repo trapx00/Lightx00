@@ -51,6 +51,7 @@ public class CommodityDataControllerTest {
 
     @Test
     public void modify() throws Exception {
+        service.add(commodityPo);
         assertEquals(ResultMessage.Success,service.modify(commodityPo));
         resetTable();
     }

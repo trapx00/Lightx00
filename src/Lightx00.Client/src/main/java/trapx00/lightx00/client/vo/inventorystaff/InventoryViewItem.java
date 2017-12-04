@@ -1,25 +1,17 @@
-package trapx00.lightx00.shared.po.inventorystaff;
+package trapx00.lightx00.client.vo.inventorystaff;
 
-import com.j256.ormlite.field.DatabaseField;
-
-import java.io.Serializable;
 import java.util.Date;
 
-public class InventoryViewItem implements Serializable {
-    @DatabaseField
+public class InventoryViewItem  {
+
     private Date operaDate;
-    @DatabaseField
     private  double inventoryAmount;//入库数量
-    @DatabaseField
     private  double inventoryMoney;//入库金额
-    @DatabaseField
     private  double outOfInventoryAmount;//出库数量
-    @DatabaseField
     private  double outOfInVentoryMoney;//
-    @DatabaseField
     private  double sum;//合计
-    @DatabaseField
     private  double inSoldPrice;//最近进价
+    private  double outSoldPrice;//最近售价
 
     public InventoryViewItem (Date time, double inventoryAmount, double inventoryMoney,
                            double outOfInventoryAmount, double outOfInVentoryMoney, double sum,
@@ -90,6 +82,5 @@ public class InventoryViewItem implements Serializable {
         this.outSoldPrice = outSoldPrice;
     }
 
-    @DatabaseField
-    private  double outSoldPrice;//最近售价
+
 }

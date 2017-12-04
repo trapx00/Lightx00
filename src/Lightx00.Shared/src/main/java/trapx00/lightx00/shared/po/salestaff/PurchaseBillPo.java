@@ -25,8 +25,8 @@ public class PurchaseBillPo extends PurchaseBillBasePo {
     public PurchaseBillPo() {
     }
 
-    public PurchaseBillPo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, purchaseBillType);
+    public PurchaseBillPo(String id, Date date, BillState state, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, PurchaseBillType.Purchase);
         this.clientId = clientId;
         this.repository = repository;
         this.operatorId = operatorId;

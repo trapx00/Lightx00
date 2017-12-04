@@ -122,10 +122,24 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
                 return ResultMessage.Success;
             }
             logService.printLog(delegate, String.format("deleted a %s (id: %s),which is not existed", commodityPo.getName() , commodityPo.getId()));
-            return ResultMessage.Success;
+            throw new IdNotExistsException(commodityPo.getId());
         }catch (SQLException e) {
             handleSQLException(e);
             return ResultMessage.Failure;
+        }
+    }
+
+    @Override
+    public CommodityPo[] getAllCommodity() {
+        List<CommodityPo> result=null;
+        try {
+            List<CommodityPo> results = (List<CommodityPo>) commodityDao.queryForAll();
+            logService.printLog(delegate, String.format("queried all commodity and got %d results.", results.size()));
+            result=results;
+            return result.toArray(new CommodityPo[result.size()]);
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return result.toArray(new CommodityPo[result.size()]);
         }
     }
 

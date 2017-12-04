@@ -4,6 +4,7 @@ import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
@@ -31,9 +32,11 @@ public interface InventoryGiftBlService {
      */
     ResultMessage saveAsDraft(InventoryGiftVo bill);//保存草稿
 
+    CommodityItem[] getPromotionCommodity(String id);
 
     InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo);
 
 
 
 }
+
