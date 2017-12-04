@@ -33,7 +33,7 @@ public class ComSalePromotionBlServiceDriver {
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success,service.delete(promotion));
+        assertEquals(ResultMessage.Success,service.delete("0001"));
     }
 
 }

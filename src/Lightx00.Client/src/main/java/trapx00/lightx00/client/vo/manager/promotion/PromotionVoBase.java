@@ -1,24 +1,35 @@
 package trapx00.lightx00.client.vo.manager.promotion;
 
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.promotionbl.factory.PromotionDraftQueryServiceFactory;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.draft.DraftableQueryServiceRegistry;
+import trapx00.lightx00.shared.po.draft.DraftType;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 
-public abstract class PromotionVoBase {
+public abstract class PromotionVoBase implements Draftable, Serializable {
     private String id;
     private PromotionType type;
     private Date startDate;
     private Date endDate;
     private PromotionState state;
+    private PromotionCommodity[] promotionCommodities;
 
     public PromotionVoBase(String id, PromotionType type, Date startDate, Date endDate,
-                           PromotionState state) {
+                           PromotionState state,PromotionCommodity[] promotionCommodities) {
         this.id = id;
         this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
         this.state = state;
+        this.promotionCommodities = promotionCommodities;
     }
 
     public PromotionState getState() {
@@ -41,9 +52,13 @@ public abstract class PromotionVoBase {
         return startDate;
     }
 
-    public PromotionType getPromotionType(){return type;}
+    public PromotionType getPromotionType() {return type;}
 
-    public PromotionState getPromotionState(){return state;}
+    public PromotionState getPromotionState() {return state;}
+
+    public PromotionCommodity[] getPromotionCommodities() {
+        return promotionCommodities;
+    }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
@@ -60,5 +75,33 @@ public abstract class PromotionVoBase {
     public void setState(PromotionState state) {
         this.state = state;
     }
+
+    public void setPromotionCommodities(PromotionCommodity[] promotionCommodities) {
+        this.promotionCommodities = promotionCommodities;
+    }
+
+    /**
+     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
+     *
+     * @return key-value maps for the properties
+     */
+    @Override
+    public abstract HashMap<String, String> properties();
+
+    /**
+     * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DeleteService
+     */
+    @Override
+    public abstract DraftDeleteService deleteService();
+
+    /**
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DraftContinueWritableUiController
+     */
+    @Override
+    public abstract DraftContinueWritableUiController continueWritableUi();
 
 }

@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
 public interface InventoryWarningBlService {
@@ -12,14 +12,14 @@ public interface InventoryWarningBlService {
      * @param bill
      * @return  whether the operation is done successfully
      */
-    ResultMessage submit(InventoryBillVo bill);//提交
+    ResultMessage submit(InventoryDetailBillVo bill);//提交
 
     /**
      * Saves the current bil
      * @param bill
      * @return  whether the operation is done successfully
      */
-    ResultMessage saveAsDraft(InventoryBillVo bill);//保存草稿
+    ResultMessage saveAsDraft(InventoryDetailBillVo bill);//保存草稿
 
     /**
      *  Modifys the warning value of the commoditybl
@@ -30,16 +30,11 @@ public interface InventoryWarningBlService {
     ResultMessage modify(String id, double modifyWarning);//修改警戒值
 
     /**
-     * Gets the current Bill
-     * @return the current BillVo
-     */
-    InventoryBillVo getCurrentBill();//得到正在操作单据信息
-    /**
      *  Querys a bill
      * @param inventoryBillQueryVo
-     * @return InventoryBillVo
+     * @return InventoryDetailBillVo
      */
-    InventoryBillVo []query(InventoryBillQueryVo inventoryBillQueryVo);
+    InventoryDetailBillVo[]query(InventoryBillQueryVo inventoryBillQueryVo);
     /**
      * Gets the id for the next bill.
      * @return id for the next bill

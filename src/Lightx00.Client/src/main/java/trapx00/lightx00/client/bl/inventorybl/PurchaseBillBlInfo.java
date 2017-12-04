@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.shared.po.salestaff.PurchaseRefundBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;

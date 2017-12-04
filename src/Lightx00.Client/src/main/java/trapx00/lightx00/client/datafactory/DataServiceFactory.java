@@ -10,7 +10,8 @@ import java.rmi.RemoteException;
 
 @SuppressWarnings("unchecked")
 public abstract class DataServiceFactory {
-    protected static <T extends Remote> T lookupService(Class<T> clazz) {
+
+    public static <T extends Remote> T lookupService(Class<T> clazz) {
         try {
             return (T) Naming.lookup(RmiHelper.generateRmiUrl(clazz));
         } catch (NotBoundException | MalformedURLException | RemoteException e) {

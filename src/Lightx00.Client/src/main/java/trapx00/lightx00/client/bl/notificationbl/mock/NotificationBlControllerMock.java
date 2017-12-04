@@ -31,7 +31,7 @@ public class NotificationBlControllerMock extends NotificationBlController {
      * @return current users's notifications
      */
     public NotificationVo[] update() {
-        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123");
+        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123","0001");
         return new NotificationVo[] {
                 new OtherNotificationVo(1,new Date(), employeeVo, employeeVo, "test"),
                 new BillApprovalNotificationVo(2,new Date(),employeeVo, employeeVo,

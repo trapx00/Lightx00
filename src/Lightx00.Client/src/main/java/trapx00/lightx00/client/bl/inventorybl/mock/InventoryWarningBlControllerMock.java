@@ -1,14 +1,14 @@
 package trapx00.lightx00.client.bl.inventorybl.mock;
 
 import trapx00.lightx00.client.bl.inventorybl.InventoryWarningBlController;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryBillVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-public class InventoryWarningBlControllerMock extends InventoryWarningBlController{
+public class InventoryWarningBlControllerMock extends InventoryWarningBlController {
     /**
      * When bill is approved, this method is called to modify the state of the bill.
      *
@@ -26,7 +26,7 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage submit(InventoryBillVo bill) {
+    public ResultMessage submit(InventoryDetailBillVo bill) {
         return super.submit(bill);
     }
 
@@ -36,7 +36,7 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage saveAsDraft(InventoryBillVo bill) {
+    public ResultMessage saveAsDraft(InventoryDetailBillVo bill) {
         return super.saveAsDraft(bill);
     }
 
@@ -55,10 +55,6 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
      * Gets the current Bill
      * @return the current BillVo
      */
-    @Override
-    public InventoryBillVo getCurrentBill() {
-        return super.getCurrentBill();
-    }
 
     /**
      *  Querys a bill
@@ -66,7 +62,7 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
      * @return InventoryBill that match query condition
      */
     @Override
-    public InventoryBillVo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
+    public InventoryDetailBillVo[] query(InventoryBillQueryVo inventoryBillQueryVo) {
         return super.query(inventoryBillQueryVo);
     }
 
@@ -113,8 +109,5 @@ public class InventoryWarningBlControllerMock extends InventoryWarningBlControll
      * Query a commoditybl
      * @return Commodity that match query condition
      */
-    @Override
-    public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return super.queryCommodity(commodityQueryVo);
-    }
+
 }

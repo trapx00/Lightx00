@@ -17,8 +17,8 @@ public class SaleStaffVo extends EmployeeVo {
         this.saleStaffType = saleStaffType;
     }
 
-    public SaleStaffVo(String name, String id, Date workSince, String username, SaleStaffType saleStaffType) {
-        super(name, id, workSince, username, EmployeePosition.SaleStaff);
+    public SaleStaffVo(String name, String id, Date workSince, String username, String pssword, SaleStaffType saleStaffType) {
+        super(name, id, workSince, username, EmployeePosition.SaleStaff,pssword);
         this.saleStaffType = saleStaffType;
     }
 }

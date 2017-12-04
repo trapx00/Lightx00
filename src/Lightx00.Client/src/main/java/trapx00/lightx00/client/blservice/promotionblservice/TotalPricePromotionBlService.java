@@ -28,10 +28,10 @@ public interface TotalPricePromotionBlService {
 
     /**
      * Delete a overdue or needless TotalPricePromotionVo.
-     * @param promotion the TotalPricePromotionVo to be deleted
+     * @param id id of the TotalPricePromotionVo to be deleted
      * @return whether the operation is done successfully
      */
-    ResultMessage delete(TotalPricePromotionVo promotion);
+    ResultMessage delete(String id);
 
     /**
      * Get id for the next promotion.

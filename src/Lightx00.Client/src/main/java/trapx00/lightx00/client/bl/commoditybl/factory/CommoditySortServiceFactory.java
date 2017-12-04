@@ -5,10 +5,10 @@ import trapx00.lightx00.client.bl.commoditybl.mock.CommoditySortBlControllerMock
 
 public class CommoditySortServiceFactory {
 
-    private static CommoditySortBlController instance =new CommoditySortBlControllerMock();
+    private static CommoditySortBlController instance =new CommoditySortBlController();
     /**
-     * Gets a CommoditySortService instance.
-     * @return CommoditySortService instance
+     * Gets a CommoditySortInfo instance.
+     * @return CommoditySortInfo instance
      */
     public static  CommoditySortBlController getController(){
         return instance;

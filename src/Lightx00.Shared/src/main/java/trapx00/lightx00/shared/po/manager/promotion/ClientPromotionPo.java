@@ -15,7 +15,7 @@ public class ClientPromotionPo extends PromotionPoBase {
     private double salePrice;
 
     public ClientPromotionPo(String id, Date startDate, Date endDate, PromotionState state, int clientLevel, double couponPrice,PromotionCommodity[] promotionCommodities,double salePrice) {
-        super(id, PromotionType.ClientPromotion, startDate, endDate, PromotionState.Waiting,promotionCommodities);
+        super(id, PromotionType.ClientPromotion, startDate, endDate, state,promotionCommodities);
         this.clientLevel = clientLevel;
         this.couponPrice = couponPrice;
         this.salePrice = salePrice;

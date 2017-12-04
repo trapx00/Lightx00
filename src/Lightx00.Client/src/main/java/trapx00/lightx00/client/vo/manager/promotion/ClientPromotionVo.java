@@ -1,24 +1,24 @@
 package trapx00.lightx00.client.vo.manager.promotion;
 
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.promotionbl.factory.ClientPromotionBlFactory;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class ClientPromotionVo extends PromotionVoBase {
     private int clientLevel;
     private double couponPrice;
-    private CommodityVo[] promotionCommodity;
     private double salePrice;
 
-    public ClientPromotionVo(String id, Date startDate, Date endDate, PromotionState state,
-                             int clientLevel, double couponPrice,CommodityVo[] promotionCommodity,double salePrice) {
-        super(id, PromotionType.ClientPromotion, startDate, endDate, PromotionState.Waiting);
+    public ClientPromotionVo(String id, Date startDate, Date endDate, PromotionState state, int clientLevel, double couponPrice,PromotionCommodity[] promotionCommodities,double salePrice) {
+        super(id, PromotionType.ClientPromotion, startDate, endDate, state,promotionCommodities);
         this.clientLevel = clientLevel;
         this.couponPrice = couponPrice;
-        this.promotionCommodity = promotionCommodity;
         this.salePrice = salePrice;
     }
 
@@ -38,20 +38,43 @@ public class ClientPromotionVo extends PromotionVoBase {
         this.couponPrice = couponPrice;
     }
 
-    public CommodityVo[] getPromotionCommodity() {
-        return promotionCommodity;
-    }
-
     public double getSalePrice() {
         return salePrice;
-    }
-
-    public void setPromotionCommodity() {
-        this.promotionCommodity = promotionCommodity;
     }
 
     public void setSalePrice() {
         this.salePrice = salePrice;
     }
+
+    /**
+     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
+     *
+     * @return key-value maps for the properties
+     */
+    @Override
+    public HashMap<String, String> properties() {
+        return null;
+    }
+
+    /**
+     * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DeleteService
+     */
+    @Override
+    public DraftDeleteService deleteService() {
+        return ClientPromotionBlFactory.getDraftDeleteService();
+    }
+
+    /**
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DraftContinueWritableUiController
+     */
+    @Override
+    public DraftContinueWritableUiController continueWritableUi() {
+        return null;
+    }
+
 
 }

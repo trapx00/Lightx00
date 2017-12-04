@@ -9,13 +9,12 @@ import java.util.Date;
 
 public abstract class ReceivalPaymentBillVoBase extends FinanceBillVo implements Reversible {
     private String clientId;
-    private String operatorId;
     private Transcation[] transcations;
     private double total;
 
     public ReceivalPaymentBillVoBase(FinanceBillType financeBillType,
                                      String id, Date date, BillState state, String clientId, String operatorId, Transcation[] transcations, double total) {
-        super(financeBillType, id, date, state);
+        super(financeBillType, id, date, state, operatorId);
         this.clientId = clientId;
         this.operatorId = operatorId;
         this.transcations = transcations;
@@ -28,14 +27,6 @@ public abstract class ReceivalPaymentBillVoBase extends FinanceBillVo implements
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public Transcation[] getTranscations() {

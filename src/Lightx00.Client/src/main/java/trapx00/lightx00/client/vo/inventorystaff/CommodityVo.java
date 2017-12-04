@@ -1,5 +1,7 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
+import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+
 import java.util.Date;
 
 public class CommodityVo {
@@ -16,6 +18,14 @@ public class CommodityVo {
     private double retailPrice;//售价
     private double recentRetailPrice;//最近售价
     private double warningValue;//警戒值
+
+    public static CommodityPo commodityVoToPo(CommodityVo commodityVo){
+
+    }
+
+    public static CommodityVo commodityPotoVo(CommodityPo commodityPo){
+
+    }
 
     public CommodityVo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
