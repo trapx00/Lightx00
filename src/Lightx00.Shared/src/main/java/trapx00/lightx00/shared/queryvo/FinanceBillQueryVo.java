@@ -25,4 +25,8 @@ public class FinanceBillQueryVo {
     public <T extends SpecificFinanceBillQueryVo> T getSpecificFinanceBillQueryVo(FinanceBillType type) {
         return (T) hashMap.get(type);
     }
+
+    public HashMap<FinanceBillType, SpecificFinanceBillQueryVo> getHashMap() {
+        return hashMap;
+    }
 }

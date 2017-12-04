@@ -7,11 +7,11 @@ import trapx00.lightx00.server.data.approvaldata.factory.AuditDataDaoFactory;
 import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
-import trapx00.lightx00.shared.po.manager.BillInfoPo;
+import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
+import trapx00.lightx00.shared.queryvo.AuditIdQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -28,12 +28,12 @@ public class AuditDataControllerTest {
             e.printStackTrace();
         }
     }
-    private Dao<BillInfoPo, String> dao = AuditDataDaoFactory.getAuditDao();
+    private Dao<AuditIdPo, String> dao = AuditDataDaoFactory.getAuditDao();
     private AuditDataService service = AuditDataFactory.getService();
     private final BillPo bill = new BillPo(BillType.FinanceBill,"XJFYD-20171112-00001", new Date(), BillState.WaitingForApproval);
-    private final BillInfoPo billInfo1 = new BillInfoPo("XJFYD-20171112-00001", BillType.FinanceBill,new Date(), BillState.WaitingForApproval);
-    private final BillInfoPo billInfo2 = new BillInfoPo("XJFYD-20171112-00002", BillType.FinanceBill,new Date(), BillState.WaitingForApproval);
-    private final BillInfoPo billInfo3 = new BillInfoPo("JHXSD-20171111-00001", BillType.SaleBill,new Date(), BillState.WaitingForApproval);
+    private final AuditIdPo billInfo1 = new AuditIdPo("XJFYD-20171112-00001",new Date());
+    private final AuditIdPo billInfo2 = new AuditIdPo("XJFYD-20171112-00002",new Date());
+    private final AuditIdPo billInfo3 = new AuditIdPo("JHXSD-20171111-00001",new Date());
 
     @Before
     public void setUp() throws Exception {
@@ -49,8 +49,8 @@ public class AuditDataControllerTest {
             dao.create(billInfo1);
             dao.create(billInfo2);
             dao.create(billInfo3);
-            assertEquals(3, service.query(new BillInfoQueryVo()).length);
-            assertEquals(2, service.query(new BillInfoQueryVo().eq("type",BillType.FinanceBill)).length);
+            assertEquals(3, service.query(new AuditIdQueryVo()).length);
+            assertEquals(2, service.query(new AuditIdQueryVo().eq("type",BillType.FinanceBill)).length);
         } finally {
             dao.deleteById(billInfo1.getId());
             dao.deleteById(billInfo2.getId());
@@ -81,7 +81,7 @@ public class AuditDataControllerTest {
     @Test
     public void requestApproval() throws Exception {
         try {
-            service.requestApproval(bill);
+            service.requestApproval(bill.getId());
             assertTrue(dao.idExists(bill.getId()));
         } finally {
             dao.deleteById(bill.getId());

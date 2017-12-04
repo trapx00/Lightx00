@@ -11,7 +11,7 @@ public class DraftBlServiceStub implements DraftBlService {
     @Override
     public DraftVo[] update() {
         return new DraftVo[]{
-                new DraftVo(new Date(), null,null,null)
+                new DraftVo(1, new Date(), null,null,null)
         };
     }
 

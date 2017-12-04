@@ -32,7 +32,7 @@ public class ComSalePromotionBlControllerTest {
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success,controller.delete(promotion));
+        assertEquals(ResultMessage.Success,controller.delete("0001"));
     }
 
     @Test

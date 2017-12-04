@@ -7,5 +7,10 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import java.util.function.Predicate;
 
 public class InventoryBillQueryVo extends  BaseQueryVo<InventoryDetailBillPo,String, InventoryBillQueryVo> {
+    public InventoryBillQueryVo(BaseQueryVo another) {
+        super(another);
+    }
 
+    public InventoryBillQueryVo() {
+    }
 }

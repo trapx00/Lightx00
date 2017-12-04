@@ -19,7 +19,10 @@ import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
 import java.util.List;
 
-public class PaymentBillBlController implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService, BillPoVoConverter<PaymentBillPo, PaymentBillVo> {
+public class PaymentBillBlController
+    implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService,
+    DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService, BillPoVoConverter<PaymentBillPo, PaymentBillVo> {
+
     private PaymentBillDataService dataService = PaymentBillDataServiceFactory.getService();
     private CommonBillBlController<PaymentBillVo, PaymentBillPo, PaymentBillQueryVo> commonBillBlController =
         new CommonBillBlController<>(dataService, "付款单", this);

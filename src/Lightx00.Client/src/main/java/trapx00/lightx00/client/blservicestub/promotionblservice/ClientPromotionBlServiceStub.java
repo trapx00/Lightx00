@@ -20,7 +20,7 @@ public class ClientPromotionBlServiceStub implements ClientPromotionBlService {
     }
 
     @Override
-    public ResultMessage delete(ClientPromotionVo promotion) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
 

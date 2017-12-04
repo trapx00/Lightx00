@@ -11,7 +11,7 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class TotalPricePromotionBlServiceTest {
+public class TotalPricePromotionBlServiceDriver {
     private TotalPricePromotionBlService service = new TotalPricePromotionBlServiceStub();
     private TotalPricePromotionVo promotion = new TotalPricePromotionVo("0001",new Date(),new Date(), PromotionState.Waiting,200,1000,null);
 
@@ -32,7 +32,7 @@ public class TotalPricePromotionBlServiceTest {
 
     @Test
     public void delete() throws Exception {
-        assertEquals(ResultMessage.Success,service.delete(promotion));
+        assertEquals(ResultMessage.Success,service.delete("0001"));
     }
 
 }

@@ -49,7 +49,7 @@ public class LoginUiController {
                     .create(dialogContainer)
                     .show();
         } else {
-            finishLogin(new AdminVo("Admin","123123",new Date(),"123123"));
+            finishLogin(new AdminVo("Admin","123123",new Date(),"123123","0001"));
         }
     }
 

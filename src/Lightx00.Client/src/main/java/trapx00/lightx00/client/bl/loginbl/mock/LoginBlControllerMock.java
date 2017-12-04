@@ -7,7 +7,7 @@ import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import java.util.Date;
 
 public class LoginBlControllerMock extends LoginBlController {
-    private EmployeeVo user = new FinanceStaffVo("123","123",new Date(), "123");;
+    private EmployeeVo user = new FinanceStaffVo("123","123",new Date(), "123","0001");;
     /**
      * Login with username and password provided.
      *

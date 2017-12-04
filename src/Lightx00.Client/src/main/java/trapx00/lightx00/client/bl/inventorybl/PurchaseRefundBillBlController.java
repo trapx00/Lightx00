@@ -1,15 +1,35 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseRefundBillDataServiceFactory;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
+import trapx00.lightx00.shared.po.salestaff.PurchaseRefundBillPo;
+import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
-public class PurchaseRefundBillBlController implements PurchaseRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService {
+import java.util.List;
+
+public class PurchaseRefundBillBlController implements PurchaseRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<PurchaseRefundBillPo, PurchaseRefundBillVo> {
+    EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
+    PurchaseRefundBillDataService dataService = PurchaseRefundBillDataServiceFactory.getInstance();
+    private CommonBillBlController<PurchaseRefundBillVo, PurchaseRefundBillPo, PurchaseRefundBillQueryVo> commonBillBlController
+            = new CommonBillBlController<>(dataService, "进货退货单", this);
 
     /**
      * Deletes a draft.
@@ -19,7 +39,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return commonBillBlController.deleteDraft(id);
     }
 
     /**
@@ -30,7 +50,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return commonBillBlController.abandon(id);
     }
 
     /**
@@ -41,7 +61,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        return commonBillBlController.activate(id);
     }
 
     /**
@@ -52,7 +72,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage submit(PurchaseRefundBillVo purchaseRefundBill) {
-        return null;
+        return commonBillBlController.submit(purchaseRefundBill);
     }
 
     /**
@@ -63,7 +83,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage saveAsDraft(PurchaseRefundBillVo purchaseRefundBill) {
-        return null;
+        return commonBillBlController.saveAsDraft(purchaseRefundBill);
     }
 
     /**
@@ -73,7 +93,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public String getId() {
-        return null;
+        return commonBillBlController.getId();
     }
 
     /**
@@ -83,8 +103,9 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      * @return array of PurchaseRefundBillVo
      */
     @Override
-    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
-        return new PurchaseRefundBillVo[0];
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query) {
+        List<PurchaseRefundBillVo> list = commonBillBlController.query(query);
+        return list.toArray(new PurchaseRefundBillVo[list.size()]);
     }
 
     /**
@@ -96,6 +117,28 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
-        return null;
+        return commonBillBlController.approvalComplete(billId, state);
+    }
+
+    /**
+     * Convert vo to po.
+     *
+     * @param vo vo
+     * @return po
+     */
+    @Override
+    public PurchaseRefundBillPo fromVoToPo(PurchaseRefundBillVo vo) {
+        return new PurchaseRefundBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getSupplier(), vo.getRepository(), vo.getOperator().getId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
+    }
+
+    /**
+     * Convert po to vo.
+     *
+     * @param po po
+     * @return vo
+     */
+    @Override
+    public PurchaseRefundBillVo fromPoToVo(PurchaseRefundBillPo po) {
+        return new PurchaseRefundBillVo(po.getId(), po.getDate(), po.getState(), po.getSupplier(), po.getRepository(), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getComment(), po.getTotal(), po.getCommodityList());
     }
 }

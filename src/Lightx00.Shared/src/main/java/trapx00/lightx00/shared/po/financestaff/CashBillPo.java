@@ -12,30 +12,19 @@ import trapx00.lightx00.shared.po.bill.BillState;
 @DatabaseTable(tableName = "CashBill")
 public class CashBillPo extends FinanceBillPo  {
     @DatabaseField
-    private String operatorId;
-    @DatabaseField
     private String accountId;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CashBillItem[] items;
 
     public CashBillPo(String id, Date date, BillState state, String operatorId,
                       String accountId, CashBillItem[] items) {
-        super(id, date, state, FinanceBillType.CashBill);
-        this.operatorId = operatorId;
+        super(id, date, state, FinanceBillType.CashBill, operatorId);
         this.accountId = accountId;
         this.items = items;
     }
 
     public CashBillPo() {
 
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public String getAccountId() {
@@ -57,7 +46,6 @@ public class CashBillPo extends FinanceBillPo  {
     @Override
     public String toString() {
         return "CashBillPo{" +
-            "operatorId='" + operatorId + '\'' +
             ", accountId='" + accountId + '\'' +
             ", items=" + Arrays.toString(items) +
             "} " + super.toString();

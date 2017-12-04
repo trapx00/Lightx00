@@ -1,26 +1,26 @@
 package trapx00.lightx00.client.vo.financestaff;
 
 import java.util.Date;
-import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
 
 public class SaleDetailQueryVo { //销售明细表查询条件
     private Date start;
     private Date end;
-    private String commodityName;
-    private ClientVo client;
-    private SaleStaffVo operator;
+    private String[] commodityNames;
+    private ClientVo[] clients;
+    private EmployeeVo[] operators;
     private int repository;
 
-    public SaleDetailQueryVo(Date start, Date end, String commodityName, ClientVo client,
-                             SaleStaffVo operator, int repository) {
+    public SaleDetailQueryVo(Date start, Date end, String[] commodityNames, ClientVo[] clients,
+                             EmployeeVo[] operators, int repository) {
         this.start = start;
         this.end = end;
-        this.commodityName = commodityName;
-        this.client = client;
-        this.operator = operator;
+        this.commodityNames = commodityNames;
+        this.clients = clients;
+        this.operators = operators;
         this.repository = repository;
     }
 
@@ -40,28 +40,28 @@ public class SaleDetailQueryVo { //销售明细表查询条件
         this.end = end;
     }
 
-    public String getCommodityName() {
-        return commodityName;
+    public String[] getCommodityNames() {
+        return commodityNames;
     }
 
-    public void setCommodityName(String commodityName) {
-        this.commodityName = commodityName;
+    public void setCommodityNames(String[] commodityNames) {
+        this.commodityNames = commodityNames;
     }
 
-    public ClientVo getClient() {
-        return client;
+    public ClientVo[] getClients() {
+        return clients;
     }
 
-    public void setClient(ClientVo client) {
-        this.client = client;
+    public void setClient(ClientVo[] clients) {
+        this.clients = clients;
     }
 
-    public SaleStaffVo getOperator() {
-        return operator;
+    public EmployeeVo[] getOperators() {
+        return operators;
     }
 
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
+    public void setOperator(EmployeeVo[] operator) {
+        this.operators = operator;
     }
 
     public int getRepository() {

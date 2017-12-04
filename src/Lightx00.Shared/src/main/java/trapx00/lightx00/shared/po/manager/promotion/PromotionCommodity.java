@@ -1,16 +1,19 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
-import com.j256.ormlite.field.DatabaseField;
-
 import java.io.Serializable;
 
 public class PromotionCommodity implements Serializable {
-    @DatabaseField
-    private String id;
-    @DatabaseField
     private String commodityId;
-    @DatabaseField
     private double amount;
+    private double unitPrice;
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
 
     public double getAmount() {
         return amount;
@@ -20,16 +23,8 @@ public class PromotionCommodity implements Serializable {
         return commodityId;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setCommodityId(String commodityId) {

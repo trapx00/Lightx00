@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class SaleBillVo extends SaleBillBaseVo {
-    private String supplier;
-    private EmployeeVo defaultOperator;
+    private String clientId;
+    private SaleStaffVo salesman;
     private SaleStaffVo operator;
     private int repository;
     private CommodityItem[] commodityList;
@@ -25,20 +25,34 @@ public class SaleBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public String getSupplier() {
-        return supplier;
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.Sale);
+        this.clientId = clientId;
+        this.salesman = salesman;
+        this.operator = operator;
+        this.repository = repository;
+        this.commodityList = commodityList;
+        this.originTotal = originTotal;
+        this.minusProfits = minusProfits;
+        this.token = token;
+        this.ultiTotal = ultiTotal;
+        this.comment = comment;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getClientId() {
+        return clientId;
     }
 
-    public EmployeeVo getDefaultOperator() {
-        return defaultOperator;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public void setDefaultOperator(EmployeeVo defaultOperator) {
-        this.defaultOperator = defaultOperator;
+    public SaleStaffVo getSalesman() {
+        return salesman;
+    }
+
+    public void setSalesman(SaleStaffVo salesman) {
+        this.salesman = salesman;
     }
 
     public SaleStaffVo getOperator() {
@@ -102,20 +116,6 @@ public class SaleBillVo extends SaleBillBaseVo {
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public SaleBillVo(String id, Date date, BillState state, String supplier, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
-        this.supplier = supplier;
-        this.defaultOperator = defaultOperator;
-        this.operator = operator;
-        this.repository = repository;
-        this.commodityList = commodityList;
-        this.originTotal = originTotal;
-        this.minusProfits = minusProfits;
-        this.token = token;
-        this.ultiTotal = ultiTotal;
         this.comment = comment;
     }
 

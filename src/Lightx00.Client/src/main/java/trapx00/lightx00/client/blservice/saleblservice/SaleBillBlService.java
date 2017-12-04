@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.blservice.saleblservice;
 
+import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
@@ -8,6 +9,7 @@ public interface SaleBillBlService {
 
     /**
      * submit a saleBill
+     *
      * @param saleBill to be submitted
      * @return whether the operation is done successfully
      */
@@ -34,5 +36,13 @@ public interface SaleBillBlService {
      * @param query function
      * @return array of SaleBillVo
      */
-    public SaleBillVo[] querySaleBill(SaleBillQueryVo query);
+    SaleBillVo[] querySaleBill(SaleBillQueryVo query);
+
+    /**
+     * query for sale promotion
+     *
+     * @param saleBillVo current sale bill
+     * @return promotions
+     */
+    PromotionVoBase[] queryPromotion(SaleBillVo saleBillVo);
 }
