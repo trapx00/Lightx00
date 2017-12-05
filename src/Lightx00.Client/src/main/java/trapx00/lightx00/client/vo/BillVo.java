@@ -19,12 +19,22 @@ public abstract class BillVo implements Draftable, Serializable {
     protected String id;
     protected Date date;
     protected BillState state;
+    protected String operatorId;
 
-    public BillVo(BillType billType, String id, Date date, BillState state) {
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    public BillVo(BillType billType, String id, Date date, BillState state, String operatorId) {
         this.billType = billType;
         this.id = id;
         this.date = date;
         this.state = state;
+        this.operatorId = operatorId;
     }
 
 

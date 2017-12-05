@@ -15,13 +15,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
-import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
-import trapx00.lightx00.client.presentation.helpui.DialogStack;
-import trapx00.lightx00.client.presentation.helpui.StageManager;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
 import trapx00.lightx00.client.vo.EmployeeVo;
+
+import java.io.IOException;
 
 public class FrameworkUiController {
     public StackPane dialogContainer;
@@ -112,6 +112,24 @@ public class FrameworkUiController {
             subController = NotificationUiController.init(this);
         }
 
+    }
+
+    /**
+     * 切换功能界面的方法。
+     * @param clazz 对应功能界面的类对象
+     * @param title 标题名称
+     */
+    public void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title) {
+        if (!clazz.isAssignableFrom(subController.getClass())) {
+            try {
+                ExternalLoadedUiPackage externalLoadedUiPackage = clazz.newInstance().load();
+                subController = externalLoadedUiPackage.getController();
+                this.contentPane.getChildren().clear();
+                this.contentPane.getChildren().add(externalLoadedUiPackage.getComponent());
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public DialogStack getDialogStack() {

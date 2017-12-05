@@ -26,7 +26,7 @@ public class InitialEstablishmentUiController implements DraftContinueWritableUi
      * @return external loaded ui controller and component
      */
     @Override
-    public ExternalLoadedUiPackage load() throws IOException {
+    public ExternalLoadedUiPackage load() {
         return null;
     }
 }
