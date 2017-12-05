@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.blservice.couponblservice;
+package trapx00.lightx00.client.blservice.promotionblservice.couponblservice;
 
 import trapx00.lightx00.client.vo.manager.CouponVo;
 import trapx00.lightx00.shared.po.ResultMessage;

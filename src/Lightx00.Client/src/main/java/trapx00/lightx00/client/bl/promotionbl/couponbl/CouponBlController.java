@@ -1,9 +1,9 @@
-package trapx00.lightx00.client.bl.couponbl;
+package trapx00.lightx00.client.bl.promotionbl.couponbl;
 
-import trapx00.lightx00.client.blservice.couponblservice.CouponBlService;
-import trapx00.lightx00.client.datafactory.coupondataservicefactory.CouponDataServieFactory;
+import trapx00.lightx00.client.blservice.promotionblservice.couponblservice.CouponBlService;
+import trapx00.lightx00.client.datafactory.promotiondataservicefactory.coupondataservicefactory.CouponDataServieFactory;
 import trapx00.lightx00.client.vo.manager.CouponVo;
-import trapx00.lightx00.shared.dataservice.coupondataservice.CouponDataService;
+import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.CouponPo;

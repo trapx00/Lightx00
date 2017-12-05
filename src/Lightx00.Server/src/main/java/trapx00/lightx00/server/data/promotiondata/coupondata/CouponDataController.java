@@ -1,8 +1,8 @@
-package trapx00.lightx00.server.data.coupondata;
+package trapx00.lightx00.server.data.promotiondata.coupondata;
 
 import com.j256.ormlite.dao.Dao;
-import trapx00.lightx00.server.data.coupondata.factory.CouponDataDaoFactory;
-import trapx00.lightx00.shared.dataservice.coupondataservice.CouponDataService;
+import trapx00.lightx00.server.data.promotiondata.coupondata.factory.CouponDataDaoFactory;
+import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;

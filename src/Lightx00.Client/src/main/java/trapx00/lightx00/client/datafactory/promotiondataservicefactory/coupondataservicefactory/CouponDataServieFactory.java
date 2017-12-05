@@ -1,8 +1,8 @@
-package trapx00.lightx00.client.datafactory.coupondataservicefactory;
+package trapx00.lightx00.client.datafactory.promotiondataservicefactory.coupondataservicefactory;
 
 import trapx00.lightx00.client.datafactory.DataServiceFactory;
-import trapx00.lightx00.shared.dataservice.coupondataservice.CouponDataService;
-import trapx00.lightx00.shared.dataservicestub.coupondataservice.CouponDataServiceStub;
+import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
+import trapx00.lightx00.shared.dataservicestub.promotiondataservice.coupondataservice.CouponDataServiceStub;
 
 public class CouponDataServieFactory extends DataServiceFactory {
     private static CouponDataService service = new CouponDataServiceStub();

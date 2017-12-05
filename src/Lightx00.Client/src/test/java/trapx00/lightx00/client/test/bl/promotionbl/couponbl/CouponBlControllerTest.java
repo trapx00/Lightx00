@@ -1,8 +1,8 @@
-package trapx00.lightx00.client.test.bl.couponbl;
+package trapx00.lightx00.client.test.bl.promotionbl.couponbl;
 
 import org.junit.Test;
-import trapx00.lightx00.client.bl.couponbl.CouponBlController;
-import trapx00.lightx00.client.bl.couponbl.factory.CouponFactory;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.CouponBlController;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.factory.CouponFactory;
 import trapx00.lightx00.client.vo.manager.CouponVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 
