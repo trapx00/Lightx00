@@ -4,7 +4,7 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -13,11 +13,10 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleRefundBillVo extends SaleBillBaseVo {
     private String clientId;
-    private SaleStaffVo salesman;
+    private EmployeeVo defaultOperator;
     private SaleStaffVo operator;
     private int repository;
     private CommodityItem[] commodityList;
@@ -27,10 +26,10 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public SaleRefundBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
+    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType);
         this.clientId = clientId;
-        this.salesman = salesman;
+        this.defaultOperator = defaultOperator;
         this.operator = operator;
         this.repository = repository;
         this.commodityList = commodityList;
@@ -49,12 +48,12 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
         this.clientId = clientId;
     }
 
-    public SaleStaffVo getSalesman() {
-        return salesman;
+    public EmployeeVo getDefaultOperator() {
+        return defaultOperator;
     }
 
-    public void setSalesman(SaleStaffVo salesman) {
-        this.salesman = salesman;
+    public void setDefaultOperator(EmployeeVo defaultOperator) {
+        this.defaultOperator = defaultOperator;
     }
 
     public SaleStaffVo getOperator() {
@@ -128,7 +127,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return SaleRefundBillBlFactory.getNotificationActivateService();
+        return null;
     }
 
     /**
@@ -138,7 +137,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return SaleRefundBillBlFactory.getNotificationAbandonService();
+        return null;
     }
 
     /**
@@ -148,7 +147,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return SaleRefundBillBlFactory.getBillApprovalCompleteService();
+        return null;
     }
 
     /**
@@ -158,7 +157,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return SaleRefundBillBlFactory.getDraftDeleteService();
+        return null;
     }
 
     /**

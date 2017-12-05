@@ -22,10 +22,7 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
 
     @Override
     public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
-        return new CommoditySortPo[]{
-                new CommoditySortPo("S0001","Led", null,
-                "")
-        };
+        return null;
     }
 
     @Override
@@ -35,18 +32,12 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
 
     @Override
     public CommoditySortPo[] display() {
-        return new CommoditySortPo[]{
-                new CommoditySortPo("S0001","Led", null,
-                        "")
-        };
+        return null;
     }
 
     @Override
     public CommoditySortPo[] dispaly(CommoditySortPo commoditySort) {
-        return new CommoditySortPo[]{
-                new CommoditySortPo(commoditySort.getId(),commoditySort.getName(), null,
-                        "")
-        };
+        return null;
     }
 
 

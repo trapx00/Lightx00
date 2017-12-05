@@ -10,5 +10,5 @@ public interface ExternalLoadableUiController {
      * Loads the controller.
      * @return external loaded ui controller and component
      */
-    ExternalLoadedUiPackage load() throws IOException;
+    ExternalLoadedUiPackage load();
 }

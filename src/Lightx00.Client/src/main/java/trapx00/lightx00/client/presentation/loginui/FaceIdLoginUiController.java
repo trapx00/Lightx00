@@ -2,8 +2,6 @@ package trapx00.lightx00.client.presentation.loginui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXProgressBar;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -11,7 +9,7 @@ import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.bl.loginbl.factory.FaceIdAuthenticationBlServiceFactory;
 import trapx00.lightx00.client.blservice.loginblservice.FaceIdAuthenticationBlService;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.StageManager;
 import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
@@ -100,6 +98,6 @@ public class FaceIdLoginUiController {
     }
 
     public void onCancelButtonClicked(ActionEvent actionEvent) {
-        UiUtil.closeStage();
+        StageManager.closeStage();
     }
 }

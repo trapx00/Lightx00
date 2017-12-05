@@ -4,7 +4,6 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
@@ -14,11 +13,10 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleBillVo extends SaleBillBaseVo {
     private String clientId;
-    private SaleStaffVo salesman;
+    private EmployeeVo defaultOperator;
     private SaleStaffVo operator;
     private int repository;
     private CommodityItem[] commodityList;
@@ -35,7 +33,7 @@ public class SaleBillVo extends SaleBillBaseVo {
     public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList,double giftToken) {
         super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
-        this.salesman = salesman;
+        this.defaultOperator = defaultOperator;
         this.operator = operator;
         this.repository = repository;
         this.commodityList = commodityList;
@@ -58,12 +56,12 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientId = clientId;
     }
 
-    public SaleStaffVo getSalesman() {
-        return salesman;
+    public EmployeeVo getDefaultOperator() {
+        return defaultOperator;
     }
 
-    public void setSalesman(SaleStaffVo salesman) {
-        this.salesman = salesman;
+    public void setDefaultOperator(EmployeeVo defaultOperator) {
+        this.defaultOperator = defaultOperator;
     }
 
     public SaleStaffVo getOperator() {
@@ -169,7 +167,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return SaleBillBlFactory.getNotificationActivateService();
+        return null;
     }
 
     /**
@@ -179,7 +177,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return SaleBillBlFactory.getNotificationAbandonService();
+        return null;
     }
 
     /**
@@ -189,7 +187,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return SaleBillBlFactory.getBillApprovalCompleteService();
+        return null;
     }
 
     /**
@@ -199,7 +197,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return SaleBillBlFactory.getDraftDeleteService();
+        return null;
     }
 
     /**

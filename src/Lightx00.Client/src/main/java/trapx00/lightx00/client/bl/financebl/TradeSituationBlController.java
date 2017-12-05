@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.financebl;
 
-import trapx00.lightx00.client.bl.couponbl.CouponInfo;
-import trapx00.lightx00.client.bl.couponbl.factory.CouponFactory;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.CouponInfo;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.factory.CouponFactory;
 import trapx00.lightx00.client.bl.inventorybl.InventoryDetailBillInfo;
 import trapx00.lightx00.client.bl.inventorybl.InventoryGiftInfo;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;

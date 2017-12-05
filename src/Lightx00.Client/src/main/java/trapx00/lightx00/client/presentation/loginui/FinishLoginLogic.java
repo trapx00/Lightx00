@@ -5,7 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import trapx00.lightx00.client.Client;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
+import trapx00.lightx00.client.presentation.helpui.StageManager;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
 
@@ -14,13 +15,15 @@ import java.io.IOException;
 public class FinishLoginLogic {
     public static void finishLogin(EmployeeVo employeeVo) {
         try {
-            UiUtil.closeStage();
+            StageManager.closeStage();
             Stage newStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Client.class.getResource("/fxml/mainui/FrameworkUi.fxml"));
             Scene scene = new Scene(loader.load());
 
             FrameworkUiController controller = loader.getController();
+
+            FrameworkUiManager.setFrameworkUiController(controller);
 
             newStage.initStyle(StageStyle.UNDECORATED);
 

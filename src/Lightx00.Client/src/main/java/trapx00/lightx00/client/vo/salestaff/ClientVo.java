@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.vo.salestaff;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
@@ -123,16 +124,6 @@ public class ClientVo implements Draftable {
     }
 
     /**
-     * Gets the key-value maps to display the properties.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
-
-    /**
      * Gets DeleteService corresponding to this type of draft.
      *
      * @return DeleteService
@@ -149,6 +140,16 @@ public class ClientVo implements Draftable {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
+        return null;
+    }
+
+    /**
+     * 显示详细信息UI
+     *
+     * @return 显示详细信息UI
+     */
+    @Override
+    public ContentDisplayUi contentDisplayUi() {
         return null;
     }
 }

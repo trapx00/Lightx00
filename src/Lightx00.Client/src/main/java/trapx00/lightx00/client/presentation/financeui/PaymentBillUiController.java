@@ -26,7 +26,7 @@ public class PaymentBillUiController implements DraftContinueWritableUiControlle
      * @return external loaded ui controller and component
      */
     @Override
-    public ExternalLoadedUiPackage load() throws IOException {
+    public ExternalLoadedUiPackage load() {
         return null;
     }
 }

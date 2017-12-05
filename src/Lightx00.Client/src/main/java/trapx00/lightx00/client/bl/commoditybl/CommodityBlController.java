@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.commoditybl;
 
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
 import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
 import trapx00.lightx00.client.bl.util.PoVoConverter;
@@ -30,7 +31,7 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public ResultMessage add(CommodityVo newCommodity) {
-        CommodityPo commodityPo = fromVoToPo(newCommodity);
+        CommodityPo commodityPo=this.fromVoToPo(newCommodity);
         try{
             ResultMessage opResult = dataService.add(commodityPo);
             if (opResult.isSuccess()) {
@@ -57,7 +58,7 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public ResultMessage modify(CommodityVo updateCommodity) {
-        CommodityPo commodityPo=fromVoToPo(updateCommodity);
+        CommodityPo commodityPo=this.fromVoToPo(updateCommodity);
         try{
             ResultMessage opResult = dataService.modify(commodityPo);
             if (opResult.isSuccess()) {
@@ -83,7 +84,19 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public CommodityVo[] query(CommodityQueryVo commodityQueryVo) {
-        return new CommodityVo[0];
+        String logLeadingText = String.format("查找商品");
+        try {
+            CommodityPo[] queryResult = dataService.query(commodityQueryVo);
+            logService.log(LogSeverity.Success, String.format(logLeadingText + "成功，查找到%d条记录。", queryResult.length));
+            CommodityVo[] result=new CommodityVo[queryResult.length];
+            for(int i=0;i<queryResult.length;i++){
+                result[i]=this.fromPoToVo(queryResult[i]);
+            }
+            return result;
+        } catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     /**
@@ -93,7 +106,22 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public ResultMessage delete(CommodityVo commodity) {
-        return ResultMessage.Success;
+        CommodityPo commodityPo=this.fromVoToPo(commodity);
+        try{
+            ResultMessage opResult = dataService.delete(commodityPo);
+            if (opResult.isSuccess()) {
+                logService.log(LogSeverity.Success, String.format("删除了商品%s,编号为%s。", commodity.getName(), commodity.getId()));
+            } else {
+                logService.log(LogSeverity.Failure, String.format("删除商品%s失败，原因不明。",commodity.getName()));
+            }
+            return opResult;
+        }catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, String.format( "删除%s商品失败，原因是网络原因，具体信息是%s。", commodity.getName(),e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        }catch (IdNotExistsException e) { //参考服务器端写的代码，直接抓对应的异常即可，记得如果不在这里处理，需要继续往外抛出。比如这里就需要UI层继续处理这个异常，所以需要继续抛出。
+            logService.log(LogSeverity.Failure, String.format("删除商品%s%s失败，原商品不存在", commodity.getId(), commodity.getName()));
+            throw e;
+        }
     }
 
     /**
@@ -103,12 +131,46 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return new CommodityVo[0];
+        String logLeadingText = String.format("查找商品");
+        try {
+            CommodityPo[] queryResult = dataService.query(commodityQueryVo);
+            logService.log(LogSeverity.Success, String.format(logLeadingText + "成功，查找到%d条记录。", queryResult.length));
+            CommodityVo[] result=new CommodityVo[queryResult.length];
+            for(int i=0;i<queryResult.length;i++){
+                result[i]=this.fromPoToVo(queryResult[i]);
+            }
+            return result;
+        } catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     @Override
     public ResultMessage update(String id, double value) {
-        return null;
+        String logLeadingText = String.format("修改警戒值");
+        try{
+            CommodityPo[] commodityPos=dataService.query(new CommodityQueryVo().eq("id",id));
+            CommodityVo commodityVo=this.fromPoToVo(commodityPos[0]);
+            commodityVo.setWarningValue(value);
+            this.modify(commodityVo);
+            logService.log(LogSeverity.Success, String.format("修改%s%s的警戒值成功",commodityVo.getId(),commodityVo.getName()));
+            return ResultMessage.Success;
+        }catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        }
+    }
+
+    @Override
+    public CommodityVo[] getAllCommodity() {
+
+        CommodityPo[] commodityPos=dataService.getAllCommodity();
+        CommodityVo[] commodityVos=new CommodityVo[commodityPos.length];
+        for(int i=0;i<commodityPos.length;i++){
+            commodityVos[i]= this.fromPoToVo(commodityPos[i]);
+        }
+        return commodityVos;
     }
 
     /**
@@ -120,7 +182,18 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
      */
     @Override
     public ResultMessage modifyInventory(String commodityId, InventoryModificationFlag flag, double delta) {
-        return ResultMessage.Success;
+        String logLeadingText = String.format("修改库存");
+        try{
+            CommodityPo[] commodityPos=dataService.query(new CommodityQueryVo().eq("id",commodityId));
+            CommodityVo commodityVo=this.fromPoToVo(commodityPos[0]);
+            commodityVo.setAmount(commodityVo.getAmount()+((flag==InventoryModificationFlag.Up?1:-1)*delta));
+            this.modify(commodityVo);
+            logService.log(LogSeverity.Success, String.format("修改%s%s的库存值成功",commodityVo.getId(),commodityVo.getName()));
+            return ResultMessage.Success;
+        }catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        }
     }
 
     @Override

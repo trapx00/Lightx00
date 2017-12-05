@@ -27,8 +27,8 @@ public class CommoditySortDataControllerTest {
 
     private Dao<CommoditySortPo, String> dao = CommodityDataDaoFactory.getCommoditySortDao();
     private CommoditySortDataService service= CommoditySortDataFactory.getCommoditySortDataService();
-    private  CommoditySortPo commoditySortPo = new CommoditySortPo("PRO-0001","Led",null,null);
-    private  CommoditySortPo commoditySortPo1 = new CommoditySortPo("PRO-0002","Led",null,"PRO-0001");
+    private  CommoditySortPo commoditySortPo = new CommoditySortPo("PRO-0001","Led",null,null,null);
+    private  CommoditySortPo commoditySortPo1 = new CommoditySortPo("PRO-0002","Led",null,"PRO-0001",null);
 
     @Before
     public void setUp() throws Exception {

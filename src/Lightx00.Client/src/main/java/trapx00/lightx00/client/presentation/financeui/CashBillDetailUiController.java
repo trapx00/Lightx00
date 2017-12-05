@@ -18,6 +18,9 @@ import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
+/**
+ * 现金费用单详细信息UI。注意，单据UI详细信息实现了BIllDetailUi后，不需要再实现DraftDetailUi。
+ */
 public class CashBillDetailUiController extends BillDetailUi {
     public JFXTextField tfBillState;
     public JFXTextField tfBankaccountId;

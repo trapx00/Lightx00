@@ -81,14 +81,6 @@ public abstract class PromotionVoBase implements Draftable, Serializable {
     }
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public abstract HashMap<String, String> properties();
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService

@@ -16,18 +16,18 @@ public interface InventoryCheckBlService {
      * @param endTime
      * @return The inventoryView during specified time range
      */
-    InventoryViewVo[] getInventoryView(Date beginTime, Date endTime);//库存查看
+    InventoryViewVo getInventoryView(Date beginTime, Date endTime);//库存查看
 
     /**
      * Gets the inventory snapshot
      * @return The inventory snapshot during that day
      */
-    InventoryPictureVo[] getInventoryPicture();//库存盘点
+    InventoryPictureVo getInventoryPicture();//库存盘点
 
     /**
      * Exports the inventory snapshot to the required file by excel
      * @param newfile
      * @return whether the operation is done successfully
      */
-    ResultMessage export(File newfile);//导出Excel
+    ResultMessage export(String newfile);//导出Excel
 }

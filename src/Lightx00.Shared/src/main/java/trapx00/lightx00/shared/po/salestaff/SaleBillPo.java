@@ -13,7 +13,7 @@ public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
     private String clientId;
     @DatabaseField
-    private String salesmanId;
+    private String defaultOperatorId;
     @DatabaseField
     private String operatorId;
     @DatabaseField
@@ -45,7 +45,7 @@ public class SaleBillPo extends SaleBillBasePo {
     public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
         super(id, date, state, SaleBillType.Sale);
         this.clientId = clientId;
-        this.salesmanId = salesmanId;
+        this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;
         this.repository = repository;
         this.commodityList = commodityList;
@@ -68,12 +68,12 @@ public class SaleBillPo extends SaleBillBasePo {
         this.clientId = clientId;
     }
 
-    public String getSalesmanId() {
-        return salesmanId;
+    public String getDefaultOperatorId() {
+        return defaultOperatorId;
     }
 
-    public void setSalesmanId(String salesmanId) {
-        this.salesmanId = salesmanId;
+    public void setDefaultOperatorId(String defaultOperatorId) {
+        this.defaultOperatorId = defaultOperatorId;
     }
 
     public String getOperatorId() {

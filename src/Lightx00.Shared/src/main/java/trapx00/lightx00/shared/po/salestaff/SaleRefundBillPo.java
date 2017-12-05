@@ -12,7 +12,7 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
     private String clientId;
     @DatabaseField
-    private String salesmanId;
+    private String defaultOperatorId;
     @DatabaseField
     private String operatorId;
     @DatabaseField
@@ -33,10 +33,10 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     public SaleRefundBillPo() {
     }
 
-    public SaleRefundBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
+    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType);
         this.clientId = clientId;
-        this.salesmanId = salesmanId;
+        this.defaultOperatorId = defaultOperatorId;
         this.operatorId = operatorId;
         this.repository = repository;
         this.commodityList = commodityList;
@@ -55,12 +55,12 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         this.clientId = clientId;
     }
 
-    public String getSalesmanId() {
-        return salesmanId;
+    public String getDefaultOperatorId() {
+        return defaultOperatorId;
     }
 
-    public void setSalesmanId(String salesmanId) {
-        this.salesmanId = salesmanId;
+    public void setDefaultOperatorId(String defaultOperatorId) {
+        this.defaultOperatorId = defaultOperatorId;
     }
 
     public String getOperatorId() {

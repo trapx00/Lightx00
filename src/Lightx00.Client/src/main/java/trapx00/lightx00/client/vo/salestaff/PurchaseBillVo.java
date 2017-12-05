@@ -2,7 +2,6 @@ package trapx00.lightx00.client.vo.salestaff;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
@@ -23,8 +22,8 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
     private double total;
     private CommodityItem[] commodityList;
 
-    public PurchaseBillVo(String id, Date date, BillState state, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, PurchaseBillType.Purchase);
+    public PurchaseBillVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, purchaseBillType);
         this.clientId = clientId;
         this.repository = repository;
         this.operator = operator;
@@ -88,7 +87,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return PurchaseBillBlFactory.getNotificationActivateService();
+        return null;
     }
 
     /**
@@ -98,7 +97,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return PurchaseBillBlFactory.getNotificationAbandonService();
+        return null;
     }
 
     /**
@@ -108,7 +107,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return PurchaseBillBlFactory.getBillApprovalCompleteService();
+        return null;
     }
 
     /**
@@ -118,7 +117,7 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return PurchaseBillBlFactory.getDraftDeleteService();
+        return null;
     }
 
     /**

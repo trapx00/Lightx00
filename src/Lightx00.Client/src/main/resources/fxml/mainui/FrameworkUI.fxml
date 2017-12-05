@@ -39,13 +39,6 @@
                             </ImageView>
                         </graphic>
                     </Label>
-                    
-
-                    <JFXButton onAction="#onTradeSituationClicked" prefHeight="60" prefWidth="200" text="查看经营情况表" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">

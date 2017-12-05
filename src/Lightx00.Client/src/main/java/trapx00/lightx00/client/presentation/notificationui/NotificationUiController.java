@@ -12,9 +12,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.Client;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
@@ -25,11 +23,12 @@ import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Date;
 
 @SuppressWarnings("unchecked")
-public class NotificationUiController {
+public class NotificationUiController implements ExternalLoadableUiController {
 
     public JFXButton selectAllButton;
     public JFXButton deleteButton;
@@ -123,10 +122,18 @@ public class NotificationUiController {
         NotificationModel model = notificationTable.getRoot().getChildren().get(index).getValue();
         JFXDialog dialog = PromptDialogHelper.start("消息详细内容","你选择了通知").create(frameworkController.dialogContainer);
         ExternalLoadedUiPackage uiPackage = model.getVoObjectProperty().notificationDetailUi().showContent(model.getVoObjectProperty());
-        NotificationDetailUi controller = (NotificationDetailUi) uiPackage.getController();
-        controller.setFatherDialogContainer(frameworkController.dialogContainer);
-        controller.setCurrentDialog(dialog);
         dialog.setContent((Region) uiPackage.getComponent());
+        FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
         dialog.show();
+    }
+
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/notificationui/NotificationUi.fxml").loadAndGetPackageWithoutException();
     }
 }

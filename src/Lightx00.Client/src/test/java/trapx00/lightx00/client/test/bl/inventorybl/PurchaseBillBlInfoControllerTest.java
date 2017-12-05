@@ -19,7 +19,7 @@ public class PurchaseBillBlInfoControllerTest {
     PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
     PurchaseBillBlController purchaseBillBlController = PurchaseBillBlFactory.getPurchaseBillBlController();
     PurchaseRefundBillBlController purchaseRefundBillBlController = PurchaseRefundBillBlFactory.getPurchaseRefundBillBlController();
-    PurchaseBillVo purchaseBillVo=new PurchaseBillVo("0",null,null,null,1,null,null,100,null);
+    PurchaseBillVo purchaseBillVo=new PurchaseBillVo("0",null,null,null,"1",1,null,null,100,null);
     PurchaseRefundBillVo purchaseRefundBillVo=new PurchaseRefundBillVo("0",null,null,null,1,null,null,100,null);
 
     @Test

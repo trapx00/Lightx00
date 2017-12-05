@@ -4,11 +4,11 @@ import trapx00.lightx00.client.vo.Reversible;
 
 import java.io.IOException;
 
-public interface ReversibleUi<T extends Reversible> {
+public interface ReversibleUi {
     /**
      * Revert a reversible.
      * @param reversible reversible
      * @return External loaded ui package including a controller and the component.
      */
-    ExternalLoadedUiPackage revertReversible(T reversible) throws IOException;
+    ExternalLoadedUiPackage revertReversible(Reversible reversible);
 }

@@ -111,4 +111,8 @@ public class PromptDialogHelper {
         dialog.setDialogContainer(container);
         return dialog;
     }
+
+    public JFXDialog create() {
+        return create(FrameworkUiManager.getDialogContainer());
+    }
 }

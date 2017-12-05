@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.StageManager;
 
 public class Client extends Application {
 
@@ -32,7 +32,7 @@ public class Client extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/loginui/LoginUi.fxml"));
         Scene newScene = new Scene(loader.load());
-        UiUtil.setStage(primaryStage);
+        StageManager.setStage(primaryStage);
         primaryStage.setScene(newScene);
         primaryStage.show();
     }
