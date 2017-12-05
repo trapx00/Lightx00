@@ -27,8 +27,8 @@ public class FinanceStaffUiController extends FrameworkUiController {
         /**
          * 调用父类切换界面方法实现切换界面。
          * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
-         * @see #switchFunction(Class, String)
+         * @see #switchFunction(Class, String, boolean)
          */
-        switchFunction(CashBillUiController.class, "制定现金费用单");
+        switchFunction(CashBillUiController.class, "制定现金费用单",true);
     }
 }

@@ -89,15 +89,15 @@ public class FrameworkUiController {
     }
 
     public void onDraftFunctionButtonClicked(ActionEvent event) {
-        switchFunction(DraftUiController.class, "草稿");
+        switchFunction(DraftUiController.class, "草稿", true);
     }
 
     public void onLogButtonClicked(ActionEvent actionEvent) {
-        switchFunction(LogUiController.class, "日志");
+        switchFunction(LogUiController.class, "日志", true);
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-        switchFunction(NotificationUiController.class, "通知");
+        switchFunction(NotificationUiController.class, "通知",true);
 
     }
 
