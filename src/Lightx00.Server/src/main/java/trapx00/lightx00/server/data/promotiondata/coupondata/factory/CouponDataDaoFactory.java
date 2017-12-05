@@ -1,4 +1,4 @@
-package trapx00.lightx00.server.data.coupondata.factory;
+package trapx00.lightx00.server.data.promotiondata.coupondata.factory;
 
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;

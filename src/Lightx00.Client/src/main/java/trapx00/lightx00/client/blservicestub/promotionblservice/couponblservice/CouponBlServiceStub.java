@@ -1,6 +1,6 @@
-package trapx00.lightx00.client.blservicestub.couponblservice;
+package trapx00.lightx00.client.blservicestub.promotionblservice.couponblservice;
 
-import trapx00.lightx00.client.blservice.couponblservice.CouponBlService;
+import trapx00.lightx00.client.blservice.promotionblservice.couponblservice.CouponBlService;
 import trapx00.lightx00.client.vo.manager.CouponVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 

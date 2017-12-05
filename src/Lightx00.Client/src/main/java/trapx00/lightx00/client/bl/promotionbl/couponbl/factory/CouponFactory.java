@@ -1,9 +1,9 @@
-package trapx00.lightx00.client.bl.couponbl.factory;
+package trapx00.lightx00.client.bl.promotionbl.couponbl.factory;
 
-import trapx00.lightx00.client.bl.couponbl.CouponBlController;
-import trapx00.lightx00.client.bl.couponbl.CouponInfo;
-import trapx00.lightx00.client.bl.couponbl.SendCouponInfo;
-import trapx00.lightx00.client.bl.couponbl.UseCouponInfo;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.CouponBlController;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.CouponInfo;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.SendCouponInfo;
+import trapx00.lightx00.client.bl.promotionbl.couponbl.UseCouponInfo;
 
 public class CouponFactory {
     private static CouponBlController controller = new CouponBlController();

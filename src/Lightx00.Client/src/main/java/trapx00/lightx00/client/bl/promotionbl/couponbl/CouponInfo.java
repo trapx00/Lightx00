@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.bl.couponbl;
+package trapx00.lightx00.client.bl.promotionbl.couponbl;
 import java.util.Date;
 
 public interface CouponInfo {

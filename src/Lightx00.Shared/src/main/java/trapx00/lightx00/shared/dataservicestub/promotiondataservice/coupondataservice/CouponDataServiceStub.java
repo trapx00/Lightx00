@@ -1,6 +1,6 @@
-package trapx00.lightx00.shared.dataservicestub.coupondataservice;
+package trapx00.lightx00.shared.dataservicestub.promotiondataservice.coupondataservice;
 
-import trapx00.lightx00.shared.dataservice.coupondataservice.CouponDataService;
+import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.CouponPo;
 import trapx00.lightx00.shared.queryvo.promotion.UsedCouponQueryVo;
