@@ -88,29 +88,15 @@ public class FrameworkUiController {
     }
 
     public void onDraftFunctionButtonClicked(ActionEvent event) {
-        if (!(subController instanceof DraftUiController)) {
-            subController = DraftUiController.init(this);
-        }
-    }
-    public void onTradeSituationClicked(ActionEvent actionEvent) {
-        if (!(subController instanceof TradeHistoryUiController)) {
-
-            subController = TradeHistoryUiController.init(this);
-        }
-
+        switchFunction(DraftUiController.class, "草稿");
     }
 
     public void onLogButtonClicked(ActionEvent actionEvent) {
-        if (!(subController instanceof LogUiController)) {
-
-            subController = LogUiController.init(this);
-        }
+        switchFunction(LogUiController.class, "日志");
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-        if (!(subController instanceof NotificationUiController)) {
-            subController = NotificationUiController.init(this);
-        }
+        switchFunction(NotificationUiController.class, "通知");
 
     }
 
@@ -126,6 +112,7 @@ public class FrameworkUiController {
                 subController = externalLoadedUiPackage.getController();
                 this.contentPane.getChildren().clear();
                 this.contentPane.getChildren().add(externalLoadedUiPackage.getComponent());
+                this.titleText.setText(title);
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }

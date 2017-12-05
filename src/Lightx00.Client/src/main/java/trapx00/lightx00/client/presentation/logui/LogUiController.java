@@ -11,6 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.Client;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -19,7 +22,7 @@ import trapx00.lightx00.client.vo.log.LogVo;
 import java.io.IOException;
 import java.util.Date;
 
-public class LogUiController {
+public class LogUiController implements ExternalLoadableUiController {
 
     public JFXTreeTableView<LogTableItemModel> logTable;
     public JFXTreeTableColumn<LogTableItemModel, String> logDateColumn;
@@ -64,4 +67,13 @@ public class LogUiController {
     }
 
 
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/logui/LogUi.fxml").loadAndGetPackageWithoutException();
+    }
 }
