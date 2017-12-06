@@ -17,8 +17,7 @@ import java.util.Date;
 
 public class SaleBillVo extends SaleBillBaseVo {
     private String clientId;
-    private EmployeeVo defaultOperator;
-    private String operatorId;
+    private String salesmanId;
     private int repository;
     private CommodityItem[] commodityList;
     private double originTotal;
@@ -31,10 +30,10 @@ public class SaleBillVo extends SaleBillBaseVo {
     private CommodityItem[] giftList;
     private double giftToken;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
+    public SaleBillVo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
         super(id, date, state, SaleBillType.Sale, operatorId);
         this.clientId = clientId;
-        this.defaultOperator = defaultOperator;
+        this.salesmanId = salesmanId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -56,12 +55,12 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientId = clientId;
     }
 
-    public EmployeeVo getDefaultOperator() {
-        return defaultOperator;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public void setDefaultOperator(EmployeeVo defaultOperator) {
-        this.defaultOperator = defaultOperator;
+    public void setSalesmanId(String salesmanId) {
+        this.salesmanId = salesmanId;
     }
 
     public int getRepository() {

@@ -15,6 +15,7 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
@@ -37,7 +38,7 @@ public class SaleRefundBillDataControllerTest {
         }
     }
 
-    private final SaleRefundBillPo bill = new SaleRefundBillPo("XSTHD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "");
+    private final SaleRefundBillPo bill = new SaleRefundBillPo("XSD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "");
     private Dao<SaleRefundBillPo, String> dao = SaleRefundBillDataDaoFactory.getSaleRefundBillDao();
     private SaleRefundBillDataService service = SaleRefundBillDataFactory.getService();
 

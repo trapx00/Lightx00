@@ -4,6 +4,8 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservicestub.approvaldataservice.AuditDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.financestaff.CashBillItem;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -15,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class AuditDataServiceDriver {
     private AuditDataService service = new AuditDataServiceStub();
-    private BillPo bill = new BillPo(BillType.FinanceBill,"XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval);
+    private BillPo bill = new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"123","123",new CashBillItem[] { new CashBillItem("123",0,"123")});
     private AuditIdPo auditId = new AuditIdPo("XJFYD-20171112-00001",new Date());
     @Test
     public void query() throws Exception {
