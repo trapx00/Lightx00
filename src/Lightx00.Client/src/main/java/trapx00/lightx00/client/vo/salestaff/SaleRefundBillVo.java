@@ -117,7 +117,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return SaleRefundBillBlFactory.getNotificationActivateService();
+        return null;
     }
 
     /**
@@ -127,7 +127,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return SaleRefundBillBlFactory.getNotificationAbandonService();
+        return null;
     }
 
     /**
@@ -137,7 +137,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return SaleRefundBillBlFactory.getBillApprovalCompleteService();
+        return null;
     }
 
     /**
@@ -147,7 +147,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return SaleRefundBillBlFactory.getDraftDeleteService();
+        return null;
     }
 
     /**
