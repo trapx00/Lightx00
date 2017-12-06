@@ -1,13 +1,21 @@
 package trapx00.lightx00.client.bl.approvalbl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.financebl.BillInfo;
 import trapx00.lightx00.client.bl.financebl.factory.BillInfoBlFactory;
 import trapx00.lightx00.client.bl.logbl.LogService;
 import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
+import trapx00.lightx00.client.bl.loginbl.CurrentUserService;
+import trapx00.lightx00.client.bl.loginbl.factory.CurrentUserServiceFactory;
+import trapx00.lightx00.client.bl.notificationbl.NotificationService;
+import trapx00.lightx00.client.bl.notificationbl.factory.NotificationServiceFactory;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
 import trapx00.lightx00.client.datafactory.approvaldataservicefactory.AuditDataServiceFactory;
 import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.manager.AuditIdVo;
+import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
@@ -18,6 +26,7 @@ import trapx00.lightx00.shared.queryvo.AuditIdQueryVo;
 
 import java.rmi.RemoteException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +34,9 @@ public class AuditBlController implements AuditBlService {
     private LogService logService = LogServiceFactory.getLogService();
     private AuditDataService dataService = AuditDataServiceFactory.getService();
     private BillInfo billDetailService = BillInfoBlFactory.getBillInfo();
+    private NotificationService notificationService = NotificationServiceFactory.getNotificationService();
+    private CurrentUserService currentUserService = CurrentUserServiceFactory.getCurrentUserService();
+    private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
 
     private AuditIdVo fromPoToVo(AuditIdPo po) {
         return new AuditIdVo(po.getId(), po.getApprovalTime());
@@ -50,6 +62,10 @@ public class AuditBlController implements AuditBlService {
                 //调用接口，修改bill的状态属性
                 BillApprovalCompleteService approvalService = currentBill.billApprovalCompleteService();
                 approvalService.approvalComplete(auditId.getId(),BillState.Rejected);
+                //通知相关人员
+                EmployeeVo[] receivers = new EmployeeVo[1];
+                receivers[0] = employeeInfo.queryById(currentBill.getOperatorId());
+                notificationService.addNotification(new BillApprovalNotificationVo(new Date(),currentUserService.getCurrentUser(),receivers,currentBill));
                 logService.log(LogSeverity.Success, String.format("审批单据并拒绝通过，单据编号是%s。", auditId.getId()));
             } else {
                 logService.log(LogSeverity.Failure, String.format("审批单据并拒绝通过操作失败，原因不明。单据编号是%s。",auditId.getId()));
@@ -76,6 +92,10 @@ public class AuditBlController implements AuditBlService {
                 //调用接口，修改bill的状态属性
                 BillApprovalCompleteService approvalService = currentBill.billApprovalCompleteService();
                 approvalService.approvalComplete(auditId.getId(),BillState.Approved);
+                //通知相关人员
+                EmployeeVo[] receivers = new EmployeeVo[1];
+                receivers[0] = employeeInfo.queryById(currentBill.getOperatorId());
+                notificationService.addNotification(new BillApprovalNotificationVo(new Date(),currentUserService.getCurrentUser(),receivers,currentBill));
                 logService.log(LogSeverity.Success, String.format("审批单据并通过，单据编号是%s。", auditId.getId()));
             } else {
                 logService.log(LogSeverity.Failure, String.format("审批单据并通过操作失败，原因不明。单据编号是%s。", auditId.getId()));

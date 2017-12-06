@@ -96,4 +96,15 @@ public abstract class PromotionVoBase implements Draftable, Serializable {
     @Override
     public abstract DraftContinueWritableUiController continueWritableUi();
 
+    @Override
+    public String toString() {
+        return "PromotionPo{" +
+                "promotionType =" + type +
+                ", id='" + id + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", state=" + state +
+                '}';
+    }
+
 }
