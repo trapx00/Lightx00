@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
@@ -117,7 +118,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return SaleRefundBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -127,7 +128,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return SaleRefundBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -137,7 +138,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -147,7 +148,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getDraftDeleteService();
     }
 
     /**
