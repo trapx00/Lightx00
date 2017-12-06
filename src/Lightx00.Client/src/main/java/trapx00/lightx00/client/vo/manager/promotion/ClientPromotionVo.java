@@ -2,6 +2,7 @@ package trapx00.lightx00.client.vo.manager.promotion;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.promotionbl.factory.ClientPromotionBlFactory;
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
@@ -47,16 +48,6 @@ public class ClientPromotionVo extends PromotionVoBase {
     }
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService
@@ -77,4 +68,13 @@ public class ClientPromotionVo extends PromotionVoBase {
     }
 
 
+    /**
+     * 显示详细信息UI
+     *
+     * @return 显示详细信息UI
+     */
+    @Override
+    public ContentDisplayUi contentDisplayUi() {
+        return null;
+    }
 }

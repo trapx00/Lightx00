@@ -1,8 +1,8 @@
 package trapx00.lightx00.shared.bldriver.coupondataservice;
 
 import org.junit.Test;
-import trapx00.lightx00.shared.dataservice.coupondataservice.CouponDataService;
-import trapx00.lightx00.shared.dataservicestub.coupondataservice.CouponDataServiceStub;
+import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
+import trapx00.lightx00.shared.dataservicestub.promotiondataservice.coupondataservice.CouponDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.CouponPo;
 

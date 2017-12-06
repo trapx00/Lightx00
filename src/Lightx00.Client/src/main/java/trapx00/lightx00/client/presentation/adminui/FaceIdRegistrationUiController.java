@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.blservice.adminblservice.FaceIdRegistrationBlService;
 import trapx00.lightx00.client.blservice.adminblservice.FaceIdRegistrationBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.StageManager;
 import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
 import trapx00.lightx00.shared.exception.faceid.NetworkException;
@@ -72,6 +72,6 @@ public class FaceIdRegistrationUiController {
 
 
     public void onBtnCancelClicked(ActionEvent actionEvent) {
-        UiUtil.closeStage();
+        StageManager.closeStage();
     }
 }

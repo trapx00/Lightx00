@@ -14,12 +14,11 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleBillVo extends SaleBillBaseVo {
     private String clientId;
-    private SaleStaffVo salesman;
-    private SaleStaffVo operator;
+    private EmployeeVo defaultOperator;
+    private String operatorId;
     private int repository;
     private CommodityItem[] commodityList;
     private double originTotal;
@@ -32,11 +31,10 @@ public class SaleBillVo extends SaleBillBaseVo {
     private CommodityItem[] giftList;
     private double giftToken;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList,double giftToken) {
-        super(id, date, state, SaleBillType.Sale);
+    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
+        super(id, date, state, SaleBillType.Sale, operatorId);
         this.clientId = clientId;
-        this.salesman = salesman;
-        this.operator = operator;
+        this.defaultOperator = defaultOperator;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -47,7 +45,7 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientLevel = clientLevel;
         this.promotionId = promotionId;
         this.giftList = giftList;
-        this.giftToken=giftToken;
+        this.giftToken = giftToken;
     }
 
     public String getClientId() {
@@ -58,20 +56,12 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientId = clientId;
     }
 
-    public SaleStaffVo getSalesman() {
-        return salesman;
+    public EmployeeVo getDefaultOperator() {
+        return defaultOperator;
     }
 
-    public void setSalesman(SaleStaffVo salesman) {
-        this.salesman = salesman;
-    }
-
-    public SaleStaffVo getOperator() {
-        return operator;
-    }
-
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
+    public void setDefaultOperator(EmployeeVo defaultOperator) {
+        this.defaultOperator = defaultOperator;
     }
 
     public int getRepository() {

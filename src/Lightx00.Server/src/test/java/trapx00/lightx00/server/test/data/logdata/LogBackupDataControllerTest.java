@@ -4,10 +4,13 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.table.TableUtils;
 import org.junit.Before;
 import org.junit.Test;
+import trapx00.lightx00.server.data.logdata.factory.LogBackupDataFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
+import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
@@ -26,7 +29,9 @@ public class LogBackupDataControllerTest {
             e.printStackTrace();
         }
     }
-    private LogDataService service = LogDataFactory.getService();
+
+    private LogDataService logDataService = LogDataFactory.getService();
+    private LogBackupDataService logBackupDataService = LogBackupDataFactory.getService();
     private Dao<LogPo, Integer> dao = LogDataDaoFactory.getLogDao();
     private LogPo logPo = new LogPo(new Date(), LogSeverity.Success, "123");
 
@@ -36,12 +41,13 @@ public class LogBackupDataControllerTest {
     }
 
     @Test
-    public void backupLog() throws Exception{
-
+    public void backupLog() throws Exception {
+        logDataService.log(logPo.getSeverity(), logPo.getContent());
+        assertEquals(ResultMessage.Success, logBackupDataService.backupLog());
     }
 
     @Test
-    public void fetchCloudLog() throws Exception{
+    public void fetchCloudLog() throws Exception {
 
     }
 

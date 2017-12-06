@@ -1,26 +1,35 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
+import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 
 public class CommoditySortVo {
     //商品分类
     private String id;
     private String name;
-    private String[] commodityIdList;
+    private CommodityItem[] commodityIdList;
     private String preId;//父类
-    private String[] nextIds; //子类
+    private CommoditySortItem[] commoditySortItems;
 
     //public static CommoditySortPo commoditySortVotoPo(CommoditySortVo  commoditySortVo){
    //     return new CommoditySortPo(commoditySortVo.getId(),commoditySortVo.getName(),commoditySortVo.get)
    // }
 
-    public CommoditySortVo(String id, String name, String[] commodityIdList,
-                           String preId, String[] nextIds) {
+    public CommoditySortVo(String id, String name, CommodityItem[] commodityIdList,
+                           String preId,CommoditySortItem[] commoditySortItems) {
         this.id = id;
         this.name = name;
         this.commodityIdList = commodityIdList;
         this.preId = preId;
-        this.nextIds = nextIds;
+        this.commoditySortItems=commoditySortItems;
+    }
+    public CommoditySortItem[] getCommoditySortItems() {
+        return commoditySortItems;
+    }
+
+    public void setCommoditySortItems(CommoditySortItem[] commoditySortItems) {
+        this.commoditySortItems = commoditySortItems;
     }
 
     public String getId() {
@@ -31,7 +40,7 @@ public class CommoditySortVo {
         return name;
     }
 
-    public String[] getCommodityIdList() {
+    public CommodityItem[] getCommodityIdList() {
         return commodityIdList;
     }
 
@@ -39,9 +48,6 @@ public class CommoditySortVo {
         return preId;
     }
 
-    public String[] getNextIds() {
-        return nextIds;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -51,7 +57,7 @@ public class CommoditySortVo {
         this.name = name;
     }
 
-    public void setCommodityIdList(String[] commodityIdList) {
+    public void setCommodityItem(CommodityItem[] commodityIdList) {
         this.commodityIdList = commodityIdList;
     }
 
@@ -59,7 +65,4 @@ public class CommoditySortVo {
         this.preId = preId;
     }
 
-    public void setNextIds(String[] nextIds) {
-        this.nextIds = nextIds;
-    }
 }

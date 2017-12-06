@@ -26,7 +26,7 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
         String lowNextIds[]={""};
         return new CommoditySortVo[]{
                 new CommoditySortVo("S0001","Led", null,
-                "", nextIds)
+                "", null)
         };
     }
 
@@ -36,24 +36,9 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
     }
 
     @Override
-    public CommoditySortVo[] display() {
-        String commodityIdList[]={"C0001","C0002"};
-        String nextIds[]={"S0002"};
-        String lowNextIds[]={""};
-        return new CommoditySortVo[]{
-                new CommoditySortVo("S0001","Led", null,
-                        "", nextIds)
-        };
+    public CommoditySortVo[] getAllCommoditySort() {
+        return new CommoditySortVo[0];
     }
 
-    @Override
-    public CommoditySortVo[] dispaly(CommoditySortVo commoditySort) {
-        String commodityIdList[]={"C0001","C0002"};
-        String nextIds[]={"S0002"};
-        String lowNextIds[]={""};
-        return new CommoditySortVo[]{
-                new CommoditySortVo("S0002","lowLed", commodityIdList,
-                        "", lowNextIds)
-        };
-    }
+
 }

@@ -28,7 +28,7 @@ public interface InventoryGiftDataService  extends CommonBillDataService<Invento
     /**
      * Activates a CashBill.
      * The bill must be in BillState.WaitingForApproval state.
-     * Otherwise a BillInvalidStateException will be thrown.
+     * OtherwiseEx a BillInvalidStateception will be thrown.
      *
      * @param id id for the bill that have been approved of
      * @return whether the operation is done successfully

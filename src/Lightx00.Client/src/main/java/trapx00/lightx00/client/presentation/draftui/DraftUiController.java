@@ -12,8 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Region;
 import trapx00.lightx00.client.Client;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.ReadOnlyPairTableHelper;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.DraftDemoVo;
 import trapx00.lightx00.shared.po.bill.BillType;
@@ -23,7 +22,7 @@ import trapx00.lightx00.shared.util.DateHelper;
 import java.io.IOException;
 import java.util.Date;
 
-public class DraftUiController {
+public class DraftUiController implements ExternalLoadableUiController {
     public JFXButton selectAllButton;
     public JFXButton deleteButton;
     public JFXTreeTableView<DraftTableItemModel> draftTable;
@@ -105,7 +104,6 @@ public class DraftUiController {
                     .addTable(
                             ReadOnlyPairTableHelper.start()
                                     .addPair("单据编号", String.valueOf(model.getId()))
-                                    .addMap(model.getDraft().properties())
                                     .create())
                     .addCloseButton("取消","CLOSE",null)
                     .addCloseButton("确定","CHECK",e -> {
@@ -125,5 +123,15 @@ public class DraftUiController {
                     .create(frameworkController.dialogContainer).show();
         }
 
+    }
+
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/draftui/DraftUi.fxml").loadAndGetPackageWithoutException();
     }
 }

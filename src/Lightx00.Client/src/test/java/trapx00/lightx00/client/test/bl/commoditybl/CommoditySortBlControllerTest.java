@@ -15,7 +15,7 @@ public class CommoditySortBlControllerTest {
     private CommoditySortBlController service= CommoditySortServiceFactory.getController();
     String nextIds[]={"S0002"};
     CommoditySortVo Led=new CommoditySortVo("S0001","Led", null,
-            "",  nextIds);
+            "",  null);
 
 
     @Test
@@ -40,7 +40,7 @@ public class CommoditySortBlControllerTest {
 
     @Test
     public void display() throws Exception {
-        assertEquals("S0002",Led.getNextIds()[0]);
+        assertEquals("S0001",Led.getId());
     }
 
     @Test

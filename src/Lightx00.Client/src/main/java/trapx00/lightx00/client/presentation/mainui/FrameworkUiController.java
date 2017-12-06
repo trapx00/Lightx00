@@ -15,12 +15,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
-import trapx00.lightx00.client.presentation.helpui.BorderlessStageHelper;
-import trapx00.lightx00.client.presentation.helpui.UiUtil;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
 import trapx00.lightx00.client.vo.EmployeeVo;
+
+import java.io.IOException;
 
 public class FrameworkUiController {
     public StackPane dialogContainer;
@@ -39,10 +40,11 @@ public class FrameworkUiController {
     public Text titleText;
     protected EmployeeVo employeeVo;
     private Object subController;
+    private DialogStack dialogStack = new DialogStack();
 
     public void setStage(Stage stage) {
         this.stage = stage;
-        UiUtil.setStage(stage);
+        StageManager.setStage(stage);
         BorderlessStageHelper.makeResizeable(stage);
         BorderlessStageHelper.makeDraggable(stage, titleBar);
     }
@@ -86,29 +88,38 @@ public class FrameworkUiController {
     }
 
     public void onDraftFunctionButtonClicked(ActionEvent event) {
-        if (!(subController instanceof DraftUiController)) {
-            subController = DraftUiController.init(this);
-        }
-    }
-    public void onTradeSituationClicked(ActionEvent actionEvent) {
-        if (!(subController instanceof TradeHistoryUiController)) {
-
-            subController = TradeHistoryUiController.init(this);
-        }
-
+        switchFunction(DraftUiController.class, "草稿");
     }
 
     public void onLogButtonClicked(ActionEvent actionEvent) {
-        if (!(subController instanceof LogUiController)) {
-
-            subController = LogUiController.init(this);
-        }
+        switchFunction(LogUiController.class, "日志");
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-        if (!(subController instanceof NotificationUiController)) {
-            subController = NotificationUiController.init(this);
-        }
+        switchFunction(NotificationUiController.class, "通知");
 
+    }
+
+    /**
+     * 切换功能界面的方法。
+     * @param clazz 对应功能界面的类对象
+     * @param title 标题名称
+     */
+    public void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title) {
+        if (!clazz.isAssignableFrom(subController.getClass())) {
+            try {
+                ExternalLoadedUiPackage externalLoadedUiPackage = clazz.newInstance().load();
+                subController = externalLoadedUiPackage.getController();
+                this.contentPane.getChildren().clear();
+                this.contentPane.getChildren().add(externalLoadedUiPackage.getComponent());
+                this.titleText.setText(title);
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public DialogStack getDialogStack() {
+        return dialogStack;
     }
 }

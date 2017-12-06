@@ -9,6 +9,7 @@ import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftServiceFactor
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -63,15 +64,6 @@ public class InventoryGiftVo extends InventoryBillBaseVo {
         return InventoryGiftServiceFactory.getNotificationAbandonService();
     }
 
-    /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
 
     /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
@@ -92,6 +84,12 @@ public class InventoryGiftVo extends InventoryBillBaseVo {
     public DraftContinueWritableUiController continueWritableUi() {
         return null;
     }
+
+    @Override
+    public BillDetailUi billDetailUi() {
+        return null;
+    }
+
     /**
      * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
      *

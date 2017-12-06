@@ -14,21 +14,31 @@ public class CommoditySortPo {
     @DatabaseField
     private String name;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private CommodityPo []commodityList;
+    private CommodityItem []commodityList;
     @DatabaseField
     private String preId;//父类
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private CommoditySortItem[] commoditySortItems;
 
 
     public CommoditySortPo(){
 
     }
 
-    public CommoditySortPo(String id, String name, CommodityPo[] commodityList,
-                           String preId) {
+    public CommoditySortPo(String id, String name, CommodityItem[] commodityList,
+                           String preId, CommoditySortItem[] commoditySortItems) {
         this.id = id;
         this.name = name;
         this.commodityList = commodityList;
         this.preId = preId;
+        this.commoditySortItems=commoditySortItems;
+    }
+    public CommoditySortItem[] getCommoditySortItems() {
+        return commoditySortItems;
+    }
+
+    public void setCommoditySortItems(CommoditySortItem[] commoditySortItems) {
+        this.commoditySortItems = commoditySortItems;
     }
 
     public String getId() {
@@ -39,11 +49,11 @@ public class CommoditySortPo {
         return name;
     }
 
-    public CommodityPo[] getCommodityList() {
+    public CommodityItem[] getCommodityList() {
         return commodityList;
     }
 
-    public void setCommodityList(CommodityPo[] commodityList) {
+    public void setCommodityList(CommodityItem[] commodityList) {
         this.commodityList = commodityList;
     }
 

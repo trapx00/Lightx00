@@ -9,6 +9,7 @@ import trapx00.lightx00.client.bl.financebl.factory.CashBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.financeui.CashBillDetailUiController;
+import trapx00.lightx00.client.presentation.financeui.CashBillUiController;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
@@ -117,7 +118,7 @@ public class CashBillVo extends FinanceBillVo implements Reversible {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new CashBillUiController();
     }
 
     /**
@@ -127,11 +128,11 @@ public class CashBillVo extends FinanceBillVo implements Reversible {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new CashBillUiController(); //对应的单据填写UiController实现红冲接口后，在Vo里new一个新的controller返回。
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return new CashBillDetailUiController();
+        return new CashBillDetailUiController(); // 这个是对应的单据详情显示界面，和上面的不一样。
     }
 }

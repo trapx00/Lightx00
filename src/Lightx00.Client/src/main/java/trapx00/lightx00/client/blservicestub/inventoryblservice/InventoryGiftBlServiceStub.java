@@ -4,6 +4,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServi
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
@@ -34,6 +35,12 @@ public class InventoryGiftBlServiceStub implements InventoryGiftBlService {
     @Override
     public ResultMessage saveAsDraft(InventoryGiftVo bill) {
         return null;
+    }
+
+
+    @Override
+    public CommodityItem[] getPromotionCommodity(String id) {
+        return new CommodityItem[0];
     }
 
 

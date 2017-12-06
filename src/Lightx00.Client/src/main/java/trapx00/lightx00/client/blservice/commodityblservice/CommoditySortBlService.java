@@ -14,7 +14,7 @@ public interface CommoditySortBlService {
      * @param parentSort
      * @return whether the operation is done successfully
      */
-    ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort);//新建分类
+    ResultMessage add(CommoditySortVo newSort,CommoditySortVo parentSort);//新建分类
 
     /**
      * Modify a commoditySort
@@ -41,12 +41,6 @@ public interface CommoditySortBlService {
      * Display all commoditySorts
      * @return the list of commoditySort
      */
-    CommoditySortVo[] display();//得到all
+    CommoditySortVo[] getAllCommoditySort();//得到all
 
-    /**
-     *  Get the childsoft of a commoditySort
-     * @param commoditySort
-     * @return the childCommoditySort
-     */
-    CommoditySortVo[] dispaly(CommoditySortVo commoditySort);//得到子类
 }

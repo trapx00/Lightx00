@@ -52,19 +52,5 @@ public class CommoditySortBlControllerMock extends CommoditySortBlController {
      * Display all commoditySorts
      * @return The list of all commoditySorts
      */
-    @Override
-    public CommoditySortVo[] display() {
-        return super.display();
-    }
-
-    /**
-     * Display child commoditySort
-     * @param commoditySort
-     * @return The list of child commoditySort
-     */
-    @Override
-    public CommoditySortVo[] dispaly(CommoditySortVo commoditySort) {
-        return super.dispaly(commoditySort);
-    }
 
 }

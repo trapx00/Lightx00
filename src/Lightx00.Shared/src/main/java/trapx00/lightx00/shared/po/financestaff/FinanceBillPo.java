@@ -13,21 +13,15 @@ public class FinanceBillPo extends BillPo {
     @DatabaseField
     private FinanceBillType financeBillType;
 
-    @DatabaseField
-    private String operatorId;
 
     public FinanceBillType getFinanceBillType() {
         return financeBillType;
     }
 
-    public String getOperatorId() {
-        return operatorId;
-    }
 
     public FinanceBillPo(String id, Date date, BillState state, FinanceBillType financeBillType, String operatorId) {
-        super(BillType.FinanceBill, id, date, state);
+        super(BillType.FinanceBill, id, date, state, operatorId);
         this.financeBillType = financeBillType;
-        this.operatorId = operatorId;
     }
 
     public FinanceBillPo() {
@@ -37,7 +31,6 @@ public class FinanceBillPo extends BillPo {
     public String toString() {
         return "FinanceBillPo{" +
             "financeBillType=" + financeBillType +
-            ", operatorId='" + operatorId + '\'' +
             "} " + super.toString();
     }
 }

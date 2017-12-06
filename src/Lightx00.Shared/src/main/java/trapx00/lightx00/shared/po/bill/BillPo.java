@@ -14,12 +14,15 @@ public class BillPo implements Serializable {
     private Date date;
     @DatabaseField
     private BillState state;
+    @DatabaseField
+    private String operatorId;
 
-    public BillPo(BillType billType, String id, Date date, BillState state) {
+    public BillPo(BillType billType, String id, Date date, BillState state, String operatorId) {
         this.billType = billType;
         this.id = id;
         this.date = date;
         this.state = state;
+        this.operatorId = operatorId;
     }
 
     public BillPo() {
@@ -56,6 +59,15 @@ public class BillPo implements Serializable {
 
     public void setState(BillState state) {
         this.state = state;
+    }
+
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 
     @Override

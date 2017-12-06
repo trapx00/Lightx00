@@ -14,8 +14,6 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
     private String salesmanId;
     @DatabaseField
-    private String operatorId;
-    @DatabaseField
     private int repository;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommodityItem[] commodityList;
@@ -33,11 +31,10 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     public SaleRefundBillPo() {
     }
 
-    public SaleRefundBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
+    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType, operatorId);
         this.clientId = clientId;
         this.salesmanId = salesmanId;
-        this.operatorId = operatorId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -59,16 +56,8 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         return salesmanId;
     }
 
-    public void setSalesmanId(String salesmanId) {
+    public void setSalesmanId(String defaultOperatorId) {
         this.salesmanId = salesmanId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public int getRepository() {

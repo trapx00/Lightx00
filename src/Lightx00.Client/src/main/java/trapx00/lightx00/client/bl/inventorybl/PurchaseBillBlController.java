@@ -165,7 +165,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public PurchaseBillPo fromVoToPo(PurchaseBillVo vo) {
-        return new PurchaseBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getRepository(), vo.getOperator().getId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
+        return new PurchaseBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getRepository(), vo.getOperatorId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
     }
 
     /**
@@ -176,7 +176,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public PurchaseBillVo fromPoToVo(PurchaseBillPo po) {
-        return new PurchaseBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getRepository(), (SaleStaffVo) employeeInfo.queryById(po.getOperatorId()), po.getComment(), po.getTotal(), po.getCommodityList());
+        return new PurchaseBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getRepository(), po.getOperatorId(), po.getComment(), po.getTotal(), po.getCommodityList());
     }
 }
 

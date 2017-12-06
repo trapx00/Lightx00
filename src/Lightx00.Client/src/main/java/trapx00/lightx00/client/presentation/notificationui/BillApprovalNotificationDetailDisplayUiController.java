@@ -38,14 +38,10 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
         controller.tfSender.setText(arg.getSender().getName());
         controller.tfBillId.setText(arg.getBill().getId());
         controller.btnBillDetail.setOnAction(e -> {
-            controller.currentDialog.close();
-            JFXDialog dialog = PromptDialogHelper.start("","").create(controller.dialogContainer);
+            JFXDialog dialog = PromptDialogHelper.start("","").create();
             ExternalLoadedUiPackage externalLoadedUiPackage1 = (arg.getBill()).billDetailUi().showContent(arg.getBill());
-            BillDetailUi billDetailUi = (BillDetailUi) externalLoadedUiPackage1.getController();
-            billDetailUi.setCurrentDialog(dialog);
-            billDetailUi.setFatherDialog(controller.currentDialog);
             dialog.setContent((Region) externalLoadedUiPackage1.getComponent());
-            dialog.show();
+            FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
         });
         controller.billVo = arg.getBill();
         controller.notificationVo = arg;

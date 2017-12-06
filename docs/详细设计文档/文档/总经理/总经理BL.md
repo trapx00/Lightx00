@@ -2,11 +2,11 @@
 
 #### 2.2.12.1 概述
 
-promtionbl包负责总经理制定促销策略（包括组合商品降价、满额促销策略（赠送商品或者代金券）、客户促销策略（赠送礼品或者代金券或者价格这让））用例的业务逻辑实现代码。具体功能需求和非功能需求可参见需求规格说明文档和体系结构设计文档。
+promtionbl包负责总经理制定促销策略（包括组合商品降价、满额促销策略（赠送商品或者代金券）、客户促销策略（赠送礼品或者代金券或者价格这让））用例的业务逻辑实现代码，以及代金券使用逻辑。具体功能需求和非功能需求可参见需求规格说明文档和体系结构设计文档。
 
 #### 2.2.12.2 整体结构
 
-此包为业务逻辑层的一部分，它负责业务逻辑的实现。它实现了promtionui包所需要的promotionblservice所有接口，并依赖对应的promotiondataservice包与data层进行交互。由于销售行为需要依赖促销策略，它还需要实现PromotionInfo接口。
+此包为业务逻辑层的一部分，它负责业务逻辑的实现。它实现了promtionui包所需要的promotionblservice所有接口，并依赖对应的promotiondataservice包与data层进行交互。由于销售行为需要依赖促销策略，它还需要实现PromotionInfo接口。另外，由于销售行为和财务管理需要对代金券的使用进行管理，此包还实现了代金券管理逻辑需要的couponblservice，并实现了CouponInfo、SendCouponInfo、UseCouponInfo三个接口。
 
 #### 2.2.12.3 设计
 
@@ -14,14 +14,17 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 
 ![promotionbl](../../img/设计图/promotionbl.png)
 
+![promotionbl](../../img/设计图/promotionbl.couponbl.png)
+
 ##### 2.2.12.3.2 各个类的职责
 
-| 类名                              | 职责                                 |
-| ------------------------------- | ---------------------------------- |
-| PromotionInfoController         | 负责管理salebill查询可用促销策略的功能实现。         |
-| ComSalePromotionBlController    | 负责管理填写组合商品降价促销策略的功能实现。             |
-| TotalPricePromotionBlController | 负责管理填写满额促销策略（赠送礼品或者代金券）的功能实现。      |
-| ClientPromotionBlController     | 负责管理填写客户促销策略（赠送礼品或者代金券或价格折让）的功能实现。 |
+| 类名                                      | 职责                                 |
+| --------------------------------------- | ---------------------------------- |
+| PromotionInfoController                 | 负责管理salebill查询可用促销策略的功能实现。         |
+| ComSalePromotionBlController            | 负责管理填写组合商品降价促销策略的功能实现。             |
+| TotalPricePromotionBlController         | 负责管理填写满额促销策略（赠送礼品或者代金券）的功能实现。      |
+| ClientPromotionBlController             | 负责管理填写客户促销策略（赠送礼品或者代金券或价格折让）的功能实现。 |
+| promotionbl.couponbl.CouponBlController | 负责管理代金券使用的功能实现。                    |
 
 ##### 2.2.12.3.3 内部类的接口规范
 
@@ -111,6 +114,26 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 | `draftbl.DraftService.saveAsDraft(ClientPromotionVo promotion)` | 保存草稿。      |
 | `logbl.LogService.log(LogSeverity severity, String content)` | 记录日志。      |
 
+**CouponBlController**
+
+提供的接口
+
+| 接口名称                                     | 语法                                       | 前置条件         | 后置条件            |
+| ---------------------------------------- | ---------------------------------------- | ------------ | --------------- |
+| promotionblservice.couponblservice.CouponBlService.add | `public ResultMessage add(CouponVo coupon);` | 使用一个代金券促销策略。 | 返回保存结果。         |
+| promotionbl.couponbl.CouponInfo          | `public double queryUnusedCouponValue(Date start, Date end);` | 输入日期有效。      | 返回时间段内未使用代金券总额。 |
+| promotionbl.couponbl.SendCouponInfo      | `public ResultMessage sendCoupon(double couponPrice);` | 输入代金券面值有效。   | 返回保存结果。         |
+| promotionbl.couponbl.UseCouponInfo       | `public ResultMessage useCoupon(double couponPrice);` | 输入代金券面值有效。   | 返回保存结果。         |
+
+需要的接口
+
+| 接口名称                                     | 服务名          |
+| ---------------------------------------- | ------------ |
+| `promotiondataservice.CouponDataService.add(CouponPo coupon)` | 保存发放和使用的代金券。 |
+| `promotiondataservice.CouponDataService.query(COuponQueryVo query)` | 查询代金券。       |
+
+
+
 ##### 2.2.12.3.4 业务逻辑层的动态模型
 
 下图为填写组合降价促销策略时的顺序图，满额以及客户促销策略的顺序图参见此图。
@@ -132,6 +155,18 @@ promtionbl包负责总经理制定促销策略（包括组合商品降价、满�
 由于本包会对销售行为提供查询销售可用的促销策略接口，此功能实现顺序图如下
 
 ![BL层查询可用促销策略](../../img/顺序图/BL层查询可用促销策略.png)
+
+由于本包的子包couponbl为销售提供发放代金券接口，此功能实现顺序图如下
+
+![BL层查询可用促销策略](../../img/顺序图/BL层发放代金券.png)
+
+由于本包的子包couponbl为销售提供使用代金券接口，此功能实现顺序图如下
+
+![BL层查询可用促销策略](../../img/顺序图/BL层使用代金券.png)
+
+由于本包的子包couponbl为财务提供使用未使用代金券总额接口，此功能实现顺序图如下
+
+![BL层查询可用促销策略](../../img/顺序图/BL层查询未使用代金券总额.png)
 
 ### 2.2.13 approvalbl包
 

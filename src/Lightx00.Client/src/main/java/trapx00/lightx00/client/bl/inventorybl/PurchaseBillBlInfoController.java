@@ -8,8 +8,8 @@ import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
 public class PurchaseBillBlInfoController implements PurchaseBillBlInfo {
-    PurchaseBillBlService purchaseBillBlService=new PurchaseBillBlController();
-    PurchaseRefundBillBlService purchaseRefundBillBlService=new PurchaseRefundBillBlController();
+    PurchaseBillBlService purchaseBillBlService = new PurchaseBillBlController();
+    PurchaseRefundBillBlService purchaseRefundBillBlService = new PurchaseRefundBillBlController();
 
     /**
      * query for PurchaseBills

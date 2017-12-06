@@ -11,12 +11,12 @@ import java.util.Date;
 public abstract class PurchaseBillBaseVo extends BillVo implements Reversible {
     private PurchaseBillType purchaseBillType;
 
-    public PurchaseBillType getPurchaseBillType() {
-        return purchaseBillType;
+    public PurchaseBillBaseVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String operatorId) {
+        super(BillType.InventoryBill, id, date, state, operatorId);
+        this.purchaseBillType = purchaseBillType;
     }
 
-    public PurchaseBillBaseVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType) {
-        super(BillType.SaleBill, id, date, state);
-        this.purchaseBillType = purchaseBillType;
+    public PurchaseBillType getPurchaseBillType() {
+        return purchaseBillType;
     }
 }

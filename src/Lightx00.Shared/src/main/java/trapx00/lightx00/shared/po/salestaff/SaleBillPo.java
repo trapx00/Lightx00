@@ -11,11 +11,9 @@ import java.util.Date;
 @DatabaseTable(tableName = "SaleBill")
 public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
+    String salesmanId;
+    @DatabaseField
     private String clientId;
-    @DatabaseField
-    private String salesmanId;
-    @DatabaseField
-    private String operatorId;
     @DatabaseField
     private int repository;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -43,10 +41,9 @@ public class SaleBillPo extends SaleBillBasePo {
     }
 
     public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
-        super(id, date, state, SaleBillType.Sale);
+        super(id, date, state, SaleBillType.Sale, operatorId);
         this.clientId = clientId;
         this.salesmanId = salesmanId;
-        this.operatorId = operatorId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -72,16 +69,8 @@ public class SaleBillPo extends SaleBillBasePo {
         return salesmanId;
     }
 
-    public void setSalesmanId(String salesmanId) {
-        this.salesmanId = salesmanId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
+    public void setSalesmanId(String defaultOperatorId) {
+        this.salesmanId = defaultOperatorId;
     }
 
     public int getRepository() {
