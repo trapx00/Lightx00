@@ -14,25 +14,17 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 public class InventoryGiftPo extends InventoryBillPo {
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private  PromotionCommodity[] gifts;
-    @DatabaseField
-    private String operatorId;
 
     public InventoryGiftPo(BillType billType, String id, Date date, BillState state, InventoryBillType inventoryBillType
-            , PromotionCommodity[] gifts) {
-        super(id,date,state,inventoryBillType);
+            , PromotionCommodity[] gifts,String operatorId) {
+        super(id,date,state,inventoryBillType,operatorId);
         this.gifts = gifts;
     }
-    @Override
-    public String getOperatorId() {
-        return operatorId;
+
+    public InventoryGiftPo(){
+
     }
 
-    @Override
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
-    }
-
-    public InventoryGiftPo(){ ; }
     public PromotionCommodity[] getGifts() {
         return gifts;
     }

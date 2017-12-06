@@ -1,22 +1,39 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.InventoryModificationService;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
+import trapx00.lightx00.client.bl.commoditybl.factory.InventoryModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryWarningDataServiceFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.inventorystaff.*;
+import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
+import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,6 +41,10 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
 
     private InventoryWarningDataService dataService= InventoryWarningDataServiceFactory.getService();
     private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
+    private InventoryModificationService inventoryModificationService= InventoryModificationServiceFactory.getService();
+    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+    EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
 
     private CommonBillBlController<InventoryDetailBillVo, InventoryDetailBillPo, InventoryBillQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "库存监控单", this);
@@ -35,6 +56,21 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
 
     public InventoryDetailBillPo fromVoToPo(InventoryDetailBillVo vo) {
         return new InventoryDetailBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getInventoryBillType(),vo.getCommodities(),vo.getOperatorId());
+    }
+
+    private String generatePurchaseBillMessage(String id) {
+        String separator = " | ";
+        String result = id + " up:" + System.lineSeparator();
+        try {
+            InventoryDetailBillPo inventoryDetailBillPo = dataService.query(new InventoryBillQueryVo().idEq(id))[0];
+            InventoryWarningItem[] commodityList = inventoryDetailBillPo.getCommodityList();
+            for (InventoryWarningItem commodityItem : commodityList) {
+                result += commodityItem.getId() + separator + commodityItem.getDelta() + System.lineSeparator();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -117,7 +153,27 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
      */
     @Override
     public ResultMessage activate(String id) {
-        return commonBillBlController.activate(id);
+        try {
+            ResultMessage resultMessage=commonBillBlController.activate(id);
+            if(resultMessage.isSuccess()){
+                InventoryDetailBillPo inventoryDetailBillPo=dataService.query(new InventoryBillQueryVo().idEq(id))[0];
+                int length=inventoryDetailBillPo.getCommodityList().length;
+                if(inventoryDetailBillPo.getInventoryBillType()== InventoryBillType.Warning){
+                    EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.SaleStaff, new SpecificUserAccountQueryVo()));
+                    notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(inventoryDetailBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseBillMessage(id)));
+                    return ResultMessage.Success;
+                }
+                for(int i=0;i<length;i++){
+                    inventoryModificationService.modifyInventory(inventoryDetailBillPo.getCommodityList()[i].getId(),
+                            InventoryModificationFlag.Up,inventoryDetailBillPo.getCommodityList()[i].getDelta());
+                }
+                return ResultMessage.Success;
+            }
+            return ResultMessage.Failure;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
 
