@@ -19,5 +19,5 @@ public interface LogBackupDataService extends Remote {
      *
      * @return the temp uri of the log resources
      */
-    URI fetchCloudLog() throws RemoteException;
+    String fetchCloudLog() throws RemoteException;
 }

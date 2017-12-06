@@ -5,6 +5,7 @@ import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
+import trapx00.lightx00.server.data.logdata.factory.LogBackupDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataFactory;
@@ -18,6 +19,7 @@ import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
+import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
@@ -37,8 +39,9 @@ import java.util.Arrays;
 
 public class Server {
 
-    public static ServerLogService logService = ServerLogServiceFactory.getService();
     public static final String caller = "Main function";
+    public static ServerLogService logService = ServerLogServiceFactory.getService();
+
     /**
      * Server runner
      *
@@ -61,6 +64,7 @@ public class Server {
             LoginDataService loginDataService = LoginDataFactory.getService();
             CashBillDataService cashBillDataService = CashBillDataFactory.getService();
             NotificationDataService notificationDataService = NotificationDataFactory.getService();
+            LogBackupDataService logBackupDataService = LogBackupDataFactory.getService();
             LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
             export(saleBillDataService);
             export(saleRefundBillDataService);
@@ -72,6 +76,7 @@ public class Server {
             export(loginDataService);
             export(cashBillDataService);
             export(notificationDataService);
+            export(logBackupDataService);
             logService.printLog(caller, "Initialization done.");
         } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
             logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));
@@ -82,9 +87,9 @@ public class Server {
     public static void export(Remote remoteObj) throws RemoteException, MalformedURLException, AlreadyBoundException {
         Class[] implementedInterfaces = remoteObj.getClass().getInterfaces();
         Class remoteInterface = Arrays.stream(implementedInterfaces)
-            .filter(Remote.class::isAssignableFrom)
-            .findFirst()
-            .orElse(null);
+                .filter(Remote.class::isAssignableFrom)
+                .findFirst()
+                .orElse(null);
         if (remoteInterface != null) {
             String url = RmiHelper.generateRmiUrl(remoteInterface);
             logService.printLog(caller, String.format("registered %s to %s", url, remoteObj.toString()));

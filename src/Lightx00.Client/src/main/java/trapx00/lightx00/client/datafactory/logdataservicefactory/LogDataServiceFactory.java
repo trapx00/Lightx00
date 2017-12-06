@@ -20,7 +20,7 @@ public class LogDataServiceFactory extends DataServiceFactory {
     }
 
     public static LogDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }
