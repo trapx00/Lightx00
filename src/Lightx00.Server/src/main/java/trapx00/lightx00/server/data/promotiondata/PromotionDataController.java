@@ -36,7 +36,7 @@ public class PromotionDataController<Po extends PromotionPoBase> {
     }
 
     private void handleSqlException(SQLException e) {
-        logService.printLog(delegate, "failed at a database operation. Error message: " + e.getMessage());
+        logService.printLog(delegate, "数据库操作失败，错误原因是: " + e.getMessage());
         throw new DbSqlException(e);
     }
 
@@ -82,7 +82,7 @@ public class PromotionDataController<Po extends PromotionPoBase> {
             //promotion是草稿状态（数据库已经有了id）
             if (po != null && po.getState().equals(PromotionState.Draft)) {
                 dao.update(promotion);
-                logService.printLog(delegate,String.format("updated a draft %s (id: %s). New content: %s", promotion.getState().toString(), promotion.getId(), promotion.toString()));
+                logService.printLog(delegate,String.format("更新促销策略草稿(id: %s)，新内容是: %s", promotion.getId(), promotion.toString()));
                 return ResultMessage.Success;
             }
             //id被占用
@@ -92,7 +92,7 @@ public class PromotionDataController<Po extends PromotionPoBase> {
             //id没有占用
             dao.create(promotion);
             promotion.setId(dao.extractId(promotion));
-            logService.printLog(delegate, String.format("created a %s (id: %s). Content: %s", promotion.getPromotionType().toString(), promotion.getId(), promotion.toString()));
+            logService.printLog(delegate, String.format("创建促销策略草稿(id: %s)，内容是: %s", promotion.getId(), promotion.toString()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             handleSqlException(e);
@@ -115,19 +115,19 @@ public class PromotionDataController<Po extends PromotionPoBase> {
             switch (previousState) {
                 case Draft:
                     dao.deleteById(id);
-                    logService.printLog(delegate, String.format("deletes a draft %s (id: %s)", po.getPromotionType(), id));
+                    logService.printLog(delegate, String.format("删除促销策略草稿(id: %s)", id));
                     return ResultMessage.Success;
                 case Overdue:
                     po.setState(PromotionState.Abandoned);
                     dao.update(po);
-                    logService.printLog(delegate, String.format("marked a %s (id: %s) as Abandoned (previously %s)", po.getPromotionType(), po.getId(), previousState));
+                    logService.printLog(delegate, String.format("作废过期促销策略(id: %s)", id));
                     return ResultMessage.Success;
                 case Active:
                     throw new PromotionInvalidStateException(previousState,PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
                 case Waiting:
                     po.setState(PromotionState.Abandoned);
                     dao.update(po);
-                    logService.printLog(delegate, String.format("marked a %s (id: %s) as Abandoned (previously %s)", po.getPromotionType(), po.getId(), previousState));
+                    logService.printLog(delegate, String.format("作废待生效促销策略(id: %s)",id));
                     return ResultMessage.Success;
                 default:
                     throw new PromotionInvalidStateException(previousState,PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
@@ -149,7 +149,7 @@ public class PromotionDataController<Po extends PromotionPoBase> {
     public <Q extends BaseQueryVo> List<Po> query(Q query) {
         try {
             List<Po> results = dao.query(query.prepareQuery(dao));
-            logService.printLog(delegate, String.format("queried promotions and got %d results.", results.size()));
+            logService.printLog(delegate, String.format("查询促销策略，得到%d条结果.", results.size()));
             return results;
         } catch (SQLException e) {
             handleSqlException(e);
@@ -173,11 +173,11 @@ public class PromotionDataController<Po extends PromotionPoBase> {
                     .mapToInt(Integer::parseInt)
                     .max();
             if (maxId.orElse(-1) == MAX_PROMOTION_NUM_FOR_A_DAY) {
-                logService.printLog(delegate, "got a new id and it has been full.");
+                logService.printLog(delegate, "当日促销策略数量已满");
                 throw new NoMoreBillException();
             }
             String newId = leadingText + "-" + PromotionHelper.currentDateStringForPromotion() + "-" + PromotionHelper.formatId(maxId.orElse(0) + 1);
-            logService.printLog(delegate, "got a new id " + newId);
+            logService.printLog(delegate, "得到编号" + newId);
             return newId;
         } catch (SQLException e) {
             handleSqlException(e);

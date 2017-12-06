@@ -10,6 +10,7 @@ import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
+import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
@@ -56,6 +57,7 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
             logService.log(LogSeverity.Failure, String.format("创建一份%s失败，原因是单据ID（%s）已经存在。促销策略内容是%s", promotionName, promotion.getId(), promotion.toString()));
             throw e;
         }
+
     }
 
     /**
@@ -126,7 +128,7 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
      * @return whether the operation is done successfully
      */
     public ResultMessage delete(String id) {
-        String logLeadingText = String.format("丢弃一份%s(id: %s)", promotionName, id);
+        String logLeadingText = String.format("丢弃促销策略%s(id: %s)", promotionName,id);
         try {
             ResultMessage resultMessage = dataService.delete(id);
             if (resultMessage.isSuccess()) {
@@ -140,6 +142,9 @@ public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, Pr
             throw new UncheckedRemoteException(e);
         } catch (IdNotExistsException e) {
             logService.log(LogSeverity.Failure, logLeadingText + "失败，原因是ID不存在。");
+            throw e;
+        } catch (PromotionInvalidStateException e) {
+            logService.log(LogSeverity.Failure, logLeadingText + "失败，原因是促销策略正在生效。");
             throw e;
         }
     }
