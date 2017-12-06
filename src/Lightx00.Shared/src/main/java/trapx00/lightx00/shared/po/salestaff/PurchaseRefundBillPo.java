@@ -14,8 +14,6 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
     @DatabaseField
     private int repository;
     @DatabaseField
-    private String operatorId;
-    @DatabaseField
     private String comment;
     @DatabaseField
     private double total;
@@ -26,10 +24,9 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
     }
 
     public PurchaseRefundBillPo(String id, Date date, BillState state, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, PurchaseBillType.PurchaseRefund);
+        super(id, date, state, PurchaseBillType.PurchaseRefund,operatorId);
         this.clientId = clientId;
         this.repository = repository;
-        this.operatorId = operatorId;
         this.comment = comment;
         this.total = total;
         this.commodityList = commodityList;
@@ -49,14 +46,6 @@ public class PurchaseRefundBillPo extends PurchaseBillBasePo {
 
     public void setRepository(int repository) {
         this.repository = repository;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public String getComment() {

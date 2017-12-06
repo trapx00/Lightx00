@@ -12,9 +12,7 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
     private String clientId;
     @DatabaseField
-    private String defaultOperatorId;
-    @DatabaseField
-    private String operatorId;
+    private String salesmanId;
     @DatabaseField
     private int repository;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -33,11 +31,10 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     public SaleRefundBillPo() {
     }
 
-    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType);
+    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType, operatorId);
         this.clientId = clientId;
-        this.defaultOperatorId = defaultOperatorId;
-        this.operatorId = operatorId;
+        this.salesmanId = salesmanId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -55,20 +52,12 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         this.clientId = clientId;
     }
 
-    public String getDefaultOperatorId() {
-        return defaultOperatorId;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
+    public void setSalesmanId(String defaultOperatorId) {
+        this.salesmanId = salesmanId;
     }
 
     public int getRepository() {

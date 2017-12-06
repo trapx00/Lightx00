@@ -17,7 +17,6 @@ import java.util.Date;
 public class SaleRefundBillVo extends SaleBillBaseVo {
     private String clientId;
     private EmployeeVo defaultOperator;
-    private SaleStaffVo operator;
     private int repository;
     private CommodityItem[] commodityList;
     private double originTotal;
@@ -26,11 +25,10 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType);
+    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType, operatorId);
         this.clientId = clientId;
         this.defaultOperator = defaultOperator;
-        this.operator = operator;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -54,14 +52,6 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
 
     public void setDefaultOperator(EmployeeVo defaultOperator) {
         this.defaultOperator = defaultOperator;
-    }
-
-    public SaleStaffVo getOperator() {
-        return operator;
-    }
-
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
     }
 
     public int getRepository() {

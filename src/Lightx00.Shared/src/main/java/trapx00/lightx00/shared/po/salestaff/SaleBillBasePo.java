@@ -11,8 +11,8 @@ public class SaleBillBasePo extends BillPo {
     @DatabaseField
     private SaleBillType saleBillType;
 
-    public SaleBillBasePo(String id, Date date, BillState state, SaleBillType saleBillType) {
-        super(BillType.SaleBill, id, date, state);
+    public SaleBillBasePo(String id, Date date, BillState state, SaleBillType saleBillType, String operatorId) {
+        super(BillType.SaleBill, id, date, state, operatorId);
         this.saleBillType = saleBillType;
     }
 

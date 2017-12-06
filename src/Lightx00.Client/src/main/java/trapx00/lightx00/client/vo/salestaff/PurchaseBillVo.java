@@ -17,16 +17,14 @@ import java.util.HashMap;
 public class PurchaseBillVo extends PurchaseBillBaseVo {
     private String clientId;
     private int repository;
-    private SaleStaffVo operator;
     private String comment;
     private double total;
     private CommodityItem[] commodityList;
 
-    public PurchaseBillVo(String id, Date date, BillState state, PurchaseBillType purchaseBillType, String clientId, int repository, SaleStaffVo operator, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, purchaseBillType);
+    public PurchaseBillVo(String id, Date date, BillState state, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, PurchaseBillType.Purchase, operatorId);
         this.clientId = clientId;
         this.repository = repository;
-        this.operator = operator;
         this.comment = comment;
         this.total = total;
         this.commodityList = commodityList;
@@ -46,14 +44,6 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
 
     public void setRepository(int repository) {
         this.repository = repository;
-    }
-
-    public SaleStaffVo getOperator() {
-        return operator;
-    }
-
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
     }
 
     public String getComment() {
