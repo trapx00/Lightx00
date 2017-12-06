@@ -34,7 +34,7 @@ public class InventoryGiftDataControllerTest {
     private Dao<InventoryGiftPo, String> dao = InventoryDataDaoFactory.getInventoryGiftDao();
     private InventoryGiftDataService service = InventoryGiftDataFactory.getService();
     private final InventoryGiftPo bill = new InventoryGiftPo(BillType.InventoryBill,"GIFT-20171126-00001",new Date(),BillState.Draft,
-            InventoryBillType.Gift,null);
+            InventoryBillType.Gift,null,null);
 
     @Before
     public void setUp() throws Exception {

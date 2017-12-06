@@ -31,8 +31,8 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     public SaleRefundBillPo() {
     }
 
-    public SaleRefundBillPo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType, operatorId);
+    public SaleRefundBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.SaleRefund, operatorId);
         this.clientId = clientId;
         this.salesmanId = salesmanId;
         this.repository = repository;

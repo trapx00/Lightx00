@@ -25,9 +25,9 @@ public abstract class InventoryBillBaseVo extends BillVo implements Reversible {
 
 
 
-    public InventoryBillBaseVo(String id, Date date, BillState state, InventoryBillType inventoryBillType) {
+    public InventoryBillBaseVo(String id, Date date, BillState state, InventoryBillType inventoryBillType,String operatorId) {
 
-        super(BillType.InventoryBill, id, date, state);
+        super(BillType.InventoryBill, id, date, state,operatorId);
 
         this.inventoryBillType = inventoryBillType;
 

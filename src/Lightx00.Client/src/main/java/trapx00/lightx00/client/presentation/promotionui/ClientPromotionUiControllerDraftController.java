@@ -25,7 +25,7 @@ public class ClientPromotionUiControllerDraftController implements DraftContinue
      * @return external loaded ui controller and component
      */
     @Override
-    public ExternalLoadedUiPackage load() throws IOException {
+    public ExternalLoadedUiPackage load() {
         return null;
     }
 }

@@ -170,7 +170,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public SaleBillPo fromVoToPo(SaleBillVo vo) {
-        return new SaleBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesman().getId(), vo.getOperatorId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment(), vo.getClientLevel(), vo.getPromotionId(), vo.getGiftList(), vo.getGiftToken());
+        return new SaleBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getSalesmanId(), vo.getOperatorId(), vo.getRepository(), vo.getCommodityList(), vo.getOriginTotal(), vo.getMinusProfits(), vo.getToken(), vo.getUltiTotal(), vo.getComment(), vo.getClientLevel(), vo.getPromotionId(), vo.getGiftList(), vo.getGiftToken());
     }
 
     /**
@@ -181,6 +181,6 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
      */
     @Override
     public SaleBillVo fromPoToVo(SaleBillPo po) {
-        return new SaleBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), (SaleStaffVo) employeeInfo.queryById(po.getSalesmanId()), po.getOperatorId(), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment(), po.getClientLevel(), po.getPromotionId(), po.getGiftList(), po.getGiftToken());
+        return new SaleBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getSalesmanId(), po.getOperatorId(), po.getRepository(), po.getCommodityList(), po.getOriginTotal(), po.getMinusProfits(), po.getToken(), po.getUltiTotal(), po.getComment(), po.getClientLevel(), po.getPromotionId(), po.getGiftList(), po.getGiftToken());
     }
 }
