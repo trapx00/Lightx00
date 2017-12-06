@@ -1,8 +1,12 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.InventoryModificationService;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
+import trapx00.lightx00.client.bl.commoditybl.factory.InventoryModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
@@ -11,18 +15,26 @@ import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.InventoryGiftDataServiceFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
+import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.util.Date;
 import java.util.List;
@@ -33,17 +45,19 @@ public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprov
     private InventoryGiftDataService dataService= InventoryGiftDataServiceFactory.getService();
     private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
     private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
+    private InventoryModificationService inventoryModificationService= InventoryModificationServiceFactory.getService();
+
 
     private CommonBillBlController<InventoryGiftVo, InventoryGiftPo, InventoryGiftQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "库存赠送单", this);
 
     public InventoryGiftVo fromPoToVo(InventoryGiftPo po) {
-        return new InventoryGiftVo(po.getId(), po.getDate(), po.getState(), po.getGifts());
+        return new InventoryGiftVo(po.getId(), po.getDate(), po.getState(), po.getGifts(),po.getOperatorId());
 
     }
 
     public InventoryGiftPo fromVoToPo(InventoryGiftVo vo) {
-        return new InventoryGiftPo(BillType.InventoryBill,vo.getId(), vo.getDate(), vo.getState(),vo.getInventoryBillType(),vo.getGifts());
+        return new InventoryGiftPo(BillType.InventoryBill,vo.getId(), vo.getDate(), vo.getState(),vo.getInventoryBillType(),vo.getGifts(),vo.getOperatorId());
     }
 
     public CommodityItem[] getPromotionCommodity(String id){
@@ -86,7 +100,23 @@ public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprov
      */
     @Override
     public ResultMessage activate(String id) {
-        return commonBillBlController.activate(id);
+        //通过后修改库存,完成赠送操作
+        try {
+            ResultMessage resultMessage=commonBillBlController.activate(id);
+            if(resultMessage.isSuccess()){
+                InventoryGiftPo inventoryGiftPo=dataService.query(new InventoryGiftQueryVo().idEq(id))[0];
+                int length=inventoryGiftPo.getGifts().length;
+                for(int i=0;i<length;i++){
+                    inventoryModificationService.modifyInventory(inventoryGiftPo.getGifts()[i].getCommodityId(), InventoryModificationFlag.Low,
+                            inventoryGiftPo.getGifts()[i].getAmount());
+                }
+                return ResultMessage.Success;
+            }
+            return ResultMessage.Failure;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
     /**
      * Deletes a draft.

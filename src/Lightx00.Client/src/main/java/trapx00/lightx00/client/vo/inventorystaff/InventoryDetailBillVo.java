@@ -18,20 +18,15 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
 
 public  class InventoryDetailBillVo extends InventoryBillBaseVo implements Reversible {
     //报损报溢报警
-    private String operatorId;
     private InventoryWarningItem[] commodities;//商品
     private InventoryBillType type;
 
     public InventoryDetailBillVo(String id, Date date, BillState state, String operatorId, InventoryWarningItem[] commodities,  InventoryBillType type) {
-        super(id, date, state,type);
-        this.operatorId = operatorId;
+        super(id, date, state,type,operatorId);
         this.commodities = commodities;
         this.type = type;
     }
 
-    public  String getOperatorId() {
-        return operatorId;
-    }
 
     public InventoryWarningItem[] getCommodities() {
         return commodities;

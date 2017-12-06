@@ -19,21 +19,11 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 public class InventoryGiftVo extends InventoryBillBaseVo {
 
 
-
-    private String operatorId;
     private PromotionCommodity[] gifts;
 
-    public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts) {
-        super(id, date, state, InventoryBillType.Gift);
+    public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts,String operatorId) {
+        super(id, date, state, InventoryBillType.Gift,operatorId);
         this.gifts = gifts;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public PromotionCommodity[] getGifts() {

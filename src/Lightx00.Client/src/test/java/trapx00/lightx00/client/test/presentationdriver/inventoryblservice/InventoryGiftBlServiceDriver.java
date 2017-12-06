@@ -16,7 +16,7 @@ public class InventoryGiftBlServiceDriver {
     Date date=new Date();
     PromotionCommodity pCommodity=new PromotionCommodity();
     PromotionCommodity[] input={null};
-    InventoryGiftVo gifts=new InventoryGiftVo("G0001",date,null,input);
+    InventoryGiftVo gifts=new InventoryGiftVo("G0001",date,null,input,null);
 
     @Test
     public void sumbit() throws Exception {

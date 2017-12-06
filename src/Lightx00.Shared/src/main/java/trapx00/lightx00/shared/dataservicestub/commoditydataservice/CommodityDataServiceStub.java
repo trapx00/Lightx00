@@ -34,5 +34,10 @@ public class CommodityDataServiceStub implements CommodityDataService {
         return ResultMessage.Success;
     }
 
+    @Override
+    public CommodityPo[] getAllCommodity() {
+        return new CommodityPo[0];
+    }
+
 
 }
