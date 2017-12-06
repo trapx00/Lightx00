@@ -11,12 +11,12 @@ import java.util.Date;
 public abstract class SaleBillBaseVo extends BillVo implements Reversible {
     private SaleBillType saleBillType;
 
-    public SaleBillType getSaleBillType() {
-        return saleBillType;
+    public SaleBillBaseVo(String id, Date date, BillState state, SaleBillType saleBillType, String operatorId) {
+        super(BillType.SaleBill, id, date, state, operatorId);
+        this.saleBillType = saleBillType;
     }
 
-    public SaleBillBaseVo(String id, Date date, BillState state, SaleBillType saleBillType) {
-        super(BillType.SaleBill, id, date, state);
-        this.saleBillType = saleBillType;
+    public SaleBillType getSaleBillType() {
+        return saleBillType;
     }
 }

@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
@@ -17,7 +18,6 @@ import java.util.Date;
 public class SaleRefundBillVo extends SaleBillBaseVo {
     private String clientId;
     private EmployeeVo defaultOperator;
-    private SaleStaffVo operator;
     private int repository;
     private CommodityItem[] commodityList;
     private double originTotal;
@@ -26,11 +26,10 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
     private double ultiTotal;
     private String comment;
 
-    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, saleBillType);
+    public SaleRefundBillVo(String id, Date date, BillState state, SaleBillType saleBillType, String clientId, EmployeeVo defaultOperator, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, saleBillType, operatorId);
         this.clientId = clientId;
         this.defaultOperator = defaultOperator;
-        this.operator = operator;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -54,14 +53,6 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
 
     public void setDefaultOperator(EmployeeVo defaultOperator) {
         this.defaultOperator = defaultOperator;
-    }
-
-    public SaleStaffVo getOperator() {
-        return operator;
-    }
-
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
     }
 
     public int getRepository() {
@@ -127,7 +118,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return SaleRefundBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -137,7 +128,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return SaleRefundBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -147,7 +138,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -157,7 +148,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getDraftDeleteService();
     }
 
     /**

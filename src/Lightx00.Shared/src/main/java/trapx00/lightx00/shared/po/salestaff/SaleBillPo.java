@@ -11,11 +11,9 @@ import java.util.Date;
 @DatabaseTable(tableName = "SaleBill")
 public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
+    String salesmanId;
+    @DatabaseField
     private String clientId;
-    @DatabaseField
-    private String defaultOperatorId;
-    @DatabaseField
-    private String operatorId;
     @DatabaseField
     private int repository;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -43,10 +41,9 @@ public class SaleBillPo extends SaleBillBasePo {
     }
 
     public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
-        super(id, date, state, SaleBillType.Sale);
+        super(id, date, state, SaleBillType.Sale, operatorId);
         this.clientId = clientId;
-        this.defaultOperatorId = defaultOperatorId;
-        this.operatorId = operatorId;
+        this.salesmanId = salesmanId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -68,20 +65,12 @@ public class SaleBillPo extends SaleBillBasePo {
         this.clientId = clientId;
     }
 
-    public String getDefaultOperatorId() {
-        return defaultOperatorId;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
+    public void setSalesmanId(String defaultOperatorId) {
+        this.salesmanId = defaultOperatorId;
     }
 
     public int getRepository() {
