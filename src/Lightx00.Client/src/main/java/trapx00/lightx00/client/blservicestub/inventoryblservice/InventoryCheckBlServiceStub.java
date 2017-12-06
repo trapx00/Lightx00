@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class InventoryCheckBlServiceStub implements InventoryCheckBlService {
 
+
     /**
      * Checks the invenntory change between the begintime and endtime
      *
@@ -19,8 +20,8 @@ public class InventoryCheckBlServiceStub implements InventoryCheckBlService {
      * @return The inventoryView during specified time range
      */
     @Override
-    public InventoryViewVo[] getInventoryView(Date beginTime, Date endTime) {
-        return new InventoryViewVo[] { new InventoryViewVo("123",new Date(), null)};
+    public InventoryViewVo getInventoryView(Date beginTime, Date endTime) {
+        return null;
     }
 
     /**
@@ -29,17 +30,18 @@ public class InventoryCheckBlServiceStub implements InventoryCheckBlService {
      * @return The inventory snapshot during that day
      */
     @Override
-    public InventoryPictureVo[] getInventoryPicture() {
-        Date date=new Date();
-        CommodityVo[] commoditys= new CommodityVo[]{
-            new CommodityVo("C0001", "LedLight", "Led", 98, date,
-                "1", "2", 56, 60, 90, 99, 50)
-        };
-        return new InventoryPictureVo[] { new InventoryPictureVo(date, commoditys) };
+    public InventoryPictureVo getInventoryPicture() {
+        return null;
     }
 
+    /**
+     * Exports the inventory snapshot to the required file by excel
+     *
+     * @param newfile
+     * @return whether the operation is done successfully
+     */
     @Override
-    public ResultMessage export(File newfile) {
-        return ResultMessage.Success;
+    public ResultMessage export(String newfile) {
+        return null;
     }
 }

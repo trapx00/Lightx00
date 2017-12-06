@@ -45,7 +45,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     public AuditIdPo[] query(AuditIdQueryVo query) {
         try {
             List<AuditIdPo> results = dao.query(query.prepareQuery(dao));
-            logService.printLog(delegate,String.format("queried BillInfoPos and got %d results", results.size()));
+            logService.printLog(delegate,String.format("查询待审批单据得到%d条结果", results.size()));
             return results.toArray(new AuditIdPo[results.size()]);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
         assertExists(billInfo.getId(), true);
         try {
             dao.deleteById(billInfo.getId());
-            logService.printLog(delegate, String.format("approved BillPo (id: %s)",billInfo.getId()));
+            logService.printLog(delegate, String.format("通过审批(id: %s)",billInfo.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
         assertExists(billInfo.getId(), true);
         try {
             dao.deleteById(billInfo.getId());
-            logService.printLog(delegate, String.format("rejected to approve BillPo (id: %s)",billInfo.getId()));
+            logService.printLog(delegate, String.format("拒绝通过审批(id: %s)",billInfo.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();

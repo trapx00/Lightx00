@@ -79,4 +79,15 @@ public class PromotionPoBase {
     public PromotionState getState() {
         return state;
     }
+
+    @Override
+    public String toString() {
+        return "PromotionPo{" +
+                "promotionType =" + type +
+                ", id='" + id + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", state=" + state +
+                '}';
+    }
 }

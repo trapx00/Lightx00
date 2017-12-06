@@ -34,7 +34,7 @@ public class DraftContinueWritableDemoUiController implements ExternalLoadableUi
      * @return
      */
     @Override
-    public ExternalLoadedUiPackage load() throws IOException {
-        return new UiLoader("/fxml/DraftContinueWritingDemoUi.fxml").loadAndGetPackage();
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/DraftContinueWritingDemoUi.fxml").loadAndGetPackageWithoutException();
     }
 }

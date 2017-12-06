@@ -4,6 +4,7 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
@@ -16,8 +17,7 @@ import java.util.Date;
 
 public class SaleBillVo extends SaleBillBaseVo {
     private String clientId;
-    private EmployeeVo defaultOperator;
-    private SaleStaffVo operator;
+    private String salesmanId;
     private int repository;
     private CommodityItem[] commodityList;
     private double originTotal;
@@ -30,11 +30,10 @@ public class SaleBillVo extends SaleBillBaseVo {
     private CommodityItem[] giftList;
     private double giftToken;
 
-    public SaleBillVo(String id, Date date, BillState state, String clientId, SaleStaffVo salesman, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList,double giftToken) {
-        super(id, date, state, SaleBillType.Sale);
+    public SaleBillVo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
+        super(id, date, state, SaleBillType.Sale, operatorId);
         this.clientId = clientId;
-        this.defaultOperator = defaultOperator;
-        this.operator = operator;
+        this.salesmanId = salesmanId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -45,7 +44,7 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientLevel = clientLevel;
         this.promotionId = promotionId;
         this.giftList = giftList;
-        this.giftToken=giftToken;
+        this.giftToken = giftToken;
     }
 
     public String getClientId() {
@@ -56,20 +55,12 @@ public class SaleBillVo extends SaleBillBaseVo {
         this.clientId = clientId;
     }
 
-    public EmployeeVo getDefaultOperator() {
-        return defaultOperator;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public void setDefaultOperator(EmployeeVo defaultOperator) {
-        this.defaultOperator = defaultOperator;
-    }
-
-    public SaleStaffVo getOperator() {
-        return operator;
-    }
-
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
+    public void setSalesmanId(String salesmanId) {
+        this.salesmanId = salesmanId;
     }
 
     public int getRepository() {
@@ -167,7 +158,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return SaleBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -177,7 +168,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return SaleBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -187,7 +178,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
+        return SaleBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -197,7 +188,7 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleBillBlFactory.getDraftDeleteService();
     }
 
     /**

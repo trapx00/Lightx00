@@ -6,18 +6,19 @@ import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlServi
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommoditySortBlServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
 
 import static org.junit.Assert.*;
 
 public class CommoditySortBlServiceDriver {
 
-    CommoditySortBlService service=new CommoditySortBlServiceStub();
+    private CommoditySortBlService service=new CommoditySortBlServiceStub();
 
     String commodityIdList[]={""};
-    String nextIds[]={"S0002"};
+    private String nextIds[]={"S0002"};
     CommoditySortVo Led=new CommoditySortVo("S0001","Led", null,
-    "",  nextIds);
-    CommoditySortVo[] commoditysorts={Led};
+    "",  new CommoditySortItem[] {new CommoditySortItem("123","123")});
+    private CommoditySortVo[] commoditysorts={Led};
 
 
     @Test
@@ -40,14 +41,5 @@ public class CommoditySortBlServiceDriver {
         assertEquals(ResultMessage.Success,service.delete(Led));
     }
 
-    @Test
-    public void display() throws Exception {
-        assertEquals("S0002",service.dispaly(Led)[0].getId());
-    }
-
-    @Test
-    public void dispaly() throws Exception {
-        assertEquals("S0001",service.display()[0].getId());
-    }
 
 }

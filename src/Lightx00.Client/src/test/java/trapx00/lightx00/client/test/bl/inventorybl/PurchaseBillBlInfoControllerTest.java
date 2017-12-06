@@ -9,18 +9,22 @@ import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
 import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseRefundBillBlFactory;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
+
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class PurchaseBillBlInfoControllerTest {
 
-    PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
-    PurchaseBillBlController purchaseBillBlController = PurchaseBillBlFactory.getPurchaseBillBlController();
-    PurchaseRefundBillBlController purchaseRefundBillBlController = PurchaseRefundBillBlFactory.getPurchaseRefundBillBlController();
-    PurchaseBillVo purchaseBillVo=new PurchaseBillVo("0",null,null,null,"1",1,null,null,100,null);
-    PurchaseRefundBillVo purchaseRefundBillVo=new PurchaseRefundBillVo("0",null,null,null,1,null,null,100,null);
+    private PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
+    private PurchaseBillBlController purchaseBillBlController = PurchaseBillBlFactory.getPurchaseBillBlController();
+    private PurchaseRefundBillBlController purchaseRefundBillBlController = PurchaseRefundBillBlFactory.getPurchaseRefundBillBlController();
+    private PurchaseBillVo purchaseBillVo=new PurchaseBillVo("0",new Date(), BillState.Draft, "123",1,"123","123",10,new CommodityItem[] {new CommodityItem("123",10,123)});
+    private PurchaseRefundBillVo purchaseRefundBillVo=new PurchaseRefundBillVo("0",null,null,null,1,null,null,100,null);
 
     @Test
     public void queryPurchaseBillVo() throws Exception {
