@@ -13,6 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import com.jfoenix.controls.JFXButton?>
 <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.logui.LogUiController">
     <padding>
@@ -35,4 +36,8 @@
             <JFXTreeTableColumn fx:id="logContentColumn" prefWidth="150" text="日志内容"/>
         </columns>
     </JFXTreeTableView>
+    <JFXButton buttonType="RAISED" onAction="#onBtnSelectClicked" prefHeight="32.0" prefWidth="80.0"
+               style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="确定"/>
+    <Label fx:id="lbResult" text="选择结束后，结果将在这里显示"/>
+
 </VBox>
