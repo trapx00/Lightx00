@@ -3,11 +3,13 @@ package trapx00.lightx00.client.presentation.inventoryui;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.Reversible;
 
 import java.io.IOException;
 
-public class InventoryWarningUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
+public class InventoryWarningUiController implements DraftContinueWritableUiController, ExternalLoadableUiController,ReversibleUi {
 
     /**
      * Start continuing write a draft. Returns a External loaded ui package.
@@ -28,6 +30,11 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
      */
     @Override
     public ExternalLoadedUiPackage load() {
+        return null;
+    }
+
+    @Override
+    public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
         return null;
     }
 }

@@ -12,11 +12,14 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftDetailUiController;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController;
+import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
-public class InventoryGiftVo extends InventoryBillBaseVo {
+public class InventoryGiftVo extends InventoryBillBaseVo implements Reversible{
 
 
     private PromotionCommodity[] gifts;
@@ -72,12 +75,12 @@ public class InventoryGiftVo extends InventoryBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new InventoryGiftUiController();
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new InventoryGiftDetailUiController();
     }
 
     /**
@@ -97,6 +100,6 @@ public class InventoryGiftVo extends InventoryBillBaseVo {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new InventoryGiftUiController();
     }
 }
