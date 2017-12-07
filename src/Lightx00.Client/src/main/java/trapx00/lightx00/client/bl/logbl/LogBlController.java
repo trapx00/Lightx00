@@ -50,6 +50,6 @@ public class LogBlController implements LogBlService, LogService {
     }
 
     private LogVo fromPo(LogPo logPo) {
-        return new LogVo(logPo.getDate(), logPo.getSeverity(), logPo.getContent());
+        return new LogVo(logPo.getId(), logPo.getDate(), logPo.getSeverity(), logPo.getContent());
     }
 }
