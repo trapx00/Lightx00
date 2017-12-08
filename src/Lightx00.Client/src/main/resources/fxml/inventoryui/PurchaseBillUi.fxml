@@ -168,8 +168,8 @@
                                         <RowConstraints prefHeight="900.0" />
                                     </rowConstraints>
                                     <columnConstraints>
-                                        <ColumnConstraints prefWidth="600.0"/>
-                                        <ColumnConstraints prefWidth="600.0"/>
+                                        <ColumnConstraints prefWidth="800.0"/>
+                                        <ColumnConstraints prefWidth="800.0"/>
                                     </columnConstraints>
                                 <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER" fx:id="infoPane" styleClass="floatingPane">
                                     <rowConstraints>
@@ -181,8 +181,8 @@
                                         <RowConstraints prefHeight="150.0" />
                                     </rowConstraints>
                                     <columnConstraints>
-                                        <ColumnConstraints prefWidth="300.0"/>
-                                        <ColumnConstraints prefWidth="300.0"/>
+                                        <ColumnConstraints prefWidth="400.0"/>
+                                        <ColumnConstraints prefWidth="400.0"/>
                                     </columnConstraints>
                                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_LEFT">
                                         <HBox alignment="CENTER">
@@ -195,8 +195,8 @@
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
                                         </HBox>
-                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER">
-                                            <JFXTextField fx:id="tfBillId" prefWidth="250" text="JHD-20171026-00000" alignment="CENTER" disable="true"></JFXTextField>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER_RIGHT">
+                                            <JFXTextField fx:id="tfBillId" minWidth="400" text="JHD-20171026-00000" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -213,8 +213,8 @@
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
                                         </HBox>
-                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER">
-                                            <JFXTextField fx:id="tfOperatorId" prefWidth="250" text="1612501213" alignment="CENTER" disable="true"></JFXTextField>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER_RIGHT">
+                                            <JFXTextField fx:id="tfOperatorId" minWidth="400" text="1612501213" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -231,8 +231,8 @@
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
                                         </HBox>
-                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" alignment="CENTER">
-                                            <JFXTextField fx:id="tfClientId" prefWidth="250" text="1612501213" alignment="CENTER" disable="true"></JFXTextField>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" alignment="CENTER_RIGHT">
+                                            <JFXTextField fx:id="tfClientId" minWidth="400" text="1612501213" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -249,8 +249,8 @@
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
                                         </HBox>
-                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" alignment="CENTER">
-                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" alignment="CENTER_RIGHT">
+                                            <JFXComboBox fx:id="cbRepository" minWidth="400"></JFXComboBox>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -267,8 +267,8 @@
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
                                         </HBox>
-                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="4" alignment="CENTER">
-                                            <JFXTextField fx:id="tfBillTotal" prefWidth="250" text="200.00" alignment="CENTER" disable="true"></JFXTextField>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="4" alignment="CENTER_RIGHT">
+                                            <JFXTextField fx:id="tfBillTotal" minWidth="400" text="200.00" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -285,8 +285,8 @@
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
                                         </HBox>
-                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="5" alignment="CENTER">
-                                            <JFXTextField prefWidth="250"></JFXTextField>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="5" alignment="CENTER_RIGHT">
+                                            <JFXTextField fx:id="tfComment" minWidth="400"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -296,9 +296,13 @@
                                 <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER">
                                     <JFXTreeTableView fx:id="commodityList">
                                         <columns>
-                                            <JFXTreeTableColumn fx:id="tcCommodityNameColumn" editable="false" text="商品名称"/>
-                                            <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="false" text="商品数量"/>
-                                            <JFXTreeTableColumn fx:id="tcCommodityTotalColumn" editable="false" text="商品总价"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityIdColumn" editable="false" text="商品编号"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityNameColumn" editable="false" text="名称"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityTypeColumn" editable="false" text="型号"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="true" text="数量"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityPriceColumn" editable="false" text="单价"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityTotalColumn" editable="false" text="金额"/>
+                                            <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="true" text="备注"/>
                                         </columns>
                                     </JFXTreeTableView>
                                     <padding>
