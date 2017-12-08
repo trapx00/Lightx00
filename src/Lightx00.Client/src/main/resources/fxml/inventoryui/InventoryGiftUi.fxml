@@ -11,6 +11,8 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController"
@@ -58,11 +60,21 @@
 
     <JFXTreeTableView fx:id="inventoryGiftItems" prefHeight="300.0" prefWidth="400.0">
         <columns>
-            <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="条目名" />
+            <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="商品名" />
             <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="100" resizable="false" text="价格" />
             <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
         </columns>
     </JFXTreeTableView>
+    <JFXButton fx:id="cButton" buttonType="RAISED" onAction="#onBtnSelectClicked" style="-fx-background-color: #232e5f; -fx-text-fill: #FFFFFF" text="确定">
+        <graphic>
+            <MaterialIconView glyphName="ARROW_FORWARD" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+        </graphic>
+        <HBox.margin>
+            <Insets right="10.0" />
+        </HBox.margin>
+    </JFXButton>
+
+    <Label fx:id="lbResult" text="选择结束后，结果将在这里显示"/>
 
 
 </VBox>
