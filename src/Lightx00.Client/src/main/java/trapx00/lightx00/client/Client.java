@@ -30,7 +30,7 @@ public class Client extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/loginui/LoginUi.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/inventoryui/PurchaseBillUi.fxml"));
         Scene newScene = new Scene(loader.load());
         StageManager.setStage(primaryStage);
         primaryStage.setScene(newScene);

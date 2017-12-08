@@ -22,7 +22,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
-<StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.inventoryui.ModifyPurchaseBillUiController">
+<StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController">
     <AnchorPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <GridPane fx:id="drawer" style="-fx-background-color: white" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
@@ -218,7 +218,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXTextField fx:id="BillId" prefWidth="250" text="JHD-20171026-00000" alignment="CENTER" disable="true"></JFXTextField>
+                                            <JFXTextField fx:id="tfBillId" prefWidth="250" text="JHD-20171026-00000" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -236,7 +236,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER" prefWidth="280">
-                                            <JFXTextField fx:id="OperatorId" prefWidth="250" text="1612501213" alignment="CENTER" disable="true"></JFXTextField>
+                                            <JFXTextField fx:id="tfOperatorId" prefWidth="250" text="1612501213" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -254,7 +254,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <JFXComboBox fx:id="cbClientId" prefWidth="250"></JFXComboBox>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -272,7 +272,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <JFXComboBox fx:id="cbRepository" prefWidth="250"></JFXComboBox>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -290,7 +290,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER" prefWidth="250">
-                                            <JFXTextField fx:id="BillTotal" prefWidth="250" text="200.00" alignment="CENTER" disable="true"></JFXTextField>
+                                            <JFXTextField fx:id="tfBillTotal" prefWidth="250" text="200.00" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -308,7 +308,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXTextField prefWidth="250"></JFXTextField>
+                                            <JFXTextField fx:id="tfComment" prefWidth="250"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -338,7 +338,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER" prefWidth="250">
-                                            <JFXTextField fx:id="CommodityId" prefWidth="250" text="000000" alignment="CENTER" disable="true"></JFXTextField>
+                                            <JFXTextField fx:id="tfCommodityId" prefWidth="250" text="000000" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -356,7 +356,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <JFXComboBox fx:id="cbCommodityName" prefWidth="250"></JFXComboBox>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -374,7 +374,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXComboBox prefWidth="250"></JFXComboBox>
+                                            <JFXComboBox fx:id="cbCommodityType" prefWidth="250"></JFXComboBox>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -392,7 +392,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXTextField fx:id="CommodityNumber" prefWidth="250" text="10.0" alignment="CENTER"></JFXTextField>
+                                            <JFXTextField fx:id="tfCommodityNumber" prefWidth="250" text="10.0" alignment="CENTER"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -410,7 +410,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER" prefWidth="250">
-                                            <JFXTextField fx:id="CommodityPrice" prefWidth="250" text="20.00" alignment="CENTER" disable="true"></JFXTextField>
+                                            <JFXTextField fx:id="tfCommodityPrice" prefWidth="250" text="20.00" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -428,7 +428,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER" prefWidth="250">
-                                            <JFXTextField fx:id="CommodityTotal" prefWidth="250" text="200.00" alignment="CENTER" disable="true"></JFXTextField>
+                                            <JFXTextField fx:id="tfCommodityTotal" prefWidth="250" text="200.00" alignment="CENTER" disable="true"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
@@ -446,7 +446,7 @@
                                             </padding>
                                         </HBox>
                                         <HBox alignment="CENTER">
-                                            <JFXTextField prefWidth="250"></JFXTextField>
+                                            <JFXTextField fx:id="tfCommodityComment" prefWidth="250"></JFXTextField>
                                             <padding>
                                                 <Insets bottom="20" left="20" right="20" top="20" />
                                             </padding>
