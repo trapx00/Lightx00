@@ -55,6 +55,10 @@ public class FrameworkUiController {
         promptLabel.setText("欢迎你！" + employee.getName());
     }
 
+    public EmployeeVo getEmployeeVo() {
+        return employeeVo;
+    }
+
     public void initialize() {
         JFXDepthManager.setDepth(drawer, DEPTH);
         JFXDepthManager.setDepth(titleBar, DEPTH);

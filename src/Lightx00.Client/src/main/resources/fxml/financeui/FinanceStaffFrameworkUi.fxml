@@ -44,9 +44,12 @@
                     </Label>
 
                     <!--功能按钮区-->
-                    <JFXButton onAction="#onCashBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定现金费用表" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
+                    <JFXButton onAction="#onReceivalBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定收款单" textFill="#000000" />
+                    <JFXButton onAction="#onPaymentBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定付款单" textFill="#000000" />
+                    <JFXButton onAction="#onCashBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定现金费用单" textFill="#000000" />
+                    <JFXButton onAction="#onSaleDetailFunctionClicked" prefHeight="60" prefWidth="200" text="查看销售明细表" textFill="#000000" />
+                    <JFXButton onAction="#onTradeHistoryFunctionClicked" prefHeight="60" prefWidth="200" text="查看经营历程表" textFill="#000000" />
+                    <JFXButton onAction="#onTradeSituationFunctionClicked" prefHeight="60" prefWidth="200" text="查看经营情况表" textFill="#000000" />
                     <!--功能按钮区完-->
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>

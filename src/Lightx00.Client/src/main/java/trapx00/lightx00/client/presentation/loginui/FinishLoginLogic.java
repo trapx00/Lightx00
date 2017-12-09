@@ -18,7 +18,11 @@ public class FinishLoginLogic {
             StageManager.closeStage();
             Stage newStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
+<<<<<<< HEAD
             loader.setLocation(Client.class.getResource("/fxml/mainui/InventoryStaffUI.fxml"));
+=======
+            loader.setLocation(Client.class.getResource("/fxml/financeui/FinanceStaffFrameworkUi.fxml"));
+>>>>>>> origin/chenjunda
             Scene scene = new Scene(loader.load());
 
             FrameworkUiController controller = loader.getController();

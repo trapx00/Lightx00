@@ -5,6 +5,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public abstract class ReceivalPaymentBillVoBase extends FinanceBillVo implements Reversible {
