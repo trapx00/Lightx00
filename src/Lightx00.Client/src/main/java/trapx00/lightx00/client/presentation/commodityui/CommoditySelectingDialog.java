@@ -36,8 +36,6 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableAmountColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableDateColumn;
-    @FXML private JFXButton btnSelect;
-    @FXML private JFXButton btnClose;
     @FXML private JFXTextField tfSearch;
 
     private Consumer<List<CommodityVo>> callback;
@@ -58,7 +56,30 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
         initTable();
         initSearch();
         update();
-        /*CommodityVo commoditVo=new CommodityVo("123","SmallLed","Led",34
+
+    }
+    private void initSearch() {
+        tfSearch.setOnKeyPressed(e -> {
+           if (e.getCode().equals(KeyCode.ENTER)) {
+                if (tfSearch.getText().length() > 0) {
+                    update(new CommodityQueryVo().eq("name", tfSearch.getText()));
+                } else {
+                    update();
+               }
+
+            }
+        });
+    }
+
+    private void update() {
+        update(new CommodityQueryVo());
+    }
+
+    private void update(CommodityQueryVo queryVo) {
+        CommodityVo[] queryResult = blService.query(queryVo);
+        commodityModels.clear();
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
+       /* CommodityVo commoditVo=new CommodityVo("123","SmallLed","Led",34
                 ,new Date(),"No.1","No.2",43,53,44,
                 45,45);
         commodityModels.clear();
@@ -74,28 +95,6 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
         commodityModels.add(new CommoditySelectionItemModel(new CommodityVo("123","SmallLed","Led",34
                 ,new Date(),"No.1","No.2",43,53,44,
                 45,45)));*/
-    }
-    private void initSearch() {
-        tfSearch.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ENTER)) {
-                if (tfSearch.getText().length() > 0) {
-                    update(new CommodityQueryVo().eq("name", tfSearch.getText()));
-                } else {
-                    update();
-                }
-
-            }
-        });
-    }
-
-    private void update() {
-        update(new CommodityQueryVo());
-    }
-
-    private void update(CommodityQueryVo queryVo) {
-        CommodityVo[] queryResult = blService.query(queryVo);
-        commodityModels.clear();
-        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
 
 
@@ -148,6 +147,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
 
     @Override
     public CommodityVo queryId(String id) {
+
         return blService.query(new CommodityQueryVo().idEq(id))[0];
     }
 

@@ -20,6 +20,8 @@ import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.NoMoreBillException;
+import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -36,7 +38,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public JFXButton btnDelete;
     public JFXTreeTableView<InventoryGiftItemModel> inventoryGiftItems;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcName;
-    public JFXTreeTableColumn<InventoryGiftItemModel, String> tcId;
+    public JFXTreeTableColumn<InventoryGiftItemModel, String> tcPrice;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcAmount;
 
     private ObjectProperty<List<CommodityVo>> currentCommodity = new SimpleObjectProperty<>();
@@ -71,9 +73,9 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     }
 
     public void initialize() {
-        tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getCommodityId()));
+        tcName.setCellValueFactory(cellData -> new SimpleStringProperty(CommodityUiFactory.getCommoditySelectionUi().queryId(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getCommodityId()).getName()));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getAmount())));
-        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
+        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
 
 
         currentDate.addListener(((observable, oldValue, newValue) -> {
@@ -116,6 +118,16 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public void onBtnAddItemClicked() {
         CommodityUiFactory.getCommoditySelectionUi()
                 .showCommoditySelectDialog(vo -> this.currentCommodity.setValue(vo));
+        CommodityVo[] commodityVo=currentCommodity.get().stream().toArray(CommodityVo[]::new);
+        for(CommodityVo commodityVo1:commodityVo){
+            PromotionCommodity promotionCommodity=new PromotionCommodity();
+            promotionCommodity.setCommodityId(commodityVo1.getId());
+            promotionCommodity.setAmount(commodityVo1.getAmount());
+            promotionCommodity.setUnitPrice(commodityVo1.getRetailPrice());
+            inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(
+                    promotionCommodity));
+
+        }
     }
 
     public void onBtnDeleteItemClicked() {
@@ -180,6 +192,19 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         currentEmployee.setValue(null);
         currentCommodity.setValue(null);
         inventoryGiftItemModelObservableList.clear();
+    }
+
+    public void onBtnAutofillClicked() {
+        try {
+            tfId.setText(blService.getId());
+            currentDate.setValue(new Date());
+            currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+        } catch (NoMoreBillException e) {
+            PromptDialogHelper.start("ID不够！","当日ID已经达到99999，无法增加新的单据。")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+
     }
 
 

@@ -99,21 +99,6 @@ public class CommodityUiController implements ExternalLoadableUiController {
         return new UiLoader("/fxml/inventoryui/CommodityUi.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void onBtnSelectClicked(ActionEvent actionEvent) {
-        /**
-         * 这里是new的，应该提供工厂。工厂应该直接new一个回来。
-         */
-        new CommoditySelectingDialog().showSelectLogDialog(new ArrayList<>(), list -> {
-            /**
-             * 这个函数就是如何处理选择结束后的数据。参数list就是用户选择的内容。
-             * 如果用户按了取消，就不会调用
-             */
-            StringBuilder result = new StringBuilder("你选择了ID是");
-            list.forEach(x -> result.append(x.getId()).append("、"));
-
-            lbResult.setText(result.append("的商品").toString());
-        });
-    }
 
 
 }
