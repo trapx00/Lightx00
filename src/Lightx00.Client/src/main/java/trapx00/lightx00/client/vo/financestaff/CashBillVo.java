@@ -21,13 +21,17 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 
 public class CashBillVo extends FinanceBillVo implements Reversible {
-    private String accountId;
+    private int accountId;
     private CashBillItem[] items;
 
-    public CashBillVo(String id, Date date, BillState state, String operatorId, String accountId, CashBillItem[] items) {
+    public CashBillVo(String id, Date date, BillState state, String operatorId, int accountId, CashBillItem[] items) {
         super(FinanceBillType.CashBill, id, date, state, operatorId);
         this.accountId = accountId;
         this.items = items;
+    }
+
+    public double getTotal() {
+        return Arrays.stream(items).mapToDouble(CashBillItem::getAmount).sum();
     }
 
 
@@ -40,11 +44,11 @@ public class CashBillVo extends FinanceBillVo implements Reversible {
         this.operatorId = operatorId;
     }
 
-    public String getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 

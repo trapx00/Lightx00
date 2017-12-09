@@ -70,7 +70,7 @@ public class PromptDialogHelper {
                 e.handle(event);
             }
 
-            dialog.close();
+            FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
         });
         buttonList.add(button);
         return this;
@@ -87,6 +87,11 @@ public class PromptDialogHelper {
         JFXButton button = new JFXButton(content, icon);
         button.setOnMouseClicked(e);
         buttonList.add(button);
+        return this;
+    }
+
+    public PromptDialogHelper setContent(Node node) {
+        contentNode = node;
         return this;
     }
 
@@ -114,5 +119,9 @@ public class PromptDialogHelper {
 
     public JFXDialog create() {
         return create(FrameworkUiManager.getDialogContainer());
+    }
+
+    public void createAndShow() {
+        FrameworkUiManager.getCurrentDialogStack().pushAndShow(create());
     }
 }

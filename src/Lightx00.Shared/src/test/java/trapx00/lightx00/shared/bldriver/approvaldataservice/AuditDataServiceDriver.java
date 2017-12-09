@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class AuditDataServiceDriver {
     private AuditDataService service = new AuditDataServiceStub();
-    private BillPo bill = new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"123","123",new CashBillItem[] { new CashBillItem("123",0,"123")});
+    private BillPo bill = new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"123",1,new CashBillItem[] { new CashBillItem("123",0,"123")});
     private AuditIdPo auditId = new AuditIdPo("XJFYD-20171112-00001",new Date());
     @Test
     public void query() throws Exception {

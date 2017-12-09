@@ -12,3 +12,6 @@
     -fx-border-width: 1;
 }
 
+.loginBackground {
+    -fx-background-image: url(../../img/background.png);
+}

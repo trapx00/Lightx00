@@ -42,7 +42,7 @@ public class NotificationUiController implements ExternalLoadableUiController {
     private EmployeeVo employeeVo = new FinanceStaffVo("123","123",new Date(),"123","123");
     private OtherNotificationVo testVo = new OtherNotificationVo(1, new Date(), employeeVo, new EmployeeVo[] {employeeVo}, "test content\n123");
     private BillApprovalNotificationVo testBillApprovalVo = new BillApprovalNotificationVo(2, new Date(), employeeVo, new EmployeeVo[] {employeeVo},
-        new CashBillVo("123",new Date(), BillState.Approved, "123","123",
+        new CashBillVo("123",new Date(), BillState.Approved, "123",1,
             new CashBillItem[] {
             new CashBillItem("item1", 10, "test1"),
                 new CashBillItem("item2", 10, "test2")

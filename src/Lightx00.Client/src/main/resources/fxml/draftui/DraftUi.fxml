@@ -10,7 +10,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.draftui.DraftUiController">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.draftui.DraftUiController">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>

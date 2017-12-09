@@ -5,18 +5,21 @@ import com.jfoenix.controls.JFXDialog;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.bl.loginbl.factory.FaceIdAuthenticationBlServiceFactory;
 import trapx00.lightx00.client.blservice.loginblservice.FaceIdAuthenticationBlService;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.StageManager;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
 import trapx00.lightx00.shared.exception.faceid.NetworkException;
 import trapx00.lightx00.shared.exception.faceid.NoFaceDetectedException;
 
-public class FaceIdLoginUiController {
+import java.awt.*;
+
+public class FaceIdLoginUiController implements ExternalLoadableUiController {
     public JFXButton loginButton;
     public JFXButton cancelButton;
     public StackPane rootPane;
@@ -26,6 +29,7 @@ public class FaceIdLoginUiController {
     public void initialize() {
         loginButton.setDisable(true);
         webCamView.setOnCameraInitialized(() -> loginButton.setDisable(false));
+        BorderlessStageHelper.makeDraggable(StageManager.getStage(), rootPane);
     }
 
     public void onLoginButtonClicked(ActionEvent actionEvent) {
@@ -99,5 +103,21 @@ public class FaceIdLoginUiController {
 
     public void onCancelButtonClicked(ActionEvent actionEvent) {
         StageManager.closeStage();
+    }
+
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/loginui/FaceIdLogin.fxml").loadAndGetPackageWithoutException();
+    }
+
+    public void onBtnJumpBackClicked(ActionEvent actionEvent) {
+        ExternalLoadedUiPackage externalLoadedUiPackage = new LoginUiController().load();
+        StageManager.changeScene(new Scene(externalLoadedUiPackage.getComponent()));
+
     }
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="trapx00.lightx00.client.presentation.bankaccountui.BankAccountAddUi"
+      prefHeight="250.0" prefWidth="400.0" alignment="TOP_CENTER">
+    <Label text="新增银行账户" textFill="#5e5e5e">
+        <font>
+            <Font name="System Bold" size="32.0" />
+        </font>
+    </Label>
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints prefWidth="100"/>
+            <ColumnConstraints prefWidth="200"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="50"/>
+        </rowConstraints>
+
+        <padding>
+            <Insets left="20" right="20" top="20" bottom="20"/>
+        </padding>
+
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="新账户名"/>
+        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfNewName" />
+    </GridPane>
+
+    <HBox alignment="CENTER">
+        <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
+            <graphic>
+                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
+        <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消">
+            <graphic>
+                <MaterialIconView glyphName="CLOSE" glyphSize="24" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
+    </HBox>
+</VBox>
