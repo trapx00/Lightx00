@@ -11,7 +11,9 @@ import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 
 import java.sql.SQLException;
+import java.util.Date;
 
+import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 public class BaseDatabaseFactory {
 
     private static final String connectionString = "jdbc:sqlite:" + getDbFilePath();
@@ -51,6 +53,23 @@ public class BaseDatabaseFactory {
                 e.printStackTrace();
             }
         }).scan();
+
+        initializeData();
+    }
+
+    private static void initializeData() {
+
+        try {
+            Dao<BankAccountPo, Integer> dao = createDao(BankAccountPo.class);
+            TableUtils.dropTable(dao,true);
+            TableUtils.createTableIfNotExists(connectionSource, BankAccountPo.class);
+            dao.create(new BankAccountPo("1", 10, new Date()));
+            dao.create(new BankAccountPo("2", 20, new Date()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

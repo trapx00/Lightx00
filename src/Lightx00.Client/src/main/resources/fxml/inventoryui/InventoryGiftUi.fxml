@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController"
+      prefHeight="400.0" prefWidth="600.0">
+    <Label text="库存赠送单" textFill="#5e5e5e">
+        <font>
+            <Font name="System Bold" size="32.0" />
+        </font>
+    </Label>
+    <HBox alignment="CENTER" spacing="20">
+        <VBox alignment="TOP_CENTER">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="100"/>
+                    <ColumnConstraints prefWidth="200"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="50"/>
+                    <RowConstraints minHeight="50"/>
+                    <RowConstraints minHeight="50"/>
+                    <RowConstraints minHeight="50"/>
+                </rowConstraints>
+
+                <padding>
+                    <Insets left="20" right="20" top="20" bottom="20"/>
+                </padding>
+
+                <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="ID"/>
+                <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfId" disable="true"/>
+
+                <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="日期"/>
+                <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfDate" disable="true" />
+
+                <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="制定者"/>
+                <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfOperator" disable="true"/>
+
+            </GridPane>
+
+            <JFXButton GridPane.columnIndex="0" fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnAutofillClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="自动填充信息">
+                <graphic>
+                    <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+                </graphic>
+                <HBox.margin>
+                    <Insets right="10.0" />
+                </HBox.margin>
+            </JFXButton>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="10" prefHeight="300">
+            <Label text="赠送商品" textFill="#5e5e5e">
+            </Label>
+            <JFXTreeTableView fx:id="inventoryGiftItems" prefHeight="300.0" prefWidth="400.0">
+                <columns>
+                    <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="商品"/>
+                    <JFXTreeTableColumn fx:id="tcPrice" prefWidth="100" text="价格" />
+                    <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
+                </columns>
+            </JFXTreeTableView>
+            <HBox prefWidth="100" spacing="10" alignment="BASELINE_RIGHT">
+                <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #FFFFFF" text="">
+                    <graphic>
+                        <MaterialIconView glyphName="ADD" glyphSize="24" />
+                    </graphic>
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin>
+                </JFXButton>
+                <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteItemClicked" style="-fx-text-fill: #000000;" text="">
+                    <graphic>
+                        <MaterialIconView glyphName="DELETE" glyphSize="24" />
+                    </graphic>
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin>
+                </JFXButton>
+            </HBox>
+
+        </VBox>
+    </HBox>
+
+    <Separator/>
+    <HBox alignment="CENTER">
+        <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
+            <graphic>
+                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
+        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
+            <graphic>
+                <MaterialIconView glyphName="SAVE" glyphSize="24" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
+        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked" style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
+            <graphic>
+                <MaterialIconView glyphName="REFRESH" glyphSize="24" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
+    </HBox>
+
+
+
+</VBox>

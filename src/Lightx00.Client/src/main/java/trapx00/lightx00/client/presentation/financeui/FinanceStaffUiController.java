@@ -31,4 +31,24 @@ public class FinanceStaffUiController extends FrameworkUiController {
          */
         switchFunction(CashBillUiController.class, "制定现金费用单",true);
     }
+
+    public void onReceivalBillFunctionClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void onPaymentBillFunctionClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {
+        
+    }
+
+    public void onTradeHistoryFunctionClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
+
+    }
 }

@@ -164,13 +164,19 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
 
     @Override
     public CommodityVo[] getAllCommodity() {
-
-        CommodityPo[] commodityPos=dataService.getAllCommodity();
-        CommodityVo[] commodityVos=new CommodityVo[commodityPos.length];
-        for(int i=0;i<commodityPos.length;i++){
-            commodityVos[i]= this.fromPoToVo(commodityPos[i]);
+        String logLeadingText = String.format("得到所有商品");
+        try{
+            CommodityPo[] commodityPos=dataService.getAllCommodity();
+            logService.log(LogSeverity.Success, String.format(logLeadingText + "成功，查找到%d条记录。", commodityPos.length));
+            CommodityVo[] commodityVos=new CommodityVo[commodityPos.length];
+            for(int i=0;i<commodityPos.length;i++){
+                commodityVos[i]= this.fromPoToVo(commodityPos[i]);
+            }
+            return commodityVos;
+        }catch (RemoteException e) {
+            logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
+            throw new UncheckedRemoteException(e);
         }
-        return commodityVos;
     }
 
     /**
