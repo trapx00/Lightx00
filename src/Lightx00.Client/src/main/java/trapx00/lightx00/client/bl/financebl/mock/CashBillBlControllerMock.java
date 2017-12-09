@@ -84,7 +84,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
     @Override
     public CashBillVo[] query(CashBillQueryVo query) {
         return new CashBillVo[] {
-            new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "","",new CashBillItem[0])
+            new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "",1,new CashBillItem[0])
         };
     }
 

@@ -27,7 +27,7 @@ public class BankAccountDataControllerTest {
         }
     }
     private Dao<BankAccountPo, Integer> dao = BankAccountDataDaoFactory.getBankAccountDao();
-    private BankAccountDataService service = BankAccountDataFactory.getController();
+    private BankAccountDataService service = BankAccountDataFactory.getService();
     private BankAccountPo dumbAccount = new BankAccountPo("123",10,new Date());
     @Test
     public void query() throws Exception {

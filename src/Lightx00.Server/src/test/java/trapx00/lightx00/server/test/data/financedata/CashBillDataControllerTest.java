@@ -30,7 +30,7 @@ public class CashBillDataControllerTest {
     }
     private Dao<CashBillPo, String> dao = FinanceDataDaoFactory.getCashBillDao();
     private CashBillDataService service = CashBillDataFactory.getService();
-    private final CashBillPo bill = new CashBillPo("XJFYD-20171122-00001",new Date(), BillState.Draft, "123","123",null);
+    private final CashBillPo bill = new CashBillPo("XJFYD-20171122-00001",new Date(), BillState.Draft, "123",1,null);
 
     @Before
     public void setUp() throws Exception {

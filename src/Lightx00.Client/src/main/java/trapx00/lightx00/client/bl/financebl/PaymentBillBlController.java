@@ -1,5 +1,7 @@
 package trapx00.lightx00.client.bl.financebl;
 
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
@@ -10,6 +12,7 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.PaymentBillDataServiceFactory;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
@@ -24,6 +27,8 @@ public class PaymentBillBlController
     DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService, BillPoVoConverter<PaymentBillPo, PaymentBillVo> {
 
     private PaymentBillDataService dataService = PaymentBillDataServiceFactory.getService();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+
     private CommonBillBlController<PaymentBillVo, PaymentBillPo, PaymentBillQueryVo> commonBillBlController =
         new CommonBillBlController<>(dataService, "付款单", this);
 
@@ -97,6 +102,8 @@ public class PaymentBillBlController
      */
     @Override
     public ResultMessage activate(String id) {
+        PaymentBillVo paymentBillVo = query(new PaymentBillQueryVo().idEq(id))[0];
+        clientModificationService.modifyClient(paymentBillVo.getClientId(), ClientModificationFlag.RECEIVABLE, -paymentBillVo.getTotal());
         return commonBillBlController.activate(id);
     }
 

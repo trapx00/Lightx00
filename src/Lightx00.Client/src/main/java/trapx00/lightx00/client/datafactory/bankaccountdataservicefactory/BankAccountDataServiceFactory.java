@@ -12,7 +12,7 @@ public class BankAccountDataServiceFactory extends DataServiceFactory {
     }
 
     public static BankAccountDataService getDataService() {
-        //initRmi();
+        initRmi();
         return dataService;
     }
 }

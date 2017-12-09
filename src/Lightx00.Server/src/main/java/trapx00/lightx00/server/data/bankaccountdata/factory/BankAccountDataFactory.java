@@ -7,17 +7,17 @@ import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDat
 import java.rmi.RemoteException;
 
 public class BankAccountDataFactory {
-    private static BankAccountDataService controller;
+    private static BankAccountDataService service;
 
     static {
         try {
-            controller = new BankAccountDataController();
+            service = new BankAccountDataController();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    public static BankAccountDataService getController() {
-        return controller;
+    public static BankAccountDataService getService() {
+        return service;
     }
 }

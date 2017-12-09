@@ -12,12 +12,12 @@ import trapx00.lightx00.shared.po.bill.BillState;
 @DatabaseTable(tableName = "CashBill")
 public class CashBillPo extends FinanceBillPo  {
     @DatabaseField
-    private String accountId;
+    private int accountId;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CashBillItem[] items;
 
     public CashBillPo(String id, Date date, BillState state, String operatorId,
-                      String accountId, CashBillItem[] items) {
+                      int accountId, CashBillItem[] items) {
         super(id, date, state, FinanceBillType.CashBill, operatorId);
         this.accountId = accountId;
         this.items = items;
@@ -27,11 +27,11 @@ public class CashBillPo extends FinanceBillPo  {
 
     }
 
-    public String getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 

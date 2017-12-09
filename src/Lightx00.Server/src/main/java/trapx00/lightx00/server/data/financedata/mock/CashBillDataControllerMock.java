@@ -81,7 +81,7 @@ public class CashBillDataControllerMock extends CashBillDataController {
     @Override
     public CashBillPo[] query(CashBillQueryVo query) {
         return new CashBillPo[]{
-                new CashBillPo("123", new Date(), BillState.Draft, "123","123",new CashBillItem[]{
+                new CashBillPo("123", new Date(), BillState.Draft, "123",1,new CashBillItem[]{
                         new CashBillItem("123", 0.0, "123")
                 })
         };
