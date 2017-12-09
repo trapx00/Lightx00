@@ -44,6 +44,7 @@
                     </Label>
 
                     <!--功能按钮区-->
+                    <JFXButton onAction="#onBankAccountFunctionClicked" prefHeight="60" prefWidth="200" text="银行账户管理" textFill="#000000" />
                     <JFXButton onAction="#onReceivalBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定收款单" textFill="#000000" />
                     <JFXButton onAction="#onPaymentBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定付款单" textFill="#000000" />
                     <JFXButton onAction="#onCashBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定现金费用单" textFill="#000000" />

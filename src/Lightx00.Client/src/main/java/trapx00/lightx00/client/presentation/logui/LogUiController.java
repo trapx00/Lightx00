@@ -1,30 +1,24 @@
 package trapx00.lightx00.client.presentation.logui;
 
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.Client;
+import trapx00.lightx00.client.blservice.logblservice.LogBlService;
+import trapx00.lightx00.client.blservice.logblservice.LogBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.SampleSelectingDialog;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
-import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.util.DateHelper;
 import trapx00.lightx00.client.vo.log.LogVo;
+import trapx00.lightx00.shared.queryvo.LogQueryVo;
+import trapx00.lightx00.shared.util.DateHelper;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class LogUiController implements ExternalLoadableUiController {
 
@@ -33,7 +27,12 @@ public class LogUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<LogTableItemModel, String> logSeverityColumn;
     public JFXTreeTableColumn<LogTableItemModel, String> logContentColumn;
     public Label lbResult;
+    public JFXDatePicker startDatePicker;
+    public JFXDatePicker endDatePicker;
+    public JFXCheckBox cbIsEnabled;
     private ObservableList<LogTableItemModel> logTableItemModels = FXCollections.observableArrayList();
+    private LogBlService logBlService = LogBlServiceFactory.getInstance();
+
 
 
     public void initLogItem() {
@@ -46,8 +45,22 @@ public class LogUiController implements ExternalLoadableUiController {
     }
 
     public void updateItems() {
+        LogQueryVo queryVo = new LogQueryVo();
+        if (cbIsEnabled.isSelected()) {
+            try {
+                queryVo.between("date",
+                    DateHelper.fromLocalDate(startDatePicker.getValue()),
+                    DateHelper.fromLocalDate(endDatePicker.getValue()));
+            } catch (Exception ignored) {
+
+            }
+        }
+
         logTableItemModels.clear();
-        logTableItemModels.add(new LogTableItemModel(new LogVo(new Date(), LogSeverity.Success, "增加用户{你好，那啥}")));
+
+        for(LogVo logVo : logBlService.query(queryVo)) {
+            logTableItemModels.add(new LogTableItemModel(logVo));
+        }
     }
 
     public void initialize() {
@@ -80,5 +93,9 @@ public class LogUiController implements ExternalLoadableUiController {
 
             lbResult.setText(result.append("的日志").toString());
         });
+    }
+
+    public void onBtnConfirmedClicked(ActionEvent actionEvent) {
+        updateItems();
     }
 }

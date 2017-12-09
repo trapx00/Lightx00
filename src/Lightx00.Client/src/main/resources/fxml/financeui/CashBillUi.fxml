@@ -16,7 +16,10 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.financeui.CashBillUiController"
-      prefHeight="600.0" prefWidth="800.0" alignment="TOP_CENTER" spacing="10">
+      prefHeight="600.0" prefWidth="800.0" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
     <Label text="现金费用单" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
@@ -63,7 +66,7 @@
             </JFXButton>
         </VBox>
 
-        <VBox alignment="CENTER" spacing="10" prefHeight="300">
+        <VBox alignment="CENTER_LEFT" spacing="10" prefHeight="300">
             <Label text="现金费用款项" textFill="#5e5e5e">
             </Label>
             <JFXTreeTableView fx:id="tbCashBillItems" prefHeight="300.0" prefWidth="400.0">
@@ -95,7 +98,7 @@
         </VBox>
     </HBox>
     <Separator/>
-    <HBox alignment="CENTER">
+    <HBox alignment="BASELINE_LEFT">
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />

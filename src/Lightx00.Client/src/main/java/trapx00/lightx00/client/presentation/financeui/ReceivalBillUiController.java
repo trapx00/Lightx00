@@ -1,13 +1,12 @@
 package trapx00.lightx00.client.presentation.financeui;
 
-import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.Reversible;
 
 import java.io.IOException;
 
-public class ReceivalBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
+public class ReceivalBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
     /**
      * Start continuing write a draft. Returns a External loaded ui package.
      * Overrides to return a specific ui controller.
@@ -27,6 +26,17 @@ public class ReceivalBillUiController implements DraftContinueWritableUiControll
      */
     @Override
     public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/financeui/ReceivalBillUi.fxml").loadAndGetPackageWithoutException();
+    }
+
+    /**
+     * Revert a reversible.
+     *
+     * @param reversible reversible
+     * @return External loaded ui package including a controller and the component.
+     */
+    @Override
+    public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
         return null;
     }
 }

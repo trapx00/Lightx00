@@ -5,10 +5,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import trapx00.lightx00.client.Client;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.StageManager;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 
 import java.io.IOException;
 
@@ -17,8 +20,9 @@ public class FinishLoginLogic {
         try {
             StageManager.closeStage();
             Stage newStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Client.class.getResource("/fxml/financeui/FinanceStaffFrameworkUi.fxml"));
+
+            UiLoader loader = new UiLoader(selectUrl(employeeVo.getPosition()));
+
             Scene scene = new Scene(loader.load());
 
             FrameworkUiController controller = loader.getController();
@@ -38,4 +42,18 @@ public class FinishLoginLogic {
             e.printStackTrace();
         }
     }
+
+    private static String selectUrl(EmployeePosition position) {
+        switch (position) {
+            case InventoryStaff:
+            case Manager:
+            case Admin:
+            case SaleStaff:
+            case FinanceStaff:
+                return "/fxml/financeui/FinanceStaffFrameworkUi.fxml";
+            default:
+                return null;
+        }
+    }
+
 }

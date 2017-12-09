@@ -56,22 +56,6 @@ public class DraftUiController implements ExternalLoadableUiController {
         draftTable.setShowRoot(false);
     }
 
-    public static DraftUiController init(FrameworkUiController frameworkUiController) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Client.class.getResource("/fxml/draftui/DraftUi.fxml"));
-            Parent content = loader.load();
-            DraftUiController draftUiController = loader.getController();
-            draftUiController.frameworkController = frameworkUiController;
-            frameworkUiController.setContent(content);
-            //frameworkUiController.titleText.setText("管理草稿箱");
-            return draftUiController;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
         updateItems();

@@ -6,8 +6,8 @@ public class ExternalLoadedUiPackage {
     private ExternalLoadableUiController controller;
     private Parent component;
 
-    public ExternalLoadableUiController getController() {
-        return controller;
+    public <T extends ExternalLoadableUiController> T getController() {
+        return (T) controller;
     }
 
     public Parent getComponent() {
