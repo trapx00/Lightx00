@@ -11,11 +11,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
+import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
+import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.financeui.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
@@ -43,6 +46,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     public JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityCommentColumn;
 
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
+    private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -97,6 +101,11 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
         return null;
+    }
+
+    public void onClientClicked() {
+        clientInfoUi.showClientSelectDialog(list -> {
+        });
     }
 
     public void onDraftFunctionButtonClicked() {
