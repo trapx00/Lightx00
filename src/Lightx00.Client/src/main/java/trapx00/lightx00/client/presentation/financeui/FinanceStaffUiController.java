@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.presentation.financeui;
 
 import javafx.event.ActionEvent;
+import trapx00.lightx00.client.presentation.bankaccountui.BankAccountUiController;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 
 
@@ -50,5 +51,9 @@ public class FinanceStaffUiController extends FrameworkUiController {
 
     public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
 
+    }
+
+    public void onBankAccountFunctionClicked(ActionEvent actionEvent) {
+        switchFunction(BankAccountUiController.class, "银行账户管理", true);
     }
 }

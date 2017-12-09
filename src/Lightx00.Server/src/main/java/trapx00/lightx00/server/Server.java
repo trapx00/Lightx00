@@ -10,6 +10,8 @@ import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryGiftDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
+import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
+import trapx00.lightx00.server.data.logdata.factory.LogDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataFactory;
@@ -26,6 +28,7 @@ import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataServic
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
+import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
@@ -72,6 +75,7 @@ public class Server {
             CashBillDataService cashBillDataService = CashBillDataFactory.getService();
             NotificationDataService notificationDataService = NotificationDataFactory.getService();
             BankAccountDataService bankAccountDataService = BankAccountDataFactory.getService();
+            LogDataService logDataService = LogDataFactory.getService();
             LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
             CommodityDataService commodityDataService= CommodityDataFactory.getController();
             InventoryGiftDataService inventoryGiftDataService= InventoryGiftDataFactory.getService();
@@ -88,6 +92,7 @@ public class Server {
             export(cashBillDataService);
             export(notificationDataService);
             export(bankAccountDataService);
+            export(logDataService);
             logService.printLog(caller, "Initialization done.");
 
         } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
