@@ -2,38 +2,50 @@ package trapx00.lightx00.client.presentation.inventoryui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServiceFactory;
+import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.logui.LogTableItemModel;
 import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class InventoryGiftUiController implements DraftContinueWritableUiController, ExternalLoadableUiController,ReversibleUi {
 
-    public JFXTextField tfBillState;
     public JFXTextField tfOperator;
     public JFXTextField tfDate;
     public JFXTextField tfId;
-    public JFXButton cButton;
+    public JFXButton btnAdd;
+    public JFXButton btnDelete;
     public JFXTreeTableView<InventoryGiftItemModel> inventoryGiftItems;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcName;
-    public JFXTreeTableColumn<InventoryGiftItemModel, String> tcPrice;
+    public JFXTreeTableColumn<InventoryGiftItemModel, String> tcId;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcAmount;
-    public Label lbResult;
+
+    private ObjectProperty<List<CommodityVo>> currentCommodity = new SimpleObjectProperty<>();
+    private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
+    private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
 
     private ObservableList<InventoryGiftItemModel> inventoryGiftItemModelObservableList = FXCollections.observableArrayList();
+    private InventoryGiftBlService blService= InventoryGiftBlServiceFactory.getInstance();
+    private CommoditySelection commoditySelection= CommodityUiFactory.getCommoditySelectionUi();
 
     /**
      * Start continuing write a draft. Returns a External loaded ui package.
@@ -53,33 +65,30 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         InventoryGiftUiController inventoryGiftUiController = (InventoryGiftUiController) externalLoadedUiPackage.getController();
         inventoryGiftUiController.tfId.setText(inventoryGiftVo.getId());
         inventoryGiftUiController.tfDate.setText(DateHelper.fromDate(inventoryGiftVo.getDate()));
-        inventoryGiftUiController.tfBillState.setText(inventoryGiftVo.getState().toString());
         inventoryGiftUiController.tfOperator.setText(inventoryGiftVo.getOperatorId());
         inventoryGiftUiController.addGiftItems(inventoryGiftVo.getGifts());
         return externalLoadedUiPackage;
     }
 
-    public void initItem() {
+    public void initialize() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getCommodityId()));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getAmount())));
-        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
+
+
+        currentDate.addListener(((observable, oldValue, newValue) -> {
+            tfDate.setText(newValue == null ? "" : DateHelper.fromDate(newValue));
+        }));
+
+        currentEmployee.addListener(((observable, oldValue, newValue) -> {
+            tfOperator.setText(newValue == null ? "" : newValue.getName());
+        }));
+
         TreeItem<InventoryGiftItemModel> root = new RecursiveTreeItem<>(inventoryGiftItemModelObservableList, RecursiveTreeObject::getChildren);
         inventoryGiftItems.setRoot(root);
         inventoryGiftItems.setShowRoot(false);
-    }
-
-    public void updateItems() {
-        PromotionCommodity promotionCommodity=new PromotionCommodity();
-        promotionCommodity.setCommodityId("12");
-        promotionCommodity.setAmount(123);
-        promotionCommodity.setUnitPrice(150);
-        inventoryGiftItemModelObservableList.clear();
-        inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(promotionCommodity));
-    }
-
-    public void initialize() {
-        initItem();
-        updateItems();
+        inventoryGiftItems.setEditable(true);
+        inventoryGiftItems.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
 
@@ -99,24 +108,79 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         return new UiLoader("/fxml/inventoryui/InventoryGiftUi.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void onBtnSelectClicked(ActionEvent actionEvent) {
-        /**
-         * 这里是new的，应该提供工厂。工厂应该直接new一个回来。
-         */
-        new SelectingGift().showSelectLogDialog(new ArrayList<>(), list -> {
-            /**
-             * 这个函数就是如何处理选择结束后的数据。参数list就是用户选择的内容。
-             * 如果用户按了取消，就不会调用
-             */
-            StringBuilder result = new StringBuilder("你选择了ID是");
-            list.forEach(x -> result.append(x.getId()).append("、"));
-
-            lbResult.setText(result.append("的赠送单").toString());
-        });
-    }
-
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
         return null;
     }
+
+    public void onBtnAddItemClicked() {
+        CommodityUiFactory.getCommoditySelectionUi()
+                .showCommoditySelectDialog(vo -> this.currentCommodity.setValue(vo));
+    }
+
+    public void onBtnDeleteItemClicked() {
+        try {
+            int index = inventoryGiftItems.getSelectionModel().getSelectedIndex();
+            inventoryGiftItemModelObservableList.remove(index);
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    private InventoryGiftVo getCurrentGiftVo() {
+        if (tfId.getText().length() == 0 || currentEmployee == null || currentDate == null) {
+            PromptDialogHelper.start("提交失败！","请选点击自动填写信息以自动填写ID、日期和操作员信息。")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+            throw new NotCompleteException();
+        }
+
+        return new InventoryGiftVo(
+                tfId.getText(),
+                currentDate.getValue(),
+                BillState.Draft,
+                inventoryGiftItemModelObservableList.stream().map(InventoryGiftItemModel::getPromotionCommodityObjectProperty).toArray(PromotionCommodity[]::new),
+                currentEmployee.getValue().getId()
+        );
+    }
+
+    public void onBtnSubmitClicked() {
+        try {
+            blService.sumbit(getCurrentGiftVo());
+            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功")
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+    }
+
+    public void onBtnSaveAsDraftClicked() {
+        try {
+            blService.saveAsDraft(getCurrentGiftVo());
+            PromptDialogHelper.start("提交成功！","你的单据已经提交成功")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+    }
+
+    public void onBtnResetClicked() {
+        tfId.setText("");
+        tfOperator.setText("");
+        tfDate.setText("");
+        currentDate.setValue(null);
+        currentEmployee.setValue(null);
+        currentCommodity.setValue(null);
+        inventoryGiftItemModelObservableList.clear();
+    }
+
+
 }

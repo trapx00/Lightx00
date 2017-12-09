@@ -23,18 +23,18 @@ public class CommodityUiController implements ExternalLoadableUiController {
 
     public JFXButton selectAllButton;
     public JFXButton deleteButton;
-    public JFXTreeTableView<CommodityItemModel> commodityTable;
-    public JFXTreeTableColumn<CommodityItemModel, String> tableNameColumn;
-    public JFXTreeTableColumn<CommodityItemModel, String> tableSortColumn;
-    public JFXTreeTableColumn<CommodityItemModel, String> tableAmountColumn;
-    public JFXTreeTableColumn<CommodityItemModel, String> tableIdColumn;
-    public JFXTreeTableColumn<CommodityItemModel, String> tableDateColumn;
+    public JFXTreeTableView<CommoditySelectionItemModel> commodityTable;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableNameColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableSortColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableAmountColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableDateColumn;
     public JFXButton addCommodityButton;
     public Label lbResult;
 
     private InventoryStaffUiController inventoryStaffUiController;
 
-    public ObservableList<CommodityItemModel> commodityModels = FXCollections.observableArrayList();
+    public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
 
 
 
@@ -48,20 +48,20 @@ public class CommodityUiController implements ExternalLoadableUiController {
         ,new Date(),"No.1","No.2",43,53,44,
         45,45);
         commodityModels.clear();
-        commodityModels.add(new CommodityItemModel(commoditVo));
-        commodityModels.add(new CommodityItemModel(commoditVo));
-        commodityModels.add(new CommodityItemModel(commoditVo));
-        commodityModels.add(new CommodityItemModel(commoditVo));
+        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
+        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
+        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
+        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
 
     }
 
     public void initCommodityItem() {
-        tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getProductionDate())));
-        tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getName()));
-        tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getId())));
-        tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getAmount())));
+        tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getCommodityVoObjectProperty().getProductionDate())));
+        tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
+        tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
+        tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
 
-        TreeItem<CommodityItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
+        TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
         commodityTable.setRoot(root);
         commodityTable.setShowRoot(false);
     }
@@ -73,12 +73,12 @@ public class CommodityUiController implements ExternalLoadableUiController {
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         int index = commodityTable.getSelectionModel().getFocusedIndex();
-        CommodityItemModel model = commodityTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个商品吗？","你选择了商品" + model.getId())
+        CommoditySelectionItemModel model = commodityTable.getRoot().getChildren().get(index).getValue();
+        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个商品吗？","你选择了商品" + model.getCommodityVoObjectProperty().getId())
                 .addTable(ReadOnlyPairTableHelper.start()
-                        .addPair("ID", String.valueOf(model.getId()))
-                        .addPair("名称", model.getName())
-                        .addPair("时间", DateHelper.fromDate(model.getProductionDate()))
+                        .addPair("ID", String.valueOf(model.getCommodityVoObjectProperty().getId()))
+                        .addPair("名称", model.getCommodityVoObjectProperty().getName())
+                        .addPair("时间", DateHelper.fromDate(model.getCommodityVoObjectProperty().getProductionDate()))
                         .create())
                 .addCloseButton("确定", "CHECK",e -> deleteItem(index))
                 .addCloseButton("取消", "CLOSE", null)

@@ -10,19 +10,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class CommoditySelectingDialog extends SelectingDialog {
+public class CommoditySelectingDialog extends SelectingDialog implements CommoditySelection {
 
     @FXML
     public JFXTreeTableView<CommoditySelectionItemModel> commodityTable;
@@ -33,9 +38,11 @@ public class CommoditySelectingDialog extends SelectingDialog {
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableDateColumn;
     @FXML private JFXButton btnSelect;
     @FXML private JFXButton btnClose;
-    private Consumer<List<CommodityVo>> callback;
+    @FXML private JFXTextField tfSearch;
 
+    private Consumer<List<CommodityVo>> callback;
     private ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
+    private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
     /**
      * Loads the controller.
      *
@@ -48,8 +55,10 @@ public class CommoditySelectingDialog extends SelectingDialog {
 
     @FXML
     private void initialize() {
-        initCommodityItem();
-        CommodityVo commoditVo=new CommodityVo("123","SmallLed","Led",34
+        initTable();
+        initSearch();
+        update();
+        /*CommodityVo commoditVo=new CommodityVo("123","SmallLed","Led",34
                 ,new Date(),"No.1","No.2",43,53,44,
                 45,45);
         commodityModels.clear();
@@ -64,13 +73,34 @@ public class CommoditySelectingDialog extends SelectingDialog {
                 45,45)));
         commodityModels.add(new CommoditySelectionItemModel(new CommodityVo("123","SmallLed","Led",34
                 ,new Date(),"No.1","No.2",43,53,44,
-                45,45)));
+                45,45)));*/
+    }
+    private void initSearch() {
+        tfSearch.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                if (tfSearch.getText().length() > 0) {
+                    update(new CommodityQueryVo().eq("name", tfSearch.getText()));
+                } else {
+                    update();
+                }
+
+            }
+        });
+    }
+
+    private void update() {
+        update(new CommodityQueryVo());
+    }
+
+    private void update(CommodityQueryVo queryVo) {
+        CommodityVo[] queryResult = blService.query(queryVo);
+        commodityModels.clear();
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
 
 
-
     @FXML
-    private void initCommodityItem() {
+    private void initTable() {
         tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getCommodityVoObjectProperty().getProductionDate())));
         tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
@@ -92,43 +122,44 @@ public class CommoditySelectingDialog extends SelectingDialog {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 设置目前选择的。用于刚开始的时候初始化已经选择的项。
-     * @param selected 已经选择的项
-     */
-    private void setSelected(@NotNull List<CommodityVo> selected) {
-        List<String> ids = selected.stream().map(CommodityVo::getId).collect(Collectors.toList());
-        for (int i = 0; i < commodityTable.getCurrentItemsCount(); i++) {
-            if (ids.contains(commodityTable.getTreeItem(i).getValue().getCommodityVoObjectProperty().getId())) {
-                commodityTable.getSelectionModel().select(i);
-            }
+
+
+
+
+    @FXML
+    private void onBtnSelectClicked(ActionEvent actionEvent) {
+        List<CommodityVo> selected = getSelected();
+        if (callback != null && selected != null) {
+            callback.accept(selected);
         }
+        onClose();
     }
 
 
-    /**
-     * 重点方法。也是外界调用的方法。
-     * @param defaultSelection 默认选中的方法
-     * @param callback 选择结束后的回调函数。如果用户点了取消按钮，那么直接退出，不会触发回调函数。
-     *                 用法参见……
-     *
-     */
-    public void showSelectLogDialog(@NotNull List<CommodityVo> defaultSelection, Consumer<List<CommodityVo>> callback) {
+    @Override
+    public void showCommoditySelectDialog(Consumer<List<CommodityVo>> callback) {
         ExternalLoadedUiPackage uiPackage = load();
         CommoditySelectingDialog controller = (CommoditySelectingDialog) uiPackage.getController();
-        controller.setSelected(defaultSelection);
         controller.callback = callback;
         JFXDialog dialog = PromptDialogHelper.start("","").create();
         dialog.setContent((Region) uiPackage.getComponent());
         FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
     }
 
-    @FXML
-    private void onBtnSelectClicked(ActionEvent actionEvent) {
-        if (callback != null) {
-            callback.accept(getSelected()); //选择结束，调用回调方法。
+    @Override
+    public CommodityVo queryId(String id) {
+        return blService.query(new CommodityQueryVo().idEq(id))[0];
+    }
+
+    /**
+     * 设置目前选择的。用于刚开始的时候初始化已经选择的项。
+     */
+    private CommodityVo setSelected() {
+        try {
+            return commodityTable.getSelectionModel().getSelectedItem().getValue().getCommodityVoObjectProperty();
+        } catch (Exception e) {
+            return null;
         }
-        onClose(); //一定要调用这个来把弹出框关了。
     }
 
     @FXML
