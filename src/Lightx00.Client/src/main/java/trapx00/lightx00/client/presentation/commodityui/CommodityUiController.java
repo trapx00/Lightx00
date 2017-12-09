@@ -2,21 +2,35 @@ package trapx00.lightx00.client.presentation.commodityui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftSelection;
+import trapx00.lightx00.client.presentation.inventoryui.factory.InventoryGiftUiFactory;
 import trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommodityUiController implements ExternalLoadableUiController {
 
@@ -30,32 +44,49 @@ public class CommodityUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableDateColumn;
     public JFXButton addCommodityButton;
-    public Label lbResult;
+    @FXML
+    private JFXTextField tfSearch;
 
     private InventoryStaffUiController inventoryStaffUiController;
 
     public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
+    private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
 
 
 
-    public void initialize() {
-        initCommodityItem();
-        updateItems();
+    @FXML
+    private void initialize() {
+        initTable();
+        initSearch();
+        update();
+
+    }
+    private void initSearch() {
+        tfSearch.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                if (tfSearch.getText().length() > 0) {
+                    update(new CommodityQueryVo().eq("id", tfSearch.getText()));
+                } else {
+                    update();
+                }
+
+            }
+        });
     }
 
-    public void updateItems() {
-        CommodityVo commoditVo=new CommodityVo("123","SmallLed","Led",34
-        ,new Date(),"No.1","No.2",43,53,44,
-        45,45);
+    private void update() {
+        update(new CommodityQueryVo());
+    }
+
+    private void update(CommodityQueryVo queryVo) {
+        CommodityVo[] queryResult = blService.query(queryVo);
         commodityModels.clear();
-        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
-        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
-        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
-        commodityModels.add(new CommoditySelectionItemModel(commoditVo));
-
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
 
-    public void initCommodityItem() {
+
+    @FXML
+    private void initTable() {
         tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getCommodityVoObjectProperty().getProductionDate())));
         tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
@@ -64,11 +95,13 @@ public class CommodityUiController implements ExternalLoadableUiController {
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
         commodityTable.setRoot(root);
         commodityTable.setShowRoot(false);
+        commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
     }
 
 
+
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        updateItems();
+        update();
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
@@ -78,7 +111,6 @@ public class CommodityUiController implements ExternalLoadableUiController {
                 .addTable(ReadOnlyPairTableHelper.start()
                         .addPair("ID", String.valueOf(model.getCommodityVoObjectProperty().getId()))
                         .addPair("名称", model.getCommodityVoObjectProperty().getName())
-                        .addPair("时间", DateHelper.fromDate(model.getCommodityVoObjectProperty().getProductionDate()))
                         .create())
                 .addCloseButton("确定", "CHECK",e -> deleteItem(index))
                 .addCloseButton("取消", "CLOSE", null)
@@ -90,8 +122,10 @@ public class CommodityUiController implements ExternalLoadableUiController {
         commodityModels.remove(index);
     }
 
+
     public void onAddButtonClicked(ActionEvent actionEvent){
-        updateItems();
+
+
     }
 
     @Override

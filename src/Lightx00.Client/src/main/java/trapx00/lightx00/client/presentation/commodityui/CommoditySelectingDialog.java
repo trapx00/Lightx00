@@ -79,22 +79,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
         CommodityVo[] queryResult = blService.query(queryVo);
         commodityModels.clear();
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
-       /* CommodityVo commoditVo=new CommodityVo("123","SmallLed","Led",34
-                ,new Date(),"No.1","No.2",43,53,44,
-                45,45);
-        commodityModels.clear();
-        commodityModels.add(new CommoditySelectionItemModel(new CommodityVo("123","SmallLed","Led",34
-                ,new Date(),"No.1","No.2",43,53,44,
-                45,45)));
-        commodityModels.add(new CommoditySelectionItemModel(new CommodityVo("123","SmallLed","Led",34
-                ,new Date(),"No.1","No.2",43,53,44,
-                45,45)));
-        commodityModels.add(new CommoditySelectionItemModel(new CommodityVo("123","SmallLed","Led",34
-                ,new Date(),"No.1","No.2",43,53,44,
-                45,45)));
-        commodityModels.add(new CommoditySelectionItemModel(new CommodityVo("123","SmallLed","Led",34
-                ,new Date(),"No.1","No.2",43,53,44,
-                45,45)));*/
+
     }
 
 
@@ -120,9 +105,6 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
                 .map(x -> x.getValue().getCommodityVoObjectProperty())
                 .collect(Collectors.toList());
     }
-
-
-
 
 
     @FXML
