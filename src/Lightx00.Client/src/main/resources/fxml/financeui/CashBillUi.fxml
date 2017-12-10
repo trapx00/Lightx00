@@ -66,6 +66,8 @@
                 </columns>
             </JFXTreeTableView>
             <HBox prefWidth="100" spacing="10" alignment="BASELINE_RIGHT">
+                <Label text="总价："/>
+                <Label fx:id="lbTotal" text="0.00"/>
                 <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #FFFFFF" text="">
                     <graphic>
                         <MaterialIconView glyphName="ADD" glyphSize="24" />

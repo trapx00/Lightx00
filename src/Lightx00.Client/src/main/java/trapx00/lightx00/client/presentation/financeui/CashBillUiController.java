@@ -6,7 +6,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +27,7 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -47,6 +50,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     public JFXTreeTableColumn<CashBillItemModel, String> tcComment;
     public JFXButton btnAdd;
     public JFXButton btnDelete;
+    public Label lbTotal;
 
     private ObjectProperty<BankAccountVo> currentBankAccount = new SimpleObjectProperty<>();
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
@@ -73,7 +77,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
          */
         CashBillVo cashBillVo = (CashBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        CashBillUiController cashBillDetailUiController = (CashBillUiController) externalLoadedUiPackage.getController();
+        CashBillUiController cashBillDetailUiController = externalLoadedUiPackage.getController();
         cashBillDetailUiController.tfId.setText(cashBillVo.getId());
         cashBillDetailUiController.currentDate.setValue(cashBillVo.getDate());
         cashBillDetailUiController.currentBankAccount.setValue(bankAccountSelection.queryId(cashBillVo.getAccountId()));
@@ -84,7 +88,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
 
     public void initialize() {
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
-        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getAmount())));
+        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
         tcComment.setCellValueFactory(cellData -> cellData.getValue().getValue().commentProperty());
 
         currentBankAccount.addListener((observable, oldValue, newValue) -> {
@@ -98,6 +102,11 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         currentEmployee.addListener(((observable, oldValue, newValue) -> {
             tfOperator.setText(newValue == null ? "" : newValue.getName());
         }));
+
+        cashBillItemModelObservableList.addListener((ListChangeListener<CashBillItemModel>) c -> {
+            lbTotal.setText(BillHelper.toFixed(cashBillItemModelObservableList.stream().mapToDouble(CashBillItemModel::getAmount).sum()));
+        });
+
 
         TreeItem<CashBillItemModel> root = new RecursiveTreeItem<>(cashBillItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCashBillItems.setRoot(root);
