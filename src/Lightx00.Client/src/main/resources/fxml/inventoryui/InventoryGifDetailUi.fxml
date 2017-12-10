@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Font?>
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.financeui.CashBillDetailUiController"
+      fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryGiftDetailUiController"
       prefHeight="800.0" prefWidth="600.0" spacing="20">
-    <Label text="现金费用单" textFill="#5e5e5e">
+    <Label text="库存赠送单" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
@@ -24,7 +24,6 @@
             <ColumnConstraints prefWidth="200"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints prefHeight="50"/>
             <RowConstraints prefHeight="50"/>
             <RowConstraints prefHeight="50"/>
             <RowConstraints prefHeight="50"/>
@@ -44,19 +43,17 @@
         <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="制定者"/>
         <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfOperator" disable="true"/>
 
-
         <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="单据状态"/>
         <JFXTextField  GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfBillState" disable="true"/>
 
-        <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="银行账户"/>
-        <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfBankaccountId" disable="true"/>
+
     </GridPane>
 
-    <JFXTreeTableView fx:id="tbCashBillItems" prefHeight="300.0" prefWidth="400.0">
+    <JFXTreeTableView fx:id="inventoryGiftItems" prefHeight="300.0" prefWidth="400.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="条目名" />
-            <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="100" resizable="false" text="价格" />
-            <JFXTreeTableColumn fx:id="tcComment" prefWidth="100" text="备注" />
+            <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="100" resizable="false" text="最近价格" />
+            <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
         </columns>
     </JFXTreeTableView>
 

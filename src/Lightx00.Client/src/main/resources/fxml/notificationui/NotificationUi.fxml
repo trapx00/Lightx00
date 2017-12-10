@@ -23,6 +23,7 @@
                 <JFXTreeTableColumn fx:id="tableSenderColumn" prefWidth="150" text="发送者" />
             </columns>
         </JFXTreeTableView>
+
         <HBox alignment="CENTER_LEFT" maxHeight="60.0" maxWidth="2000.0" prefHeight="60.0" prefWidth="600.0">
             <padding>
                 <Insets bottom="10" right="20" top="10" />

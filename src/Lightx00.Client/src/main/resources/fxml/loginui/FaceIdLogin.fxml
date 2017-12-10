@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx"
            stylesheets="@../helpui/main.css"
            xmlns:fx="http://javafx.com/fxml"
@@ -49,11 +50,20 @@
         <bottom>
             <HBox alignment="CENTER" prefHeight="40.0" spacing="40.0">
                 <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#onLoginButtonClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="登 录">
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin></JFXButton>
-                <JFXButton fx:id="btnJumpBack" buttonType="RAISED" onAction="#onBtnJumpBackClicked" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #f57f17; -fx-text-fill: #FFFFFF;" text="回到用户密码登录" />
-                <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#onCancelButtonClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="退 出" />
+                    <graphic>
+                        <MaterialIconView glyphName="CHECK" glyphSize="24" fill="#FFFFFF"/>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="btnJumpBack" buttonType="RAISED" onAction="#onBtnJumpBackClicked" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #f57f17; -fx-text-fill: #FFFFFF;" text="用户密码登录">
+                    <graphic>
+                        <MaterialIconView glyphName="ENHANCED_ENCRYPTION" glyphSize="24" fill="#FFFFFF"/>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#onCancelButtonClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="退 出">
+                    <graphic>
+                        <MaterialIconView glyphName="EXIT_TO_APP" glyphSize="24" fill="#000000"/>
+                    </graphic>
+                </JFXButton>
                 <BorderPane.margin>
                     <Insets top="20.0" />
                 </BorderPane.margin>

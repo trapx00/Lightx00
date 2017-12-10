@@ -37,15 +37,6 @@ public class CommodityPo implements Serializable {
     @DatabaseField
     private double inventoryNum;//报警报溢数量
 
-    public double getInventoryNum() {
-        return inventoryNum;
-    }
-
-    public void setInventoryNum(double inventoryNum) {
-        this.inventoryNum = inventoryNum;
-    }
-
-
 
     public CommodityPo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
@@ -70,6 +61,14 @@ public class CommodityPo implements Serializable {
     }
     public String getId() {
         return id;
+    }
+
+    public double getInventoryNum() {
+        return inventoryNum;
+    }
+
+    public void setInventoryNum(double inventoryNum) {
+        this.inventoryNum = inventoryNum;
     }
 
     public String getName() {

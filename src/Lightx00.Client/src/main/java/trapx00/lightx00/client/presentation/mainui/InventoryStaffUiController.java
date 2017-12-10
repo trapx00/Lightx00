@@ -1,0 +1,68 @@
+package trapx00.lightx00.client.presentation.mainui;
+
+import javafx.event.ActionEvent;
+import trapx00.lightx00.client.presentation.commodityui.CommoditySortUiController;
+import trapx00.lightx00.client.presentation.commodityui.CommodityUiController;
+import trapx00.lightx00.client.presentation.financeui.CashBillUiController;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryCheckUiController;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryWarningUiController;
+
+public class InventoryStaffUiController extends FrameworkUiController {
+
+    public void initialize() {
+        // 必须有。调用基类初始化来初始化基类的元素。
+        super.initialize();
+        // 如果还需要初始化自己的元素请接着写。
+    }
+
+    /**
+     * 财务人员独有的制定现金费用单的功能按钮的相应方法。通过调用switchFunction进入对应的功能界面。
+     * @see CashBillUiController 。功能界面必须实现ExternalLoadableUiController
+     * @param actionEvent actionEvent
+     */
+    public void onCommodityFunctionClicked(ActionEvent actionEvent) {
+        /**
+         * 调用父类切换界面方法实现切换界面。
+         * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
+         * @see #switchFunction(Class, String, boolean)
+         */
+        switchFunction(CommodityUiController.class, "商品管理",true);
+    }
+
+    public void onCommoditySortFunctionClicked(ActionEvent actionEvent) {
+        /**
+         * 调用父类切换界面方法实现切换界面。
+         * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
+         * @see #switchFunction(Class, String, boolean)
+         */
+        switchFunction(CommoditySortUiController.class, "商品分类管理",true);
+    }
+
+    public void onInventoryCheckFunctionClicked(ActionEvent actionEvent) {
+        /**
+         * 调用父类切换界面方法实现切换界面。
+         * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
+         * @see #switchFunction(Class, String, boolean)
+         */
+        switchFunction(InventoryCheckUiController.class, "库存快照",true);
+    }
+
+    public void onInventoryGiftFunctionClicked(ActionEvent actionEvent) {
+        /**
+         * 调用父类切换界面方法实现切换界面。
+         * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
+         * @see #switchFunction(Class, String, boolean)
+         */
+        switchFunction(InventoryGiftUiController.class, "制定库存赠送单",true);
+    }
+
+    public void onInventoryWarningFunctionClicked(ActionEvent actionEvent) {
+        /**
+         * 调用父类切换界面方法实现切换界面。
+         * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
+         * @see #switchFunction(Class, String, boolean)
+         */
+        switchFunction(InventoryWarningUiController.class, "库存监控制定单据",true);
+    }
+}
