@@ -30,7 +30,7 @@ public class CashBillBlControllerTest {
     @Before
     public void setUp() {
         cashBill = new CashBillVo(String.format("XJFKD-%s-00001", BillHelper.currentDateStringForBill()),
-            new Date(), BillState.Draft,"123","123",
+            new Date(), BillState.Draft,"123",1,
             new CashBillItem[] {
             new CashBillItem("123",1,"123")
             });
