@@ -17,7 +17,11 @@ public class StageManager {
     public static void changeScene(Scene newScene) {
         stage.setScene(newScene);
         stage.sizeToScene();
+        stage.centerOnScreen();
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
 
 }

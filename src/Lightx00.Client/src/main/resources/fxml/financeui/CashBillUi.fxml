@@ -16,14 +16,17 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.financeui.CashBillUiController"
-      prefHeight="600.0" prefWidth="800.0" alignment="TOP_CENTER" spacing="10">
+      prefHeight="800.0" prefWidth="800.0" spacing="10" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
     <Label text="现金费用单" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
     </Label>
 
-    <HBox alignment="CENTER" spacing="20">
+    <HBox alignment="TOP_CENTER" spacing="20">
         <VBox alignment="TOP_CENTER">
             <GridPane>
                 <columnConstraints>
@@ -53,17 +56,6 @@
                 <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="银行账户ID"/>
                 <JFXTextField GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfBankaccountId" onMouseClicked="#onTfBankAccountClicked" />
             </GridPane>
-            <JFXButton GridPane.columnIndex="0" fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnAutofillClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="自动填充信息">
-                <graphic>
-                    <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
-                </graphic>
-                <HBox.margin>
-                    <Insets right="10.0" />
-                </HBox.margin>
-            </JFXButton>
-        </VBox>
-
-        <VBox alignment="CENTER" spacing="10" prefHeight="300">
             <Label text="现金费用款项" textFill="#5e5e5e">
             </Label>
             <JFXTreeTableView fx:id="tbCashBillItems" prefHeight="300.0" prefWidth="400.0">
@@ -91,34 +83,30 @@
                     </HBox.margin>
                 </JFXButton>
             </HBox>
-
         </VBox>
+
     </HBox>
     <Separator/>
-    <HBox alignment="CENTER">
+    <HBox alignment="TOP_CENTER" spacing="20">
+        <JFXButton fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnAutofillClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="自动填充信息">
+            <graphic>
+                <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+            </graphic>
+        </JFXButton>
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
             </graphic>
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
         </JFXButton>
         <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
             <graphic>
                 <MaterialIconView glyphName="SAVE" glyphSize="24" />
             </graphic>
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
         </JFXButton>
         <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked" style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
             <graphic>
                 <MaterialIconView glyphName="REFRESH" glyphSize="24" />
             </graphic>
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
         </JFXButton>
     </HBox>
 

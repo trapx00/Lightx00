@@ -1,8 +1,10 @@
 package trapx00.lightx00.shared.util;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
 import java.util.Date;
 
 public class DateHelper {
@@ -49,6 +51,8 @@ public class DateHelper {
         return currentDateString("yyyy-MM-dd HH:mm:ss.SSS");
     }
 
-
+    public static Date fromLocalDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 
 }

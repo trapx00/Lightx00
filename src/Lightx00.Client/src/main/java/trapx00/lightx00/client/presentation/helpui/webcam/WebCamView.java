@@ -74,6 +74,7 @@ public class WebCamView extends VBox {
                 initializeWebCam(newValue.getWebCamIndex());
             }
         });
+        cbCameraOptions.getSelectionModel().selectFirst();
     }
 
     public byte[] acquireImage() {
