@@ -1,5 +1,6 @@
 package trapx00.lightx00.server.data.logdata.mock;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import trapx00.lightx00.server.data.logdata.LogBackupDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 
@@ -32,18 +33,12 @@ public class LogBackupDataControllerMock extends LogBackupDataController {
     }
 
     /**
-     * get the log backed up on the cloud
+     * get the log backed up on the cloudtrin
      *
-     * @return the temp uri of the log resources
+     *urn the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() throws RemoteException {
-        URI uri = null;
-        try {
-            uri = new URI("www.123.com");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return uri;
+    public String fetchCloudLog() throws RemoteException {
+        return "www.123.com";
     }
 }

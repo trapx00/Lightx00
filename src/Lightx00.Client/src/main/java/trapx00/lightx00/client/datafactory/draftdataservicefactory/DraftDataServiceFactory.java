@@ -20,7 +20,7 @@ public class DraftDataServiceFactory extends DataServiceFactory {
     }
 
     public static DraftDataService getService() {
-        //initRmi(); //when the rmi is functional, uncomment this to use rmi instead of stub.
+        initRmi(); //when the rmi is functional, uncomment this to use rmi instead of stub.
         return service;
     }
 }

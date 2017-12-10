@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -66,11 +67,10 @@ public class PromptDialogHelper {
     public PromptDialogHelper addCloseButton(String content, Node icon,  EventHandler<? super MouseEvent> e) {
         JFXButton button = new JFXButton(content, icon);
         button.setOnMouseClicked(event -> {
+            FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
             if (e != null) {
                 e.handle(event);
             }
-
-            FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
         });
         buttonList.add(button);
         return this;

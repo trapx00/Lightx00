@@ -5,7 +5,7 @@ import trapx00.lightx00.client.bl.loginbl.LoginBlController;
 import trapx00.lightx00.client.bl.loginbl.mock.LoginBlControllerMock;
 
 public class CurrentUserServiceFactory {
-    private static CurrentUserService currentUserService = new LoginBlController();
+    private static CurrentUserService currentUserService = LoginBlFactory.getController();
 
     /**
      * Gets a CurrentUserService instance.

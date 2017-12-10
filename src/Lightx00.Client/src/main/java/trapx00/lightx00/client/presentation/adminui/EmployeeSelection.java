@@ -8,5 +8,5 @@ import java.util.function.Consumer;
 public interface EmployeeSelection {
     void showEmployeeSelectDialog(Consumer<List<EmployeeVo>> callback);
 
-    EmployeeVo queryId(int id);
+    EmployeeVo queryId(String id);
 }

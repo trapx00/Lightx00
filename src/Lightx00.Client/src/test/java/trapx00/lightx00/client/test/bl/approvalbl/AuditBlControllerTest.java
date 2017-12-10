@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class AuditBlControllerTest {
     private AuditBlController controller = AuditBlFactory.getController();
-    private CashBillVo bill = new CashBillVo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"0001","0002",null);
+    private CashBillVo bill = new CashBillVo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"0001",1,null);
     private AuditIdVo auditId = new AuditIdVo("XJFYD-20171112-00001",new Date());
 
     @Test

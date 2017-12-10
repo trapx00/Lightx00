@@ -64,21 +64,25 @@
                 <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#onLoginButtonClicked" prefHeight="32.0"
                            prefWidth="340"
                            style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="登 录">
-                    <HBox.margin>
-                        <Insets/>
-                    </HBox.margin>
+                    <graphic>
+                        <MaterialIconView glyphName="CHECK" glyphSize="24" fill="#FFFFFF"/>
+                    </graphic>
                 </JFXButton>
                 <JFXButton fx:id="btnFaceId" buttonType="RAISED" onAction="#onBtnFaceIdClicked" prefHeight="32.0"
                            prefWidth="340"
                            style="-fx-background-color: #f57f17; -fx-text-fill: #FFFFFF;" text="Face ID">
-                    <HBox.margin>
-                        <Insets/>
-                    </HBox.margin>
+                    <graphic>
+                        <MaterialIconView glyphName="FACE" glyphSize="24" fill="#FFFFFF"/>
+                    </graphic>
                 </JFXButton>
                 <JFXButton fx:id="cancelButton" buttonType="RAISED" prefHeight="32.0"
                            prefWidth="340"
                            onAction="#onBtnCancelClicked"
-                           style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="退 出"/>
+                           style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="退 出">
+                    <graphic>
+                        <MaterialIconView glyphName="EXIT_TO_APP" glyphSize="24" fill="#000000"/>
+                    </graphic>
+                </JFXButton>
                 <BorderPane.margin>
                     <Insets top="20.0"/>
                 </BorderPane.margin>
