@@ -30,7 +30,7 @@ public class SaleBillDataControllerTest {
         }
     }
 
-    private final SaleBillPo bill = new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "",1,"2",new CommodityItem[] { new CommodityItem("123",1,1) }, 10);
+    private final SaleBillPo bill = new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "",1,"2",new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 10);
     private Dao<SaleBillPo, String> dao = SaleBillDataDaoFactory.getSaleBillDao();
     private SaleBillDataService service = SaleBillDataFactory.getService();
 

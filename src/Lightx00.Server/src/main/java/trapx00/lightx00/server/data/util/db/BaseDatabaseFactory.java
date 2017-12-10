@@ -15,11 +15,16 @@ import java.util.Date;
 
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
+import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
+import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
 public class BaseDatabaseFactory {
 
     private static final String connectionString = "jdbc:sqlite:" + getDbFilePath();
     protected static ConnectionSource connectionSource;
+
+    protected BaseDatabaseFactory() {
+    }
 
     private static String getDbFilePath() {
         return Server.class.getResource("/database/database.db").getPath();
@@ -35,9 +40,6 @@ public class BaseDatabaseFactory {
         }
     }
 
-    protected BaseDatabaseFactory() {
-    }
-
     public static void init() throws SQLException {
         System.setProperty("com.j256.ormlite.logger.level", "ERROR"); //this closes ORMLite log
         BaseDatabaseFactory.connectionSource = new JdbcConnectionSource(connectionString);
@@ -49,7 +51,7 @@ public class BaseDatabaseFactory {
 
         scanner.matchClassesWithAnnotation(DatabaseTable.class, classWithAnnotation -> {
             try {
-                ServerLogServiceFactory.getService().printLog("BaseDatabaseFactory","initialized a table with Po class " + classWithAnnotation.getName());
+                ServerLogServiceFactory.getService().printLog("BaseDatabaseFactory", "initialized a table with Po class " + classWithAnnotation.getName());
                 TableUtils.createTableIfNotExists(connectionSource, classWithAnnotation);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -63,7 +65,7 @@ public class BaseDatabaseFactory {
 
         try {
             Dao<BankAccountPo, Integer> dao = createDao(BankAccountPo.class);
-            TableUtils.dropTable(dao,true);
+            TableUtils.dropTable(dao, true);
             TableUtils.createTableIfNotExists(connectionSource, BankAccountPo.class);
             dao.create(new BankAccountPo("1", 10, new Date()));
             dao.create(new BankAccountPo("2", 20, new Date()));
@@ -71,7 +73,12 @@ public class BaseDatabaseFactory {
             Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
             TableUtils.dropTable(financeStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
-            financeStaffDao.create(new FinanceStaffPo("财务人员","1", new Date(), "123","123"));
+            financeStaffDao.create(new FinanceStaffPo("财务人员", "1", new Date(), "123", "123"));
+
+            Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
+            TableUtils.dropTable(saleStaffDao, true);
+            TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
+            saleStaffDao.create(new SaleStaffPo("进货销售人员", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
         } catch (SQLException e) {
             e.printStackTrace();
         }

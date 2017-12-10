@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import trapx00.lightx00.client.presentation.helpui.StageManager;
-import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController;
 import trapx00.lightx00.client.presentation.loginui.LoginUiController;
 
 public class Client extends Application {
@@ -34,14 +33,15 @@ public class Client extends Application {
     public void start(Stage primaryStage) throws Exception {
         StageManager.setStage(primaryStage);
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/inventoryui/PurchaseBillUi.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/loginui/LoginUi.fxml"));
         Scene newScene = new Scene(loader.load());
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        PurchaseBillUiController controller = loader.getController();
+        LoginUiController controller = loader.getController();
 
 
         primaryStage.setScene(newScene);
+        controller.initializeBorderlessStuff();
         primaryStage.show();
     }
 
