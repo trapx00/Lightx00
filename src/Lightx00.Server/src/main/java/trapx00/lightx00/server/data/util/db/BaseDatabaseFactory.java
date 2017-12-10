@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
+import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
+
 public class BaseDatabaseFactory {
 
     private static final String connectionString = "jdbc:sqlite:" + getDbFilePath();
@@ -65,6 +67,11 @@ public class BaseDatabaseFactory {
             TableUtils.createTableIfNotExists(connectionSource, BankAccountPo.class);
             dao.create(new BankAccountPo("1", 10, new Date()));
             dao.create(new BankAccountPo("2", 20, new Date()));
+
+            Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
+            TableUtils.dropTable(financeStaffDao, true);
+            TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
+            financeStaffDao.create(new FinanceStaffPo("财务人员","1", new Date(), "123","123"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

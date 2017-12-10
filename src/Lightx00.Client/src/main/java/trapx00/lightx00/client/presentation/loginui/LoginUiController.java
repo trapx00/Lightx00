@@ -1,12 +1,13 @@
 package trapx00.lightx00.client.presentation.loginui;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.validation.RequiredFieldValidator;
+import de.jensd.fx.glyphs.materialicons.MaterialIcon;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -66,9 +67,17 @@ public class LoginUiController implements ExternalLoadableUiController {
             if (employeeVo != null) {
                 finishLogin(employeeVo);
             } else {
-                new PromptDialogHelper("登录失败！","用户名和/或密码无效！")
-                    .addCloseButton("好的","CHECK",null)
-                    .createAndShow();
+                JFXDialogLayout layout = new JFXDialogLayout();
+                JFXButton button = new JFXButton("好", new MaterialIconView(MaterialIcon.CHECK));
+                layout.setBody(new Label("登录失败！请检查用户名！或者寻找支持人员！"));
+                layout.setHeading(new Label("登录失败！"));
+                layout.setActions(button);
+                JFXDialog dialog = new JFXDialog(dialogContainer, layout, JFXDialog.DialogTransition.CENTER);
+                button.setOnAction(e -> {
+                    dialog.close();
+                });
+                dialog.show();
+
             }
 
         }
