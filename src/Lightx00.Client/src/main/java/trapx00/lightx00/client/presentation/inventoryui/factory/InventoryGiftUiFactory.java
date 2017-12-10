@@ -1,6 +1,8 @@
 package trapx00.lightx00.client.presentation.inventoryui.factory;
 
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftSelectingDialog;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftSelection;
 import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController;
 import trapx00.lightx00.client.presentation.inventoryui.mock.InventoryGiftUiControllerMock;
 
@@ -9,6 +11,10 @@ public class InventoryGiftUiFactory {
 
     public static DraftContinueWritableUiController getInventoryGiftContinueWritable() {
         return inventoryGiftUiController;
+    }
+
+    public static InventoryGiftSelection getInventoryGiftSelectionUi(){
+        return new InventoryGiftSelectingDialog();
     }
 
 }

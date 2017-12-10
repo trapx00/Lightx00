@@ -1,6 +1,8 @@
 package trapx00.lightx00.client.bl.financebl;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.bankaccountbl.BankAccountModificationService;
+import trapx00.lightx00.client.bl.bankaccountbl.factory.BankAccountFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
@@ -8,6 +10,7 @@ import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.CashBillDataServiceFactory;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
@@ -21,6 +24,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
 
 
     private CashBillDataService dataService = CashBillDataServiceFactory.getService();
+    private BankAccountModificationService modificationService = BankAccountFactory.getModificationService();
 
     private CommonBillBlController<CashBillVo, CashBillPo, CashBillQueryVo> commonBillBlController
         = new CommonBillBlController<>(dataService, "现金费用单", this);
@@ -99,6 +103,8 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
      */
     @Override
     public ResultMessage activate(String id) {
+        CashBillVo cashBillVo = query(new CashBillQueryVo().idEq(id))[0];
+        modificationService.modifyBankAccount(cashBillVo.getAccountId(), cashBillVo.getTotal());
         return commonBillBlController.activate(id);
     }
 

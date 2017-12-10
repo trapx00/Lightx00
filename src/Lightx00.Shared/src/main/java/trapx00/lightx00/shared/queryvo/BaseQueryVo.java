@@ -104,6 +104,10 @@ public class BaseQueryVo<Po,PK, T extends BaseQueryVo> implements Serializable {
         return (T) this;
     }
 
+    public int conditionCount() {
+        return queries.size();
+    }
+
     public BaseQueryVo() {
 
     }

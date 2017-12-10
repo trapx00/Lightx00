@@ -7,6 +7,8 @@ public class PromotionCommodity implements Serializable {
     private double amount;
     private double unitPrice;
 
+
+
     public double getUnitPrice() {
         return unitPrice;
     }

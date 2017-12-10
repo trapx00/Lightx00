@@ -41,7 +41,7 @@ public class CashBillDetailUiController extends BillDetailUi {
         CashBillDetailUiController cashBillDetailUiController = (CashBillDetailUiController) externalLoadedUiPackage.getController();
         cashBillDetailUiController.tfId.setText(cashBillVo.getId());
         cashBillDetailUiController.tfDate.setText(DateHelper.fromDate(cashBillVo.getDate()));
-        cashBillDetailUiController.tfBankaccountId.setText(cashBillVo.getAccountId());
+        cashBillDetailUiController.tfBankaccountId.setText(String.valueOf(cashBillVo.getAccountId()));
         cashBillDetailUiController.tfBillState.setText(cashBillVo.getState().toString());
         cashBillDetailUiController.tfOperator.setText(cashBillVo.getOperatorId());
         cashBillDetailUiController.addCashBillItems(cashBillVo.getItems());
@@ -56,9 +56,9 @@ public class CashBillDetailUiController extends BillDetailUi {
     }
 
     public void initialize() {
-        tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCashBillItemObjectProperty().getName()));
-        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCashBillItemObjectProperty().getAmount())));
-        tcComment.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCashBillItemObjectProperty().getComment()));
+        tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
+        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().amountProperty())));
+        tcComment.setCellValueFactory(cellData -> cellData.getValue().getValue().commentProperty());
         TreeItem<CashBillItemModel> root = new RecursiveTreeItem<>(cashBillItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCashBillItems.setRoot(root);
         tbCashBillItems.setShowRoot(false);

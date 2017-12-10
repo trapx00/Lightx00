@@ -1,11 +1,21 @@
 package trapx00.lightx00.server;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
+import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
 import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
+import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryGiftDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
+<<<<<<< HEAD
 import trapx00.lightx00.server.data.logdata.factory.LogBackupDataFactory;
+=======
+import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
+import trapx00.lightx00.server.data.logdata.factory.LogDataFactory;
+>>>>>>> origin/chenjunda
 import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataFactory;
@@ -15,16 +25,24 @@ import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.admindataservice.FaceIdRegistrationDataService;
+import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
+<<<<<<< HEAD
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
+=======
+import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
+>>>>>>> origin/chenjunda
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
+import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 import trapx00.lightx00.shared.util.RmiHelper;
 
 import javax.management.Notification;
@@ -37,6 +55,7 @@ import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
 import java.util.Arrays;
 
+
 public class Server {
 
     public static final String caller = "Main function";
@@ -47,7 +66,7 @@ public class Server {
      *
      * @param args command line args
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         initRmi();
     }
 
@@ -65,7 +84,13 @@ public class Server {
             CashBillDataService cashBillDataService = CashBillDataFactory.getService();
             NotificationDataService notificationDataService = NotificationDataFactory.getService();
             LogBackupDataService logBackupDataService = LogBackupDataFactory.getService();
+            BankAccountDataService bankAccountDataService = BankAccountDataFactory.getService();
+            LogDataService logDataService = LogDataFactory.getService();
             LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
+            CommodityDataService commodityDataService= CommodityDataFactory.getController();
+            InventoryGiftDataService inventoryGiftDataService= InventoryGiftDataFactory.getService();
+            export(inventoryGiftDataService);
+            export(commodityDataService);
             export(saleBillDataService);
             export(saleRefundBillDataService);
             export(purchaseBillDataService);
@@ -77,12 +102,16 @@ public class Server {
             export(cashBillDataService);
             export(notificationDataService);
             export(logBackupDataService);
+            export(bankAccountDataService);
+            export(logDataService);
             logService.printLog(caller, "Initialization done.");
+
         } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
             logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));
             e.printStackTrace();
         }
     }
+
 
     public static void export(Remote remoteObj) throws RemoteException, MalformedURLException, AlreadyBoundException {
         Class[] implementedInterfaces = remoteObj.getClass().getInterfaces();

@@ -19,6 +19,8 @@
 <?import javafx.scene.text.Text?>
 
 <!--专属于财务人员的UI的fxml，直接复制粘贴FrameworkUi.fxml，然后controller设置成自己的Controller。后在按钮区（在下面，有注释）增加属于自己的功能的按钮即可。如果自己想搞点什么花样，请便。-->
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine" stylesheets="@../helpui/main.css"
            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="trapx00.lightx00.client.presentation.financeui.FinanceStaffUiController">
@@ -32,7 +34,7 @@
                     <RowConstraints prefHeight="250.0" vgrow="SOMETIMES" />
                     <RowConstraints prefHeight="50.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <VBox GridPane.rowIndex="0">
+                <VBox GridPane.rowIndex="0" >
                     <Label fx:id="promptLabel" contentDisplay="CENTER" style="-fx-text-fill: #FFFFFF" text="Hello!">
                         <graphic>
                             <ImageView fitHeight="100.0" fitWidth="200.0">
@@ -44,9 +46,41 @@
                     </Label>
 
                     <!--功能按钮区-->
-                    <JFXButton onAction="#onCashBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定现金费用表" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
+                    <JFXButton onAction="#onBankAccountFunctionClicked" prefHeight="60" prefWidth="200" text="银行账户管理" textFill="#000000">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="BANK" glyphSize="18" fill="black" />
+                    </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onReceivalBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定收款单" textFill="#000000">
+                        <graphic>
+                            <MaterialIconView glyphName="RECEIPT" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onPaymentBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定付款单" textFill="#000000">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="BTC" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onCashBillFunctionClicked" prefHeight="60" prefWidth="200" text="制定现金费用单" textFill="#000000">
+                        <graphic>
+                            <MaterialDesignIconView glyphName="CASH_100" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onSaleDetailFunctionClicked" prefHeight="60" prefWidth="200" text="查看销售明细表" textFill="#000000">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="LINE_CHART" glyphSize="18" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onTradeHistoryFunctionClicked" prefHeight="60" prefWidth="200" text="查看经营历程表" textFill="#000000">
+                        <graphic>
+                            <MaterialIconView glyphName="HISTORY" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onTradeSituationFunctionClicked" prefHeight="60" prefWidth="200" text="查看经营情况表" textFill="#000000">
+                    <graphic>
+                        <MaterialIconView glyphName="ASSESSMENT" glyphSize="24" fill="black" />
+                    </graphic>
+                    </JFXButton>
                     <!--功能按钮区完-->
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>

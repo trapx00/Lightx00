@@ -33,7 +33,7 @@ public class AuditDataControllerTest {
     }
     private Dao<AuditIdPo, String> dao = AuditDataDaoFactory.getAuditDao();
     private AuditDataService service = AuditDataFactory.getService();
-    private final BillPo bill = new CashBillPo("XJFYD-20171112-00001", new Date(), BillState.WaitingForApproval, "123","123", new CashBillItem[] { new CashBillItem("123",0,"123") });
+    private final BillPo bill = new CashBillPo("XJFYD-20171112-00001", new Date(), BillState.WaitingForApproval, "123",1, new CashBillItem[] { new CashBillItem("123",0,"123") });
     private final AuditIdPo billInfo1 = new AuditIdPo("XJFYD-20171112-00001",new Date());
     private final AuditIdPo billInfo2 = new AuditIdPo("XJFYD-20171112-00002",new Date());
     private final AuditIdPo billInfo3 = new AuditIdPo("JHXSD-20171111-00001",new Date());

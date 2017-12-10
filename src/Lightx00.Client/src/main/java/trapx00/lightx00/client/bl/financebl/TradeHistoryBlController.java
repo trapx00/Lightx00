@@ -84,8 +84,7 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
 
         List<BillVo> queryResult = new ArrayList<>();
 
-        List<BillType> billTypes = new ArrayList<>();
-        billTypes.addAll(Arrays.asList(query.getBillTypes()));
+        List<BillType> billTypes = new ArrayList<>(Arrays.asList(query.getBillTypes()));
         if (billTypes.contains(BillType.InventoryBill)) {
             queryResult.addAll(Arrays.asList(inventoryGiftInfo.queryInventoryGiftBill(new InventoryGiftQueryVo(baseQueryVo))));
         }

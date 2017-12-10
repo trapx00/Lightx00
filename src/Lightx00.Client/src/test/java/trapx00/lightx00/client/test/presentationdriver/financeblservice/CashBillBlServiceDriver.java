@@ -17,7 +17,7 @@ public class CashBillBlServiceDriver {
     private CashBillVo cashBill = null;
     @Before
     public void setUp() throws Exception {
-        cashBill = new CashBillVo("123",new Date(), BillState.Draft,"123","123",null);
+        cashBill = new CashBillVo("123",new Date(), BillState.Draft,"123",1,null);
     }
 
     @Test
