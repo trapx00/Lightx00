@@ -2,10 +2,12 @@ package trapx00.lightx00.server;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import trapx00.lightx00.server.data.admindata.factory.AdminDataFactory;
 import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
 import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
 import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataFactory;
+import trapx00.lightx00.server.data.draftdata.factory.DraftDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryGiftDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
@@ -21,9 +23,11 @@ import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.admindataservice.FaceIdRegistrationDataService;
+import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
+import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
@@ -79,6 +83,8 @@ public class Server {
             LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
             CommodityDataService commodityDataService= CommodityDataFactory.getController();
             InventoryGiftDataService inventoryGiftDataService= InventoryGiftDataFactory.getService();
+            DraftDataService draftDataService = DraftDataFactory.getService();
+            UserManagementDataService userManagementDataService = AdminDataFactory.getUserManagementDataService();
             export(inventoryGiftDataService);
             export(commodityDataService);
             export(saleBillDataService);
@@ -93,6 +99,8 @@ public class Server {
             export(notificationDataService);
             export(bankAccountDataService);
             export(logDataService);
+            export(draftDataService);
+            export(userManagementDataService);
             logService.printLog(caller, "Initialization done.");
 
         } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
@@ -104,16 +112,14 @@ public class Server {
 
     public static void export(Remote remoteObj) throws RemoteException, MalformedURLException, AlreadyBoundException {
         Class[] implementedInterfaces = remoteObj.getClass().getInterfaces();
-        Class remoteInterface = Arrays.stream(implementedInterfaces)
-            .filter(Remote.class::isAssignableFrom)
-            .findFirst()
-            .orElse(null);
-        if (remoteInterface != null) {
-            String url = RmiHelper.generateRmiUrl(remoteInterface);
-            logService.printLog(caller, String.format("registered %s to %s", url, remoteObj.toString()));
-            Naming.rebind(url, remoteObj);
+        for (Class clazz : remoteObj.getClass().getInterfaces()) {
+            if (Remote.class.isAssignableFrom(clazz)) {
+                String url = RmiHelper.generateRmiUrl(clazz);
+                logService.printLog(caller, String.format("registered %s to %s", url, remoteObj.toString()));
+                Naming.rebind(url, remoteObj);
+                return;
+            }
         }
-
     }
 
 }

@@ -14,9 +14,9 @@ public class DialogStack {
     }
 
     public DialogStack pushAndShow(JFXDialog dialog) {
-        if (!dialogStack.empty()) {
-            dialogStack.peek().close();
-        }
+//        if (!dialogStack.empty()) {
+//            dialogStack.peek().close();
+//        }
         dialogStack.push(dialog);
         dialog.show();
         return this;
@@ -26,9 +26,9 @@ public class DialogStack {
         if (!dialogStack.empty()) {
             dialogStack.pop().close();
         }
-        if (!dialogStack.empty()) {
-            dialogStack.peek().show();
-        }
+//        if (!dialogStack.empty()) {
+//            dialogStack.peek().show();
+//        }
         return this;
     }
 

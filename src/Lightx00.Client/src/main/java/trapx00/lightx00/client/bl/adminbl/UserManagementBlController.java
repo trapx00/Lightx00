@@ -12,6 +12,7 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.log.LogSeverity;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
@@ -129,12 +130,10 @@ public class UserManagementBlController implements UserManagementBlService, Empl
     @Override
     public EmployeeVo queryById(String id) {
         try {
-            EmployeePo[] poList = dataService.query(new UserAccountQueryVo());
-            for (EmployeePo po : poList) {
-                if (po.getId().equals(id))
-                    return converter.fromPoToVo(po);
-            }
-            return null;
+            EmployeePo[] poList = dataService.query(
+                new UserAccountQueryVo().addQueryVoForAllEmployeePosition(
+                    (SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo().idEq(id)));
+            return poList.length == 0 ? null : converter.fromPoToVo(poList[0]);
         } catch (RemoteException e) {
             throw new UncheckedRemoteException(e);
         }

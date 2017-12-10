@@ -18,7 +18,7 @@ public class UserManagementDataServiceFactory extends DataServiceFactory {
     }
 
     public static UserManagementDataService getService() {
-        //initRmi();
+        initRmi();
         return userManagementDataService;
     }
 }

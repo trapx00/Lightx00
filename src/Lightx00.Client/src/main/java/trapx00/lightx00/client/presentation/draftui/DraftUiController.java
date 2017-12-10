@@ -12,15 +12,23 @@ import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Region;
 import trapx00.lightx00.client.Client;
+import trapx00.lightx00.client.blservice.draftblservice.DraftBlService;
+import trapx00.lightx00.client.blservice.draftblservice.DraftBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.DraftDemoVo;
+import trapx00.lightx00.client.vo.draft.DraftVo;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.draft.DraftType;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class DraftUiController implements ExternalLoadableUiController {
     public JFXButton selectAllButton;
@@ -30,10 +38,13 @@ public class DraftUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<DraftTableItemModel, String> tableTypeColumn;
     public JFXTreeTableColumn<DraftTableItemModel, String> tableIdColumn;
     public JFXButton continueWriteButton;
+    public JFXTreeTableColumn<DraftTableItemModel, String> tcDraftableId;
 
-    private FrameworkUiController frameworkController;
 
     public ObservableList<DraftTableItemModel> draftModels = FXCollections.observableArrayList();
+
+    private DraftBlService blService = DraftBlServiceFactory.getInstance();
+
 
     public DraftUiController() { }
 
@@ -44,13 +55,15 @@ public class DraftUiController implements ExternalLoadableUiController {
 
     public void updateItems() {
         draftModels.clear();
-        draftModels.add(new DraftTableItemModel(new Date(), DraftType.Bill, 1, new DraftDemoVo()));
+        draftModels.addAll(Arrays.stream(blService.update()).map(DraftTableItemModel::new).collect(Collectors.toList()));
+
     }
 
     public void initDraftItem() {
         tableDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getDate())));
         tableTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getId())));
+        tcDraftableId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getDraft().getId()));
         TreeItem<DraftTableItemModel> root = new RecursiveTreeItem<>(draftModels, RecursiveTreeObject::getChildren);
         draftTable.setRoot(root);
         draftTable.setShowRoot(false);
@@ -64,47 +77,57 @@ public class DraftUiController implements ExternalLoadableUiController {
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         int index = draftTable.getSelectionModel().getFocusedIndex();
         DraftTableItemModel model = draftTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个草稿吗？","你选择了单据" + model.getId())
+        PromptDialogHelper.start("确定要删除这个草稿吗？","你选择了草稿" + model.getId())
                 .addTable(ReadOnlyPairTableHelper.start()
-                        .addPair("ID", String.valueOf(model.getId()))
-                        .addPair("单据类型", model.getType().toString())
-                        .addPair("时间", DateHelper.fromDate(model.getDate()))
+                        .addPair("草稿ID", String.valueOf(model.getId()))
+                        .addPair("草稿类型", model.getType().toString())
+                        .addPair("草稿时间", DateHelper.fromDate(model.getDate()))
+                        .addPair("草稿内容ID", model.getDraft().getId())
                         .create())
-                .addCloseButton("确定", "CHECK",e -> deleteItem(index))
+                .addCloseButton("确定", "CHECK",e -> {
+                    deleteItem(index);
+
+                })
                 .addCloseButton("取消", "CLOSE", null)
-                .create(frameworkController.dialogContainer);
-        dialog.show();
+                .createAndShow();
     }
 
     public void deleteItem(int index) {
-        draftModels.remove(index);
+        DraftVo draftVo = draftModels.get(index).toDraftVo();
+        try {
+            blService.delete(draftVo);
+            PromptDialogHelper.start("删除成功！","草稿和草稿内容已经删除！").addCloseButton("好", "CHECK", e -> updateItems()).createAndShow();
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("网络错误！","网络错误，信息是：" + e.getMessage()).addCloseButton("好","CHECK",null).createAndShow();
+        }
     }
 
     @SuppressWarnings("unchecked")
     public void onContinueWriteButtonClicked(ActionEvent actionEvent) {
         try {
             DraftTableItemModel model = draftTable.getSelectionModel().getSelectedItem().getValue();
-            PromptDialogHelper.start("确认继续填写这个单据吗","")
+            PromptDialogHelper.start("确认继续填写这个吗","")
                     .addTable(
                             ReadOnlyPairTableHelper.start()
-                                    .addPair("单据编号", String.valueOf(model.getId()))
-                                    .create())
+                                .addPair("草稿ID", String.valueOf(model.getId()))
+                                .addPair("草稿时间", DateHelper.fromDate(model.getDate()))
+                                .addPair("草稿类型", model.getType().name())
+                                .addPair("草稿内容ID", model.getDraft().getId())
+                                .create())
                     .addCloseButton("取消","CLOSE",null)
-                    .addCloseButton("确定","CHECK",e -> {
+                    .addButton("确定","CHECK",e -> {
                         try {
                             Parent ui = model.getDraft().continueWritableUi().continueWriting(model.getDraft()).getComponent();
-                            JFXDialog dialog = PromptDialogHelper.start("继续填写草稿", "").create(frameworkController.dialogContainer);
-                            dialog.setContent((Region) ui);
-                            dialog.show();
+                            PromptDialogHelper.start("继续填写草稿", "").setContent(ui).createAndShow();
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                     })
-                    .create(frameworkController.dialogContainer).show();
+                    .createAndShow();
         } catch (Exception ex) {
             PromptDialogHelper.start("错误","请至少选一个条目。")
                     .addCloseButton("好的","DONE",null)
-                    .create(frameworkController.dialogContainer).show();
+                    .createAndShow();
         }
 
     }
