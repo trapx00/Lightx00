@@ -1,7 +1,5 @@
 package trapx00.lightx00.server;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
 import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
@@ -10,12 +8,8 @@ import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryGiftDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
-<<<<<<< HEAD
 import trapx00.lightx00.server.data.logdata.factory.LogBackupDataFactory;
-=======
-import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogDataFactory;
->>>>>>> origin/chenjunda
 import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataFactory;
@@ -32,20 +26,15 @@ import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataServic
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
-<<<<<<< HEAD
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
-=======
 import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
->>>>>>> origin/chenjunda
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
-import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 import trapx00.lightx00.shared.util.RmiHelper;
 
-import javax.management.Notification;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;

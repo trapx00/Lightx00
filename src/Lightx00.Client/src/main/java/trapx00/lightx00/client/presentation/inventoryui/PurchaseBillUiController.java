@@ -10,7 +10,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.financeui.CashBillItemModel;
@@ -24,6 +26,7 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,7 @@ import java.util.List;
 
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
+    public StackPane mainPane;
     public JFXTextField tfBillId;
     public JFXTextField tfOperatorId;
     public JFXTextField tfClientId;
@@ -86,6 +90,9 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     }
 
     public void initialize() {
+        tfOperatorId.setOnAction(event -> {
+            onClientClicked();
+        });
         ObservableList<Integer> integerObservableList = FXCollections.observableArrayList(
                 1, 2, 3
         );
@@ -103,46 +110,52 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         return null;
     }
 
-    public void onClientClicked() {
+    @FXML
+    private void onClientClicked() {
+        System.out.println("run here");
         clientInfoUi.showClientSelectDialog(list -> {
         });
     }
 
-    public void onDraftFunctionButtonClicked() {
+    @FXML
+    private void onDraftFunctionButtonClicked() {
 
     }
 
-    public void onSubmitButtonClicked() {
-        /*PromptDialogHelper.start("单据详情", null)
+    @FXML
+    private void onSubmitButtonClicked() {
+        PromptDialogHelper.start("单据详情", null)
                 .addCloseButton("确认提交", "DONE", e -> submitSuccess())
                 .addCloseButton("取消", "CLOSE", null)
                 .addTable(
                         ReadOnlyPairTableHelper.start()
-                                .addPair("单据编号", purchaseBillPo.getId())
-                                .addPair("操作员", purchaseBillPo.getOperatorIds())
-                                .addPair("供应商", purchaseBillPo.getSupplier())
-                                .addPair("仓库", purchaseBillPo.getRepository() + "")
-                                .addPair("总额合计", purchaseBillPo.getTotal() + "")
-                                .addPair("备注", purchaseBillPo.getComment())
+                                .addPair("单据编号", tfBillId.getText())
+                                .addPair("操作员", tfOperatorId.getText())
+                                .addPair("供应商", tfClientId.getText())
+                                .addPair("仓库", cbRepository.getValue() + "")
+                                .addPair("总额合计", tfBillTotal.getText())
+                                .addPair("备注", tfComment.getText())
                                 .create())
-                .create(this.dialogContainer)
-                .show();*/
+                .create(this.mainPane)
+                .show();
     }
 
-    public void onCancelButtonClicked() {
-        /*PromptDialogHelper.start("是否要存入草稿箱", null)
+    @FXML
+    private void onCancelButtonClicked() {
+        PromptDialogHelper.start("是否要存入草稿箱", null)
                 .addCloseButton("存入", "DONE", null)
                 .addCloseButton("不存入", "CLOSE", null)
                 .addCloseButton("取消", "UNDO", null)
-                .create(this.dialogContainer)
-                .show();*/
+                .create(this.mainPane)
+                .show();
     }
 
-    public void submitSuccess() {
-        /*PromptDialogHelper.start("提交成功", null)
+    @FXML
+    private void submitSuccess() {
+        PromptDialogHelper.start("提交成功", null)
                 .addCloseButton("确定", "DONE", null)
-                .create(this.dialogContainer)
-                .show();*/
+                .create(this.mainPane)
+                .show();
     }
 }
 

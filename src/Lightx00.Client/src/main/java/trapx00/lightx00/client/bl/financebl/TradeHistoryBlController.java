@@ -28,7 +28,7 @@ import trapx00.lightx00.shared.queryvo.querys.BaseQuery;
 import java.util.*;
 
 @SuppressWarnings("unchecked")
-public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, BillInfo,  DraftableQueryService {
+public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, BillInfo, DraftableQueryService {
     private CashBillInfo cashBillInfo = SpecificFinanceBillQueryFactory.getCashbillInfo();
     private PaymentBillInfo paymentBillInfo = SpecificFinanceBillQueryFactory.getPaymentBillInfo();
     private ReceivalBillInfo receivalBillInfo = SpecificFinanceBillQueryFactory.getReceivalBillInfo();
@@ -57,7 +57,7 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
     @Override
     public FinanceBillVo[] query(FinanceBillQueryVo query) {
         ArrayList<FinanceBillVo> queryResults = new ArrayList<>();
-        for (Map.Entry<FinanceBillType, SpecificFinanceBillQueryVo> entry : query.getHashMap().entrySet()){
+        for (Map.Entry<FinanceBillType, SpecificFinanceBillQueryVo> entry : query.getHashMap().entrySet()) {
             if (query.getSpecificFinanceBillQueryVo(entry.getKey()) != null) {
                 queryResults.addAll(Arrays.asList(financeBillTypeBaseFinanceBillInfoHashMap.get(entry.getKey()).query(entry.getValue())));
             }
@@ -125,7 +125,6 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
         logService.log(LogSeverity.Info, "导出了经营情况表。");
         return ResultMessage.Success;
     }
-
 
 
     /**

@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -58,7 +59,7 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
         controller.callback = callback;
         JFXDialog dialog = PromptDialogHelper.start("","").create();
         dialog.setContent((Region) uiPackage.getComponent());
-        FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
+        dialog.show();
     }
 
     @FXML
@@ -128,7 +129,7 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return null;
+        return new UiLoader("/fxml/clientui/ClientUi.fxml").loadAndGetPackageWithoutException();
     }
 
     @FXML

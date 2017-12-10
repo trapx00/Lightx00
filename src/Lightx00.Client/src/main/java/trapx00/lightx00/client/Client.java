@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import trapx00.lightx00.client.presentation.helpui.StageManager;
+import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController;
 import trapx00.lightx00.client.presentation.loginui.LoginUiController;
 
 public class Client extends Application {
@@ -37,11 +38,10 @@ public class Client extends Application {
         Scene newScene = new Scene(loader.load());
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        LoginUiController controller = loader.getController();
+        PurchaseBillUiController controller = loader.getController();
 
 
         primaryStage.setScene(newScene);
-        controller.initializeBorderlessStuff();
         primaryStage.show();
     }
 
