@@ -28,6 +28,7 @@
             <RowConstraints prefHeight="50"/>
             <RowConstraints prefHeight="50"/>
             <RowConstraints prefHeight="50"/>
+            <RowConstraints prefHeight="50"/>
         </rowConstraints>
 
         <padding>
@@ -47,7 +48,7 @@
         <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="单据状态"/>
         <JFXTextField  GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfBillState" disable="true"/>
 
-        <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="银行账户ID"/>
+        <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="银行账户"/>
         <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfBankaccountId" disable="true"/>
     </GridPane>
 
