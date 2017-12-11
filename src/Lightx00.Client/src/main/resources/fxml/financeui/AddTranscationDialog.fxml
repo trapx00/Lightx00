@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.financeui.cashbill.AddCashBillItemDialog"
-      prefHeight="400.0" prefWidth="400.0" alignment="TOP_CENTER">
+      fx:controller="trapx00.lightx00.client.presentation.financeui.paymentandreceival.AddTranscationDialog"
+      prefHeight="400.0" prefWidth="400.0">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Label text="增加现金费用条目" textFill="#5e5e5e">
+    <Label text="增加转账项" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
@@ -38,10 +38,10 @@
             <Insets left="20" right="20" top="20" bottom="20"/>
         </padding>
 
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="条目名"/>
-        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfName" />
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="银行账户"/>
+        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfBankAccount" onMouseClicked="#onTfBankAccountClicked" />
 
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="价格"/>
+        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="转账金额"/>
         <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfPrice" />
 
         <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="备注"/>
@@ -67,4 +67,5 @@
             </HBox.margin>
         </JFXButton>
     </HBox>
+
 </VBox>

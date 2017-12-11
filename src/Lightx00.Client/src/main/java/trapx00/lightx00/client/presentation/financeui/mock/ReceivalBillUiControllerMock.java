@@ -1,6 +1,6 @@
 package trapx00.lightx00.client.presentation.financeui.mock;
 
-import trapx00.lightx00.client.presentation.financeui.ReceivalBillUiController;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.vo.Draftable;
 

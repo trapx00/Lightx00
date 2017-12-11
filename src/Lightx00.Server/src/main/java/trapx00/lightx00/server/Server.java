@@ -1,5 +1,7 @@
 package trapx00.lightx00.server;
 
+import trapx00.lightx00.server.data.financedata.factory.PaymentBillDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.ReceivalBillDataFactory;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.server.data.admindata.factory.AdminDataFactory;
@@ -29,6 +31,8 @@ import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
@@ -86,6 +90,8 @@ public class Server {
             InventoryGiftDataService inventoryGiftDataService = InventoryGiftDataFactory.getService();
             DraftDataService draftDataService = DraftDataFactory.getService();
             UserManagementDataService userManagementDataService = AdminDataFactory.getUserManagementDataService();
+            PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
+            ReceivalBillDataService receivalBillDataService = ReceivalBillDataFactory.getService();
             export(inventoryGiftDataService);
             export(commodityDataService);
             export(saleBillDataService);
@@ -103,17 +109,18 @@ public class Server {
             export(logDataService);
             export(draftDataService);
             export(userManagementDataService);
+            export(receivalBillDataService);
+            export(paymentBillDataService);
             logService.printLog(caller, "Initialization done.");
 
-        } catch (RemoteException | MalformedURLException | AlreadyBoundException | SQLException e) {
+        } catch (RemoteException | MalformedURLException | SQLException e) {
             logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));
             e.printStackTrace();
         }
     }
 
 
-    public static void export(Remote remoteObj) throws RemoteException, MalformedURLException, AlreadyBoundException {
-        Class[] implementedInterfaces = remoteObj.getClass().getInterfaces();
+    public static void export(Remote remoteObj) throws RemoteException, MalformedURLException {
         for (Class clazz : remoteObj.getClass().getInterfaces()) {
             if (Remote.class.isAssignableFrom(clazz)) {
                 String url = RmiHelper.generateRmiUrl(clazz);

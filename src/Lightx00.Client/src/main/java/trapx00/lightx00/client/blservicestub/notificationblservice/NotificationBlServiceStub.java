@@ -22,7 +22,7 @@ public class NotificationBlServiceStub implements NotificationBlService {
                 new BillApprovalNotificationVo(1,new Date(),employeeVo, new EmployeeVo[] { employeeVo },
 
                         new PaymentBillVo("123",new Date(),
-                                BillState.Approved, "123", "123",new Transcation[]{ new Transcation("123",1,"123")},0))};
+                                BillState.Approved, "123", "123",new Transcation[]{ new Transcation(1,1,"123")},0))};
     }
 
     @Override

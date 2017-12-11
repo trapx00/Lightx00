@@ -6,14 +6,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.logblservice.LogBlService;
 import trapx00.lightx00.client.blservice.logblservice.LogBlServiceFactory;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.SampleSelectingDialog;
-import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -34,11 +33,24 @@ public class LogUiController implements ExternalLoadableUiController {
     private LogBlService logBlService = LogBlServiceFactory.getInstance();
 
 
+    public LogVo getSelected() {
+        return logTable.getSelectionModel().getSelectedItem().getValue().toLogVo();
+    }
 
     public void initLogItem() {
         logDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getDate())));
         logSeverityColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getSeverity().toString()));
         logContentColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().contentProperty());
+        logTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                try {
+                    LogVo selected = getSelected();
+                    ExternalLoadedUiPackage uiPackage = selected.contentDisplayUi().showContent(selected);
+                    PromptDialogHelper.start("日志信息","").setContent(uiPackage.getComponent()).createAndShow();
+                } catch (Exception ignored) {
+                    ignored.printStackTrace();
+                }
+        }});
         TreeItem<LogTableItemModel> root = new RecursiveTreeItem<>(logTableItemModels, RecursiveTreeObject::getChildren);
         logTable.setRoot(root);
         logTable.setShowRoot(false);
