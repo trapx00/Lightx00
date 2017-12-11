@@ -7,7 +7,7 @@ import trapx00.lightx00.client.vo.Draftable;
 
 import java.io.IOException;
 
-public class TotalPricePromotionUiControllerDraftController implements DraftContinueWritableUiController, ExternalLoadableUiController {
+public class ComSalePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
      * Overrides to return a specific ui controller.

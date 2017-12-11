@@ -3,11 +3,12 @@ package trapx00.lightx00.client.presentation.promotionui;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.Draftable;
 
 import java.io.IOException;
 
-public class ClientPromotionUiControllerDraftController implements DraftContinueWritableUiController, ExternalLoadableUiController {
+public class ClientPromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
      * Overrides to return a specific ui controller.
@@ -26,6 +27,6 @@ public class ClientPromotionUiControllerDraftController implements DraftContinue
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return null;
+        return new UiLoader("/fxml/managerui/ClientPromotionUi.fxml").loadAndGetPackageWithoutException();
     }
 }
