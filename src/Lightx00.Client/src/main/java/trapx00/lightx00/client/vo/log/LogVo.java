@@ -1,5 +1,7 @@
 package trapx00.lightx00.client.vo.log;
 
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
+import trapx00.lightx00.client.presentation.logui.LogDetailUi;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 
 import java.util.Date;
@@ -53,6 +55,10 @@ public class LogVo {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public ContentDisplayUi<LogVo> contentDisplayUi() {
+        return new LogDetailUi();
     }
 }
 

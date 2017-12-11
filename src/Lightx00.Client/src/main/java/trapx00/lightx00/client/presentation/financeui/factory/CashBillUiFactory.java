@@ -1,6 +1,6 @@
 package trapx00.lightx00.client.presentation.financeui.factory;
 
-import trapx00.lightx00.client.presentation.financeui.CashBillUiController;
+import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
 import trapx00.lightx00.client.presentation.financeui.mock.CashBillUiControllerMock;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 

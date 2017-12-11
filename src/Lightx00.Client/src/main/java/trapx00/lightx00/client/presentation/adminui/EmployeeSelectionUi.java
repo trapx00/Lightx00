@@ -14,7 +14,7 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
     }
 
     @Override
-    public EmployeeVo queryId(int id) {
+    public EmployeeVo queryId(String id) {
         return null;
     }
 

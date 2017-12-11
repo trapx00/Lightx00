@@ -25,13 +25,7 @@ public class LogBackupBlServiceStub implements LogBackupBlService {
      * @return the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() {
-        URI uri = null;
-        try {
-            uri = new URI("www.123.com");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return uri;
+    public String fetchCloudLog() {
+        return "www.123.com";
     }
 }

@@ -1,8 +1,10 @@
-package trapx00.lightx00.client.presentation.financeui;
+package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountUiController;
-import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
+import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
 
 
 /**
@@ -21,7 +23,7 @@ public class FinanceStaffUiController extends FrameworkUiController {
 
     /**
      * 财务人员独有的制定现金费用单的功能按钮的相应方法。通过调用switchFunction进入对应的功能界面。
-     * @see CashBillUiController。功能界面必须实现ExternalLoadableUiController
+     * @see CashBillUiController 。功能界面必须实现ExternalLoadableUiController
      * @param actionEvent actionEvent
      */
     public void onCashBillFunctionClicked(ActionEvent actionEvent) {
@@ -34,11 +36,11 @@ public class FinanceStaffUiController extends FrameworkUiController {
     }
 
     public void onReceivalBillFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(ReceivalBillUiController.class, "制定付款单",true);
     }
 
     public void onPaymentBillFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(PaymentBillUiController.class, "制定收款单",true);
     }
 
     public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {

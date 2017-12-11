@@ -7,59 +7,48 @@
 <?import javafx.scene.text.Font?>
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.financeui.CashBillDetailUiController"
+      fx:controller="trapx00.lightx00.client.presentation.financeui.cashbill.CashBillDetailUiController"
       prefHeight="800.0" prefWidth="600.0" spacing="20">
+    <padding>
+        <Insets top="10" left="20" bottom="20" right="20"/>
+    </padding>
     <Label text="现金费用单" textFill="#5e5e5e">
         <font>
-            <Font name="System Bold" size="32.0" />
+            <Font name="System Bold" size="32.0"/>
         </font>
         <VBox.margin>
-            <Insets />
+            <Insets/>
         </VBox.margin>
     </Label>
 
-    <GridPane alignment="BASELINE_CENTER">
-        <columnConstraints>
-            <ColumnConstraints prefWidth="100"/>
-            <ColumnConstraints prefWidth="200"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-        </rowConstraints>
+    <VBox maxWidth="500" spacing="30">
+        <JFXTextField promptText="ID" labelFloat="true" fx:id="tfId" editable="false"/>
 
-        <padding>
-            <Insets left="20" right="20" top="20" bottom="20"/>
-        </padding>
+        <JFXTextField promptText="日期" labelFloat="true" fx:id="tfDate" editable="false"/>
 
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="ID"/>
-        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfId" disable="true"/>
+        <JFXTextField promptText="制定者" labelFloat="true" fx:id="tfOperator" editable="false"/>
 
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="日期"/>
-        <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfDate" disable="true"/>
+        <JFXTextField promptText="单据状态" labelFloat="true" fx:id="tfBillState" editable="false"/>
 
-        <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="制定者"/>
-        <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfOperator" disable="true"/>
+        <JFXTextField promptText="银行账户" labelFloat="true" fx:id="tfBankaccountId" editable="false"/>
+    </VBox>
 
 
-        <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="单据状态"/>
-        <JFXTextField  GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfBillState" disable="true"/>
-
-        <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="银行账户"/>
-        <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfBankaccountId" disable="true"/>
-    </GridPane>
+    <Label text="现金费用款项" textFill="#5e5e5e">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
 
     <JFXTreeTableView fx:id="tbCashBillItems" prefHeight="300.0" prefWidth="400.0">
         <columns>
-            <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="条目名" />
-            <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="100" resizable="false" text="价格" />
-            <JFXTreeTableColumn fx:id="tcComment" prefWidth="100" text="备注" />
+            <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="条目名"/>
+            <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="100" resizable="false" text="价格"/>
+            <JFXTreeTableColumn fx:id="tcComment" prefWidth="100" text="备注"/>
         </columns>
     </JFXTreeTableView>
 
-    <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
+    <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
+               style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
 
 </VBox>
