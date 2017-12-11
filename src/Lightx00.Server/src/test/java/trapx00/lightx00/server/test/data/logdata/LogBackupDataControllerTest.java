@@ -48,7 +48,7 @@ public class LogBackupDataControllerTest {
 
     @Test
     public void fetchCloudLog() throws Exception {
-
+        assertEquals(null,logBackupDataService.fetchCloudLog());
     }
 
 }

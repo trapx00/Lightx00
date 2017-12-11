@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.financeui;
+package trapx00.lightx00.client.presentation.financeui.cashbill;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;

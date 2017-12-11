@@ -17,6 +17,6 @@ public class LogBackupDataServiceDriver {
 
     @Test
     public void fetchCloudLog() throws Exception {
-        assertEquals("www.123.com", service.fetchCloudLog().toString());
+        assertEquals("www.123.com", service.fetchCloudLog());
     }
 }

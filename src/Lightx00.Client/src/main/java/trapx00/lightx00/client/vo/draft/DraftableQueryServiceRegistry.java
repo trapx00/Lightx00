@@ -10,10 +10,11 @@ import trapx00.lightx00.shared.po.draft.DraftType;
 import java.util.HashMap;
 
 public class DraftableQueryServiceRegistry {
+
+    private static HashMap<DraftType, DraftableQueryService> map = new HashMap<>();
     static {
         registerAll();
     }
-    private static HashMap<DraftType, DraftableQueryService> map = new HashMap<>();
 
     private static void registerAll() {
         register(DraftType.Bill, BillDraftQueryServiceFactory.getQueryService());

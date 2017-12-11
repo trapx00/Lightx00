@@ -1,12 +1,12 @@
 package trapx00.lightx00.server.data.logdata;
 
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.Protocol;
+import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
@@ -22,7 +22,7 @@ import trapx00.lightx00.shared.util.DateHelper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
@@ -30,10 +30,13 @@ import java.util.Date;
 import java.util.List;
 
 public class LogBackupDataController extends UnicastRemoteObject implements LogBackupDataService {
-    private static final String END_POINT = "http://oos-bj2.ctyunapi.cn";
+    private static final String END_POINT = "http://oos.ctyunapi.cn";
     private static final String BUCKET_NAME = "lightx00";
+    private static final String ACCESS_KEY = "622ff0aad8c78a306eaa";
+    private static final String SECRET_KEY = "c4a84bcc4ce1ad09805def0284a07452dd7a7519";
     private static final String FILE_PATH = Server.class.getResource("/temp.txt").getPath();
     private static final String SEPATAROR = " | ";
+    private static final long EXPIRATION = 1000 * 60 * 60 * 24;
 
     private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
     private Object delegate = this;
@@ -70,7 +73,7 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
     public ResultMessage backupLog() throws RemoteException {
         try {
             List<LogPo> logPos = logDao.queryBuilder().query();
-            File file=new File(FILE_PATH);
+            File file = new File(FILE_PATH);
             FileWriter fileWriter = new FileWriter(file);
             for (LogPo logPo : logPos) {
                 fileWriter.write(logPo.getId() + SEPATAROR);
@@ -82,9 +85,10 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
             fileWriter.close();
             logDao.delete(logPos);
 
-            AmazonS3 oos = new AmazonS3Client(new PropertiesCredentials(LogBackupDataController.class.getResourceAsStream("OOSCredentials.properties")));
+            AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
+            AmazonS3 oos = new AmazonS3Client(credentials);
             oos.setEndpoint(END_POINT);
-            oos.putObject(BUCKET_NAME,DateHelper.currentDateString(),file);
+            oos.putObject(BUCKET_NAME, DateHelper.currentDateString("yyyy_MM_dd_HH:mm:ss"), file);
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,7 +107,24 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
      * @return the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() throws RemoteException {
-        return null;
+    public String fetchCloudLog() throws RemoteException {
+        String result = "";
+        AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
+        AmazonS3 oos = new AmazonS3Client(credentials);
+
+        oos.setEndpoint(END_POINT);
+        List<S3ObjectSummary> list = oos.listObjects(BUCKET_NAME).getObjectSummaries();
+        for (S3ObjectSummary object : list) {
+            result += object.getKey();
+            GeneratePresignedUrlRequest generatePresignedUrlRequest =
+                    new GeneratePresignedUrlRequest(BUCKET_NAME, object.getKey());
+            generatePresignedUrlRequest.setMethod(HttpMethod.GET);
+            generatePresignedUrlRequest.setExpiration(new Date(EXPIRATION));
+            URL url = oos.generatePresignedUrl(generatePresignedUrlRequest);
+            result += SEPATAROR;
+            result += url.toString();
+            result += System.lineSeparator();
+        }
+        return result;
     }
 }

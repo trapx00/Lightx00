@@ -2,10 +2,14 @@ package trapx00.lightx00.client.presentation.loginui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import de.jensd.fx.glyphs.materialicons.MaterialIcon;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.bl.loginbl.factory.FaceIdAuthenticationBlServiceFactory;
@@ -46,14 +50,24 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
                         showPromptDialog("登录失败！","未知错误！");
                     } else {
                         Platform.runLater(() -> {
-                            PromptDialogHelper.start("登录成功", String.format("登录成功！确认将以%s（id: %s）的身份登录！", employeeVo.getName(), employeeVo.getId()))
-                                .addCloseButton("好", "CHECK", e -> {
-                                    closeCamera();
-                                    disposeCamera(actionEvent);
-                                    FinishLoginLogic.finishLogin(employeeVo);
-                                })
-                                .addCloseButton("不对！这不是我！","CLOSE", e -> startCamera())
-                                .create(rootPane).show();
+                            JFXDialogLayout layout = new JFXDialogLayout();
+                            JFXButton btnConfirm = new JFXButton("好", new MaterialIconView(MaterialIcon.CHECK));
+                            JFXButton btnClose = new JFXButton("不对，这不是我", new MaterialIconView(MaterialIcon.CLOSE));
+                            layout.setBody(new javafx.scene.control.Label(String.format("登录成功！确认将以%s（id: %s）的身份登录！", employeeVo.getName(), employeeVo.getId())));
+                            layout.setHeading(new Label("登录成功"));
+                            layout.setActions(btnConfirm, btnClose);
+                            JFXDialog dialog = new JFXDialog(rootPane, layout, JFXDialog.DialogTransition.CENTER);
+                            btnConfirm.setOnAction(e -> {
+                                closeCamera();
+                                disposeCamera(actionEvent);
+                                dialog.close();
+                                FinishLoginLogic.finishLogin(employeeVo);
+                            });
+                            btnClose.setOnAction(e -> {
+                                startCamera();
+                                dialog.close();
+                            });
+                            dialog.show();
                         });
 
                     }
@@ -79,10 +93,17 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
     }
 
     public void showPromptDialog(String title, String content) {
-        PromptDialogHelper.start(title, content)
-            .addCloseButton("好","CHECK",e -> startCamera())
-            .create(rootPane)
-            .show();
+        JFXDialogLayout layout = new JFXDialogLayout();
+        JFXButton button = new JFXButton("好", new MaterialIconView(MaterialIcon.CHECK));
+        layout.setBody(new javafx.scene.control.Label(content));
+        layout.setHeading(new Label(title));
+        layout.setActions(button);
+        JFXDialog dialog = new JFXDialog(rootPane, layout, JFXDialog.DialogTransition.CENTER);
+        button.setOnAction(e -> {
+            dialog.close();
+        });
+        dialog.show();
+
     }
 
     private void closeCamera() {

@@ -23,7 +23,7 @@ public class PurchaseBillBlInfoControllerTest {
     private PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
     private PurchaseBillBlController purchaseBillBlController = PurchaseBillBlFactory.getPurchaseBillBlController();
     private PurchaseRefundBillBlController purchaseRefundBillBlController = PurchaseRefundBillBlFactory.getPurchaseRefundBillBlController();
-    private PurchaseBillVo purchaseBillVo=new PurchaseBillVo("0",new Date(), BillState.Draft, "123",1,"123","123",10,new CommodityItem[] {new CommodityItem("123",10,123)});
+    private PurchaseBillVo purchaseBillVo=new PurchaseBillVo("0",new Date(), BillState.Draft, "123",1,"123","123",10,new CommodityItem[] {new CommodityItem("123","!23","!@#",1,1,1,"")});
     private PurchaseRefundBillVo purchaseRefundBillVo=new PurchaseRefundBillVo("0",null,null,null,1,null,null,100,null);
 
     @Test

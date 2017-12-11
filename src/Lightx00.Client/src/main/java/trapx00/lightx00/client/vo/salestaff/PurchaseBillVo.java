@@ -8,6 +8,8 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
+import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillType;
@@ -118,12 +120,12 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new PurchaseBillUiController();
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new PurchaseBillDetailUiController();
     }
 
     /**
@@ -133,6 +135,6 @@ public class PurchaseBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new PurchaseBillUiController();
     }
 }

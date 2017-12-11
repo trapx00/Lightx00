@@ -9,8 +9,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
-import java.util.Map;
 
+import java.util.Map;
 
 
 public class ReadOnlyPairTableHelper {
@@ -51,7 +51,6 @@ public class ReadOnlyPairTableHelper {
         keyColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().key));
         valueColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().value));
     }
-
 
 
     public JFXTreeTableView create() {

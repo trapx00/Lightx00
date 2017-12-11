@@ -1,8 +1,7 @@
-package trapx00.lightx00.client.presentation.financeui;
+package trapx00.lightx00.client.presentation.financeui.cashbill;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.*;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 
 public class CashBillItemModel extends RecursiveTreeObject<CashBillItemModel> {

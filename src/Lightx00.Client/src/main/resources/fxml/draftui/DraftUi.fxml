@@ -29,6 +29,7 @@
            <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="150" text="日期" />
            <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" text="草稿ID" />
            <JFXTreeTableColumn fx:id="tableTypeColumn" prefWidth="150" text="草稿类型" />
+           <JFXTreeTableColumn fx:id="tcDraftableId" prefWidth="150" text="草稿内容ID" />
        </columns>
    </JFXTreeTableView>
     <HBox alignment="CENTER_LEFT" maxHeight="60.0" maxWidth="2000.0" prefHeight="60.0" prefWidth="600.0">

@@ -84,7 +84,7 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
     @Override
     public PaymentBillVo[] query(PaymentBillQueryVo query) {
         return new PaymentBillVo[]{
-                new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)
+                new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation(1,0,"123")}, 0.0)
         };
     }
 

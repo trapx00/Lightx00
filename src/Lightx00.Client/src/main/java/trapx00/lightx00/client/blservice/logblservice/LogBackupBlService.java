@@ -17,5 +17,5 @@ public interface LogBackupBlService {
      *
      * @return the temp uri of the log resources
      */
-    URI fetchCloudLog();
+    String fetchCloudLog();
 }
