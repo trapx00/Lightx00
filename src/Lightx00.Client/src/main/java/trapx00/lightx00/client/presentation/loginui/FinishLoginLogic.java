@@ -46,6 +46,7 @@ public class FinishLoginLogic {
     private static String selectUrl(EmployeePosition position) {
         switch (position) {
             case InventoryStaff:
+                return "/fxml/mainui/InventoryStaffUI.fxml";
             case Manager:
             case Admin:
             case SaleStaff:

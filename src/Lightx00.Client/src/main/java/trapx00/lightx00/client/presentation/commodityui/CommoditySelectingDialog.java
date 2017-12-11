@@ -2,13 +2,11 @@ package trapx00.lightx00.client.presentation.commodityui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.istack.internal.NotNull;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
@@ -16,14 +14,10 @@ import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.log.LogVo;
-import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -48,7 +42,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/CommoditySelectingDialog.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/commodity/CommoditySelectingDialog.fxml").loadAndGetPackageWithoutException();
     }
 
     @FXML

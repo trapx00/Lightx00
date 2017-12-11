@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.inventoryui.gift;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -15,7 +15,6 @@ import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.util.DateHelper;
 

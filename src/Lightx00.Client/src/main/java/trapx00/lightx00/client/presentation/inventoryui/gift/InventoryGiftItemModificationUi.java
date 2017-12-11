@@ -1,16 +1,11 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.inventoryui.gift;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Region;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelectingDialog;
 import trapx00.lightx00.client.presentation.helpui.*;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class InventoryGiftItemModificationUi implements ExternalLoadableUiController {

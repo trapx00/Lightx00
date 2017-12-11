@@ -1,9 +1,8 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.inventoryui.gift;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import trapx00.lightx00.client.presentation.helpui.LogSelectionItemModel;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 
 public class GiftSelectingItemModel  extends RecursiveTreeObject<GiftSelectingItemModel> {

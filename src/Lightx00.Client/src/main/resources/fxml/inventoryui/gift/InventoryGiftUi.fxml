@@ -14,46 +14,38 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import com.jfoenix.controls.JFXMasonryPane?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController"
+      fx:controller="trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftUiController"
       prefHeight="400.0" prefWidth="600.0">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <Label text="库存赠送单" textFill="#5e5e5e">
-        <font>
-            <Font name="System Bold" size="32.0" />
-        </font>
-    </Label>
-    <HBox alignment="CENTER" spacing="20">
-        <VBox alignment="TOP_CENTER">
-            <GridPane>
-                <columnConstraints>
-                    <ColumnConstraints prefWidth="100"/>
-                    <ColumnConstraints prefWidth="200"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints minHeight="50"/>
-                    <RowConstraints minHeight="50"/>
-                    <RowConstraints minHeight="50"/>
-                    <RowConstraints minHeight="50"/>
-                </rowConstraints>
 
-                <padding>
-                    <Insets left="20" right="20" top="20" bottom="20"/>
-                </padding>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <MaterialDesignIconView fill="black" glyphName="CASH_100" glyphSize="48" />
+        <Label text="库存赠送单" textFill="#5e5e5e">
+            <font>
+                <Font name="System Bold" size="32.0" />
+            </font>
+        </Label>
+    </HBox>
 
-                <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="ID"/>
-                <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfId" disable="true"/>
+    <JFXMasonryPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfId" editable="false" promptText="ID" />
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfDate" editable="false" promptText="日期" />
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfOperator" editable="false" promptText="制定者" />
+        </StackPane>
+    </JFXMasonryPane>
 
-                <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="日期"/>
-                <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfDate" disable="true" />
-
-                <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="制定者"/>
-                <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfOperator" disable="true"/>
-
-            </GridPane>
+    <VBox alignment="CENTER" spacing="20">
 
             <Label text="赠送商品" textFill="#5e5e5e">
             </Label>
@@ -64,6 +56,7 @@
                     <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
                 </columns>
             </JFXTreeTableView>
+
             <HBox prefWidth="100" spacing="10" alignment="BASELINE_RIGHT">
                 <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #FFFFFF" text="">
                     <graphic>
@@ -90,9 +83,7 @@
                     </HBox.margin>
                 </JFXButton>
             </HBox>
-
-        </VBox>
-    </HBox>
+    </VBox>
 
     <Separator/>
     <HBox alignment="CENTER">

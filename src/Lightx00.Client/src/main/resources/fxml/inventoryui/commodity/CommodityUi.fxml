@@ -12,10 +12,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.Label?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Separator?>
 <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.commodityui.CommodityUiController">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10" />
+        <Insets bottom="10" left="10" right="10" top="10"/>
     </padding>
+
     <HBox alignment="CENTER_LEFT" maxWidth="2000">
         <MaterialIconView glyphName="CLASS" glyphSize="28" />
         <Text text="商品管理">
@@ -26,16 +28,32 @@
         <Insets right="10.0" />
     </padding>
     </HBox>
-    <JFXTextField fx:id="tfSearch" promptText="按Id搜索，按回车执行搜索"/>
-    <JFXTreeTableView fx:id="commodityTable" maxHeight="2000.0" maxWidth="2000.0" prefHeight="600.0" prefWidth="600.0">
+
+    <HBox alignment="CENTER_LEFT" maxWidth="2000">
+        <MaterialIconView glyphName="BORDER_COLOR" glyphSize="15" />
+        <JFXTextField fx:id="tfSearch" promptText="按Id搜索，按回车执行搜索"/>
+        <padding>
+        <Insets right="10.0" />
+         </padding>
+    </HBox>
+
+    <HBox alignment="BASELINE_LEFT" maxWidth="2000">
+    </HBox>
+
+    <HBox alignment="CENTER_RIGHT" maxWidth="1000">
+        <JFXTreeTableView fx:id="commodityTable" maxHeight="2000.0" maxWidth="2000.0" prefHeight="600.0" prefWidth="600.0">
         <columns>
             <JFXTreeTableColumn fx:id="tableNameColumn" prefWidth="150" text="商品名" />
             <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" text="商品ID" />
             <JFXTreeTableColumn fx:id="tableSortColumn" prefWidth="150" text="所在商品分类" />
             <JFXTreeTableColumn fx:id="tableAmountColumn" prefWidth="150" text="商品数量" />
             <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="150" text="生产日期" />
-        </columns>
-    </JFXTreeTableView>
+         </columns>
+        </JFXTreeTableView>
+    </HBox>
+
+
+
     <HBox alignment="CENTER_LEFT" maxHeight="60.0" maxWidth="2000.0" prefHeight="60.0" prefWidth="600.0">
         <padding>
             <Insets bottom="10" right="20" top="10" />

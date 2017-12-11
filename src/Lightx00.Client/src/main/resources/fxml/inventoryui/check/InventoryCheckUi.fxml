@@ -20,7 +20,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryCheckUiController"
+      fx:controller="trapx00.lightx00.client.presentation.inventoryui.check.InventoryCheckUiController"
       prefHeight="600.0" prefWidth="800.0">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10"/>
@@ -71,28 +71,17 @@
             <Insets right="10.0" />
         </padding>
     </HBox>
-    <JFXTreeTableView fx:id="tableBankAccounts" prefHeight="500.0" prefWidth="500.0">
+    <JFXTreeTableView fx:id="tableView" prefHeight="500.0" prefWidth="500.0">
         <columns>
-            <JFXTreeTableColumn fx:id="tcinventoryAmount" prefWidth="50" text="入库数量" />
-            <JFXTreeTableColumn fx:id="tcinventoryMoney" editable="false" prefWidth="150" text="入库金额" />
+            <JFXTreeTableColumn fx:id="tcinventoryAmount" prefWidth="150" text="入库数量" />
+            <JFXTreeTableColumn fx:id="tcinventoryMoney"  prefWidth="150" text="入库金额" />
             <JFXTreeTableColumn fx:id="tcoutOfInventoryAmount" prefWidth="150" text="出库数量" />
             <JFXTreeTableColumn fx:id="tcoutOfInVentoryMoney" prefWidth="150" text="出库金额" />
+            <JFXTreeTableColumn fx:id="tcinSold" prefWidth="150" text="销售金额" />
+            <JFXTreeTableColumn fx:id="tcoutSold" prefWidth="150" text="进货金额" />
             <JFXTreeTableColumn fx:id="tcsum" prefWidth="150" text="合计" />
         </columns>
     </JFXTreeTableView>
-    <HBox alignment="CENTER_LEFT" maxHeight="60.0" maxWidth="2000.0" prefHeight="60.0" prefWidth="600.0">
-        <padding>
-            <Insets bottom="10" right="20" top="10" />
-        </padding>
-        <JFXButton fx:id="btnAdd" buttonType="RAISED" onAction="#onBtnAddClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF" text="">
-            <graphic>
-                <MaterialIconView glyphName="ADD" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
-            </graphic>
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
-        </JFXButton>
 
-    </HBox>
 
 </VBox>

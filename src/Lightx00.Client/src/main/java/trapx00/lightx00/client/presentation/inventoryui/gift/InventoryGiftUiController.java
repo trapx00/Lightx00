@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.inventoryui.gift;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -27,7 +27,6 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
-import java.util.List;
 
 public class InventoryGiftUiController implements DraftContinueWritableUiController, ExternalLoadableUiController,ReversibleUi {
 
@@ -108,7 +107,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/InventoryGiftUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/gift/InventoryGiftUi.fxml").loadAndGetPackageWithoutException();
     }
 
     @Override

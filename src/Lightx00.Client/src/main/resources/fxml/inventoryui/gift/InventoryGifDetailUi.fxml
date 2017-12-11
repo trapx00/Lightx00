@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryGiftDetailUiController"
+      fx:controller="trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftDetailUiController"
       prefHeight="800.0" prefWidth="600.0" spacing="20">
     <Label text="库存赠送单" textFill="#5e5e5e">
         <font>

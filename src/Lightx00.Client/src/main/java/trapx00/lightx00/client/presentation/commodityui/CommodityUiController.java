@@ -2,34 +2,24 @@ package trapx00.lightx00.client.presentation.commodityui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftSelection;
-import trapx00.lightx00.client.presentation.inventoryui.factory.InventoryGiftUiFactory;
 import trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class CommodityUiController implements ExternalLoadableUiController {
@@ -132,7 +122,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
 
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/CommodityUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/commodity/CommodityUi.fxml").loadAndGetPackageWithoutException();
     }
 
 
