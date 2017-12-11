@@ -1,5 +1,7 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+
 import java.io.Serializable;
 
 public class PromotionCommodity implements Serializable {
@@ -7,7 +9,15 @@ public class PromotionCommodity implements Serializable {
     private double amount;
     private double unitPrice;
 
+    public PromotionCommodity(){
+        ;
+    }
 
+    public PromotionCommodity(String id, double amount,double unitPrice){
+        this.commodityId=id;
+        this.amount=amount;
+        this.unitPrice=unitPrice;
+    }
 
     public double getUnitPrice() {
         return unitPrice;

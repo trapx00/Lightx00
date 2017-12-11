@@ -36,12 +36,13 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public JFXTextField tfId;
     public JFXButton btnAdd;
     public JFXButton btnDelete;
+    public JFXButton btnSet;
     public JFXTreeTableView<InventoryGiftItemModel> inventoryGiftItems;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcName;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcPrice;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcAmount;
 
-    private ObjectProperty<List<CommodityVo>> currentCommodity = new SimpleObjectProperty<>();
+    private ObjectProperty<CommodityVo> currentCommodity = new SimpleObjectProperty<>();
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
 
@@ -117,16 +118,30 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
     public void onBtnAddItemClicked() {
         CommodityUiFactory.getCommoditySelectionUi()
-                .showCommoditySelectDialog(vo -> this.currentCommodity.setValue(vo));
-        CommodityVo[] commodityVo=currentCommodity.get().stream().toArray(CommodityVo[]::new);
-        for(CommodityVo commodityVo1:commodityVo){
-            PromotionCommodity promotionCommodity=new PromotionCommodity();
-            promotionCommodity.setCommodityId(commodityVo1.getId());
-            promotionCommodity.setAmount(commodityVo1.getAmount());
-            promotionCommodity.setUnitPrice(commodityVo1.getRetailPrice());
-            inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(
-                    promotionCommodity));
+                .showCommoditySelectDialog(vo -> inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(new PromotionCommodity(vo.getId(),
+                        0,vo.getRetailPrice()))));
 
+    }
+
+    public void onBtnSetItemClicked(){
+        InventoryGiftItemModel inventoryGiftItemModel=getSelected();
+        if(inventoryGiftItemModel!=null){
+            new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
+                    getValue().getPromotionCommodityObjectProperty().setAmount(aDouble));
+            //  inventoryGiftItemModelObservableList.remove(temp);
+            //inventoryGiftItemModelObservableList.add(inventoryGiftItemModel);
+        }
+
+    }
+
+    public InventoryGiftItemModel getSelected(){
+        try {
+            return inventoryGiftItems.getSelectionModel().getSelectedItem().getValue();
+        } catch (Exception e) {
+            new PromptDialogHelper("未选择！","请先选择一个赠送商品！")
+                    .addCloseButton("好","CHECK", null)
+                    .createAndShow();
+            return null;
         }
     }
 

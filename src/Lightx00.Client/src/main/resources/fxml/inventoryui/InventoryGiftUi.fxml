@@ -13,10 +13,14 @@
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController"
       prefHeight="400.0" prefWidth="600.0">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
     <Label text="库存赠送单" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
@@ -51,17 +55,6 @@
 
             </GridPane>
 
-            <JFXButton GridPane.columnIndex="0" fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnAutofillClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="自动填充信息">
-                <graphic>
-                    <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
-                </graphic>
-                <HBox.margin>
-                    <Insets right="10.0" />
-                </HBox.margin>
-            </JFXButton>
-        </VBox>
-
-        <VBox alignment="CENTER" spacing="10" prefHeight="300">
             <Label text="赠送商品" textFill="#5e5e5e">
             </Label>
             <JFXTreeTableView fx:id="inventoryGiftItems" prefHeight="300.0" prefWidth="400.0">
@@ -75,6 +68,14 @@
                 <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #FFFFFF" text="">
                     <graphic>
                         <MaterialIconView glyphName="ADD" glyphSize="24" />
+                    </graphic>
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin>
+                </JFXButton>
+                <JFXButton fx:id="btnSet" onAction="#onBtnSetItemClicked" style="-fx-text-fill: #FFFFFF" text="">
+                    <graphic>
+                        <MaterialIconView glyphName="CALL_RECEIVED" glyphSize="24" />
                     </graphic>
                     <HBox.margin>
                         <Insets right="10.0" />
@@ -95,6 +96,15 @@
 
     <Separator/>
     <HBox alignment="CENTER">
+        <JFXButton fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnAutofillClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="自动填充信息">
+            <graphic>
+                <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
+
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />

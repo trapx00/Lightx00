@@ -38,7 +38,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableDateColumn;
     @FXML private JFXTextField tfSearch;
 
-    private Consumer<List<CommodityVo>> callback;
+    private Consumer<CommodityVo> callback;
     private ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
     private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
     /**
@@ -93,23 +93,21 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
         commodityTable.setRoot(root);
         commodityTable.setShowRoot(false);
-        commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
+       // commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
     }
 
     /**
      * 获得当前已经选择的日志。如果没有选择的，那么这个是空List（不是null！！！）
      * @return 当前已经选择的项
      */
-    private List<CommodityVo> getSelected() {
-        return commodityTable.getSelectionModel().getSelectedItems().stream()
-                .map(x -> x.getValue().getCommodityVoObjectProperty())
-                .collect(Collectors.toList());
+    private CommodityVo getSelected() {
+        return commodityTable.getSelectionModel().getSelectedItem().getValue().commodityVoObjectProperty.getValue();
     }
 
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-        List<CommodityVo> selected = getSelected();
+        CommodityVo selected = getSelected();
         if (callback != null && selected != null) {
             callback.accept(selected);
         }
@@ -118,7 +116,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
 
 
     @Override
-    public void showCommoditySelectDialog(Consumer<List<CommodityVo>> callback) {
+    public void showCommoditySelectDialog(Consumer<CommodityVo> callback) {
         ExternalLoadedUiPackage uiPackage = load();
         CommoditySelectingDialog controller = (CommoditySelectingDialog) uiPackage.getController();
         controller.callback = callback;

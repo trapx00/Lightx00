@@ -124,7 +124,9 @@ public class CommodityUiController implements ExternalLoadableUiController {
 
 
     public void onAddButtonClicked(ActionEvent actionEvent){
-
+        new AddCommodityDialog().show(item -> {
+            commodityModels.add(new CommoditySelectionItemModel(item));
+        });
 
     }
 

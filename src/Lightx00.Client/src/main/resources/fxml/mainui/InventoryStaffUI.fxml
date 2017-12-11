@@ -22,6 +22,8 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController">
     <AnchorPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
@@ -45,11 +47,31 @@
                     </Label>
 
                     <!--功能按钮区-->
-                    <JFXButton onAction="#onCommodityFunctionClicked" prefHeight="60" prefWidth="200" text="商品管理" textFill="#000000" />
-                    <JFXButton onAction="#onCommoditySortFunctionClicked" prefHeight="60" prefWidth="200" text="商品分类管理" textFill="#000000" />
-                    <JFXButton onAction="#onInventoryCheckFunctionClicked" prefHeight="60" prefWidth="200" text="库存盘点" textFill="#000000" />
-                    <JFXButton onAction="#onInventoryGiftFunctionClicked" prefHeight="60" prefWidth="200" text="库存赠送" textFill="#000000" />
-                    <JFXButton onAction="#onInventoryWarningFunctionClicked" prefHeight="60" prefWidth="200" text="库存监控" textFill="#000000" />
+                    <JFXButton onAction="#onCommodityFunctionClicked" prefHeight="60" prefWidth="200" text="商品管理" textFill="#000000">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="LIST" glyphSize="18" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onCommoditySortFunctionClicked" prefHeight="60" prefWidth="200" text="商品分类管理" textFill="#000000" >
+                        <graphic>
+                            <FontAwesomeIconView glyphName="INDENT" glyphSize="18" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onInventoryCheckFunctionClicked" prefHeight="60" prefWidth="200" text="库存盘点" textFill="#000000" >
+                        <graphic>
+                        <MaterialIconView glyphName="RECEIPT" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onInventoryGiftFunctionClicked" prefHeight="60" prefWidth="200" text="库存赠送" textFill="#000000">
+                         <graphic>
+                        <MaterialDesignIconView glyphName="CASH_100" glyphSize="24" fill="black" />
+                         </graphic>
+                    </JFXButton>
+                    <JFXButton onAction="#onInventoryWarningFunctionClicked" prefHeight="60" prefWidth="200" text="库存监控" textFill="#000000" >
+                        <graphic>
+                            <MaterialIconView glyphName="HISTORY" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
