@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.financeui;
+package trapx00.lightx00.client.presentation.financeui.cashbill;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseEvent;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlServiceFactory;
@@ -33,7 +32,6 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -97,7 +95,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         tcComment.setCellValueFactory(cellData -> cellData.getValue().getValue().commentProperty());
 
         currentBankAccount.addListener((observable, oldValue, newValue) -> {
-            tfBankaccountId.setText(newValue == null ? "" : newValue.getName());
+            tfBankaccountId.setText(newValue == null ? "" : String.format("%s(id: %s)", newValue.getId(), newValue.getName()));
         });
 
         currentDate.addListener(((observable, oldValue, newValue) -> {
@@ -105,7 +103,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         }));
 
         currentEmployee.addListener(((observable, oldValue, newValue) -> {
-            tfOperator.setText(newValue == null ? "" : newValue.getName());
+            tfOperator.setText(newValue == null ? "" : String.format("%s(id: %s)", newValue.getId(), newValue.getName()));
         }));
 
         cashBillItemModelObservableList.addListener((ListChangeListener<CashBillItemModel>) c -> {
@@ -209,7 +207,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         try {
             blService.submit(getCurrentCashBillVo());
             PromptDialogHelper.start("提交成功！", "你的单据已经提交成功")
-                .addCloseButton("好的", "CHECK", null)
+                .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
                 .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {
@@ -222,8 +220,8 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     public void onBtnSaveAsDraftClicked() {
         try {
             blService.saveAsDraft(getCurrentCashBillVo());
-            PromptDialogHelper.start("提交成功！","你的单据已经提交成功")
-                .addCloseButton("好的","CHECK", null)
+            PromptDialogHelper.start("保存草稿成功","你的单据已经保存为草稿。")
+                .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
                 .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {
@@ -234,10 +232,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     }
 
     public void onBtnResetClicked() {
-        tfBankaccountId.setText("");
         tfId.setText("");
-        tfOperator.setText("");
-        tfDate.setText("");
         currentDate.setValue(null);
         currentEmployee.setValue(null);
         currentBankAccount.setValue(null);

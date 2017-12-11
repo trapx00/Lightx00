@@ -20,7 +20,7 @@ public class DraftBlControllerTest {
     private FinanceStaffVo saver = new FinanceStaffVo("123","123",new Date(),"123","123");
     @Test
     public void saveAsDraft() throws Exception {
-        assertEquals(ResultMessage.Success, controller.saveAsDraft( new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)));
+        assertEquals(ResultMessage.Success, controller.saveAsDraft( new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation(1,0,"123")}, 0.0)));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class DraftBlControllerTest {
     public void delete() throws Exception {
         assertEquals(ResultMessage.Success, controller.delete(
             new DraftVo(1, new Date(), saver,
-            new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0),
+            new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation(1,0,"123")}, 0.0),
                 DraftType.Bill)));
 
     }

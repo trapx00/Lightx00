@@ -22,7 +22,7 @@ public class OtherNotificationDetailDisplayUiController extends NotificationDeta
     @Override
     public ExternalLoadedUiPackage showContent(OtherNotificationVo arg) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        OtherNotificationDetailDisplayUiController controller = (OtherNotificationDetailDisplayUiController) externalLoadedUiPackage.getController();
+        OtherNotificationDetailDisplayUiController controller = externalLoadedUiPackage.getController();
         controller.tfId.setText(String.valueOf(arg.getId()));
         controller.tfSender.setText(arg.getSender().getName());
         controller.tfDate.setText(DateHelper.fromDate(arg.getDate()));

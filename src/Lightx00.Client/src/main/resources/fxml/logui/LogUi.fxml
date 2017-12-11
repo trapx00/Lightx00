@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXMasonryPane?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.logui.LogUiController">
     <padding>
@@ -57,7 +45,7 @@
         <columns>
             <JFXTreeTableColumn fx:id="logDateColumn" prefWidth="150" text="日期"/>
             <JFXTreeTableColumn fx:id="logSeverityColumn" editable="false" prefWidth="150" text="日志类型"/>
-            <JFXTreeTableColumn fx:id="logContentColumn" prefWidth="150" text="日志内容"/>
+            <JFXTreeTableColumn fx:id="logContentColumn" prefWidth="400" text="日志内容"/>
         </columns>
     </JFXTreeTableView>
 </VBox>

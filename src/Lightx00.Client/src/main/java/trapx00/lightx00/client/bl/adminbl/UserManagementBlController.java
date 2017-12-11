@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unchecked")
 public class UserManagementBlController implements UserManagementBlService, EmployeeInfo {
     private static HashMap<EmployeePosition, String> employeeName = new HashMap<>();
     private LogService logService = LogServiceFactory.getLogService();

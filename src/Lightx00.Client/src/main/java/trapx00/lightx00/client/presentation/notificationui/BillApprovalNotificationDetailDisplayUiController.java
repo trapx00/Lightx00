@@ -32,7 +32,7 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
     @Override
     public ExternalLoadedUiPackage showContent(BillApprovalNotificationVo arg) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        BillApprovalNotificationDetailDisplayUiController controller = (BillApprovalNotificationDetailDisplayUiController) externalLoadedUiPackage.getController();
+        BillApprovalNotificationDetailDisplayUiController controller = externalLoadedUiPackage.getController();
         controller.tfId.setText(String.valueOf(arg.getId()));
         controller.tfDate.setText(DateHelper.fromDate(arg.getDate()));
         controller.tfSender.setText(arg.getSender().getName());
