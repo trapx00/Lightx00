@@ -20,7 +20,7 @@
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <HBox alignment="CENTER_LEFT" spacing="10">
-        <MaterialDesignIconView fill="black" glyphName="CASH_100" glyphSize="48" />
+        <MaterialDesignIconView fill="black" glyphName="CASH_100" glyphSize="42" />
         <Label text="现金费用单" textFill="#5e5e5e">
             <font>
                 <Font name="System Bold" size="32.0" />

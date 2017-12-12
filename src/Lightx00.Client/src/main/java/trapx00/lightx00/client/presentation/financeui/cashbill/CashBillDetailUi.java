@@ -21,7 +21,7 @@ import trapx00.lightx00.shared.util.DateHelper;
 /**
  * 现金费用单详细信息UI。注意，单据UI详细信息实现了BIllDetailUi后，不需要再实现DraftDetailUi。
  */
-public class CashBillDetailUiController extends BillDetailUi {
+public class CashBillDetailUi extends BillDetailUi {
     public JFXTextField tfBillState;
     public JFXTextField tfBankaccountId;
     public JFXTextField tfOperator;
@@ -38,13 +38,13 @@ public class CashBillDetailUiController extends BillDetailUi {
     public ExternalLoadedUiPackage showContent(BillVo arg) {
         CashBillVo cashBillVo = (CashBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        CashBillDetailUiController cashBillDetailUiController = (CashBillDetailUiController) externalLoadedUiPackage.getController();
-        cashBillDetailUiController.tfId.setText(cashBillVo.getId());
-        cashBillDetailUiController.tfDate.setText(DateHelper.fromDate(cashBillVo.getDate()));
-        cashBillDetailUiController.tfBankaccountId.setText(String.valueOf(cashBillVo.getAccountId()));
-        cashBillDetailUiController.tfBillState.setText(cashBillVo.getState().toString());
-        cashBillDetailUiController.tfOperator.setText(cashBillVo.getOperatorId());
-        cashBillDetailUiController.addCashBillItems(cashBillVo.getItems());
+        CashBillDetailUi cashBillDetailUi = externalLoadedUiPackage.getController();
+        cashBillDetailUi.tfId.setText(cashBillVo.getId());
+        cashBillDetailUi.tfDate.setText(DateHelper.fromDate(cashBillVo.getDate()));
+        cashBillDetailUi.tfBankaccountId.setText(String.valueOf(cashBillVo.getAccountId()));
+        cashBillDetailUi.tfBillState.setText(cashBillVo.getState().toString());
+        cashBillDetailUi.tfOperator.setText(cashBillVo.getOperatorId());
+        cashBillDetailUi.addCashBillItems(cashBillVo.getItems());
         return externalLoadedUiPackage;
     }
 
@@ -57,7 +57,7 @@ public class CashBillDetailUiController extends BillDetailUi {
 
     public void initialize() {
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
-        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().amountProperty())));
+        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getAmount())));
         tcComment.setCellValueFactory(cellData -> cellData.getValue().getValue().commentProperty());
         TreeItem<CashBillItemModel> root = new RecursiveTreeItem<>(cashBillItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCashBillItems.setRoot(root);

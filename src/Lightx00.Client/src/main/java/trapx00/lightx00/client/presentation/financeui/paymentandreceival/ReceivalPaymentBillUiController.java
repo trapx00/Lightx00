@@ -35,6 +35,7 @@ import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 import trapx00.lightx00.client.vo.financestaff.ReceivalPaymentBillVoBase;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -43,10 +44,12 @@ import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
-public abstract class PaymentAndReceivalUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
+public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentBillVoBase> implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
     public JFXTextField tfId;
     public JFXTextField tfClient;
     public JFXTextField tfOperator;
@@ -61,7 +64,7 @@ public abstract class PaymentAndReceivalUiController implements DraftContinueWri
 
     protected EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     protected PaymentAndReceivalBlService blService;
-    protected Class<? extends ReceivalPaymentBillVoBase> voClazz;
+    protected Class<T> voClazz;
     protected ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
 
     protected ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
@@ -79,10 +82,28 @@ public abstract class PaymentAndReceivalUiController implements DraftContinueWri
      */
     @Override
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
-        return null;
+        ExternalLoadedUiPackage uiPackage = load();
+        ReceivalPaymentBillUiController<T> controller = uiPackage.getController();
+
+
+        T bill = (T) draft;
+        ClientVo client = clientInfoUi.queryById(bill.getClientId());
+        EmployeeVo operator = employeeSelection.queryId(bill.getOperatorId());
+
+        controller.tfId.setText(bill.getId());
+        controller.client.set(client);
+        controller.currentEmployee.set(operator);
+        controller.initTranscationTable(bill.getTranscations());
+        controller.currentDate.set(bill.getDate());
+        return uiPackage;
     }
 
-    public PaymentAndReceivalUiController(PaymentAndReceivalBlService service, Class<? extends ReceivalPaymentBillVoBase> voClazz) {
+    public void initTranscationTable(Transcation[] transcations) {
+        transcationModels.addAll(Arrays.stream(transcations).map(TranscationModel::fromTranscation).collect(Collectors.toList()));
+        lbTotal.setText(BillHelper.toFixed(Arrays.stream(transcations).mapToDouble(Transcation::getTotal).sum()));
+    }
+
+    public ReceivalPaymentBillUiController(PaymentAndReceivalBlService service, Class<T> voClazz) {
         this.blService = service;
         this.voClazz = voClazz;
     }
@@ -146,7 +167,24 @@ public abstract class PaymentAndReceivalUiController implements DraftContinueWri
      */
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
-        return null;
+        ExternalLoadedUiPackage uiPackage = load();
+        ReceivalPaymentBillUiController<T> controller = uiPackage.getController();
+
+
+        T bill = (T) reversible;
+        ClientVo client = clientInfoUi.queryById(bill.getClientId());
+        EmployeeVo operator = employeeSelection.queryId(bill.getOperatorId());
+
+        controller.tfId.setText(controller.blService.getId());
+        controller.client.set(client);
+        controller.currentEmployee.set(operator);
+
+        for(Transcation t : bill.getTranscations()) {
+            t.setTotal(-t.getTotal());
+        }
+        controller.initTranscationTable(bill.getTranscations());
+        controller.currentDate.set(bill.getDate());
+        return uiPackage;
     }
 
     public void onBtnAddItemClicked() {
@@ -166,7 +204,7 @@ public abstract class PaymentAndReceivalUiController implements DraftContinueWri
         return tfId.validate() & tfClient.validate() & tfOperator.validate() & tfDate.validate();
     }
 
-    public ReceivalPaymentBillVoBase getCurrent() {
+    public T getCurrent() {
         if (validate()) {
             try {
                 return voClazz.getDeclaredConstructor(
@@ -217,6 +255,14 @@ public abstract class PaymentAndReceivalUiController implements DraftContinueWri
             PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
                 .addCloseButton("好的","CHECK", null)
                 .createAndShow();
+        } catch (IdExistsException e) {
+            PromptDialogHelper.start("提交失败","ID已经存在，请重新获取ID！")
+                .addCloseButton("好的","CHECK",null)
+                .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败","错误信息如下：\n" + e.getMessage())
+                .addCloseButton("好的","CHECK",null)
+                .createAndShow();
         }
     }
 
@@ -230,6 +276,10 @@ public abstract class PaymentAndReceivalUiController implements DraftContinueWri
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
                 .addCloseButton("好的","CHECK", null)
+                .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败","错误信息如下：\n" + e.getMessage())
+                .addCloseButton("好的","CHECK",null)
                 .createAndShow();
         }
     }

@@ -4,6 +4,8 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.PaymentBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillDetailUi;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
@@ -25,13 +27,13 @@ public class PaymentBillVo extends ReceivalPaymentBillVoBase {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new PaymentBillUiController();
         //not initialized
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new PaymentBillDetailUi();
     }
 
 

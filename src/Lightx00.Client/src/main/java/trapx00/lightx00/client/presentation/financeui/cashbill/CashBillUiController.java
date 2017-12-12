@@ -25,6 +25,7 @@ import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -214,6 +215,10 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
             PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
                 .addCloseButton("好的","CHECK", null)
                 .createAndShow();
+        } catch (IdExistsException e) {
+            PromptDialogHelper.start("提交失败","ID已经存在，请重新获取ID！")
+                .addCloseButton("好的","CHECK",null)
+                .createAndShow();
         }
     }
 
@@ -227,6 +232,10 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
                 .addCloseButton("好的","CHECK", null)
+                .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败","错误信息如下：\n" + e.getMessage())
+                .addCloseButton("好的","CHECK",null)
                 .createAndShow();
         }
     }
