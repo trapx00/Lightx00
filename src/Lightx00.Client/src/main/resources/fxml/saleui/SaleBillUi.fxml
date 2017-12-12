@@ -37,19 +37,31 @@
             <JFXTextField labelFloat="true" fx:id="tfBillId" editable="false" promptText="单据编号"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfSalesmanId" editable="false" promptText="业务员ID"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfSalesmanName" editable="false" promptText="业务员姓名"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfOperatorId" editable="false" promptText="操作员ID"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientId" editable="false" promptText="供应商ID"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientId" editable="false" promptText="销售商ID"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientName" editable="false" promptText="供应商姓名"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientName" editable="false" promptText="销售商姓名"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXComboBox labelFloat="true" fx:id="cbRepository" editable="false" promptText="仓库"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfBillTotal" editable="false" promptText="总额合计"/>
+            <JFXTextField labelFloat="true" fx:id="tfOriginTotal" editable="false" promptText="折让前总额"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfMinusProfits" editable="true" promptText="折让"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfToken" editable="true" promptText="使用代金券金额"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfComment" editable="true" promptText="备注"/>
@@ -57,7 +69,7 @@
     </JFXMasonryPane>
 
     <VBox>
-        <Label text="商品清单" textFill="#5e5e5e">
+        <Label text="出货商品清单" textFill="#5e5e5e">
             <font>
                 <Font size="18.0"/>
             </font>

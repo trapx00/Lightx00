@@ -57,7 +57,7 @@
     </JFXMasonryPane>
 
     <VBox>
-        <Label text="商品清单" textFill="#5e5e5e">
+        <Label text="入库商品清单" textFill="#5e5e5e">
             <font>
                 <Font size="18.0"/>
             </font>
