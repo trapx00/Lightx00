@@ -1,37 +1,53 @@
 package trapx00.lightx00.client.presentation.inventoryui;
 
+
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-
 
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
-    public StackPane mainPane;
-    public JFXTextField tfBillId;
-    public JFXTextField tfOperatorId;
-    public JFXTextField tfClientId;
-    public JFXComboBox<Integer> cbRepository;
-    public JFXTextField tfBillTotal;
-    public JFXTextField tfComment;
-    public JFXTreeTableColumn<CommodityItemModel, String> tcCommodityIdColumn;
-    public JFXTreeTableColumn<CommodityItemModel, String> tcCommodityNameColumn;
-    public JFXTreeTableColumn<CommodityItemModel, String> tcCommodityTypeColumn;
-    public JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityNumberColumn;
-    public JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityPriceColumn;
-    public JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityTotalColumn;
-    public JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityCommentColumn;
+    @FXML
+    private JFXTextField tfBillId;
+    @FXML
+    private JFXTextField tfOperatorId;
+    @FXML
+    private JFXTextField tfClientId;
+    @FXML
+    private JFXComboBox<String> cbRepository;
+    @FXML
+    private JFXTextField tfBillTotal;
+    @FXML
+    private JFXTextField tfComment;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, String> tcCommodityIdColumn;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, String> tcCommodityNameColumn;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, String> tcCommodityTypeColumn;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityNumberColumn;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityPriceColumn;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityTotalColumn;
+    @FXML
+    private JFXTreeTableColumn<CommodityItemModel, Double> tcCommodityCommentColumn;
 
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
@@ -51,7 +67,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
         purchaseBillUiController.tfOperatorId.setText(purchaseBillVo.getOperatorId());
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
-        purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository());
+        purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository()+"");
         purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
         purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
         return externalLoadedUiPackage;
@@ -74,13 +90,10 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     }
 
     public void initialize() {
-        tfOperatorId.setOnAction(event -> {
-            onClientClicked();
-        });
-        ObservableList<Integer> integerObservableList = FXCollections.observableArrayList(
-                1, 2, 3
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "1", "2", "3"
         );
-        cbRepository.setItems(integerObservableList);
+        cbRepository.setItems(stringObservableList);
     }
 
     /**
@@ -101,13 +114,33 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         });
     }
 
+
     @FXML
-    private void onDraftFunctionButtonClicked() {
+    private void onBtnCancelClicked() {
+        PromptDialogHelper.start("是否要存入草稿箱", null)
+                .addCloseButton("存入", "DONE", null)
+                .addCloseButton("不存入", "CLOSE", null)
+                .addCloseButton("取消", "UNDO", null)
+                .createAndShow();
+    }
+
+    @FXML
+    private void onBtnAddItemClicked() {
 
     }
 
     @FXML
-    private void onSubmitButtonClicked() {
+    private void onBtnDeleteItemClicked() {
+
+    }
+
+    @FXML
+    private void onBtnGetPromotionClicked() {
+
+    }
+
+    @FXML
+    private void onBtnSubmitClicked() {
         PromptDialogHelper.start("单据详情", null)
                 .addCloseButton("确认提交", "DONE", e -> submitSuccess())
                 .addCloseButton("取消", "CLOSE", null)
@@ -120,26 +153,33 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                                 .addPair("总额合计", tfBillTotal.getText())
                                 .addPair("备注", tfComment.getText())
                                 .create())
-                .create(this.mainPane)
-                .show();
+                .createAndShow();
     }
 
-    @FXML
-    private void onCancelButtonClicked() {
-        PromptDialogHelper.start("是否要存入草稿箱", null)
-                .addCloseButton("存入", "DONE", null)
-                .addCloseButton("不存入", "CLOSE", null)
-                .addCloseButton("取消", "UNDO", null)
-                .create(this.mainPane)
-                .show();
+    private void submitRetreat(){
+
     }
 
-    @FXML
     private void submitSuccess() {
         PromptDialogHelper.start("提交成功", null)
                 .addCloseButton("确定", "DONE", null)
-                .create(this.mainPane)
-                .show();
+                .createAndShow();
+    }
+
+    @FXML
+    private void onBtnSaveAsDraftClicked() {
+
+    }
+
+    @FXML
+    private void onBtnResetClicked() {
+        tfBillId.clear();
+        tfOperatorId.clear();
+        tfComment.clear();
+        tfBillTotal.clear();
+        tfClientId.clear();
+        cbRepository.setValue("仓库");
+        commodityItemModelObservableList.clear();
     }
 }
 
