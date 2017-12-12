@@ -11,7 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServiceFactory;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;

@@ -1,0 +1,285 @@
+package trapx00.lightx00.client.presentation.inventoryui.warning;
+
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TreeItem;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServiceFactory;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlServiceFactory;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
+import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
+import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
+import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.Reversible;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.client.vo.log.LogVo;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.NoMoreBillException;
+import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.util.DateHelper;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.stream.Collectors;
+
+public class InventoryWarningUiController implements DraftContinueWritableUiController, ExternalLoadableUiController,ReversibleUi {
+
+    public JFXTextField tfOperator;
+    public JFXTextField tfDate;
+    public JFXTextField tfId;
+    public JFXButton btnDelete;
+    public JFXComboBox<Label> jfxComboBox=new JFXComboBox<Label>();
+    public JFXTreeTableView<CommoditySelectionItemModel> inventoryGiftItems;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcName;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcId;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcAmount;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcStockAmount;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcWarningWalue;
+
+    public JFXTreeTableView<CommoditySelectionItemModel> commodityTable;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableNameColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableSortColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableAmountColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
+    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableWarningColumn;
+
+    private ObjectProperty<CommodityVo> currentCommodity = new SimpleObjectProperty<>();
+    private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
+    private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
+
+    private ObservableList<CommoditySelectionItemModel> inventoryGiftItemModelObservableList = FXCollections.observableArrayList();
+    public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
+
+    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
+    private CommodityBlService blService1= CommodityBlServiceFactory.getInstance();
+    private InventoryWarningBlService blService= InventoryWarningBlServiceFactory.getInstance();
+    private CommoditySelection commoditySelection= CommodityUiFactory.getCommoditySelectionUi();
+
+    /**
+     * Start continuing write a draft. Returns a External loaded ui package.
+     * Overrides to return a specific ui controller.
+     *
+     * @param draft draft
+     * @return External loaded ui package including a controller and the component.
+     */
+    @Override
+    public ExternalLoadedUiPackage continueWriting(Draftable draft) {
+        InventoryDetailBillVo inventoryDetailBillVo = (InventoryDetailBillVo) draft;
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        InventoryWarningUiController inventoryWarningUiController = externalLoadedUiPackage.getController();
+        inventoryWarningUiController.tfId.setText(inventoryDetailBillVo.getId());
+        inventoryWarningUiController.currentDate.setValue(inventoryDetailBillVo.getDate());
+        inventoryWarningUiController.tfOperator.setText(inventoryDetailBillVo.getOperatorId());
+        inventoryWarningUiController.currentEmployee.setValue(employeeSelection.queryId(inventoryDetailBillVo.getOperatorId()));
+        inventoryWarningUiController.jfxComboBox.setValue(new Label(inventoryDetailBillVo.getInventoryBillType().toString()));
+        inventoryWarningUiController.addCommodityItem(inventoryDetailBillVo.getCommodities());
+        return externalLoadedUiPackage;
+    }
+
+    public void addCommodityItem (InventoryWarningItem[] inventoryWarningItems){
+        for(InventoryWarningItem inventoryWarningItem:inventoryWarningItems){
+            inventoryGiftItemModelObservableList.add(new CommoditySelectionItemModel(
+                    blService1.query(new CommodityQueryVo().idEq(inventoryWarningItem.getId()))[0])
+            );
+        }
+    }
+
+    public void initialize() {
+        tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
+        tcStockAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
+        tcWarningWalue.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getWarningValue())));
+
+
+        currentDate.addListener(((observable, oldValue, newValue) -> {
+            tfDate.setText(newValue == null ? "" : DateHelper.fromDate(newValue));
+        }));
+
+        currentEmployee.addListener(((observable, oldValue, newValue) -> {
+            tfOperator.setText(newValue == null ? "" : newValue.getName());
+        }));
+
+        TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(inventoryGiftItemModelObservableList, RecursiveTreeObject::getChildren);
+        inventoryGiftItems.setRoot(root);
+        inventoryGiftItems.setShowRoot(false);
+        inventoryGiftItems.setEditable(true);
+        inventoryGiftItems.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+
+        jfxComboBox.getItems().add(new Label("Loss"));
+        jfxComboBox.getItems().add(new Label("OverFlow"));
+        jfxComboBox.getItems().add(new Label("Warning"));
+
+
+        initTable();
+    }
+    @FXML
+
+    private void initTable() {
+        tableWarningColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getWarningValue())));
+        tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
+        tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
+        tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
+        tableSortColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
+
+        commodityTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                CommodityVo selected = getSelected();
+                inventoryGiftItemModelObservableList.add(new CommoditySelectionItemModel(selected));
+            }});
+
+        TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
+        commodityTable.setRoot(root);
+        commodityTable.setShowRoot(false);
+        commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
+
+        CommodityVo[] queryResult = blService1.query(new CommodityQueryVo());
+        commodityModels.clear();
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
+    }
+
+
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/inventoryui/warning/InventoryWarningUi.fxml").loadAndGetPackageWithoutException();
+    }
+
+    @Override
+    public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
+        return null;
+    }
+
+
+
+    public CommodityVo getSelected(){
+       return commodityTable.getSelectionModel().getSelectedItem().getValue().getCommodityVoObjectProperty();
+    }
+
+    public void onBtnDeleteItemClicked() {
+        try {
+            int index = inventoryGiftItems.getSelectionModel().getSelectedIndex();
+            inventoryGiftItemModelObservableList.remove(index);
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    private InventoryDetailBillVo getInventoryWanringVo() {
+        if (tfId.getText().length() == 0 || currentEmployee == null || currentDate == null) {
+            PromptDialogHelper.start("提交失败！","请选点击自动填写信息以自动填写ID、日期和操作员信息。")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+            throw new NotCompleteException();
+        }
+        if (jfxComboBox.getValue().getText() == null) {
+            PromptDialogHelper.start("提交失败！","请先选择单据类型。")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+            throw new NotCompleteException();
+        }
+        InventoryBillType inventoryBillType;
+        if(jfxComboBox.getValue().getText().equals("报损单"))
+            inventoryBillType=InventoryBillType.Loss;
+        else if(jfxComboBox.getValue().getText().equals("报溢单"))
+            inventoryBillType=InventoryBillType.Overflow;
+        else
+            inventoryBillType=InventoryBillType.Warning;
+
+        CommodityVo [] commodityVos=inventoryGiftItemModelObservableList.stream().map(CommoditySelectionItemModel::getCommodityVoObjectProperty).toArray(CommodityVo[]::new);
+        InventoryWarningItem[] inventoryWarningItems=new InventoryWarningItem[commodityVos.length];
+        for(int i=0;i<commodityVos.length;i++){
+            inventoryWarningItems[i]=new InventoryWarningItem(commodityVos[i].getId(),commodityVos[i].getAmount(),commodityVos[i].getRecentRetailPrice());
+        }
+        return new InventoryDetailBillVo(
+                tfId.getText(),
+                currentDate.getValue(),
+                BillState.Draft,
+                currentEmployee.getValue().getId(),
+               inventoryWarningItems,
+                inventoryBillType
+        );
+    }
+
+    public void onBtnSubmitClicked() {
+        try {
+            blService.submit(getInventoryWanringVo());
+            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功")
+                    .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+    }
+
+    public void onBtnSaveAsDraftClicked() {
+        try {
+            blService.saveAsDraft(getInventoryWanringVo());
+            PromptDialogHelper.start("保存草稿成功","你的单据已经保存为草稿。")
+                    .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+    }
+
+    public void onBtnResetClicked() {
+        tfId.setText("");
+        tfOperator.setText("");
+        tfDate.setText("");
+        jfxComboBox.setValue(new Label());
+        currentDate.setValue(null);
+        currentEmployee.setValue(null);
+        currentCommodity.setValue(null);
+        inventoryGiftItemModelObservableList.clear();
+    }
+
+    public void onBtnAutofillClicked() {
+        try {
+            tfId.setText(blService.getId());
+            currentDate.setValue(new Date());
+            currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+        } catch (NoMoreBillException e) {
+            PromptDialogHelper.start("ID不够！","当日ID已经达到99999，无法增加新的单据。")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+
+    }
+
+
+}

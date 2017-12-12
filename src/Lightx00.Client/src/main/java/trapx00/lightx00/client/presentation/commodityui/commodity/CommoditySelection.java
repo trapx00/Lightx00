@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.commodityui;
+package trapx00.lightx00.client.presentation.commodityui.commodity;
 
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 

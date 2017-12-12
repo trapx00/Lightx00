@@ -18,36 +18,25 @@
         </VBox.margin>
     </Label>
 
-    <GridPane alignment="BASELINE_CENTER">
-        <columnConstraints>
-            <ColumnConstraints prefWidth="100"/>
-            <ColumnConstraints prefWidth="200"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-            <RowConstraints prefHeight="50"/>
-        </rowConstraints>
+    <VBox maxWidth="500" spacing="30">
 
-        <padding>
-            <Insets left="20" right="20" top="20" bottom="20"/>
-        </padding>
+        <JFXTextField promptText="ID" labelFloat="true" fx:id="tfId" disable="true"/>
 
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="ID"/>
-        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfId" disable="true"/>
+        <JFXTextField promptText="日期" labelFloat="true"  fx:id="tfDate" disable="true"/>
 
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="日期"/>
-        <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfDate" disable="true"/>
+        <JFXTextField promptText="制定者" labelFloat="true"  fx:id="tfOperator" disable="true"/>
 
-        <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="制定者"/>
-        <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfOperator" disable="true"/>
-
-        <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="单据状态"/>
-        <JFXTextField  GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfBillState" disable="true"/>
+        <JFXTextField   promptText="单据状态" labelFloat="true"  fx:id="tfBillState" disable="true"/>
 
 
-    </GridPane>
+    </VBox>
+
+
+    <Label text="赠送商品" textFill="#5e5e5e">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
 
     <JFXTreeTableView fx:id="inventoryGiftItems" prefHeight="300.0" prefWidth="400.0">
         <columns>

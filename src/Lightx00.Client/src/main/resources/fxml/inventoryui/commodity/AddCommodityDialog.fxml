@@ -13,7 +13,7 @@
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.commodityui.AddCommodityDialog"
+      fx:controller="trapx00.lightx00.client.presentation.commodityui.commodity.AddCommodityDialog"
       prefHeight="600.0" prefWidth="400.0" alignment="TOP_CENTER">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>

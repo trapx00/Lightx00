@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.commodityui;
+package trapx00.lightx00.client.presentation.commodityui.commodity;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
@@ -26,7 +26,7 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
 
     private Consumer<CommodityVo> callback;
 
-    public void show(Consumer<CommodityVo> callback) {
+    public void show(Runnable runnable) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         AddCommodityDialog dialog = (AddCommodityDialog) externalLoadedUiPackage.getController();
         dialog.callback = callback;

@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.commodityui;
+package trapx00.lightx00.client.presentation.commodityui.commodity;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
