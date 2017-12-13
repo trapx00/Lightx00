@@ -2,11 +2,9 @@ package trapx00.lightx00.client.presentation.financeui.paymentandreceival;
 
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 
-public class PaymentBillDetailUi extends ReceivalPaymentDetailUiBase<PaymentBillVo> {
-
-
+public class ReceivalBillDetailUi extends ReceivalPaymentDetailUiBase<ReceivalBillVo> {
     /**
      * Loads the controller.
      *
@@ -14,8 +12,6 @@ public class PaymentBillDetailUi extends ReceivalPaymentDetailUiBase<PaymentBill
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/financeui/PaymentBillDetailUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/financeui/ReceivalBillDetailUi.fxml").loadAndGetPackageWithoutException();
     }
-
-
 }

@@ -24,7 +24,6 @@ public class AddTranscationDialog implements ExternalLoadableUiController {
     private ObjectProperty<BankAccountVo> bankAccountProperty = new SimpleObjectProperty<>();
 
     private Consumer<TranscationModel> callback;
-    private BankAccountSelection bankAccountSelection = BankAccountUiFactory.getBankAccountSelectionUi();
 
 
     public void show(Consumer<TranscationModel> callback) {

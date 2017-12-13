@@ -31,4 +31,9 @@ public class FrameworkUiManager {
     public static EmployeeVo getCurrentEmployee() {
         return frameworkUiController.getEmployeeVo();
     }
+
+    public static void switchBackToHome() {
+        frameworkUiController.switchBackToHome();
+    }
+
 }

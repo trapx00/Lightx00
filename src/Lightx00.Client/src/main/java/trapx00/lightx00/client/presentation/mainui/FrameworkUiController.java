@@ -84,6 +84,7 @@ public class FrameworkUiController {
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+        switchBackToHome();
     }
 
 
@@ -150,6 +151,15 @@ public class FrameworkUiController {
             this.titleText.setText(title);
         }
     }
+
+    /**
+     * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+     */
+    public void switchBackToHome() {
+
+    }
+
+
 
     public DialogStack getDialogStack() {
         return dialogStack;

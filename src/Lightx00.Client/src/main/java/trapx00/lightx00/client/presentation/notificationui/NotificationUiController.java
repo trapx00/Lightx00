@@ -12,6 +12,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.Client;
+import trapx00.lightx00.client.bl.notificationbl.factory.NotificationBlFactory;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
@@ -25,7 +27,9 @@ import trapx00.lightx00.shared.util.DateHelper;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class NotificationUiController implements ExternalLoadableUiController {
@@ -48,9 +52,10 @@ public class NotificationUiController implements ExternalLoadableUiController {
                 new CashBillItem("item2", 10, "test2")
             }));
 
-    private FrameworkUiController frameworkController;
 
     public ObservableList<NotificationModel> notificationModels = FXCollections.observableArrayList();
+
+    private NotificationBlService blService = NotificationBlFactory.getController();
 
     public NotificationUiController() { }
 
@@ -61,8 +66,7 @@ public class NotificationUiController implements ExternalLoadableUiController {
 
     public void updateItems(){
         notificationModels.clear();
-        notificationModels.add(new NotificationModel(testVo));
-        notificationModels.add(new NotificationModel(testBillApprovalVo));
+        notificationModels.addAll(Arrays.stream(blService.update()).map(NotificationModel::new).collect(Collectors.toList()));
     }
 
     public void initNotifyItem() {
@@ -75,56 +79,57 @@ public class NotificationUiController implements ExternalLoadableUiController {
         notificationTable.setShowRoot(false);
     }
 
-    public static NotificationUiController init(FrameworkUiController frameworkUiController) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Client.class.getResource("/fxml/notificationui/NotificationUi.fxml"));
-            Parent content = loader.load();
-            NotificationUiController notifyUiController = loader.getController();
-            notifyUiController.frameworkController = frameworkUiController;
-            frameworkUiController.setContent(content);
-            return notifyUiController;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
         updateItems();
     }
 
+    public NotificationModel getSelected() {
+        return notificationTable.getSelectionModel().getSelectedItem().getValue();
+    }
+
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         int index = notificationTable.getSelectionModel().getFocusedIndex();
-        NotificationModel model = notificationTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个通知吗？","你选择了通知"+model.getVoObjectProperty().getId())
+        NotificationModel model = getSelected();
+        if (model != null) {
+            PromptDialogHelper.start("确定要删除这个通知吗？","你选择了通知"+model.getVoObjectProperty().getId())
                 .addTable(ReadOnlyPairTableHelper.start()
                     .addPair("ID", String.valueOf(model.getVoObjectProperty().getId()))
-
                     .addPair("时间", DateHelper.fromDate(model.getVoObjectProperty().getDate()))
                     .addPair("类型", model.getVoObjectProperty().getType().toString())
                     .addPair("发送者", model.getVoObjectProperty().getSender().getName())
-                .create())
+                    .create())
                 .addCloseButton("确定", "CHECK",e -> deleteItem(index))
                 .addCloseButton("取消", "CLOSE", null)
-                .create(frameworkController.dialogContainer);
-        dialog.show();
+                .createAndShow();
+        } else {
+            showNotSelectedDialog();
+        }
+
+    }
+
+    public void showNotSelectedDialog() {
+        PromptDialogHelper.start("请选择一条通知！","请选择一条通知！")
+            .addCloseButton("好","CHECK",null)
+            .createAndShow();
     }
 
     public void deleteItem(int index){
-
         notificationModels.remove(index);
     }
 
     public void onReadButtonClicked(ActionEvent actionEvent) {
-        int index = notificationTable.getSelectionModel().getFocusedIndex();
-        NotificationModel model = notificationTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("消息详细内容","你选择了通知").create(frameworkController.dialogContainer);
-        ExternalLoadedUiPackage uiPackage = model.getVoObjectProperty().notificationDetailUi().showContent(model.getVoObjectProperty());
-        dialog.setContent((Region) uiPackage.getComponent());
-        FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
-        dialog.show();
+        NotificationModel model = getSelected();
+        if (model != null) {
+            ExternalLoadedUiPackage uiPackage = model.getVoObjectProperty().notificationDetailUi().showContent(model.getVoObjectProperty());
+            PromptDialogHelper.start("消息详细内容","你选择了通知")
+                .setContent(uiPackage.getComponent())
+                .createAndShow();
+        } else {
+            showNotSelectedDialog();
+        }
+
+
     }
 
     /**
