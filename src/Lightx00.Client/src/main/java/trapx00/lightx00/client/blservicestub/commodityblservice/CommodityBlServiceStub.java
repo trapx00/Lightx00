@@ -33,4 +33,9 @@ public class CommodityBlServiceStub implements CommodityBlService {
     public ResultMessage delete(CommodityVo commodity) {
         return ResultMessage.Success;
     }
+
+    @Override
+    public String getId(String sortId) {
+        return null;
+    }
 }

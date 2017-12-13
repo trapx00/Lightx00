@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
@@ -20,6 +21,7 @@ import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -73,6 +75,9 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     }
 
     public void initialize() {
+
+
+
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(CommodityUiFactory.getCommoditySelectionUi().queryId(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getCommodityId()).getName()));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getAmount())));
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
@@ -83,8 +88,10 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         }));
 
         currentEmployee.addListener(((observable, oldValue, newValue) -> {
-            tfOperator.setText(newValue == null ? "" : newValue.getName());
+            tfOperator.setText(newValue == null ? "" : String.format("%s(id: %s)", newValue.getId(), newValue.getName()));
         }));
+
+        autofill();
 
         TreeItem<InventoryGiftItemModel> root = new RecursiveTreeItem<>(inventoryGiftItemModelObservableList, RecursiveTreeObject::getChildren);
         inventoryGiftItems.setRoot(root);
@@ -112,7 +119,23 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
-        return null;
+        /**
+         * 红冲功能实现。
+         * 和草稿继续填写差不多，但是需要：
+         * 1. 重新获取ID（因为红冲单子其实是一张新的UI单子）
+         * 2. 取反数量。
+         */
+        InventoryGiftVo inventoryGiftVo = (InventoryGiftVo) reversible;
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        InventoryGiftUiController inventoryGiftUiController = externalLoadedUiPackage.getController();
+        inventoryGiftUiController.tfId.setText(inventoryGiftUiController.blService.getId());
+        inventoryGiftUiController.currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+        inventoryGiftUiController.currentDate.setValue(new Date());
+        for (PromotionCommodity item : inventoryGiftVo.getGifts()) {
+            item.setAmount(-item.getAmount());
+        }
+        inventoryGiftUiController.addGiftItems(inventoryGiftVo.getGifts());
+        return externalLoadedUiPackage;
     }
 
     public void onBtnAddItemClicked() {
@@ -127,8 +150,6 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         if(inventoryGiftItemModel!=null){
             new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
                     getValue().getPromotionCommodityObjectProperty().setAmount(aDouble));
-            //  inventoryGiftItemModelObservableList.remove(temp);
-            //inventoryGiftItemModelObservableList.add(inventoryGiftItemModel);
         }
 
     }
@@ -172,32 +193,70 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
     public void onBtnSubmitClicked() {
         try {
-            blService.sumbit(getCurrentGiftVo());
-            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功")
-                    .addCloseButton("好的", "CHECK", null)
+            InventoryGiftVo inventoryGiftVo=getCurrentGiftVo();
+            PromptDialogHelper.start("确认单据", "").setContent(
+                    inventoryGiftVo.billDetailUi().showContent(inventoryGiftVo).getComponent())
+                    .addCloseButton("确定", "CHECK", e -> {
+                        try {
+                            blService.sumbit(inventoryGiftVo);
+                            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
+                                    .addCloseButton("继续填写", "EDIT", e1 -> {
+                                        onBtnResetClicked();
+                                        autofill();
+                                    })
+                                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                                    .createAndShow();
+                        } catch (UncheckedRemoteException e1) {
+                            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        } catch (IdExistsException e1) {
+                            PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        }
+                    })
+                    .addCloseButton("取消", "CLOSE", null)
                     .createAndShow();
         } catch (NotCompleteException ignored) {
-        } catch (UncheckedRemoteException e) {
-            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
-                    .addCloseButton("好的","CHECK", null)
-                    .createAndShow();
+
         }
     }
 
     public void onBtnSaveAsDraftClicked() {
+        saveAsDraft();
+
+    }
+
+    public void saveAsDraft(){
         try {
             blService.saveAsDraft(getCurrentGiftVo());
-            PromptDialogHelper.start("提交成功！","你的单据已经提交成功")
-                    .addCloseButton("好的","CHECK", null)
+            PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
+                    .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchBackToHome())
                     .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {
-            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
-                    .addCloseButton("好的","CHECK", null)
+            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
+                    .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
         }
     }
 
+    public void autofill(){
+        try {
+            tfId.setText(blService.getId());
+            currentDate.setValue(new Date());
+            currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+        } catch (NoMoreBillException e) {
+            PromptDialogHelper.start("ID不够！","当日ID已经达到99999，无法增加新的单据。")
+                    .addCloseButton("好的","CHECK", null)
+                    .createAndShow();
+        }
+    }
     public void onBtnResetClicked() {
         tfId.setText("");
         tfOperator.setText("");
@@ -208,18 +267,17 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         inventoryGiftItemModelObservableList.clear();
     }
 
-    public void onBtnAutofillClicked() {
-        try {
-            tfId.setText(blService.getId());
-            currentDate.setValue(new Date());
-            currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
-        } catch (NoMoreBillException e) {
-            PromptDialogHelper.start("ID不够！","当日ID已经达到99999，无法增加新的单据。")
-                    .addCloseButton("好的","CHECK", null)
-                    .createAndShow();
-        }
+    public void onBtnCancelClicked() {
+        PromptDialogHelper.start("是否退出？", "是否保存草稿？")
+                .addCloseButton("保存", "SAVE", e -> saveAsDraft())
+                .addCloseButton("不保存", "DELETE", e -> FrameworkUiManager.switchBackToHome())
+                .addCloseButton("取消", "CLOSE", null)
+                .createAndShow();
 
     }
+
+
+
 
 
 }

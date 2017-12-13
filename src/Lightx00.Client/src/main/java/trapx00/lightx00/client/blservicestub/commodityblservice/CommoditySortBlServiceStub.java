@@ -10,7 +10,7 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
 
 
     @Override
-    public ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort) {
+    public ResultMessage add(CommoditySortVo newSort) {
         return ResultMessage.Success;
     }
 
@@ -38,6 +38,11 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
     @Override
     public CommoditySortVo[] getAllCommoditySort() {
         return new CommoditySortVo[0];
+    }
+
+    @Override
+    public String getId() {
+        return null;
     }
 
 

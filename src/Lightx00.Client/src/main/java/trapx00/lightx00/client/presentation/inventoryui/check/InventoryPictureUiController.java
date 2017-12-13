@@ -15,6 +15,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServ
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountModel;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 public class InventoryPictureUiController implements ExternalLoadableUiController {
 
     @FXML private JFXButton btnFilter;
+    public JFXButton exportButton;
     @FXML private JFXTreeTableView<InventoryPictureModel> tableView;
     @FXML private JFXTreeTableColumn<InventoryPictureModel, String> tcId;
     @FXML private JFXTreeTableColumn<InventoryPictureModel, String> tcName;
@@ -45,9 +47,6 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
         updateItems();
     }
 
-    public void onBtnExportClicked(ActionEvent actionEvent){
-        updateItems();
-    }
 
     public void initialize() {
         initTable();
@@ -79,5 +78,11 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/inventoryui/check/InventoryPictureUi.fxml").loadAndGetPackageWithoutException();
+    }
+    public void onExportClicked(ActionEvent actionEvent) {
+        PromptDialogHelper.start("导出成功","已经导出到C:\\233.xlsx。")
+                .addCloseButton("去看看","FORWARD",null)
+                .addCloseButton("完成","DONE",null)
+                .createAndShow();
     }
 }

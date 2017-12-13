@@ -35,4 +35,7 @@ public interface CommodityBlService {
      * @return whether the operation is done successfully
      */
     ResultMessage delete(CommodityVo commodity);//删除商品
+
+
+    String getId(String sortId);
 }

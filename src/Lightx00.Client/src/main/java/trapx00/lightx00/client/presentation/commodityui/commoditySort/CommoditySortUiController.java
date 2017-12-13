@@ -1,12 +1,13 @@
 package trapx00.lightx00.client.presentation.commodityui.commoditySort;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
@@ -17,7 +18,10 @@ import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlServi
 import trapx00.lightx00.client.presentation.commodityui.commodity.AddCommodityDialog;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
@@ -33,28 +37,74 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     public JFXTextField tfOperator;
     public JFXTextField tfDate;
     public JFXTextField tfId;
+    public JFXTreeTableView<CommoditySortModel> commodityTable;
+    public JFXTreeTableColumn<CommoditySortModel, String> tableNameColumn;
+    public ObservableList<CommoditySortModel> commodityModels = FXCollections.observableArrayList();
 
 
+    TreeItem<String> root;
     private CommoditySortBlService blService= CommoditySortBlServiceFactory.getInstance();
 
     @FXML
     private void initialize() {
         initView();
         initSearch();
+        initTable();
+    }
+    public void initTable(){
+        tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommoditySortVoObjectProperty().getName()));
+
+        TreeItem<CommoditySortModel> root1 = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
+        commodityTable.setRoot(root1);
+        commodityTable.setShowRoot(false);
+        commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
+
+        update();
+    }
+    private void initView(){
+        root = new TreeItem<>("CommoditySort");
+        root.setExpanded(true);
+        tv.setRoot(root);
+        tv.setShowRoot(false);
+        showGoodsTree();
     }
 
-    private void initView(){
-        TreeItem<String> item = new TreeItem<>("Commodity");
-        tv.setRoot(item);
-        item.setExpanded(false);
-        TreeItem<String> i1 = new TreeItem<>("LightSort1");
-        TreeItem<String> i2 = new TreeItem<>("LightSort2");
-        TreeItem<String> i3 = new TreeItem<>("Led");
-        item.getChildren().addAll(i1,i2,i3);
-        TreeItem<String> i4 = new TreeItem<>("荡寇风云");
-        TreeItem<String> i5 = new TreeItem<>("变形金刚5");
-        i1.setExpanded(false);
-        i1.getChildren().addAll(i4,i5);
+    public void showGoodsTree(){
+        try{
+            CommoditySortVo[] commoditySortVos = blService.getAllCommoditySort();
+            CommoditySortVo t;
+            for (CommoditySortVo goodskindsVO : commoditySortVos) {
+                t = goodskindsVO;
+                if (t.getPreId() == null) {
+                    TreeItem<String> treeItem = new TreeItem<>(t.getName());
+                    root.getChildren().add(treeItem);
+                    treeItem.setExpanded(true);
+                    showkinds(treeItem);
+                }
+            }
+        }catch (UncheckedRemoteException e){
+
+        }
+
+    }
+    private void showkinds(TreeItem<String> treeItem)  {
+        try{
+            CommoditySortVo commoditySortVo =blService.query(new CommoditySortQueryVo().eq("name",treeItem.getValue()))[0];
+            CommoditySortItem[] temp;
+            if(commoditySortVo.getCommoditySortItems() != null) {
+                temp = commoditySortVo.getCommoditySortItems();
+                for (CommoditySortItem aTemp : temp) {
+                    TreeItem<String> treeItem1 = new TreeItem<>(aTemp.getName());
+                    treeItem1.setExpanded(true);
+                    treeItem.getChildren().add(treeItem1);
+                    showkinds(treeItem1);
+                }
+            }
+        }catch (UncheckedRemoteException e){
+
+        }
+
+
     }
 
     private void initSearch() {
@@ -74,8 +124,8 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     }
 
     private void update(CommoditySortQueryVo queryVo) {
-       // CommodityVo[] queryResult = blService.query(queryVo);
-      //  commodityModels.clear();
+      //  CommoditySortVo[] queryResult = blService.query(queryVo);
+      // commodityModels.clear();
         //commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
 
@@ -95,5 +145,9 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/inventoryui/commodity/CommoditySortUi.fxml").loadAndGetPackageWithoutException();
+    }
+
+    public void onBtnModifyClicked(ActionEvent actionEvent) {
+       ;
     }
 }

@@ -23,8 +23,9 @@
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.check.InventoryCheckUiController"
       prefHeight="600.0" prefWidth="800.0">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10"/>
+        <Insets top="20" right="20" bottom="10" left="20"/>
     </padding>
+
     <HBox alignment="CENTER_LEFT" maxWidth="2000">
         <MaterialIconView glyphName="FILTER_LIST" glyphSize="28" />
         <Text text="库存查看">

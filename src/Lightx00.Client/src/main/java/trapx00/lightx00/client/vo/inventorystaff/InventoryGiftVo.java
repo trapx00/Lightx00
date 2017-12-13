@@ -89,7 +89,7 @@ public class InventoryGiftVo extends InventoryBillBaseVo implements Reversible{
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return InventoryWarningServiceFactory.getBillApprovalCompleteService();
+        return InventoryGiftServiceFactory.getBillApprovalCompleteService();
     }
 
     /**

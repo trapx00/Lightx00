@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
@@ -24,13 +26,13 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
     public JFXTextField tfretailPrice;
     public JFXTextField tfwarningValue;
 
-    private Consumer<CommodityVo> callback;
+    private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
+    private Runnable runnable;
 
     public void show(Runnable runnable) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        AddCommodityDialog dialog = (AddCommodityDialog) externalLoadedUiPackage.getController();
-        dialog.callback = callback;
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
+        ((AddCommodityDialog)externalLoadedUiPackage.getController()).runnable = runnable;
     }
 
     @Override
@@ -40,6 +42,8 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
 
     @FXML
     private void initialize() {
+
+        tfId.setText(blService.getId("PRO-0002"));
         DoubleValidator validator = new DoubleValidator();
         validator.setMessage("请输入数字");
         tfAmount.getValidators().add(validator);
@@ -79,8 +83,7 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
 
     public void onBtnSubmitClicked(ActionEvent actionEvent) {
         if (validate()) {
-            if (callback != null) {
-                callback.accept(new CommodityVo(
+           blService.add(new CommodityVo(
                         tfId.getText(),
                         tfName.getText(),
                         tfSort.getText(),
@@ -94,12 +97,14 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
                         Double.parseDouble(tfretailPrice.getText()),
                         Double.parseDouble(tfwarningValue.getText())
                 ));
-                close();
-            }
+            PromptDialogHelper.start("创建成功！","已经创建新的商品。")
+                    .addCloseButton("好","CHECK",e -> close())
+                    .createAndShow();
         }
     }
 
     public void close() {
         FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+        runnable.run();
     }
 }

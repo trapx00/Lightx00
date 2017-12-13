@@ -83,7 +83,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
         tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
         tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
-
+        tableSortColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getType()));
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
         commodityTable.setRoot(root);
         commodityTable.setShowRoot(false);

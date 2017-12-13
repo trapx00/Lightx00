@@ -10,12 +10,11 @@ public class CommoditySortBlControllerMock extends CommoditySortBlController {
     /**
      * Add a commoditySort
      * @param newSort
-     * @param parentSort
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort) {
-        return super.add(newSort, parentSort);
+    public ResultMessage add(CommoditySortVo newSort) {
+        return super.add(newSort);
     }
 
     /**

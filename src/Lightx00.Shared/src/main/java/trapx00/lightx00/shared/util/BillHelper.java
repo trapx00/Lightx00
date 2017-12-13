@@ -21,6 +21,10 @@ public class BillHelper {
         return String.format("%05d",id);
     }
 
+    public static String comFormaiId(int id){
+        return String.format("%04d",id);
+    }
+
     public static String toFixed(double num, int precision) {
         return String.format("%.2f", num);
     }

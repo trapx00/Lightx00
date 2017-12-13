@@ -15,6 +15,9 @@ import java.util.Date;
 
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
+import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
@@ -79,6 +82,25 @@ public class BaseDatabaseFactory {
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
             saleStaffDao.create(new SaleStaffPo("进货销售人员", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
+
+
+            Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
+            TableUtils.dropTable(inventoryStaffPos, true);
+            TableUtils.createTableIfNotExists(connectionSource, InventoryStaffPo.class);
+            inventoryStaffPos.create(new InventoryStaffPo("库存管理人员", "1", new Date(), "12", "12"));
+
+            Dao<CommodityPo,String>commodityPos=createDao(CommodityPo.class);
+            TableUtils.dropTable(commodityPos, true);
+            TableUtils.createTableIfNotExists(connectionSource, CommodityPo.class);
+            commodityPos.create(new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"一",
+                    "01",34,34,34,34,100));
+
+            Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);
+            TableUtils.dropTable(commoditySortPos, true);
+            TableUtils.createTableIfNotExists(connectionSource, CommoditySortPo.class);
+            commoditySortPos.create( new CommoditySortPo("PRO-0001","Led",null,null,null));
+            commoditySortPos.create(new CommoditySortPo("PRO-0002","DgLed",null,"PRO-0001",null));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

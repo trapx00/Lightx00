@@ -11,10 +11,9 @@ public interface CommoditySortBlService {
     /**
      * Create a new commoditySort attaching to a parentSort
      * @param newSort
-     * @param parentSort
      * @return whether the operation is done successfully
      */
-    ResultMessage add(CommoditySortVo newSort,CommoditySortVo parentSort);//新建分类
+    ResultMessage add(CommoditySortVo newSort);//新建分类
 
     /**
      * Modify a commoditySort
@@ -43,4 +42,5 @@ public interface CommoditySortBlService {
      */
     CommoditySortVo[] getAllCommoditySort();//得到all
 
+    String getId();
 }

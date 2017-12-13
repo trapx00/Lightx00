@@ -2,15 +2,24 @@ package trapx00.lightx00.client.vo.inventorystaff;
 
 import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
-import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 
 public class CommoditySortVo {
     //商品分类
     private String id;
     private String name;
     private CommodityItem[] commodityIdList;
-    private String preId;//父类
-    private CommoditySortItem[] commoditySortItems;
+    private String preId;//爸爸
+    private CommoditySortItem[] commoditySortItems;//儿子们
+
+    public boolean isLeaf() {
+        return isLeaf;
+    }
+
+    public void setLeaf(boolean leaf) {
+        isLeaf = leaf;
+    }
+
+    private boolean isLeaf;
 
     //public static CommoditySortPo commoditySortVotoPo(CommoditySortVo  commoditySortVo){
    //     return new CommoditySortPo(commoditySortVo.getId(),commoditySortVo.getName(),commoditySortVo.get)

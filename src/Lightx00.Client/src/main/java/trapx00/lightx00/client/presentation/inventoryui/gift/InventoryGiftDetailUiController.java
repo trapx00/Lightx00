@@ -70,10 +70,8 @@ public class InventoryGiftDetailUiController extends BillDetailUi {
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/InventoryGiftDetailUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/gift/InventoryGiftDetailUi.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void onBtnBackClicked(ActionEvent actionEvent) {
-        onClose();
-    }
+
 }

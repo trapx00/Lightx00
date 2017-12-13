@@ -4,7 +4,9 @@ import org.junit.Test;
 import trapx00.lightx00.client.bl.adminbl.UserManagementBlController;
 import trapx00.lightx00.client.bl.adminbl.factory.UserManagementBlFactory;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
@@ -15,10 +17,11 @@ import static org.junit.Assert.*;
 public class UserManagementBlControllerTest {
     private UserManagementBlController controller = UserManagementBlFactory.getController();
     private FinanceStaffVo account = new FinanceStaffVo("张三","0001",new Date(),"10081","0001");
+    private InventoryStaffVo inventoryStaffVo = new InventoryStaffVo("张三","0002",new Date(),"567","567");
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,controller.add(account));
+        assertEquals(ResultMessage.Success,controller.add(inventoryStaffVo));
     }
 
     @Test

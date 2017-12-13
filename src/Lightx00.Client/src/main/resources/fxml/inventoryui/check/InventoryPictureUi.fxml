@@ -23,7 +23,7 @@
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.check.InventoryPictureUiController"
       prefHeight="600.0" prefWidth="800.0">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10"/>
+        <Insets top="20" right="20" bottom="10" left="20"/>
     </padding>
 
     <HBox alignment="CENTER_LEFT" maxWidth="2000">
@@ -66,12 +66,13 @@
                 <Insets right="10.0" />
             </HBox.margin>
         </JFXButton>
-        <JFXButton fx:id="btnExport" buttonType="RAISED" onAction="#onBtnExportClicked" style="-fx-background-color: #232e5f; -fx-text-fill: #FFFFFF" text="导出Excel">
+        <JFXButton fx:id="exportButton" buttonType="RAISED" onAction="#onExportClicked"
+                   style="-fx-background-color: #ff6f00; -fx-text-fill: #FFFFFF" text="导出">
             <graphic>
-                <MaterialIconView glyphName="ARROW_FORWARD" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+                <MaterialIconView glyphName="SHARE" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
             <HBox.margin>
-                <Insets right="10.0" />
+                <Insets right="10.0"/>
             </HBox.margin>
         </JFXButton>
     </HBox>

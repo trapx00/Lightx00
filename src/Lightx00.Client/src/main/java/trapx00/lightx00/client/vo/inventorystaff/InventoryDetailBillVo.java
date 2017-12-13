@@ -11,6 +11,8 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.inventoryui.warning.InventoryWarningDetailUi;
+import trapx00.lightx00.client.presentation.inventoryui.warning.InventoryWarningUiController;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
@@ -87,12 +89,12 @@ public  class InventoryDetailBillVo extends InventoryBillBaseVo implements Rever
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new InventoryWarningUiController();
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new InventoryWarningDetailUi();
     }
 
     /**
@@ -102,6 +104,6 @@ public  class InventoryDetailBillVo extends InventoryBillBaseVo implements Rever
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new InventoryWarningUiController();
     }
 }

@@ -13,8 +13,6 @@ public class CommoditySortPo {
     private String id;
     @DatabaseField
     private String name;
-    @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private CommodityItem []commodityList;
     @DatabaseField
     private String preId;//父类
     @DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -29,7 +27,6 @@ public class CommoditySortPo {
                            String preId, CommoditySortItem[] commoditySortItems) {
         this.id = id;
         this.name = name;
-        this.commodityList = commodityList;
         this.preId = preId;
         this.commoditySortItems=commoditySortItems;
     }
@@ -49,13 +46,6 @@ public class CommoditySortPo {
         return name;
     }
 
-    public CommodityItem[] getCommodityList() {
-        return commodityList;
-    }
-
-    public void setCommodityList(CommodityItem[] commodityList) {
-        this.commodityList = commodityList;
-    }
 
     public String getPreId() {
         return preId;

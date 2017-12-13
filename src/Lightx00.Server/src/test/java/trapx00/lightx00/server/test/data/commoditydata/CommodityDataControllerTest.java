@@ -28,13 +28,11 @@ public class CommodityDataControllerTest {
 
     private Dao<CommodityPo, String> dao = CommodityDataDaoFactory.getCommodityDao();
     private CommodityDataService service= CommodityDataFactory.getController();
-    private  CommodityPo commodityPo = new CommodityPo("PRO-0001-0001","SmallLed","Led",13,new Date(),"一",
+    private  CommodityPo commodityPo = new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"一",
             "01",34,34,34,34,100);
 
-    @Before
-    public void setUp() throws Exception {
-        dao.deleteById(commodityPo.getId());
-    }
+
+
     private void resetTable() throws Exception {
         TableUtils.dropTable(dao.getConnectionSource(),CommodityPo.class,true);
         TableUtils.createTable(dao.getConnectionSource(), CommodityPo.class);

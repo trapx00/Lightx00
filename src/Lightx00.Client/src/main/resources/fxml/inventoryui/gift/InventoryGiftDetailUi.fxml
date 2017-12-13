@@ -9,6 +9,11 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftDetailUiController"
       prefHeight="800.0" prefWidth="600.0" spacing="20">
+
+    <padding>
+        <Insets top="10" left="20" bottom="20" right="20"/>
+    </padding>
+
     <Label text="库存赠送单" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
@@ -20,13 +25,13 @@
 
     <VBox maxWidth="500" spacing="30">
 
-        <JFXTextField promptText="ID" labelFloat="true" fx:id="tfId" disable="true"/>
+        <JFXTextField promptText="ID" labelFloat="true" fx:id="tfId" editable="false"/>
 
-        <JFXTextField promptText="日期" labelFloat="true"  fx:id="tfDate" disable="true"/>
+        <JFXTextField promptText="日期" labelFloat="true"  fx:id="tfDate" editable="false"/>
 
-        <JFXTextField promptText="制定者" labelFloat="true"  fx:id="tfOperator" disable="true"/>
+        <JFXTextField promptText="制定者" labelFloat="true"  fx:id="tfOperator" editable="false"/>
 
-        <JFXTextField   promptText="单据状态" labelFloat="true"  fx:id="tfBillState" disable="true"/>
+        <JFXTextField   promptText="单据状态" labelFloat="true"  fx:id="tfBillState" editable="false"/>
 
 
     </VBox>
@@ -45,7 +50,5 @@
             <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
         </columns>
     </JFXTreeTableView>
-
-    <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
 
 </VBox>

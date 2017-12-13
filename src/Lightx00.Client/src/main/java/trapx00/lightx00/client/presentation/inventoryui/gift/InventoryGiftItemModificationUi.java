@@ -14,7 +14,7 @@ public class InventoryGiftItemModificationUi implements ExternalLoadableUiContro
 
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/InventoryGiftModificationUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/gift/InventoryGiftModificationUi.fxml").loadAndGetPackageWithoutException();
     }
 
     public void show(Consumer<Double> callback) {
