@@ -4,23 +4,36 @@ import java.io.Serializable;
 
 public class PromotionCommodity implements Serializable {
     private String commodityId;
+    private String name;
+    private double price;
     private double amount;
-    private double unitPrice;
 
-
-
-    public double getUnitPrice() {
-        return unitPrice;
+    public PromotionCommodity(String commodityId, String name, double price, double amount) {
+        this.commodityId = commodityId;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
+    public PromotionCommodity() {}
+    public double getPrice() {
+        return price;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getAmount() {
         return amount;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     public String getCommodityId() {
         return commodityId;
     }
@@ -32,4 +45,6 @@ public class PromotionCommodity implements Serializable {
     public void setCommodityId(String commodityId) {
         this.commodityId = commodityId;
     }
+
+
 }
