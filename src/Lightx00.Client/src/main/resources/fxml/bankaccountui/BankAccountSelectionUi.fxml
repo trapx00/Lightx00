@@ -21,7 +21,7 @@
             <Font name="System Bold" size="32.0"/>
         </font>
     </Label>
-    <JFXTextField fx:id="tfSearch" promptText="按名字搜索，按回车执行搜索"/>
+    <JFXTextField labelFloat="true" fx:id="tfSearch" promptText="按名字搜索，按回车执行搜索"/>
     <JFXTreeTableView fx:id="tableBankAccounts" prefHeight="500.0" prefWidth="500.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcId" prefWidth="50" text="ID" />

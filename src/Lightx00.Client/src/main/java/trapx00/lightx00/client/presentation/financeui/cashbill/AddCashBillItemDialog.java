@@ -18,7 +18,7 @@ public class AddCashBillItemDialog implements ExternalLoadableUiController {
 
     public void show(Consumer<CashBillItem> callback) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        AddCashBillItemDialog dialog = (AddCashBillItemDialog) externalLoadedUiPackage.getController();
+        AddCashBillItemDialog dialog = externalLoadedUiPackage.getController();
         dialog.callback = callback;
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
     }
