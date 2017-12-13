@@ -79,13 +79,6 @@
                 <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="tfOperator" editable="false" />
             </GridPane>
         </VBox>
-        <VBox alignment="CENTER_RIGHT" maxWidth="1000">
-            <JFXTreeTableView fx:id="commodityTable" maxHeight="5000.0" maxWidth="5000.0" prefHeight="600.0" prefWidth="600.0">
-                <columns>
-                    <JFXTreeTableColumn fx:id="tableNameColumn" prefWidth="150" text="商品名" />
-                </columns>
-            </JFXTreeTableView>
-        </VBox>
     </HBox>
 
 

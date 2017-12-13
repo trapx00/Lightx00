@@ -94,13 +94,18 @@ public class BaseDatabaseFactory {
             TableUtils.createTableIfNotExists(connectionSource, CommodityPo.class);
             commodityPos.create(new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"一",
                     "01",34,34,34,34,100));
+            commodityPos.create(new CommodityPo("PRO-0002-0002","SmaqwellLed","PRO-0002",13,new Date(),"一",
+                    "01",34,34,34,34,100));
+            commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"一",
+                    "01",34,34,34,34,100));
+
 
             Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);
             TableUtils.dropTable(commoditySortPos, true);
             TableUtils.createTableIfNotExists(connectionSource, CommoditySortPo.class);
             commoditySortPos.create( new CommoditySortPo("PRO-0001","Led",null,null,null));
             commoditySortPos.create(new CommoditySortPo("PRO-0002","DgLed",null,"PRO-0001",null));
-
+            commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",null,"PRO-0001",null));
         } catch (SQLException e) {
             e.printStackTrace();
         }

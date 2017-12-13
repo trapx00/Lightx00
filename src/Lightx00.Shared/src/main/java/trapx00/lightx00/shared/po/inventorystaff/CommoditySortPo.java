@@ -5,9 +5,10 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.awt.*;
+import java.io.Serializable;
 
 @DatabaseTable(tableName = "CommoditySort")
-public class CommoditySortPo {
+public class CommoditySortPo implements Serializable{
     //商品分类
     @DatabaseField(id=true)
     private String id;

@@ -29,10 +29,13 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
     private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
     private Runnable runnable;
 
-    public void show(Runnable runnable) {
+    public void show(String text,Runnable runnable) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        AddCommodityDialog ui = externalLoadedUiPackage.getController();
+        ui.tfId.setText(blService.getId(text));
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
         ((AddCommodityDialog)externalLoadedUiPackage.getController()).runnable = runnable;
+
     }
 
     @Override
@@ -42,8 +45,6 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
 
     @FXML
     private void initialize() {
-
-        tfId.setText(blService.getId("PRO-0002"));
         DoubleValidator validator = new DoubleValidator();
         validator.setMessage("请输入数字");
         tfAmount.getValidators().add(validator);

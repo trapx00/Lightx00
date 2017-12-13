@@ -50,6 +50,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
     private JFXTextField tfSearch;
     TreeItem<String> root;
     private InventoryStaffUiController inventoryStaffUiController;
+    private  String leadingtest;
 
     public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
     private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
@@ -70,6 +71,15 @@ public class CommodityUiController implements ExternalLoadableUiController {
         tv.setRoot(root);
         tv.setShowRoot(false);
         showGoodsTree();
+        tv.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                leadingtest= blService1.query(new CommoditySortQueryVo().eq("name",
+                        tv.getSelectionModel().getSelectedItem().getValue()))[0].getId();
+                update(new CommodityQueryVo().eq("type",leadingtest
+                       ));
+
+            }
+        });
 
     }
     public void showGoodsTree(){
@@ -93,11 +103,10 @@ public class CommodityUiController implements ExternalLoadableUiController {
     private void showkinds(TreeItem<String> treeItem)  {
         try{
             CommoditySortVo commoditySortVo =blService1.query(new CommoditySortQueryVo().eq("name",treeItem.getValue()))[0];
-            CommoditySortItem[] temp;
-            if(commoditySortVo.getCommoditySortItems() != null) {
-                temp = commoditySortVo.getCommoditySortItems();
-                for (CommoditySortItem aTemp : temp) {
-                    TreeItem<String> treeItem1 = new TreeItem<>(aTemp.getName());
+            CommoditySortVo[] commoditySortVos=blService1.query(new CommoditySortQueryVo().eq("preId",commoditySortVo.getId()));
+            if(commoditySortVos != null) {
+                for (CommoditySortVo commoditySortVo1:commoditySortVos) {
+                    TreeItem<String> treeItem1 = new TreeItem<>(commoditySortVo1.getName());
                     treeItem1.setExpanded(true);
                     treeItem.getChildren().add(treeItem1);
                     showkinds(treeItem1);
@@ -153,7 +162,6 @@ public class CommodityUiController implements ExternalLoadableUiController {
         commodityTable.setShowRoot(false);
         commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
 
-        update();
     }
 
 
@@ -179,7 +187,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
     }
 
     public void onAddButtonClicked(ActionEvent actionEvent){
-        new AddCommodityDialog().show(this::update);
+        new AddCommodityDialog().show(leadingtest,this::update);
     }
 
     @Override

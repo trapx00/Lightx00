@@ -49,17 +49,7 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     private void initialize() {
         initView();
         initSearch();
-        initTable();
-    }
-    public void initTable(){
-        tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommoditySortVoObjectProperty().getName()));
 
-        TreeItem<CommoditySortModel> root1 = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
-        commodityTable.setRoot(root1);
-        commodityTable.setShowRoot(false);
-        commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
-
-        update();
     }
     private void initView(){
         root = new TreeItem<>("CommoditySort");
@@ -90,11 +80,10 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     private void showkinds(TreeItem<String> treeItem)  {
         try{
             CommoditySortVo commoditySortVo =blService.query(new CommoditySortQueryVo().eq("name",treeItem.getValue()))[0];
-            CommoditySortItem[] temp;
-            if(commoditySortVo.getCommoditySortItems() != null) {
-                temp = commoditySortVo.getCommoditySortItems();
-                for (CommoditySortItem aTemp : temp) {
-                    TreeItem<String> treeItem1 = new TreeItem<>(aTemp.getName());
+            CommoditySortVo[] commoditySortVos=blService.query(new CommoditySortQueryVo().eq("preId",commoditySortVo.getId()));
+            if(commoditySortVos != null) {
+                for (CommoditySortVo commoditySortVo1:commoditySortVos) {
+                    TreeItem<String> treeItem1 = new TreeItem<>(commoditySortVo1.getName());
                     treeItem1.setExpanded(true);
                     treeItem.getChildren().add(treeItem1);
                     showkinds(treeItem1);
@@ -124,9 +113,10 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     }
 
     private void update(CommoditySortQueryVo queryVo) {
-      //  CommoditySortVo[] queryResult = blService.query(queryVo);
-      // commodityModels.clear();
-        //commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
+        CommoditySortVo[] queryResult = blService.query(queryVo);
+        commodityModels.clear();
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySortModel::new).collect(Collectors.toList()));
+
     }
 
 
