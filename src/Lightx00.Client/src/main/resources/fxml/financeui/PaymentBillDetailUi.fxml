@@ -11,7 +11,7 @@
       fx:controller="trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillDetailUi"
       prefHeight="800.0" prefWidth="600.0" alignment="TOP_CENTER" spacing="20">
     <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets top="10" right="50" bottom="10" left="50"/>
     </padding>
     <HBox spacing="10" alignment="CENTER_LEFT">
         <FontAwesomeIconView glyphName="BTC" glyphSize="38" fill="black" />
@@ -23,7 +23,7 @@
     </HBox>
 
 
-    <VBox spacing="30" maxWidth="500">
+    <VBox spacing="30">
         <JFXTextField labelFloat="true" fx:id="tfId" editable="false" promptText="ID"/>
         <JFXTextField labelFloat="true" fx:id="tfDate" editable="false" promptText="日期"/>
         <JFXTextField labelFloat="true" fx:id="tfOperator" editable="false" promptText="操作员"/>
@@ -50,7 +50,4 @@
             <Label fx:id="lbTotal" text="0.00"/>
         </HBox>
     </VBox>
-    <Separator/>
-    <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
-               style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
 </VBox>

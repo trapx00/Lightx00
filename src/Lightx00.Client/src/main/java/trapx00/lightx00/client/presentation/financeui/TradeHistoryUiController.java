@@ -14,10 +14,7 @@ import trapx00.lightx00.client.bl.financebl.factory.TradeHistoryBlFactory;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -101,7 +98,10 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
     public void showDetail(BillTableItemModel model) {
         if (model != null) {
             BillVo selected = model.getBill();
-            PromptDialogHelper.start("单据详细信息","").setContent(selected.billDetailUi().showContent(selected).getComponent()).createAndShow();
+            PromptDialogHelper.start("单据详细信息","")
+                    .setContent(selected.billDetailUi().showContent(selected).getComponent())
+                    .addCloseButton("好","CHECK",null)
+                    .createAndShow();
         } else {
             PromptDialogHelper.start("错误","请至少选一个条目。")
                 .addCloseButton("好的","DONE",null)
@@ -151,6 +151,7 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
         if (selected != null) {
             if (selected instanceof Reversible) {
                 Reversible reversible = (Reversible) selected;
+                FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
                 PromptDialogHelper.start("红冲单据","").setContent(reversible.reversibleUi().revertReversible(reversible).getComponent()).createAndShow();
             } else {
                 PromptDialogHelper.start("您所选的单据不可红冲！","您所选的单据不可红冲！")

@@ -10,9 +10,9 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillDetailUi"
-      prefHeight="800.0" prefWidth="600.0" alignment="TOP_CENTER" spacing="20">
+      prefHeight="700.0" prefWidth="600.0" alignment="TOP_CENTER" spacing="20">
     <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets top="10" right="50" bottom="10" left="50"/>
     </padding>
     <HBox spacing="10" alignment="CENTER_LEFT">
         <MaterialIconView glyphName="RECEIPT" glyphSize="40" fill="black" />
@@ -24,7 +24,7 @@
     </HBox>
 
 
-    <VBox spacing="30" maxWidth="500">
+    <VBox spacing="30">
         <JFXTextField labelFloat="true" fx:id="tfId" editable="false" promptText="ID"/>
         <JFXTextField labelFloat="true" fx:id="tfDate" editable="false" promptText="日期"/>
         <JFXTextField labelFloat="true" fx:id="tfOperator" editable="false" promptText="操作员"/>
@@ -33,7 +33,7 @@
     </VBox>
 
 
-    <VBox>
+    <VBox spacing="10">
         <Label text="转账列表" textFill="#5e5e5e">
             <font>
                 <Font size="18.0" />
@@ -51,7 +51,4 @@
             <Label fx:id="lbTotal" text="0.00"/>
         </HBox>
     </VBox>
-    <Separator/>
-    <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
-               style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
 </VBox>

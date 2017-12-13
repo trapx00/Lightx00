@@ -74,8 +74,4 @@ public class CashBillDetailUi extends BillDetailUi {
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/financeui/CashBillDetailUi.fxml").loadAndGetPackageWithoutException();
     }
-
-    public void onBtnBackClicked(ActionEvent actionEvent) {
-        onClose();
-    }
 }

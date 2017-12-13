@@ -140,15 +140,17 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         tbTranscations.setEditable(true);
         tbTranscations.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        addRequiredValidator(tfId,"请点击自动填写信息以填写ID。");
+        addRequiredValidator(tfId, "请点击自动填写信息以填写ID。");
         addRequiredValidator(tfClient, "请点击选择客户");
         addRequiredValidator(tfOperator, "请点击自动填写信息以填充操作员。");
         addRequiredValidator(tfDate, "请点击自动填写信息以填写日期。");
 
+        autofill();
+
     }
 
     public void addRequiredValidator(JFXTextField jfxTextField, String message) {
-        RequiredFieldValidator fieldValidator =new RequiredFieldValidator();
+        RequiredFieldValidator fieldValidator = new RequiredFieldValidator();
         fieldValidator.setMessage(message);
         jfxTextField.getValidators().add(fieldValidator);
         jfxTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -179,11 +181,11 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         controller.client.set(client);
         controller.currentEmployee.set(operator);
 
-        for(Transcation t : bill.getTranscations()) {
+        for (Transcation t : bill.getTranscations()) {
             t.setTotal(-t.getTotal());
         }
         controller.initTranscationTable(bill.getTranscations());
-        controller.currentDate.set(bill.getDate());
+        controller.currentDate.set(new Date());
         return uiPackage;
     }
 
@@ -208,22 +210,22 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         if (validate()) {
             try {
                 return voClazz.getDeclaredConstructor(
-                    String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.class)
-                    .newInstance(tfId.getId(),
-                        currentDate.get(),
-                        BillState.Draft,
-                        tfClient.getId(),
-                        currentEmployee.getValue().getId(),
-                        transcationModels.stream().map(TranscationModel::toTranscation).toArray(Transcation[]::new),
-                        Double.parseDouble(lbTotal.getText()));
+                        String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.class)
+                        .newInstance(tfId.getId(),
+                                currentDate.get(),
+                                BillState.Draft,
+                                tfClient.getId(),
+                                currentEmployee.getValue().getId(),
+                                transcationModels.stream().map(TranscationModel::toTranscation).toArray(Transcation[]::new),
+                                Double.parseDouble(lbTotal.getText()));
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
                 throw new RuntimeException();
             }
         } else {
-            PromptDialogHelper.start("未填写完成！","请填写完成所有字段！")
-                .addCloseButton("好","CHECK",null)
-                .createAndShow();
+            PromptDialogHelper.start("未填写完成！", "请填写完成所有字段！")
+                    .addCloseButton("好", "CHECK", null)
+                    .createAndShow();
             throw new NotCompleteException();
         }
     }
@@ -232,56 +234,57 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         clientInfoUi.showClientSelectDialog(x -> client.set(x));
     }
 
-    public void onBtnAutofillClicked() {
+    public void autofill() {
         try {
             tfId.setText(blService.getId());
             currentDate.setValue(new Date());
             currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         } catch (NoMoreBillException e) {
-            PromptDialogHelper.start("ID不够！","当日ID已经达到99999，无法增加新的单据。")
-                .addCloseButton("好的","CHECK", null)
-                .createAndShow();
+            PromptDialogHelper.start("ID不够！", "当日ID已经达到99999，无法增加新的单据。")
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
         }
     }
 
     public void onBtnSubmitClicked() {
         try {
-            blService.submit(getCurrent());
-            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功")
-                .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
-                .createAndShow();
+            T bill = getCurrent();
+            PromptDialogHelper.start("确认单据", "")
+                    .setContent(bill.billDetailUi().showContent(bill).getComponent())
+                    .addCloseButton("确定", "CHECK", event -> {
+                        try {
+                            blService.submit(getCurrent());
+                            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
+                                .addCloseButton("继续填写", "EDIT", e1 -> {
+                                    onBtnResetClicked();
+                                    autofill();
+                                })
+                                .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                                .createAndShow();
+                        } catch (UncheckedRemoteException e) {
+                            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        } catch (IdExistsException e) {
+                            PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        } catch (Exception e) {
+                            PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        }
+                    })
+                    .addCloseButton("取消", "CLOSE", null)
+                    .createAndShow();
         } catch (NotCompleteException ignored) {
-        } catch (UncheckedRemoteException e) {
-            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
-                .addCloseButton("好的","CHECK", null)
-                .createAndShow();
-        } catch (IdExistsException e) {
-            PromptDialogHelper.start("提交失败","ID已经存在，请重新获取ID！")
-                .addCloseButton("好的","CHECK",null)
-                .createAndShow();
-        } catch (Exception e) {
-            PromptDialogHelper.start("提交失败","错误信息如下：\n" + e.getMessage())
-                .addCloseButton("好的","CHECK",null)
-                .createAndShow();
         }
+
+
     }
 
     public void onBtnSaveAsDraftClicked() {
-        try {
-            blService.saveAsDraft(getCurrent());
-            PromptDialogHelper.start("保存草稿成功","你的单据已经保存为草稿。")
-                .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
-                .createAndShow();
-        } catch (NotCompleteException ignored) {
-        } catch (UncheckedRemoteException e) {
-            PromptDialogHelper.start("提交失败！","网络错误。详细信息：\n" + e.getRemoteException().getMessage())
-                .addCloseButton("好的","CHECK", null)
-                .createAndShow();
-        } catch (Exception e) {
-            PromptDialogHelper.start("提交失败","错误信息如下：\n" + e.getMessage())
-                .addCloseButton("好的","CHECK",null)
-                .createAndShow();
-        }
+        saveAsDraft();
     }
 
     public void onBtnResetClicked() {
@@ -291,4 +294,32 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         tfId.setText("");
         transcationModels.clear();
     }
+
+    public void onBtnCancelClicked(ActionEvent actionEvent) {
+        PromptDialogHelper.start("是否退出？", "是否保存草稿？")
+                .addCloseButton("保存", "SAVE", e -> saveAsDraft())
+                .addCloseButton("不保存", "DELETE", e -> FrameworkUiManager.switchBackToHome())
+                .addCloseButton("取消", "CLOSE", null)
+                .createAndShow();
+    }
+
+    public void saveAsDraft() {
+        try {
+            blService.saveAsDraft(getCurrent());
+            PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
+                    .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        }
+    }
+
+
 }

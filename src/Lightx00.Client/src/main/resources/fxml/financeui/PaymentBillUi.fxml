@@ -83,14 +83,14 @@
     </VBox>
     <Separator/>
     <HBox spacing="20">
-        <JFXButton fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnAutofillClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="自动填充信息">
-            <graphic>
-                <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
-            </graphic>
-        </JFXButton>
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked" style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
+            <graphic>
+                <MaterialIconView glyphName="REFRESH" glyphSize="24" />
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
@@ -98,9 +98,9 @@
                 <MaterialIconView glyphName="SAVE" glyphSize="24" />
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked" style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
+        <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="取消">
             <graphic>
-                <MaterialIconView glyphName="REFRESH" glyphSize="24" />
+                <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
             </graphic>
         </JFXButton>
     </HBox>

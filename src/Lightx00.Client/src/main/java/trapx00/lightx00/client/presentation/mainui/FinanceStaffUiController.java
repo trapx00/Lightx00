@@ -2,6 +2,7 @@ package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountUiController;
+import trapx00.lightx00.client.presentation.financeui.HomeUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
@@ -54,6 +55,15 @@ public class FinanceStaffUiController extends FrameworkUiController {
 
     public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
 
+    }
+
+
+    /**
+     * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+     */
+    @Override
+    public void switchBackToHome() {
+        switchFunction(HomeUiController.class, "主界面",true);
     }
 
     public void onBankAccountFunctionClicked(ActionEvent actionEvent) {
