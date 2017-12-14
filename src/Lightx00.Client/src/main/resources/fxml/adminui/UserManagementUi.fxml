@@ -36,7 +36,7 @@
         </padding>
         <Label alignment="CENTER" maxHeight="30" text="输入姓名" />
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
-            <JFXTextField fx:id="tfName" />
+            <JFXTextField fx:id="tfSearch" maxWidth="150.0" prefWidth="100.0" />
         </StackPane>
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
             <JFXButton fx:id="btnSearch" buttonType="RAISED" onAction="#onBtnSearchClicked" prefHeight="18" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF" text="查找">
@@ -56,11 +56,11 @@
             <Insets right="10.0" />
         </padding>
     </HBox>
-    <JFXTreeTableView fx:id="tableEmployees" prefHeight="500.0" prefWidth="500.0">
+    <JFXTreeTableView fx:id="tableEmployee" prefHeight="500.0" prefWidth="500.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcId" prefWidth="150" text="ID" />
             <JFXTreeTableColumn fx:id="tcName" editable="false" prefWidth="150" text="姓名" />
-            <JFXTreeTableColumn fx:id="tcWorkSince" prefWidth="150" text="入职时间" />
+            <JFXTreeTableColumn fx:id="tcWorkDate" prefWidth="150" text="入职时间" />
             <JFXTreeTableColumn fx:id="tcPosition" prefWidth="150" text="就职单位" />
         </columns>
     </JFXTreeTableView>

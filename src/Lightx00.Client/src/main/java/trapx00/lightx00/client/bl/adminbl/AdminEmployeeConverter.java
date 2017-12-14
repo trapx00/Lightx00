@@ -19,15 +19,15 @@ public class AdminEmployeeConverter implements EmployeeConverter<EmployeeVo> {
     public EmployeeVo fromPoToVo(EmployeePo po) {
         switch(po.getPosition()) {
             case Admin:
-                return new AdminVo(po.getName(),po.getId(),po.getWorkSince(),po.getUsername(),po.getPassword());
+                return new AdminVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), po.getState());
             case Manager:
-                return new ManagerVo(po.getName(),po.getId(),po.getWorkSince(),po.getUsername(),po.getPassword());
+                return new ManagerVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), po.getState());
             case InventoryStaff:
-                return new InventoryStaffVo(po.getName(),po.getId(),po.getWorkSince(),po.getUsername(),po.getPassword());
+                return new InventoryStaffVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), po.getState());
             case FinanceStaff:
-                return new FinanceStaffVo(po.getName(),po.getId(),po.getWorkSince(),po.getUsername(),po.getPassword());
+                return new FinanceStaffVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), po.getState(), ((FinanceStaffPo)po).isRoot());
             case SaleStaff:
-                return new SaleStaffVo(po.getName(),po.getId(),po.getWorkSince(),po.getUsername(),po.getPassword(),((SaleStaffPo)po).getSaleStaffType());
+                return new SaleStaffVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), ((SaleStaffPo)po).getSaleStaffType(), po.getState(), ((SaleStaffPo)po).isRoot());
         }
         return null;
     }
@@ -36,15 +36,15 @@ public class AdminEmployeeConverter implements EmployeeConverter<EmployeeVo> {
     public EmployeePo fromVoToPo(EmployeeVo vo) {
         switch(vo.getPosition()) {
             case Admin:
-                return new AdminPo(vo.getName(),vo.getId(),vo.getWorkSince(),vo.getUsername(),vo.getPassword());
+                return new AdminPo(vo.getId(),vo.getName(),vo.getWorkSince(),vo.getPassword(),vo.getState());
             case Manager:
-                return new ManagerPo(vo.getName(),vo.getId(),vo.getWorkSince(),vo.getUsername(),vo.getPassword());
+                return new ManagerPo(vo.getId(),vo.getName(),vo.getWorkSince(),vo.getPassword(),vo.getState());
             case InventoryStaff:
-                return new InventoryStaffPo(vo.getName(),vo.getId(),vo.getWorkSince(),vo.getUsername(),vo.getPassword());
+                return new InventoryStaffPo(vo.getId(), vo.getName(), vo.getWorkSince(), vo.getPassword(),vo.getState());
             case FinanceStaff:
-                return new FinanceStaffPo(vo.getName(),vo.getId(),vo.getWorkSince(),vo.getUsername(),vo.getPassword());
+                return new FinanceStaffPo(vo.getId(),vo.getName(),vo.getWorkSince(),vo.getPassword(),vo.getState(),((FinanceStaffVo)vo).isRoot());
             case SaleStaff:
-                return new SaleStaffPo(vo.getName(),vo.getId(),vo.getWorkSince(),vo.getUsername(),vo.getPassword(),((SaleStaffVo)vo).getSaleStaffType());
+                return new SaleStaffPo(vo.getId(),vo.getName(),vo.getWorkSince(),vo.getPassword(),((SaleStaffVo)vo).getSaleStaffType(),vo.getState(),((SaleStaffVo)vo).isRoot());
         }
         return null;
     }

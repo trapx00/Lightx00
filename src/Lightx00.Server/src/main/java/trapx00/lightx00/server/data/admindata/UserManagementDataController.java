@@ -107,15 +107,15 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     /**
      * Login.
      *
-     * @param username username
+     * @param name name
      * @param password password
      * @return EmployeeId if login is successful. Null otherwise
      */
     @Override
-    public String login(String username, String password) {
+    public String login(String name, String password) {
         for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> controller : positionDaoMap.entrySet()) {
             List<EmployeePo> employeePo = controller.getValue().query((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo()
-                .eq("username", username).and().eq("password", password));
+                .eq("name", name).and().eq("password", password));
             if (employeePo.size() != 0) {
                 return employeePo.get(0).getId();
             }
