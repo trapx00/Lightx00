@@ -115,7 +115,7 @@
                             <padding>
                                 <Insets left="20"/>
                             </padding>
-                            <Text fill="white" text="功能">
+                            <Text fx:id="titleText" fill="white" text="功能">
                                 <font>
                                     <Font size="24.0"/>
                                 </font>

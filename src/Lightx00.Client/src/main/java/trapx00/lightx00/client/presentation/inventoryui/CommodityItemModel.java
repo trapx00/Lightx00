@@ -16,6 +16,10 @@ public class CommodityItemModel extends RecursiveTreeObject<CommodityItemModel> 
         return commodityItemObjectProperty.get();
     }
 
+    public CommodityItem toCommodityItem(){
+        return new CommodityItem(commodityItemObjectProperty.getValue().getCommodityId(),commodityItemObjectProperty.getValue().getName(),commodityItemObjectProperty.getValue().getType(),commodityItemObjectProperty.getValue().getNumber(),commodityItemObjectProperty.getValue().getPrice(),commodityItemObjectProperty.getValue().getTotal(),commodityItemObjectProperty.getValue().getComment());
+    }
+
     public void setCommodityItemObjectProperty(CommodityItem commodityItemObjectProperty) {
         this.commodityItemObjectProperty.set(commodityItemObjectProperty);
     }

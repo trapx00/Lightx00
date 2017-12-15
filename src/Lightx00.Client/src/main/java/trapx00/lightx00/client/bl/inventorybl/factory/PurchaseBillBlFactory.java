@@ -9,7 +9,7 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 
 public class PurchaseBillBlFactory {
 
-    private static PurchaseBillBlController purchaseBillBlController = new PurchaseBillBlControllerMock();
+    private static PurchaseBillBlController purchaseBillBlController = new PurchaseBillBlController();
     private static NotificationActivateService notificationActivateService = purchaseBillBlController;
     private static NotificationAbandonService notificationAbandonService = purchaseBillBlController;
     private static BillApprovalCompleteService billApprovalCompleteService = purchaseBillBlController;

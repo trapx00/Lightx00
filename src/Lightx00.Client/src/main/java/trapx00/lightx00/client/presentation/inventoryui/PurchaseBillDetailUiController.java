@@ -2,6 +2,8 @@ package trapx00.lightx00.client.presentation.inventoryui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +17,17 @@ import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+
+import java.awt.event.ActionEvent;
 
 public class PurchaseBillDetailUiController extends BillDetailUi {
     @FXML
     private JFXTextField tfBillId;
     @FXML
-    private JFXTextField tfOperatorId;
+    private JFXTextField tfOperator;
     @FXML
     private JFXTextField tfClientId;
     @FXML
@@ -47,19 +54,35 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
     private JFXTreeTableColumn<CommodityItemModel, String> tcCommodityCommentColumn;
 
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
-    private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
+
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
-        return null;
+        PurchaseBillVo purchaseBillVo = (PurchaseBillVo) arg;
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        PurchaseBillDetailUiController purchaseBillDetailUiController = externalLoadedUiPackage.getController();
+        purchaseBillDetailUiController.tfBillId.setText(purchaseBillVo.getId());
+        purchaseBillDetailUiController.tfOperator.setText(purchaseBillVo.getOperatorId());
+        purchaseBillDetailUiController.tfClientId.setText(purchaseBillVo.getClientId());
+        purchaseBillDetailUiController.tfRepository.setText(purchaseBillVo.getRepository() + "");
+        purchaseBillDetailUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
+        purchaseBillDetailUiController.tfComment.setText(purchaseBillVo.getComment());
+        purchaseBillDetailUiController.addCommodityItems(purchaseBillVo.getCommodityList());
+        return externalLoadedUiPackage;
+    }
+
+    private void addCommodityItems(CommodityItem[] commodityItems) {
+        for (CommodityItem commodityItem : commodityItems) {
+            commodityItemModelObservableList.add(new CommodityItemModel(commodityItem));
+        }
     }
 
     public void initialize() {
         tcCommodityIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getCommodityId()));
         tcCommodityNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getName()));
         tcCommodityTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getType()));
-        tcCommodityNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getNumber()+""));
-        tcCommodityPriceColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getPrice()+""));
-        tcCommodityTotalColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getTotal()+""));
+        tcCommodityNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getNumber() + ""));
+        tcCommodityPriceColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getPrice() + ""));
+        tcCommodityTotalColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getTotal() + ""));
         tcCommodityCommentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getComment()));
         TreeItem<CommodityItemModel> root = new RecursiveTreeItem<>(commodityItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCommodityList.setRoot(root);
@@ -75,5 +98,10 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/inventoryui/PurchaseBillDetailUi.fxml").loadAndGetPackageWithoutException();
+    }
+
+    @FXML
+    private void onBtnBackClicked() {
+
     }
 }

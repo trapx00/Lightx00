@@ -10,6 +10,10 @@ import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 
 public class SaleStaffUiController extends FrameworkUiController {
 
+    public void initialize() {
+        super.initialize();
+    }
+
     @FXML
     private void onClientFunctionClicked(ActionEvent actionEvent) {
         switchFunction(ClientUiController.class, "管理客户", true);

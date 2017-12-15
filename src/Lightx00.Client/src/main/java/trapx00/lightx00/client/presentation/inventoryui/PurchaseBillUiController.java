@@ -3,6 +3,8 @@ package trapx00.lightx00.client.presentation.inventoryui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,24 +13,41 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
+import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
+import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
+import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.util.DateHelper;
+
+import java.util.Date;
 
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
     @FXML
     private JFXTextField tfBillId;
     @FXML
-    private JFXTextField tfOperatorId;
+    private JFXTextField tfOperator;
+    @FXML
+    private JFXTextField tfDate;
     @FXML
     private JFXTextField tfClientId;
+    @FXML
+    private JFXTextField tfClientName;
     @FXML
     private JFXComboBox<String> cbRepository;
     @FXML
@@ -52,6 +71,9 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     @FXML
     private JFXTreeTableColumn<CommodityItemModel, String> tcCommodityCommentColumn;
 
+    private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
+    private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
+    private PurchaseBillBlService blService= PurchaseBillBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
 
@@ -68,7 +90,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseBillUiController purchaseBillUiController = (PurchaseBillUiController) externalLoadedUiPackage.getController();
         purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
-        purchaseBillUiController.tfOperatorId.setText(purchaseBillVo.getOperatorId());
+        purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
         purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository()+"");
         purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
@@ -93,6 +115,14 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     }
 
     public void initialize() {
+        currentDate.addListener(((observable, oldValue, newValue) -> {
+            tfDate.setText(newValue == null ? "" : DateHelper.fromDate(newValue));
+        }));
+
+        currentEmployee.addListener(((observable, oldValue, newValue) -> {
+            tfOperator.setText(newValue == null ? "" : String.format("%s(id: %s)", newValue.getName(), newValue.getId()));
+        }));
+
         tcCommodityIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getCommodityId()));
         tcCommodityNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getName()));
         tcCommodityTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getType()));
@@ -107,6 +137,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                 "1", "2", "3"
         );
         cbRepository.setItems(stringObservableList);
+        autofill();
     }
 
     /**
@@ -148,35 +179,74 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     }
 
     @FXML
-    private void onBtnGetPromotionClicked() {
-
-    }
-
-    @FXML
     private void onBtnSubmitClicked() {
-        PromptDialogHelper.start("单据详情", null)
-                .addCloseButton("确认提交", "DONE", e -> submitSuccess())
-                .addCloseButton("取消", "CLOSE", null)
-                .addTable(
-                        ReadOnlyPairTableHelper.start()
-                                .addPair("单据编号", tfBillId.getText())
-                                .addPair("操作员", tfOperatorId.getText())
-                                .addPair("供应商", tfClientId.getText())
-                                .addPair("仓库", cbRepository.getValue() + "")
-                                .addPair("总额合计", tfBillTotal.getText())
-                                .addPair("备注", tfComment.getText())
-                                .create())
-                .createAndShow();
+        try {
+            PurchaseBillVo purchaseBillVo = getCurrentPurchaseBillVo();
+            PromptDialogHelper.start("确认单据", "").setContent(
+                    purchaseBillVo.billDetailUi().showContent(purchaseBillVo).getComponent())
+                    .addCloseButton("确定", "CHECK", e -> {
+                        try {
+                            blService.submit(purchaseBillVo);
+                            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
+                                    .addCloseButton("继续填写", "EDIT", e1 -> {
+                                        onBtnResetClicked();
+                                        autofill();
+                                    })
+                                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                                    .createAndShow();
+                        } catch (UncheckedRemoteException e1) {
+                            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        } catch (IdExistsException e1) {
+                            PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        }
+                    })
+                    .addCloseButton("取消", "CLOSE", null)
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+
+        }
+
     }
 
-    private void submitRetreat(){
-
+    private PurchaseBillVo getCurrentPurchaseBillVo() {
+        if (cbRepository.getValue() == null||tfBillTotal.getText().length()==0) {
+            PromptDialogHelper.start("提交失败！", "请先填写完单据。")
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+            throw new NotCompleteException();
+        }
+        return new PurchaseBillVo(
+                tfBillId.getText(),
+                currentDate.getValue(),
+                BillState.Draft,
+                tfClientId.getText(),
+                Integer.parseInt(cbRepository.getValue()),
+                currentEmployee.getValue().getId(),
+                tfComment.getText(),
+                Double.parseDouble(tfBillTotal.getText()),
+                commodityItemModelObservableList.stream().map(CommodityItemModel::toCommodityItem).toArray(CommodityItem[]::new)
+        );
     }
 
-    private void submitSuccess() {
-        PromptDialogHelper.start("提交成功", null)
-                .addCloseButton("确定", "DONE", null)
-                .createAndShow();
+    private void autofill() {
+        try {
+            tfBillId.setText(blService.getId());
+            currentDate.setValue(new Date());
+            currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+        } catch (NoMoreBillException e) {
+            PromptDialogHelper.start("ID不够！", "当日ID已经达到99999，无法增加新的单据。")
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("初始化失败！", "请重试！")
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        }
+
     }
 
     @FXML
@@ -186,12 +256,11 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
 
     @FXML
     private void onBtnResetClicked() {
-        tfBillId.clear();
-        tfOperatorId.clear();
         tfComment.clear();
         tfBillTotal.clear();
         tfClientId.clear();
-        cbRepository.setValue("仓库");
+        tfClientName.clear();
+        cbRepository.setValue("");
         commodityItemModelObservableList.clear();
     }
 }
