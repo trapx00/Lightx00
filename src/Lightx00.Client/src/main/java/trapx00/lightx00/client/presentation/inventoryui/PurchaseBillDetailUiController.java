@@ -99,9 +99,4 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/inventoryui/PurchaseBillDetailUi.fxml").loadAndGetPackageWithoutException();
     }
-
-    @FXML
-    private void onBtnBackClicked() {
-
-    }
 }

@@ -1,24 +1,64 @@
 package trapx00.lightx00.client.presentation.clientui;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import trapx00.lightx00.client.presentation.helpui.ClientDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
-import java.awt.event.ActionEvent;
+public class ClientDetailUiController extends ClientDetailUi {
+    @FXML
+    private JFXTextField clientId;
+    @FXML
+    private JFXTextField clientName;
+    @FXML
+    private JFXTextField clientType;
+    @FXML
+    private JFXTextField clientLevel;
+    @FXML
+    private JFXTextField clientPhone;
+    @FXML
+    private JFXTextField clientAddress;
+    @FXML
+    private JFXTextField clientZipCode;
+    @FXML
+    private JFXTextField clientEmail;
+    @FXML
+    private JFXTextField clientReceivableQuota;
+    @FXML
+    private JFXTextField clientReceivable;
+    @FXML
+    private JFXTextField clientPayable;
+    @FXML
+    private JFXTextField clientDefaultOperator;
+    @FXML
+    private JFXTextField clientOperatorId;
 
-public class ClientDetailUiController {
+    @Override
+    public ExternalLoadedUiPackage showContent(ClientVo arg) {
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        ClientVo clientVo = (ClientVo) arg;
+        ClientDetailUiController clientDetailUiController = externalLoadedUiPackage.getController();
+        clientDetailUiController.clientId.setText(clientVo.getId());
+        clientDetailUiController.clientName.setText(clientVo.getClientType().toString());
+        clientDetailUiController.clientLevel.setText(clientVo.getClientLevel() + "");
+        clientDetailUiController.clientPhone.setText(clientVo.getAddress());
+        clientDetailUiController.clientZipCode.setText(clientVo.getEmail());
+        clientDetailUiController.clientEmail.setText(clientVo.getEmail());
+        clientDetailUiController.clientReceivableQuota.setText(clientVo.getReceivableQuota() + "");
+        clientDetailUiController.clientReceivable.setText(clientVo.getReceivable() + "");
+        clientDetailUiController.clientPayable.setText(clientVo.getPayable() + "");
+        return externalLoadedUiPackage;
+    }
 
     /**
      * Loads the controller.
      *
      * @return external loaded ui controller and component
      */
+    @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/clientui/ClientDetailUi.fxml").loadAndGetPackageWithoutException();
-    }
-
-    @FXML
-    private void onBtnBackClicked(){
-
     }
 }
