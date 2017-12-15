@@ -79,7 +79,6 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
                 new SaleStaffVo(null,null,null,null,null,null))));
     }
 
-    @FXML
     private void initLogItem() {
         clientIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getId()));
         clientNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getName()));
@@ -133,11 +132,26 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
     }
 
     @FXML
+    private void onBtnAddClicked(ActionEvent actionEvent){
+
+    }
+
+    @FXML
+    private void onBtnDeleteClicked(ActionEvent actionEvent){
+
+    }
+
+    @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
         if (callback != null) {
             callback.accept(getSelected().get(0)); //选择结束，调用回调方法。
         }
         onClose(); //一定要调用这个来把弹出框关了。
+    }
+
+    @FXML
+    private void onBtnCancelClicked(ActionEvent actionEvent){
+
     }
 
     @FXML
