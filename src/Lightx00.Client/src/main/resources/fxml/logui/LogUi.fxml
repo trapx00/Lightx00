@@ -13,7 +13,7 @@
         <Insets bottom="10" left="10" right="10" top="10"/>
     </padding>
     <HBox alignment="CENTER_LEFT">
-        <MaterialIconView glyphName="MESSAGE" glyphSize="28"/>
+        <MaterialIconView glyphName="MESSAGE" glyphSize="32"/>
         <Text text="日志">
             <font>
                 <Font size="20.0"/>

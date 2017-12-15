@@ -84,32 +84,33 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
 
         List<BillVo> queryResult = new ArrayList<>();
 
-        List<BillType> billTypes = new ArrayList<>(Arrays.asList(query.getBillTypes()));
-        if (billTypes.contains(BillType.InventoryBill)) {
-            queryResult.addAll(Arrays.asList(inventoryGiftInfo.queryInventoryGiftBill(new InventoryGiftQueryVo(baseQueryVo))));
-        }
+        if (query.getBillTypes() != null && query.getBillTypes().length != 0) {
+            List<BillType> billTypes = new ArrayList<>(Arrays.asList(query.getBillTypes()));
+            if (billTypes.contains(BillType.InventoryBill)) {
+                queryResult.addAll(Arrays.asList(inventoryGiftInfo.queryInventoryGiftBill(new InventoryGiftQueryVo(baseQueryVo))));
+            }
 
-        if (query.getClientIds() != null && query.getClientIds().length > 0) {
-            baseQueryVo.and();
-            baseQueryVo.in("clientId", query.getClientIds());
-        }
+            if (query.getClientIds() != null && query.getClientIds().length > 0) {
+                baseQueryVo.and();
+                baseQueryVo.in("clientId", query.getClientIds());
+            }
 
-        if (billTypes.contains(BillType.FinanceBill)) {
-            queryResult.addAll(Arrays.asList(cashBillInfo.query(new CashBillQueryVo(baseQueryVo))));
-            queryResult.addAll(Arrays.asList(paymentBillInfo.query(new PaymentBillQueryVo(baseQueryVo))));
-            queryResult.addAll(Arrays.asList(receivalBillInfo.query(new ReceivalBillQueryVo(baseQueryVo))));
-        }
+            if (billTypes.contains(BillType.FinanceBill)) {
+                queryResult.addAll(Arrays.asList(cashBillInfo.query(new CashBillQueryVo(baseQueryVo))));
+                queryResult.addAll(Arrays.asList(paymentBillInfo.query(new PaymentBillQueryVo(baseQueryVo))));
+                queryResult.addAll(Arrays.asList(receivalBillInfo.query(new ReceivalBillQueryVo(baseQueryVo))));
+            }
 
-        if (billTypes.contains(BillType.SaleBill)) {
-            queryResult.addAll(Arrays.asList(saleBillBlInfo.querySaleBill(new SaleBillQueryVo(baseQueryVo))));
-            queryResult.addAll(Arrays.asList(saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo(baseQueryVo))));
-        }
+            if (billTypes.contains(BillType.SaleBill)) {
+                queryResult.addAll(Arrays.asList(saleBillBlInfo.querySaleBill(new SaleBillQueryVo(baseQueryVo))));
+                queryResult.addAll(Arrays.asList(saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo(baseQueryVo))));
+            }
 
-        if (billTypes.contains(BillType.StockBill)) {
-            queryResult.addAll(Arrays.asList(purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo(baseQueryVo))));
-            queryResult.addAll(Arrays.asList(purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo(baseQueryVo))));
+            if (billTypes.contains(BillType.StockBill)) {
+                queryResult.addAll(Arrays.asList(purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo(baseQueryVo))));
+                queryResult.addAll(Arrays.asList(purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo(baseQueryVo))));
+            }
         }
-
         return new TradeHistoryVo(queryResult.toArray(new BillVo[queryResult.size()]));
 
     }

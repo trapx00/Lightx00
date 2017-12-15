@@ -115,10 +115,10 @@ public class DraftUiController implements ExternalLoadableUiController {
                                 .addPair("草稿内容ID", model.getDraft().getId())
                                 .create())
                     .addCloseButton("取消","CLOSE",null)
-                    .addButton("确定","CHECK",e -> {
+                    .addCloseButton("确定","CHECK",e -> {
                         try {
-                            Parent ui = model.getDraft().continueWritableUi().continueWriting(model.getDraft()).getComponent();
-                            PromptDialogHelper.start("继续填写草稿", "").setContent(ui).createAndShow();
+                            ExternalLoadedUiPackage ui = model.getDraft().continueWritableUi().continueWriting(model.getDraft());
+                            FrameworkUiManager.getFrameworkUiController().switchFunction(ui,"继续填写草稿",true);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
