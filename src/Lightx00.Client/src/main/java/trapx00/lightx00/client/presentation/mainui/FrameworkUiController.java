@@ -25,9 +25,9 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import java.io.IOException;
 
 public class FrameworkUiController {
+    public static final int DEPTH = 3;
     public StackPane dialogContainer;
     public GridPane drawer;
-    public static final int DEPTH = 3;
     public GridPane titleBar;
     public GridPane bottomBar;
     public Pane contentPane;
@@ -102,14 +102,15 @@ public class FrameworkUiController {
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-        switchFunction(NotificationUiController.class, "通知",true);
+        switchFunction(NotificationUiController.class, "通知", true);
 
     }
 
     /**
      * 切换功能界面的方法。这个重载方法每次都会重新加载一个新的功能界面，以前的功能界面的状态将会被丢弃。
-     * @param clazz 对应功能界面的类对象
-     * @param title 标题名称
+     *
+     * @param clazz   对应功能界面的类对象
+     * @param title   标题名称
      * @param refresh 如果新的UI界面和原来的界面是同一个界面的话，是否需要刷新。
      */
     public void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title, boolean refresh) {
@@ -128,9 +129,10 @@ public class FrameworkUiController {
 
     /**
      * 另一种通过package切换界面的方法。这个方法允许用户自己维护原来的功能界面的状态。
-     * @see #switchFunction(Parent, ExternalLoadableUiController, String, boolean)  和这个等价
+     *
      * @param uiPackage package
-     * @param refresh 如果新的UI界面和原来的界面是同一个界面的话（通过controller是否一致来判断），是否需要刷新。
+     * @param refresh   如果新的UI界面和原来的界面是同一个界面的话（通过controller是否一致来判断），是否需要刷新。
+     * @see #switchFunction(Parent, ExternalLoadableUiController, String, boolean)  和这个等价
      */
 
     public void switchFunction(ExternalLoadedUiPackage uiPackage, String title, boolean refresh) {
@@ -139,9 +141,10 @@ public class FrameworkUiController {
 
     /**
      * 另一种通过package切换界面的方法。这个方法允许用户自己维护原来的功能界面的状态。
-     * @see #switchFunction(ExternalLoadedUiPackage,String, boolean) 和这个等价
-     * @param parent 功能对象UI元素
+     *
+     * @param parent     功能对象UI元素
      * @param controller 控制器
+     * @see #switchFunction(ExternalLoadedUiPackage, String, boolean) 和这个等价
      */
     public void switchFunction(Parent parent, ExternalLoadableUiController controller, String title, boolean refresh) {
         if (refresh || (!(subController.getClass().isAssignableFrom(controller.getClass())))) {
@@ -158,7 +161,6 @@ public class FrameworkUiController {
     public void switchBackToHome() {
 
     }
-
 
 
     public DialogStack getDialogStack() {

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class ClientUiController extends SelectingDialog implements ClientInfoUi, ExternalLoadableUiController {
+public class ClientUiController implements ClientInfoUi, ExternalLoadableUiController {
 
     @FXML
     private TreeTableView<ClientSelectionItemModel> clientTable;
@@ -45,7 +45,6 @@ public class ClientUiController extends SelectingDialog implements ClientInfoUi,
     private TreeTableColumn<ClientSelectionItemModel, String> clientLevelColumn;
     @FXML
     private TreeTableColumn<ClientSelectionItemModel, String> clientPhoneColumn;
-    private Consumer<ClientVo> callback;
 
     private ObservableList<ClientSelectionItemModel> clientSelectionItemModels = FXCollections.observableArrayList();
 
@@ -57,7 +56,6 @@ public class ClientUiController extends SelectingDialog implements ClientInfoUi,
     public void showClientSelectDialog(Consumer<ClientVo> callback) {
         ExternalLoadedUiPackage uiPackage = load();
         ClientUiController controller = (ClientUiController) uiPackage.getController();
-        controller.callback = callback;
         JFXDialog dialog = PromptDialogHelper.start("", "").create();
         dialog.setContent((Region) uiPackage.getComponent());
         dialog.show();
@@ -78,7 +76,7 @@ public class ClientUiController extends SelectingDialog implements ClientInfoUi,
                 123,
                 456,
                 789,
-                new SaleStaffVo(null, null, null, null, null, null))));
+                "1")));
     }
 
     private void initLogItem() {
@@ -104,16 +102,6 @@ public class ClientUiController extends SelectingDialog implements ClientInfoUi,
     }
 
     /**
-     * 设置目前选择的。用于刚开始的时候初始化已经选择的项。
-     *
-     * @param selected 已经选择的项
-     */
-    private void setSelected(@NotNull List<ClientVo> selected) {
-        List<String> ids = selected.stream().map(ClientVo::getId).collect(Collectors.toList());
-        clientTable.getSelectionModel().select(Integer.parseInt(ids.get(0)));
-    }
-
-    /**
      * Loads the controller.
      *
      * @return external loaded ui controller and component
@@ -125,28 +113,27 @@ public class ClientUiController extends SelectingDialog implements ClientInfoUi,
 
     @FXML
     private void onBtnAddClicked(ActionEvent actionEvent) {
-        if (callback != null) {
-            callback.accept(getSelected().get(0)); //选择结束，调用回调方法。
-        }
-        onClose(); //一定要调用这个来把弹出框关了。
+
+    }
+
+    @FXML
+    private void onBtnModifyClicked(ActionEvent actionEvent) {
+
     }
 
     @FXML
     private void onBtnDeleteClicked(ActionEvent actionEvent) {
-        onClose();
+
     }
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-        if (callback != null) {
-            callback.accept(getSelected().get(0)); //选择结束，调用回调方法。
-        }
-        onClose(); //一定要调用这个来把弹出框关了。
+
     }
 
     @FXML
     private void onBtnCloseClicked(ActionEvent actionEvent) {
-        onClose();
+        FrameworkUiManager.switchBackToHome();
     }
 
     /**

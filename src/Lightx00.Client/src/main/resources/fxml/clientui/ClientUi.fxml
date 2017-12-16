@@ -40,6 +40,12 @@
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
         </JFXButton>
+        <JFXButton buttonType="RAISED" onAction="#onBtnModifyClicked"
+                   style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="修改">
+            <graphic>
+                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
+            </graphic>
+        </JFXButton>
         <JFXButton buttonType="RAISED" onAction="#onBtnDeleteClicked"
                    style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="删除">
             <graphic>
@@ -55,7 +61,7 @@
         <JFXButton buttonType="RAISED" onAction="#onBtnCloseClicked"
                    style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消">
             <graphic>
-                <MaterialIconView glyphName="SAVE" glyphSize="24"/>
+                <MaterialIconView glyphName="HOME" glyphSize="24"/>
             </graphic>
         </JFXButton>
     </HBox>

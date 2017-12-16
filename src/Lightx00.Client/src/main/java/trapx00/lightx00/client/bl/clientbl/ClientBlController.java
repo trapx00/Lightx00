@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class ClientBlController implements ClientBlService, DraftDeleteService, ClientModificationService, DraftableQueryService, ClientQueryService, ClientPoVoConverter {
 
     ClientDataService clientDataService = ClientDataServiceFactory.getInstance();
-    EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
     DraftService draftService = DraftServiceFactory.getDraftService();
 
     /**
@@ -192,9 +191,9 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
         }
         try {
             if (flag == ClientModificationFlag.PAYABLE) {
-                clientPo.setPayableQuota(clientPo.getPayableQuota() + delta);
+                clientPo.setPayable(clientPo.getPayable() + delta);
             } else {
-                clientPo.setReceivableQuota(clientPo.getReceivableQuota() + delta);
+                clientPo.setReceivable(clientPo.getReceivable() + delta);
             }
             clientDataService.modify(clientPo);
             return ResultMessage.Success;
@@ -231,13 +230,13 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
     /**
      * Convert vo to po.
      *
-     * @param clientVo          vo
+     * @param clientVo    vo
      * @param clientState
      * @return po
      */
     @Override
     public ClientPo fromVoToPo(ClientVo clientVo, ClientState clientState) {
-        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getPayableQuota(), clientVo.getDefaultOperator().getId(), clientState);
+        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getReceivable(), clientVo.getPayable(), clientVo.getDefaultOperatorId(), clientState);
         return clientPo;
     }
 
@@ -249,7 +248,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
      */
     @Override
     public ClientPo fromVoToPo(ClientVo clientVo) {
-        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getPayableQuota(), clientVo.getDefaultOperator().getId(), ClientState.Real);
+        ClientPo clientPo = new ClientPo(clientVo.getId(), clientVo.getClientType(), clientVo.getClientLevel(), clientVo.getName(), clientVo.getPhone(), clientVo.getAddress(), clientVo.getZipCode(), clientVo.getEmail(), clientVo.getReceivableQuota(), clientVo.getReceivable(), clientVo.getPayable(), clientVo.getDefaultOperatorId(), ClientState.Real);
         return clientPo;
     }
 
@@ -261,7 +260,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
      */
     @Override
     public ClientVo fromPoToVo(ClientPo clientPo) {
-        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getPayableQuota(), (SaleStaffVo) employeeInfo.queryById(clientPo.getId()));
+        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getReceivable(), clientPo.getPayable(), clientPo.getId());
         return clientVo;
     }
 }

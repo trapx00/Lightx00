@@ -67,8 +67,9 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
                         || clientPo.getEmail().contains(query)
                         || clientPo.getPhone().contains(query)
                         || clientPo.getName().contains(query)
-                        || (clientPo.getPayableQuota() + "").contains(query)
-                        || (clientPo.getReceivableQuota() + "").contains(query)) {
+                        || (clientPo.getReceivableQuota() + "").contains(query)
+                        || (clientPo.getPayable() + "").contains(query)
+                        || (clientPo.getReceivable() + "").contains(query)) {
                     result.add(clientPo);
                 }
             }

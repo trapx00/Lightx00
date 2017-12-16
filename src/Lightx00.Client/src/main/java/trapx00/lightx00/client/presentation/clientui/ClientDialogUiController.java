@@ -13,6 +13,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Region;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
@@ -38,6 +40,8 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
     @FXML
     private TreeTableColumn<ClientSelectionItemModel, String> clientPhoneColumn;
     private ObservableList<ClientSelectionItemModel> clientSelectionItemModels = FXCollections.observableArrayList();
+
+    private ClientBlService blService= ClientBlServiceFactory.getInstance();
 
     /**
      * show the select client dialog
@@ -68,7 +72,7 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
                 123,
                 456,
                 789,
-                new SaleStaffVo(null, null, null, null, null, null))));
+                "1")));
     }
 
     private void initLogItem() {
@@ -110,7 +114,7 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/clientui/ClientUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/clientui/ClientDialogUi.fxml").loadAndGetPackageWithoutException();
     }
 
     @FXML

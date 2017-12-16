@@ -2,7 +2,9 @@ package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import trapx00.lightx00.client.presentation.clientui.ClientUiController;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleBillUiController;
@@ -10,8 +12,12 @@ import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 
 public class SaleStaffUiController extends FrameworkUiController {
 
+    @FXML
+    private Text welcomeText;
+
     public void initialize() {
         super.initialize();
+        welcomeText.setText(welcomeText.getText()+ FrameworkUiManager.getCurrentEmployee().getPosition()+" "+FrameworkUiManager.getCurrentEmployee().getName());
     }
 
     @FXML
@@ -37,6 +43,14 @@ public class SaleStaffUiController extends FrameworkUiController {
     @FXML
     private void onSaleRefundBillFunctionClicked(ActionEvent actionEvent) {
         switchFunction(SaleRefundBillUiController.class, "制定销售退货单", true);
+    }
+
+    /**
+     * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+     */
+    @Override
+    public void switchBackToHome() {
+        switchFunction(SaleStaffHomeUiController.class,"主界面",true);
     }
 
 }

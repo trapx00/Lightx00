@@ -17,13 +17,16 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 
-public class ClientModifyUiController implements DraftContinueWritableUiController, C {
+public class ClientModifyUiController implements DraftContinueWritableUiController {
 
+    private static final HashMap<String, ClientType> clientTypeMap = new HashMap<>();
     @FXML
     private JFXTextField clientId;
     @FXML
@@ -50,7 +53,6 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     private JFXTextField clientDefaultOperator;
     @FXML
     private JFXTextField clientOperatorId;
-
     private ClientBlService blService = ClientBlServiceFactory.getInstance();
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
 
@@ -62,6 +64,8 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
         currentEmployee.addListener(((observable, oldValue, newValue) -> {
             clientOperatorId.setText(newValue == null ? "" : newValue.getId());
         }));
+        clientTypeMap.put(ClientType.Retailer.toString(), ClientType.Retailer);
+        clientTypeMap.put(ClientType.Supplier.toString(), ClientType.Supplier);
     }
 
     /**
@@ -105,7 +109,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
                     clientVo.detailUi().showContent(clientVo).getComponent())
                     .addCloseButton("确定", "CHECK", e -> {
                         try {
-                            blService.submit(clientVo);
+                            blService.modify(clientVo);
                             PromptDialogHelper.start("提交成功！", "你的客户信息已经提交成功！")
                                     .addCloseButton("继续填写", "EDIT", e1 -> {
                                         onBtnResetClicked();
@@ -132,7 +136,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     }
 
     private ClientVo getCurrentClientVo() {
-        if (clientName.getText().length()==0||clientType.getText().length()==0||clientLevel.getText().length()==0||clientPhone.getText().length()==0||clientAddress.getText().length()==0||clientZipCode.getText().length()==0||clientEmail.getText().length()==0||clientDefaultOperator.getText().length()==0) {
+        if (clientName.getText().length() == 0 || clientType.getText().length() == 0 || clientLevel.getText().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！", "请先填写完客户信息。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
@@ -140,7 +144,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
         }
         return new ClientVo(
                 clientId.getText(),
-                clientType.getText(),
+                clientTypeMap.get(clientType.getText()),
                 Integer.parseInt(clientLevel.getText()),
                 clientName.getText(),
                 clientPhone.getText(),
@@ -150,7 +154,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
                 Double.parseDouble(clientReceivableQuota.getText()),
                 Double.parseDouble(clientReceivable.getText()),
                 Double.parseDouble(clientPayable.getText()),
-                clientDefaultOperator.getText(),
+                clientDefaultOperator.getText()
         );
     }
 

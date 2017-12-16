@@ -22,6 +22,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine"
            stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121"
            xmlns:fx="http://javafx.com/fxml/1"
@@ -82,6 +83,11 @@
                     <Separator prefHeight="5" prefWidth="200"/>
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
+                    <JFXButton onAction="#switchBackToHome" prefHeight="60" prefWidth="200" text="主界面" textFill="#000000">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="HOME" glyphSize="20" />
+                        </graphic>
+                    </JFXButton>
                     <JFXButton prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20"/>
@@ -150,7 +156,7 @@
                         <BorderPane fx:id="contentFramePane">
                             <top>
                                 <HBox>
-                                    <Text fill="black" text="欢迎~,{职位}{姓名}">
+                                    <Text fx:id="welcomeText" fill="black" text="欢迎~,">
                                         <font>
                                             <Font size="32.00"/>
                                         </font>
