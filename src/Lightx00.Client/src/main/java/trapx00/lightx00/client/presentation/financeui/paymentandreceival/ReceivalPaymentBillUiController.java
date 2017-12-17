@@ -288,11 +288,16 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
     }
 
     public void onBtnResetClicked() {
-        client.set(null);
-        currentEmployee.set(null);
-        currentDate.set(null);
-        tfId.setText("");
-        transcationModels.clear();
+        PromptDialogHelper.start("重置确认","是否确定重置？")
+            .addCloseButton("是","CHECK", e-> {
+                client.set(null);
+                currentEmployee.set(null);
+                currentDate.set(null);
+                tfId.setText("");
+                transcationModels.clear();
+            }).addCloseButton("否","CLOSE", null)
+            .createAndShow();
+
     }
 
     public void onBtnCancelClicked(ActionEvent actionEvent) {
