@@ -10,6 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.blservice.financeblservice.SaleDetailBlService;
 import trapx00.lightx00.client.blservice.financeblservice.SaleDetailBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
@@ -29,6 +32,7 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -152,7 +156,25 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
 
     public void onExportClicked(ActionEvent actionEvent) {
         if (saleDetailVo != null) {
-            blService.export(saleDetailVo);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("选择路径");
+            fileChooser.setInitialFileName(String.format("销售明细表-%s.xls", DateHelper.currentDateString("yyyy_MM_dd-HH_mm_ss")));
+            File file = fileChooser.showSaveDialog(new Stage());
+
+            if (file != null) {
+                ExcelOutput.createExcel(file.getParent(), saleDetailVo.toExcel(), file.getName());
+
+                blService.export(saleDetailVo);
+
+                PromptDialogHelper.start("导出成功！",String.format("销售明细表已经导出到%s。", file.getAbsolutePath()))
+                    .addCloseButton("好","CHECK",null)
+                    .createAndShow();
+            }
+
+        } else {
+            PromptDialogHelper.start("导出失败！","请先查询报表！")
+                .addCloseButton("好","CHECK",null)
+                .createAndShow();
         }
     }
 

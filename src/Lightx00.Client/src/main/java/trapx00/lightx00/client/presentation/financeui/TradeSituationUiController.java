@@ -8,7 +8,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import trapx00.lightx00.client.bl.financebl.factory.TradeSituationBlFactory;
+import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.blservice.financeblservice.TradeSituationBlService;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
@@ -18,7 +21,11 @@ import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class TradeSituationUiController implements ExternalLoadableUiController {
@@ -102,7 +109,45 @@ public class TradeSituationUiController implements ExternalLoadableUiController 
         tradeSituation.set(query);
     }
 
-    public void onExportClicked(ActionEvent actionEvent) {
+    private String[] toExcel(TradeSituationVo situation) {
+        List<String> content = new ArrayList<>();
+        content.add("项-值");
+        content.add(String.format("销售收入-%.2f", situation.getSaleIncome()));
+        content.add(String.format("商品类收入-%.2f", situation.getCommodityIncome()));
+        content.add(String.format("报溢收入-%.2f", situation.getOverflowIncome()));
+        content.add(String.format("成本调价-%.2f", situation.getIncomeAdjustIncome()));
+        content.add(String.format("进货退货差价-%.2f", situation.getDifferenceOfSaleAndRefundIncome()));
+        content.add(String.format("未使用的代金券-%.2f", situation.getUnusedCouponValue()));
+        content.add(String.format("折让后总收入-%.2f", situation.getSaleIncome() + situation.getCommodityIncome()));
+        content.add(String.format("销售支出-%.2f", situation.getSaleCost()));
+        content.add(String.format("商品类支出-%.2f", situation.getCommodityCost()));
+        content.add(String.format("商品报损-%.2f", situation.getLossCost()));
+        content.add(String.format("商品赠出-%.2f", situation.getGiveawayCost()));
+        content.add(String.format("支出-%.2f", situation.getSaleCost() + situation.getCommodityCost()));
+        content.add(String.format("利润部分-%.2f", situation.getProfit()));
+        return content.toArray(new String[content.size()]);
+    }
 
+    public void onExportClicked(ActionEvent actionEvent) {
+        if (tradeSituation.get() != null) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("选择路径");
+            fileChooser.setInitialFileName(String.format("经营情况表-%s.xls", DateHelper.currentDateString("yyyy_MM_dd-HH_mm_ss")));
+            File file = fileChooser.showSaveDialog(new Stage());
+            if (file != null) {
+                ExcelOutput.createExcel(file.getParent(), toExcel(tradeSituation.get()), file.getName());
+
+                blService.export(tradeSituation.get());
+
+                PromptDialogHelper.start("导出成功！",String.format("经营情况表已经导出到%s。", file.getAbsolutePath()))
+                    .addCloseButton("好","CHECK",null)
+                    .createAndShow();
+            }
+
+        } else {
+            PromptDialogHelper.start("导出失败！","请先查询报表！")
+                .addCloseButton("好","CHECK",null)
+                .createAndShow();
+        }
     }
 }
