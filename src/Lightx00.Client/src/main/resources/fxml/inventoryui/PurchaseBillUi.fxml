@@ -97,7 +97,7 @@
             </columns>
         </JFXTreeTableView>
         <HBox alignment="BASELINE_RIGHT" prefWidth="100" spacing="10">
-            <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #FFFFFF" text="添加商品">
+            <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #000000" text="添加商品">
                 <graphic>
                     <MaterialIconView glyphName="ADD" glyphSize="24"/>
                 </graphic>

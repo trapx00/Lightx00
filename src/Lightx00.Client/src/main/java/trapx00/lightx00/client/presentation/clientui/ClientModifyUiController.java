@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.vo.Draftable;
@@ -24,7 +26,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ClientModifyUiController implements DraftContinueWritableUiController {
+public class ClientModifyUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
 
     private static final HashMap<String, ClientType> clientTypeMap = new HashMap<>();
     @FXML
@@ -54,6 +56,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     @FXML
     private JFXTextField clientOperatorId;
     private ClientBlService blService = ClientBlServiceFactory.getInstance();
+    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
 
     @FXML
@@ -73,6 +76,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
      *
      * @return external loaded ui controller and component
      */
+    @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/clientui/ClientModifyUi.fxml").loadAndGetPackageWithoutException();
     }
@@ -191,15 +195,40 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     @FXML
     private void onBtnCancelClicked() {
         PromptDialogHelper.start("是否要存入草稿箱", null)
-                .addCloseButton("存入", "DONE", null)
-                .addCloseButton("不存入", "CLOSE", null)
+                .addCloseButton("存入", "DONE", e -> saveAsDraft())
+                .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.switchFunction(ClientUiController.class, "管理客户", true))
                 .addCloseButton("取消", "UNDO", null)
                 .createAndShow();
     }
 
     @FXML
     private void onBtnSaveAsDraftClicked() {
+        saveAsDraft();
+    }
 
+    private void saveAsDraft() {
+        try {
+            blService.saveAsDraft(getCurrentClientVo());
+            PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
+                    .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchFunction(ClientUiController.class, "管理客户", true))
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        }
+    }
+
+    @FXML
+    private void selectEmployee() {
+        employeeSelection.showEmployeeSelectDialog(x -> {
+            clientDefaultOperator.setText(x.get(0).getId() + " " + x.get(0).getName());
+        });
     }
 
 }

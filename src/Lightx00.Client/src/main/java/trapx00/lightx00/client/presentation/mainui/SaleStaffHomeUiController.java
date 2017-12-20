@@ -33,21 +33,26 @@ public class SaleStaffHomeUiController implements ExternalLoadableUiController {
 
     @FXML
     private void onClientFunctionClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(ClientUiController.class, "管理客户", true);
     }
 
     @FXML
     private void onPurchaseBillFunctionClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(PurchaseBillUiController.class, "制定进货单", true);
     }
 
     @FXML
     private void onPurchaseRefundBillFunctionClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(PurchaseRefundBillUiController.class, "制定进货退货单", true);
     }
 
     @FXML
     private void onSaleBillFunctionClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(SaleBillUiController.class, "制定销售单", true);
     }
 
     @FXML
     private void onSaleRefundBillFunctionClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(SaleRefundBillUiController.class, "制定销售退货单", true);
     }
 }

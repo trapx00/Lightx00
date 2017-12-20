@@ -26,10 +26,6 @@ public class FrameworkUiManager {
         return promptDialogHelper.create(frameworkUiController.dialogContainer);
     }
 
-    public static void setCurrentEmployee(EmployeeVo employee) {
-        currentEmployee = employee;
-    }
-
     public static StackPane getDialogContainer() {
         return frameworkUiController.dialogContainer;
     }
@@ -38,8 +34,16 @@ public class FrameworkUiManager {
         return currentEmployee;
     }
 
+    public static void setCurrentEmployee(EmployeeVo employee) {
+        currentEmployee = employee;
+    }
+
     public static void switchBackToHome() {
         frameworkUiController.switchBackToHome();
+    }
+
+    public static void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title, boolean refresh) {
+        frameworkUiController.switchFunction(clazz, title, refresh);
     }
 
 }

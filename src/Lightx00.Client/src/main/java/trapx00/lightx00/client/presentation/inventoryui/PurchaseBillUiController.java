@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.bridj.cpp.std.list;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
@@ -73,7 +74,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
 
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
-    private PurchaseBillBlService blService= PurchaseBillBlServiceFactory.getInstance();
+    private PurchaseBillBlService blService = PurchaseBillBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
 
@@ -92,7 +93,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
-        purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository()+"");
+        purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
         purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
         purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
         return externalLoadedUiPackage;
@@ -126,9 +127,9 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         tcCommodityIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getCommodityId()));
         tcCommodityNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getName()));
         tcCommodityTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getType()));
-        tcCommodityNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getNumber()+""));
-        tcCommodityPriceColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getPrice()+""));
-        tcCommodityTotalColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getTotal()+""));
+        tcCommodityNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getNumber() + ""));
+        tcCommodityPriceColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getPrice() + ""));
+        tcCommodityTotalColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getTotal() + ""));
         tcCommodityCommentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityItemObjectProperty().getComment()));
         TreeItem<CommodityItemModel> root = new RecursiveTreeItem<>(commodityItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCommodityList.setRoot(root);
@@ -153,8 +154,9 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
 
     @FXML
     private void onClientClicked() {
-        System.out.println("run here");
-        clientInfoUi.showClientSelectDialog(list -> {
+        clientInfoUi.showClientSelectDialog(x -> {
+            tfClientId.setText(x.getId());
+            tfClientName.setText(x.getName());
         });
     }
 
@@ -162,8 +164,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     @FXML
     private void onBtnCancelClicked() {
         PromptDialogHelper.start("是否要存入草稿箱", null)
-                .addCloseButton("存入", "DONE", null)
-                .addCloseButton("不存入", "CLOSE", null)
+                .addCloseButton("存入", "DONE", e -> saveAsDraft())
+                .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.switchBackToHome())
                 .addCloseButton("取消", "UNDO", null)
                 .createAndShow();
     }
@@ -213,7 +215,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     }
 
     private PurchaseBillVo getCurrentPurchaseBillVo() {
-        if (cbRepository.getValue() == null||tfBillTotal.getText().length()==0) {
+        if (cbRepository.getValue() == null || tfBillTotal.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
@@ -251,11 +253,36 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
 
     @FXML
     private void onBtnSaveAsDraftClicked() {
+        saveAsDraft();
+    }
 
+    private void saveAsDraft() {
+        try {
+            blService.saveAsDraft(getCurrentPurchaseBillVo());
+            PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
+                    .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchBackToHome())
+                    .createAndShow();
+        } catch (NotCompleteException ignored) {
+        } catch (UncheckedRemoteException e) {
+            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (Exception e) {
+            PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        }
     }
 
     @FXML
     private void onBtnResetClicked() {
+        PromptDialogHelper.start("是否要重置", null)
+                .addCloseButton("确定", "DONE", e -> reset())
+                .addCloseButton("取消", "UNDO", null)
+                .createAndShow();
+    }
+
+    private void reset(){
         tfComment.clear();
         tfBillTotal.clear();
         tfClientId.clear();

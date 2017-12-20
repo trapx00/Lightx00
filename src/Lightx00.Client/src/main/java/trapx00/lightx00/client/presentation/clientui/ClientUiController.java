@@ -117,12 +117,12 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnAddClicked(ActionEvent actionEvent) {
-
+        FrameworkUiManager.switchFunction(ClientModifyUiController.class,"管理客户",true);
     }
 
     @FXML
     private void onBtnModifyClicked(ActionEvent actionEvent) {
-
+        FrameworkUiManager.switchFunction(ClientModifyUiController.class,"管理客户",true);
     }
 
     @FXML
@@ -132,7 +132,7 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-
+        FrameworkUiManager.switchFunction(ClientDetailUiController.class,"管理客户",true);
     }
 
     @FXML

@@ -32,17 +32,17 @@
 
     <VBox maxWidth="500" spacing="30">
         <JFXTextField fx:id="clientId" editable="false" prefWidth="150" promptText="编号"/>
-        <JFXTextField fx:id="clientName" editable="false" prefWidth="150" promptText="姓名"/>
-        <JFXTextField fx:id="clientType" editable="false" prefWidth="150" promptText="分类"/>
-        <JFXTextField fx:id="clientLevel" editable="false" prefWidth="150" promptText="级别"/>
-        <JFXTextField fx:id="clientPhone" editable="false" prefWidth="150" promptText="电话"/>
-        <JFXTextField fx:id="clientAddress" editable="false" prefWidth="150" promptText="地址"/>
-        <JFXTextField fx:id="clientZipCode" editable="false" prefWidth="150" promptText="邮编"/>
-        <JFXTextField fx:id="clientEmail" editable="false" prefWidth="150" promptText="电子邮箱"/>
-        <JFXTextField fx:id="clientReceivableQuota" editable="false" prefWidth="150" promptText="应收额度"/>
+        <JFXTextField fx:id="clientName" editable="true" prefWidth="150" promptText="姓名"/>
+        <JFXTextField fx:id="clientType" editable="true" prefWidth="150" promptText="分类"/>
+        <JFXTextField fx:id="clientLevel" editable="true" prefWidth="150" promptText="级别"/>
+        <JFXTextField fx:id="clientPhone" editable="true" prefWidth="150" promptText="电话"/>
+        <JFXTextField fx:id="clientAddress" editable="true" prefWidth="150" promptText="地址"/>
+        <JFXTextField fx:id="clientZipCode" editable="true" prefWidth="150" promptText="邮编"/>
+        <JFXTextField fx:id="clientEmail" editable="true" prefWidth="150" promptText="电子邮箱"/>
+        <JFXTextField fx:id="clientReceivableQuota" editable="true" prefWidth="150" promptText="应收额度"/>
         <JFXTextField fx:id="clientReceivable" editable="false" prefWidth="150" promptText="应收"/>
         <JFXTextField fx:id="clientPayable" editable="false" prefWidth="150" promptText="应付"/>
-        <JFXTextField fx:id="clientDefaultOperator" editable="false" prefWidth="150" promptText="默认业务员"/>
+        <JFXTextField fx:id="clientDefaultOperator" editable="false" onMouseClicked="#selectEmployee" prefWidth="150" promptText="默认业务员"/>
         <JFXTextField fx:id="clientOperatorId" editable="false" prefWidth="150" promptText="操作员ID"/>
     </VBox>
 

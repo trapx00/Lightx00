@@ -3,11 +3,12 @@ package trapx00.lightx00.client.presentation.clientui;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import trapx00.lightx00.client.presentation.helpui.ClientDetailUi;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
-public class ClientDetailUiController extends ClientDetailUi {
+public class ClientDetailUiController extends ClientDetailUi implements ExternalLoadableUiController {
     @FXML
     private JFXTextField clientId;
     @FXML
