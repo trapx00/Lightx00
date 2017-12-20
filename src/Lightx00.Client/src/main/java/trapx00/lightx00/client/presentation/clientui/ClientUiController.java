@@ -15,6 +15,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Region;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.log.LogVo;
@@ -47,6 +49,8 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
     private TreeTableColumn<ClientSelectionItemModel, String> clientPhoneColumn;
 
     private ObservableList<ClientSelectionItemModel> clientSelectionItemModels = FXCollections.observableArrayList();
+
+    private ClientBlService blService= ClientBlServiceFactory.getInstance();
 
     /**
      * show the select client dialog
@@ -144,6 +148,6 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
      */
     @Override
     public ClientVo queryById(String id) {
-        return null;
+        return blService.queryById(id);
     }
 }

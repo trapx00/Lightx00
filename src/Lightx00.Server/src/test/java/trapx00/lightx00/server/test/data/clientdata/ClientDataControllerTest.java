@@ -34,6 +34,14 @@ public class ClientDataControllerTest {
     }
 
     @org.junit.Test
+    public void queryById() throws Exception {
+        ids[0] = "0";
+        service.add(clientPo);
+        assertEquals("xiaoming", service.queryById("0").getName());
+        service.delete(ids);
+    }
+
+    @org.junit.Test
     public void modify() throws Exception {
         ids[0] = "0";
         service.add(clientPo);

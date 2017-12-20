@@ -69,6 +69,23 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
     }
 
     /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the client with its id
+     */
+    @Override
+    public ClientVo queryById(String id) {
+        try {
+            ClientPo clientPo = clientDataService.queryById(id);
+            return fromPoToVo(clientPo);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * Saves a half-completed client as draft.
      *
      * @param client ClientVo to be saved as a draft

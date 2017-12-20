@@ -2,6 +2,9 @@ package trapx00.lightx00.client.blservice.clientblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.shared.po.client.ClientPo;
+
+import java.rmi.RemoteException;
 
 public interface ClientBlService {
 
@@ -11,6 +14,14 @@ public interface ClientBlService {
      * @return the clients which corresponds to the query
      */
     ClientVo[] query(String query);
+
+    /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the client with its id
+     */
+    ClientVo queryById(String id);
 
     /**
      * Saves a half-completed client as draft.

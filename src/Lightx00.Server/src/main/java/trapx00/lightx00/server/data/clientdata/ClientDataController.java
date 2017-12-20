@@ -87,6 +87,26 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
     }
 
     /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the clients with its id
+     */
+    @Override
+    public ClientPo queryById(String id) throws RemoteException {
+        ClientPo result;
+        try {
+            result = clientDao.queryForId(id);
+            logService.printLog(delegate, "query a client whose id is " + id);
+        } catch (SQLException e) {
+            result = null;
+            e.printStackTrace();
+            handleSQLException(e);
+        }
+        return result;
+    }
+
+    /**
      * modify a client
      *
      * @param client to be modified
