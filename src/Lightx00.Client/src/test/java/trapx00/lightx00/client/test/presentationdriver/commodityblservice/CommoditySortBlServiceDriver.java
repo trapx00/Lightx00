@@ -23,7 +23,7 @@ public class CommoditySortBlServiceDriver {
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(Led,null));
+        assertEquals(ResultMessage.Success,service.add(Led));
     }
 
     @Test

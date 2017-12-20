@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.commodityui.CommoditySelectingDialog">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectingDialog">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>

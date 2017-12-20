@@ -18,6 +18,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServic
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
+import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
@@ -77,6 +78,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private PurchaseBillBlService blService = PurchaseBillBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
+    private CommoditySelection commoditySelection=
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.

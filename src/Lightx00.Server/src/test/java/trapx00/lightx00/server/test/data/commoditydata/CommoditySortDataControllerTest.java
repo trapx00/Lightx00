@@ -28,11 +28,7 @@ public class CommoditySortDataControllerTest {
     private Dao<CommoditySortPo, String> dao = CommodityDataDaoFactory.getCommoditySortDao();
     private CommoditySortDataService service= CommoditySortDataFactory.getCommoditySortDataService();
     private  CommoditySortPo commoditySortPo = new CommoditySortPo("PRO-0001","Led",null,null,null);
-    private  CommoditySortPo commoditySortPo1 = new CommoditySortPo("PRO-0002","Led",null,"PRO-0001",null);
 
-    @Before
-    public void setUp() throws Exception {
-    }
 
     private void resetTable() throws Exception {
         TableUtils.dropTable(dao.getConnectionSource(),CommoditySortPo.class,true);
@@ -41,8 +37,9 @@ public class CommoditySortDataControllerTest {
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(commoditySortPo,commoditySortPo1));
-        resetTable();
+       CommoditySortPo[] commoditySortPos=service.display();
+       for(CommoditySortPo commoditySortPo:commoditySortPos)
+           System.out.println(commoditySortPo.getName());
     }
 
     @Test
@@ -61,8 +58,13 @@ public class CommoditySortDataControllerTest {
     @Test
     public void delete() throws Exception {
         dao.create(commoditySortPo);
-        assertEquals(ResultMessage.Success,service.delete(commoditySortPo));
-        resetTable();
+        String id = dao.extractId(commoditySortPo);
+        try {
+            service.delete(commoditySortPo);
+            assertNull(dao.queryForId(id));
+        } finally {
+            dao.deleteById(id);
+        }
     }
 
     @Test

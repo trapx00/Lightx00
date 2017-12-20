@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.inventoryui.gift;
 
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
 

@@ -1,58 +1,49 @@
-package trapx00.lightx00.client.presentation.commodityui;
+package trapx00.lightx00.client.presentation.commodityui.commodity;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Region;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftSelection;
-import trapx00.lightx00.client.presentation.inventoryui.factory.InventoryGiftUiFactory;
-import trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class CommodityUiController implements ExternalLoadableUiController {
+public class CommoditySelectingDialog extends SelectingDialog implements CommoditySelection {
 
-
-    public JFXButton selectAllButton;
-    public JFXButton deleteButton;
+    @FXML
     public JFXTreeTableView<CommoditySelectionItemModel> commodityTable;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableNameColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableSortColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableAmountColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableDateColumn;
-    public JFXButton addCommodityButton;
-    @FXML
-    private JFXTextField tfSearch;
+    @FXML private JFXTextField tfSearch;
 
-    private InventoryStaffUiController inventoryStaffUiController;
-
-    public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
+    private Consumer<CommodityVo> callback;
+    private ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
     private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
-
-
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/inventoryui/commodity/CommoditySelectingDialog.fxml").loadAndGetPackageWithoutException();
+    }
 
     @FXML
     private void initialize() {
@@ -63,12 +54,12 @@ public class CommodityUiController implements ExternalLoadableUiController {
     }
     private void initSearch() {
         tfSearch.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ENTER)) {
+           if (e.getCode().equals(KeyCode.ENTER)) {
                 if (tfSearch.getText().length() > 0) {
-                    update(new CommodityQueryVo().eq("id", tfSearch.getText()));
+                    update(new CommodityQueryVo().eq("name", tfSearch.getText()));
                 } else {
                     update();
-                }
+               }
 
             }
         });
@@ -82,6 +73,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
         CommodityVo[] queryResult = blService.query(queryVo);
         commodityModels.clear();
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
+
     }
 
 
@@ -91,48 +83,61 @@ public class CommodityUiController implements ExternalLoadableUiController {
         tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
         tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
-
+        tableSortColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getType()));
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
         commodityTable.setRoot(root);
         commodityTable.setShowRoot(false);
-        commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
+       // commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
+    }
+
+    /**
+     * 获得当前已经选择的日志。如果没有选择的，那么这个是空List（不是null！！！）
+     * @return 当前已经选择的项
+     */
+    private CommodityVo getSelected() {
+        return commodityTable.getSelectionModel().getSelectedItem().getValue().commodityVoObjectProperty.getValue();
     }
 
 
-
-    public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        update();
-    }
-
-    public void onDeleteButtonClicked(ActionEvent actionEvent) {
-        int index = commodityTable.getSelectionModel().getFocusedIndex();
-        CommoditySelectionItemModel model = commodityTable.getRoot().getChildren().get(index).getValue();
-        JFXDialog dialog = PromptDialogHelper.start("确定要删除这个商品吗？","你选择了商品" + model.getCommodityVoObjectProperty().getId())
-                .addTable(ReadOnlyPairTableHelper.start()
-                        .addPair("ID", String.valueOf(model.getCommodityVoObjectProperty().getId()))
-                        .addPair("名称", model.getCommodityVoObjectProperty().getName())
-                        .create())
-                .addCloseButton("确定", "CHECK",e -> deleteItem(index))
-                .addCloseButton("取消", "CLOSE", null)
-                .create(inventoryStaffUiController.dialogContainer);
-        dialog.show();
-    }
-
-    public void deleteItem(int index) {
-        commodityModels.remove(index);
+    @FXML
+    private void onBtnSelectClicked(ActionEvent actionEvent) {
+        CommodityVo selected = getSelected();
+        if (callback != null && selected != null) {
+            callback.accept(selected);
+        }
+        onClose();
     }
 
 
-    public void onAddButtonClicked(ActionEvent actionEvent){
-
-
+    @Override
+    public void showCommoditySelectDialog(Consumer<CommodityVo> callback) {
+        ExternalLoadedUiPackage uiPackage = load();
+        CommoditySelectingDialog controller = (CommoditySelectingDialog) uiPackage.getController();
+        controller.callback = callback;
+        JFXDialog dialog = PromptDialogHelper.start("","").create();
+        dialog.setContent((Region) uiPackage.getComponent());
+        FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
     }
 
     @Override
-    public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/CommodityUi.fxml").loadAndGetPackageWithoutException();
+    public CommodityVo queryId(String id) {
+
+        return blService.query(new CommodityQueryVo().idEq(id))[0];
     }
 
+    /**
+     * 设置目前选择的。用于刚开始的时候初始化已经选择的项。
+     */
+    private CommodityVo setSelected() {
+        try {
+            return commodityTable.getSelectionModel().getSelectedItem().getValue().getCommodityVoObjectProperty();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-
+    @FXML
+    private void onBtnCloseClicked(ActionEvent actionEvent) {
+        onClose();
+    }
 }

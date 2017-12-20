@@ -1,8 +1,7 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.inventoryui.gift;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.istack.internal.NotNull;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,7 +44,7 @@ public class InventoryGiftSelectingDialog extends SelectingDialog implements Inv
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/InventoryGiftSelectingDialog.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/gift/InventoryGiftSelectingDialog.fxml").loadAndGetPackageWithoutException();
     }
 
     @FXML

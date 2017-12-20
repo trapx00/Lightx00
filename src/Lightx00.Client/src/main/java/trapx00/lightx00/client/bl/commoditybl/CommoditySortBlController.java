@@ -10,6 +10,7 @@ import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDat
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
+import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityItem;
@@ -30,12 +31,10 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage add(CommoditySortVo newSort,CommoditySortVo parentSort) {
+    public ResultMessage add(CommoditySortVo newSort) {
         CommoditySortPo commoditySortPo=this.fromVoToPo(newSort);
-        CommoditySortPo commoditySortParentPo=this.fromVoToPo(parentSort);
-
         try{
-            ResultMessage opResult = dataService.add(commoditySortPo,commoditySortParentPo);
+            ResultMessage opResult = dataService.add(commoditySortPo);
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("创建了商品种类%s,编号为%s。", newSort.getName(), newSort.getId()));
             } else {
@@ -131,7 +130,7 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
     @Override
     public CommoditySortVo[] getAllCommoditySort() {
        try{
-           CommoditySortPo[]commoditySortPos=dataService.display();
+           CommoditySortPo[]commoditySortPos=dataService.query(new CommoditySortQueryVo());
            CommoditySortVo[]result=new CommoditySortVo[commoditySortPos.length];
            for(int i=0;i<commoditySortPos.length;i++){
                result[i]=this.fromPoToVo(commoditySortPos[i]);
@@ -142,6 +141,21 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
            logService.log(LogSeverity.Failure, String.format("得到所有商品种类失败，原因是网络原因，具体信息是%s。", e.getMessage()));
            throw new UncheckedRemoteException(e);
        }
+    }
+
+    @Override
+    public String getId() {
+        try {
+            String id = dataService.getId();
+            logService.log(LogSeverity.Info, String.format("获得了一个新的分类ID：%s", id));
+            return id;
+        } catch (RemoteException e) { //RemoteException是网络原因的错误。这里记下日志，然后用UncheckedRemoteException包一下继续抛出。
+            logService.log(LogSeverity.Failure, String.format("获得新ID失败，原因是网络原因，具体是%s", e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        } catch (NoMoreBillException e) { //参考服务器端写的代码，直接抓对应的异常即可，记得如果不在这里处理，需要继续往外抛出。比如这里就需要UI层继续处理这个异常，所以需要继续抛出。
+            logService.log(LogSeverity.Failure, String.format("获得新ID失败，原因是当日ID已满。"));
+            throw e;
+        }
     }
 
     /**
@@ -168,11 +182,11 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
 
     @Override
     public CommoditySortPo fromVoToPo(CommoditySortVo vo) {
-        return new CommoditySortPo(vo.getId(),vo.getName(),vo.getCommodityIdList(),vo.getPreId(),vo.getCommoditySortItems());
+        return new CommoditySortPo(vo.getId(),vo.getName(),null,vo.getPreId(),vo.getCommoditySortItems());
     }
 
     @Override
     public CommoditySortVo fromPoToVo(CommoditySortPo po) {
-        return new CommoditySortVo(po.getId(),po.getName(),po.getCommodityList(),po.getPreId(),po.getCommoditySortItems());
+        return new CommoditySortVo(po.getId(),po.getName(),null,po.getPreId(),po.getCommoditySortItems());
     }
 }

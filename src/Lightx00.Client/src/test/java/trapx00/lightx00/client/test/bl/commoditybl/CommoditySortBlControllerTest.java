@@ -5,6 +5,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.bl.commoditybl.CommoditySortBlController;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommoditySortServiceFactory;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
+import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
@@ -19,13 +20,13 @@ public class CommoditySortBlControllerTest {
 
 
     @Test
-    public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(Led,null));
-    }
-
-    @Test
     public void modify() throws Exception {
-        assertEquals(ResultMessage.Success,service.modify(Led));
+        try{
+            System.out.println(service.query(new CommoditySortQueryVo().idEq("PRO-0001"))[0].getId());
+        }catch (UncheckedRemoteException e){
+
+        }
+
     }
 
     @Test

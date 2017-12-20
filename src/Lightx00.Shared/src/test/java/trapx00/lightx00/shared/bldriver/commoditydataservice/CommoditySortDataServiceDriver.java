@@ -18,7 +18,7 @@ public class CommoditySortDataServiceDriver {
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(commoditySortPo,fatheCommoditySortPo));
+        assertEquals(ResultMessage.Success,service.add(commoditySortPo));
     }
 
     @Test

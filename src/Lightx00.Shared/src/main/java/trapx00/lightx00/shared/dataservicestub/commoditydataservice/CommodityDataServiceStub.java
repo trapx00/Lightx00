@@ -39,5 +39,10 @@ public class CommodityDataServiceStub implements CommodityDataService {
         return new CommodityPo[0];
     }
 
+    @Override
+    public String getId() {
+        return null;
+    }
+
 
 }
