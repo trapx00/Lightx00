@@ -12,12 +12,8 @@ import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 
 public class SaleStaffUiController extends FrameworkUiController {
 
-    @FXML
-    private Text welcomeText;
-
     public void initialize() {
         super.initialize();
-        welcomeText.setText(welcomeText.getText()+ FrameworkUiManager.getCurrentEmployee().getPosition()+" "+FrameworkUiManager.getCurrentEmployee().getName());
     }
 
     @FXML
