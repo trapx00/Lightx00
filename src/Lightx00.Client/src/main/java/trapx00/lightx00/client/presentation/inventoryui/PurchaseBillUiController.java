@@ -19,6 +19,8 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServic
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
@@ -78,7 +80,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private PurchaseBillBlService blService = PurchaseBillBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
-    private CommoditySelection commoditySelection=
+    private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -174,7 +176,10 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
 
     @FXML
     private void onBtnAddItemClicked() {
-
+        commoditySelection.showCommoditySelectDialog(x -> {
+            CommodityItem commodityItem = new CommodityItem(x.getId(), x.getName(), x.getType(), 0, x.getPurchasePrice(), 0, "");
+            commodityItemModelObservableList.add(new CommodityItemModel(commodityItem));
+        });
     }
 
     @FXML
@@ -284,7 +289,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                 .createAndShow();
     }
 
-    private void reset(){
+    private void reset() {
         tfComment.clear();
         tfBillTotal.clear();
         tfClientId.clear();
