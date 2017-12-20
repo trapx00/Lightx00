@@ -44,7 +44,7 @@
         </top>
         <center>
             <VBox alignment="CENTER" spacing="20" >
-                <JFXTextField fx:id="tfEmployeeId" prefWidth="300" promptText="用户ID" />
+                <JFXTextField fx:id="tfEmployeeId" labelFloat="true" onMouseClicked="#onTfEmployeeIdClicked" prefWidth="300" promptText="用户ID" />
                 <WebCamView fx:id="webCamView" prefWidth="400" prefHeight="700"/>
             </VBox>
 

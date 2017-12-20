@@ -78,7 +78,7 @@ public class BaseDatabaseFactory {
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
-            saleStaffDao.create(new SaleStaffPo("进货销售人员", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
+            saleStaffDao.create(new SaleStaffPo("进货销售人员", "2", new Date(), "zlz", "zlz", SaleStaffType.President));
         } catch (SQLException e) {
             e.printStackTrace();
         }

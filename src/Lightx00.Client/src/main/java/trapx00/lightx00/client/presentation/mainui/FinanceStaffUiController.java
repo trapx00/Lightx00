@@ -3,10 +3,13 @@ package trapx00.lightx00.client.presentation.mainui;
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountUiController;
 import trapx00.lightx00.client.presentation.financeui.HomeUiController;
+import trapx00.lightx00.client.presentation.financeui.SaleDetailUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
+import trapx00.lightx00.client.presentation.financeui.TradeSituationUiController;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
+import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 
 
 /**
@@ -46,7 +49,7 @@ public class FinanceStaffUiController extends FrameworkUiController {
     }
 
     public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {
-        
+        switchFunction(SaleDetailUiController.class, "查看销售明细表",true);
     }
 
     public void onTradeHistoryFunctionClicked(ActionEvent actionEvent) {
@@ -54,7 +57,7 @@ public class FinanceStaffUiController extends FrameworkUiController {
     }
 
     public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(TradeSituationUiController.class ,"查看经营情况表",true);
     }
 
 
@@ -68,5 +71,9 @@ public class FinanceStaffUiController extends FrameworkUiController {
 
     public void onBankAccountFunctionClicked(ActionEvent actionEvent) {
         switchFunction(BankAccountUiController.class, "银行账户管理", true);
+    }
+
+    public void onInitialEstablishmentFunctionClicked(ActionEvent actionEvent) {
+
     }
 }
