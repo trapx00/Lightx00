@@ -27,6 +27,17 @@ public class ClientDataServiceStub implements ClientDataService {
         return clientPos;
     }
 
+    /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the client with its id
+     */
+    @Override
+    public ClientPo queryById(String id) throws RemoteException {
+        return null;
+    }
+
     @Override
     public ResultMessage modify(ClientPo client) {
         return ResultMessage.Success;

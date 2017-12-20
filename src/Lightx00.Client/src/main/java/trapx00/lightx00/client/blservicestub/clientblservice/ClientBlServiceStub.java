@@ -24,6 +24,17 @@ public class ClientBlServiceStub implements ClientBlService {
         return clientVos;
     }
 
+    /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the client with its id
+     */
+    @Override
+    public ClientVo queryById(String id) {
+        return null;
+    }
+
     @Override
     public ResultMessage saveAsDraft(ClientVo client) {
         return ResultMessage.Success;
