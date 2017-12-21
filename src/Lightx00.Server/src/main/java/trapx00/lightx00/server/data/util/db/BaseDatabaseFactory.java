@@ -81,6 +81,7 @@ public class BaseDatabaseFactory {
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
+<<<<<<< HEAD
             saleStaffDao.create(new SaleStaffPo("进货销售人员", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
 
 
@@ -107,6 +108,9 @@ public class BaseDatabaseFactory {
             commoditySortPos.create(new CommoditySortPo("PRO-0002","DgLed",1,"PRO-0001",null));
             commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",1,"PRO-0001",null));
             commoditySortPos.create(new CommoditySortPo("PRO-0004","qwasdeLed",0,"PRO-0001",null));
+=======
+            saleStaffDao.create(new SaleStaffPo("进货销售人员", "2", new Date(), "zlz", "zlz", SaleStaffType.President));
+>>>>>>> origin/chenjunda
         } catch (SQLException e) {
             e.printStackTrace();
         }

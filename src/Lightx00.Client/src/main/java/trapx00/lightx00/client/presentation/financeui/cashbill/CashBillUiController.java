@@ -260,11 +260,16 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     }
 
     public void onBtnResetClicked() {
-        tfId.setText("");
-        currentDate.setValue(null);
-        currentEmployee.setValue(null);
-        currentBankAccount.setValue(null);
-        cashBillItemModelObservableList.clear();
+        PromptDialogHelper.start("重置","是否要重置？")
+            .addCloseButton("是","CHECK", e-> {
+                tfId.setText("");
+                currentDate.setValue(null);
+                currentEmployee.setValue(null);
+                currentBankAccount.setValue(null);
+                cashBillItemModelObservableList.clear();
+            }).addCloseButton("否","CLOSE", null)
+            .createAndShow();
+
     }
 
     public void autofill() {

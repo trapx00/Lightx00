@@ -66,6 +66,11 @@
                             <MaterialDesignIconView glyphName="CASH_100" glyphSize="24" fill="black" />
                         </graphic>
                     </JFXButton>
+                    <JFXButton onAction="#onInitialEstablishmentFunctionClicked" prefHeight="60" prefWidth="200" text="期初建账" textFill="#000000">
+                        <graphic>
+                            <MaterialDesignIconView glyphName="ATTACHMENT" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
                     <JFXButton onAction="#onSaleDetailFunctionClicked" prefHeight="60" prefWidth="200" text="查看销售明细表" textFill="#000000">
                         <graphic>
                             <FontAwesomeIconView glyphName="LINE_CHART" glyphSize="18" fill="black" />
