@@ -18,7 +18,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServic
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;

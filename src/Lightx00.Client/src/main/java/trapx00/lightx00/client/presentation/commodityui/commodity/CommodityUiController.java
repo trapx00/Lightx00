@@ -7,9 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
@@ -47,6 +50,10 @@ public class CommodityUiController implements ExternalLoadableUiController {
     TreeItem<String> root;
     private InventoryStaffUiController inventoryStaffUiController;
     private  String currentSortId;
+    private final Node rootIcon = new ImageView(
+            new Image("/img/com.png")
+    );
+
 
     public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
     private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
@@ -85,7 +92,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
             for (CommoditySortVo goodskindsVO : commoditySortVos) {
                 t = goodskindsVO;
                 if (t.getPreId() == null) {
-                    TreeItem<String> treeItem = new TreeItem<>(t.getName());
+                    TreeItem<String> treeItem = new TreeItem<>(t.getName(),rootIcon);
                     root.getChildren().add(treeItem);
                     treeItem.setExpanded(true);
                     showkinds(treeItem);

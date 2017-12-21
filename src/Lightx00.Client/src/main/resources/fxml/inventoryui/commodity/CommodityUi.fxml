@@ -32,33 +32,33 @@
         </Label>
     </HBox>
 
-
-    <HBox alignment="CENTER_LEFT" maxWidth="2000">
+    <HBox alignment="CENTER_RIGHT" maxWidth="2000">
         <MaterialIconView glyphName="BORDER_COLOR" glyphSize="15" />
         <JFXTextField fx:id="tfSearch" promptText="按Id搜索，按回车执行搜索"/>
         <padding>
-        <Insets right="10.0" />
-         </padding>
+            <Insets right="10.0" />
+        </padding>
     </HBox>
 
 
     <HBox alignment="CENTER_LEFT" spacing="20">
         <HBox alignment="CENTER_LEFT" >
-            <TreeView fx:id="tv" maxHeight="2000" maxWidth="500" >
+            <TreeView fx:id="tv" maxHeight="4000" maxWidth="4000" >
 
             </TreeView>
         </HBox>
-        <VBox alignment="CENTER" maxWidth="5000">
+
+        <HBox alignment="CENTER_RIGHT" maxWidth="5000">
             <JFXTreeTableView fx:id="commodityTable" maxHeight="5000.0" maxWidth="5000.0" prefHeight="600.0" prefWidth="600.0">
                  <columns>
                     <JFXTreeTableColumn fx:id="tableNameColumn" prefWidth="150" text="商品名" />
-                    <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" text="商品ID" />
+                    <JFXTreeTableColumn fx:id="tableIdColumn"  prefWidth="150" text="商品ID" />
                     <JFXTreeTableColumn fx:id="tableSortColumn" prefWidth="150" text="所在商品分类" />
                     <JFXTreeTableColumn fx:id="tableAmountColumn" prefWidth="150" text="商品数量" />
                     <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="150" text="生产日期" />
                 </columns>
           </JFXTreeTableView>
-        </VBox>
+        </HBox>
     </HBox>
 
 

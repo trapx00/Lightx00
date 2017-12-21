@@ -10,6 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountModel;
@@ -17,12 +20,16 @@ import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -79,10 +86,26 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/inventoryui/check/InventoryPictureUi.fxml").loadAndGetPackageWithoutException();
     }
+
+
     public void onExportClicked(ActionEvent actionEvent) {
-        PromptDialogHelper.start("导出成功","已经导出到C:\\233.xlsx。")
-                .addCloseButton("去看看","FORWARD",null)
-                .addCloseButton("完成","DONE",null)
-                .createAndShow();
+        if (viewModels.get(0)!= null) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("选择路径");
+            fileChooser.setInitialFileName(String.format("库存快照-%s.xls", DateHelper.currentDateString("yyyy_MM_dd-HH_mm_ss")));
+            File file = fileChooser.showSaveDialog(new Stage());
+            if (file != null) {
+                blService.export(file.getParent());
+
+                PromptDialogHelper.start("导出成功！",String.format("经营情况表已经导出到%s。", file.getAbsolutePath()))
+                        .addCloseButton("好","CHECK",null)
+                        .createAndShow();
+            }
+
+        } else {
+            PromptDialogHelper.start("导出失败！","请先查询报表！")
+                    .addCloseButton("好","CHECK",null)
+                    .createAndShow();
+        }
     }
 }
