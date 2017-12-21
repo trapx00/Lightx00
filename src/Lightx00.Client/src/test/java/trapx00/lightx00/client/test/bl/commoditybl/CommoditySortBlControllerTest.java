@@ -15,7 +15,7 @@ public class CommoditySortBlControllerTest {
 
     private CommoditySortBlController service= CommoditySortServiceFactory.getController();
     String nextIds[]={"S0002"};
-    CommoditySortVo Led=new CommoditySortVo("S0001","Led", null,
+    CommoditySortVo Led=new CommoditySortVo("S0001","Led", 0,
             "",  null);
 
 

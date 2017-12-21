@@ -182,11 +182,11 @@ public class CommoditySortBlController implements CommoditySortBlService,Commodi
 
     @Override
     public CommoditySortPo fromVoToPo(CommoditySortVo vo) {
-        return new CommoditySortPo(vo.getId(),vo.getName(),null,vo.getPreId(),vo.getCommoditySortItems());
+        return new CommoditySortPo(vo.getId(),vo.getName(),vo.getLeaf(),vo.getPreId(),vo.getCommoditySortItems());
     }
 
     @Override
     public CommoditySortVo fromPoToVo(CommoditySortPo po) {
-        return new CommoditySortVo(po.getId(),po.getName(),null,po.getPreId(),po.getCommoditySortItems());
+        return new CommoditySortVo(po.getId(),po.getName(),po.getLeaf(),po.getPreId(),po.getCommoditySortItems());
     }
 }

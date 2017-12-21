@@ -16,6 +16,8 @@ public class CommoditySortPo implements Serializable{
     private String name;
     @DatabaseField
     private String preId;//父类
+    @DatabaseField
+    private int leaf;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommoditySortItem[] commoditySortItems;
 
@@ -24,20 +26,28 @@ public class CommoditySortPo implements Serializable{
 
     }
 
-    public CommoditySortPo(String id, String name, CommodityItem[] commodityList,
+    public CommoditySortPo(String id, String name, int leaf,
                            String preId, CommoditySortItem[] commoditySortItems) {
+        this.leaf=leaf;
         this.id = id;
         this.name = name;
         this.preId = preId;
         this.commoditySortItems=commoditySortItems;
     }
+
+
     public CommoditySortItem[] getCommoditySortItems() {
         return commoditySortItems;
     }
 
-    public void setCommoditySortItems(CommoditySortItem[] commoditySortItems) {
-        this.commoditySortItems = commoditySortItems;
+    public int getLeaf() {
+        return leaf;
     }
+
+    public void setLeaf(int leaf) {
+        this.leaf = leaf;
+    }
+
 
     public String getId() {
         return id;
@@ -62,8 +72,5 @@ public class CommoditySortPo implements Serializable{
     }
 
 
-    public void setPreId(String preId) {
-        this.preId = preId;
-    }
 
 }

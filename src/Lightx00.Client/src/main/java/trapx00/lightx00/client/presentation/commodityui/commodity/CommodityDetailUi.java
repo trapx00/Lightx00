@@ -28,7 +28,7 @@ public class CommodityDetailUi  implements ExternalLoadableUiController {
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/commodity/CommodityModificationUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/commodity/CommodityDetailUi.fxml").loadAndGetPackageWithoutException();
     }
 
     public void show(CommodityVo oldcommodityVo, Runnable runnable) {
@@ -73,28 +73,4 @@ public class CommodityDetailUi  implements ExternalLoadableUiController {
     }
 
 
-
-    public void onBtnSubmitClicked(ActionEvent actionEvent) {
-        if (tfretailPrice.validate()&&tfpurchasePrice.validate()&&tfName.validate()&&
-                tfwarningValue.validate()&&tfAmount.validate()) {
-            commodityVo.setName(tfName.getText());
-            commodityVo.setAmount(Double.valueOf(tfAmount.getText()));
-            commodityVo.setWarningValue(Double.valueOf(tfwarningValue.getText()));
-            commodityVo.setPurchasePrice(Double.valueOf(tfpurchasePrice.getText()));
-            commodityVo.setRetailPrice(Double.valueOf(tfretailPrice.getText()));
-            blService.modify(commodityVo);
-            PromptDialogHelper.start("修改成功！","商品已经修改成功。")
-                    .addCloseButton("好","CHECK",e -> close())
-                    .createAndShow();
-        }
-    }
-
-    public void onBtnCancelClicked(ActionEvent actionEvent) {
-        close();
-    }
-
-    private void close() {
-        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
-        runnable.run();
-    }
 }

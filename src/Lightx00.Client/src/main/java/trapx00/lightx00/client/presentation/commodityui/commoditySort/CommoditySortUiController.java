@@ -1,13 +1,8 @@
 package trapx00.lightx00.client.presentation.commodityui.commoditySort;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
@@ -15,21 +10,14 @@ import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlServiceFactory;
-import trapx00.lightx00.client.presentation.commodityui.commodity.AddCommodityDialog;
-import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
-import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class CommoditySortUiController  implements ExternalLoadableUiController {
-    public JFXButton selectAllButton;
     public JFXButton deleteButton;
     public TreeView<String> tv;
     public JFXButton addCommodityButton;
@@ -37,13 +25,14 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     public JFXTextField tfOperator;
     public JFXTextField tfDate;
     public JFXTextField tfId;
-    public JFXTreeTableView<CommoditySortModel> commodityTable;
-    public JFXTreeTableColumn<CommoditySortModel, String> tableNameColumn;
-    public ObservableList<CommoditySortModel> commodityModels = FXCollections.observableArrayList();
+    public JFXTextField tfName;
 
 
     TreeItem<String> root;
+    String currentId;
+    TreeItem<String> currentItem;
     private CommoditySortBlService blService= CommoditySortBlServiceFactory.getInstance();
+    private CommodityBlService blService1=CommodityBlServiceFactory.getInstance();
 
     @FXML
     private void initialize() {
@@ -57,11 +46,20 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
         tv.setRoot(root);
         tv.setShowRoot(false);
         showGoodsTree();
-    }
+        tv.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                currentId = blService.query(new CommoditySortQueryVo().eq("name",
+                        tv.getSelectionModel().getSelectedItem().getValue()))[0].getId();
+                currentItem=tv.getSelectionModel().getSelectedItem();
+                update(new CommoditySortQueryVo().eq("id", currentId
+                ));
 
+            }
+        });
+    }
     public void showGoodsTree(){
         try{
-            CommoditySortVo[] commoditySortVos = blService.getAllCommoditySort();
+            CommoditySortVo[] commoditySortVos = blService.query(new CommoditySortQueryVo());
             CommoditySortVo t;
             for (CommoditySortVo goodskindsVO : commoditySortVos) {
                 t = goodskindsVO;
@@ -73,10 +71,10 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
                 }
             }
         }catch (UncheckedRemoteException e){
-
         }
 
     }
+
     private void showkinds(TreeItem<String> treeItem)  {
         try{
             CommoditySortVo commoditySortVo =blService.query(new CommoditySortQueryVo().eq("name",treeItem.getValue()))[0];
@@ -113,28 +111,75 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     }
 
     private void update(CommoditySortQueryVo queryVo) {
-        CommoditySortVo[] queryResult = blService.query(queryVo);
-        commodityModels.clear();
-        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySortModel::new).collect(Collectors.toList()));
+        CommoditySortVo queryResult = blService.query(queryVo)[0];
+        tfId.setText(queryResult.getId());
+        tfName.setText(queryResult.getName());
+        if(queryResult.getPreId()==null)
+            tfOperator.setText("");
+        else
+            tfOperator.setText(blService.query(new CommoditySortQueryVo().eq("id",queryResult.getPreId()))[0].getName());
+        tfDate.setText((queryResult.getLeaf()==1 ? "是":"不是"));
+    }
 
+    public  boolean delete() {
+        boolean isdelete;
+        CommodityVo[] temp = blService1.query(new CommodityQueryVo().eq("type", currentId));
+        CommoditySortVo[] temptemp=blService.query(new CommoditySortQueryVo().eq("preId",currentId));
+        if (temp.length==0&&temptemp.length==0)
+            isdelete = true;
+        else
+            isdelete = false;
+        return isdelete;
     }
 
 
-
-    public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        update();
-    }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
+        CommoditySortVo selected=blService.query(new CommoditySortQueryVo().eq("id", currentId))[0];
+        if (selected != null) {
+            new PromptDialogHelper("确定删除",
+                    String.format("您确定要删除商品分类(id: %s, 名称: %s)吗？", selected.getId(), selected.getName()))
+                    .addCloseButton("取消","CLOSE",null)
+                    .addButton("确定","CHECK",e -> {
+                        if(!delete())
+                            new PromptDialogHelper("删除失败",String.format("分类（id:%s）含有分类或商品",selected.getId()))
+                                    .addCloseButton("返回","check",e2->{
+                                        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                        }).createAndShow();
+                        else{
+                                blService.delete(selected);
+                                new PromptDialogHelper("删除成功",String.format("分类(id: %s)已经删除！", selected.getId()))
+                                        .addCloseButton("好","CHECK", e3 -> {
+                                            FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                                            currentItem.getParent().getChildren().remove(currentItem);
+                                        })
+                                        .createAndShow();
+                            }
+
+                    }).createAndShow();
+        }
 
     }
     public void onAddButtonClicked(ActionEvent actionEvent){
-
+        CommoditySortVo selected=blService.query(new CommoditySortQueryVo().eq("id", currentId))[0];
+        if(selected.getLeaf()==1){
+            new PromptDialogHelper("","当前选中分类为叶节点，无法添加子分类").addCloseButton("取消","CLOSE",null)
+                    .createAndShow();
+        }else{
+            new AddCommoditySortDialog().show(currentId,this::change);
+        }
+    }
+    public void change(){
+        CommoditySortVo[] commoditySortVo=blService.query(new CommoditySortQueryVo().eq("preId",currentId));
+        for(CommoditySortVo commoditySortVo1:commoditySortVo){
+            currentItem.getChildren().remove(0,currentItem.getChildren().size());
+        }
+        showkinds(currentItem);
     }
 
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/commodity/CommoditySortUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/commoditysort/CommoditySortUi.fxml").loadAndGetPackageWithoutException();
     }
 
     public void onBtnModifyClicked(ActionEvent actionEvent) {

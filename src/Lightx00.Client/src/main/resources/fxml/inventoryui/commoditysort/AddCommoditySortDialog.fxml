@@ -11,11 +11,12 @@
 <?import javafx.scene.text.Font?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.commodityui.commodity.AddCommodityDialog"
-      prefHeight="600.0" prefWidth="400.0" alignment="TOP_CENTER">
-    <Label text="增加商品" textFill="#5e5e5e">
+      fx:controller="trapx00.lightx00.client.presentation.commodityui.commoditySort.AddCommoditySortDialog"
+      prefHeight="500.0" prefWidth="400.0" alignment="TOP_CENTER">
+    <Label text="增加商品分类" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
@@ -27,11 +28,6 @@
             <ColumnConstraints prefWidth="200"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
             <RowConstraints minHeight="50"/>
             <RowConstraints minHeight="50"/>
             <RowConstraints minHeight="50"/>
@@ -49,25 +45,10 @@
         <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfName" />
 
         <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="种类"/>
-        <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfSort" disable="true"  />
+        <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfSort"   disable="true"  />
 
-        <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="数量"/>
-        <JFXTextField GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfAmount" />
-
-        <Label GridPane.rowIndex="4" GridPane.columnIndex="0"  text="批次"/>
-        <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfBatch" />
-
-        <Label GridPane.rowIndex="5" GridPane.columnIndex="0"  text="批号"/>
-        <JFXTextField GridPane.rowIndex="5" GridPane.columnIndex="1" fx:id="tfBatchNo" />
-
-        <Label GridPane.rowIndex="6" GridPane.columnIndex="0"  text="进价"/>
-        <JFXTextField GridPane.rowIndex="6" GridPane.columnIndex="1" fx:id="tfpurchasePrice"/>
-
-        <Label GridPane.rowIndex="7" GridPane.columnIndex="0"  text="售价"/>
-        <JFXTextField GridPane.rowIndex="7" GridPane.columnIndex="1" fx:id="tfretailPrice"/>
-
-        <Label GridPane.rowIndex="8" GridPane.columnIndex="0"  text="警戒值"/>
-        <JFXTextField GridPane.rowIndex="8" GridPane.columnIndex="1" fx:id="tfwarningValue"/>
+        <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="是否为叶节点"/>
+        <JFXComboBox GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="jfxComboBox" editable="false" />
 
     </GridPane>
 

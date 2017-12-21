@@ -25,7 +25,7 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
         String nextIds[]={"S0002"};
         String lowNextIds[]={""};
         return new CommoditySortVo[]{
-                new CommoditySortVo("S0001","Led", null,
+                new CommoditySortVo("S0001","Led", 0,
                 "", null)
         };
     }

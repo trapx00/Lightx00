@@ -2,6 +2,7 @@ package trapx00.lightx00.client.presentation.commodityui.commodity;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
@@ -33,6 +34,7 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         AddCommodityDialog ui = externalLoadedUiPackage.getController();
         ui.tfId.setText(blService.getId(text));
+        ui.tfSort.setText(text);
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
         ((AddCommodityDialog)externalLoadedUiPackage.getController()).runnable = runnable;
 
@@ -45,6 +47,14 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
 
     @FXML
     private void initialize() {
+        RequiredFieldValidator validator1 = new RequiredFieldValidator();
+        validator1.setMessage("请输入");
+        tfName.getValidators().add(validator1);
+        tfName.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                tfName.validate();
+            }
+        });
         DoubleValidator validator = new DoubleValidator();
         validator.setMessage("请输入数字");
         tfAmount.getValidators().add(validator);

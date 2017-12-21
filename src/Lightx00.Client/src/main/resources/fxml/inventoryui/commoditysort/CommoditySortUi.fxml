@@ -73,9 +73,9 @@
                 <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="tfId" editable="false"/>
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text="种类名称"/>
                 <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="tfName" editable="false" />
-                <Label GridPane.columnIndex="0" GridPane.rowIndex="2" text="日期"/>
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="2" text="是否是叶节点"/>
                 <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="tfDate" editable="false" />
-                <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text="制定者"/>
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text="所在分类"/>
                 <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="tfOperator" editable="false" />
             </GridPane>
         </VBox>

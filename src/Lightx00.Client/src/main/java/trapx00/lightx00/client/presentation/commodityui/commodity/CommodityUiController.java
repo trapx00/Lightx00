@@ -20,16 +20,12 @@ import trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
-import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
-import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 
-import java.rmi.RemoteException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class CommodityUiController implements ExternalLoadableUiController {
@@ -50,7 +46,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
     private JFXTextField tfSearch;
     TreeItem<String> root;
     private InventoryStaffUiController inventoryStaffUiController;
-    private  String leadingtest;
+    private  String currentSortId;
 
     public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
     private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
@@ -73,9 +69,9 @@ public class CommodityUiController implements ExternalLoadableUiController {
         showGoodsTree();
         tv.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                leadingtest= blService1.query(new CommoditySortQueryVo().eq("name",
+                currentSortId = blService1.query(new CommoditySortQueryVo().eq("name",
                         tv.getSelectionModel().getSelectedItem().getValue()))[0].getId();
-                update(new CommodityQueryVo().eq("type",leadingtest
+                update(new CommodityQueryVo().eq("type", currentSortId
                        ));
 
             }
@@ -133,7 +129,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
     }
 
     private void update() {
-        update(new CommodityQueryVo());
+        update(new CommodityQueryVo().eq("type",currentSortId));
     }
 
     private void update(CommodityQueryVo queryVo) {
@@ -152,8 +148,7 @@ public class CommodityUiController implements ExternalLoadableUiController {
         tableSortColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getType()));
         commodityTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-               // CommodityVo selected = getSelected();
-
+               new CommodityDetailUi().show(getSelected(),this::update);
             }
         });
 
@@ -187,7 +182,14 @@ public class CommodityUiController implements ExternalLoadableUiController {
     }
 
     public void onAddButtonClicked(ActionEvent actionEvent){
-        new AddCommodityDialog().show(leadingtest,this::update);
+        if(blService1.query(new CommoditySortQueryVo().idEq(currentSortId))[0].getLeaf()==1){
+            new AddCommodityDialog().show(currentSortId,this::update);
+        }
+        else{
+            PromptDialogHelper.start("添加失败","当前分类不是叶节点分类无法添加商品").addCloseButton("确定","CHECK",null)
+                    .createAndShow();
+        }
+
     }
 
     @Override

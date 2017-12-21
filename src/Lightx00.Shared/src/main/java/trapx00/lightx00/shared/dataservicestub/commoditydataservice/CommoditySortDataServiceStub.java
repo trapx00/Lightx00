@@ -32,8 +32,8 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
 
     @Override
     public CommoditySortPo[] display() {
-        CommoditySortPo commoditySortPo= new CommoditySortPo("PRO-0002","DgLed",null,"PRO-0001",null);
-        CommoditySortPo  commoditySortPo1=new CommoditySortPo("PRO-0001","Led",null,null,null);
+        CommoditySortPo commoditySortPo= new CommoditySortPo("PRO-0002","DgLed",0,"PRO-0001",null);
+        CommoditySortPo  commoditySortPo1=new CommoditySortPo("PRO-0001","Led",0,null,null);
         CommoditySortPo[]result={commoditySortPo,commoditySortPo1};
         return result;
 
