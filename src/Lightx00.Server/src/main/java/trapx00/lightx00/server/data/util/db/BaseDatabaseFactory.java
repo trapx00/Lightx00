@@ -76,34 +76,40 @@ public class BaseDatabaseFactory {
             Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
             TableUtils.dropTable(financeStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
-            financeStaffDao.create(new FinanceStaffPo("Ë¥¢Âä°‰∫∫Âëò", "1", new Date(), "123", "123"));
+            financeStaffDao.create(new FinanceStaffPo("≤∆ŒÒ»À‘±", "1", new Date(), "123", "123"));
 
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
 <<<<<<< HEAD
+<<<<<<< HEAD
             saleStaffDao.create(new SaleStaffPo("ËøõË¥ßÈîÄÂîÆ‰∫∫Âëò", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
+=======
+            saleStaffDao.create(new SaleStaffPo("Ω¯ªıœ˙ €»À‘±", "2", new Date(), "zlz", "zlz", SaleStaffType.President));
+            saleStaffDao.create(new SaleStaffPo("Ω¯ªıœ˙ €»À‘±", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
+>>>>>>> origin/surevil
 
 
             Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
             TableUtils.dropTable(inventoryStaffPos, true);
             TableUtils.createTableIfNotExists(connectionSource, InventoryStaffPo.class);
-            inventoryStaffPos.create(new InventoryStaffPo("Â∫ìÂ≠òÁÆ°ÁêÜ‰∫∫Âëò", "1", new Date(), "12", "12"));
+            inventoryStaffPos.create(new InventoryStaffPo("ø‚¥Êπ‹¿Ì»À‘±", "1", new Date(), "12", "12"));
 
             Dao<CommodityPo,String>commodityPos=createDao(CommodityPo.class);
             TableUtils.dropTable(commodityPos, true);
             TableUtils.createTableIfNotExists(connectionSource, CommodityPo.class);
-            commodityPos.create(new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"‰∏Ä",
+            commodityPos.create(new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"“ª",
                     "01",34,34,34,34,100));
-            commodityPos.create(new CommodityPo("PRO-0002-0002","SmaqwellLed","PRO-0002",13,new Date(),"‰∏Ä",
+            commodityPos.create(new CommodityPo("PRO-0002-0002","SmaqwellLed","PRO-0002",13,new Date(),"“ª",
                     "01",34,34,34,34,100));
-            commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"‰∏Ä",
+            commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"“ª",
                     "01",34,34,34,34,100));
 
 
             Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);
             TableUtils.dropTable(commoditySortPos, true);
             TableUtils.createTableIfNotExists(connectionSource, CommoditySortPo.class);
+<<<<<<< HEAD
             commoditySortPos.create( new CommoditySortPo("PRO-0001","Led",0,null,null));
             commoditySortPos.create(new CommoditySortPo("PRO-0002","DgLed",1,"PRO-0001",null));
             commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",1,"PRO-0001",null));
@@ -111,6 +117,11 @@ public class BaseDatabaseFactory {
 =======
             saleStaffDao.create(new SaleStaffPo("ËøõË¥ßÈîÄÂîÆ‰∫∫Âëò", "2", new Date(), "zlz", "zlz", SaleStaffType.President));
 >>>>>>> origin/chenjunda
+=======
+            commoditySortPos.create( new CommoditySortPo("PRO-0001","Led",null,null,null));
+            commoditySortPos.create(new CommoditySortPo("PRO-0002","DgLed",null,"PRO-0001",null));
+            commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",null,"PRO-0001",null));
+>>>>>>> origin/surevil
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="trapx00.lightx00.client.presentation.clientui.ClientModifyUiController"
+      prefHeight="800.0" prefWidth="600.0" spacing="20">
+    <padding>
+        <Insets top="10" left="20" bottom="20" right="20"/>
+    </padding>
+    <Label text="现金费用单" textFill="#5e5e5e">
+        <font>
+            <Font name="System Bold" size="32.0"/>
+        </font>
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Label>
+
+    <VBox maxWidth="500" spacing="30">
+        <JFXTextField fx:id="clientId" editable="false" prefWidth="150" promptText="编号"/>
+        <JFXTextField fx:id="clientName" editable="true" prefWidth="150" promptText="姓名"/>
+        <JFXTextField fx:id="clientType" editable="true" prefWidth="150" promptText="分类"/>
+        <JFXTextField fx:id="clientLevel" editable="true" prefWidth="150" promptText="级别"/>
+        <JFXTextField fx:id="clientPhone" editable="true" prefWidth="150" promptText="电话"/>
+        <JFXTextField fx:id="clientAddress" editable="true" prefWidth="150" promptText="地址"/>
+        <JFXTextField fx:id="clientZipCode" editable="true" prefWidth="150" promptText="邮编"/>
+        <JFXTextField fx:id="clientEmail" editable="true" prefWidth="150" promptText="电子邮箱"/>
+        <JFXTextField fx:id="clientReceivableQuota" editable="true" prefWidth="150" promptText="应收额度"/>
+        <JFXTextField fx:id="clientReceivable" editable="false" prefWidth="150" promptText="应收"/>
+        <JFXTextField fx:id="clientPayable" editable="false" prefWidth="150" promptText="应付"/>
+        <JFXTextField fx:id="clientDefaultOperator" editable="false" onMouseClicked="#selectEmployee" prefWidth="150" promptText="默认业务员"/>
+        <JFXTextField fx:id="clientOperatorId" editable="false" prefWidth="150" promptText="操作员ID"/>
+    </VBox>
+
+    <Separator/>
+    <HBox spacing="20">
+        <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked"
+                   style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
+            <graphic>
+                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked"
+                   style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
+            <graphic>
+                <MaterialIconView glyphName="REFRESH" glyphSize="24"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked"
+                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
+            <graphic>
+                <MaterialIconView glyphName="SAVE" glyphSize="24"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked"
+                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消">
+            <graphic>
+                <FontAwesomeIconView glyphName="HOME" glyphSize="24"/>
+            </graphic>
+        </JFXButton>
+    </HBox>
+
+</VBox>
