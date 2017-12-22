@@ -148,8 +148,13 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public void onBtnSetItemClicked(){
         InventoryGiftItemModel inventoryGiftItemModel=getSelected();
         if(inventoryGiftItemModel!=null){
-            new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
-                    getValue().getPromotionCommodityObjectProperty().setAmount(aDouble));
+            new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItemModel.getPromotionCommodityObjectProperty().setAmount(aDouble));
+            if(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getAmount()>
+                   commoditySelection.queryId(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getCommodityId()).getAmount() )
+            {
+                PromptDialogHelper.start("失败","赠送数量超过库存数量");
+                inventoryGiftItemModel.getPromotionCommodityObjectProperty().setAmount(0);
+            }
         }
 
     }

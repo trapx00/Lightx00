@@ -24,6 +24,8 @@ import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelec
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
+import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftItemModel;
+import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftItemModificationUi;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -63,7 +65,6 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public JFXTreeTableView<CommoditySelectionItemModel> commodityTable;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableNameColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableSortColumn;
-    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableAmountColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableWarningColumn;
 
@@ -109,7 +110,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
 
     public void initialize() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
-        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getActualAmount())));
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
         tcStockAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
         tcWarningWalue.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getWarningValue())));
@@ -145,7 +146,6 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         tableWarningColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getWarningValue())));
         tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
-        tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
         tableSortColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
 
         commodityTable.setOnMouseClicked(event -> {
@@ -236,7 +236,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         CommodityVo [] commodityVos=inventoryGiftItemModelObservableList.stream().map(CommoditySelectionItemModel::getCommodityVoObjectProperty).toArray(CommodityVo[]::new);
         InventoryWarningItem[] inventoryWarningItems=new InventoryWarningItem[commodityVos.length];
         for(int i=0;i<commodityVos.length;i++){
-            inventoryWarningItems[i]=new InventoryWarningItem(commodityVos[i].getId(),commodityVos[i].getAmount(),commodityVos[i].getRecentRetailPrice()
+            inventoryWarningItems[i]=new InventoryWarningItem(commodityVos[i].getId(),commodityVos[i].getActualAmount()-commodityVos[i].getAmount(),commodityVos[i].getRecentRetailPrice()
             );
         }
         return new InventoryDetailBillVo(
@@ -311,6 +311,14 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         currentEmployee.setValue(null);
         currentCommodity.setValue(null);
         inventoryGiftItemModelObservableList.clear();
+    }
+    public void onBtnSetItemClicked(){
+        CommodityVo commodityVo=getSelected();
+        if(commodityVo!=null){
+            new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
+                    getValue().getCommodityVoObjectProperty().setActualAmount(aDouble));
+        }
+
     }
 
     public void auto() {

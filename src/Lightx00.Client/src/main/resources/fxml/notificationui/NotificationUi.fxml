@@ -44,8 +44,8 @@
         <JFXButton fx:id="selectAllButton" buttonType="RAISED" onAction="#onRefreshButtonClicked"
                    style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF" text="更新">
             <graphic>
-                <MaterialIconView glyphName="REFRESH" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
+            <MaterialIconView glyphName="REFRESH" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             <HBox.margin>
                 <Insets left="10.0" right="10.0"/>
             </HBox.margin>

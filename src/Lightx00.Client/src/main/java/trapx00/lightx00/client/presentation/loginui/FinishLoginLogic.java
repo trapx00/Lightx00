@@ -52,7 +52,7 @@ public class FinishLoginLogic {
             case Manager:
             case Admin:
             case SaleStaff:
-                return "/fxml/mainui/SaleStaffUi.fxml";
+                //return "/fxml/mainui/SaleStaffUi.fxml";
             case FinanceStaff:
                 return "/fxml/mainui/FinanceStaffUi.fxml";
             default:

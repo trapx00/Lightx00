@@ -9,10 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
+import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
+import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
 
@@ -31,7 +35,7 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
     @FXML private JFXTreeTableColumn<InventoryViewModel, Double> tcoutSold;
 
     private ObservableList<InventoryViewModel> viewModels = FXCollections.observableArrayList();
-   // private InventoryCheckBlService blService= InventoryCheckBlServiceFactory.getInstance();
+    private InventoryCheckBlService blService= InventoryCheckBlServiceFactory.getInstance();
 
     public void onBtnFilterClicked(ActionEvent actionEvent) {
         updateItems();
@@ -44,15 +48,19 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
     public void updateItems() {
         viewModels.clear();
 
-        //InventoryViewVo inventoryViewVo=null;
-           /* try {
+        InventoryViewVo inventoryViewVo=null;
+            try {
                 inventoryViewVo=blService.getInventoryView(
                         DateHelper.fromLocalDate(startDatePicker.getValue()),
                         DateHelper.fromLocalDate(endDatePicker.getValue()));
-            } catch (Exception ignored) { }*/
+                viewModels.add(new InventoryViewModel(new InventoryViewItem(new Date(),inventoryViewVo.getItems().getInventoryAmount(),
+                        inventoryViewVo.getItems().getInventoryMoney(),inventoryViewVo.getItems().getOutOfInventoryAmount()
+                        ,inventoryViewVo.getItems().getOutOfInVentoryMoney()
+                        ,inventoryViewVo.getItems().getSum(),inventoryViewVo.getItems().getInSoldPrice(),inventoryViewVo.getItems().getOutSoldPrice())));
+            } catch (Exception ignored) { }
 
-        viewModels.add(new InventoryViewModel(new InventoryViewItem(new Date(),123,
-                33,44,55,66,77,88)));
+
+
     }
 
     @FXML

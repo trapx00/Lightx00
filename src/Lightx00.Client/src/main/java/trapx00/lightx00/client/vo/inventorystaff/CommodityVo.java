@@ -19,6 +19,16 @@ public class CommodityVo {
     private double recentRetailPrice;//最近售价
     private double warningValue;//警戒值
 
+    public double getActualAmount() {
+        return actualAmount;
+    }
+
+    public void setActualAmount(double actualAmount) {
+        this.actualAmount = actualAmount;
+    }
+
+    private double actualAmount=0;
+
     public CommodityVo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
                        double recentPurchasePrice, double retailPrice, double recentRetailPrice,

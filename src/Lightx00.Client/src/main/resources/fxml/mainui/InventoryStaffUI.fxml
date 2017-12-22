@@ -52,11 +52,6 @@
                             <FontAwesomeIconView glyphName="LIST" glyphSize="18" fill="black" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onCommoditySortFunctionClicked" prefHeight="60" prefWidth="200" text="商品分类管理" textFill="#000000" >
-                        <graphic>
-                            <FontAwesomeIconView glyphName="INDENT" glyphSize="18" fill="black" />
-                        </graphic>
-                    </JFXButton>
                     <JFXButton onAction="#onInventoryCheckFunctionClicked" prefHeight="60" prefWidth="200" text="库存查看" textFill="#000000" >
                         <graphic>
                         <MaterialIconView glyphName="RECEIPT" glyphSize="24" fill="black" />

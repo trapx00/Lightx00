@@ -58,13 +58,21 @@
             <columns>
                 <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="商品"/>
                 <JFXTreeTableColumn fx:id="tcId" prefWidth="100" text="Id" />
-                <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
+                <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="实际数量" />
                 <JFXTreeTableColumn fx:id="tcStockAmount" prefWidth="100" text="库存数量"/>
                 <JFXTreeTableColumn fx:id="tcWarningWalue" prefWidth="100" text="警戒值"/>
             </columns>
         </JFXTreeTableView>
 
         <HBox prefWidth="100" spacing="10" alignment="BASELINE_RIGHT">
+            <JFXButton fx:id="btnSet" onAction="#onBtnSetItemClicked" style="-fx-text-fill: #FFFFFF" text="">
+                <graphic>
+                    <MaterialIconView glyphName="CALL_RECEIVED" glyphSize="24" />
+                </graphic>
+                <HBox.margin>
+                    <Insets right="10.0" />
+                </HBox.margin>
+            </JFXButton>
             <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteItemClicked" style="-fx-text-fill: #000000;" text="">
                 <graphic>
                     <MaterialIconView glyphName="DELETE" glyphSize="24" />
@@ -81,7 +89,6 @@
             <columns>
                 <JFXTreeTableColumn fx:id="tableNameColumn" prefWidth="150" text="商品名" />
                 <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" text="商品ID" />
-                <JFXTreeTableColumn fx:id="tableAmountColumn" prefWidth="150" text="数量" />
                 <JFXTreeTableColumn fx:id="tableSortColumn" prefWidth="150" text="库存数量" />
                 <JFXTreeTableColumn fx:id="tableWarningColumn" prefWidth="150" text="警戒值" />
             </columns>
