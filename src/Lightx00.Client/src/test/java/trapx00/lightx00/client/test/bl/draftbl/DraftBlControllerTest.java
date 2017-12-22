@@ -9,6 +9,7 @@ import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.draft.DraftType;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 
 public class DraftBlControllerTest {
     private DraftBlController controller =  new DraftBlControllerMock();
-    private FinanceStaffVo saver = new FinanceStaffVo("123","123",new Date(),"123","123");
+    private FinanceStaffVo saver = new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true);
     @Test
     public void saveAsDraft() throws Exception {
         assertEquals(ResultMessage.Success, controller.saveAsDraft( new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation(1,0,"123")}, 0.0)));

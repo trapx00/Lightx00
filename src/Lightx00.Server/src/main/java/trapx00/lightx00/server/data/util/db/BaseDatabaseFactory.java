@@ -13,11 +13,14 @@ import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServi
 import java.sql.SQLException;
 import java.util.Date;
 
+import trapx00.lightx00.shared.po.admin.AdminPo;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
+import trapx00.lightx00.shared.po.manager.ManagerPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
@@ -76,17 +79,29 @@ public class BaseDatabaseFactory {
             Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
             TableUtils.dropTable(financeStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
-            financeStaffDao.create(new FinanceStaffPo("������Ա", "1", new Date(), "123", "123"));
+            financeStaffDao.create(new FinanceStaffPo("10002", "财务经理", new Date(), "123456",EmployeeState.Active,true));
+            financeStaffDao.create(new FinanceStaffPo("10103", "财务职员", new Date(), "123456",EmployeeState.Active,false));
 
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
-            saleStaffDao.create(new SaleStaffPo("进货销售人员", "1", new Date(), "zlz", "zlz", SaleStaffType.President));
+            saleStaffDao.create(new SaleStaffPo("10004", "销售主管", new Date(), "123456", SaleStaffType.AStaff,EmployeeState.Active,true));
+            saleStaffDao.create(new SaleStaffPo("10201", "C销售主任", new Date(), "123456", SaleStaffType.AStaff,EmployeeState.Active,false));
 
             Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
             TableUtils.dropTable(inventoryStaffPos, true);
             TableUtils.createTableIfNotExists(connectionSource, InventoryStaffPo.class);
-            inventoryStaffPos.create(new InventoryStaffPo("qwe", "1", new Date(), "12", "12"));
+            inventoryStaffPos.create(new InventoryStaffPo("10001", "库存经理", new Date(), "123456", EmployeeState.Active));
+
+            Dao<ManagerPo,String> managerPos =createDao(ManagerPo.class);
+            TableUtils.dropTable(managerPos, true);
+            TableUtils.createTableIfNotExists(connectionSource, ManagerPo.class);
+            managerPos.create(new ManagerPo("10003", "总经理", new Date(), "123456", EmployeeState.Active));
+
+            Dao<AdminPo,String> adminPos = createDao(AdminPo.class);
+            TableUtils.dropTable(adminPos, true);
+            TableUtils.createTableIfNotExists(connectionSource, AdminPo.class);
+            adminPos.create(new AdminPo("10006", "管理员", new Date(), "123456", EmployeeState.Active));
 
             Dao<CommodityPo,String>commodityPos=createDao(CommodityPo.class);
             TableUtils.dropTable(commodityPos, true);

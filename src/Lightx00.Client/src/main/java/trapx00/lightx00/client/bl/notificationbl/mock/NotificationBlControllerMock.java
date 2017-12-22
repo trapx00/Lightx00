@@ -9,6 +9,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.Date;
@@ -31,7 +32,7 @@ public class NotificationBlControllerMock extends NotificationBlController {
      * @return current users's notifications
      */
     public NotificationVo[] update() {
-        EmployeeVo employeeVo = new FinanceStaffVo("123","123", new Date(),"123","0001");
+        EmployeeVo employeeVo = new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true);
         return new NotificationVo[] {
                 new OtherNotificationVo(1,new Date(), employeeVo, new EmployeeVo[] {employeeVo}, "test"),
                 new BillApprovalNotificationVo(2,new Date(),employeeVo, new EmployeeVo[] {employeeVo},

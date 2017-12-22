@@ -5,6 +5,10 @@ import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientType;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
+import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
+
+import java.util.Date;
 
 public class ClientBlServiceStub implements ClientBlService {
     @Override
@@ -20,7 +24,7 @@ public class ClientBlServiceStub implements ClientBlService {
                 "12345679@qq.com",
                 123,
                 456,
-                new SaleStaffVo(null, null, null, null, null,null));
+                new SaleStaffVo("10001","销售经理",new Date(),"123456", EmployeeState.Active,true, SaleStaffType.AStaff));
         return clientVos;
     }
 

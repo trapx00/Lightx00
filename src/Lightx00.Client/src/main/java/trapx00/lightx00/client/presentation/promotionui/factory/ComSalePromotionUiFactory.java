@@ -1,12 +1,12 @@
 package trapx00.lightx00.client.presentation.promotionui.factory;
 
-import trapx00.lightx00.client.presentation.promotionui.ComSalePromotionUiControllerDraftController;
-import trapx00.lightx00.client.presentation.promotionui.mock.ComSalePromotionUiControllerMockDraftController;
+import trapx00.lightx00.client.presentation.promotionui.ComSalePromotionUiController;
+import trapx00.lightx00.client.presentation.promotionui.mock.ComSalePromotionUiControllerMock;
 
 public class ComSalePromotionUiFactory {
-    private static ComSalePromotionUiControllerDraftController controller = new ComSalePromotionUiControllerMockDraftController();
+    private static ComSalePromotionUiController controller = new ComSalePromotionUiControllerMock();
 
-    public static ComSalePromotionUiControllerDraftController getController() {
+    public static ComSalePromotionUiController getController() {
         return controller;
     }
 }

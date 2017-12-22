@@ -8,6 +8,7 @@ import trapx00.lightx00.client.vo.draft.DraftVo;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.draft.DraftType;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.Date;
@@ -34,7 +35,7 @@ public class DraftBlControllerMock extends DraftBlController {
         return new DraftVo[]{
                 new DraftVo(1,
                         new Date(),
-                        new FinanceStaffVo("drafter","123",new Date(), "123","123"),
+                        new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true),
                         new PaymentBillVo("FKD-20171111-00001",new Date(), BillState.Draft, "123", "123",
                                 new Transcation[] { new Transcation(1,10.0,"123")},
                                 10.0),

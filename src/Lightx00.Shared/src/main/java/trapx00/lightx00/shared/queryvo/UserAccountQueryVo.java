@@ -1,11 +1,13 @@
 package trapx00.lightx00.shared.queryvo;
 
+import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class UserAccountQueryVo implements Serializable {
+public class UserAccountQueryVo extends BaseQueryVo<EmployeePo,String, UserAccountQueryVo> implements Serializable {
+
     private HashMap<EmployeePosition, SpecificUserAccountQueryVo> specificUserAccountQueryVoHashMap = new HashMap<>();
 
     public UserAccountQueryVo addQueryVoForOneEmployeePosition(EmployeePosition employeePosition, SpecificUserAccountQueryVo specificUserAccountQueryVo) {
