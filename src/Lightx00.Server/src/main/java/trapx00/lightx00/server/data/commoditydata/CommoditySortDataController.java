@@ -172,16 +172,22 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
 
     @Override
     public String getId() {
+
         try {
-            current++;
-            if (current== MAX_BILL_NUM_FOR_A_DAY) {
+            OptionalInt maxId = commoditySortDao.queryBuilder().selectColumns("id").query().stream()
+                    .map(CommoditySortPo::getId)
+                    .map(x -> x.split("-")[1])
+                    .mapToInt(Integer::parseInt)
+                    .max();
+            if (maxId.orElse(-1) == MAX_BILL_NUM_FOR_A_DAY) {
                 logService.printLog(delegate, "got a new id and it has been full.");
                 throw new NoMoreBillException();
             }
-            String newId = "PRO" + "-" + BillHelper.comFormaiId(current);
+            String newId = "PRO" + "-"+BillHelper.formatId(maxId.orElse(0) + 1);
             logService.printLog(delegate, "got a new id " + newId);
             return newId;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            handleSQLException(e);
             return "";
         }
     }

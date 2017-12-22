@@ -62,8 +62,8 @@ public class CommoditySortModificationUi  implements ExternalLoadableUiControlle
 
     public void onBtnSubmitClicked(ActionEvent actionEvent) {
         if (tfName.validate()) {
-            CommoditySortVo commoditySortVo=blService.query(new CommoditySortQueryVo().eq("preId",tfId.getText()))[0];
-            CommodityVo commodityVo=blService1.query(new CommodityQueryVo().eq("type",tfId.getText()))[0];
+            CommoditySortVo []commoditySortVo=blService.query(new CommoditySortQueryVo().eq("preId",tfId.getText()));
+            CommodityVo[] commodityVo=blService1.query(new CommodityQueryVo().eq("type",tfId.getText()));
             if(commoditySortVo==null&&commodityVo==null){
                 blService.modify(new CommoditySortVo(
                         tfId.getText(),

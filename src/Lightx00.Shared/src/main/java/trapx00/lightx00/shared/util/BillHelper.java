@@ -32,4 +32,6 @@ public class BillHelper {
     public static String toFixed(double num) {
         return toFixed(num, 2);
     }
+
+    public static String formatComid(int id){return  String.format("%04d",id);}
 }
