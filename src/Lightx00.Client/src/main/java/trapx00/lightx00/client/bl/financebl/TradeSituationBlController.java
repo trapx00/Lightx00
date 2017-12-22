@@ -140,7 +140,7 @@ public class TradeSituationBlController implements TradeSituationBlService {
 
     private double giveawayCost(List<InventoryGiftVo> inventoryGiftVos) {
         double giveawayCost = inventoryGiftVos.stream()
-            .flatMapToDouble(x -> Arrays.stream(x.getGifts()).mapToDouble(c -> c.getUnitPrice() * c.getAmount()))
+            .flatMapToDouble(x -> Arrays.stream(x.getGifts()).mapToDouble(c -> c.getPrice() * c.getAmount()))
             .sum();
 
         return giveawayCost;

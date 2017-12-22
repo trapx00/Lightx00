@@ -80,7 +80,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(CommodityUiFactory.getCommoditySelectionUi().queryId(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getCommodityId()).getName()));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getAmount())));
-        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
+        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getPrice())));
 
 
         currentDate.addListener(((observable, oldValue, newValue) -> {
@@ -141,7 +141,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public void onBtnAddItemClicked() {
         CommodityUiFactory.getCommoditySelectionUi()
                 .showCommoditySelectDialog(vo -> inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(new PromotionCommodity(vo.getId(),
-                        0,vo.getRetailPrice()))));
+                        vo.getName(),0,vo.getRetailPrice()))));
 
     }
 
