@@ -1,11 +1,13 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySortUiController;
-import trapx00.lightx00.client.presentation.commodityui.CommodityUiController;
-import trapx00.lightx00.client.presentation.inventoryui.InventoryCheckUiController;
-import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController;
-import trapx00.lightx00.client.presentation.inventoryui.InventoryWarningUiController;
+import trapx00.lightx00.client.presentation.commodityui.InventoryStaffHome;
+import trapx00.lightx00.client.presentation.commodityui.commoditySort.CommoditySortUiController;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommodityUiController;
+import trapx00.lightx00.client.presentation.inventoryui.check.InventoryCheckUiController;
+import trapx00.lightx00.client.presentation.inventoryui.check.InventoryPictureUiController;
+import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftUiController;
+import trapx00.lightx00.client.presentation.inventoryui.warning.InventoryWarningUiController;
 
 public class InventoryStaffUiController extends FrameworkUiController {
 
@@ -39,7 +41,11 @@ public class InventoryStaffUiController extends FrameworkUiController {
          * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
          * @see #switchFunction(Class, String, boolean)
          */
-        switchFunction(InventoryCheckUiController.class, "库存快照",true);
+        switchFunction(InventoryCheckUiController.class, "库存查看",true);
+    }
+
+    public void onInventoryPictureFunctionClicked(ActionEvent actionEvent){
+        switchFunction(InventoryPictureUiController.class,"库存快照",true);
     }
 
     public void onInventoryGiftFunctionClicked(ActionEvent actionEvent) {
@@ -58,5 +64,10 @@ public class InventoryStaffUiController extends FrameworkUiController {
          * @see #switchFunction(Class, String, boolean)
          */
         switchFunction(InventoryWarningUiController.class, "库存监控制定单据",true);
+    }
+
+    @Override
+    public void switchBackToHome() {
+        switchFunction(InventoryStaffHome.class, "主界面",true);
     }
 }

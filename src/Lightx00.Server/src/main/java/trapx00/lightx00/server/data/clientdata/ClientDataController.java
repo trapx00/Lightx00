@@ -67,8 +67,9 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
                         || clientPo.getEmail().contains(query)
                         || clientPo.getPhone().contains(query)
                         || clientPo.getName().contains(query)
-                        || (clientPo.getPayableQuota() + "").contains(query)
-                        || (clientPo.getReceivableQuota() + "").contains(query)) {
+                        || (clientPo.getReceivableQuota() + "").contains(query)
+                        || (clientPo.getPayable() + "").contains(query)
+                        || (clientPo.getReceivable() + "").contains(query)) {
                     result.add(clientPo);
                 }
             }
@@ -83,6 +84,26 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
             arrayResult[i] = result.get(i);
         }
         return arrayResult;
+    }
+
+    /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the clients with its id
+     */
+    @Override
+    public ClientPo queryById(String id) throws RemoteException {
+        ClientPo result;
+        try {
+            result = clientDao.queryForId(id);
+            logService.printLog(delegate, "query a client whose id is " + id);
+        } catch (SQLException e) {
+            result = null;
+            e.printStackTrace();
+            handleSQLException(e);
+        }
+        return result;
     }
 
     /**

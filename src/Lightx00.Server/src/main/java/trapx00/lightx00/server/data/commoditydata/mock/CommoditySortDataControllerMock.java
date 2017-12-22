@@ -18,7 +18,7 @@ public class CommoditySortDataControllerMock extends CommoditySortDataServiceStu
     String lowNextIds[]={""};
 
     @Override
-    public ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort) {
+    public ResultMessage add(CommoditySortPo newCSort) {
         return ResultMessage.Success;
     }
 

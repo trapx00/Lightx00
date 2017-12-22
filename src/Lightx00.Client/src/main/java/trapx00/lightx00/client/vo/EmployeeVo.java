@@ -2,24 +2,23 @@ package trapx00.lightx00.client.vo;
 
 import java.util.Date;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 
 public abstract class EmployeeVo {
-    private String name;
     private String id;
+    private String name;
     private Date workSince;
-    private String username;
     private EmployeePosition position;
     private String password;
-    private boolean root;
+    private EmployeeState state;
 
-    public EmployeeVo(String name, String id, Date workSince, String username,
-                      EmployeePosition position,String password) {
+    public EmployeeVo(String id, String name, Date workSince, EmployeePosition position, String password, EmployeeState state) {
         this.name = name;
         this.id = id;
         this.workSince = workSince;
-        this.username = username;
         this.position = position;
         this.password = password;
+        this.state = state;
     }
 
     public String getName() {
@@ -46,14 +45,6 @@ public abstract class EmployeeVo {
         this.workSince = workSince;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public EmployeePosition getPosition() {
         return position;
     }
@@ -70,11 +61,11 @@ public abstract class EmployeeVo {
         return password;
     }
 
-    public boolean isRoot() {
-        return root;
+    public EmployeeState getState() {
+        return state;
     }
 
-    public void setRoot(boolean root) {
-        this.root = root;
+    public void setState(EmployeeState state) {
+        this.state = state;
     }
 }

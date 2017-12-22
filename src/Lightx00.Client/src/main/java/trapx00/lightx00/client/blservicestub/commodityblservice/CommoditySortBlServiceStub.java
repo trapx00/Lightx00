@@ -10,7 +10,7 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
 
 
     @Override
-    public ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort) {
+    public ResultMessage add(CommoditySortVo newSort) {
         return ResultMessage.Success;
     }
 
@@ -25,7 +25,7 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
         String nextIds[]={"S0002"};
         String lowNextIds[]={""};
         return new CommoditySortVo[]{
-                new CommoditySortVo("S0001","Led", null,
+                new CommoditySortVo("S0001","Led", 0,
                 "", null)
         };
     }
@@ -38,6 +38,11 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
     @Override
     public CommoditySortVo[] getAllCommoditySort() {
         return new CommoditySortVo[0];
+    }
+
+    @Override
+    public String getId() {
+        return null;
     }
 
 

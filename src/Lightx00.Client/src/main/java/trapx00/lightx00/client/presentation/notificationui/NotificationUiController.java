@@ -22,6 +22,7 @@ import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotifica
 import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
@@ -43,7 +44,7 @@ public class NotificationUiController implements ExternalLoadableUiController {
     public JFXButton readButton;
     public JFXTreeTableColumn<NotificationModel, String> tableSenderColumn;
     public StackPane dialogContainer;
-    private EmployeeVo employeeVo = new FinanceStaffVo("123","123",new Date(),"123","123");
+    private EmployeeVo employeeVo = new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true);
     private OtherNotificationVo testVo = new OtherNotificationVo(1, new Date(), employeeVo, new EmployeeVo[] {employeeVo}, "test content\n123");
     private BillApprovalNotificationVo testBillApprovalVo = new BillApprovalNotificationVo(2, new Date(), employeeVo, new EmployeeVo[] {employeeVo},
         new CashBillVo("123",new Date(), BillState.Approved, "123",1,

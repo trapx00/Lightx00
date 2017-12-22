@@ -17,6 +17,7 @@ import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
@@ -28,8 +29,8 @@ import static org.junit.Assert.*;
 public class NotificationBlControllerTest {
     private NotificationBlController controller = NotificationBlFactory.getController();
     private NotificationDataService dataService = NotificationDataServiceFactory.getService();
-    private EmployeeVo sender = new AdminVo("admin sender", "1234", new Date(), "adminsender","0001");
-    private EmployeeVo[] receivers = new EmployeeVo[]{new FinanceStaffVo("Finance receiver", "123", new Date(), "financereceiver", "0001"), sender};
+    private EmployeeVo sender = new AdminVo("10002","管理员",new Date(),"123456", EmployeeState.Active);
+    private EmployeeVo[] receivers = new EmployeeVo[]{new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true), sender};
     private CashBillVo cashBill = new CashBillVo(String.format("XJFKD-%s-00001", BillHelper.currentDateStringForBill()),
         new Date(), BillState.Draft,"123",1,
         new CashBillItem[] {

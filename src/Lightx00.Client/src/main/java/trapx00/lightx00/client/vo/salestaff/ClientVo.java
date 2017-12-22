@@ -1,8 +1,13 @@
 package trapx00.lightx00.client.vo.salestaff;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.presentation.clientui.ClientDetailUiController;
+import trapx00.lightx00.client.presentation.clientui.ClientModifyUiController;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
+import trapx00.lightx00.client.presentation.helpui.ClientDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
 
@@ -18,10 +23,11 @@ public class ClientVo implements Draftable {
     private String zipCode;
     private String email;
     private double receivableQuota;
-    private double payableQuota;
-    private SaleStaffVo defaultOperator;
+    private double receivable;
+    private double payable;
+    private String defaultOperatorId;
 
-    public ClientVo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, SaleStaffVo defaultOperator) {
+    public ClientVo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double receivable, double payable, String defaultOperatorId) {
         this.id = id;
         this.clientType = clientType;
         this.clientLevel = clientLevel;
@@ -31,10 +37,26 @@ public class ClientVo implements Draftable {
         this.zipCode = zipCode;
         this.email = email;
         this.receivableQuota = receivableQuota;
-        this.payableQuota = payableQuota;
-        this.defaultOperator = defaultOperator;
+        this.receivable = receivable;
+        this.payable = payable;
+        this.defaultOperatorId = defaultOperatorId;
     }
 
+    public ClientVo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivable, double payable, SaleStaffVo defaultOperator) {
+        this.id = id;
+        this.clientType = clientType;
+        this.clientLevel = clientLevel;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.email = email;
+        this.receivable = receivable;
+        this.payable = payable;
+        this.defaultOperatorId = defaultOperator.getId();
+    }
+
+    @Override
     public String getId() {
         return id;
     }
@@ -107,20 +129,28 @@ public class ClientVo implements Draftable {
         this.receivableQuota = receivableQuota;
     }
 
-    public double getPayableQuota() {
-        return payableQuota;
+    public double getReceivable() {
+        return receivable;
     }
 
-    public void setPayableQuota(double payableQuota) {
-        this.payableQuota = payableQuota;
+    public void setReceivable(double receivable) {
+        this.receivable = receivable;
     }
 
-    public SaleStaffVo getDefaultOperator() {
-        return defaultOperator;
+    public double getPayable() {
+        return payable;
     }
 
-    public void setDefaultOperator(SaleStaffVo defaultOperator) {
-        this.defaultOperator = defaultOperator;
+    public void setPayable(double payable) {
+        this.payable = payable;
+    }
+
+    public String getDefaultOperatorId() {
+        return defaultOperatorId;
+    }
+
+    public void setDefaultOperatorId(String defaultOperatorId) {
+        this.defaultOperatorId = defaultOperatorId;
     }
 
     /**
@@ -151,6 +181,11 @@ public class ClientVo implements Draftable {
     @Override
     public ContentDisplayUi contentDisplayUi() {
         return null;
+    }
+
+
+    public ClientDetailUi detailUi() {
+        return new ClientDetailUiController();
     }
 }
  

@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.presentation.inventoryui.mock;
 
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.inventoryui.InventoryWarningUiController;
+import trapx00.lightx00.client.presentation.inventoryui.warning.InventoryWarningUiController;
 import trapx00.lightx00.client.vo.Draftable;
 
 public class InventoryWarningUiControllerMock extends InventoryWarningUiController {

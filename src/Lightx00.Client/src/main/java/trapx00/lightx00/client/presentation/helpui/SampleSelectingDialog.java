@@ -30,8 +30,9 @@ public class SampleSelectingDialog extends SelectingDialog {
     @FXML private JFXTreeTableColumn<LogSelectionItemModel, String> logContentColumn;
     @FXML private JFXButton btnSelect;
     @FXML private JFXButton btnClose;
-    private Consumer<List<LogVo>> callback;
 
+
+    private Consumer<List<LogVo>> callback;
     private ObservableList<LogSelectionItemModel> logTableItemModels = FXCollections.observableArrayList();
     /**
      * Loads the controller.

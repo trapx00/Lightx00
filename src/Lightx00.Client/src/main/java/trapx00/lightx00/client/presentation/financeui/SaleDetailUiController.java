@@ -19,7 +19,7 @@ import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
@@ -179,7 +179,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
     }
 
     public void onTfCommodityClicked(MouseEvent mouseEvent) {
-        commoditySelection.showCommoditySelectDialog(x -> commodities.set(x));
+        //commoditySelection.showCommoditySelectDialog(x -> commodities.set(x));
     }
 
     public void onTfClientClicked(MouseEvent mouseEvent) {
