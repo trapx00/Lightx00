@@ -5,6 +5,7 @@ import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataSe
 import trapx00.lightx00.shared.dataservicestub.admindataservice.UserManagementDataServiceStub;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class UserManagementDataServiceDriver {
     private UserManagementDataService service = new UserManagementDataServiceStub();
-    private EmployeePo account = new ManagerPo("张三","0001",new Date(),"10081","123456");
+    private EmployeePo account = new ManagerPo("0001","张三",new Date(),"10081", EmployeeState.Practice);
 
     @Test
     public void query() throws Exception {

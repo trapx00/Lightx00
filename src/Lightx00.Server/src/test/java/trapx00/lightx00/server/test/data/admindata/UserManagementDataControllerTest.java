@@ -8,6 +8,7 @@ import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
@@ -32,9 +33,9 @@ public class UserManagementDataControllerTest {
     private Dao<ManagerPo, String> managerDao = AdminDataDaoFactory.getManagerDao();
     private Dao<FinanceStaffPo, String> financeStaffDao = AdminDataDaoFactory.getFinanceStaffDao();
     private Dao<InventoryStaffPo,String> inventoryStaffPos=AdminDataDaoFactory.getInventoryStaffDao();
-    private ManagerPo account = new ManagerPo("张三","001",new Date(),"张三","123456");
-    private FinanceStaffPo financeStaffPo = new FinanceStaffPo("财务人员","003",new Date(), "1234","123456");
-    private InventoryStaffPo inventoryStaffPo=new InventoryStaffPo("库存管理人员","002",new Date(),"1215","1215");
+    private ManagerPo account = new ManagerPo("10001","总经理",new Date(),"123456", EmployeeState.Active);
+    private FinanceStaffPo financeStaffPo = new FinanceStaffPo("10002","财务人员",new Date(), "123456",EmployeeState.Active,true);
+    private InventoryStaffPo inventoryStaffPo=new InventoryStaffPo("10003","库存管理",new Date(),"1215",EmployeeState.Active);
 
     @Test
     public void add1() throws  Exception{
@@ -42,7 +43,7 @@ public class UserManagementDataControllerTest {
     }
     @Test
     public void queryOneTable() throws Exception {
-        ManagerPo anotherManagerPo = new ManagerPo("张四","0002", new Date(),"123","12345");
+        ManagerPo anotherManagerPo = new ManagerPo("10005","张三", new Date(),"12345", EmployeeState.Active);
         managerDao.create(account);
         managerDao.create(anotherManagerPo);
         try {
@@ -93,7 +94,7 @@ public class UserManagementDataControllerTest {
 
     @Test
     public void addMultipleInOneTable() throws Exception {
-        ManagerPo another = new ManagerPo("123","123",new Date(), "123", "123");
+        ManagerPo another = new ManagerPo("123","123",new Date(), "123",EmployeeState.Active);
         try {
             long previous = managerDao.countOf();
             service.add(account);

@@ -16,7 +16,7 @@ public class UserManagementDataServiceStub implements UserManagementDataService 
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        return new EmployeePo[]{new FinanceStaffPo("张三","0001",new Date(),"10081","123456")};
+        return new EmployeePo[0];
     }
 
     /**

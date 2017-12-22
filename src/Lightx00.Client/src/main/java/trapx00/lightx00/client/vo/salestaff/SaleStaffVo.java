@@ -11,8 +11,8 @@ public class SaleStaffVo extends EmployeeVo {
     SaleStaffType saleStaffType;
     boolean root;
 
-    public SaleStaffVo(String name, String id, Date workSince, String password, EmployeeState state, boolean root,SaleStaffType saleStaffType) {
-        super(name, id, workSince, EmployeePosition.SaleStaff, password, state);
+    public SaleStaffVo(String id, String name, Date workSince, String password, EmployeeState state, boolean root,SaleStaffType saleStaffType) {
+        super(id, name, workSince, EmployeePosition.SaleStaff, password, state);
         this.saleStaffType = saleStaffType;
         this.root = root;
     }

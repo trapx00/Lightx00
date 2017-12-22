@@ -11,7 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlServiceFactory;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
@@ -174,7 +174,9 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
     }
 
     public void onBtnAddGiftClicked() {
-        commoditySelection.showCommoditySelectDialog(null);
+        commoditySelection.showCommoditySelectDialog(
+                vo -> promotionCommodityModelObservableList.add(new PromotionCommodityModel(new PromotionCommodity(vo.getId(), vo.getName(),vo.getRetailPrice(),1)))
+        );
     }
 
     public void onBtnDeleteGiftClicked () {

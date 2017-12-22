@@ -41,35 +41,27 @@
         </HBox.margin>
     </HBox>
 
-    <JFXTreeTableView fx:id="billTable" maxHeight="2000.0" maxWidth="2000.0" prefHeight="600.0" prefWidth="500.0">
+    <JFXTreeTableView fx:id="tbBill" maxHeight="2000.0" maxWidth="2000.0" prefHeight="600.0" prefWidth="500.0">
         <columns>
-            <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" text="单据ID" />
-            <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="100" text="日期" />
-            <JFXTreeTableColumn fx:id="tableTypeColumn" prefWidth="120.0" text="单据类型" />
-            <JFXTreeTableColumn fx:id="tableStateColumn" prefWidth="110" text="单据状态" />
+            <JFXTreeTableColumn fx:id="tcId" editable="false" prefWidth="150" text="单据ID" />
+            <JFXTreeTableColumn fx:id="tcType" prefWidth="100" text="单据类型" />
+            <JFXTreeTableColumn fx:id="tcCommitTime" prefWidth="120.0" text="提交时间" />
+            <JFXTreeTableColumn fx:id="tcOperator" prefWidth="110" text="操作员" />
         </columns>
     </JFXTreeTableView>
     <HBox alignment="CENTER_LEFT" maxHeight="60.0" maxWidth="2000.0" prefHeight="60.0" prefWidth="600.0">
         <padding>
             <Insets bottom="10" right="20" top="10" />
         </padding>
-        <JFXButton fx:id="updateButton" buttonType="RAISED" onAction="#onRefreshButtonClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF" text="更新">
+        <JFXButton fx:id="detailButton" buttonType="RAISED" onAction="#onDetailClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000" text="查看详细信息">
             <graphic>
-                <MaterialIconView glyphName="REFRESH" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+                <MaterialIconView glyphName="DESCRIPTION" glyphSize="24" glyphStyle="-fx-fill: #000000" />
             </graphic>
             <HBox.margin>
                 <Insets right="10.0" />
             </HBox.margin>
         </JFXButton>
-        <JFXButton fx:id="detailButton" buttonType="RAISED" onAction="#onDetailClicked" style="-fx-background-color: #00695c; -fx-text-fill: #FFFFFF" text="查看详细信息">
-            <graphic>
-                <MaterialIconView glyphName="DESCRIPTION" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
-            </graphic>
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
-        </JFXButton>
-        <JFXButton fx:id="approveButton" buttonType="RAISED" onAction="#onApproveClicked" style="-fx-background-color: #ff6f00; -fx-text-fill: #FFFFFF;" text="通过">
+        <JFXButton fx:id="approveButton" buttonType="RAISED" onAction="#onApproveClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="通过">
             <graphic>
                 <MaterialIconView glyphName="CHECK_CIRCLE" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
             </graphic>

@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<VBox prefHeight="800.0" prefWidth="800.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.promotionui.ClientPromotionUiController">
+<VBox prefHeight="800.0" prefWidth="800.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.promotionui.TotalPricePromotionUiController">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
@@ -82,7 +82,7 @@
     </VBox>
     <Separator />
 
-    <HBox spacing="20">
+    <HBox alignment="CENTER_LEFT" spacing="20">
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
@@ -98,6 +98,9 @@
                 <MaterialIconView glyphName="REFRESH" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
             </graphic>
         </JFXButton>
+        <VBox.margin>
+            <Insets left="20.0" />
+        </VBox.margin>
     </HBox>
 
 </VBox>

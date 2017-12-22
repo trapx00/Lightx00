@@ -3,6 +3,7 @@ package trapx00.lightx00.server.data.admindata.mock;
 import trapx00.lightx00.server.data.admindata.UserManagementDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
@@ -32,7 +33,7 @@ public class UserManagementDataControllerMock extends UserManagementDataControll
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        return new EmployeePo[]{new FinanceStaffPo("张三","0001",new Date(),"10081","123456")};
+        return new EmployeePo[]{new FinanceStaffPo("0001","张三",new Date(),"123456", EmployeeState.Practice,false)};
     }
 
     /**

@@ -64,7 +64,7 @@
             </columns>
         </JFXTreeTableView>
         <HBox alignment="BASELINE_RIGHT" prefWidth="100" spacing="10">
-            <JFXButton fx:id="btnAdd" onAction="#onBtnAddGiftClicked" style="-fx-text-fill: #000000;" text = "" >
+            <JFXButton fx:id="btnAdd" onAction="#onBtnAddGiftClicked" style="-fx-text-fill: #000000;" text="">
                 <graphic>
                     <MaterialIconView glyphName="ADD" glyphSize="24" />
                 </graphic>
@@ -72,7 +72,7 @@
                     <Insets right="10.0" />
                 </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteGiftClicked" style="-fx-text-fill: #000000;" text = "" >
+            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteGiftClicked" style="-fx-text-fill: #000000;" text="">
                 <graphic>
                     <MaterialIconView glyphName="DELETE" glyphSize="24" />
                 </graphic>
@@ -84,7 +84,7 @@
     </VBox>
     <Separator />
 
-    <HBox spacing="20">
+    <HBox alignment="CENTER_LEFT" spacing="20">
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
@@ -100,6 +100,9 @@
                 <MaterialIconView glyphName="REFRESH" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
             </graphic>
         </JFXButton>
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin>
     </HBox>
 
 </VBox>

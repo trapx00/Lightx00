@@ -11,7 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlServiceFactory;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
@@ -22,7 +22,6 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.util.BillHelper;
 
-import java.io.IOException;
 import java.util.Date;
 
 public class TotalPricePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
@@ -59,7 +58,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/managerui/ClientPromotionUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/managerui/TotalPricePromotionUi.fxml").loadAndGetPackageWithoutException();
     }
 
 
@@ -171,7 +170,9 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
     }
 
     public void onBtnAddGiftClicked() {
-        commoditySelection.showCommoditySelectDialog(null);
+        commoditySelection.showCommoditySelectDialog(
+                vo -> promotionCommodityModelObservableList.add(new PromotionCommodityModel(new PromotionCommodity(vo.getId(), vo.getName(),vo.getRetailPrice(),1)))
+        );
     }
 
     public void onBtnDeleteGiftClicked () {

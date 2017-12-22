@@ -27,7 +27,7 @@ public class AdminEmployeeConverter implements EmployeeConverter<EmployeeVo> {
             case FinanceStaff:
                 return new FinanceStaffVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), po.getState(), ((FinanceStaffPo)po).isRoot());
             case SaleStaff:
-                return new SaleStaffVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), ((SaleStaffPo)po).getSaleStaffType(), po.getState(), ((SaleStaffPo)po).isRoot());
+                return new SaleStaffVo(po.getId(), po.getName(), po.getWorkSince(), po.getPassword(), po.getState(), ((SaleStaffPo)po).isRoot(), ((SaleStaffPo)po).getSaleStaffType());
         }
         return null;
     }

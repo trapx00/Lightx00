@@ -36,8 +36,8 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
     @FXML private JFXComboBox<EmployeeState> tfState;
     @FXML private JFXComboBox<String> tfRoot;
     @FXML private JFXComboBox<SaleStaffType> tfSaleType;
-    @FXML private JFXButton btnSubmit;
-    @FXML private JFXButton btnCancel;
+    @FXML public JFXButton btnSubmit;
+    @FXML public JFXButton btnCancel;
 
     private UserManagementBlService blService = UserManagementBlServiceFactory.getInstance();
     private Runnable runnable;

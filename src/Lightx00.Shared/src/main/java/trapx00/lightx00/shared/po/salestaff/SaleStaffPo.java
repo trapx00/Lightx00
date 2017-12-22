@@ -15,8 +15,8 @@ public class SaleStaffPo extends EmployeePo {
     @DatabaseField
     private boolean root;
 
-    public SaleStaffPo(String name, String id, Date workSince, String password, SaleStaffType saleStaffType, EmployeeState state, boolean root) {
-        super(name, id, workSince, EmployeePosition.SaleStaff, password,state);
+    public SaleStaffPo(String id, String name, Date workSince, String password, SaleStaffType saleStaffType, EmployeeState state, boolean root) {
+        super(id, name, workSince, EmployeePosition.SaleStaff, password,state);
         this.saleStaffType = saleStaffType;
         this.root = root;
     }

@@ -13,10 +13,9 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlServiceFactory;
-import trapx00.lightx00.client.presentation.commodityui.CommoditySelection;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionDetailUi;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
@@ -174,8 +173,10 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         promotionCommodityModelObservableList.clear();
     }
 
-    public void onAddButtonCommodityClicked() {
-        commoditySelection.showCommoditySelectDialog(null);
+    public void onBtnAddCommodityClicked() {
+        commoditySelection.showCommoditySelectDialog(
+                vo -> promotionCommodityModelObservableList.add(new PromotionCommodityModel(new PromotionCommodity(vo.getId(), vo.getName(),vo.getRetailPrice(),1)))
+        );
     }
 
     public void onBtnDeleteCommodityClicked () {
