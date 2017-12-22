@@ -16,14 +16,14 @@ public class CommoditySortBlServiceDriver {
 
     String commodityIdList[]={""};
     private String nextIds[]={"S0002"};
-    CommoditySortVo Led=new CommoditySortVo("S0001","Led", null,
+    CommoditySortVo Led=new CommoditySortVo("S0001","Led", 0,
     "",  new CommoditySortItem[] {new CommoditySortItem("123","123")});
     private CommoditySortVo[] commoditysorts={Led};
 
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(Led,null));
+        assertEquals(ResultMessage.Success,service.add(Led));
     }
 
     @Test

@@ -4,36 +4,47 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.blservice.adminblservice.FaceIdRegistrationBlService;
 import trapx00.lightx00.client.blservice.adminblservice.FaceIdRegistrationBlServiceFactory;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.StageManager;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
 import trapx00.lightx00.shared.exception.faceid.NetworkException;
 import trapx00.lightx00.shared.exception.faceid.NoFaceDetectedException;
 import trapx00.lightx00.shared.po.ResultMessage;
 
-public class FaceIdRegistrationUiController {
+public class FaceIdRegistrationUiController implements ExternalLoadableUiController {
     public JFXButton btnCancel;
     public JFXButton btnRegister;
     public JFXTextField tfEmployeeId;
     public WebCamView webCamView;
     public StackPane rootPane;
     private FaceIdRegistrationBlService blService = FaceIdRegistrationBlServiceFactory.getService();
+    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
+
+    private ObjectProperty<EmployeeVo> employee = new SimpleObjectProperty<>();
 
     public void onBtnRegisterClicked(ActionEvent actionEvent) {
         JFXDialog dialog = PromptDialogHelper.start("注册中", "注册中，请稍等").create(rootPane);
         dialog.show();
+        if (employee.get() == null) {
+            showPromptDialog("请先选择一个用户！","未选择用户");
+            return;
+        }
         Task task = new Task() {
             @Override
             protected Object call() throws Exception {
                 try {
-                    ResultMessage rm = blService.register(tfEmployeeId.getText(), webCamView.acquireImage());
+                    ResultMessage rm = blService.register(employee.get().getId(), webCamView.acquireImage());
                     dialog.close();
                     if (rm.equals(ResultMessage.Success)) {
                         showPromptDialog("注册成功",String.format("您已给ID为%s的职员注册Face ID。", tfEmployeeId.getId()));
@@ -68,10 +79,31 @@ public class FaceIdRegistrationUiController {
     public void initialize() {
         btnRegister.setDisable(true);
         webCamView.setOnCameraInitialized(() -> btnRegister.setDisable(false));
+        employee.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                 tfEmployeeId.setText("");
+            } else {
+                tfEmployeeId.setText(String.format("%s(id: %s)", newValue.getName(), newValue.getId()));
+            }
+        });
     }
 
 
     public void onBtnCancelClicked(ActionEvent actionEvent) {
         StageManager.closeStage();
+    }
+
+    /**
+     * Loads the controller.
+     *
+     * @return external loaded ui controller and component
+     */
+    @Override
+    public ExternalLoadedUiPackage load() {
+        return new UiLoader("/fxml/adminui/FaceIdRegistration.fxml").loadAndGetPackageWithoutException();
+    }
+
+    public void onTfEmployeeIdClicked(MouseEvent mouseEvent) {
+        employeeSelection.showEmployeeSelectDialog(x -> employee.set(x.size() == 0 ? null : x.get(0)));
     }
 }

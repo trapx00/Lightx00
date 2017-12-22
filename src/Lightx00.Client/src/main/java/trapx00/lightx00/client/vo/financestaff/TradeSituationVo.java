@@ -29,15 +29,27 @@ public class TradeSituationVo { //经营历程表
         this.incomeAdjustIncome = incomeAdjustIncome;
         this.differenceOfSaleAndRefundIncome = differenceOfSaleAndRefundIncome;
         this.unusedCouponValue = unusedCouponValue;
+
+        this.commodityIncome = overflowIncome + incomeAdjustIncome + differenceOfSaleAndRefundIncome + unusedCouponValue;
+
+
         this.promotion = promotion;
         this.saleCost = saleCost;
         this.lossCost = lossCost;
         this.giveawayCost = giveawayCost;
 
+
+
         this.commodityCost = lossCost + giveawayCost;
         this.totalCost = commodityCost + saleCost;
-        this.profit = saleIncome - totalCost;
 
+
+
+        this.profit = saleIncome + commodityIncome - totalCost;
+
+    }
+
+    public TradeSituationVo() {
     }
 
     public double getUnusedCouponValue() {

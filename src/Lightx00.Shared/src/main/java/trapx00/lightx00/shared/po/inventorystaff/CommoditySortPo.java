@@ -5,18 +5,19 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.awt.*;
+import java.io.Serializable;
 
 @DatabaseTable(tableName = "CommoditySort")
-public class CommoditySortPo {
+public class CommoditySortPo implements Serializable{
     //商品分类
     @DatabaseField(id=true)
     private String id;
     @DatabaseField
     private String name;
-    @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private CommodityItem []commodityList;
     @DatabaseField
     private String preId;//父类
+    @DatabaseField
+    private int leaf;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommoditySortItem[] commoditySortItems;
 
@@ -25,21 +26,28 @@ public class CommoditySortPo {
 
     }
 
-    public CommoditySortPo(String id, String name, CommodityItem[] commodityList,
+    public CommoditySortPo(String id, String name, int leaf,
                            String preId, CommoditySortItem[] commoditySortItems) {
+        this.leaf=leaf;
         this.id = id;
         this.name = name;
-        this.commodityList = commodityList;
         this.preId = preId;
         this.commoditySortItems=commoditySortItems;
     }
+
+
     public CommoditySortItem[] getCommoditySortItems() {
         return commoditySortItems;
     }
 
-    public void setCommoditySortItems(CommoditySortItem[] commoditySortItems) {
-        this.commoditySortItems = commoditySortItems;
+    public int getLeaf() {
+        return leaf;
     }
+
+    public void setLeaf(int leaf) {
+        this.leaf = leaf;
+    }
+
 
     public String getId() {
         return id;
@@ -49,13 +57,6 @@ public class CommoditySortPo {
         return name;
     }
 
-    public CommodityItem[] getCommodityList() {
-        return commodityList;
-    }
-
-    public void setCommodityList(CommodityItem[] commodityList) {
-        this.commodityList = commodityList;
-    }
 
     public String getPreId() {
         return preId;
@@ -71,8 +72,5 @@ public class CommoditySortPo {
     }
 
 
-    public void setPreId(String preId) {
-        this.preId = preId;
-    }
 
 }

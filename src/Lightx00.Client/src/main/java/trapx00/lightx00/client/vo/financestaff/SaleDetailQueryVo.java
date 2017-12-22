@@ -24,6 +24,9 @@ public class SaleDetailQueryVo { //销售明细表查询条件
         this.repository = repository;
     }
 
+    public SaleDetailQueryVo() {
+    }
+
     public Date getStart() {
         return start;
     }

@@ -42,4 +42,7 @@ public interface CommodityDataService extends Remote {
     CommodityPo[] getAllCommodity() throws RemoteException;
 
 
+    String getId() throws RemoteException;
+
+
 }

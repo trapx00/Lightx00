@@ -1,7 +1,9 @@
 package trapx00.lightx00.server;
 
+import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.PaymentBillDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.ReceivalBillDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryWarningDataFactory;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.server.data.admindata.factory.AdminDataFactory;
@@ -29,11 +31,13 @@ import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataSe
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
@@ -92,6 +96,10 @@ public class Server {
             UserManagementDataService userManagementDataService = AdminDataFactory.getUserManagementDataService();
             PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
             ReceivalBillDataService receivalBillDataService = ReceivalBillDataFactory.getService();
+            CommoditySortDataService commoditySortDataService= CommoditySortDataFactory.getCommoditySortDataService();
+            InventoryWarningDataService inventoryWarningDataService= InventoryWarningDataFactory.getService();
+            export(inventoryWarningDataService);
+            export(commoditySortDataService);
             export(inventoryGiftDataService);
             export(commodityDataService);
             export(saleBillDataService);

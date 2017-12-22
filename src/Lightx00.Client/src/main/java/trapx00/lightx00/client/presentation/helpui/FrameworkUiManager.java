@@ -2,11 +2,13 @@ package trapx00.lightx00.client.presentation.helpui;
 
 import com.jfoenix.controls.JFXDialog;
 import javafx.scene.layout.StackPane;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
 
 public class FrameworkUiManager {
     private static FrameworkUiController frameworkUiController;
+    private static EmployeeVo currentEmployee;
 
     public static FrameworkUiController getFrameworkUiController() {
         return frameworkUiController;
@@ -29,11 +31,19 @@ public class FrameworkUiManager {
     }
 
     public static EmployeeVo getCurrentEmployee() {
-        return frameworkUiController.getEmployeeVo();
+        return currentEmployee;
+    }
+
+    public static void setCurrentEmployee(EmployeeVo employee) {
+        currentEmployee = employee;
     }
 
     public static void switchBackToHome() {
         frameworkUiController.switchBackToHome();
+    }
+
+    public static void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title, boolean refresh) {
+        frameworkUiController.switchFunction(clazz, title, refresh);
     }
 
 }

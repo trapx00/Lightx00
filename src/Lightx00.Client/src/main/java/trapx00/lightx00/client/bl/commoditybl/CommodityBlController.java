@@ -10,6 +10,7 @@ import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataSer
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
+import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
@@ -120,6 +121,21 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
             throw new UncheckedRemoteException(e);
         }catch (IdNotExistsException e) { //参考服务器端写的代码，直接抓对应的异常即可，记得如果不在这里处理，需要继续往外抛出。比如这里就需要UI层继续处理这个异常，所以需要继续抛出。
             logService.log(LogSeverity.Failure, String.format("删除商品%s%s失败，原商品不存在", commodity.getId(), commodity.getName()));
+            throw e;
+        }
+    }
+
+    @Override
+    public String getId(String sortId) {
+        try {
+            String id = dataService.getId();
+            logService.log(LogSeverity.Info, String.format("获得了一个新的商品ID：%s", sortId+id));
+            return sortId+id;
+        } catch (RemoteException e) { //RemoteException是网络原因的错误。这里记下日志，然后用UncheckedRemoteException包一下继续抛出。
+            logService.log(LogSeverity.Failure, String.format("获得新ID失败，原因是网络原因，具体是%s", e.getMessage()));
+            throw new UncheckedRemoteException(e);
+        } catch (NoMoreBillException e) { //参考服务器端写的代码，直接抓对应的异常即可，记得如果不在这里处理，需要继续往外抛出。比如这里就需要UI层继续处理这个异常，所以需要继续抛出。
+            logService.log(LogSeverity.Failure, "获得新ID失败，原因是当日ID已满。");
             throw e;
         }
     }

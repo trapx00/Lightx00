@@ -13,10 +13,9 @@ public interface CommoditySortDataService extends Remote {
     /**
      * Create a new commoditySort attaching to a parentSort
      * @param newCSort
-     * @param parentSort
      * @return whether the operation is done successfully
      */
-    ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort) throws RemoteException;//增加分类
+    ResultMessage add(CommoditySortPo newCSort) throws RemoteException;//增加分类
 
     /**
      * Modify a commoditySort
@@ -52,5 +51,6 @@ public interface CommoditySortDataService extends Remote {
      */
     CommoditySortPo[] dispaly(CommoditySortPo commoditySort) throws RemoteException;
 
+    String getId()throws RemoteException;
 
 }

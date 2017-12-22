@@ -15,6 +15,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Region;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.log.LogVo;
@@ -31,23 +33,25 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class ClientUiController extends SelectingDialog implements DraftContinueWritableUiController, ClientInfoUi, ExternalLoadableUiController {
+public class ClientUiController implements ClientInfoUi, ExternalLoadableUiController {
 
     @FXML
     private TreeTableView<ClientSelectionItemModel> clientTable;
     @FXML
-    private TreeTableColumn<ClientSelectionItemModel,String> clientIdColumn;
+    private TreeTableColumn<ClientSelectionItemModel, String> clientIdColumn;
     @FXML
-    private TreeTableColumn<ClientSelectionItemModel,String> clientNameColumn;
+    private TreeTableColumn<ClientSelectionItemModel, String> clientNameColumn;
     @FXML
-    private TreeTableColumn<ClientSelectionItemModel,String> clientTypeColumn;
+    private TreeTableColumn<ClientSelectionItemModel, String> clientTypeColumn;
     @FXML
-    private TreeTableColumn<ClientSelectionItemModel,String> clientLevelColumn;
+    private TreeTableColumn<ClientSelectionItemModel, String> clientLevelColumn;
     @FXML
-    private TreeTableColumn<ClientSelectionItemModel,String> clientPhoneColumn;
-    private Consumer<ClientVo> callback;
+    private TreeTableColumn<ClientSelectionItemModel, String> clientPhoneColumn;
 
-    private ObservableList<ClientSelectionItemModel> clientSelectionItemModels= FXCollections.observableArrayList();
+    private ObservableList<ClientSelectionItemModel> clientSelectionItemModels = FXCollections.observableArrayList();
+
+    private ClientBlService blService= ClientBlServiceFactory.getInstance();
+
     /**
      * show the select client dialog
      *
@@ -56,8 +60,7 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
     public void showClientSelectDialog(Consumer<ClientVo> callback) {
         ExternalLoadedUiPackage uiPackage = load();
         ClientUiController controller = (ClientUiController) uiPackage.getController();
-        controller.callback = callback;
-        JFXDialog dialog = PromptDialogHelper.start("","").create();
+        JFXDialog dialog = PromptDialogHelper.start("", "").create();
         dialog.setContent((Region) uiPackage.getComponent());
         dialog.show();
     }
@@ -76,15 +79,15 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
                 "12345679@qq.com",
                 123,
                 456,
-                new SaleStaffVo(null,null,null,null,null,null))));
+                789,
+                "1")));
     }
 
-    @FXML
     private void initLogItem() {
         clientIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getId()));
         clientNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getName()));
         clientTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getClientType().toString()));
-        clientLevelColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getClientLevel()+""));
+        clientLevelColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getClientLevel() + ""));
         clientPhoneColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getPhone()));
         TreeItem<ClientSelectionItemModel> root = new RecursiveTreeItem<>(clientSelectionItemModels, RecursiveTreeObject::getChildren);
         clientTable.setRoot(root);
@@ -92,34 +95,14 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
     }
 
     /**
-     * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
-     * Overrides to return a specific ui controller.
-     *
-     * @param draft draft
-     * @return a ExternalLoadableUiController
-     */
-    @Override
-    public ExternalLoadedUiPackage continueWriting(Draftable draft) {
-        return null;
-    }
-
-    /**
      * 获得当前已经选择的日志。如果没有选择的，那么这个是空List（不是null！！！）
+     *
      * @return 当前已经选择的项
      */
     private List<ClientVo> getSelected() {
         return clientTable.getSelectionModel().getSelectedItems().stream()
                 .map(x -> x.getValue().getClientVoObjectProperty())
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * 设置目前选择的。用于刚开始的时候初始化已经选择的项。
-     * @param selected 已经选择的项
-     */
-    private void setSelected(@NotNull List<ClientVo> selected) {
-        List<String> ids = selected.stream().map(ClientVo::getId).collect(Collectors.toList());
-        clientTable.getSelectionModel().select(Integer.parseInt(ids.get(0)));
     }
 
     /**
@@ -133,16 +116,28 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
     }
 
     @FXML
+    private void onBtnAddClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(ClientModifyUiController.class,"管理客户",true);
+    }
+
+    @FXML
+    private void onBtnModifyClicked(ActionEvent actionEvent) {
+        FrameworkUiManager.switchFunction(ClientModifyUiController.class,"管理客户",true);
+    }
+
+    @FXML
+    private void onBtnDeleteClicked(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-        if (callback != null) {
-            callback.accept(getSelected().get(0)); //选择结束，调用回调方法。
-        }
-        onClose(); //一定要调用这个来把弹出框关了。
+        FrameworkUiManager.switchFunction(ClientDetailUiController.class,"管理客户",true);
     }
 
     @FXML
     private void onBtnCloseClicked(ActionEvent actionEvent) {
-        onClose();
+        FrameworkUiManager.switchBackToHome();
     }
 
     /**
@@ -153,6 +148,6 @@ public class ClientUiController extends SelectingDialog implements DraftContinue
      */
     @Override
     public ClientVo queryById(String id) {
-        return null;
+        return blService.queryById(id);
     }
 }

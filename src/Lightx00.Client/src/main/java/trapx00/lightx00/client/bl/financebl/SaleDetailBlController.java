@@ -43,14 +43,12 @@ public class SaleDetailBlController implements SaleDetailBlService {
         }
         if (query.getClients() != null && query.getClients().length > 0) {
             queryVo.and();
-            ArrayList<String> clientIds = new ArrayList<>();
-            clientIds.addAll(Arrays.stream(query.getClients()).map(ClientVo::getId).collect(Collectors.toList()));
+            ArrayList<String> clientIds = Arrays.stream(query.getClients()).map(ClientVo::getId).collect(Collectors.toCollection(ArrayList::new));
             queryVo.in("clientId", clientIds);
         }
         if (query.getOperators() != null && query.getOperators().length > 0) {
             queryVo.and();
-            ArrayList<String> operatorIds = new ArrayList<>();
-            operatorIds.addAll(Arrays.stream(query.getOperators()).map(EmployeeVo::getId).collect(Collectors.toList()));
+            ArrayList<String> operatorIds = Arrays.stream(query.getOperators()).map(EmployeeVo::getId).collect(Collectors.toCollection(ArrayList::new));
             queryVo.in("salesmanId", operatorIds);
         }
 

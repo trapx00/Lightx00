@@ -18,7 +18,7 @@ public class CommoditySortDataServiceDriver {
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(commoditySortPo,fatheCommoditySortPo));
+        assertEquals(ResultMessage.Success,service.add(commoditySortPo));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class CommoditySortDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        CommoditySortPo commoditySortPo=new CommoditySortPo("S0001","Led",null,"123",null);
+        CommoditySortPo commoditySortPo=new CommoditySortPo("S0001","Led",0,"123",null);
         assertEquals("S0001",commoditySortPo.getId());
     }
 
