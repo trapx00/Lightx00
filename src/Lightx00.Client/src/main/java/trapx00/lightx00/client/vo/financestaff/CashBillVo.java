@@ -2,19 +2,17 @@ package trapx00.lightx00.client.vo.financestaff;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.CashBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.financeui.CashBillDetailUiController;
-import trapx00.lightx00.client.presentation.financeui.CashBillUiController;
+import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillDetailUi;
+import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
-import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
@@ -137,6 +135,6 @@ public class CashBillVo extends FinanceBillVo implements Reversible {
 
     @Override
     public BillDetailUi billDetailUi() {
-        return new CashBillDetailUiController(); // 这个是对应的单据详情显示界面，和上面的不一样。
+        return new CashBillDetailUi(); // 这个是对应的单据详情显示界面，和上面的不一样。
     }
 }

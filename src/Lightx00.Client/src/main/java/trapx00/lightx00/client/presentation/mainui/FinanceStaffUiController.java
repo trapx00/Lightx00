@@ -1,8 +1,15 @@
-package trapx00.lightx00.client.presentation.financeui;
+package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountUiController;
-import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
+import trapx00.lightx00.client.presentation.financeui.HomeUiController;
+import trapx00.lightx00.client.presentation.financeui.SaleDetailUiController;
+import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
+import trapx00.lightx00.client.presentation.financeui.TradeSituationUiController;
+import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
+import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 
 
 /**
@@ -21,7 +28,7 @@ public class FinanceStaffUiController extends FrameworkUiController {
 
     /**
      * 财务人员独有的制定现金费用单的功能按钮的相应方法。通过调用switchFunction进入对应的功能界面。
-     * @see CashBillUiController。功能界面必须实现ExternalLoadableUiController
+     * @see CashBillUiController 。功能界面必须实现ExternalLoadableUiController
      * @param actionEvent actionEvent
      */
     public void onCashBillFunctionClicked(ActionEvent actionEvent) {
@@ -34,26 +41,39 @@ public class FinanceStaffUiController extends FrameworkUiController {
     }
 
     public void onReceivalBillFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(ReceivalBillUiController.class, "制定付款单",true);
     }
 
     public void onPaymentBillFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(PaymentBillUiController.class, "制定收款单",true);
     }
 
     public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {
-        
+        switchFunction(SaleDetailUiController.class, "查看销售明细表",true);
     }
 
     public void onTradeHistoryFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(TradeHistoryUiController.class, "查看经营历程表", true);
     }
 
     public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
+        switchFunction(TradeSituationUiController.class ,"查看经营情况表",true);
+    }
 
+
+    /**
+     * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+     */
+    @Override
+    public void switchBackToHome() {
+        switchFunction(HomeUiController.class, "主界面",true);
     }
 
     public void onBankAccountFunctionClicked(ActionEvent actionEvent) {
         switchFunction(BankAccountUiController.class, "银行账户管理", true);
+    }
+
+    public void onInitialEstablishmentFunctionClicked(ActionEvent actionEvent) {
+
     }
 }

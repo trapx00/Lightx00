@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.financeui;
+package trapx00.lightx00.client.presentation.financeui.cashbill;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
@@ -18,7 +18,7 @@ public class AddCashBillItemDialog implements ExternalLoadableUiController {
 
     public void show(Consumer<CashBillItem> callback) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        AddCashBillItemDialog dialog = (AddCashBillItemDialog) externalLoadedUiPackage.getController();
+        AddCashBillItemDialog dialog = externalLoadedUiPackage.getController();
         dialog.callback = callback;
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
     }

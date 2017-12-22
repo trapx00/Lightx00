@@ -3,7 +3,6 @@ package trapx00.lightx00.client.presentation.mainui;
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.commodityui.CommoditySortUiController;
 import trapx00.lightx00.client.presentation.commodityui.CommodityUiController;
-import trapx00.lightx00.client.presentation.financeui.CashBillUiController;
 import trapx00.lightx00.client.presentation.inventoryui.InventoryCheckUiController;
 import trapx00.lightx00.client.presentation.inventoryui.InventoryGiftUiController;
 import trapx00.lightx00.client.presentation.inventoryui.InventoryWarningUiController;
@@ -16,11 +15,6 @@ public class InventoryStaffUiController extends FrameworkUiController {
         // 如果还需要初始化自己的元素请接着写。
     }
 
-    /**
-     * 财务人员独有的制定现金费用单的功能按钮的相应方法。通过调用switchFunction进入对应的功能界面。
-     * @see CashBillUiController 。功能界面必须实现ExternalLoadableUiController
-     * @param actionEvent actionEvent
-     */
     public void onCommodityFunctionClicked(ActionEvent actionEvent) {
         /**
          * 调用父类切换界面方法实现切换界面。

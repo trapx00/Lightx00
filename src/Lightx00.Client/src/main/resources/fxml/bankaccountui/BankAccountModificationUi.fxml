@@ -14,40 +14,22 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.bankaccountui.BankAccountModificationUi"
-      prefHeight="250.0" prefWidth="400.0" alignment="TOP_CENTER">
+      prefHeight="300.0" prefWidth="400.0" alignment="TOP_CENTER" spacing="30">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
     <Label text="修改账户信息" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
     </Label>
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
 
-    <GridPane>
-        <columnConstraints>
-            <ColumnConstraints prefWidth="100"/>
-            <ColumnConstraints prefWidth="200"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
-        </rowConstraints>
+    <JFXTextField maxWidth="300" labelFloat="true" fx:id="tfId" editable="false" promptText="ID" />
 
-        <padding>
-            <Insets left="20" right="20" top="20" bottom="20"/>
-        </padding>
+    <JFXTextField maxWidth="300" labelFloat="true" fx:id="tfOldName" editable="false" promptText="账户名" />
 
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="账户名"/>
-        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfId" disable="true" />
-
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0"  text="账户名"/>
-        <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfOldName" disable="true" />
-
-        <Label GridPane.rowIndex="2" GridPane.columnIndex="0"  text="新账户名"/>
-        <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfNewName" />
-    </GridPane>
+    <JFXTextField maxWidth="300" labelFloat="true" fx:id="tfNewName" promptText="新账户名" />
 
     <HBox alignment="CENTER">
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">

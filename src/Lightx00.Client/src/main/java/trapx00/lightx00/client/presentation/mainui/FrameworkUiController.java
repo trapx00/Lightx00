@@ -39,7 +39,6 @@ public class FrameworkUiController {
     public MaterialIconView maximizeButtonGlyph;
     public Label promptLabel;
     public Text titleText;
-    protected EmployeeVo employeeVo;
     private ExternalLoadableUiController subController;
     private DialogStack dialogStack = new DialogStack();
 
@@ -48,15 +47,6 @@ public class FrameworkUiController {
         StageManager.setStage(stage);
         BorderlessStageHelper.makeResizeable(stage);
         BorderlessStageHelper.makeDraggable(stage, titleBar);
-    }
-
-    public void setEmployee(EmployeeVo employee) {
-        this.employeeVo = employee;
-        promptLabel.setText("欢迎你！" + employee.getName());
-    }
-
-    public EmployeeVo getEmployeeVo() {
-        return employeeVo;
     }
 
     public void initialize() {
@@ -84,6 +74,9 @@ public class FrameworkUiController {
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+        switchBackToHome();
+
+        promptLabel.setText("欢迎你！" + FrameworkUiManager.getCurrentEmployee().getName());
     }
 
 
@@ -150,6 +143,15 @@ public class FrameworkUiController {
             this.titleText.setText(title);
         }
     }
+
+    /**
+     * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+     */
+    public void switchBackToHome() {
+
+    }
+
+
 
     public DialogStack getDialogStack() {
         return dialogStack;

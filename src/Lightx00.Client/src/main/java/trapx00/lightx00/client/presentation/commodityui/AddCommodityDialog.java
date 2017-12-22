@@ -1,12 +1,10 @@
 package trapx00.lightx00.client.presentation.commodityui;
 
 import com.jfoenix.controls.JFXTextField;
-import trapx00.lightx00.client.presentation.financeui.AddCashBillItemDialog;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 
 import java.util.function.Consumer;
 

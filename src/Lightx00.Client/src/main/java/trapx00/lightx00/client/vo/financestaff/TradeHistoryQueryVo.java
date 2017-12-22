@@ -21,6 +21,10 @@ public class TradeHistoryQueryVo { //经营历程表查询条件
         this.repository = repository;
     }
 
+    public TradeHistoryQueryVo() {
+
+    }
+
     public Date getStart() {
         return start;
     }

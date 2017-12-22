@@ -80,7 +80,7 @@ public class ReceivalBillDataControllerMock extends ReceivalBillDataController {
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
         return new ReceivalBillPo[]{
-                new ReceivalBillPo("SKD-20171111-00001",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
+                new ReceivalBillPo("SKD-20171111-00001",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation(1,0.0,"123")}, 0.0)
         };
     }
 

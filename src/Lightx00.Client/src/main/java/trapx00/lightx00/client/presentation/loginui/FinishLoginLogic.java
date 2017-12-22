@@ -18,6 +18,7 @@ import java.io.IOException;
 public class FinishLoginLogic {
     public static void finishLogin(EmployeeVo employeeVo) {
         try {
+            FrameworkUiManager.setCurrentEmployee(employeeVo);
             StageManager.closeStage();
             Stage newStage = new Stage();
 
@@ -25,9 +26,11 @@ public class FinishLoginLogic {
 
             Scene scene = new Scene(loader.load());
 
+
             FrameworkUiController controller = loader.getController();
 
             FrameworkUiManager.setFrameworkUiController(controller);
+
 
             newStage.initStyle(StageStyle.UNDECORATED);
 
@@ -35,7 +38,6 @@ public class FinishLoginLogic {
             newStage.setHeight(900);
             newStage.setWidth(1600);
 
-            controller.setEmployee(employeeVo);
             controller.setStage(newStage);
             newStage.show();
         } catch (IOException e) {
@@ -51,7 +53,7 @@ public class FinishLoginLogic {
             case SaleStaff:
                 return "/fxml/mainui/SaleStaffUi.fxml";
             case FinanceStaff:
-                return "/fxml/financeui/FinanceStaffFrameworkUi.fxml";
+                return "/fxml/mainui/FinanceStaffUi.fxml";
             default:
                 return null;
         }
