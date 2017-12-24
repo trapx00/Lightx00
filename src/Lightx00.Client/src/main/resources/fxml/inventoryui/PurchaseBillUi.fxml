@@ -27,7 +27,7 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <VBox fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine"
-      stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121"
+      xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController">
     <padding>
@@ -86,13 +86,13 @@
                                     text="名称"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTypeColumn" editable="false"
                                     text="型号"/>
-                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="true"
+                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="false"
                                     text="数量"/>
                 <JFXTreeTableColumn fx:id="tcCommodityPriceColumn" editable="false"
                                     text="单价"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTotalColumn" editable="false"
                                     text="金额"/>
-                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="true"
+                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="false"
                                     text="备注"/>
             </columns>
         </JFXTreeTableView>

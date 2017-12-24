@@ -17,12 +17,14 @@ import org.bridj.cpp.std.list;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
+import trapx00.lightx00.client.presentation.clientui.ClientSelectionItemModel;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -38,7 +40,9 @@ import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
@@ -81,6 +85,10 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
+    private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
+
+    private double number;
+    private String comment;
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -177,14 +185,21 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     @FXML
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
-            CommodityItem commodityItem = new CommodityItem(x.getId(), x.getName(), x.getType(), 0, x.getPurchasePrice(), 0, "");
+            commodityFillUiController.showCommodityFillDialog(y -> {
+                number = y.getNumber();
+                comment = y.getComment();
+            });
+            CommodityItem commodityItem = new CommodityItem(x.getId(), x.getName(), x.getType(), number, x.getPurchasePrice(), x.getPurchasePrice() * number, comment);
             commodityItemModelObservableList.add(new CommodityItemModel(commodityItem));
         });
     }
 
     @FXML
     private void onBtnDeleteItemClicked() {
-
+        ObservableList<Integer> commodityIndexList = tbCommodityList.getSelectionModel().getSelectedIndices();
+        for (int index : commodityIndexList) {
+            commodityItemModelObservableList.remove(index);
+        }
     }
 
     @FXML

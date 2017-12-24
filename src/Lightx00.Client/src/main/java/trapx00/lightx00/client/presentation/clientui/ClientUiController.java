@@ -22,6 +22,7 @@ import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -50,7 +51,7 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     private ObservableList<ClientSelectionItemModel> clientSelectionItemModels = FXCollections.observableArrayList();
 
-    private ClientBlService blService= ClientBlServiceFactory.getInstance();
+    private ClientBlService blService = ClientBlServiceFactory.getInstance();
 
     /**
      * show the select client dialog
@@ -59,7 +60,7 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
      */
     public void showClientSelectDialog(Consumer<ClientVo> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        ClientUiController controller = (ClientUiController) uiPackage.getController();
+        ClientUiController controller = uiPackage.getController();
         JFXDialog dialog = PromptDialogHelper.start("", "").create();
         dialog.setContent((Region) uiPackage.getComponent());
         dialog.show();
@@ -81,6 +82,32 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
                 456,
                 789,
                 "1")));
+
+        clientSelectionItemModels.add(new ClientSelectionItemModel(new ClientVo("1",
+                ClientType.Retailer,
+                1,
+                "xiaoming",
+                "12345678",
+                "12345678",
+                "210000",
+                "12345679@qq.com",
+                123,
+                456,
+                789,
+                "1")));
+
+        clientSelectionItemModels.add(new ClientSelectionItemModel(new ClientVo("2",
+                ClientType.Retailer,
+                1,
+                "xiaoming",
+                "12345678",
+                "12345678",
+                "210000",
+                "12345679@qq.com",
+                123,
+                456,
+                789,
+                "1")));
     }
 
     private void initLogItem() {
@@ -90,19 +117,9 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
         clientLevelColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getClientLevel() + ""));
         clientPhoneColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getPhone()));
         TreeItem<ClientSelectionItemModel> root = new RecursiveTreeItem<>(clientSelectionItemModels, RecursiveTreeObject::getChildren);
+        clientTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         clientTable.setRoot(root);
         clientTable.setShowRoot(false);
-    }
-
-    /**
-     * 获得当前已经选择的日志。如果没有选择的，那么这个是空List（不是null！！！）
-     *
-     * @return 当前已经选择的项
-     */
-    private List<ClientVo> getSelected() {
-        return clientTable.getSelectionModel().getSelectedItems().stream()
-                .map(x -> x.getValue().getClientVoObjectProperty())
-                .collect(Collectors.toList());
     }
 
     /**
@@ -117,22 +134,47 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnAddClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientModifyUiController.class,"管理客户",true);
+        FrameworkUiManager.switchFunction(ClientModifyUiController.class, "管理客户", true);
     }
 
     @FXML
     private void onBtnModifyClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientModifyUiController.class,"管理客户",true);
+        FrameworkUiManager.switchFunction(ClientModifyUiController.class, "管理客户", true);
     }
 
     @FXML
     private void onBtnDeleteClicked(ActionEvent actionEvent) {
+        PromptDialogHelper.start("是否要删除", null)
+                .addCloseButton("确定", "DONE", e -> delete())
+                .addCloseButton("取消", "UNDO", null)
+                .createAndShow();
+    }
 
+    private void delete() {
+        List<String> idList = new ArrayList<>();
+        ObservableList<TreeItem<ClientSelectionItemModel>> clientSelectionTreeItemModels = clientTable.getSelectionModel().getSelectedItems();
+        for (TreeItem<ClientSelectionItemModel> treeItem : clientSelectionTreeItemModels) {
+            idList.add(treeItem.getValue().getClientVoObjectProperty().getName());
+        }
+        ResultMessage resultMessage = blService.delete(idList.toArray(new String[idList.size()]));
+        if (resultMessage == ResultMessage.Success) {
+            ObservableList<Integer> commodityIndexList = clientTable.getSelectionModel().getSelectedIndices();
+            for (int index : commodityIndexList) {
+                clientSelectionItemModels.remove(index);
+            }
+            PromptDialogHelper.start("删除成功", null)
+                    .addCloseButton("确定", "DONE", null)
+                    .createAndShow();
+        } else {
+            PromptDialogHelper.start("删除失败，请重试", null)
+                    .addCloseButton("确定", "DONE", null)
+                    .createAndShow();
+        }
     }
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientDetailUiController.class,"管理客户",true);
+        FrameworkUiManager.switchFunction(ClientDetailUiController.class, "管理客户", true);
     }
 
     @FXML

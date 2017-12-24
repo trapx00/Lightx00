@@ -22,7 +22,7 @@
             <Font name="System Bold" size="32.0" />
         </font>
     </Label>
-    <JFXTextField fx:id="tfSearch" promptText="按列表项搜索，按回车执行搜索"/>
+    <JFXTextField labelFloat="true" fx:id="tfSearch" promptText="按列表项搜索，按回车执行搜索"/>
     <JFXTreeTableView fx:id="clientTable" prefHeight="500.0" prefWidth="750.0">
         <columns>
             <JFXTreeTableColumn fx:id="clientIdColumn" editable="false" prefWidth="150" text="编号" />
