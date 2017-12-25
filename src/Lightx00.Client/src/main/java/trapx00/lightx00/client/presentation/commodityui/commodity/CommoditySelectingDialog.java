@@ -101,11 +101,11 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
+        onClose();
         CommodityVo selected = getSelected();
         if (callback != null && selected != null) {
             callback.accept(selected);
         }
-        onClose();
     }
 
 

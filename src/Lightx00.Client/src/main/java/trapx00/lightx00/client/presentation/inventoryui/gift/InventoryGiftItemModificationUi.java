@@ -4,23 +4,30 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
+import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
 import java.util.function.Consumer;
 
 public class InventoryGiftItemModificationUi implements ExternalLoadableUiController {
     public JFXTextField tfAmount;
+    public JFXTextField tfAcutal;
     private Consumer<Double> callback;
 
+    private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
+    private  double amout;
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/inventoryui/gift/InventoryGiftModificationUi.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void show(Consumer<Double> callback) {
+    public void show(String limit,Consumer<Double> callback) {
         ExternalLoadedUiPackage uiPackage = load();
         InventoryGiftItemModificationUi controller = (InventoryGiftItemModificationUi) uiPackage.getController();
         controller.callback = callback;
+        controller.tfAcutal.setText(String.valueOf(blService.query(new CommodityQueryVo().eq("id",limit))[0].getAmount()));
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
     }
     @FXML
@@ -29,19 +36,22 @@ public class InventoryGiftItemModificationUi implements ExternalLoadableUiContro
         validator.setMessage("请输入数字");
         tfAmount.getValidators().add(validator);
         tfAmount.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
+            if(!newVal)
                 tfAmount.validate();
-            }
+
         });
     }
 
     public void onBtnSubmitClicked(ActionEvent actionEvent) {
+
         if (validate()) {
             if (callback != null) {
                 callback.accept(Double.valueOf(tfAmount.getText()));
                 close();
             }
+
         }
+
     }
 
     private boolean validate() {

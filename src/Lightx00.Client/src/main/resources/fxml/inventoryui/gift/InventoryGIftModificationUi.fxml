@@ -19,7 +19,7 @@
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Label text="设定赠送数量" textFill="#5e5e5e">
+    <Label text="设定数量" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
@@ -39,8 +39,10 @@
             <Insets left="20" right="20" top="20" bottom="20"/>
         </padding>
 
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="数量"/>
-        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfAmount" />
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0"  text="库存数量"/>
+        <JFXTextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="tfAcutal" disable="true" />
+        <Label GridPane.rowIndex="1" GridPane.columnIndex="0"  text="数量"/>
+        <JFXTextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="tfAmount" />
 
 
     </GridPane>
