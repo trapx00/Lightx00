@@ -11,26 +11,18 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
-import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
-import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
-import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientType;
-import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 
-public class ClientModifyUiController extends ClientModifyUi implements DraftContinueWritableUiController, ExternalLoadableUiController {
-
+public class ClientAddUiController implements ExternalLoadableUiController {
     private static final HashMap<String, ClientType> clientTypeMap = new HashMap<>();
     @FXML
     private JFXTextField clientId;
@@ -62,6 +54,10 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
 
     @FXML
     private void initialize() {
+        clientReceivableQuota.setText("0.0");
+        clientReceivable.setText("0.0");
+        clientPayable.setText("0.0");
+        clientId.setText(blService.getId());
         clientTypeMap.put(ClientType.Retailer.toString(), ClientType.Retailer);
         clientTypeMap.put(ClientType.Supplier.toString(), ClientType.Supplier);
 
@@ -89,30 +85,6 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/clientui/ClientModifyUi.fxml").loadAndGetPackageWithoutException();
-    }
-
-    /**
-     * Start continuing write a draft. Returns a External loaded ui package.
-     * Overrides to return a specific ui controller.
-     *
-     * @param draft draft
-     * @return External loaded ui package including a ExternalLoadableUiController and the component.
-     */
-    @Override
-    public ExternalLoadedUiPackage continueWriting(Draftable draft) throws IOException {
-        ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ClientVo clientVo = (ClientVo) draft;
-        ClientModifyUiController clientModifyUiController = externalLoadedUiPackage.getController();
-        clientModifyUiController.clientId.setText(clientVo.getId());
-        clientModifyUiController.clientName.setText(clientVo.getClientType().toString());
-        clientModifyUiController.clientLevel.setText(clientVo.getClientLevel() + "");
-        clientModifyUiController.clientPhone.setText(clientVo.getAddress());
-        clientModifyUiController.clientZipCode.setText(clientVo.getEmail());
-        clientModifyUiController.clientEmail.setText(clientVo.getEmail());
-        clientModifyUiController.clientReceivableQuota.setText(clientVo.getReceivableQuota() + "");
-        clientModifyUiController.clientReceivable.setText(clientVo.getReceivable() + "");
-        clientModifyUiController.clientPayable.setText(clientVo.getPayable() + "");
-        return externalLoadedUiPackage;
     }
 
     @FXML
@@ -206,7 +178,10 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
     private void onBtnCancelClicked() {
         PromptDialogHelper.start("是否要存入草稿箱", null)
                 .addCloseButton("存入", "DONE", e -> saveAsDraft())
-                .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext())
+                .addCloseButton("不存入", "CLOSE", e -> {
+                    FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                    FrameworkUiManager.switchFunction(ClientUiController.class, "管理客户", true);
+                })
                 .addCloseButton("取消", "UNDO", null)
                 .createAndShow();
     }
@@ -239,24 +214,5 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
         employeeSelection.showEmployeeSelectDialog(x -> {
             clientDefaultOperator.setText(x.get(0).getId() + " " + x.get(0).getName());
         });
-    }
-
-    @Override
-    public ExternalLoadedUiPackage showContent(ClientVo arg) {
-        ClientVo clientVo = arg;
-        ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ClientModifyUiController clientModifyUiController = externalLoadedUiPackage.getController();
-        clientModifyUiController.clientId.setText(clientVo.getId());
-        clientModifyUiController.clientName.setText(clientVo.getName());
-        clientModifyUiController.clientType.setText(clientVo.getClientType().toString());
-        clientModifyUiController.clientLevel.setText(clientVo.getClientLevel() + "");
-        clientModifyUiController.clientPhone.setText(clientVo.getPhone());
-        clientModifyUiController.clientAddress.setText(clientVo.getAddress());
-        clientModifyUiController.clientZipCode.setText(clientVo.getZipCode() + "");
-        clientModifyUiController.clientEmail.setText(clientVo.getEmail());
-        clientModifyUiController.clientReceivable.setText(clientVo.getReceivable() + "");
-        clientModifyUiController.clientPayable.setText(clientVo.getPayable() + "");
-        clientModifyUiController.clientDefaultOperator.setText(clientVo.getDefaultOperatorId());
-        return externalLoadedUiPackage;
     }
 }

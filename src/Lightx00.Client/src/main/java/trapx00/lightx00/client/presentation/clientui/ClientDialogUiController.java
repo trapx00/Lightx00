@@ -52,9 +52,7 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
         ExternalLoadedUiPackage uiPackage = load();
         ClientDialogUiController controller = (ClientDialogUiController) uiPackage.getController();
         controller.callback = callback;
-        JFXDialog dialog = PromptDialogHelper.start("", "").create();
-        dialog.setContent((Region) uiPackage.getComponent());
-        dialog.show();
+        PromptDialogHelper.start("", "").setContent((Region) uiPackage.getComponent()).createAndShow();
     }
 
     @FXML
@@ -119,10 +117,10 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
+        onClose(); //一定要调用这个来把弹出框关了。
         if (callback != null) {
             callback.accept(getSelected().get(0)); //选择结束，调用回调方法。
         }
-        onClose(); //一定要调用这个来把弹出框关了。
     }
 
     @FXML

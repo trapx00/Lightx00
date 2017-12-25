@@ -3,6 +3,8 @@ package trapx00.lightx00.client.presentation.inventoryui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -87,9 +89,6 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
 
-    private double number;
-    private String comment;
-
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
      * Overrides to return a specific ui controller.
@@ -150,7 +149,16 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                 "1", "2", "3"
         );
         cbRepository.setItems(stringObservableList);
+        cbRepository.setValue("1");
         autofill();
+
+        NumberValidator numberValidator=new NumberValidator();
+        numberValidator.setMessage("请输入数字类型");
+        RequiredFieldValidator requiredValidator=new RequiredFieldValidator();
+        requiredValidator.setMessage("请输入信息");
+
+        tfClientId.getValidators().add(requiredValidator);
+        tfClientName.getValidators().add(requiredValidator);
     }
 
     /**
@@ -161,7 +169,17 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
      */
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
-        return null;
+        PurchaseBillVo purchaseBillVo = (PurchaseBillVo) reversible;
+        purchaseBillVo.setTotal(-purchaseBillVo.getTotal());
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        PurchaseBillUiController purchaseBillUiController = (PurchaseBillUiController) externalLoadedUiPackage.getController();
+        purchaseBillUiController.tfBillId.setText(blService.getId());
+        purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
+        purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
+        purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
+        purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
+        purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
+        return externalLoadedUiPackage;
     }
 
     @FXML
@@ -186,11 +204,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
             commodityFillUiController.showCommodityFillDialog(y -> {
-                number = y.getNumber();
-                comment = y.getComment();
+                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
             });
-            CommodityItem commodityItem = new CommodityItem(x.getId(), x.getName(), x.getType(), number, x.getPurchasePrice(), x.getPurchasePrice() * number, comment);
-            commodityItemModelObservableList.add(new CommodityItemModel(commodityItem));
         });
     }
 

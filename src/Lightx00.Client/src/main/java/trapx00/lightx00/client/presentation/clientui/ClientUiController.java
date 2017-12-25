@@ -17,7 +17,9 @@ import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Region;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
+import trapx00.lightx00.client.presentation.financeui.BillTableItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
@@ -134,12 +136,23 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnAddClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientModifyUiController.class, "管理客户", true);
+        FrameworkUiManager.switchFunction(ClientAddUiController.class, "管理客户", true);
     }
 
     @FXML
     private void onBtnModifyClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientModifyUiController.class, "管理客户", true);
+        ClientSelectionItemModel model = clientTable.getSelectionModel().getSelectedItem().getValue();
+        if (model != null) {
+            ClientVo selected = model.getClientVoObjectProperty();
+            PromptDialogHelper.start("修改客户信息信息", "")
+                    .setContent(selected.modifyUi().showContent(selected).getComponent())
+                    .addCloseButton("好", "CHECK", null)
+                    .createAndShow();
+        } else {
+            PromptDialogHelper.start("错误", "请至少选一个条目。")
+                    .addCloseButton("好的", "DONE", null)
+                    .createAndShow();
+        }
     }
 
     @FXML
@@ -174,7 +187,18 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientDetailUiController.class, "管理客户", true);
+        ClientSelectionItemModel model = clientTable.getSelectionModel().getSelectedItem().getValue();
+        if (model != null) {
+            ClientVo selected = model.getClientVoObjectProperty();
+            PromptDialogHelper.start("修改客户信息信息", "")
+                    .setContent(selected.detailUi().showContent(selected).getComponent())
+                    .addCloseButton("好", "CHECK", null)
+                    .createAndShow();
+        } else {
+            PromptDialogHelper.start("错误", "请至少选一个条目。")
+                    .addCloseButton("好的", "DONE", null)
+                    .createAndShow();
+        }
     }
 
     @FXML
