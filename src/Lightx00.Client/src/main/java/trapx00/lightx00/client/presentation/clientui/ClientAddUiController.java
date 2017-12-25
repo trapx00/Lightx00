@@ -75,6 +75,48 @@ public class ClientAddUiController implements ExternalLoadableUiController {
         clientZipCode.getValidators().add(requiredValidator);
         clientZipCode.getValidators().add(numberValidator);
         clientDefaultOperator.getValidators().add(requiredValidator);
+
+        clientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientType.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientLevel.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientPhone.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientAddress.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientZipCode.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientDefaultOperator.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
     }
 
     /**
