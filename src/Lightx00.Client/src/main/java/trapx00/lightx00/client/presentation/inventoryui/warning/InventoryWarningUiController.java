@@ -151,7 +151,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         commodityTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 CommodityVo selected = getSelected();
-                inventoryGiftItemModelObservableList.add(new CommoditySelectionItemModel(selected));
+                new InventoryGiftItemModificationUi().show(selected.getId(),aDouble ->addQWE(aDouble,selected));
             }});
 
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
@@ -164,6 +164,11 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
 
+    public void addQWE(double a,CommodityVo vo){
+        vo.setActualAmount(a);
+       inventoryGiftItemModelObservableList.
+                add(new CommoditySelectionItemModel(vo));
+    }
 
     /**
      * Loads the controller.
@@ -315,7 +320,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public void onBtnSetItemClicked(){
         CommodityVo commodityVo=getSelected();
         if(commodityVo!=null){
-            new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
+            new InventoryGiftItemModificationUi().show(commodityVo.getId(),aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
                     getValue().getCommodityVoObjectProperty().setActualAmount(aDouble));
         }
 
