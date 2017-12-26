@@ -55,6 +55,9 @@
             <JFXTextField labelFloat="true" fx:id="tfClientName" editable="false" promptText="销售商姓名"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfClientLevel" editable="false" promptText="销售商等级"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
             <JFXComboBox labelFloat="true" fx:id="cbRepository" editable="false" promptText="仓库"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
@@ -68,6 +71,12 @@
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfUltiTotal" editable="true" promptText="折让后总额"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfPromotionId" editable="true" promptText="促销策略"/>
+        </StackPane>
+        <StackPane prefHeight="50" prefWidth="100">
+            <JFXTextField labelFloat="true" fx:id="tfGiftToken" editable="true" promptText="赠出代金券额度"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfComment" editable="true" promptText="备注"/>
@@ -88,18 +97,18 @@
                                     text="名称"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTypeColumn" editable="false"
                                     text="型号"/>
-                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="true"
+                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="false"
                                     text="数量"/>
                 <JFXTreeTableColumn fx:id="tcCommodityPriceColumn" editable="false"
                                     text="单价"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTotalColumn" editable="false"
                                     text="金额"/>
-                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="true"
+                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="false"
                                     text="备注"/>
             </columns>
         </JFXTreeTableView>
         <HBox alignment="BASELINE_RIGHT" prefWidth="100" spacing="10">
-            <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #FFFFFF" text="添加商品">
+            <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #000000" text="添加商品">
                 <graphic>
                     <MaterialIconView glyphName="ADD" glyphSize="24"/>
                 </graphic>
@@ -116,6 +125,32 @@
                 </HBox.margin>
             </JFXButton>
         </HBox>
+    </VBox>
+    <Separator/>
+    <VBox>
+        <Label text="赠品清单" textFill="#5e5e5e">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <JFXTreeTableView fx:id="tbGiftList" prefHeight="300.0" prefWidth="600.0">
+            <columns>
+                <JFXTreeTableColumn fx:id="tcGiftIdColumn" editable="false"
+                                    text="商品编号"/>
+                <JFXTreeTableColumn fx:id="tcGiftNameColumn" editable="false"
+                                    text="名称"/>
+                <JFXTreeTableColumn fx:id="tcGiftTypeColumn" editable="false"
+                                    text="型号"/>
+                <JFXTreeTableColumn fx:id="tcGiftNumberColumn" editable="true"
+                                    text="数量"/>
+                <JFXTreeTableColumn fx:id="tcGiftPriceColumn" editable="false"
+                                    text="单价"/>
+                <JFXTreeTableColumn fx:id="tcGiftTotalColumn" editable="false"
+                                    text="金额"/>
+                <JFXTreeTableColumn fx:id="tcGiftCommentColumn" editable="true"
+                                    text="备注"/>
+            </columns>
+        </JFXTreeTableView>
     </VBox>
     <Separator/>
     <HBox spacing="20">

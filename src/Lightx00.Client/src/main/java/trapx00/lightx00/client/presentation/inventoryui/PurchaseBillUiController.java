@@ -19,6 +19,8 @@ import javafx.scene.layout.VBox;
 import org.bridj.cpp.std.list;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
@@ -88,6 +90,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
     private PurchaseBillBlService blService = PurchaseBillBlServiceFactory.getInstance();
     private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
+    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
@@ -109,9 +112,10 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
-        purchaseBillUiController.tfClientName.setText(employeeInfo.queryById(purchaseBillVo.getClientId()).getName());
+        purchaseBillUiController.tfClientName.setText(clientBlService.queryById(purchaseBillVo.getClientId()).getName());
         purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
         purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
+        purchaseBillUiController.tfComment.setText(purchaseBillVo.getComment());
         purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
         return externalLoadedUiPackage;
     }
@@ -198,7 +202,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
-        purchaseBillUiController.tfClientName.setText(employeeInfo.queryById(purchaseBillVo.getClientId()).getName());
+        purchaseBillUiController.tfClientName.setText(clientBlService.queryById(purchaseBillVo.getClientId()).getName());
         purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
         purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
         purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());

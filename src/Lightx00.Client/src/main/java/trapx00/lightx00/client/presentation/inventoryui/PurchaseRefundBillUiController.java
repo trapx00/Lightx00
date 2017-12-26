@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
@@ -78,6 +80,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
     private PurchaseRefundBillBlService blService = PurchaseRefundBillBlServiceFactory.getInstance();
     private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
+    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
@@ -99,7 +102,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         purchaseRefundBillUiController.tfDate.setText(purchaseRefundBillVo.getDate().toString());
         purchaseRefundBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseRefundBillUiController.tfClientId.setText(purchaseRefundBillVo.getClientId());
-        purchaseRefundBillUiController.tfClientName.setText(employeeInfo.queryById(purchaseRefundBillVo.getClientId()).getName());
+        purchaseRefundBillUiController.tfClientName.setText(clientBlService.queryById(purchaseRefundBillVo.getClientId()).getName());
         purchaseRefundBillUiController.cbRepository.setValue(purchaseRefundBillVo.getRepository() + "");
         purchaseRefundBillUiController.tfBillTotal.setText(purchaseRefundBillVo.getTotal() + "");
         purchaseRefundBillUiController.addCommodityListItems(purchaseRefundBillVo.getCommodityList());
@@ -188,7 +191,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         purchaseRefundBillUiController.tfDate.setText(purchaseRefundBillVo.getDate().toString());
         purchaseRefundBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseRefundBillUiController.tfClientId.setText(purchaseRefundBillVo.getClientId());
-        purchaseRefundBillUiController.tfClientName.setText(employeeInfo.queryById(purchaseRefundBillVo.getClientId()).getName());
+        purchaseRefundBillUiController.tfClientName.setText(clientBlService.queryById(purchaseRefundBillVo.getClientId()).getName());
         purchaseRefundBillUiController.cbRepository.setValue(purchaseRefundBillVo.getRepository() + "");
         purchaseRefundBillUiController.tfBillTotal.setText(purchaseRefundBillVo.getTotal() + "");
         purchaseRefundBillUiController.addCommodityListItems(purchaseRefundBillVo.getCommodityList());
