@@ -91,7 +91,7 @@ public class BaseDatabaseFactory {
             Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
             TableUtils.dropTable(inventoryStaffPos, true);
             TableUtils.createTableIfNotExists(connectionSource, InventoryStaffPo.class);
-            inventoryStaffPos.create(new InventoryStaffPo("10001", "库存经理", new Date(), "123456", EmployeeState.Active));
+            inventoryStaffPos.create(new InventoryStaffPo("10001", "123", new Date(), "123", EmployeeState.Active));
 
             Dao<ManagerPo,String> managerPos =createDao(ManagerPo.class);
             TableUtils.dropTable(managerPos, true);

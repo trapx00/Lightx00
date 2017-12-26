@@ -92,6 +92,11 @@
                 <JFXTreeTableColumn fx:id="tableSortColumn" prefWidth="150" text="库存数量" />
                 <JFXTreeTableColumn fx:id="tableWarningColumn" prefWidth="150" text="警戒值" />
             </columns>
+            <contextMenu>
+                <ContextMenu >
+                    <items><MenuItem fx:id="modifyMenuItem" text="修改警戒值" /></items>
+                </ContextMenu>
+            </contextMenu>
         </JFXTreeTableView>
     </VBox>
 

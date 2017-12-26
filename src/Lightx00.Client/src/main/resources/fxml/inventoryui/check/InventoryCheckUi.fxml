@@ -27,7 +27,7 @@
     </padding>
 
     <HBox alignment="CENTER_LEFT" maxWidth="2000">
-        <MaterialIconView glyphName="FILTER_LIST" glyphSize="28" />
+        <MaterialIconView glyphName="ACCOUNT_BOX" glyphSize="28" />
         <Text text="库存查看">
             <font>
                 <Font size="20.0" />
@@ -62,16 +62,6 @@
     </JFXMasonryPane>
 
 
-    <HBox alignment="CENTER_LEFT" maxWidth="2000">
-        <MaterialIconView glyphName="ACCOUNT_BOX" glyphSize="28" />
-        <Text text="库存盘点">
-            <font>
-                <Font size="20.0" />
-            </font></Text>
-        <padding>
-            <Insets right="10.0" />
-        </padding>
-    </HBox>
     <JFXTreeTableView fx:id="tableView" prefHeight="500.0" prefWidth="500.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcinventoryAmount" prefWidth="150" text="入库数量" />

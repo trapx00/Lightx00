@@ -30,7 +30,11 @@ public class CommoditySortModificationUi  implements ExternalLoadableUiControlle
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         CommoditySortModificationUi ui = externalLoadedUiPackage.getController();
         ui.tfId.setText(commoditySortVo.getId());
-        ui.tfSort.setText(blService.query(new CommoditySortQueryVo().eq("id",commoditySortVo.getPreId()))[0].getName());
+        if(commoditySortVo.getPreId()==null){
+            ui.tfSort.setText("");
+        }else{
+            ui.tfSort.setText(blService.query(new CommoditySortQueryVo().eq("id",commoditySortVo.getPreId()))[0].getName());
+        }
         ui.tfName.setText(commoditySortVo.getName());
         ui.jfxComboBox.setValue(new Label(commoditySortVo.getLeaf()==1?"是":"不是"));
         ui.jfxComboBox.getItems().add(new Label("是"));

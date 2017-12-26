@@ -90,6 +90,9 @@ public class CommodityUiController implements ExternalLoadableUiController {
         showGoodsTree();
         tv.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 1) {
+                        if(tv.getSelectionModel().getSelectedItem().getValue()==null){
+
+                        }
                         if (tv.getSelectionModel().getSelectedItem().getValue().equals("CommoditySort")) {
                             currentSortId = null;
                         } else {

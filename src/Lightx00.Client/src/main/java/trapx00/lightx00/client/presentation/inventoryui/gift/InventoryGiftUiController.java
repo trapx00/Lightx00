@@ -146,9 +146,9 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
     public void addItem(CommodityVo vo){
         InventoryGiftItemModel inventoryGiftItemModel=new InventoryGiftItemModel(new PromotionCommodity(vo.getId(),
-                0,vo.getRetailPrice()));
+                vo.getName(),vo.getRetailPrice(),0));
         new InventoryGiftItemModificationUi().show(vo.getId(),aDouble -> inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(
-                new PromotionCommodity(vo.getId(),aDouble,vo.getRecentRetailPrice())
+                new PromotionCommodity(vo.getId(),vo.getName(),vo.getRecentRetailPrice(),aDouble)
         )));
 
 

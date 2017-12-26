@@ -35,6 +35,7 @@
     </HBox>
 
     <JFXMasonryPane>
+
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfId" editable="false" promptText="ID" />
         </StackPane>
@@ -47,7 +48,9 @@
     </JFXMasonryPane>
 
     <VBox alignment="CENTER" spacing="20">
-
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
             <Label text="赠送商品" textFill="#5e5e5e">
             </Label>
             <JFXTreeTableView fx:id="inventoryGiftItems" prefHeight="300.0" prefWidth="400.0">
@@ -88,6 +91,9 @@
 
     <Separator/>
     <HBox spacing="20">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked"
                    style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
