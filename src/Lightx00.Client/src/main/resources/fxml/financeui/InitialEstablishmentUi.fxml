@@ -80,7 +80,7 @@
             </Label>
             <JFXTreeTableView fx:id="tableCommodity">
                 <columns>
-                    <JFXTreeTableColumn fx:id="tcCommodityId" prefWidth="50" text="ID"/>
+                    <JFXTreeTableColumn fx:id="tcCommodityId" prefWidth="100" text="ID"/>
                     <JFXTreeTableColumn fx:id="tcCommodityName" editable="false" prefWidth="150" text="商品名称"/>
                 </columns>
             </JFXTreeTableView>
@@ -98,12 +98,6 @@
                    style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked"
-                   style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
-            <graphic>
-                <MaterialIconView glyphName="REFRESH" glyphSize="24"/>
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked"

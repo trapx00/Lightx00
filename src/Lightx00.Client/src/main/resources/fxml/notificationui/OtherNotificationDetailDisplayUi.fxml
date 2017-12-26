@@ -22,33 +22,9 @@
         </VBox.margin>
     </Label>
 
-    <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
-        <HBox alignment="BASELINE_LEFT">
-            <Label text="通知ID"/>
-        </HBox>
-        <HBox alignment="BASELINE_RIGHT">
-            <JFXTextField fx:id="tfId" disable="true"/>
-        </HBox>
-    </HBox>
-
-    <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
-        <HBox alignment="BASELINE_LEFT">
-            <Label text="发送者"/>
-        </HBox>
-        <HBox alignment="BASELINE_RIGHT">
-            <JFXTextField fx:id="tfSender" disable="true"/>
-        </HBox>
-    </HBox>
-
-
-    <HBox maxWidth="400" alignment="BASELINE_CENTER" spacing="50">
-        <HBox alignment="BASELINE_LEFT">
-            <Label text="发送时间"/>
-        </HBox>
-        <HBox alignment="BASELINE_RIGHT">
-            <JFXTextField fx:id="tfDate" disable="true"/>
-        </HBox>
-    </HBox>
+    <JFXTextField maxWidth="250" labelFloat="true" promptText="通知ID" fx:id="tfId" editable="false"/>
+    <JFXTextField maxWidth="250" labelFloat="true" promptText="发送者" fx:id="tfSender" editable="false"/>
+    <JFXTextField maxWidth="250" labelFloat="true" promptText="发送时间"  fx:id="tfDate" editable="false"/>
 
     <Label text="内容">
         <font>
