@@ -25,7 +25,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSelection {
-    @FXML
     public JFXTreeTableView<EmployeeSelectionItemModel> tbEmployee;
     public JFXTreeTableColumn<EmployeeSelectionItemModel, String> tcId;
     public JFXTreeTableColumn<EmployeeSelectionItemModel, String> tcPosition;
@@ -114,7 +113,6 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
 
     @Override
     public EmployeeVo queryId(String id) {
-
         return blService.query(new UserAccountQueryVo().idEq(id))[0];
     }
 

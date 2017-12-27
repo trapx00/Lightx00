@@ -23,7 +23,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<StackPane fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine"
+<StackPane fx:id="dialogContainer" prefHeight="700" prefWidth="1200" styleClass="exteriorLine"
            stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="trapx00.lightx00.client.presentation.mainui.SaleStaffUiController">

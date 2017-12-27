@@ -14,7 +14,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="trapx00.lightx00.client.presentation.mainui.SaleStaffHomeUiController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="700.0" prefWidth="1200.0">
     <top>
         <HBox>
             <Text fx:id="welcomeText" fill="black" text="欢迎~,">
