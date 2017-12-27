@@ -38,6 +38,7 @@ public class CommoditySortModificationUi  implements ExternalLoadableUiControlle
         ui.tfName.setText(commoditySortVo.getName());
         ui.jfxComboBox.getItems().add(new Label("是"));
         ui.jfxComboBox.getItems().add(new Label("不是"));
+        ui.jfxComboBox.getSelectionModel().select(commoditySortVo.getLeaf()==1?0:1);
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
         ui.runnable = runnable;
     }

@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.inventoryui.gift;
+package trapx00.lightx00.client.presentation.inventoryui.warning;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
@@ -11,7 +11,7 @@ import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
 import java.util.function.Consumer;
 
-public class InventoryGiftItemModificationUi implements ExternalLoadableUiController {
+public class InventoryWarningChoose implements ExternalLoadableUiController {
     public JFXTextField tfAmount;
     public JFXTextField tfAcutal;
     private Consumer<Double> callback;
@@ -20,12 +20,12 @@ public class InventoryGiftItemModificationUi implements ExternalLoadableUiContro
     private  double amout;
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/gift/InventoryGiftModificationUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/warning/InventoryWarningChoose.fxml").loadAndGetPackageWithoutException();
     }
 
     public void show(String limit,Consumer<Double> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        InventoryGiftItemModificationUi controller = (InventoryGiftItemModificationUi) uiPackage.getController();
+        InventoryWarningChoose controller = (InventoryWarningChoose) uiPackage.getController();
         controller.callback = callback;
         controller.tfAcutal.setText(String.valueOf(blService.query(new CommodityQueryVo().eq("id",limit))[0].getAmount()));
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
@@ -45,9 +45,7 @@ public class InventoryGiftItemModificationUi implements ExternalLoadableUiContro
     public void onBtnSubmitClicked(ActionEvent actionEvent) {
         close();
         if (validate()) {
-            if(Double.valueOf(tfAcutal.getText())<Double.valueOf(tfAmount.getText()))
-                PromptDialogHelper.start("失败","赠送数量大于库存数量").createAndShow();
-            else if (callback != null) {
+          if (callback != null) {
                 callback.accept(Double.valueOf(tfAmount.getText()));
             }
 

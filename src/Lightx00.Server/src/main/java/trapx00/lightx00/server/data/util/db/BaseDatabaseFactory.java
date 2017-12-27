@@ -15,6 +15,7 @@ import java.util.Date;
 
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.admin.AdminPo;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientPo;
 import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
@@ -25,6 +26,8 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
@@ -115,6 +118,15 @@ public class BaseDatabaseFactory {
                     "01",34,34,34,34,100));
             commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"һ",
                     "01",34,34,34,34,100));
+
+            Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
+            TableUtils.dropTable(saleBillPos,true);
+            TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
+            saleBillPos.create(new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Approved, "0", "0", "0", 0,
+                    null, 0, 0, 0, 0,
+                    "",1,"2"
+                    ,new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 10));
+
 
 
             Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);

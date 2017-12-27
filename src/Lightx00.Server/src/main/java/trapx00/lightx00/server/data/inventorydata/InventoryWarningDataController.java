@@ -171,6 +171,6 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      */
     @Override
     public String getId() {
-        return commonBillDataController.getId("JCD");
+        return commonBillDataController.getId("JKD");
     }
 }

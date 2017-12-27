@@ -43,16 +43,15 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
 
     public void initialize() {
         initTable();
-        updateItems();
     }
     public void updateItems() {
-        viewModels.clear();
 
         InventoryViewVo inventoryViewVo=null;
             try {
                 inventoryViewVo=blService.getInventoryView(
                         DateHelper.fromLocalDate(startDatePicker.getValue()),
                         DateHelper.fromLocalDate(endDatePicker.getValue()));
+                System.out.println(inventoryViewVo.getId());
                 viewModels.add(new InventoryViewModel(new InventoryViewItem(new Date(),inventoryViewVo.getItems().getInventoryAmount(),
                         inventoryViewVo.getItems().getInventoryMoney(),inventoryViewVo.getItems().getOutOfInventoryAmount()
                         ,inventoryViewVo.getItems().getOutOfInVentoryMoney()

@@ -171,7 +171,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         commodityTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 CommodityVo selected = getSelected();
-                new InventoryGiftItemModificationUi().show(selected.getId(),aDouble ->addQWE(aDouble,selected));
+                new InventoryWarningChoose().show(selected.getId(),aDouble ->addQWE(aDouble,selected));
             }});
 
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
