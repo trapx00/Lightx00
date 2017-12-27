@@ -28,7 +28,7 @@ public interface CommodityBlService {
      * @return the list of the commoditybl
      */
     CommodityVo[] query(CommodityQueryVo commodityQueryVo);//查询商品
-
+    CommodityVo[] queryNormally(String query);
     /**
      * Delete a commoditybl
      * @param commodity

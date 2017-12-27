@@ -31,6 +31,7 @@ public interface CommodityDataService extends Remote {
      */
     CommodityPo[] query(CommodityQueryVo commodityQueryVo)throws RemoteException;//查询
 
+    CommodityPo[] queryNormally(String query)throws RemoteException;
     /**
      * Delete a commoditybl
      * @param commodity

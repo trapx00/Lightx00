@@ -18,6 +18,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -111,6 +112,34 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
             return result.toArray(new CommodityPo[result.size()]);
         }
     }
+
+    @Override
+    public CommodityPo[] queryNormally(String query) {
+        ArrayList<CommodityPo> result = new ArrayList<CommodityPo>();
+        try {
+            List<CommodityPo> commodityPos = commodityDao.queryBuilder().query();
+            for (CommodityPo commodityPo : commodityPos) {
+                if (commodityPo.getId().contains(query)
+                        || commodityPo.getName().contains(query)
+                        || (commodityPo.getType() + "").contains(query)
+                        || (commodityPo.getAmount()+"").contains(query)
+                        ) {
+                    result.add(commodityPo);
+                }
+            }
+            logService.printLog(delegate, "query a commodity who contains " + query);
+        } catch (SQLException e) {
+            result.add(null);
+            e.printStackTrace();
+            handleSQLException(e);
+        }
+        CommodityPo[] arrayResult = new CommodityPo[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            arrayResult[i] = result.get(i);
+        }
+        return arrayResult;
+    }
+
     /**
      * Delete a commodity
      * @param commodityPo

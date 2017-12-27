@@ -18,6 +18,7 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 
 public class CommodityBlController implements CommodityBlService,CommodityInfo,InventoryModificationService,PoVoConverter<CommodityPo,CommodityVo> {
@@ -96,6 +97,21 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
         } catch (RemoteException e) {
             logService.log(LogSeverity.Failure, String.format(logLeadingText + "失败，原因是网络原因，具体信息是%s。", e.getMessage()));
             throw new UncheckedRemoteException(e);
+        }
+    }
+
+    @Override
+    public CommodityVo[] queryNormally(String query) {
+        try {
+            CommodityPo[] commodityPos = dataService.queryNormally(query);
+            ArrayList<CommodityVo> commodityVos = new ArrayList<CommodityVo>();
+            for (int i = 0; i < commodityPos.length; i++) {
+                    commodityVos.add(fromPoToVo(commodityPos[i]));
+            }
+            return commodityVos.toArray(new CommodityVo[commodityVos.size()]);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

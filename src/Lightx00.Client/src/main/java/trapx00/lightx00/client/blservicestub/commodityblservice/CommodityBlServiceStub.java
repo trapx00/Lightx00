@@ -30,6 +30,11 @@ public class CommodityBlServiceStub implements CommodityBlService {
     }
 
     @Override
+    public CommodityVo[] queryNormally(String query) {
+        return new CommodityVo[0];
+    }
+
+    @Override
     public ResultMessage delete(CommodityVo commodity) {
         return ResultMessage.Success;
     }

@@ -209,14 +209,11 @@ public class CommodityUiController implements ExternalLoadableUiController {
     }
 
     private void initSearch() {
-        tfSearch.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ENTER)) {
-                if (tfSearch.getText().length() > 0) {
-                    update(new CommodityQueryVo().eq("id", tfSearch.getText()));
-                } else {
-                    update();
-                }
-
+        tfSearch.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                CommodityVo[] clientVos = blService.queryNormally(tfSearch.getText());
+                commodityModels.clear();
+                commodityModels.addAll(Arrays.stream(clientVos).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
             }
         });
     }
