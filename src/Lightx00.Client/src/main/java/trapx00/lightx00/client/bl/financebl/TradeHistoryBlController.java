@@ -138,9 +138,9 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
     public BillVo queryBill(String id) {
         BaseQueryVo queryVo = new BaseQueryVo().idEq(id);
         BillVo[] queryResult = null;
-        if (id.startsWith("ZSD")) {
+        if (id.startsWith("GIFT")) {
             queryResult = inventoryGiftInfo.queryInventoryGiftBill(new InventoryGiftQueryVo(queryVo));
-        } else if (id.startsWith("JKD")) {
+        } else if (id.startsWith("BJD") || id.startsWith("BSD") || id.startsWith("BYD")) {
             queryResult = inventoryDetailBillInfo.queryInventoryWarningBill(new InventoryBillQueryVo(queryVo));
         } else if (id.startsWith("JHD")) {
             queryResult = purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo(queryVo));

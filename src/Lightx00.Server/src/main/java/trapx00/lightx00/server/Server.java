@@ -1,5 +1,6 @@
 package trapx00.lightx00.server;
 
+import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
 import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.InitialEstablishmentDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.PaymentBillDataFactory;
@@ -29,6 +30,7 @@ import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.admindataservice.FaceIdRegistrationDataService;
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
@@ -101,6 +103,8 @@ public class Server {
             CommoditySortDataService commoditySortDataService= CommoditySortDataFactory.getCommoditySortDataService();
             InventoryWarningDataService inventoryWarningDataService= InventoryWarningDataFactory.getService();
             InitialEstablishmentDataService initialEstablishmentDataService = InitialEstablishmentDataFactory.getService();
+            AuditDataService auditDataService = AuditDataFactory.getService();
+            export(auditDataService);
             export(inventoryWarningDataService);
             export(commoditySortDataService);
             export(inventoryGiftDataService);

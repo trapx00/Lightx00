@@ -27,7 +27,7 @@ public abstract class NotificationVo {
         this.type = type;
     }
 
-    public NotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receiver, NotificationType type) {
+    public NotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receivers, NotificationType type) {
         this.date = date;
         this.sender = sender;
         this.receivers = receivers;

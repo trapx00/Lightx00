@@ -210,11 +210,11 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         if (validate()) {
             try {
                 return voClazz.getDeclaredConstructor(
-                        String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.class)
+                        String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.TYPE)
                         .newInstance(tfId.getId(),
                                 currentDate.get(),
                                 BillState.Draft,
-                                tfClient.getId(),
+                                client.get().getId(),
                                 currentEmployee.getValue().getId(),
                                 transcationModels.stream().map(TranscationModel::toTranscation).toArray(Transcation[]::new),
                                 Double.parseDouble(lbTotal.getText()));

@@ -19,7 +19,7 @@ public class AuditDataServiceFactory extends DataServiceFactory {
     }
 
     public static AuditDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 
