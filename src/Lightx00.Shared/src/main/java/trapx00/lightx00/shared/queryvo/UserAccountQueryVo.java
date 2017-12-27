@@ -26,6 +26,8 @@ public class UserAccountQueryVo extends BaseQueryVo<EmployeePo,String, UserAccou
         return this;
     }
 
-
-
+    @Override
+    public UserAccountQueryVo idEq(String id) {
+        return addQueryVoForAllEmployeePosition((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo().idEq(id));
+    }
 }

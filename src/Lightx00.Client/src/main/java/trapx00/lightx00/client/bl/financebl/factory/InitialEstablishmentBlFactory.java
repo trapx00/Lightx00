@@ -9,7 +9,7 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 
 public class InitialEstablishmentBlFactory {
-    private static InitialEstablishmentBlController controller = new InitialEstablishmentBlControllerMock();
+    private static InitialEstablishmentBlController controller = new InitialEstablishmentBlController();
     private static DraftDeleteService draftDeleteService = controller;
     private static NotificationAbandonService notificationAbandonService = controller;
     private static NotificationActivateService notificationActivateService = controller;

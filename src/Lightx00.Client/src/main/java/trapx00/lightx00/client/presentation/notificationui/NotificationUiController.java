@@ -45,14 +45,6 @@ public class NotificationUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<NotificationModel, String> tableSenderColumn;
     public StackPane dialogContainer;
     private EmployeeVo employeeVo = new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true);
-    private OtherNotificationVo testVo = new OtherNotificationVo(1, new Date(), employeeVo, new EmployeeVo[] {employeeVo}, "test content\n123");
-    private BillApprovalNotificationVo testBillApprovalVo = new BillApprovalNotificationVo(2, new Date(), employeeVo, new EmployeeVo[] {employeeVo},
-        new CashBillVo("123",new Date(), BillState.Approved, "123",1,
-            new CashBillItem[] {
-            new CashBillItem("item1", 10, "test1"),
-                new CashBillItem("item2", 10, "test2")
-            }));
-
 
     public ObservableList<NotificationModel> notificationModels = FXCollections.observableArrayList();
 

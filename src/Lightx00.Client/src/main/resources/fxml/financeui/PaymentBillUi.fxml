@@ -93,9 +93,10 @@
                 <MaterialIconView glyphName="REFRESH" glyphSize="24" />
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
+        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked"
+                   style="-fx-background-color: #9999CC; -fx-text-fill: #FFFFFF;" text="保存草稿">
             <graphic>
-                <MaterialIconView glyphName="SAVE" glyphSize="24" />
+                <MaterialIconView glyphName="SAVE" glyphSize="24"/>
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked" style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="取消">

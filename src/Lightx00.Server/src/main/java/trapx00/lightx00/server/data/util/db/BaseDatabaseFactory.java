@@ -13,6 +13,7 @@ import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServi
 import java.sql.SQLException;
 import java.util.Date;
 
+import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.admin.AdminPo;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
@@ -41,8 +42,7 @@ public class BaseDatabaseFactory {
         try {
             return DaoManager.createDao(connectionSource, clazz);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new DbSqlException(e);
         }
     }
 
@@ -79,7 +79,7 @@ public class BaseDatabaseFactory {
             Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
             TableUtils.dropTable(financeStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
-            financeStaffDao.create(new FinanceStaffPo("10002", "财务经理", new Date(), "123456",EmployeeState.Active,true));
+            financeStaffDao.create(new FinanceStaffPo("10002", "123456", new Date(), "123456",EmployeeState.Active,true));
             financeStaffDao.create(new FinanceStaffPo("10103", "财务职员", new Date(), "123456",EmployeeState.Active,false));
 
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
