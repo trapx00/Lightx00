@@ -29,25 +29,25 @@
     <HBox>
         <VBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="20">
             <StackPane alignment="CENTER_LEFT" prefHeight="50" prefWidth="100">
-                <JFXTextField fx:id="tfId" editable="false" labelFloat="true" maxWidth="150.0" prefWidth="100.0" promptText="ID">
+                <JFXTextField fx:id="tfId" editable="true" labelFloat="true" maxWidth="150.0" prefWidth="100.0" promptText="ID">
                     <StackPane.margin>
                         <Insets left="30.0" />
                     </StackPane.margin></JFXTextField>
             </StackPane>
             <StackPane alignment="CENTER_LEFT" prefHeight="50" prefWidth="100">
-                <JFXTextField fx:id="tfName" editable="false" labelFloat="true" maxWidth="150.0" prefWidth="100.0" promptText="姓名">
+                <JFXTextField fx:id="tfName" labelFloat="true" maxWidth="150.0" prefWidth="100.0" promptText="姓名">
                     <StackPane.margin>
                         <Insets left="30.0" />
                     </StackPane.margin></JFXTextField>
             </StackPane>
             <StackPane alignment="CENTER_LEFT" prefHeight="50" prefWidth="100">
-                <JFXTextField fx:id="tfPassword" editable="false" labelFloat="true" maxWidth="150.0" prefWidth="100.0" promptText="密码">
+                <JFXTextField fx:id="tfPassword"  labelFloat="true" maxWidth="150.0" prefWidth="100.0" promptText="密码">
                     <StackPane.margin>
                         <Insets left="30.0" />
                     </StackPane.margin></JFXTextField>
             </StackPane>
             <StackPane alignment="CENTER_LEFT" prefHeight="50" prefWidth="100">
-                <JFXDatePicker fx:id="tfWorkDate" editable="false" maxWidth="150.0" prefWidth="100.0" promptText="入职日期">
+                <JFXDatePicker fx:id="tfWorkDate" maxWidth="150.0" prefWidth="100.0" promptText="入职日期">
                     <StackPane.margin>
                         <Insets left="30.0" />
                     </StackPane.margin></JFXDatePicker>

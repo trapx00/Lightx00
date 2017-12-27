@@ -35,8 +35,8 @@ public class FinishLoginLogic {
             newStage.initStyle(StageStyle.UNDECORATED);
 
             newStage.setScene(scene);
-            newStage.setHeight(900);
-            newStage.setWidth(1600);
+            newStage.setHeight(700);
+            newStage.setWidth(1200);
 
             controller.setStage(newStage);
             newStage.show();
@@ -50,7 +50,9 @@ public class FinishLoginLogic {
             case InventoryStaff:
                 return "/fxml/mainui/InventoryStaffUI.fxml";
             case Manager:
+                return "/fxml/mainui/ManagerUi.fxml";
             case Admin:
+                return "/fxml/mainui/AdminStaffUi.fxml";
             case SaleStaff:
                 return "/fxml/mainui/SaleStaffUi.fxml";
             case FinanceStaff:

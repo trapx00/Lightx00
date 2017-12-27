@@ -74,4 +74,8 @@ public class ComSalePromotionDetailUi extends PromotionDetailUi {
     public void onBtnBackClicked() {
         onClose();
     }
+
+    public void onBtnSubmitClicked() {
+        onClose();
+    }
 }

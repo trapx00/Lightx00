@@ -19,7 +19,6 @@
 <?import javafx.scene.text.Text?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine" stylesheets="@../helpui/main.css"
            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="trapx00.lightx00.client.presentation.mainui.ManagerUiController">

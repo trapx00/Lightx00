@@ -50,4 +50,12 @@ public class UserManagementBlServiceStub implements UserManagementBlService {
     public ResultMessage delete(EmployeeVo account) {
         return ResultMessage.Success;
     }
+
+    /**
+     * New id for a new employee.
+     * @return new id
+     */
+    public String getId() {
+        return "";
+    }
 }

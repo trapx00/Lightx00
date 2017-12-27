@@ -15,20 +15,16 @@ public class EmployeeInfoModel extends RecursiveTreeObject<EmployeeInfoModel> {
     private ObjectProperty<Date> workDate;
     private ObjectProperty<EmployeePosition> position;
 
-    public EmployeeInfoModel(String id, String name, Date date, EmployeePosition position) {
-        this.id = new SimpleStringProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.workDate = new SimpleObjectProperty<>(date);
-        this.position = new SimpleObjectProperty<>(position);
+    public EmployeeInfoModel(EmployeeVo employeeVo) {
+        this.id = new SimpleStringProperty(employeeVo.getId());
+        this.name = new SimpleStringProperty(employeeVo.getName());
+        this.workDate = new SimpleObjectProperty<>(employeeVo.getWorkSince());
+        this.position = new SimpleObjectProperty<>(employeeVo.getPosition());
     }
 
     public EmployeeVo toEmployeeVo() {
         EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
         return employeeInfo.queryById(id.getValue());
-    }
-
-    public EmployeeInfoModel(EmployeeVo employee) {
-        this(employee.getId(), employee.getName(),employee.getWorkSince(), employee.getPosition());
     }
 
     public String getId() {

@@ -22,15 +22,15 @@
     </Label>
 
     <VBox maxWidth="500" spacing="30">
-        <JFXTextField promptText="ID" labelFloat="true" fx:id="tfId" editable="false"/>
+        <JFXTextField maxWidth="200" promptText="ID" labelFloat="true" fx:id="tfId" editable="false"/>
 
-        <JFXTextField promptText="起始日期" labelFloat="true" fx:id="tfStartDate" editable="false"/>
+        <JFXTextField maxWidth="200" promptText="起始日期" labelFloat="true" fx:id="tfStartDate" editable="false"/>
 
-        <JFXTextField promptText="结束日期" labelFloat="true" fx:id="tfEndDate" editable="false"/>
+        <JFXTextField maxWidth="200" promptText="结束日期" labelFloat="true" fx:id="tfEndDate" editable="false"/>
 
-        <JFXTextField promptText="代金券面值" labelFloat="true" fx:id="tfCouponPrice" editable="false"/>
+        <JFXTextField maxWidth="200" promptText="代金券面值" labelFloat="true" fx:id="tfCouponPrice" editable="false"/>
 
-        <JFXTextField promptText="总价条件" labelFloat="true" fx:id="tfTotalPrice" editable="false"/>
+        <JFXTextField maxWidth="200" promptText="总价条件" labelFloat="true" fx:id="tfTotalPrice" editable="false"/>
 
     </VBox>
 
@@ -50,7 +50,12 @@
         </columns>
     </JFXTreeTableView>
 
-    <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
-               style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
+    <HBox alignment="CENTER" maxWidth="500" spacing="30">
+        <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" prefHeight="32.0" prefWidth="80.0"
+                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="确认"/>
+        <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
+                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
+    </HBox>
+
 
 </VBox>

@@ -139,4 +139,13 @@ public class UserManagementBlController implements UserManagementBlService, Empl
             throw new UncheckedRemoteException(e);
         }
     }
+    @Override
+    public String getId(){
+        try {
+            return dataService.getId();
+        } catch (RemoteException e) {
+            throw new UncheckedRemoteException(e);
+        }
+    }
+
 }

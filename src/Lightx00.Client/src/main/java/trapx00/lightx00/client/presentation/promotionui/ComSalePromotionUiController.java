@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.cell.TextFieldTableCell;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlServiceFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
@@ -23,14 +24,19 @@ import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.util.BillHelper;
+import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class ComSalePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     public JFXTextField tfId;
-    public JFXTextField tfStartDate;
-    public JFXTextField tfEndDate;
+    public JFXDatePicker tfStartDate;
+    public JFXDatePicker tfEndDate;
     public JFXTextField tfSalePrice;
     public JFXTreeTableView<PromotionCommodityModel> tbPromotionCommodity;
     public JFXTreeTableColumn<PromotionCommodityModel, String> tcId;
@@ -43,10 +49,6 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
     public JFXButton btnDraft;
     public JFXButton btnReset;
     public Label lbTotal;
-
-
-    private ObjectProperty<Date> startDate = new SimpleObjectProperty<>();
-    private ObjectProperty<Date> endDate = new SimpleObjectProperty<>();
 
     private ComSalePromotionBlService blService = ComSalePromotionBlServiceFactory.getInstance();
 
@@ -80,20 +82,24 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
          */
         ComSalePromotionVo comSalePromotion = (ComSalePromotionVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ComSalePromotionUiController comSalePromotionDetailUi = externalLoadedUiPackage.getController();
-        comSalePromotionDetailUi.tfId.setText(comSalePromotion.getId());
-        comSalePromotionDetailUi.startDate.setValue(comSalePromotion.getStartDate());
-        comSalePromotionDetailUi.endDate.setValue(comSalePromotion.getEndDate());
-        comSalePromotionDetailUi.tfSalePrice.setText(String.valueOf(comSalePromotion.getOnSalePrice()));
-        comSalePromotionDetailUi.addPromotionCommodities(comSalePromotion.getPromotionCommodities());
+        ClientPromotionUiController continueWriting = externalLoadedUiPackage.getController();
+        continueWriting.tfId.setText(comSalePromotion.getId());
+        continueWriting.tfStartDate.setValue(DateToLocalDate(comSalePromotion.getStartDate()));
+        continueWriting.tfEndDate.setValue(DateToLocalDate(comSalePromotion.getEndDate()));
+        continueWriting.tfSalePrice.setText(String.valueOf(comSalePromotion.getOnSalePrice()));
+        continueWriting.addPromotionCommodities(comSalePromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
 
     public void initialize() {
+        tfId.setText(blService.getId());
+        tfSalePrice.setText("0");
+
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+       // tcAmount.setCellValueFactory(TextFieldTableCell.forTableColumn());
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             lbTotal.setText(BillHelper.toFixed(promotionCommodityModelObservableList.stream().mapToDouble(PromotionCommodityModel::getAmount).sum()));
@@ -129,8 +135,8 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         }
         return new ComSalePromotionVo(
                 tfId.getText(),
-                startDate.getValue(),
-                endDate.getValue(),
+                DateHelper.fromLocalDate(tfStartDate.getValue()),
+                DateHelper.fromLocalDate(tfEndDate.getValue()),
                 PromotionState.Waiting,
                 promotionCommodityModelObservableList.stream().map(PromotionCommodityModel::toPromotionCommodity).toArray(PromotionCommodity[]::new),
                 Integer.valueOf(tfSalePrice.getText())
@@ -167,8 +173,8 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
 
     public void onBtnResetClicked() {
         tfId.setText("");
-        tfStartDate.setText("");
-        tfEndDate.setText("");
+        tfStartDate.setValue(null);
+        tfEndDate.setValue(null);
         tfSalePrice.setText("");
         promotionCommodityModelObservableList.clear();
     }
@@ -195,4 +201,10 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
 
     }
 
+    private LocalDate DateToLocalDate(Date date) {
+        Instant instant = date.toInstant();
+        ZoneId zone = ZoneId.systemDefault();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
+        return localDateTime.toLocalDate();
+    }
 }

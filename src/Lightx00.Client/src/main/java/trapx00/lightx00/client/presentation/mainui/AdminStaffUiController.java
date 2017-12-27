@@ -5,8 +5,6 @@ import trapx00.lightx00.client.presentation.adminui.UserManagementUiController;
 
 public class AdminStaffUiController extends FrameworkUiController {
 
-
-
     public void initialize() {
         // 必须有。调用基类初始化来初始化基类的元素。
         super.initialize();

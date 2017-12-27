@@ -36,4 +36,9 @@ public interface UserManagementDataService extends Remote {
      */
     ResultMessage delete(EmployeePo account) throws RemoteException;
 
+    /**
+     * New id for a new employee.
+     * @return new id
+     */
+    String getId()throws RemoteException;
 }

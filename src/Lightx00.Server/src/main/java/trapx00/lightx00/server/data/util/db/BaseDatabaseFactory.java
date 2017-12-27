@@ -14,13 +14,19 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import trapx00.lightx00.shared.po.admin.AdminPo;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
+import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
+import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
@@ -122,6 +128,22 @@ public class BaseDatabaseFactory {
             commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",1,"PRO-0001",null));
             commoditySortPos.create(new CommoditySortPo("PRO-0004","qwasdeLed",0,"PRO-0001",null));
 
+            Dao<AuditIdPo,String> commitBills = createDao(AuditIdPo.class);
+            TableUtils.dropTable(commitBills,true);
+            TableUtils.createTableIfNotExists(connectionSource,AuditIdPo.class);
+            commitBills.create(new AuditIdPo("XJFYD-20171112-00001",new Date()));
+            commitBills.create(new AuditIdPo("XJFYD-20171112-00002",new Date()));
+
+            Dao<CashBillPo,String> cashBillPos = createDao(CashBillPo.class);
+            TableUtils.dropTable(cashBillPos,true);
+            TableUtils.createTableIfNotExists(connectionSource,CashBillPo.class);
+            cashBillPos.create(new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"10002",1,null));
+            cashBillPos.create(new CashBillPo("XJFYD-20171112-00002",new Date(), BillState.WaitingForApproval,"10103",2,null));
+
+            Dao<ComSalePromotionPo,String> clientPromotion = createDao(ComSalePromotionPo.class);
+            TableUtils.dropTable(clientPromotion,true);
+            TableUtils.createTableIfNotExists(connectionSource,ComSalePromotionPo.class);
+            clientPromotion.create(new ComSalePromotionPo("SPJJCXCL-20171112-00001",new Date(),new Date(), PromotionState.Draft,null,0));
 
              } catch (SQLException e) {
             e.printStackTrace();

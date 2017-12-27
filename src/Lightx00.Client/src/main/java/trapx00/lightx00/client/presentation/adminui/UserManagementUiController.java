@@ -44,13 +44,10 @@ public class UserManagementUiController implements ExternalLoadableUiController 
     private void updateItems() {
         employeeInfoModels.clear();
         UserAccountQueryVo queryVo = new UserAccountQueryVo();
-        if(tfSearch.getText().length() > 0) {
-            if (queryVo.conditionCount() > 0) {
-                queryVo.and();
-            }
-        }
         EmployeeVo[] result = blService.query(queryVo);
-        employeeInfoModels.addAll(Arrays.stream(result).map(EmployeeInfoModel::new).collect(Collectors.toList()));
+        for(EmployeeVo employeeVo:result) {
+            employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
+        }
 
     }
 
@@ -72,7 +69,7 @@ public class UserManagementUiController implements ExternalLoadableUiController 
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/admin/UserManagementUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/adminui/UserManagementUi.fxml").loadAndGetPackageWithoutException();
     }
 
     public EmployeeVo getSelected() {

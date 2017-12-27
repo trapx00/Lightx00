@@ -76,4 +76,9 @@ public class ClientPromotionDetailUi extends PromotionDetailUi {
     public void onBtnBackClicked() {
         onClose();
     }
+
+    @FXML
+    public void onBtnSubmitClicked() {
+        onClose();
+    }
 }

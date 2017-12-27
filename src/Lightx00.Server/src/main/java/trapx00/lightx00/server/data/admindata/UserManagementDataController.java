@@ -16,11 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class UserManagementDataController extends UnicastRemoteObject implements UserManagementDataService, LoginService {
@@ -50,8 +46,6 @@ public class UserManagementDataController extends UnicastRemoteObject implements
         logService.printLog(this,"遇到了数据库操作失败。");
         throw new DbSqlException(e);
     }
-
-
 
     /**
      * filter some user accounts.
@@ -105,6 +99,20 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     }
 
     /**
+     * New id for a new employee.
+     * @return new id
+     */
+    @Override
+    public String getId(){
+        List<EmployeePo> employeePos = null;
+        for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> controller : positionDaoMap.entrySet()) {
+            employeePos = controller.getValue().query((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo());
+        }
+            OptionalInt maxId = employeePos.stream().map(EmployeePo::getId)
+                                .mapToInt(Integer::parseInt).max();
+            return String.valueOf(maxId.getAsInt() + 1);
+    }
+    /**
      * Login.
      *
      * @param name name
@@ -122,4 +130,5 @@ public class UserManagementDataController extends UnicastRemoteObject implements
         }
         return null;
     }
+
 }
