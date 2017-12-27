@@ -63,11 +63,14 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
     }
 
     public void onBtnAcknowledgeClicked(ActionEvent actionEvent) {
-        billVo.notificationActivateService().activate(billVo.getId());
         if (onAcknowledgeClicked != null) {
             onAcknowledgeClicked.accept(notificationVo);
             close();
         }
+        PromptDialogHelper.start("入账成功！",String.format("单据%s已经被入账！", notificationVo.getBill().getId()))
+            .addCloseButton("好","CHECK",null)
+            .createAndShow();
+
     }
 
     public void onBtnBackClicked(ActionEvent actionEvent) {
@@ -78,6 +81,7 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
 
     private void abandon() {
         notificationVo.operationService().abandon(notificationVo);
+
     }
 
     public void onBtnModifyClicked(ActionEvent actionEvent) {
@@ -93,6 +97,11 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
 
     public void onBtnAbandonClicked(ActionEvent actionEvent) {
         abandon();
+        close();
+        PromptDialogHelper.start("丢弃成功！",String.format("单据%s已经被丢弃！", notificationVo.getBill().getId()))
+            .addCloseButton("好","CHECK",null)
+            .createAndShow();
+
     }
 
     public void onTfBillIdClicked(MouseEvent mouseEvent) {
