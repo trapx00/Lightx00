@@ -1,9 +1,9 @@
 package trapx00.lightx00.client.blservice.saleblservice;
 
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 public interface SaleBillBlService {
 

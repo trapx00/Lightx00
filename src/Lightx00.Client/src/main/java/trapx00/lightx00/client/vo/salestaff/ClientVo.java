@@ -3,12 +3,12 @@ package trapx00.lightx00.client.vo.salestaff;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.presentation.clientui.ClientDetailUiController;
 import trapx00.lightx00.client.presentation.clientui.ClientModifyUiController;
-import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
+import trapx00.lightx00.client.presentation.helpui.ClientDetailUi;
+import trapx00.lightx00.client.presentation.helpui.ClientModifyUi;
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.shared.po.client.ClientType;
-
-import java.util.HashMap;
 
 public class ClientVo implements Draftable {
     private String id;

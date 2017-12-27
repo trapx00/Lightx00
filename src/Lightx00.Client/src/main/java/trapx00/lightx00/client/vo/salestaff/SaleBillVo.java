@@ -12,7 +12,6 @@ import trapx00.lightx00.client.presentation.saleui.SaleBillDetailUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;

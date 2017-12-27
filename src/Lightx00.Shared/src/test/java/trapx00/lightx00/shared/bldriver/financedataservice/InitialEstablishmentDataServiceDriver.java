@@ -9,7 +9,7 @@ import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class InitialEstablishmentDataServiceDriver {
     private InitialEstablishmentDataService service = new InitialEstablishmentDataServiceStub();

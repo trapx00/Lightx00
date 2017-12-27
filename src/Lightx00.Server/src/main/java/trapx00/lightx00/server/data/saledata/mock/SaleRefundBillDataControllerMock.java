@@ -1,8 +1,6 @@
 package trapx00.lightx00.server.data.saledata.mock;
 
 import trapx00.lightx00.server.data.saledata.SaleRefundBillDataController;
-import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
-import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleRefundBillDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
 

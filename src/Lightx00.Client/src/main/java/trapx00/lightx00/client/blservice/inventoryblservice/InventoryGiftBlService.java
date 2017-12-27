@@ -1,15 +1,9 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
-import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
-
-import javax.xml.crypto.Data;
-import java.util.Date;
 
 public interface InventoryGiftBlService {
     /**

@@ -15,7 +15,6 @@ import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class PurchaseBillVo extends PurchaseBillBaseVo {
     private String clientId;

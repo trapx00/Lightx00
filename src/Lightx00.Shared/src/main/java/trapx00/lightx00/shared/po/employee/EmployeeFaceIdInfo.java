@@ -3,8 +3,6 @@ package trapx00.lightx00.shared.po.employee;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.net.URI;
-
 
 @DatabaseTable(tableName = "EmployeeFaceIdInfo")
 public class EmployeeFaceIdInfo {

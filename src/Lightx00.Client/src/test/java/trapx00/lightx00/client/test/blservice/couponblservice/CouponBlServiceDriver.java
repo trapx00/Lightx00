@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CouponBlServiceDriver {
     private CouponBlService service = new CouponBlServiceStub();

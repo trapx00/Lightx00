@@ -4,7 +4,7 @@ import org.junit.Test;
 import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
 import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SaleBillBlInfoControllerTest {
     private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();

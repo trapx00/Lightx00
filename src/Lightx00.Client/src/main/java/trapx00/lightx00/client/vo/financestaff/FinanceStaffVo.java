@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.vo.financestaff;
 
-import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 
 import java.util.Date;

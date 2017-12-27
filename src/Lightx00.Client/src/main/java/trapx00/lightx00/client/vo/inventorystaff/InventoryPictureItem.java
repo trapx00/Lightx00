@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
-import com.j256.ormlite.field.DatabaseField;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 import java.io.Serializable;

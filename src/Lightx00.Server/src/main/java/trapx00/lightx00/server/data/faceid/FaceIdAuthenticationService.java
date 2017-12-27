@@ -1,7 +1,5 @@
 package trapx00.lightx00.server.data.faceid;
 
-import trapx00.lightx00.shared.po.ResultMessage;
-
 public interface FaceIdAuthenticationService {
 
 

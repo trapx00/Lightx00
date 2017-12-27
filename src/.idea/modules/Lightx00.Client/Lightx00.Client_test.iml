@@ -13,7 +13,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Lightx00.Client/libs/jxl.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../libs/jxl.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -96,7 +96,6 @@
     <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.6" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.3" level="project" />
-    <orderEntry type="library" name="jxl" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="Lightx00.Client_main" />
 </module>

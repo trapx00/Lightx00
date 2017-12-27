@@ -25,7 +25,6 @@ import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

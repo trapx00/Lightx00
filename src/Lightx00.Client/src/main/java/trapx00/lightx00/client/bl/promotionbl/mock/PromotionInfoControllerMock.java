@@ -2,8 +2,8 @@ package trapx00.lightx00.client.bl.promotionbl.mock;
 
 import trapx00.lightx00.client.bl.promotionbl.PromotionInfoController;
 import trapx00.lightx00.client.vo.Draftable;
-import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 

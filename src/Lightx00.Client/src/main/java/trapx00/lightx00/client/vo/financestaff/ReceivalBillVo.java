@@ -1,22 +1,20 @@
 package trapx00.lightx00.client.vo.financestaff;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillDetailUi;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
-import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class ReceivalBillVo extends ReceivalPaymentBillVoBase {
     public ReceivalBillVo(String id, Date date, BillState state, String clientId, String operatorId, Transcation[] transcations, double total) {

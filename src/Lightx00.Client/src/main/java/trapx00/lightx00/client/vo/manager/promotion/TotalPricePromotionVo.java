@@ -9,7 +9,6 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class TotalPricePromotionVo extends PromotionVoBase {
     private double couponPrice;

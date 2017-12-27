@@ -14,7 +14,6 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
@@ -23,8 +22,6 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.client.ClientType;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ClientAddUiController implements ExternalLoadableUiController {

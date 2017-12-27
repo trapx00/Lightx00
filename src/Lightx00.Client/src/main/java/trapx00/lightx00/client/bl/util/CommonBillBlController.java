@@ -19,12 +19,9 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.BaseQueryVo;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CommonBillBlController<BillVoType extends BillVo, BillPoType extends BillPo, QueryType extends BaseQueryVo<BillPoType, String, QueryType>> {

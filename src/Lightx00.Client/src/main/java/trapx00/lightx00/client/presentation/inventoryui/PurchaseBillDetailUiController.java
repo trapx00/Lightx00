@@ -9,30 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
-import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlServiceFactory;
-import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
-import trapx00.lightx00.client.presentation.clientui.ClientSelectionItemModel;
-import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
-import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
-import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
-import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-
-import java.awt.event.ActionEvent;
-import java.util.Date;
 
 public class PurchaseBillDetailUiController extends BillDetailUi {
     @FXML

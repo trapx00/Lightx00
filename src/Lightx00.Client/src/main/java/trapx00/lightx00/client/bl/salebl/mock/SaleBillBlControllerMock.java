@@ -1,10 +1,9 @@
 package trapx00.lightx00.client.bl.salebl.mock;
 
 import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 
 public class SaleBillBlControllerMock extends SaleBillBlController {
 

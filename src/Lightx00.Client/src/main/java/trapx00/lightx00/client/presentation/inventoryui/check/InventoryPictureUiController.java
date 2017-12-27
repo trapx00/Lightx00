@@ -1,6 +1,9 @@
 package trapx00.lightx00.client.presentation.inventoryui.check;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,25 +15,16 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
-import trapx00.lightx00.client.presentation.bankaccountui.BankAccountModel;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class InventoryPictureUiController implements ExternalLoadableUiController {

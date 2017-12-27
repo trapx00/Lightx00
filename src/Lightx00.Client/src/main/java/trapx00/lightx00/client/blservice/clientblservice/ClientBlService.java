@@ -1,10 +1,7 @@
 package trapx00.lightx00.client.blservice.clientblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.shared.po.client.ClientPo;
-
-import java.rmi.RemoteException;
+import trapx00.lightx00.shared.po.ResultMessage;
 
 public interface ClientBlService {
 

@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.test.bl.notificationbl;
 
-import javafx.scene.Parent;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.notificationbl.NotificationBlController;
 import trapx00.lightx00.client.bl.notificationbl.factory.NotificationBlFactory;
@@ -8,14 +7,11 @@ import trapx00.lightx00.client.datafactory.notificationdataservicefactory.Notifi
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.admin.AdminVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
-import trapx00.lightx00.client.vo.financestaff.FinanceBillVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.client.vo.notification.NotificationConvertRegistry;
-import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
@@ -24,7 +20,7 @@ import trapx00.lightx00.shared.util.BillHelper;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NotificationBlControllerTest {
     private NotificationBlController controller = NotificationBlFactory.getController();

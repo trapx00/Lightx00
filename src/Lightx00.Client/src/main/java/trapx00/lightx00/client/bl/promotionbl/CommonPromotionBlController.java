@@ -19,7 +19,6 @@ import trapx00.lightx00.shared.queryvo.BaseQueryVo;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CommonPromotionBlController<PromotionVo extends PromotionVoBase, PromotionPo extends PromotionPoBase, QueryVo extends BaseQueryVo<PromotionPo,String,QueryVo>> {

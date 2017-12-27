@@ -6,19 +6,15 @@ import trapx00.lightx00.client.bl.financebl.CashBillBlController;
 import trapx00.lightx00.client.bl.financebl.factory.CashBillBlFactory;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.exception.database.BillInvalidStateException;
-import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
-import trapx00.lightx00.shared.util.DateHelper;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * 现金付款单测试用例。

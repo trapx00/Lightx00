@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.blservice.notificationblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
 public interface NotificationBlService {
     /**

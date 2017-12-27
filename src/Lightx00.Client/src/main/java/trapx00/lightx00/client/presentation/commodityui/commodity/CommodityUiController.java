@@ -15,7 +15,6 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import sun.reflect.generics.tree.Tree;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
@@ -27,11 +26,9 @@ import trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
-
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

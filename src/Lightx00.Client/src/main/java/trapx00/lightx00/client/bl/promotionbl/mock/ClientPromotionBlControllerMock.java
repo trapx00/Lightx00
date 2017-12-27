@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.bl.promotionbl.mock;
 
 import trapx00.lightx00.client.bl.promotionbl.ClientPromotionBlController;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 

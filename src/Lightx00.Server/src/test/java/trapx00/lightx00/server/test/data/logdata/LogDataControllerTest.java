@@ -1,9 +1,6 @@
 package trapx00.lightx00.server.test.data.logdata;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedDelete;
-import com.j256.ormlite.table.TableUtils;
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogDataFactory;
@@ -14,12 +11,9 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.OptionalInt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("unchecked")
 public class LogDataControllerTest {

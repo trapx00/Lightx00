@@ -4,14 +4,14 @@ import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.TradeHistoryBlServiceStub;
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillType;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TradeHistoryBlServiceDriver {
     private TradeHistoryBlService service = new TradeHistoryBlServiceStub();

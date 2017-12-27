@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.presentation.loginui;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.validation.RequiredFieldValidator;
 import de.jensd.fx.glyphs.materialicons.MaterialIcon;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
@@ -15,9 +14,6 @@ import trapx00.lightx00.client.bl.loginbl.factory.LoginBlFactory;
 import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.admin.AdminVo;
-
-import java.util.Date;
 
 public class LoginUiController implements ExternalLoadableUiController {
     public JFXPasswordField passwordField;

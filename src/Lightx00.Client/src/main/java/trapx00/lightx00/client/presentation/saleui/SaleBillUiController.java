@@ -19,10 +19,7 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlServiceFactory;
-import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
-import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
-import trapx00.lightx00.client.presentation.adminui.EmployeeSelectionUi;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
@@ -37,7 +34,6 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
-import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
@@ -47,7 +43,6 @@ import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.Date;
 
 public class SaleBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {

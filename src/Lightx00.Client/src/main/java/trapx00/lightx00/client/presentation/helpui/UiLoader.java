@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.presentation.helpui;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import trapx00.lightx00.client.Client;

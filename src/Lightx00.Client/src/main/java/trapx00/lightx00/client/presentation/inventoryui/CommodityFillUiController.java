@@ -1,14 +1,10 @@
 package trapx00.lightx00.client.presentation.inventoryui;
 
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
-import trapx00.lightx00.client.presentation.clientui.ClientDialogUiController;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
-import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.CommodityFillVo;
 
 import java.util.function.Consumer;

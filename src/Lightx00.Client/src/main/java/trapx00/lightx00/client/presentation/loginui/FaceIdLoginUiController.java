@@ -10,7 +10,6 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.bl.loginbl.factory.FaceIdAuthenticationBlServiceFactory;
 import trapx00.lightx00.client.blservice.loginblservice.FaceIdAuthenticationBlService;
@@ -20,8 +19,6 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
 import trapx00.lightx00.shared.exception.faceid.NetworkException;
 import trapx00.lightx00.shared.exception.faceid.NoFaceDetectedException;
-
-import java.awt.*;
 
 public class FaceIdLoginUiController implements ExternalLoadableUiController {
     public JFXButton loginButton;

@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.bl.commoditybl.factory;
 
 import trapx00.lightx00.client.bl.commoditybl.CommoditySortBlController;
-import trapx00.lightx00.client.bl.commoditybl.mock.CommoditySortBlControllerMock;
 
 public class CommoditySortServiceFactory {
 

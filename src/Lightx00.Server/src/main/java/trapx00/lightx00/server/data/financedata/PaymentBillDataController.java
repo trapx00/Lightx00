@@ -4,10 +4,6 @@ import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
 import trapx00.lightx00.server.data.util.CommonBillDataController;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
-import trapx00.lightx00.shared.exception.database.BillInvalidStateException;
-import trapx00.lightx00.shared.exception.database.DbSqlException;
-import trapx00.lightx00.shared.exception.database.IdExistsException;
-import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
@@ -16,7 +12,6 @@ import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.List;
 
 public class PaymentBillDataController extends UnicastRemoteObject implements PaymentBillDataService {

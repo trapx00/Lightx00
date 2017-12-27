@@ -6,12 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
-import trapx00.lightx00.client.presentation.commodityui.commodity.CommodityModificationUi;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftItemModificationUi;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-
-import java.util.function.Consumer;
 
 public class InventoryActualValue implements ExternalLoadableUiController {
     public JFXTextField tfAmount;

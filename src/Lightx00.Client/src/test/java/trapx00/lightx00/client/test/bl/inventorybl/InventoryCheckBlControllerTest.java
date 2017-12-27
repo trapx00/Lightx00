@@ -3,12 +3,9 @@ package trapx00.lightx00.client.test.bl.inventorybl;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.inventorybl.InventoryCheckBlController;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryCheckServiceFactory;
-import trapx00.lightx00.shared.po.ResultMessage;
 
 import java.io.File;
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class InventoryCheckBlControllerTest {
 

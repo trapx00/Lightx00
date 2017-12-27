@@ -6,10 +6,10 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientPo;
 import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
+import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
-import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 
 import java.rmi.RemoteException;
 import java.util.Date;

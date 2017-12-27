@@ -9,10 +9,6 @@ import com.j256.ormlite.table.TableUtils;
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
-
-import java.sql.SQLException;
-import java.util.Date;
-
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.admin.AdminPo;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -30,6 +26,9 @@ import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
+
+import java.sql.SQLException;
+import java.util.Date;
 
 public class BaseDatabaseFactory {
 

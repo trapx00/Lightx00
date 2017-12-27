@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
-import java.awt.event.ActionEvent;
-
 public class ClientDetailUiController extends ClientDetailUi implements ExternalLoadableUiController {
     @FXML
     private JFXTextField clientId;

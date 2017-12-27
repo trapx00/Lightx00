@@ -1,10 +1,8 @@
 package trapx00.lightx00.client.presentation.clientui;
 
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.istack.internal.NotNull;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,8 +17,6 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
-import trapx00.lightx00.shared.po.client.ClientType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -111,7 +107,7 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
      *
      * @param selected 已经选择的项
      */
-    private void setSelected(@NotNull List<ClientVo> selected) {
+    private void setSelected(List<ClientVo> selected) {
         List<String> ids = selected.stream().map(ClientVo::getId).collect(Collectors.toList());
         clientTable.getSelectionModel().select(Integer.parseInt(ids.get(0)));
     }

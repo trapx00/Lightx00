@@ -7,11 +7,10 @@ import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.manager.AuditIdVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AuditBlControllerTest {
     private AuditBlController controller = AuditBlFactory.getController();

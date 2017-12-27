@@ -4,7 +4,7 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
 import trapx00.lightx00.shared.dataservicestub.logindataservice.LoginDataServiceStub;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class LoginDataServiceDriver {
     private LoginDataService service = new LoginDataServiceStub();

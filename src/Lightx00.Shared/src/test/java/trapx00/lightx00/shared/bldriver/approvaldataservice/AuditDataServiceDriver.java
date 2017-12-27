@@ -4,16 +4,15 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservicestub.approvaldataservice.AuditDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillPo;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.manager.AuditIdPo;
-import trapx00.lightx00.shared.po.bill.BillPo;
-import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AuditDataServiceDriver {
     private AuditDataService service = new AuditDataServiceStub();

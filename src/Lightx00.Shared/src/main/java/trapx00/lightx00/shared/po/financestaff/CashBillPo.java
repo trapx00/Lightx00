@@ -1,13 +1,12 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
+
+import java.util.Arrays;
+import java.util.Date;
 
 @DatabaseTable(tableName = "CashBill")
 public class CashBillPo extends FinanceBillPo  {

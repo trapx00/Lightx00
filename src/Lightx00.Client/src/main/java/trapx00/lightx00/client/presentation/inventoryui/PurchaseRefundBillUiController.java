@@ -17,8 +17,6 @@ import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
@@ -30,7 +28,6 @@ import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiF
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;

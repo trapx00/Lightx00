@@ -7,7 +7,8 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class InventoryWarningBlControllerTest {
     private InventoryWarningBlController service= InventoryWarningServiceFactory.getInventoryWarningBlController();

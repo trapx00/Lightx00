@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.bl.adminbl;
 
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.bl.adminbl.EmployeeConverter;
 import trapx00.lightx00.client.vo.admin.AdminVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryStaffVo;

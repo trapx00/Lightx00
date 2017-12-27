@@ -5,8 +5,6 @@ import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableDemoUiController;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 
-import java.util.HashMap;
-
 public class DraftDemoVo implements Draftable {
     private String draftContent = "123";
 

@@ -8,8 +8,6 @@ import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDat
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillPo;
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;

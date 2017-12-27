@@ -1,6 +1,5 @@
 package trapx00.lightx00.shared.queryvo.querys;
 
-import javax.management.Query;
 import java.io.Serializable;
 
 public abstract class OneArgQuery<Po, PK, Obj extends Serializable> extends BaseQuery<Po, PK> {

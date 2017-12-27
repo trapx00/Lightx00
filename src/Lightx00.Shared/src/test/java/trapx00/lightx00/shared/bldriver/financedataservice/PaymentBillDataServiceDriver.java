@@ -7,10 +7,9 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 
-import javax.xml.transform.Result;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PaymentBillDataServiceDriver {
     private PaymentBillDataService service= new PaymentBillDataServiceStub();

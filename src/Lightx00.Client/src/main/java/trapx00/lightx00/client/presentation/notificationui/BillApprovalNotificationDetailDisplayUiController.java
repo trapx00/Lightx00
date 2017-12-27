@@ -1,23 +1,18 @@
 package trapx00.lightx00.client.presentation.notificationui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import trapx00.lightx00.client.bl.notificationbl.factory.NotificationBlFactory;
-import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
-import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.awt.*;
 import java.io.IOException;
 
 @SuppressWarnings("unchecked")

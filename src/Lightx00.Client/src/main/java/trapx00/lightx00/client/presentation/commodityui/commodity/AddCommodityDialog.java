@@ -8,13 +8,9 @@ import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 
 import java.util.Date;
-import java.util.function.Consumer;
 
 public class AddCommodityDialog implements ExternalLoadableUiController{
     public JFXTextField tfId;

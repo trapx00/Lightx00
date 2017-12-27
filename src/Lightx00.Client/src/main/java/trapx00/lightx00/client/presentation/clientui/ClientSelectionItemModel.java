@@ -3,8 +3,6 @@ package trapx00.lightx00.client.presentation.clientui;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import trapx00.lightx00.client.presentation.helpui.LogSelectionItemModel;
-import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
 public class ClientSelectionItemModel extends RecursiveTreeObject<ClientSelectionItemModel> {

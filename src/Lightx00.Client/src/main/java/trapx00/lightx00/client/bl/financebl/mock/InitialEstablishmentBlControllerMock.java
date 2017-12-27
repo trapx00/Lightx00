@@ -1,16 +1,9 @@
 package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.InitialEstablishmentBlController;
-import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.client.ClientType;
-import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
-import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
-
-import java.util.Date;
 
 public class InitialEstablishmentBlControllerMock extends InitialEstablishmentBlController {
     /**

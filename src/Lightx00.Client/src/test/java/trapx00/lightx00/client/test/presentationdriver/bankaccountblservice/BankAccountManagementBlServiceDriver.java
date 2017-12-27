@@ -6,7 +6,7 @@ import trapx00.lightx00.client.blservicestub.bankaccountblservice.BankAccountMan
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BankAccountManagementBlServiceDriver {
     private BankAccountManagementBlService service = new BankAccountManagementBlServiceStub();

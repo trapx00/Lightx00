@@ -6,7 +6,6 @@ import trapx00.lightx00.client.presentation.financeui.*;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
-import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 
 
 /**

@@ -1,18 +1,14 @@
 package trapx00.lightx00.client.vo.manager.promotion;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.promotionbl.factory.PromotionDraftQueryServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.vo.Draftable;
-import trapx00.lightx00.client.vo.draft.DraftableQueryServiceRegistry;
-import trapx00.lightx00.shared.po.draft.DraftType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 
 public abstract class PromotionVoBase implements Draftable, Serializable {
     private String id;

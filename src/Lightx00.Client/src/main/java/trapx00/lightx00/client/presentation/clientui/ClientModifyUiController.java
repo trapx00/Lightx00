@@ -14,23 +14,16 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
-import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
-import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
-import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientType;
-import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 
 public class ClientModifyUiController extends ClientModifyUi implements DraftContinueWritableUiController, ExternalLoadableUiController {

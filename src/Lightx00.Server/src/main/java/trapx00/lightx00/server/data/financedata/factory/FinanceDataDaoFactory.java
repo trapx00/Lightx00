@@ -1,16 +1,11 @@
 package trapx00.lightx00.server.data.financedata.factory;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
-import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 import trapx00.lightx00.shared.po.financestaff.SystemSnapshotPo;
-import trapx00.lightx00.shared.queryvo.SystemSnapshotQueryVo;
-
-import java.sql.SQLException;
 
 public class FinanceDataDaoFactory extends BaseDatabaseFactory {
 

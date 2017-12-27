@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommodityDataServiceDriver {
     CommodityDataService service=new CommodityDataServiceStub();

@@ -1,7 +1,5 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
-import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
-
 import java.util.Date;
 
 public class CommodityVo {

@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.vo.financestaff;
 
-import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.ArrayList;

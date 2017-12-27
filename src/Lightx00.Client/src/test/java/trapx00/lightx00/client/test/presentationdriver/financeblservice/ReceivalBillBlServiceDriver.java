@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.financeblservice.ReceivalBillBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.ReceivalBillBlServiceStub;
+import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ReceivalBillBlServiceDriver {
     private ReceivalBillBlService service = new ReceivalBillBlServiceStub();

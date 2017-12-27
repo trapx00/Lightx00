@@ -4,7 +4,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureItem;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 
 public class InventoryPictureModel extends RecursiveTreeObject<InventoryPictureModel> {
     private ObjectProperty<InventoryPictureItem> inventoryPictureModelObjectProperty;

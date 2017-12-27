@@ -3,11 +3,10 @@ package trapx00.lightx00.client.test.presentationdriver.saleblservice;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlServiceFactory;
-import trapx00.lightx00.client.blservicestub.saleblservice.SaleBillBlServiceStub;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SaleBillBlServiceDriver {
 

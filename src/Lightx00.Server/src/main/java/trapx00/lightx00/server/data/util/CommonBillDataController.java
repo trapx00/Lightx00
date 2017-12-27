@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.util;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.GenericRawResults;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.exception.database.*;

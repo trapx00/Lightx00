@@ -1,12 +1,12 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-import java.util.Date;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
+
+import java.util.Date;
 
 @DatabaseTable(tableName = "FinanceStaff")
 public class FinanceStaffPo extends EmployeePo {

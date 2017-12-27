@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.test.bl.commoditybl;
 
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.commoditybl.CommoditySortBlController;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommoditySortServiceFactory;

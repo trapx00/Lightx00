@@ -3,14 +3,12 @@ package trapx00.lightx00.client.test.bl.clientbl;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.clientbl.ClientBlController;
 import trapx00.lightx00.client.bl.clientbl.factory.ClientBlFactory;
-import trapx00.lightx00.client.bl.clientbl.mock.ClientBlControllerMock;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ClientBlControllerTest {
     ClientBlController clientBlController= ClientBlFactory.getClientBlController();

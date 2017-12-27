@@ -3,8 +3,6 @@ package trapx00.lightx00.shared.dataservicestub.logdataservice;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 
 public class LogBackupDataServiceStub implements LogBackupDataService {

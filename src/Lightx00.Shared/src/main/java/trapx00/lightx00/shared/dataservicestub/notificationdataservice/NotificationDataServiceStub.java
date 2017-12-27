@@ -1,11 +1,12 @@
 package trapx00.lightx00.shared.dataservicestub.notificationdataservice;
 
-import java.util.Date;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
+
+import java.util.Date;
 
 public class NotificationDataServiceStub implements NotificationDataService {
 

@@ -4,12 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
@@ -25,8 +22,6 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 import trapx00.lightx00.shared.util.DateHelper;
-
-import java.security.acl.Group;
 
 public class EmployeeAddUi implements ExternalLoadableUiController {
     @FXML private JFXTextField tfId;

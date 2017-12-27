@@ -25,7 +25,6 @@ import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 
-
 import java.util.Date;
 
 public class InventoryCheckBlController implements InventoryCheckBlService {

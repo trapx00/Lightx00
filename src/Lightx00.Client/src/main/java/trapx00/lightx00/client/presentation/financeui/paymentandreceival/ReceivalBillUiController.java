@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.presentation.financeui.paymentandreceival;
 
-import javafx.event.ActionEvent;
 import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillBlFactory;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 
 public class ReceivalBillUiController extends ReceivalPaymentBillUiController<ReceivalBillVo> {

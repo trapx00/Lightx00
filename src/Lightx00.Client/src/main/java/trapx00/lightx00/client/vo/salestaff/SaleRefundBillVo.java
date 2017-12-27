@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.vo.salestaff;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
@@ -13,7 +12,6 @@ import trapx00.lightx00.client.presentation.saleui.SaleRefundBillDetailUiControl
 import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;

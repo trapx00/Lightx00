@@ -3,7 +3,6 @@ package trapx00.lightx00.server.data.faceid;
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
-import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.exception.faceid.FileException;

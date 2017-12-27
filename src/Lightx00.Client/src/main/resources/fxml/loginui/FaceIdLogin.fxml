@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import trapx00.lightx00.client.presentation.helpui.webcam.WebCamView?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx"
            stylesheets="@../helpui/main.css"
            xmlns:fx="http://javafx.com/fxml"

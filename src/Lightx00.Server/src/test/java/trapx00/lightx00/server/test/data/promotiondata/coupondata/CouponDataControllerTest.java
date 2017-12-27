@@ -13,7 +13,8 @@ import trapx00.lightx00.shared.queryvo.promotion.UsedCouponQueryVo;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CouponDataControllerTest {
     static {

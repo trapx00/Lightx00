@@ -2,18 +2,14 @@ package trapx00.lightx00.client.presentation.commodityui.commoditySort;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.DoubleValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import trapx00.lightx00.client.bl.commoditybl.factory.CommoditySortServiceFactory;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
-
-import java.util.Date;
 
 public class AddCommoditySortDialog implements ExternalLoadableUiController {
     public JFXTextField tfId;

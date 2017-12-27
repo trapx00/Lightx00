@@ -2,9 +2,9 @@ package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
-import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
 public class PurchaseBillBlInfoController implements PurchaseBillBlInfo {

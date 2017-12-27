@@ -7,21 +7,18 @@ import trapx00.lightx00.server.data.approvaldata.factory.AuditDataDaoFactory;
 import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
-import trapx00.lightx00.shared.po.financestaff.CashBillItem;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
-import trapx00.lightx00.shared.po.financestaff.FinanceBillPo;
-import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.financestaff.CashBillItem;
+import trapx00.lightx00.shared.po.financestaff.CashBillPo;
+import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.queryvo.AuditIdQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AuditDataControllerTest {
     static {

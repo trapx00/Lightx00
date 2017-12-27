@@ -5,7 +5,6 @@ import trapx00.lightx00.client.datafactory.logdataservicefactory.LogBackupDataSe
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import java.net.URI;
 import java.rmi.RemoteException;
 
 public class LogBackupBlController implements LogBackupBlService {

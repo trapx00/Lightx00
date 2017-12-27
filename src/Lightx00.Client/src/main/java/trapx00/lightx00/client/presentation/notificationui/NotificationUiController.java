@@ -1,35 +1,24 @@
 package trapx00.lightx00.client.presentation.notificationui;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import trapx00.lightx00.client.Client;
 import trapx00.lightx00.client.bl.notificationbl.factory.NotificationBlFactory;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
-import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
-import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
-import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
-import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
-import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
-import trapx00.lightx00.shared.po.employee.EmployeeState;
-import trapx00.lightx00.shared.po.financestaff.CashBillItem;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")

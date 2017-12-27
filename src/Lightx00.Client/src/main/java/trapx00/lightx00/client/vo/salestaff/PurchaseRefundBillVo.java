@@ -8,7 +8,6 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
-import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillDetailUiController;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
@@ -16,7 +15,6 @@ import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
     private String clientId;
