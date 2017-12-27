@@ -3,10 +3,17 @@ package trapx00.lightx00.client.presentation.inventoryui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,6 +21,11 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.bridj.cpp.std.list;
+import sun.net.idn.StringPrep;
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
+import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServiceFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
@@ -47,19 +59,19 @@ import java.util.List;
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
     @FXML
-    private JFXTextField tfBillId;
+    JFXTextField tfBillId;
     @FXML
-    private JFXTextField tfOperator;
+    JFXTextField tfOperator;
+    @FXML
+    JFXTextField tfClientId;
+    @FXML
+    JFXComboBox<String> cbRepository;
+    @FXML
+    JFXTextField tfBillTotal;
     @FXML
     private JFXTextField tfDate;
     @FXML
-    private JFXTextField tfClientId;
-    @FXML
     private JFXTextField tfClientName;
-    @FXML
-    private JFXComboBox<String> cbRepository;
-    @FXML
-    private JFXTextField tfBillTotal;
     @FXML
     private JFXTextField tfComment;
     @FXML
@@ -82,13 +94,13 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
     private PurchaseBillBlService blService = PurchaseBillBlServiceFactory.getInstance();
+    private ClientBlService clientBlService = ClientBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
-
-    private double number;
-    private String comment;
+    private StringProperty tfClientIdProperty = new SimpleStringProperty("");
+    private StringProperty tfClientNameProperty = new SimpleStringProperty("");
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -101,12 +113,15 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        PurchaseBillUiController purchaseBillUiController = (PurchaseBillUiController) externalLoadedUiPackage.getController();
+        PurchaseBillUiController purchaseBillUiController = externalLoadedUiPackage.getController();
         purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
+        purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
+        purchaseBillUiController.tfClientName.setText(clientBlService.queryById(purchaseBillVo.getClientId()).getName());
         purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
         purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
+        purchaseBillUiController.tfComment.setText(purchaseBillVo.getComment());
         purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
         return externalLoadedUiPackage;
     }
@@ -146,11 +161,38 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         TreeItem<CommodityItemModel> root = new RecursiveTreeItem<>(commodityItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCommodityList.setRoot(root);
         tbCommodityList.setShowRoot(false);
+
+        commodityItemModelObservableList.addListener(new ListHandler());
+        tfClientId.textProperty().bindBidirectional(tfClientIdProperty);
+        tfClientName.textProperty().bindBidirectional(tfClientNameProperty);
+
         ObservableList<String> stringObservableList = FXCollections.observableArrayList(
                 "1", "2", "3"
         );
         cbRepository.setItems(stringObservableList);
+        cbRepository.setValue("1");
         autofill();
+
+        NumberValidator numberValidator = new NumberValidator();
+        numberValidator.setMessage("请输入数字类型");
+        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
+        requiredValidator.setMessage("请输入信息");
+
+        tfClientId.getValidators().add(requiredValidator);
+        tfClientName.getValidators().add(requiredValidator);
+
+        tfClientIdProperty.addListener(event -> {
+            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
+                tfClientId.validate();
+            }
+
+        });
+        tfClientNameProperty.addListener(event -> {
+            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
+                tfClientName.validate();
+            }
+
+        });
     }
 
     /**
@@ -161,7 +203,19 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
      */
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
-        return null;
+        PurchaseBillVo purchaseBillVo = (PurchaseBillVo) reversible;
+        purchaseBillVo.setTotal(-purchaseBillVo.getTotal());
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        PurchaseBillUiController purchaseBillUiController = (PurchaseBillUiController) externalLoadedUiPackage.getController();
+        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
+        purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
+        purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
+        purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
+        purchaseBillUiController.tfClientName.setText(clientBlService.queryById(purchaseBillVo.getClientId()).getName());
+        purchaseBillUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
+        purchaseBillUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
+        purchaseBillUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
+        return externalLoadedUiPackage;
     }
 
     @FXML
@@ -171,7 +225,6 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
             tfClientName.setText(x.getName());
         });
     }
-
 
     @FXML
     private void onBtnCancelClicked() {
@@ -186,11 +239,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
             commodityFillUiController.showCommodityFillDialog(y -> {
-                number = y.getNumber();
-                comment = y.getComment();
+                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
             });
-            CommodityItem commodityItem = new CommodityItem(x.getId(), x.getName(), x.getType(), number, x.getPurchasePrice(), x.getPurchasePrice() * number, comment);
-            commodityItemModelObservableList.add(new CommodityItemModel(commodityItem));
         });
     }
 
@@ -309,8 +359,27 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         tfBillTotal.clear();
         tfClientId.clear();
         tfClientName.clear();
-        cbRepository.setValue("");
+        cbRepository.setValue("1");
         commodityItemModelObservableList.clear();
+    }
+
+    class ListHandler implements ListChangeListener<CommodityItemModel> {
+
+        /**
+         * Called after a change has been made to an ObservableList.
+         *
+         * @param c an object representing the change that was done
+         * @see Change
+         */
+        @Override
+        public void onChanged(Change<? extends CommodityItemModel> c) {
+            ObservableList<? extends CommodityItemModel> list = c.getList();
+            double total = 0;
+            for (CommodityItemModel commodityItemModel : list) {
+                total += commodityItemModel.getCommodityItemObjectProperty().getPrice() * commodityItemModel.getCommodityItemObjectProperty().getNumber();
+            }
+            tfBillTotal.setText(total + "");
+        }
     }
 }
 

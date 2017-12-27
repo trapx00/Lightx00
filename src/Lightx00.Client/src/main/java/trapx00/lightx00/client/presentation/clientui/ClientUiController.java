@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.presentation.clientui;
 
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.sun.istack.internal.NotNull;
@@ -8,27 +9,38 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
+import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
+import trapx00.lightx00.client.presentation.financeui.BillTableItemModel;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.Draftable;
+import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.po.log.LogSeverity;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
@@ -36,6 +48,8 @@ import java.util.stream.Collectors;
 
 public class ClientUiController implements ClientInfoUi, ExternalLoadableUiController {
 
+    @FXML
+    private JFXTextField tfSearch;
     @FXML
     private TreeTableView<ClientSelectionItemModel> clientTable;
     @FXML
@@ -69,45 +83,8 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
     @FXML
     private void initialize() {
         initLogItem();
-
-        clientSelectionItemModels.add(new ClientSelectionItemModel(new ClientVo("0",
-                ClientType.Retailer,
-                1,
-                "xiaoming",
-                "12345678",
-                "12345678",
-                "210000",
-                "12345679@qq.com",
-                123,
-                456,
-                789,
-                "1")));
-
-        clientSelectionItemModels.add(new ClientSelectionItemModel(new ClientVo("1",
-                ClientType.Retailer,
-                1,
-                "xiaoming",
-                "12345678",
-                "12345678",
-                "210000",
-                "12345679@qq.com",
-                123,
-                456,
-                789,
-                "1")));
-
-        clientSelectionItemModels.add(new ClientSelectionItemModel(new ClientVo("2",
-                ClientType.Retailer,
-                1,
-                "xiaoming",
-                "12345678",
-                "12345678",
-                "210000",
-                "12345679@qq.com",
-                123,
-                456,
-                789,
-                "1")));
+        initClients();
+        initSearch();
     }
 
     private void initLogItem() {
@@ -122,6 +99,23 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
         clientTable.setShowRoot(false);
     }
 
+    private void initClients() {
+        ClientVo[] clientVos = blService.query("");
+        for (ClientVo clientVo : clientVos) {
+            clientSelectionItemModels.add(new ClientSelectionItemModel(clientVo));
+        }
+    }
+
+    private void initSearch() {
+        tfSearch.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                ClientVo[] clientVos = blService.query(tfSearch.getText());
+                clientSelectionItemModels.clear();
+                clientSelectionItemModels.addAll(Arrays.stream(clientVos).map(ClientSelectionItemModel::new).collect(Collectors.toList()));
+            }
+        });
+    }
+
     /**
      * Loads the controller.
      *
@@ -134,12 +128,23 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnAddClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientModifyUiController.class, "管理客户", true);
+        FrameworkUiManager.switchFunction(ClientAddUiController.class, "管理客户", true);
     }
 
     @FXML
     private void onBtnModifyClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientModifyUiController.class, "管理客户", true);
+        ClientSelectionItemModel model = clientTable.getSelectionModel().getSelectedItem().getValue();
+        if (model != null) {
+            ClientVo selected = model.getClientVoObjectProperty();
+            PromptDialogHelper.start("修改客户信息信息", "")
+                    .setContent(selected.modifyUi().showContent(selected).getComponent())
+                    .addCloseButton("好", "CHECK", null)
+                    .createAndShow();
+        } else {
+            PromptDialogHelper.start("错误", "请至少选一个条目。")
+                    .addCloseButton("好的", "DONE", null)
+                    .createAndShow();
+        }
     }
 
     @FXML
@@ -174,7 +179,18 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
 
     @FXML
     private void onBtnSelectClicked(ActionEvent actionEvent) {
-        FrameworkUiManager.switchFunction(ClientDetailUiController.class, "管理客户", true);
+        ClientSelectionItemModel model = clientTable.getSelectionModel().getSelectedItem().getValue();
+        if (model != null) {
+            ClientVo selected = model.getClientVoObjectProperty();
+            PromptDialogHelper.start("修改客户信息信息", "")
+                    .setContent(selected.detailUi().showContent(selected).getComponent())
+                    .addCloseButton("好", "CHECK", null)
+                    .createAndShow();
+        } else {
+            PromptDialogHelper.start("错误", "请至少选一个条目。")
+                    .addCloseButton("好的", "DONE", null)
+                    .createAndShow();
+        }
     }
 
     @FXML

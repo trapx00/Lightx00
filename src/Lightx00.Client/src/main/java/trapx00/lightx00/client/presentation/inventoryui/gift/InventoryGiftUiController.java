@@ -62,8 +62,8 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     @Override
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
         /**
-         * è‰ç¨¿åŠŸèƒ½å®žçŽ°ã€‚
-         * å’Œå¯¹åº”å•æ®è¯¦ç»†ç•Œé¢ä¸€æ ·ï¼Œé€šè¿‡ä¼ å…¥çš„å‚æ•°åˆå§‹åŒ–å¯¹åº”çš„æŽ§ä»¶å…ƒç´ ä¿¡æ¯ã€‚
+         * ²Ý¸å¹¦ÄÜÊµÏÖ¡£
+         * ºÍ¶ÔÓ¦µ¥¾ÝÏêÏ¸½çÃæÒ»Ñù£¬Í¨¹ý´«ÈëµÄ²ÎÊý³õÊ¼»¯¶ÔÓ¦µÄ¿Ø¼þÔªËØÐÅÏ¢¡£
          */
         InventoryGiftVo inventoryGiftVo = (InventoryGiftVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
@@ -120,10 +120,10 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
         /**
-         * çº¢å†²åŠŸèƒ½å®žçŽ°ã€‚
-         * å’Œè‰ç¨¿ç»§ç»­å¡«å†™å·®ä¸å¤šï¼Œä½†æ˜¯éœ€è¦ï¼š
-         * 1. é‡æ–°èŽ·å–IDï¼ˆå› ä¸ºçº¢å†²å•å­å…¶å®žæ˜¯ä¸€å¼ æ–°çš„UIå•å­ï¼‰
-         * 2. å–åæ•°é‡ã€‚
+         * ºì³å¹¦ÄÜÊµÏÖ¡£
+         * ºÍ²Ý¸å¼ÌÐøÌîÐ´²î²»¶à£¬µ«ÊÇÐèÒª£º
+         * 1. ÖØÐÂ»ñÈ¡ID£¨ÒòÎªºì³åµ¥×ÓÆäÊµÊÇÒ»ÕÅÐÂµÄUIµ¥×Ó£©
+         * 2. È¡·´ÊýÁ¿¡£
          */
         InventoryGiftVo inventoryGiftVo = (InventoryGiftVo) reversible;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
@@ -161,7 +161,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
             if(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getAmount()>
                    commoditySelection.queryId(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getCommodityId()).getAmount() )
             {
-                PromptDialogHelper.start("å¤±è´¥","èµ é€æ•°é‡è¶…è¿‡åº“å­˜æ•°é‡");
+                PromptDialogHelper.start("Ê§°Ü","ÔùËÍÊýÁ¿³¬¹ý¿â´æÊýÁ¿");
                 inventoryGiftItemModel.getPromotionCommodityObjectProperty().setAmount(0);
             }
         }
@@ -172,8 +172,8 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         try {
             return inventoryGiftItems.getSelectionModel().getSelectedItem().getValue();
         } catch (Exception e) {
-            new PromptDialogHelper("æœªé€‰æ‹©ï¼","è¯·å…ˆé€‰æ‹©ä¸€ä¸ªèµ é€å•†å“ï¼")
-                    .addCloseButton("å¥½","CHECK", null)
+            new PromptDialogHelper("Î´Ñ¡Ôñ£¡","ÇëÏÈÑ¡ÔñÒ»¸öÔùËÍÉÌÆ·£¡")
+                    .addCloseButton("ºÃ","CHECK", null)
                     .createAndShow();
             return null;
         }
@@ -190,8 +190,8 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
     private InventoryGiftVo getCurrentGiftVo() {
         if (tfId.getText().length() == 0 || currentEmployee == null || currentDate == null) {
-            PromptDialogHelper.start("æäº¤å¤±è´¥ï¼","è¯·é€‰ç‚¹å‡»è‡ªåŠ¨å¡«å†™ä¿¡æ¯ä»¥è‡ªåŠ¨å¡«å†™IDã€æ—¥æœŸå’Œæ“ä½œå‘˜ä¿¡æ¯ã€‚")
-                    .addCloseButton("å¥½çš„","CHECK", null)
+            PromptDialogHelper.start("Ìá½»Ê§°Ü£¡","ÇëÑ¡µã»÷×Ô¶¯ÌîÐ´ÐÅÏ¢ÒÔ×Ô¶¯ÌîÐ´ID¡¢ÈÕÆÚºÍ²Ù×÷Ô±ÐÅÏ¢¡£")
+                    .addCloseButton("ºÃµÄ","CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
         }
@@ -208,29 +208,29 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public void onBtnSubmitClicked() {
         try {
             InventoryGiftVo inventoryGiftVo=getCurrentGiftVo();
-            PromptDialogHelper.start("ç¡®è®¤å•æ®", "").setContent(
+            PromptDialogHelper.start("È·ÈÏµ¥¾Ý", "").setContent(
                     inventoryGiftVo.billDetailUi().showContent(inventoryGiftVo).getComponent())
-                    .addCloseButton("ç¡®å®š", "CHECK", e -> {
+                    .addCloseButton("È·¶¨", "CHECK", e -> {
                         try {
                             blService.sumbit(inventoryGiftVo);
-                            PromptDialogHelper.start("æäº¤æˆåŠŸï¼", "ä½ çš„å•æ®å·²ç»æäº¤æˆåŠŸï¼")
-                                    .addCloseButton("ç»§ç»­å¡«å†™", "EDIT", e1 -> {
+                            PromptDialogHelper.start("Ìá½»³É¹¦£¡", "ÄãµÄµ¥¾ÝÒÑ¾­Ìá½»³É¹¦£¡")
+                                    .addCloseButton("¼ÌÐøÌîÐ´", "EDIT", e1 -> {
                                         onBtnResetClicked();
                                         autofill();
                                     })
-                                    .addCloseButton("è¿”å›žä¸»ç•Œé¢", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                                    .addCloseButton("·µ»ØÖ÷½çÃæ", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
                                     .createAndShow();
                         } catch (UncheckedRemoteException e1) {
-                            PromptDialogHelper.start("æäº¤å¤±è´¥ï¼", "ç½‘ç»œé”™è¯¯ã€‚è¯¦ç»†ä¿¡æ¯ï¼š\n" + e1.getRemoteException().getMessage())
-                                    .addCloseButton("å¥½çš„", "CHECK", null)
+                            PromptDialogHelper.start("Ìá½»Ê§°Ü£¡", "ÍøÂç´íÎó¡£ÏêÏ¸ÐÅÏ¢£º\n" + e1.getRemoteException().getMessage())
+                                    .addCloseButton("ºÃµÄ", "CHECK", null)
                                     .createAndShow();
                         } catch (IdExistsException e1) {
-                            PromptDialogHelper.start("æäº¤å¤±è´¥", "IDå·²ç»å­˜åœ¨ï¼Œè¯·é‡æ–°èŽ·å–IDï¼")
-                                    .addCloseButton("å¥½çš„", "CHECK", null)
+                            PromptDialogHelper.start("Ìá½»Ê§°Ü", "IDÒÑ¾­´æÔÚ£¬ÇëÖØÐÂ»ñÈ¡ID£¡")
+                                    .addCloseButton("ºÃµÄ", "CHECK", null)
                                     .createAndShow();
                         }
                     })
-                    .addCloseButton("å–æ¶ˆ", "CLOSE", null)
+                    .addCloseButton("È¡Ïû", "CLOSE", null)
                     .createAndShow();
         } catch (NotCompleteException ignored) {
 
@@ -245,17 +245,17 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public void saveAsDraft(){
         try {
             blService.saveAsDraft(getCurrentGiftVo());
-            PromptDialogHelper.start("ä¿å­˜è‰ç¨¿æˆåŠŸ", "ä½ çš„å•æ®å·²ç»ä¿å­˜ä¸ºè‰ç¨¿ã€‚")
-                    .addCloseButton("å¥½çš„", "CHECK", e -> FrameworkUiManager.switchBackToHome())
+            PromptDialogHelper.start("±£´æ²Ý¸å³É¹¦", "ÄãµÄµ¥¾ÝÒÑ¾­±£´æÎª²Ý¸å¡£")
+                    .addCloseButton("ºÃµÄ", "CHECK", e -> FrameworkUiManager.switchBackToHome())
                     .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {
-            PromptDialogHelper.start("æäº¤å¤±è´¥ï¼", "ç½‘ç»œé”™è¯¯ã€‚è¯¦ç»†ä¿¡æ¯ï¼š\n" + e.getRemoteException().getMessage())
-                    .addCloseButton("å¥½çš„", "CHECK", null)
+            PromptDialogHelper.start("Ìá½»Ê§°Ü£¡", "ÍøÂç´íÎó¡£ÏêÏ¸ÐÅÏ¢£º\n" + e.getRemoteException().getMessage())
+                    .addCloseButton("ºÃµÄ", "CHECK", null)
                     .createAndShow();
         } catch (Exception e) {
-            PromptDialogHelper.start("æäº¤å¤±è´¥", "é”™è¯¯ä¿¡æ¯å¦‚ä¸‹ï¼š\n" + e.getMessage())
-                    .addCloseButton("å¥½çš„", "CHECK", null)
+            PromptDialogHelper.start("Ìá½»Ê§°Ü", "´íÎóÐÅÏ¢ÈçÏÂ£º\n" + e.getMessage())
+                    .addCloseButton("ºÃµÄ", "CHECK", null)
                     .createAndShow();
         }
     }
@@ -266,8 +266,8 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
             currentDate.setValue(new Date());
             currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         } catch (NoMoreBillException e) {
-            PromptDialogHelper.start("IDä¸å¤Ÿï¼","å½“æ—¥IDå·²ç»è¾¾åˆ°99999ï¼Œæ— æ³•å¢žåŠ æ–°çš„å•æ®ã€‚")
-                    .addCloseButton("å¥½çš„","CHECK", null)
+            PromptDialogHelper.start("ID²»¹»£¡","µ±ÈÕIDÒÑ¾­´ïµ½99999£¬ÎÞ·¨Ôö¼ÓÐÂµÄµ¥¾Ý¡£")
+                    .addCloseButton("ºÃµÄ","CHECK", null)
                     .createAndShow();
         }
     }
@@ -282,10 +282,10 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     }
 
     public void onBtnCancelClicked() {
-        PromptDialogHelper.start("æ˜¯å¦é€€å‡ºï¼Ÿ", "æ˜¯å¦ä¿å­˜è‰ç¨¿ï¼Ÿ")
-                .addCloseButton("ä¿å­˜", "SAVE", e -> saveAsDraft())
-                .addCloseButton("ä¸ä¿å­˜", "DELETE", e -> FrameworkUiManager.switchBackToHome())
-                .addCloseButton("å–æ¶ˆ", "CLOSE", null)
+        PromptDialogHelper.start("ÊÇ·ñÍË³ö£¿", "ÊÇ·ñ±£´æ²Ý¸å£¿")
+                .addCloseButton("±£´æ", "SAVE", e -> saveAsDraft())
+                .addCloseButton("²»±£´æ", "DELETE", e -> FrameworkUiManager.switchBackToHome())
+                .addCloseButton("È¡Ïû", "CLOSE", null)
                 .createAndShow();
 
     }

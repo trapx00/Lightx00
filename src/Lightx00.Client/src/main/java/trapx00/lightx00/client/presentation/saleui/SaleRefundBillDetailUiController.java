@@ -1,4 +1,4 @@
-package trapx00.lightx00.client.presentation.inventoryui;
+package trapx00.lightx00.client.presentation.saleui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -13,42 +13,47 @@ import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlServiceFactory;
-import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
-import trapx00.lightx00.client.presentation.clientui.ClientSelectionItemModel;
-import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
-import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
-import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
-import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
+import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
-import java.awt.event.ActionEvent;
-import java.util.Date;
-
-public class PurchaseBillDetailUiController extends BillDetailUi {
+public class SaleRefundBillDetailUiController extends BillDetailUi {
     @FXML
-    JFXTextField tfBillId;
+    private JFXTextField tfBillId;
     @FXML
-    JFXTextField tfOperator;
+    private JFXTextField tfSalesmanId;
     @FXML
-    JFXTextField tfClientId;
+    private JFXTextField tfSalesmanName;
     @FXML
-    JFXComboBox<String> cbRepository;
-    @FXML
-    JFXTextField tfBillTotal;
+    private JFXTextField tfOperator;
     @FXML
     private JFXTextField tfDate;
     @FXML
+    private JFXTextField tfClientId;
+    @FXML
     private JFXTextField tfClientName;
+    @FXML
+    private JFXTextField tfClientLevel;
+    @FXML
+    private JFXComboBox<String> cbRepository;
+    @FXML
+    private JFXTextField tfOriginTotal;
+    @FXML
+    private JFXTextField tfMinusProfits;
+    @FXML
+    private JFXTextField tfToken;
+    @FXML
+    private JFXTextField tfUltiTotal;
+    @FXML
+    private JFXTextField tfPromotionId;
+    @FXML
+    private JFXTextField tfGiftToken;
     @FXML
     private JFXTextField tfComment;
     @FXML
@@ -69,24 +74,32 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
     private JFXTreeTableColumn<CommodityItemModel, String> tcCommodityCommentColumn;
 
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
-    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
+    private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
+    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
 
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
         currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
-        PurchaseBillVo purchaseBillVo = (PurchaseBillVo) arg;
+        SaleBillVo saleBillVo=(SaleBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        PurchaseBillDetailUiController purchaseBillDetailUiController = externalLoadedUiPackage.getController();
-        purchaseBillDetailUiController.tfBillId.setText(purchaseBillVo.getId());
-        purchaseBillDetailUiController.tfDate.setText(purchaseBillVo.getDate().toString());
-        purchaseBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
-        purchaseBillDetailUiController.tfClientId.setText(purchaseBillVo.getClientId());
-        purchaseBillDetailUiController.tfClientName.setText(clientBlService.queryById(purchaseBillVo.getClientId()).getName());
-        purchaseBillDetailUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
-        purchaseBillDetailUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
-        purchaseBillDetailUiController.tfComment.setText(purchaseBillVo.getComment());
-        purchaseBillDetailUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
+        SaleBillDetailUiController saleBillDetailUiController = externalLoadedUiPackage.getController();
+        saleBillDetailUiController.tfBillId.setText(saleBillVo.getId());
+        saleBillDetailUiController.tfDate.setText(saleBillVo.getDate().toString());
+        saleBillDetailUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());
+        saleBillDetailUiController.tfSalesmanName.setText(employeeInfo.queryById(saleBillVo.getSalesmanId()).getName());
+        saleBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
+        saleBillDetailUiController.tfClientId.setText(saleBillVo.getClientId());
+        saleBillDetailUiController.tfClientName.setText(clientBlService.queryById(saleBillVo.getClientId()).getName());
+        saleBillDetailUiController.tfClientLevel.setText(clientBlService.queryById(saleBillVo.getClientId()).getClientLevel()+"");
+        saleBillDetailUiController.cbRepository.setValue(saleBillVo.getRepository() + "");
+        saleBillDetailUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
+        saleBillDetailUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
+        saleBillDetailUiController.tfToken.setText(saleBillVo.getToken() + "");
+        saleBillDetailUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
+        saleBillDetailUiController.tfGiftToken.setText(saleBillVo.getGiftToken()+"");
+        saleBillDetailUiController.tfComment.setText(saleBillVo.getComment());
+        saleBillDetailUiController.addCommodityListItems(saleBillVo.getCommodityList());
         return externalLoadedUiPackage;
     }
 
@@ -116,6 +129,6 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/PurchaseBillDetailUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/saleui/SaleRefundBillDetailUi.fxml").loadAndGetPackageWithoutException();
     }
 }

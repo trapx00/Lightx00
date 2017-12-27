@@ -9,42 +9,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
-import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
-import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlServiceFactory;
-import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
-import trapx00.lightx00.client.presentation.clientui.ClientSelectionItemModel;
-import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
-import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
-import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
-import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
-import java.awt.event.ActionEvent;
-import java.util.Date;
-
-public class PurchaseBillDetailUiController extends BillDetailUi {
+public class PurchaseRefundBillDetailUiController extends BillDetailUi {
     @FXML
-    JFXTextField tfBillId;
+    private JFXTextField tfBillId;
     @FXML
-    JFXTextField tfOperator;
+    private JFXTextField tfOperator;
     @FXML
-    JFXTextField tfClientId;
+    private JFXTextField tfClientId;
     @FXML
-    JFXComboBox<String> cbRepository;
+    private JFXComboBox<String> cbRepository;
     @FXML
-    JFXTextField tfBillTotal;
+    private JFXTextField tfBillTotal;
     @FXML
     private JFXTextField tfDate;
     @FXML
@@ -75,18 +62,18 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
         currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
-        PurchaseBillVo purchaseBillVo = (PurchaseBillVo) arg;
+        PurchaseRefundBillVo purchaseRefundBillVo = (PurchaseRefundBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        PurchaseBillDetailUiController purchaseBillDetailUiController = externalLoadedUiPackage.getController();
-        purchaseBillDetailUiController.tfBillId.setText(purchaseBillVo.getId());
-        purchaseBillDetailUiController.tfDate.setText(purchaseBillVo.getDate().toString());
-        purchaseBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
-        purchaseBillDetailUiController.tfClientId.setText(purchaseBillVo.getClientId());
-        purchaseBillDetailUiController.tfClientName.setText(clientBlService.queryById(purchaseBillVo.getClientId()).getName());
-        purchaseBillDetailUiController.cbRepository.setValue(purchaseBillVo.getRepository() + "");
-        purchaseBillDetailUiController.tfBillTotal.setText(purchaseBillVo.getTotal() + "");
-        purchaseBillDetailUiController.tfComment.setText(purchaseBillVo.getComment());
-        purchaseBillDetailUiController.addCommodityListItems(purchaseBillVo.getCommodityList());
+        PurchaseRefundBillDetailUiController purchaseRefundBillDetailUiController = externalLoadedUiPackage.getController();
+        purchaseRefundBillDetailUiController.tfBillId.setText(purchaseRefundBillVo.getId());
+        purchaseRefundBillDetailUiController.tfDate.setText(purchaseRefundBillVo.getDate().toString());
+        purchaseRefundBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
+        purchaseRefundBillDetailUiController.tfClientId.setText(purchaseRefundBillVo.getClientId());
+        purchaseRefundBillDetailUiController.tfClientName.setText(clientBlService.queryById(purchaseRefundBillVo.getClientId()).getName());
+        purchaseRefundBillDetailUiController.cbRepository.setValue(purchaseRefundBillVo.getRepository() + "");
+        purchaseRefundBillDetailUiController.tfBillTotal.setText(purchaseRefundBillVo.getTotal() + "");
+        purchaseRefundBillDetailUiController.tfComment.setText(purchaseRefundBillVo.getComment());
+        purchaseRefundBillDetailUiController.addCommodityListItems(purchaseRefundBillVo.getCommodityList());
         return externalLoadedUiPackage;
     }
 
@@ -116,6 +103,6 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/PurchaseBillDetailUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/PurchaseRefundBillDetailUi.fxml").loadAndGetPackageWithoutException();
     }
 }

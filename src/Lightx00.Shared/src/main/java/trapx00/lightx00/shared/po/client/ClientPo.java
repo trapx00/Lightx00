@@ -3,8 +3,10 @@ package trapx00.lightx00.shared.po.client;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 @DatabaseTable(tableName = "Client")
-public class ClientPo {
+public class ClientPo implements Serializable {
     @DatabaseField(id = true)
     private String id;
     @DatabaseField

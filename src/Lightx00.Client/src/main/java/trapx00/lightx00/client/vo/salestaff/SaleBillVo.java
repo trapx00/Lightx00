@@ -8,6 +8,8 @@ import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.saleui.SaleBillDetailUiController;
+import trapx00.lightx00.client.presentation.saleui.SaleBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -198,12 +200,12 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new SaleBillUiController();
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new SaleBillDetailUiController();
     }
 
     /**
@@ -213,6 +215,6 @@ public class SaleBillVo extends SaleBillBaseVo {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new SaleBillUiController();
     }
 }
