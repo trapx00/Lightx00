@@ -5,21 +5,20 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import javafx.scene.text.Font?>
 <?import com.jfoenix.controls.JFXMasonryPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-<VBox fx:id="dialogContainer" prefHeight="1200" prefWidth="1600"
+<VBox fx:id="dialogContainer" prefHeight="900" prefWidth="1600"
       xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="trapx00.lightx00.client.presentation.saleui.SaleBillUiController">
+      fx:controller="trapx00.lightx00.client.presentation.saleui.SaleBillDetailUiController">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10"/>
     </padding>
@@ -43,19 +42,19 @@
             <JFXTextField labelFloat="true" fx:id="tfDate" editable="false" promptText="日期"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfSalesmanId" onMouseClicked="#onEmployeeClicked" editable="false" promptText="业务员ID"/>
+            <JFXTextField labelFloat="true" fx:id="tfSalesmanId" editable="false" promptText="业务员ID"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfSalesmanName" onMouseClicked="#onEmployeeClicked" editable="false" promptText="业务员姓名"/>
+            <JFXTextField labelFloat="true" fx:id="tfSalesmanName" editable="false" promptText="业务员姓名"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientId" onMouseClicked="#onClientClicked" editable="false" promptText="销售商ID"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientId" editable="false" promptText="销售商ID"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientName" onMouseClicked="#onClientClicked" editable="false" promptText="销售商姓名"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientName" editable="false" promptText="销售商姓名"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientLevel" onMouseClicked="#onClientClicked" editable="false" promptText="销售商等级"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientLevel" editable="false" promptText="销售商等级"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXComboBox labelFloat="true" fx:id="cbRepository" editable="false" promptText="仓库"/>
@@ -64,22 +63,22 @@
             <JFXTextField labelFloat="true" fx:id="tfOriginTotal" editable="false" promptText="折让前总额"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfMinusProfits" editable="true" promptText="折让"/>
+            <JFXTextField labelFloat="true" fx:id="tfMinusProfits" editable="false" promptText="折让"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfToken" editable="true" promptText="使用代金券金额"/>
+            <JFXTextField labelFloat="true" fx:id="tfToken" editable="false" promptText="使用代金券金额"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfUltiTotal" editable="true" promptText="折让后总额"/>
+            <JFXTextField labelFloat="true" fx:id="tfUltiTotal" editable="false" promptText="折让后总额"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfPromotionId" editable="false" promptText="促销策略"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfGiftToken" editable="true" promptText="赠出代金券额度"/>
+            <JFXTextField labelFloat="true" fx:id="tfGiftToken" editable="false" promptText="赠出代金券额度"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfComment" editable="true" promptText="备注"/>
+            <JFXTextField labelFloat="true" fx:id="tfComment" editable="false" promptText="备注"/>
         </StackPane>
     </JFXMasonryPane>
 
@@ -97,34 +96,16 @@
                                     text="名称"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTypeColumn" editable="false"
                                     text="型号"/>
-                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="false"
+                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="true"
                                     text="数量"/>
                 <JFXTreeTableColumn fx:id="tcCommodityPriceColumn" editable="false"
                                     text="单价"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTotalColumn" editable="false"
                                     text="金额"/>
-                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="false"
+                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="true"
                                     text="备注"/>
             </columns>
         </JFXTreeTableView>
-        <HBox alignment="BASELINE_RIGHT" prefWidth="100" spacing="10">
-            <JFXButton fx:id="btnAdd" onAction="#onBtnAddItemClicked" style="-fx-text-fill: #000000" text="添加商品">
-                <graphic>
-                    <MaterialIconView glyphName="ADD" glyphSize="24"/>
-                </graphic>
-                <HBox.margin>
-                    <Insets right="10.0"/>
-                </HBox.margin>
-            </JFXButton>
-            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteItemClicked" style="-fx-text-fill: #000000;" text="删除商品">
-                <graphic>
-                    <MaterialIconView glyphName="DELETE" glyphSize="24"/>
-                </graphic>
-                <HBox.margin>
-                    <Insets right="10.0"/>
-                </HBox.margin>
-            </JFXButton>
-        </HBox>
     </VBox>
     <Separator/>
     <VBox>
@@ -152,31 +133,5 @@
             </columns>
         </JFXTreeTableView>
     </VBox>
-    <Separator/>
-    <HBox spacing="20">
-        <JFXButton fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnGetPromotionClicked"
-                   style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="获取可用的促销策略">
-            <graphic>
-                <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked"
-                   style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
-            <graphic>
-                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked"
-                   style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
-            <graphic>
-                <MaterialIconView glyphName="REFRESH" glyphSize="24"/>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnCancelClicked"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消">
-            <graphic>
-                <MaterialIconView glyphName="SAVE" glyphSize="24"/>
-            </graphic>
-        </JFXButton>
-    </HBox>
 </VBox>
+

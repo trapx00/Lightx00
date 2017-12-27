@@ -17,7 +17,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="trapx00.lightx00.client.presentation.clientui.ClientModifyUiController"
+      fx:controller="trapx00.lightx00.client.presentation.clientui.ClientAddUiController"
       prefHeight="800.0" prefWidth="600.0" spacing="20">
     <padding>
         <Insets top="10" left="20" bottom="20" right="20"/>
@@ -44,6 +44,7 @@
         <JFXTextField fx:id="clientReceivable" editable="false" prefWidth="150" promptText="应收" labelFloat="true"/>
         <JFXTextField fx:id="clientPayable" editable="false" prefWidth="150" promptText="应付" labelFloat="true"/>
         <JFXTextField fx:id="clientDefaultOperator" editable="false" onMouseClicked="#selectEmployee" prefWidth="150" promptText="默认业务员" labelFloat="true"/>
+        <JFXTextField fx:id="clientOperatorId" editable="false" prefWidth="150" promptText="操作员ID" labelFloat="true"/>
     </VBox>
 
     <Separator/>

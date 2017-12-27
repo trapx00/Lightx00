@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class ClientBlControllerTest {
     ClientBlController clientBlController= ClientBlFactory.getClientBlController();
-    ClientVo clientVo=new ClientVo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, null);
+    ClientVo clientVo=new ClientVo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 50,43.7, 37.5, "1");
 
     @Test
     public void deleteDraft() throws Exception {
@@ -25,8 +25,7 @@ public class ClientBlControllerTest {
     @Test
     public void query() throws Exception {
         clientBlController.add(clientVo);
-        assertEquals("0",clientBlController.query("0")[0].getId());
-        clientBlController.delete(new String[]{"0"});
+        assertEquals("0",clientBlController.query("")[0].getId());
     }
 
     @Test

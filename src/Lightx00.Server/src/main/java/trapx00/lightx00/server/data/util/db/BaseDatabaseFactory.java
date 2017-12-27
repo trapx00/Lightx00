@@ -15,6 +15,9 @@ import java.util.Date;
 
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.admin.AdminPo;
+import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
+import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
@@ -122,7 +125,45 @@ public class BaseDatabaseFactory {
             commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",1,"PRO-0001",null));
             commoditySortPos.create(new CommoditySortPo("PRO-0004","qwasdeLed",0,"PRO-0001",null));
 
-
+            Dao<ClientPo,String>clientPos=createDao(ClientPo.class);
+            TableUtils.dropTable(clientPos,true);
+            TableUtils.createTableIfNotExists(connectionSource,ClientPo.class);
+            clientPos.create(new ClientPo("0",
+                    ClientType.Retailer,
+                    1,
+                    "xiaoming",
+                    "12345678",
+                    "12345678",
+                    "210000",
+                    "12345679@qq.com",
+                    123,
+                    456,
+                    "1",
+                    ClientState.Real));
+            clientPos.create(new ClientPo("1",
+                    ClientType.Retailer,
+                    1,
+                    "xiaoming",
+                    "12345678",
+                    "12345678",
+                    "210000",
+                    "12345679@qq.com",
+                    123,
+                    456,
+                    "1",
+                    ClientState.Real));
+            clientPos.create(new ClientPo("2",
+                    ClientType.Retailer,
+                    1,
+                    "xiaoming",
+                    "12345678",
+                    "12345678",
+                    "210000",
+                    "12345679@qq.com",
+                    123,
+                    456,
+                    "1",
+                    ClientState.Real));
              } catch (SQLException e) {
             e.printStackTrace();
         }

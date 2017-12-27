@@ -27,9 +27,7 @@ public class CommodityFillUiController extends SelectingDialog implements Extern
         ExternalLoadedUiPackage uiPackage = load();
         CommodityFillUiController controller = uiPackage.getController();
         controller.callback = callback;
-        JFXDialog dialog = PromptDialogHelper.start("请填写商品数量和商品备注", "").create();
-        dialog.setContent((Region) uiPackage.getComponent());
-        dialog.show();
+        PromptDialogHelper.start("请填写商品数量和商品备注", "").setContent((Region) uiPackage.getComponent()).createAndShow();
     }
 
     /**
