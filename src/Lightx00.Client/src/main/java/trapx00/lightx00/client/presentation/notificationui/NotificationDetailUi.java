@@ -12,5 +12,7 @@ public abstract class NotificationDetailUi<T extends NotificationVo> implements 
     protected Consumer<T> onAcknowledgeClicked = x -> x.operationService().activate(x);
     protected Consumer<T> onIgnoreClicked = x -> FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
 
-
+    public void close() {
+        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+    }
 }

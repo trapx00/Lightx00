@@ -19,7 +19,7 @@ public class InitialEstablishmentDataServiceFactory extends DataServiceFactory {
     }
 
     public static InitialEstablishmentDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }

@@ -97,7 +97,7 @@
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
+                   style="-fx-background-color: #9999CC; -fx-text-fill: #FFFFFF;" text="保存草稿">
             <graphic>
                 <MaterialIconView glyphName="SAVE" glyphSize="24"/>
             </graphic>

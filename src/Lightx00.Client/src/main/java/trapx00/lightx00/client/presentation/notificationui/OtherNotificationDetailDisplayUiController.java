@@ -40,6 +40,7 @@ public class OtherNotificationDetailDisplayUiController extends NotificationDeta
     public void onBtnAcknowledgeClicked(ActionEvent actionEvent) {
         if (onAcknowledgeClicked != null) {
             onAcknowledgeClicked.accept(notificationVo);
+            close();
         }
 
     }
