@@ -36,15 +36,12 @@ import java.util.stream.Collectors;
 public class NotificationUiController implements ExternalLoadableUiController {
 
     public JFXButton selectAllButton;
-    public JFXButton deleteButton;
     public JFXTreeTableView<NotificationModel> notificationTable;
     public JFXTreeTableColumn<NotificationModel, String> tableDateColumn;
     public JFXTreeTableColumn<NotificationModel, String> tableTypeColumn;
     public JFXTreeTableColumn<NotificationModel, String> tableIdColumn;
     public JFXButton readButton;
     public JFXTreeTableColumn<NotificationModel, String> tableSenderColumn;
-    public StackPane dialogContainer;
-    private EmployeeVo employeeVo = new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true);
 
     public ObservableList<NotificationModel> notificationModels = FXCollections.observableArrayList();
 
@@ -81,26 +78,6 @@ public class NotificationUiController implements ExternalLoadableUiController {
         return notificationTable.getSelectionModel().getSelectedItem().getValue();
     }
 
-    public void onDeleteButtonClicked(ActionEvent actionEvent) {
-        int index = notificationTable.getSelectionModel().getFocusedIndex();
-        NotificationModel model = getSelected();
-        if (model != null) {
-            PromptDialogHelper.start("确定要删除这个通知吗？","你选择了通知"+model.getVoObjectProperty().getId())
-                .addTable(ReadOnlyPairTableHelper.start()
-                    .addPair("ID", String.valueOf(model.getVoObjectProperty().getId()))
-                    .addPair("时间", DateHelper.fromDate(model.getVoObjectProperty().getDate()))
-                    .addPair("类型", model.getVoObjectProperty().getType().toString())
-                    .addPair("发送者", model.getVoObjectProperty().getSender().getName())
-                    .create())
-                .addCloseButton("确定", "CHECK",e -> deleteItem(index))
-                .addCloseButton("取消", "CLOSE", null)
-                .createAndShow();
-        } else {
-            showNotSelectedDialog();
-        }
-
-    }
-
     public void showNotSelectedDialog() {
         PromptDialogHelper.start("请选择一条通知！","请选择一条通知！")
             .addCloseButton("好","CHECK",null)
@@ -108,13 +85,15 @@ public class NotificationUiController implements ExternalLoadableUiController {
     }
 
     public void deleteItem(int index){
-        notificationModels.remove(index);
+        updateItems();
     }
 
     public void onReadButtonClicked(ActionEvent actionEvent) {
         NotificationModel model = getSelected();
         if (model != null) {
             ExternalLoadedUiPackage uiPackage = model.getVoObjectProperty().notificationDetailUi().showContent(model.getVoObjectProperty());
+            NotificationDetailUi detailUi = uiPackage.getController();
+            detailUi.setOnExit(this::updateItems);
             PromptDialogHelper.start("消息详细内容","你选择了通知")
                 .setContent(uiPackage.getComponent())
                 .createAndShow();

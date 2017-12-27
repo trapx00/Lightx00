@@ -51,15 +51,6 @@
                 <Insets left="10.0" right="10.0"/>
             </HBox.margin>
         </JFXButton>
-        <JFXButton fx:id="deleteButton" buttonType="RAISED" onAction="#onDeleteButtonClicked"
-                   style="-fx-background-color: #bf360c; -fx-text-fill: #FFFFFF" text="删除">
-            <graphic>
-                <MaterialIconView glyphName="DELETE" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
-            </graphic>
-            <HBox.margin>
-                <Insets left="10.0" right="10.0"/>
-            </HBox.margin>
-        </JFXButton>
         <JFXButton fx:id="readButton" buttonType="RAISED" onAction="#onReadButtonClicked"
                    style="-fx-background-color: #232e5f; -fx-text-fill: #FFFFFF" text="阅读">
             <graphic>
