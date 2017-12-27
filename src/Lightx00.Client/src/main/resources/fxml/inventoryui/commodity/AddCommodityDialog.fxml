@@ -34,8 +34,6 @@
             <RowConstraints minHeight="50"/>
             <RowConstraints minHeight="50"/>
             <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
-            <RowConstraints minHeight="50"/>
         </rowConstraints>
 
         <padding>
@@ -54,20 +52,14 @@
         <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="数量"/>
         <JFXTextField GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfAmount" />
 
-        <Label GridPane.rowIndex="4" GridPane.columnIndex="0"  text="批次"/>
-        <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfBatch" />
+        <Label GridPane.rowIndex="4" GridPane.columnIndex="0"  text="进价"/>
+        <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfpurchasePrice" disable="true" />
 
-        <Label GridPane.rowIndex="5" GridPane.columnIndex="0"  text="批号"/>
-        <JFXTextField GridPane.rowIndex="5" GridPane.columnIndex="1" fx:id="tfBatchNo" />
+        <Label GridPane.rowIndex="5" GridPane.columnIndex="0"  text="售价"/>
+        <JFXTextField GridPane.rowIndex="5" GridPane.columnIndex="1" fx:id="tfretailPrice" disable="true "/>
 
-        <Label GridPane.rowIndex="6" GridPane.columnIndex="0"  text="进价"/>
-        <JFXTextField GridPane.rowIndex="6" GridPane.columnIndex="1" fx:id="tfpurchasePrice"/>
-
-        <Label GridPane.rowIndex="7" GridPane.columnIndex="0"  text="售价"/>
-        <JFXTextField GridPane.rowIndex="7" GridPane.columnIndex="1" fx:id="tfretailPrice"/>
-
-        <Label GridPane.rowIndex="8" GridPane.columnIndex="0"  text="警戒值"/>
-        <JFXTextField GridPane.rowIndex="8" GridPane.columnIndex="1" fx:id="tfwarningValue"/>
+        <Label GridPane.rowIndex="6" GridPane.columnIndex="0"  text="警戒值"/>
+        <JFXTextField GridPane.rowIndex="6" GridPane.columnIndex="1" fx:id="tfwarningValue"/>
 
     </GridPane>
 

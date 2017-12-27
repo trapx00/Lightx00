@@ -183,7 +183,7 @@ public class CommoditySortDataController extends UnicastRemoteObject implements 
                 logService.printLog(delegate, "got a new id and it has been full.");
                 throw new NoMoreBillException();
             }
-            String newId = "PRO" + "-"+BillHelper.formatId(maxId.orElse(0) + 1);
+            String newId = "PRO" + "-"+BillHelper.formatComid(maxId.orElse(0) + 1);
             logService.printLog(delegate, "got a new id " + newId);
             return newId;
         } catch (SQLException e) {

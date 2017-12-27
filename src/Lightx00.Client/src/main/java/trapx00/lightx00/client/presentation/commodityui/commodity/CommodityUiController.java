@@ -15,6 +15,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import sun.reflect.generics.tree.Tree;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
@@ -95,12 +96,15 @@ public class CommodityUiController implements ExternalLoadableUiController {
                         }
                         if (tv.getSelectionModel().getSelectedItem().getValue().equals("CommoditySort")) {
                             currentSortId = null;
+                            update(new CommodityQueryVo());
                         } else {
-                            currentSortId = blService1.query(new CommoditySortQueryVo().eq("name",
-                                    tv.getSelectionModel().getSelectedItem().getValue()))[0].getId();
-                            update(new CommodityQueryVo().eq("type", currentSortId));
-                            currentItem = tv.getSelectionModel().getSelectedItem();
-                            update(new CommoditySortQueryVo().eq("id", currentSortId));
+                                currentSortId = blService1.query(new CommoditySortQueryVo().eq("name",
+                                        tv.getSelectionModel().getSelectedItem().getValue()))[0].getId();
+                                update(new CommodityQueryVo().eq("type", currentSortId));
+                                currentItem = tv.getSelectionModel().getSelectedItem();
+                                update(new CommoditySortQueryVo().eq("id", currentSortId));
+
+
                         }
                     }
                 }
@@ -251,7 +255,11 @@ public class CommodityUiController implements ExternalLoadableUiController {
         showGoodsTree();
     }
     public void modifyItem(){
-
+        TreeItem treeItem=new TreeItem<String>(blService1.query(new CommoditySortQueryVo().eq("id",currentSortId
+        ))[0].getName());
+        currentItem.getParent().getChildren().add(treeItem);
+        currentItem.getParent().getChildren().remove(currentItem);
+        showkinds(treeItem);
     }
 
     @FXML

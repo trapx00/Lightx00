@@ -36,7 +36,6 @@ public class CommoditySortModificationUi  implements ExternalLoadableUiControlle
             ui.tfSort.setText(blService.query(new CommoditySortQueryVo().eq("id",commoditySortVo.getPreId()))[0].getName());
         }
         ui.tfName.setText(commoditySortVo.getName());
-        ui.jfxComboBox.setValue(new Label(commoditySortVo.getLeaf()==1?"是":"不是"));
         ui.jfxComboBox.getItems().add(new Label("是"));
         ui.jfxComboBox.getItems().add(new Label("不是"));
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
@@ -68,29 +67,29 @@ public class CommoditySortModificationUi  implements ExternalLoadableUiControlle
         if (tfName.validate()) {
             CommoditySortVo []commoditySortVo=blService.query(new CommoditySortQueryVo().eq("preId",tfId.getText()));
             CommodityVo[] commodityVo=blService1.query(new CommodityQueryVo().eq("type",tfId.getText()));
-            if(commoditySortVo==null&&commodityVo==null){
+            if(commoditySortVo.length==0&& commodityVo.length==0){
                 blService.modify(new CommoditySortVo(
                         tfId.getText(),
                         tfName.getText(),
                         jfxComboBox.getValue().getText().equals("是")? 1:0,
-                        tfSort.getText(),
+                        tfSort.getText().equals("")?null:blService.query(new CommoditySortQueryVo().eq("name",tfSort.getText()))[0].getId(),
                         null)
                 );
                 PromptDialogHelper.start("修改成功！","已经修改商品分类。")
                         .addCloseButton("好","CHECK",e -> close())
                         .createAndShow();
             }else{
-                if(jfxComboBox.getValue().getText().equals("不是")&&commodityVo!=null)
-                    PromptDialogHelper.start("修改失败","该节点为叶节点");
-                else if(jfxComboBox.getValue().getText().equals("是")&&commoditySortVo!=null){
-                    PromptDialogHelper.start("修改失败","该节点为菲叶节点");
+                if(jfxComboBox.getValue().getText().equals("不是")&&commodityVo.length!=0)
+                    PromptDialogHelper.start("修改失败","该节点为叶节点").createAndShow();
+                else if(jfxComboBox.getValue().getText().equals("是")&&commoditySortVo.length!=0){
+                    PromptDialogHelper.start("修改失败","该节点为非叶节点").createAndShow();
                 }
                 else{
                     blService.modify(new CommoditySortVo(
                             tfId.getText(),
                             tfName.getText(),
                             jfxComboBox.getValue().getText().equals("是")? 1:0,
-                            tfSort.getText(),
+                            tfSort.getText().equals("")?null:blService.query(new CommoditySortQueryVo().eq("name",tfSort.getText()))[0].getId(),
                             null)
                     );
                     PromptDialogHelper.start("修改成功！","已经修改商品分类。")
