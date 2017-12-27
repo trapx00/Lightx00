@@ -17,6 +17,7 @@ import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.oos.CannotOpenTempFileException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogPo;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.File;
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,7 +72,7 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage backupLog() throws RemoteException {
+    public ResultMessage backupLog() {
         try {
             List<LogPo> logPos = logDao.queryBuilder().query();
             File file = new File(FILE_PATH);
@@ -107,24 +109,23 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
      * @return the temp uri of the log resources
      */
     @Override
-    public String fetchCloudLog() throws RemoteException {
-        String result = "";
+    public LogBackupVo[] fetchCloudLog() {
+        ArrayList<LogBackupVo> result = new ArrayList<>();
         AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
         AmazonS3 oos = new AmazonS3Client(credentials);
 
         oos.setEndpoint(END_POINT);
         List<S3ObjectSummary> list = oos.listObjects(BUCKET_NAME).getObjectSummaries();
         for (S3ObjectSummary object : list) {
-            result += object.getKey();
             GeneratePresignedUrlRequest generatePresignedUrlRequest =
                     new GeneratePresignedUrlRequest(BUCKET_NAME, object.getKey());
             generatePresignedUrlRequest.setMethod(HttpMethod.GET);
             generatePresignedUrlRequest.setExpiration(new Date(EXPIRATION));
             URL url = oos.generatePresignedUrl(generatePresignedUrlRequest);
-            result += SEPATAROR;
-            result += url.toString();
-            result += System.lineSeparator();
+            LogBackupVo logBackupVo = new LogBackupVo(object.getKey(), url.toString());
+            logService.printLog(delegate, "fetch cloud log:" + logBackupVo.getDate() + "|" + logBackupVo.getUrl());
+            result.add(logBackupVo);
         }
-        return result;
+        return result.toArray(new LogBackupVo[result.size()]);
     }
 }

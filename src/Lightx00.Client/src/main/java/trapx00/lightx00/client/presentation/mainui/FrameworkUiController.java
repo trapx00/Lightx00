@@ -16,8 +16,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
+import trapx00.lightx00.client.blservice.logblservice.LogBackupBlServiceFactory;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.logui.LogBackupUiController;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -39,6 +42,7 @@ public class FrameworkUiController {
     public Text titleText;
     private ExternalLoadableUiController subController;
     private DialogStack dialogStack = new DialogStack();
+    private LogBackupBlService logBackupBlService= LogBackupBlServiceFactory.getInstance();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -89,6 +93,10 @@ public class FrameworkUiController {
 
     public void onLogButtonClicked(ActionEvent actionEvent) {
         switchFunction(LogUiController.class, "日志", true);
+    }
+
+    public void onLogFetchButtonClicked(ActionEvent actionEvent){
+        switchFunction(LogBackupUiController.class, "远程日志", true);
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
