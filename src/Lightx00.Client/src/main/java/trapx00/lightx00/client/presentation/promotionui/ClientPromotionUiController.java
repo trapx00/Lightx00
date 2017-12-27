@@ -21,13 +21,18 @@ import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.util.BillHelper;
+import trapx00.lightx00.shared.util.DateHelper;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class ClientPromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     public JFXTextField tfId;
-    public JFXTextField tfStartDate;
-    public JFXTextField tfEndDate;
+    public JFXDatePicker tfStartDate;
+    public JFXDatePicker tfEndDate;
     public JFXTextField tfClientLevel;
     public JFXTextField tfSalePrice;
     public JFXTextField tfCouponPrice;
@@ -41,10 +46,6 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
     public JFXButton btnSubmit;
     public JFXButton btnDraft;
     public JFXButton btnReset;
-
-
-    private ObjectProperty<Date> startDate = new SimpleObjectProperty<>();
-    private ObjectProperty<Date> endDate = new SimpleObjectProperty<>();
 
     private ClientPromotionBlService blService = ClientPromotionBlServiceFactory.getInstance();
 
@@ -78,18 +79,22 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
          */
         ClientPromotionVo clientPromotion = (ClientPromotionVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ClientPromotionUiController clientPromotionDetailUi = externalLoadedUiPackage.getController();
-        clientPromotionDetailUi.tfId.setText(clientPromotion.getId());
-        clientPromotionDetailUi.startDate.setValue(clientPromotion.getStartDate());
-        clientPromotionDetailUi.endDate.setValue(clientPromotion.getEndDate());
-        clientPromotionDetailUi.tfClientLevel.setText(String.valueOf(clientPromotion.getClientLevel()));
-        clientPromotionDetailUi.tfStartDate.setText(String.valueOf(clientPromotion.getSalePrice()));
-        clientPromotionDetailUi.tfCouponPrice.setText(String.valueOf(clientPromotion.getCouponPrice()));
-        clientPromotionDetailUi.addPromotionCommodities(clientPromotion.getPromotionCommodities());
+        ClientPromotionUiController continueWriting = externalLoadedUiPackage.getController();
+        continueWriting.tfId.setText(clientPromotion.getId());
+        continueWriting.tfStartDate.setValue(DateToLocalDate(clientPromotion.getStartDate()));
+        continueWriting.tfEndDate.setValue(DateToLocalDate(clientPromotion.getEndDate()));
+        continueWriting.tfClientLevel.setText(String.valueOf(clientPromotion.getClientLevel()));
+        continueWriting.tfCouponPrice.setText(String.valueOf(clientPromotion.getCouponPrice()));
+        continueWriting.addPromotionCommodities(clientPromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
 
     public void initialize() {
+        tfId.setText(blService.getId());
+        tfClientLevel.setText("0");
+        tfSalePrice.setText("0");
+        tfCouponPrice.setText("0");
+
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
@@ -123,10 +128,13 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                     .createAndShow();
             throw new NotCompleteException();
         }
+
+        if(tfSalePrice.getText().length()== 0)
+            tfSalePrice.setText("0");
         return new ClientPromotionVo(
                 tfId.getText(),
-                startDate.getValue(),
-                endDate.getValue(),
+                DateHelper.fromLocalDate(tfStartDate.getValue()),
+                DateHelper.fromLocalDate(tfEndDate.getValue()),
                 PromotionState.Waiting,
                 Integer.valueOf(tfClientLevel.getText()),
                 Integer.valueOf(tfCouponPrice.getText()),
@@ -165,11 +173,10 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
 
     public void onBtnResetClicked() {
         tfId.setText("");
-        tfStartDate.setText("");
-        tfEndDate.setText("");
+        tfStartDate.setValue(null);
+        tfEndDate.setValue(null);
         tfClientLevel.setText("");
         tfCouponPrice.setText("");
-        tfStartDate.setText("");
         promotionCommodityModelObservableList.clear();
     }
 
@@ -195,4 +202,10 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
 
     }
 
+    private LocalDate DateToLocalDate(Date date) {
+        Instant instant = date.toInstant();
+        ZoneId zone = ZoneId.systemDefault();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
+        return localDateTime.toLocalDate();
+    }
 }

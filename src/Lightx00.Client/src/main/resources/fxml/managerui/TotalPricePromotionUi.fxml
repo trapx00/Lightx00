@@ -15,6 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <VBox prefHeight="800.0" prefWidth="800.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.promotionui.TotalPricePromotionUiController">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
@@ -30,20 +31,20 @@
 
 
     <JFXMasonryPane maxHeight="150.0" prefHeight="150.0">
-        <StackPane prefHeight="50" prefWidth="100">
+        <StackPane prefHeight="50" prefWidth="150">
             <JFXTextField fx:id="tfId" editable="false" labelFloat="true" promptText="ID" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField fx:id="tfStartDate" editable="false" labelFloat="true" promptText="起始日期" />
+            <JFXDatePicker fx:id="tfStartDate" editable="true" promptText="起始日期" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField fx:id="tfEndDate" editable="false" labelFloat="true" promptText="结束日期" />
+            <JFXDatePicker fx:id="tfEndDate" editable="true" promptText="结束日期" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField fx:id="tfClientLevel" editable="false" labelFloat="true" promptText="总价条件" />
+            <JFXTextField fx:id="tfTotalPrice" editable="true" labelFloat="true" promptText="总价条件" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField fx:id="tfCouponPrice" editable="false" labelFloat="true" promptText="代金券金额" />
+            <JFXTextField fx:id="tfCouponPrice" editable="true" labelFloat="true" promptText="代金券金额" />
         </StackPane>
     </JFXMasonryPane>
 

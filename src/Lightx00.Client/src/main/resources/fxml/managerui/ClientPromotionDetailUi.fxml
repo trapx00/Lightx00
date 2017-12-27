@@ -49,7 +49,7 @@
     </JFXTreeTableView>
     <HBox alignment="CENTER" maxWidth="500" spacing="30">
         <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" prefHeight="32.0" prefWidth="80.0"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="提交"/>
+                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="确认"/>
         <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
                style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
     </HBox>

@@ -32,10 +32,10 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
     @FXML private JFXDatePicker tfWorkDate;
     @FXML private JFXTextField tfName;
     @FXML private JFXTextField tfPassword;
-    @FXML private JFXComboBox<EmployeePosition> tfPosition;
-    @FXML private JFXComboBox<EmployeeState> tfState;
-    @FXML private JFXComboBox<String> tfRoot;
-    @FXML private JFXComboBox<SaleStaffType> tfSaleType;
+    @FXML private JFXComboBox<EmployeePosition> tfPosition = new JFXComboBox<>();
+    @FXML private JFXComboBox<EmployeeState> tfState = new JFXComboBox<>();
+    @FXML private JFXComboBox<String> tfRoot = new JFXComboBox<>();
+    @FXML private JFXComboBox<SaleStaffType> tfSaleType = new JFXComboBox<>();
     @FXML public JFXButton btnSubmit;
     @FXML public JFXButton btnCancel;
 
@@ -57,10 +57,17 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
     public void show(EmployeeVo employee, Runnable runnable) {
         ExternalLoadedUiPackage uiPackage = load();
         EmployeeModificationUi ui = uiPackage.getController();
+        //设置初始化
         ui.oldEmployee = employee;
         ui.tfId.setText(employee.getId());
         ui.tfName.setText(employee.getName());
         ui.tfWorkDate.setValue(dateToLocalDate(employee.getWorkSince()));
+
+        ui.tfPosition.getItems().addAll(FXCollections.observableArrayList(EmployeePosition.values()));
+        ui.tfState.getItems().addAll(FXCollections.observableArrayList(EmployeeState.values()));
+        ui.tfRoot.getItems().addAll(root);
+        ui.tfSaleType.getItems().addAll(FXCollections.observableArrayList(SaleStaffType.values()));
+
         ui.tfPassword.setText(employee.getPassword());
         ui.tfPosition.getSelectionModel().select(employee.getPosition());
         ui.tfState.getSelectionModel().select(employee.getState());
@@ -76,19 +83,11 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
             ui.tfRoot.setEditable(true);
             ui.tfSaleType.setEditable(true);
         }
+        tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
+            transPerson = !newValue.equals(oldEmployee.getPosition());
+        });
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
         ((EmployeeModificationUi)uiPackage.getController()).runnable = runnable;
-    }
-
-    @FXML
-    public void initialize() {
-        tfPosition = new JFXComboBox<>(FXCollections.observableArrayList(EmployeePosition.values()));
-        tfState = new JFXComboBox<>(FXCollections.observableArrayList(EmployeeState.values()));
-        tfRoot = new JFXComboBox<>(root);
-        tfSaleType = new JFXComboBox<>(FXCollections.observableArrayList(SaleStaffType.values()));
-        tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
-                transPerson = !newValue.equals(oldEmployee.getPosition());
-            });
     }
 
     private EmployeeVo getCurrentEmployeeVo() {

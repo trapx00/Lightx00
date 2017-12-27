@@ -48,4 +48,11 @@ public class UserManagementDataServiceStub implements UserManagementDataService 
     public ResultMessage delete(EmployeePo account) {
         return ResultMessage.Success;
     }
+
+    /**
+     * New id for a new employee.
+     * @return new id
+     */
+    @Override
+    public String getId(){return "";}
 }

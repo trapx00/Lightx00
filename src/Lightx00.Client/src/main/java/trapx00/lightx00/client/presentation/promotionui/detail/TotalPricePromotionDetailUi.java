@@ -74,4 +74,7 @@ public class TotalPricePromotionDetailUi extends PromotionDetailUi {
     public void onBtnBackClicked() {
         onClose();
     }
+    public void onBtnSubmitClicked() {
+        onClose();
+    }
 }

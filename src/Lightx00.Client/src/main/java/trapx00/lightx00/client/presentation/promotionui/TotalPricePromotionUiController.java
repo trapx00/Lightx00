@@ -21,13 +21,18 @@ import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.util.BillHelper;
+import trapx00.lightx00.shared.util.DateHelper;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class TotalPricePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     public JFXTextField tfId;
-    public JFXTextField tfStartDate;
-    public JFXTextField tfEndDate;
+    public JFXDatePicker tfStartDate;
+    public JFXDatePicker tfEndDate;
     public JFXTextField tfCouponPrice;
     public JFXTextField tfTotalPrice;
     public JFXTreeTableView<PromotionCommodityModel> tbPromotionCommodity;
@@ -40,10 +45,6 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
     public JFXButton btnSubmit;
     public JFXButton btnDraft;
     public JFXButton btnReset;
-
-
-    private ObjectProperty<Date> startDate = new SimpleObjectProperty<>();
-    private ObjectProperty<Date> endDate = new SimpleObjectProperty<>();
 
     private TotalPricePromotionBlService blService = TotalPricePromotionBlServiceFactory.getInstance();
 
@@ -77,17 +78,22 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
          */
         TotalPricePromotionVo totalPricePromotion = (TotalPricePromotionVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        TotalPricePromotionUiController totalPricePromotionDetailUi = externalLoadedUiPackage.getController();
-        totalPricePromotionDetailUi.tfId.setText(totalPricePromotion.getId());
-        totalPricePromotionDetailUi.startDate.setValue(totalPricePromotion.getStartDate());
-        totalPricePromotionDetailUi.endDate.setValue(totalPricePromotion.getEndDate());
-        totalPricePromotionDetailUi.tfCouponPrice.setText(String.valueOf(totalPricePromotion.getCouponPrice()));
-        totalPricePromotionDetailUi.tfTotalPrice.setText(String.valueOf(totalPricePromotion.getTotalPrice()));
-        totalPricePromotionDetailUi.addPromotionCommodities(totalPricePromotion.getPromotionCommodities());
+        TotalPricePromotionUiController continueWriting = externalLoadedUiPackage.getController();
+        continueWriting.tfId.setText(totalPricePromotion.getId());
+        continueWriting.tfStartDate.setValue(DateToLocalDate(totalPricePromotion.getStartDate()));
+        continueWriting.tfEndDate.setValue(DateToLocalDate(totalPricePromotion.getEndDate()));
+        continueWriting.tfCouponPrice.setText(String.valueOf(totalPricePromotion.getCouponPrice()));
+        continueWriting.tfTotalPrice.setText(String.valueOf(totalPricePromotion.getTotalPrice()));
+        continueWriting.addPromotionCommodities(totalPricePromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
 
     public void initialize() {
+        tfId.setText(blService.getId());
+        tfTotalPrice.setText("0");
+        tfCouponPrice.setText("0");
+
+
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
@@ -123,8 +129,8 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         }
         return new TotalPricePromotionVo(
                 tfId.getText(),
-                startDate.getValue(),
-                endDate.getValue(),
+                DateHelper.fromLocalDate(tfStartDate.getValue()),
+                DateHelper.fromLocalDate(tfEndDate.getValue()),
                 PromotionState.Waiting,
                 Integer.valueOf(tfCouponPrice.getText()),
                 Integer.valueOf(tfTotalPrice.getText()),
@@ -162,8 +168,8 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
 
     public void onBtnResetClicked() {
         tfId.setText("");
-        tfStartDate.setText("");
-        tfEndDate.setText("");
+        tfStartDate.setValue(null);
+        tfEndDate.setValue(null);
         tfCouponPrice.setText("");
         tfTotalPrice.setText("");
         promotionCommodityModelObservableList.clear();
@@ -189,5 +195,12 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
                     new PromotionCommodityModel(commodity));
         }
 
+    }
+
+    private LocalDate DateToLocalDate(Date date) {
+        Instant instant = date.toInstant();
+        ZoneId zone = ZoneId.systemDefault();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
+        return localDateTime.toLocalDate();
     }
 }

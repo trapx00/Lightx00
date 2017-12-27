@@ -4,9 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
@@ -16,27 +19,30 @@ import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryStaffVo;
 import trapx00.lightx00.client.vo.manager.ManagerVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.security.acl.Group;
+
 public class EmployeeAddUi implements ExternalLoadableUiController {
     @FXML private JFXTextField tfId;
     @FXML private JFXTextField tfName;
     @FXML private JFXTextField tfPassword;
     @FXML private JFXDatePicker tfWorkDate;
-    @FXML private JFXComboBox<EmployeePosition> tfPosition;
-    @FXML private JFXComboBox<EmployeeState> tfState;
-    @FXML private JFXComboBox<String> tfRoot;
-    @FXML private JFXComboBox<SaleStaffType> tfSaleType;
-    @FXML private JFXButton btnSubmit;
-    @FXML private JFXButton btnCancel;
+    @FXML private JFXComboBox<EmployeePosition> tfPosition = new JFXComboBox<>();
+    @FXML private JFXComboBox<EmployeeState> tfState = new JFXComboBox<>();
+    @FXML private JFXComboBox<String> tfRoot = new JFXComboBox<>();
+    @FXML private JFXComboBox<SaleStaffType> tfSaleType = new JFXComboBox<>();
+    @FXML public JFXButton btnSubmit;
+    @FXML public JFXButton btnCancel;
 
     private UserManagementBlService blService = UserManagementBlServiceFactory.getInstance();
     private Runnable runnable;
-    private ObservableList<String> root = FXCollections.observableArrayList("否","是");
+    final private ObservableList<String> root = FXCollections.observableArrayList("否","是");
     /**
      * Loads the controller.
      *
@@ -48,19 +54,16 @@ public class EmployeeAddUi implements ExternalLoadableUiController {
     }
 
     public void show(Runnable runnable) {
-        ExternalLoadedUiPackage uiPackage = load();
-        PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
-        ((EmployeeAddUi)uiPackage.getController()).runnable = runnable;
-    }
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        EmployeeAddUi ui = externalLoadedUiPackage.getController();
+        ui.tfId.setText(blService.getId());
+        ui.tfPosition.getItems().addAll(FXCollections.observableArrayList(EmployeePosition.values()));
+        ui.tfState.getItems().addAll(FXCollections.observableArrayList(EmployeeState.values()));
+        ui.tfRoot.getItems().addAll(root);
+        ui.tfSaleType.getItems().addAll(FXCollections.observableArrayList(SaleStaffType.values()));
 
-    @FXML
-    public void initialize() {
-        tfPosition = new JFXComboBox<>(FXCollections.observableArrayList(EmployeePosition.values()));
-        tfState = new JFXComboBox<>(FXCollections.observableArrayList(EmployeeState.values()));
-        tfRoot= new JFXComboBox<>(root);
-        tfRoot.setEditable(false);
-        tfSaleType = new JFXComboBox<>(FXCollections.observableArrayList(SaleStaffType.values()));
-        tfSaleType.setEditable(false);
+        ui.tfRoot.setEditable(false);
+        ui.tfSaleType.setEditable(false);
         tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue.equals(EmployeePosition.SaleStaff)) {
                 tfRoot.setEditable(true);
@@ -70,6 +73,8 @@ public class EmployeeAddUi implements ExternalLoadableUiController {
                 tfRoot.setEditable(true);
             }
         });
+        PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
+        ui.runnable = runnable;
     }
 
     private EmployeeVo getCurrentEmployeeVo() {
@@ -91,40 +96,41 @@ public class EmployeeAddUi implements ExternalLoadableUiController {
     }
 
     public void onBtnSubmitClicked() {
-        if (tfName.getText().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员姓名。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else if (tfPassword.getText().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员登录密码。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else if (tfWorkDate.getValue().toString().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员入职时间。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else if (tfPosition.getValue().toString().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员就职单位。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else if (tfState.getValue().toString().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员就职状态。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else {
-            blService.add(getCurrentEmployeeVo());
-            PromptDialogHelper.start("创建成功！","已经创建一位新的职员。")
-                    .addCloseButton("好的","CHECK",e -> close())
+        try {
+            if (tfName.getText().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员姓名。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfPassword.getText().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员登录密码。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfWorkDate.getValue().toString().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员入职时间。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfPosition.getValue() == null || tfPosition.getValue().toString().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员就职单位。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfState.getValue().toString().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员就职状态。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else {
+                blService.add(getCurrentEmployeeVo());
+                PromptDialogHelper.start("创建成功！", "已经创建一位新的职员。")
+                        .addCloseButton("好的", "CHECK", e -> close())
+                        .createAndShow();
+            }
+        }catch (IdExistsException idException) {
+            PromptDialogHelper.start("创建失败！", "职员ID已经存在。")
+                    .addCloseButton("好的", "CHECK", e -> close())
                     .createAndShow();
         }
     }

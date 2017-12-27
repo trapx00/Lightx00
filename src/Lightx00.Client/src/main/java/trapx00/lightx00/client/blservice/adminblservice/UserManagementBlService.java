@@ -25,10 +25,17 @@ public interface UserManagementBlService {
      * @return array of EmployeeVo which match the conditions
      */
     EmployeeVo[] query(UserAccountQueryVo query);
+
     /**
      * Delete an needless user account.
      * @param account the user account to be deleted
      * @return whether the operation is done successfully
      */
     ResultMessage delete(EmployeeVo account);
+
+    /**
+     * New id for a new employee.
+     * @return new id
+     */
+    String getId();
 }
