@@ -1,7 +1,5 @@
 package trapx00.lightx00.shared.dataservice.logindataservice;
 
-import trapx00.lightx00.shared.po.employee.EmployeePo;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

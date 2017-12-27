@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.draftdataservice.DraftDataService
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.DraftQueryVo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DraftDataServiceDriver {
     private DraftDataService service = new DraftDataServiceStub();

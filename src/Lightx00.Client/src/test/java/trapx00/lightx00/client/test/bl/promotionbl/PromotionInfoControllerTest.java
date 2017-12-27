@@ -9,7 +9,7 @@ import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PromotionInfoControllerTest {
     private PromotionInfoController controller = PromotionInfoFactory.getController();

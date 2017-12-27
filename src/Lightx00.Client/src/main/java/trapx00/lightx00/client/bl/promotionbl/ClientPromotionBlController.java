@@ -3,9 +3,9 @@ package trapx00.lightx00.client.bl.promotionbl;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.client.datafactory.promotiondataservicefactory.ClientPromotionDataServiceFactory;
+import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
 import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 

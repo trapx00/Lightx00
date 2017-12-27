@@ -2,7 +2,6 @@ package trapx00.lightx00.client.presentation.helpui;
 
 import com.jfoenix.controls.JFXDialog;
 
-import java.awt.*;
 import java.util.Stack;
 
 public class DialogStack {

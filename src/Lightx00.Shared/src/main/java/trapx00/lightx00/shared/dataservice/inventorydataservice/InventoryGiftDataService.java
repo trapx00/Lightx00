@@ -1,15 +1,12 @@
 package trapx00.lightx00.shared.dataservice.inventorydataservice;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.util.Date;
-
 import trapx00.lightx00.shared.dataservice.CommonBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
-import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
+
+import java.rmi.RemoteException;
 
 public interface InventoryGiftDataService  extends CommonBillDataService<InventoryGiftPo, InventoryGiftQueryVo> {
 

@@ -6,11 +6,10 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationOperationRegistry;
 import trapx00.lightx00.client.bl.notificationbl.NotificationOperationService;
 import trapx00.lightx00.client.presentation.notificationui.BillApprovalNotificationDetailDisplayUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationDetailUi;
+import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.notification.NotificationConvertRegistry;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
-import trapx00.lightx00.client.vo.BillVo;
 
 import java.util.Date;
 

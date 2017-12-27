@@ -3,31 +3,22 @@ package trapx00.lightx00.server.test.data.saledata;
 import com.j256.ormlite.dao.Dao;
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.server.data.saledata.factory.SaleBillDataDaoFactory;
-import trapx00.lightx00.server.data.saledata.factory.SaleBillDataFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataDaoFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
-import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.exception.database.BillInvalidStateException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SaleRefundBillDataControllerTest {
     static {

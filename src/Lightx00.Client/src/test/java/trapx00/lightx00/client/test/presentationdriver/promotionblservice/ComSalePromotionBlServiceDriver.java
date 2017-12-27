@@ -10,7 +10,7 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ComSalePromotionBlServiceDriver {
     private ComSalePromotionBlService service = new ComSalePromotionBlServiceStub();

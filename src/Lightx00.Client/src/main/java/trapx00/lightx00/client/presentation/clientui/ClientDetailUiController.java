@@ -2,10 +2,7 @@ package trapx00.lightx00.client.presentation.clientui;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import trapx00.lightx00.client.presentation.helpui.ClientDetailUi;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
 public class ClientDetailUiController extends ClientDetailUi implements ExternalLoadableUiController {
@@ -61,5 +58,10 @@ public class ClientDetailUiController extends ClientDetailUi implements External
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/clientui/ClientDetailUi.fxml").loadAndGetPackageWithoutException();
+    }
+
+    @FXML
+    private void onBtnCancelClicked(){
+        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
     }
 }

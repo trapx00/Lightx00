@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import javafx.scene.text.Font?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-<?import com.jfoenix.controls.JFXMasonryPane?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.financeui.InitialEstablishmentUiController"
@@ -80,7 +72,7 @@
             </Label>
             <JFXTreeTableView fx:id="tableCommodity">
                 <columns>
-                    <JFXTreeTableColumn fx:id="tcCommodityId" prefWidth="50" text="ID"/>
+                    <JFXTreeTableColumn fx:id="tcCommodityId" prefWidth="100" text="ID"/>
                     <JFXTreeTableColumn fx:id="tcCommodityName" editable="false" prefWidth="150" text="商品名称"/>
                 </columns>
             </JFXTreeTableView>
@@ -98,12 +90,6 @@
                    style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="提交">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked"
-                   style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
-            <graphic>
-                <MaterialIconView glyphName="REFRESH" glyphSize="24"/>
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked"

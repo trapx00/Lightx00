@@ -1,9 +1,12 @@
 package trapx00.lightx00.client.presentation.commodityui.commoditySort;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -29,7 +32,7 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
     public JFXTextField tfDate;
     public JFXTextField tfId;
     public JFXTextField tfName;
-
+    public JFXListView<Label> list;
 
     TreeItem<String> root;
     String currentId;
@@ -52,6 +55,9 @@ public class CommoditySortUiController  implements ExternalLoadableUiController 
         tv.setRoot(root);
         tv.setShowRoot(true);
         showGoodsTree();
+        for(int i = 0 ; i < 4 ; i++) list.getItems().add(new Label("Item " + i));
+        list.getStyleClass().add("mylistview");
+
         tv.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 if(tv.getSelectionModel().getSelectedItem().getValue().equals("CommoditySort"))

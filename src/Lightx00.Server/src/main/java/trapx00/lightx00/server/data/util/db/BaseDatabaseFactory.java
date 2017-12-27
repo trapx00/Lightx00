@@ -9,26 +9,26 @@ import com.j256.ormlite.table.TableUtils;
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
-
-import java.sql.SQLException;
-import java.util.Date;
-
+import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.admin.AdminPo;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
+import trapx00.lightx00.shared.po.client.ClientType;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
-import trapx00.lightx00.shared.po.manager.AuditIdPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
-import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
+
+import java.sql.SQLException;
+import java.util.Date;
 
 public class BaseDatabaseFactory {
 
@@ -47,8 +47,7 @@ public class BaseDatabaseFactory {
         try {
             return DaoManager.createDao(connectionSource, clazz);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new DbSqlException(e);
         }
     }
 
@@ -85,7 +84,7 @@ public class BaseDatabaseFactory {
             Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
             TableUtils.dropTable(financeStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
-            financeStaffDao.create(new FinanceStaffPo("10002", "财务经理", new Date(), "123456",EmployeeState.Active,true));
+            financeStaffDao.create(new FinanceStaffPo("10002", "123456", new Date(), "123456",EmployeeState.Active,true));
             financeStaffDao.create(new FinanceStaffPo("10103", "财务职员", new Date(), "123456",EmployeeState.Active,false));
 
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
@@ -97,7 +96,7 @@ public class BaseDatabaseFactory {
             Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
             TableUtils.dropTable(inventoryStaffPos, true);
             TableUtils.createTableIfNotExists(connectionSource, InventoryStaffPo.class);
-            inventoryStaffPos.create(new InventoryStaffPo("10001", "库存经理", new Date(), "123456", EmployeeState.Active));
+            inventoryStaffPos.create(new InventoryStaffPo("10001", "123", new Date(), "123", EmployeeState.Active));
 
             Dao<ManagerPo,String> managerPos =createDao(ManagerPo.class);
             TableUtils.dropTable(managerPos, true);
@@ -119,6 +118,15 @@ public class BaseDatabaseFactory {
             commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"һ",
                     "01",34,34,34,34,100));
 
+            Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
+            TableUtils.dropTable(saleBillPos,true);
+            TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
+            saleBillPos.create(new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Approved, "0", "0", "0", 0,
+                    null, 0, 0, 0, 0,
+                    "",1,"2"
+                    ,new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 10));
+
+
 
             Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);
             TableUtils.dropTable(commoditySortPos, true);
@@ -128,23 +136,45 @@ public class BaseDatabaseFactory {
             commoditySortPos.create(new CommoditySortPo("PRO-0003","qweLed",1,"PRO-0001",null));
             commoditySortPos.create(new CommoditySortPo("PRO-0004","qwasdeLed",0,"PRO-0001",null));
 
-            Dao<AuditIdPo,String> commitBills = createDao(AuditIdPo.class);
-            TableUtils.dropTable(commitBills,true);
-            TableUtils.createTableIfNotExists(connectionSource,AuditIdPo.class);
-            commitBills.create(new AuditIdPo("XJFYD-20171112-00001",new Date()));
-            commitBills.create(new AuditIdPo("XJFYD-20171112-00002",new Date()));
-
-            Dao<CashBillPo,String> cashBillPos = createDao(CashBillPo.class);
-            TableUtils.dropTable(cashBillPos,true);
-            TableUtils.createTableIfNotExists(connectionSource,CashBillPo.class);
-            cashBillPos.create(new CashBillPo("XJFYD-20171112-00001",new Date(), BillState.WaitingForApproval,"10002",1,null));
-            cashBillPos.create(new CashBillPo("XJFYD-20171112-00002",new Date(), BillState.WaitingForApproval,"10103",2,null));
-
-            Dao<ComSalePromotionPo,String> clientPromotion = createDao(ComSalePromotionPo.class);
-            TableUtils.dropTable(clientPromotion,true);
-            TableUtils.createTableIfNotExists(connectionSource,ComSalePromotionPo.class);
-            clientPromotion.create(new ComSalePromotionPo("SPJJCXCL-20171112-00001",new Date(),new Date(), PromotionState.Draft,null,0));
-
+            Dao<ClientPo,String>clientPos=createDao(ClientPo.class);
+            TableUtils.dropTable(clientPos,true);
+            TableUtils.createTableIfNotExists(connectionSource,ClientPo.class);
+            clientPos.create(new ClientPo("0",
+                    ClientType.Retailer,
+                    1,
+                    "xiaoming",
+                    "12345678",
+                    "12345678",
+                    "210000",
+                    "12345679@qq.com",
+                    123,
+                    456,
+                    "1",
+                    ClientState.Real));
+            clientPos.create(new ClientPo("1",
+                    ClientType.Retailer,
+                    1,
+                    "xiaoming",
+                    "12345678",
+                    "12345678",
+                    "210000",
+                    "12345679@qq.com",
+                    123,
+                    456,
+                    "1",
+                    ClientState.Real));
+            clientPos.create(new ClientPo("2",
+                    ClientType.Retailer,
+                    1,
+                    "xiaoming",
+                    "12345678",
+                    "12345678",
+                    "210000",
+                    "12345679@qq.com",
+                    123,
+                    456,
+                    "1",
+                    ClientState.Real));
              } catch (SQLException e) {
             e.printStackTrace();
         }

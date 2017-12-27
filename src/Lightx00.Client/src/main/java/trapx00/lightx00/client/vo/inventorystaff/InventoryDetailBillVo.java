@@ -1,8 +1,5 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
-import java.util.Date;
-import java.util.HashMap;
-
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
@@ -17,6 +14,8 @@ import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
+
+import java.util.Date;
 
 public  class InventoryDetailBillVo extends InventoryBillBaseVo implements Reversible {
     //报损报溢报警

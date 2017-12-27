@@ -3,18 +3,16 @@ package trapx00.lightx00.client.test.bl.clientbl;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.clientbl.ClientBlController;
 import trapx00.lightx00.client.bl.clientbl.factory.ClientBlFactory;
-import trapx00.lightx00.client.bl.clientbl.mock.ClientBlControllerMock;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ClientBlControllerTest {
     ClientBlController clientBlController= ClientBlFactory.getClientBlController();
-    ClientVo clientVo=new ClientVo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, null);
+    ClientVo clientVo=new ClientVo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 50,43.7, 37.5, "1");
 
     @Test
     public void deleteDraft() throws Exception {
@@ -25,8 +23,7 @@ public class ClientBlControllerTest {
     @Test
     public void query() throws Exception {
         clientBlController.add(clientVo);
-        assertEquals("0",clientBlController.query("0")[0].getId());
-        clientBlController.delete(new String[]{"0"});
+        assertEquals("0",clientBlController.query("")[0].getId());
     }
 
     @Test

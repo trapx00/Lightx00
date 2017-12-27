@@ -2,8 +2,6 @@ package trapx00.lightx00.server.test.data.financedata;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class PaymentBillDataControllerTest {
     @Test
     public void submit() throws Exception {

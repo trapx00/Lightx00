@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
@@ -42,6 +41,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcName;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcPrice;
     public JFXTreeTableColumn<InventoryGiftItemModel, String> tcAmount;
+    public JFXTreeTableColumn<InventoryGiftItemModel,String > tfAcutal;
 
     private ObjectProperty<CommodityVo> currentCommodity = new SimpleObjectProperty<>();
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
@@ -80,8 +80,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(CommodityUiFactory.getCommoditySelectionUi().queryId(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getCommodityId()).getName()));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getAmount())));
-        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getUnitPrice())));
-
+        tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getPromotionCommodityObjectProperty().getPrice())));
 
         currentDate.addListener(((observable, oldValue, newValue) -> {
             tfDate.setText(newValue == null ? "" : DateHelper.fromDate(newValue));
@@ -140,16 +139,30 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
 
     public void onBtnAddItemClicked() {
         CommodityUiFactory.getCommoditySelectionUi()
-                .showCommoditySelectDialog(vo -> inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(new PromotionCommodity(vo.getId(),
-                        0,vo.getRetailPrice()))));
+                .showCommoditySelectDialog(vo ->addItem(vo));
+
+    }
+
+    public void addItem(CommodityVo vo){
+        InventoryGiftItemModel inventoryGiftItemModel=new InventoryGiftItemModel(new PromotionCommodity(vo.getId(),
+                vo.getName(),vo.getRetailPrice(),0));
+        new InventoryGiftItemModificationUi().show(vo.getId(),aDouble -> inventoryGiftItemModelObservableList.add(new InventoryGiftItemModel(
+                new PromotionCommodity(vo.getId(),vo.getName(),vo.getRecentRetailPrice(),aDouble)
+        )));
+
 
     }
 
     public void onBtnSetItemClicked(){
         InventoryGiftItemModel inventoryGiftItemModel=getSelected();
         if(inventoryGiftItemModel!=null){
-            new InventoryGiftItemModificationUi().show(aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
-                    getValue().getPromotionCommodityObjectProperty().setAmount(aDouble));
+            new InventoryGiftItemModificationUi().show(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getCommodityId(),aDouble -> inventoryGiftItemModel.getPromotionCommodityObjectProperty().setAmount(aDouble));
+            if(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getAmount()>
+                    commoditySelection.queryId(inventoryGiftItemModel.getPromotionCommodityObjectProperty().getCommodityId()).getAmount() )
+            {
+                PromptDialogHelper.start("失败","赠送数量超过库存数量");
+                inventoryGiftItemModel.getPromotionCommodityObjectProperty().setAmount(0);
+            }
         }
 
     }

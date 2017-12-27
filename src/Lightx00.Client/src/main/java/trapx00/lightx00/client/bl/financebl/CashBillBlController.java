@@ -10,7 +10,6 @@ import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.CashBillBlService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.CashBillDataServiceFactory;
-import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;

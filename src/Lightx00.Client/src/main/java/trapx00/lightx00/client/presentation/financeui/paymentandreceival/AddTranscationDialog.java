@@ -7,12 +7,10 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
-import trapx00.lightx00.client.presentation.bankaccountui.BankAccountSelection;
 import trapx00.lightx00.client.presentation.bankaccountui.factory.BankAccountUiFactory;
 import trapx00.lightx00.client.presentation.financeui.TranscationModel;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
-import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.function.Consumer;
 

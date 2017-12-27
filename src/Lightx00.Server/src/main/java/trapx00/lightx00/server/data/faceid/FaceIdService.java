@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.faceid;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import com.j256.ormlite.dao.Dao;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

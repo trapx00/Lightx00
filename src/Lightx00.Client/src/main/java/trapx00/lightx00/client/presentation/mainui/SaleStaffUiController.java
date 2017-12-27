@@ -2,9 +2,7 @@ package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.text.Text;
 import trapx00.lightx00.client.presentation.clientui.ClientUiController;
-import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleBillUiController;

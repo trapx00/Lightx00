@@ -1,9 +1,7 @@
 package trapx00.lightx00.client.datafactory.clientdataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
-import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservicestub.clientdataservice.ClientDataServiceStub;
-import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleBillDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;

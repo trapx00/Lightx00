@@ -1,19 +1,19 @@
 package trapx00.lightx00.server;
 
-import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
-import trapx00.lightx00.server.data.financedata.factory.PaymentBillDataFactory;
-import trapx00.lightx00.server.data.financedata.factory.ReceivalBillDataFactory;
-import trapx00.lightx00.server.data.inventorydata.factory.InventoryWarningDataFactory;
-import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
-import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.server.data.admindata.factory.AdminDataFactory;
 import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
+import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
 import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
 import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataFactory;
+import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
 import trapx00.lightx00.server.data.draftdata.factory.DraftDataFactory;
 import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.InitialEstablishmentDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.PaymentBillDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.ReceivalBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.InventoryGiftDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryWarningDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
 import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
 import trapx00.lightx00.server.data.logdata.factory.LogBackupDataFactory;
@@ -28,12 +28,14 @@ import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.admindataservice.FaceIdRegistrationDataService;
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
 import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
@@ -50,13 +52,11 @@ import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataSer
 import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 
 public class Server {
@@ -98,6 +98,9 @@ public class Server {
             ReceivalBillDataService receivalBillDataService = ReceivalBillDataFactory.getService();
             CommoditySortDataService commoditySortDataService= CommoditySortDataFactory.getCommoditySortDataService();
             InventoryWarningDataService inventoryWarningDataService= InventoryWarningDataFactory.getService();
+            InitialEstablishmentDataService initialEstablishmentDataService = InitialEstablishmentDataFactory.getService();
+            AuditDataService auditDataService = AuditDataFactory.getService();
+            export(auditDataService);
             export(inventoryWarningDataService);
             export(commoditySortDataService);
             export(inventoryGiftDataService);
@@ -119,6 +122,7 @@ public class Server {
             export(userManagementDataService);
             export(receivalBillDataService);
             export(paymentBillDataService);
+            export(initialEstablishmentDataService);
             logService.printLog(caller, "Initialization done.");
 
         } catch (RemoteException | MalformedURLException | SQLException e) {

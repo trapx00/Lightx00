@@ -8,7 +8,6 @@ import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagem
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 
-import javax.swing.*;
 import java.util.Date;
 
 public class BankAccountAddUi implements ExternalLoadableUiController {

@@ -2,7 +2,6 @@ package trapx00.lightx00.shared.dataservice.logdataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import java.net.URI;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

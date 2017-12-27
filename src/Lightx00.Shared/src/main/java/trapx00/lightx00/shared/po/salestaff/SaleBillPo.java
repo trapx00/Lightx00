@@ -4,7 +4,6 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionPoBase;
 
 import java.util.Date;
 

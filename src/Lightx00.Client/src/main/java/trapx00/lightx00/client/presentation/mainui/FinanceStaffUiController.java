@@ -2,14 +2,10 @@ package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.bankaccountui.BankAccountUiController;
-import trapx00.lightx00.client.presentation.financeui.HomeUiController;
-import trapx00.lightx00.client.presentation.financeui.SaleDetailUiController;
-import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
-import trapx00.lightx00.client.presentation.financeui.TradeSituationUiController;
+import trapx00.lightx00.client.presentation.financeui.*;
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
 import trapx00.lightx00.client.presentation.financeui.paymentandreceival.ReceivalBillUiController;
-import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
 
 
 /**
@@ -74,6 +70,6 @@ public class FinanceStaffUiController extends FrameworkUiController {
     }
 
     public void onInitialEstablishmentFunctionClicked(ActionEvent actionEvent) {
-
+        switchFunction(InitialEstablishmentUiController.class, "期初建账",true);
     }
 }

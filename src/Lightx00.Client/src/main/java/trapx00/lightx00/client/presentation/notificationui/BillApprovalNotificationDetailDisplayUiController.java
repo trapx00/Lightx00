@@ -1,15 +1,16 @@
 package trapx00.lightx00.client.presentation.notificationui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import trapx00.lightx00.client.presentation.helpui.*;
+import javafx.scene.input.MouseEvent;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.IOException;
@@ -21,13 +22,13 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
     public JFXButton btnBack;
     public JFXTextField tfDate;
     public JFXTextField tfBillId;
-    public JFXButton btnBillDetail;
     public JFXTextField tfSender;
     public JFXTextField tfId;
+    public JFXButton btnAbandon;
+    public JFXTextField tfResult;
 
     private BillVo billVo;
     private BillApprovalNotificationVo notificationVo;
-
 
     @Override
     public ExternalLoadedUiPackage showContent(BillApprovalNotificationVo arg) {
@@ -37,13 +38,11 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
         controller.tfDate.setText(DateHelper.fromDate(arg.getDate()));
         controller.tfSender.setText(arg.getSender().getName());
         controller.tfBillId.setText(arg.getBill().getId());
-        controller.btnBillDetail.setOnAction(e -> {
-            JFXDialog dialog = PromptDialogHelper.start("","").create();
-            ExternalLoadedUiPackage externalLoadedUiPackage1 = (arg.getBill()).billDetailUi().showContent(arg.getBill());
-            dialog.setContent((Region) externalLoadedUiPackage1.getComponent());
-            FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
-        });
         controller.billVo = arg.getBill();
+        controller.tfResult.setText(arg.getBill().getState().toString());
+        if (arg.getBill().getState().equals(BillState.Rejected)) {
+            controller.btnAcknowledge.setDisable(true);
+        }
         controller.notificationVo = arg;
         return externalLoadedUiPackage;
     }
@@ -59,11 +58,14 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
     }
 
     public void onBtnAcknowledgeClicked(ActionEvent actionEvent) {
-        billVo.notificationActivateService().activate(billVo.getId());
-
         if (onAcknowledgeClicked != null) {
             onAcknowledgeClicked.accept(notificationVo);
+            close();
         }
+        PromptDialogHelper.start("入账成功！",String.format("单据%s已经被入账！", notificationVo.getBill().getId()))
+            .addCloseButton("好","CHECK",null)
+            .createAndShow();
+
     }
 
     public void onBtnBackClicked(ActionEvent actionEvent) {
@@ -72,11 +74,34 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
         }
     }
 
+    private void abandon() {
+        notificationVo.operationService().abandon(notificationVo);
+
+    }
+
     public void onBtnModifyClicked(ActionEvent actionEvent) {
         try {
-            billVo.continueWritableUi().continueWriting(billVo);
+            ExternalLoadedUiPackage uiPackage = billVo.continueWritableUi().continueWriting(billVo);
+            FrameworkUiManager.switchFunction(uiPackage.getController(), "修改单据",true);
+            close();
+            abandon();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void onBtnAbandonClicked(ActionEvent actionEvent) {
+        abandon();
+        close();
+        PromptDialogHelper.start("丢弃成功！",String.format("单据%s已经被丢弃！", notificationVo.getBill().getId()))
+            .addCloseButton("好","CHECK",null)
+            .createAndShow();
+
+    }
+
+    public void onTfBillIdClicked(MouseEvent mouseEvent) {
+        PromptDialogHelper.start("单据详情","")
+            .setContent(billVo.billDetailUi().showContent(billVo).getComponent())
+            .createAndShow();
     }
 }

@@ -19,19 +19,16 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.BaseQueryVo;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CommonBillBlController<BillVoType extends BillVo, BillPoType extends BillPo, QueryType extends BaseQueryVo<BillPoType, String, QueryType>> {
     private LogService logService = LogServiceFactory.getLogService();
     private CommonBillDataService<BillPoType, QueryType> dataService;
     private DraftService draftService = DraftServiceFactory.getDraftService();
-    private String billName = "";
+    private String billName;
     private BillPoVoConverter<BillPoType, BillVoType> converter;
     private ApprovalRequest approvalRequest = ApprovalRequestFactory.getService();
 
@@ -49,6 +46,7 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
 
     public ResultMessage submit(BillVoType bill) {
         try {
+            bill.setState(BillState.WaitingForApproval);
             ResultMessage opResult = dataService.submit(converter.fromVoToPo(bill));
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("创建了一张%s，内容是%s。", billName, bill.toString()));

@@ -1,8 +1,9 @@
 package trapx00.lightx00.client.vo;
 
-import java.util.Date;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
+
+import java.util.Date;
 
 public abstract class EmployeeVo {
     private String id;

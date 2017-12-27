@@ -3,12 +3,8 @@ package trapx00.lightx00.client.bl.inventorybl.factory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.InventoryGiftBlController;
-import trapx00.lightx00.client.bl.inventorybl.mock.InventoryGiftBlControllerMock;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 public class InventoryGiftServiceFactory {
 

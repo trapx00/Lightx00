@@ -12,7 +12,7 @@ import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NotificationDataControllerTest {
     static {

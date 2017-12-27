@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.blservicestub.loginblservice;
 
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
-import trapx00.lightx00.shared.po.employee.EmployeePo;
 
 import java.rmi.RemoteException;
 

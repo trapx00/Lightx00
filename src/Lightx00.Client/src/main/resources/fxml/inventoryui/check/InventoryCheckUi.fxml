@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
-<?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import com.jfoenix.controls.JFXMasonryPane?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-
+<?import javafx.scene.text.Text?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.check.InventoryCheckUiController"
@@ -27,7 +15,7 @@
     </padding>
 
     <HBox alignment="CENTER_LEFT" maxWidth="2000">
-        <MaterialIconView glyphName="FILTER_LIST" glyphSize="28" />
+        <MaterialIconView glyphName="ACCOUNT_BOX" glyphSize="28" />
         <Text text="库存查看">
             <font>
                 <Font size="20.0" />
@@ -62,16 +50,6 @@
     </JFXMasonryPane>
 
 
-    <HBox alignment="CENTER_LEFT" maxWidth="2000">
-        <MaterialIconView glyphName="ACCOUNT_BOX" glyphSize="28" />
-        <Text text="库存盘点">
-            <font>
-                <Font size="20.0" />
-            </font></Text>
-        <padding>
-            <Insets right="10.0" />
-        </padding>
-    </HBox>
     <JFXTreeTableView fx:id="tableView" prefHeight="500.0" prefWidth="500.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcinventoryAmount" prefWidth="150" text="入库数量" />

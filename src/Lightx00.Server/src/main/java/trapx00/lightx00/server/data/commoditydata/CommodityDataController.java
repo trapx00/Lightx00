@@ -1,6 +1,5 @@
 package trapx00.lightx00.server.data.commoditydata;
 
-import com.amazonaws.services.dynamodbv2.xspec.B;
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataDaoFactory;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
@@ -11,7 +10,6 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
@@ -22,6 +20,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 public class CommodityDataController extends UnicastRemoteObject implements CommodityDataService {
     private static final int MAX_BILL_NUM_FOR_A_DAY = 9999;
@@ -113,6 +112,34 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
             return result.toArray(new CommodityPo[result.size()]);
         }
     }
+
+    @Override
+    public CommodityPo[] queryNormally(String query) {
+        ArrayList<CommodityPo> result = new ArrayList<CommodityPo>();
+        try {
+            List<CommodityPo> commodityPos = commodityDao.queryBuilder().query();
+            for (CommodityPo commodityPo : commodityPos) {
+                if (commodityPo.getId().contains(query)
+                        || commodityPo.getName().contains(query)
+                        || (commodityPo.getType() + "").contains(query)
+                        || (commodityPo.getAmount()+"").contains(query)
+                        ) {
+                    result.add(commodityPo);
+                }
+            }
+            logService.printLog(delegate, "query a commodity who contains " + query);
+        } catch (SQLException e) {
+            result.add(null);
+            e.printStackTrace();
+            handleSQLException(e);
+        }
+        CommodityPo[] arrayResult = new CommodityPo[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            arrayResult[i] = result.get(i);
+        }
+        return arrayResult;
+    }
+
     /**
      * Delete a commodity
      * @param commodityPo
@@ -151,15 +178,20 @@ public class CommodityDataController extends UnicastRemoteObject implements Comm
 
     public String getId() {
         try {
-            current++;
-            if (current== MAX_BILL_NUM_FOR_A_DAY) {
+            OptionalInt maxId = commodityDao.queryBuilder().selectColumns("id").query().stream()
+                    .map(CommodityPo::getId)
+                    .map(x -> x.split("-")[2])
+                    .mapToInt(Integer::parseInt)
+                    .max();
+            if (maxId.orElse(-1) == MAX_BILL_NUM_FOR_A_DAY) {
                 logService.printLog(delegate, "got a new id and it has been full.");
                 throw new NoMoreBillException();
             }
-            String newId = "-"+ BillHelper.comFormaiId(current);
+            String newId = "-"+BillHelper.formatComid(maxId.orElse(0) + 1);
             logService.printLog(delegate, "got a new id " + newId);
             return newId;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            handleSQLException(e);
             return "";
         }
     }

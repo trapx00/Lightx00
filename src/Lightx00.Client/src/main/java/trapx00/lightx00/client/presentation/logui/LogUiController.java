@@ -6,18 +6,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.logblservice.LogBlService;
 import trapx00.lightx00.client.blservice.logblservice.LogBlServiceFactory;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
-
-import java.util.ArrayList;
 
 public class LogUiController implements ExternalLoadableUiController {
 
@@ -89,22 +88,6 @@ public class LogUiController implements ExternalLoadableUiController {
     @Override
     public ExternalLoadedUiPackage load() {
         return new UiLoader("/fxml/logui/LogUi.fxml").loadAndGetPackageWithoutException();
-    }
-
-    public void onBtnSelectClicked(ActionEvent actionEvent) {
-        /**
-         * 这里是new的，应该提供工厂。工厂应该直接new一个回来。
-         */
-        new SampleSelectingDialog().showSelectLogDialog(new ArrayList<>(), list -> {
-            /**
-             * 这个函数就是如何处理选择结束后的数据。参数list就是用户选择的内容。
-             * 如果用户按了取消，就不会调用
-             */
-            StringBuilder result = new StringBuilder("你选择了ID是");
-            list.forEach(x -> result.append(x.getId()).append("、"));
-
-            lbResult.setText(result.append("的日志").toString());
-        });
     }
 
     public void onBtnConfirmedClicked(ActionEvent actionEvent) {

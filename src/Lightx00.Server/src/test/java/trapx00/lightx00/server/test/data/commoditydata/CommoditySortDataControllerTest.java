@@ -2,7 +2,6 @@ package trapx00.lightx00.server.test.data.commoditydata;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.table.TableUtils;
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataDaoFactory;
 import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
@@ -14,7 +13,8 @@ import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class CommoditySortDataControllerTest {
     static {

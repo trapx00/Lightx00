@@ -1,9 +1,6 @@
 package trapx00.lightx00.client.presentation.helpui;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import trapx00.lightx00.client.Client;
 import trapx00.lightx00.client.vo.DraftDemoVo;
 
 import java.io.IOException;

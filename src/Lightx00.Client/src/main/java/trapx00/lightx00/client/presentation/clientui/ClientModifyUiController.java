@@ -1,32 +1,32 @@
 package trapx00.lightx00.client.presentation.clientui;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
-import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
-import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientType;
-import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 
-public class ClientModifyUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
+public class ClientModifyUiController extends ClientModifyUi implements DraftContinueWritableUiController, ExternalLoadableUiController {
 
     private static final HashMap<String, ClientType> clientTypeMap = new HashMap<>();
     @FXML
@@ -34,7 +34,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     @FXML
     private JFXTextField clientName;
     @FXML
-    private JFXTextField clientType;
+    private JFXComboBox clientType;
     @FXML
     private JFXTextField clientLevel;
     @FXML
@@ -53,22 +53,79 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     private JFXTextField clientPayable;
     @FXML
     private JFXTextField clientDefaultOperator;
-    @FXML
-    private JFXTextField clientOperatorId;
     private ClientBlService blService = ClientBlServiceFactory.getInstance();
     private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
 
     @FXML
     private void initialize() {
-        clientReceivableQuota.setText("0.0");
-        clientReceivable.setText("0.0");
-        clientPayable.setText("0.0");
-        currentEmployee.addListener(((observable, oldValue, newValue) -> {
-            clientOperatorId.setText(newValue == null ? "" : newValue.getId());
-        }));
+        if (((SaleStaffVo) currentEmployee.getValue()).isRoot()) {
+            clientReceivableQuota.setEditable(true);
+        }
         clientTypeMap.put(ClientType.Retailer.toString(), ClientType.Retailer);
         clientTypeMap.put(ClientType.Supplier.toString(), ClientType.Supplier);
+
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "销售商", "进货商"
+        );
+        clientType.setItems(stringObservableList);
+        clientType.setValue("销售商");
+
+        NumberValidator numberValidator = new NumberValidator();
+        numberValidator.setMessage("请输入数字类型");
+        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
+        requiredValidator.setMessage("请输入信息");
+
+        clientName.getValidators().add(requiredValidator);
+        clientLevel.getValidators().add(requiredValidator);
+        clientLevel.getValidators().add(numberValidator);
+        clientPhone.getValidators().add(requiredValidator);
+        clientAddress.getValidators().add(requiredValidator);
+        clientZipCode.getValidators().add(requiredValidator);
+        clientZipCode.getValidators().add(numberValidator);
+        clientDefaultOperator.getValidators().add(requiredValidator);
+
+        clientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientType.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientLevel.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientPhone.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientAddress.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientZipCode.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
+
+        clientDefaultOperator.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientName.validate();
+            }
+        });
     }
 
     /**
@@ -140,7 +197,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     }
 
     private ClientVo getCurrentClientVo() {
-        if (clientName.getText().length() == 0 || clientType.getText().length() == 0 || clientLevel.getText().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
+        if (clientName.getText().length() == 0 || clientType.getValue().toString().length() == 0 || clientLevel.getText().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！", "请先填写完客户信息。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
@@ -148,7 +205,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
         }
         return new ClientVo(
                 clientId.getText(),
-                clientTypeMap.get(clientType.getText()),
+                clientTypeMap.get(clientType.getValue()),
                 Integer.parseInt(clientLevel.getText()),
                 clientName.getText(),
                 clientPhone.getText(),
@@ -183,7 +240,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
 
     private void reset() {
         clientName.clear();
-        clientType.clear();
+        clientType.setValue("销售商");
         clientLevel.clear();
         clientPhone.clear();
         clientAddress.clear();
@@ -196,7 +253,7 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
     private void onBtnCancelClicked() {
         PromptDialogHelper.start("是否要存入草稿箱", null)
                 .addCloseButton("存入", "DONE", e -> saveAsDraft())
-                .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.switchFunction(ClientUiController.class, "管理客户", true))
+                .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext())
                 .addCloseButton("取消", "UNDO", null)
                 .createAndShow();
     }
@@ -231,4 +288,22 @@ public class ClientModifyUiController implements DraftContinueWritableUiControll
         });
     }
 
+    @Override
+    public ExternalLoadedUiPackage showContent(ClientVo arg) {
+        ClientVo clientVo = arg;
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        ClientModifyUiController clientModifyUiController = externalLoadedUiPackage.getController();
+        clientModifyUiController.clientId.setText(clientVo.getId());
+        clientModifyUiController.clientName.setText(clientVo.getName());
+        clientModifyUiController.clientType.setValue(clientVo.getClientType().toString());
+        clientModifyUiController.clientLevel.setText(clientVo.getClientLevel() + "");
+        clientModifyUiController.clientPhone.setText(clientVo.getPhone());
+        clientModifyUiController.clientAddress.setText(clientVo.getAddress());
+        clientModifyUiController.clientZipCode.setText(clientVo.getZipCode() + "");
+        clientModifyUiController.clientEmail.setText(clientVo.getEmail());
+        clientModifyUiController.clientReceivable.setText(clientVo.getReceivable() + "");
+        clientModifyUiController.clientPayable.setText(clientVo.getPayable() + "");
+        clientModifyUiController.clientDefaultOperator.setText(clientVo.getDefaultOperatorId());
+        return externalLoadedUiPackage;
+    }
 }

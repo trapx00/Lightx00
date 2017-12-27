@@ -25,7 +25,6 @@ import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 
-
 import java.util.Date;
 
 public class InventoryCheckBlController implements InventoryCheckBlService {
@@ -48,9 +47,13 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
         PurchaseRefundBillVo[] purchaseRefundBillVos=purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
         SaleBillVo[]saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
         SaleRefundBillVo[] saleRefundBillVos=saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
-        InventoryViewVo inventoryViewVo=new InventoryViewVo("VIew"+FormatDateTime.toShortDateString(new Date()),new Date(),null);
-        InventoryViewItem inventoryViewItem=new InventoryViewItem(new Date(),0,0,0,0,0,0,
+        InventoryViewVo inventoryViewVo=new InventoryViewVo("View"+FormatDateTime.toShortDateString(new Date()),new Date(),null);
+        InventoryViewItem inventoryViewItem=new InventoryViewItem(new Date(),0,
+                0,0,0,0,0,
                 0);
+        System.out.println(purchaseBillVos==null);
+        System.out.println(saleBillVos==null);
+        System.out.println(saleBillVos[0].getCommodityList()[0].getNumber());
         for(int i=0;i<purchaseBillVos.length;i++){
             for(int j=0;j<purchaseBillVos[i].getCommodityList().length;j++) {
                 inventoryViewItem.setInventoryAmount(inventoryViewItem.getInventoryAmount() + purchaseBillVos[i].getCommodityList()[j].getNumber());
@@ -86,6 +89,8 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
         inventoryViewItem.setInSoldPrice(inventoryViewItem.getInventoryMoney()/inventoryViewItem.getInventoryAmount());
         inventoryViewItem.setOutSoldPrice(inventoryViewItem.getOutOfInVentoryMoney()/inventoryViewItem.getOutOfInventoryAmount());
         inventoryViewVo.setItems(inventoryViewItem);
+        System.out.println(inventoryViewVo.getItems().getInventoryAmount());
+        System.out.println(inventoryViewVo.getItems().getSum());
         return inventoryViewVo;
 
 

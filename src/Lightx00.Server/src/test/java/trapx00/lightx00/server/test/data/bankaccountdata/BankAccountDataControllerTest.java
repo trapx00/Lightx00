@@ -2,21 +2,18 @@ package trapx00.lightx00.server.test.data.bankaccountdata;
 
 import com.j256.ormlite.dao.Dao;
 import org.junit.Test;
-import trapx00.lightx00.server.data.bankaccountdata.BankAccountDataController;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataDaoFactory;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
-import trapx00.lightx00.shared.dataservicestub.bankaccountdataservice.BankAccountDataServiceStub;
-import trapx00.lightx00.shared.exception.database.IdExistsException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class BankAccountDataControllerTest {
     static {

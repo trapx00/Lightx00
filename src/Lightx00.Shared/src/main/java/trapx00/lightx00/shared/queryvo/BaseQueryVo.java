@@ -2,9 +2,7 @@ package trapx00.lightx00.shared.queryvo;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.Where;
-import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.queryvo.querys.*;
 
 import java.io.Serializable;

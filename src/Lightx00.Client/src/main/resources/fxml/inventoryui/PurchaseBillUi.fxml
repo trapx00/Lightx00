@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.materialicons.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-<?import javafx.scene.control.Button?>
-<?import com.jfoenix.controls.JFXMasonryPane?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<VBox fx:id="dialogContainer" prefHeight="900" prefWidth="1600" styleClass="exteriorLine"
-      stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121"
+<VBox fx:id="dialogContainer" prefHeight="900" prefWidth="1600"
+      xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController">
     <padding>
@@ -53,10 +36,12 @@
             <JFXTextField labelFloat="true" fx:id="tfDate" editable="false" promptText="日期"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientId" onMouseClicked="#onClientClicked" editable="false" promptText="供应商ID"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientId" onMouseClicked="#onClientClicked" editable="false"
+                          promptText="供应商ID"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField labelFloat="true" fx:id="tfClientName" onMouseClicked="#onClientClicked" editable="false" promptText="供应商姓名"/>
+            <JFXTextField labelFloat="true" fx:id="tfClientName" onMouseClicked="#onClientClicked" editable="false"
+                          promptText="供应商姓名"/>
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXComboBox labelFloat="true" fx:id="cbRepository" editable="false" promptText="仓库"/>
@@ -73,7 +58,7 @@
     </JFXMasonryPane>
 
     <VBox>
-        <Label text="入库商品清单" textFill="#5e5e5e">
+        <Label text="商品清单" textFill="#5e5e5e">
             <font>
                 <Font size="18.0"/>
             </font>
@@ -86,13 +71,13 @@
                                     text="名称"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTypeColumn" editable="false"
                                     text="型号"/>
-                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="true"
+                <JFXTreeTableColumn fx:id="tcCommodityNumberColumn" editable="false"
                                     text="数量"/>
                 <JFXTreeTableColumn fx:id="tcCommodityPriceColumn" editable="false"
                                     text="单价"/>
                 <JFXTreeTableColumn fx:id="tcCommodityTotalColumn" editable="false"
                                     text="金额"/>
-                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="true"
+                <JFXTreeTableColumn fx:id="tcCommodityCommentColumn" editable="false"
                                     text="备注"/>
             </columns>
         </JFXTreeTableView>
@@ -130,7 +115,7 @@
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
+                   style="-fx-background-color: #9999CC; -fx-text-fill: #FFFFFF;" text="保存草稿">
             <graphic>
                 <MaterialIconView glyphName="SAVE" glyphSize="24"/>
             </graphic>

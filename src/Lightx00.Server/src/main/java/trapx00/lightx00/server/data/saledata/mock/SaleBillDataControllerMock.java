@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.saledata.mock;
 
 import trapx00.lightx00.server.data.saledata.SaleBillDataController;
-import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleBillDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 

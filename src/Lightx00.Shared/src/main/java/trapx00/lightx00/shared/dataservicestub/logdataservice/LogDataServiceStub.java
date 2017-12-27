@@ -6,7 +6,6 @@ import trapx00.lightx00.shared.po.log.LogPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
-import java.rmi.RemoteException;
 import java.util.Date;
 
 public class LogDataServiceStub implements LogDataService {

@@ -1,8 +1,6 @@
 package trapx00.lightx00.client.datafactory.saledataservicefactory;
 
-import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
-import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleBillDataServiceStub;
 import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleRefundBillDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;
 

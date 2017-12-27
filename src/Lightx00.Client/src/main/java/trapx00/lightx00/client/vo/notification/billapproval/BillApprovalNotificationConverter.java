@@ -5,16 +5,12 @@ import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.financebl.BillInfo;
 import trapx00.lightx00.client.bl.financebl.factory.BillInfoBlFactory;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.notification.NotificationConverterClass;
 import trapx00.lightx00.client.vo.notification.NotificationConverter;
-import trapx00.lightx00.shared.po.employee.EmployeePo;
+import trapx00.lightx00.client.vo.notification.NotificationConverterClass;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @NotificationConverterClass(notificationType = NotificationType.BillApproval)
 public class BillApprovalNotificationConverter implements NotificationConverter<BillApprovalNotificationVo> {

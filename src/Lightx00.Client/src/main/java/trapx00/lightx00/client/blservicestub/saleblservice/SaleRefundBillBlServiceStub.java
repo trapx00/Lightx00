@@ -1,9 +1,9 @@
 package trapx00.lightx00.client.blservicestub.saleblservice;
 
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
+import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 
 public class SaleRefundBillBlServiceStub implements SaleRefundBillBlService{
 

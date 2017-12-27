@@ -13,13 +13,9 @@ import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-
-import javax.xml.transform.Result;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
@@ -171,6 +167,6 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
      */
     @Override
     public String getId() {
-        return commonBillDataController.getId("JCD");
+        return commonBillDataController.getId("JKD");
     }
 }

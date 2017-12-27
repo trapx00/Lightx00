@@ -7,8 +7,6 @@ import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Date;
 
 public class LogBlControllerMock extends LogBlController {

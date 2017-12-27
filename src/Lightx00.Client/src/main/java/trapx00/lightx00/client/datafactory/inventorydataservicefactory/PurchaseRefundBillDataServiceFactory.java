@@ -1,8 +1,6 @@
 package trapx00.lightx00.client.datafactory.inventorydataservicefactory;
 
-import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
-import trapx00.lightx00.shared.dataservicestub.inventorydataservice.PurchaseBillDataServiceStub;
 import trapx00.lightx00.shared.dataservicestub.inventorydataservice.PurchaseRefundBillDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;
 

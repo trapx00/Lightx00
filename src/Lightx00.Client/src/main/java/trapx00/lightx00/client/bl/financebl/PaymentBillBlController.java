@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.bl.financebl;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
 import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
@@ -8,17 +9,14 @@ import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
 import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.PaymentBillBlService;
-import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.PaymentBillDataServiceFactory;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
+import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
-import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
 import java.util.List;
 

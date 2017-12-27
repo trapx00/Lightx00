@@ -7,14 +7,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
-import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
@@ -23,14 +23,12 @@ import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelec
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
+import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftItemModificationUi;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
@@ -38,7 +36,6 @@ import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
@@ -63,9 +60,10 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public JFXTreeTableView<CommoditySelectionItemModel> commodityTable;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableNameColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableSortColumn;
-    public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableAmountColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableWarningColumn;
+
+    public MenuItem modifyMenuItem;
 
     private ObjectProperty<CommodityVo> currentCommodity = new SimpleObjectProperty<>();
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
@@ -109,7 +107,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
 
     public void initialize() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
-        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getActualAmount())));
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
         tcStockAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
         tcWarningWalue.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getWarningValue())));
@@ -125,6 +123,8 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
 
         auto();
 
+
+
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(inventoryGiftItemModelObservableList, RecursiveTreeObject::getChildren);
         inventoryGiftItems.setRoot(root);
         inventoryGiftItems.setShowRoot(false);
@@ -136,8 +136,19 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         jfxComboBox.getItems().add(new Label("OverFlow"));
         jfxComboBox.getItems().add(new Label("Warning"));
 
+        modifyMenuItem.setOnAction((ActionEvent t)->{
+                CommodityVo selected=commodityTable.getSelectionModel().getSelectedItem().getValue().getCommodityVoObjectProperty();
+                new InventoryActualValue().show(selected,this::updateCommodity);
+
+        });
 
         initTable();
+    }
+
+    public void updateCommodity(){
+        CommodityVo[] queryResult = blService1.query(new CommodityQueryVo());
+        commodityModels.clear();
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
     @FXML
 
@@ -145,13 +156,12 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         tableWarningColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getWarningValue())));
         tableNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
         tableIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
-        tableAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
         tableSortColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getAmount())));
 
         commodityTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 CommodityVo selected = getSelected();
-                inventoryGiftItemModelObservableList.add(new CommoditySelectionItemModel(selected));
+                new InventoryWarningChoose().show(selected.getId(),aDouble ->addQWE(aDouble,selected));
             }});
 
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
@@ -164,6 +174,45 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
 
+    public void addQWE(double a,CommodityVo vo){
+        vo.setActualAmount(a);
+        System.out.println();
+        if(jfxComboBox.getSelectionModel().getSelectedItem()==null){
+            inventoryGiftItemModelObservableList.
+                    add(new CommoditySelectionItemModel(vo));
+            if(vo.getAmount()>vo.getActualAmount())
+                jfxComboBox.getSelectionModel().select(0);
+            else if(vo.getActualAmount()>vo.getAmount())
+                jfxComboBox.getSelectionModel().select(1);
+            else
+                jfxComboBox.getSelectionModel().select(2);
+        }else{
+            if(jfxComboBox.getSelectionModel().getSelectedItem().getText().equals("Loss")){
+                System.out.println("loss");
+                if(vo.getActualAmount()<vo.getAmount())
+                    inventoryGiftItemModelObservableList.
+                            add(new CommoditySelectionItemModel(vo));
+                else
+                    PromptDialogHelper.start("添加失败","该单据为报损单").createAndShow();
+            }else if(jfxComboBox.getSelectionModel().getSelectedItem().getText().equals("OverFlow")){
+                if(vo.getAmount()<vo.getActualAmount())
+                    inventoryGiftItemModelObservableList.
+                            add(new CommoditySelectionItemModel(vo));
+                else{
+                    PromptDialogHelper.start("添加失败","该单据为报溢单").createAndShow();
+                }
+
+            }else{
+                System.out.println("warning");
+                if(vo.getActualAmount()==vo.getAmount())
+                    inventoryGiftItemModelObservableList.
+                            add(new CommoditySelectionItemModel(vo));
+                else
+                    PromptDialogHelper.start("添加失败","该单据为报警单").createAndShow();
+            }
+        }
+
+    }
 
     /**
      * Loads the controller.
@@ -236,7 +285,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         CommodityVo [] commodityVos=inventoryGiftItemModelObservableList.stream().map(CommoditySelectionItemModel::getCommodityVoObjectProperty).toArray(CommodityVo[]::new);
         InventoryWarningItem[] inventoryWarningItems=new InventoryWarningItem[commodityVos.length];
         for(int i=0;i<commodityVos.length;i++){
-            inventoryWarningItems[i]=new InventoryWarningItem(commodityVos[i].getId(),commodityVos[i].getAmount(),commodityVos[i].getRecentRetailPrice()
+            inventoryWarningItems[i]=new InventoryWarningItem(commodityVos[i].getId(),commodityVos[i].getActualAmount()-commodityVos[i].getAmount(),commodityVos[i].getRecentRetailPrice()
             );
         }
         return new InventoryDetailBillVo(
@@ -311,6 +360,14 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         currentEmployee.setValue(null);
         currentCommodity.setValue(null);
         inventoryGiftItemModelObservableList.clear();
+    }
+    public void onBtnSetItemClicked(){
+        CommodityVo commodityVo=getSelected();
+        if(commodityVo!=null){
+            new InventoryGiftItemModificationUi().show(commodityVo.getId(),aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
+                    getValue().getCommodityVoObjectProperty().setActualAmount(aDouble));
+        }
+
     }
 
     public void auto() {

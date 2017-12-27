@@ -13,15 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
-import javafx.scene.input.MouseEvent;
-import org.bridj.cpp.com.VARIANT;
-import trapx00.lightx00.client.bl.financebl.factory.ReceivalBillBlFactory;
 import trapx00.lightx00.client.blservice.financeblservice.PaymentAndReceivalBlService;
-import trapx00.lightx00.client.blservice.financeblservice.ReceivalBillBlService;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
-import trapx00.lightx00.client.presentation.bankaccountui.BankAccountSelection;
-import trapx00.lightx00.client.presentation.bankaccountui.factory.BankAccountUiFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.financeui.TranscationModel;
@@ -30,8 +24,6 @@ import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
-import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
-import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 import trapx00.lightx00.client.vo.financestaff.ReceivalPaymentBillVoBase;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
@@ -210,11 +202,11 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         if (validate()) {
             try {
                 return voClazz.getDeclaredConstructor(
-                        String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.class)
+                        String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.TYPE)
                         .newInstance(tfId.getId(),
                                 currentDate.get(),
                                 BillState.Draft,
-                                tfClient.getId(),
+                                client.get().getId(),
                                 currentEmployee.getValue().getId(),
                                 transcationModels.stream().map(TranscationModel::toTranscation).toArray(Transcation[]::new),
                                 Double.parseDouble(lbTotal.getText()));

@@ -4,14 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.financebl.TradeSituationBlController;
 import trapx00.lightx00.client.bl.financebl.factory.TradeSituationBlFactory;
-import trapx00.lightx00.client.blservice.financeblservice.TradeSituationBlService;
-import trapx00.lightx00.client.blservicestub.financeblservice.TradeSituationBlServiceStub;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.financestaff.TradeSituationVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TradeSituationBlControllerTest {
     private TradeSituationBlController service = TradeSituationBlFactory.getController();

@@ -8,21 +8,15 @@ import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 
 import java.util.Date;
-import java.util.function.Consumer;
 
 public class AddCommodityDialog implements ExternalLoadableUiController{
     public JFXTextField tfId;
     public JFXTextField tfName;
     public JFXTextField tfSort;
     public JFXTextField tfAmount;
-    public JFXTextField tfBatch;
-    public JFXTextField tfBatchNo;
     public JFXTextField tfpurchasePrice;
     public JFXTextField tfretailPrice;
     public JFXTextField tfwarningValue;
@@ -35,6 +29,8 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
         AddCommodityDialog ui = externalLoadedUiPackage.getController();
         ui.tfId.setText(blService.getId(text));
         ui.tfSort.setText(text);
+        ui.tfpurchasePrice.setText("0");
+        ui.tfretailPrice.setText("0");
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
         ((AddCommodityDialog)externalLoadedUiPackage.getController()).runnable = runnable;
 
@@ -100,8 +96,8 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
                         tfSort.getText(),
                         Double.parseDouble(tfAmount.getText()),
                         new Date(),
-                        tfBatch.getText(),
-                        tfBatchNo.getText(),
+                        null,
+                        null,
                         Double.parseDouble(tfpurchasePrice.getText()),
                         Double.parseDouble(tfpurchasePrice.getText()),
                         Double.parseDouble(tfretailPrice.getText()),

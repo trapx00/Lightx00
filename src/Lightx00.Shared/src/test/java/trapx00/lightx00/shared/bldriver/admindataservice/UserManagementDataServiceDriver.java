@@ -3,15 +3,15 @@ package trapx00.lightx00.shared.bldriver.admindataservice;
 import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
 import trapx00.lightx00.shared.dataservicestub.admindataservice.UserManagementDataServiceStub;
-import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserManagementDataServiceDriver {
     private UserManagementDataService service = new UserManagementDataServiceStub();

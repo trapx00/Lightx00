@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.notificationdata;
 
 import com.j256.ormlite.dao.Dao;
-import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataDaoFactory;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;

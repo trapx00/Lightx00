@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.bl.adminbl.factory;
 
 import trapx00.lightx00.client.bl.adminbl.UserManagementBlController;
+
 import static trapx00.lightx00.client.bl.adminbl.UserManagementBlController.init;
 
 public class UserManagementBlFactory {

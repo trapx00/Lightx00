@@ -1,11 +1,8 @@
 package trapx00.lightx00.server.data.logdata.mock;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import trapx00.lightx00.server.data.logdata.LogBackupDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 
 public class LogBackupDataControllerMock extends LogBackupDataController {

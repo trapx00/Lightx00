@@ -1,14 +1,13 @@
 package trapx00.lightx00.client.test.presentationdriver.commodityblservice;
 
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommoditySortBlServiceStub;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommoditySortBlServiceDriver {
 

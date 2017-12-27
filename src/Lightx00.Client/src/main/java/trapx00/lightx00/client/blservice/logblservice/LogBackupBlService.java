@@ -2,8 +2,6 @@ package trapx00.lightx00.client.blservice.logblservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
 
-import java.net.URI;
-
 public interface LogBackupBlService {
     /**
      * back up the log information on the server to oos and clear the log

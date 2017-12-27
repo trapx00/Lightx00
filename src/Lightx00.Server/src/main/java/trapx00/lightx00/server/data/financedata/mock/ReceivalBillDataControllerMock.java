@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.financedata.mock;
 
 import trapx00.lightx00.server.data.financedata.ReceivalBillDataController;
-import trapx00.lightx00.shared.dataservicestub.financedataservice.ReceivalBillDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;

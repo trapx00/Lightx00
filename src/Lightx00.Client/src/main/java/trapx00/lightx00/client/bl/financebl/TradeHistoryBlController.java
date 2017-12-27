@@ -23,7 +23,6 @@ import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.*;
-import trapx00.lightx00.shared.queryvo.querys.BaseQuery;
 
 import java.util.*;
 
@@ -138,7 +137,7 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
     public BillVo queryBill(String id) {
         BaseQueryVo queryVo = new BaseQueryVo().idEq(id);
         BillVo[] queryResult = null;
-        if (id.startsWith("ZSD")) {
+        if (id.startsWith("GIFT")) {
             queryResult = inventoryGiftInfo.queryInventoryGiftBill(new InventoryGiftQueryVo(queryVo));
         } else if (id.startsWith("JKD")) {
             queryResult = inventoryDetailBillInfo.queryInventoryWarningBill(new InventoryBillQueryVo(queryVo));

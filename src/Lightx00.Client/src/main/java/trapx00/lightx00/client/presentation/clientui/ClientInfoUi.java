@@ -2,7 +2,6 @@ package trapx00.lightx00.client.presentation.clientui;
 
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public interface ClientInfoUi {

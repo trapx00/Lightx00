@@ -8,9 +8,10 @@ import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.saleui.SaleRefundBillDetailUiController;
+import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
@@ -158,12 +159,12 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new SaleRefundBillUiController();
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new SaleRefundBillDetailUiController();
     }
 
     /**
@@ -173,6 +174,6 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new SaleRefundBillUiController();
     }
 }

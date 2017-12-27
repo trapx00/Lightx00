@@ -1,33 +1,24 @@
 package trapx00.lightx00.client.presentation.draftui;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
-import javafx.scene.layout.Region;
-import trapx00.lightx00.client.Client;
 import trapx00.lightx00.client.blservice.draftblservice.DraftBlService;
 import trapx00.lightx00.client.blservice.draftblservice.DraftBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
-import trapx00.lightx00.client.vo.DraftDemoVo;
 import trapx00.lightx00.client.vo.draft.DraftVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.po.draft.DraftType;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 public class DraftUiController implements ExternalLoadableUiController {
@@ -86,7 +77,6 @@ public class DraftUiController implements ExternalLoadableUiController {
                         .create())
                 .addCloseButton("确定", "CHECK",e -> {
                     deleteItem(index);
-
                 })
                 .addCloseButton("取消", "CLOSE", null)
                 .createAndShow();
@@ -114,15 +104,16 @@ public class DraftUiController implements ExternalLoadableUiController {
                                 .addPair("草稿类型", model.getType().name())
                                 .addPair("草稿内容ID", model.getDraft().getId())
                                 .create())
-                    .addCloseButton("取消","CLOSE",null)
                     .addCloseButton("确定","CHECK",e -> {
                         try {
                             ExternalLoadedUiPackage ui = model.getDraft().continueWritableUi().continueWriting(model.getDraft());
-                            FrameworkUiManager.getFrameworkUiController().switchFunction(ui,"继续填写草稿",true);
+                            FrameworkUiManager.getFrameworkUiController().switchFunction(ui, "继续填写草稿",true);
+                            blService.delete(model.toDraftVo());
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                     })
+                    .addCloseButton("取消","CLOSE",null)
                     .createAndShow();
         } catch (Exception ex) {
             PromptDialogHelper.start("错误","请至少选一个条目。")

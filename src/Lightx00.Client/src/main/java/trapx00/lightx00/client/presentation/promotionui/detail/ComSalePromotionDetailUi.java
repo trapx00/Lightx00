@@ -14,8 +14,6 @@ import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.awt.event.ActionEvent;
-
 public class ComSalePromotionDetailUi extends PromotionDetailUi {
     public JFXTextField tfId;
     public JFXTextField tfStartDate;

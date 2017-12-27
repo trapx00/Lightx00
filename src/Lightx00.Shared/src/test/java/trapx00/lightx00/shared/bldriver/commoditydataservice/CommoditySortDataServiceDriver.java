@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommoditySor
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommoditySortDataServiceDriver {
     CommoditySortDataService service=new CommoditySortDataServiceStub();

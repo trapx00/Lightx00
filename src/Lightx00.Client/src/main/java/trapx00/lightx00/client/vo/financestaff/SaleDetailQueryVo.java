@@ -1,9 +1,9 @@
 package trapx00.lightx00.client.vo.financestaff;
 
-import java.util.Date;
-
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
+
+import java.util.Date;
 
 
 public class SaleDetailQueryVo { //销售明细表查询条件

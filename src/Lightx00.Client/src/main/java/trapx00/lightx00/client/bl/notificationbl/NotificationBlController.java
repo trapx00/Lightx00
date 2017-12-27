@@ -8,11 +8,10 @@ import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlSer
 import trapx00.lightx00.client.datafactory.notificationdataservicefactory.NotificationDataServiceFactory;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.notification.NotificationConvertRegistry;
-import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;

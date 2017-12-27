@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.blservice.bankaccountblservice;
 
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
-import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 
 public interface BankAccountManagementBlService {
     /**

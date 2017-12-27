@@ -9,7 +9,7 @@ import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BankAccountBlControllerTest {
     private BankAccountBlController controller = BankAccountFactory.getController();

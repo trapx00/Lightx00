@@ -3,10 +3,7 @@ package trapx00.lightx00.client.blservicestub.inventoryblservice;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
-
-import java.util.Date;
 
 public class InventoryWarningBlServiceStub implements InventoryWarningBlService {
     @Override

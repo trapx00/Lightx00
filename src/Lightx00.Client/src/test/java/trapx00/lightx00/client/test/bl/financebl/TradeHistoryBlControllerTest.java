@@ -3,10 +3,7 @@ package trapx00.lightx00.client.test.bl.financebl;
 import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.financebl.TradeHistoryBlController;
-import trapx00.lightx00.client.bl.financebl.TradeSituationBlController;
 import trapx00.lightx00.client.bl.financebl.factory.TradeHistoryBlFactory;
-import trapx00.lightx00.client.bl.financebl.factory.TradeSituationBlFactory;
-import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceBillVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
@@ -16,7 +13,8 @@ import trapx00.lightx00.shared.queryvo.FinanceBillQueryVo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class TradeHistoryBlControllerTest {
     private TradeHistoryBlController service = TradeHistoryBlFactory.getController();

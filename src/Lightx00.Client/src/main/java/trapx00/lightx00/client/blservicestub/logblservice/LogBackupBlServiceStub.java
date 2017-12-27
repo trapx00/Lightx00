@@ -1,12 +1,7 @@
 package trapx00.lightx00.client.blservicestub.logblservice;
 
 import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
-import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.rmi.RemoteException;
 
 public class LogBackupBlServiceStub implements LogBackupBlService {
     /**

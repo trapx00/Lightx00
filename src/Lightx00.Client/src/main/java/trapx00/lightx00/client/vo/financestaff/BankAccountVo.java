@@ -1,7 +1,8 @@
 package trapx00.lightx00.client.vo.financestaff;
 
-import java.util.Date;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
+
+import java.util.Date;
 
 public class BankAccountVo {
     private int id;

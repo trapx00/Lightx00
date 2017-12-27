@@ -7,13 +7,12 @@ import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserManagementBlControllerTest {
     private UserManagementBlController controller = UserManagementBlFactory.getController();

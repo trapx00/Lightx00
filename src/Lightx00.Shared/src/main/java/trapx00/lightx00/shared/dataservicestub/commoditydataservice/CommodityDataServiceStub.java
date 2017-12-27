@@ -5,6 +5,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 public class CommodityDataServiceStub implements CommodityDataService {
@@ -27,6 +28,10 @@ public class CommodityDataServiceStub implements CommodityDataService {
         };
     }
 
+    @Override
+    public CommodityPo[] queryNormally(String query) throws RemoteException {
+        return new CommodityPo[0];
+    }
 
 
     @Override

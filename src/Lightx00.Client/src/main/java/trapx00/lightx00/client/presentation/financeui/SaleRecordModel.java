@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.presentation.financeui;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.org.apache.xml.internal.utils.ObjectPool;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
