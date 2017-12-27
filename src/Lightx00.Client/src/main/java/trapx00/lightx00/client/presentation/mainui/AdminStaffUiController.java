@@ -1,6 +1,7 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
+import trapx00.lightx00.client.presentation.adminui.FaceIdRegistrationUiController;
 import trapx00.lightx00.client.presentation.adminui.UserManagementUiController;
 
 public class AdminStaffUiController extends FrameworkUiController {
@@ -12,7 +13,13 @@ public class AdminStaffUiController extends FrameworkUiController {
     }
 
     public void onUserManagementFunctionClicked(ActionEvent actionEvent) {
-        switchFunction(UserManagementUiController.class, "职员信息管理",true);
+        switchFunction(UserManagementUiController.class, "管理职员信息",true);
     }
 
+    public void onFaceIdRegistrationFunctionClicked(ActionEvent actionEvent) {
+        switchFunction(FaceIdRegistrationUiController.class, "注册FaceId",true);
+    }
+    public void onLogBackUpFunctionClicked(ActionEvent actionEvent) {
+       // switchFunction(UserManagementUiController.class, "云备份日志",true);
+    }
 }
