@@ -21,6 +21,11 @@ import trapx00.lightx00.shared.queryvo.LogBackupVo;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+
 public class LogBackupUiController implements ExternalLoadableUiController {
 
     public JFXTreeTableView<LogBackupTableItemModel> logBackupTable;
@@ -35,11 +40,26 @@ public class LogBackupUiController implements ExternalLoadableUiController {
         TreeItem<LogBackupTableItemModel> root = new RecursiveTreeItem<>(logBackupTableItemModels, RecursiveTreeObject::getChildren);
         logBackupTable.setRoot(root);
         logBackupTable.setShowRoot(false);
+
+        logBackupTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                try {
+                    LogBackupVo selected = getSelected();
+                    Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    Transferable text = new StringSelection(selected.getUrl());
+                    clip.setContents(text, null);
+                } catch (Exception ignored) {
+                    ignored.printStackTrace();
+                }
+            }});
+    }
+
+    public LogBackupVo getSelected() {
+        return logBackupTable.getSelectionModel().getSelectedItem().getValue().getLogBackupVo();
     }
 
     public void updateItems() {
         LogBackupVo[] logBackupVos = logBackupBlService.fetchCloudLog();
-        System.out.println("run here");
         if (logBackupVos != null) {
             for (LogBackupVo logBackupVo : logBackupVos) {
                 logBackupTableItemModels.add(new LogBackupTableItemModel(logBackupVo));
