@@ -61,8 +61,8 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     public ResultMessage pass(AuditIdPo billInfo) {
         assertExists(billInfo.getId(), true);
         try {
-            dao.deleteById(billInfo.getId());
             logService.printLog(delegate, String.format("通过审批(id: %s)",billInfo.getId()));
+            dao.deleteById(billInfo.getId());
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
