@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.adminui.EmployeeSelectionUi">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
@@ -30,13 +31,17 @@
     </JFXTreeTableView>
     <HBox alignment="CENTER" prefHeight="40.0" spacing="40.0">
         <JFXButton fx:id="btnSelect" buttonType="RAISED" onAction="#onBtnSelectClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="选择">
-            <HBox.margin>
-                <Insets />
-            </HBox.margin>
+            <graphic>
+                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />
+            </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnClose" buttonType="RAISED" onAction="#onBtnCloseClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消" />
-      <padding>
+        <JFXButton fx:id="btnClose" buttonType="RAISED" onAction="#onBtnCloseClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消" >
+            <graphic>
+                <MaterialIconView glyphName="CLOSE" glyphSize="24" />
+            </graphic>
+        </JFXButton>
+        <padding>
          <Insets bottom="10.0" />
-      </padding>
+        </padding>
     </HBox>
 </VBox>

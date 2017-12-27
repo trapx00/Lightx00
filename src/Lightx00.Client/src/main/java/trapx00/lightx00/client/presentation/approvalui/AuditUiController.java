@@ -75,7 +75,7 @@ public class AuditUiController implements ExternalLoadableUiController {
 
                     })
                     .addButton("通过","CHECK",e->{
-                        ResultMessage result = blService.reject(new AuditIdVo(selected.getId(),new Date()));
+                        ResultMessage result = blService.pass(new AuditIdVo(selected.getId(),new Date()));
                         if(result.equals(ResultMessage.Success)) {
                             PromptDialogHelper.start("审批通过成功", "已发送通知。")
                                     .addCloseButton("完成", "DONE", null)
