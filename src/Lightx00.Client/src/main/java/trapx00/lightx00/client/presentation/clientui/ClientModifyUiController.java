@@ -1,10 +1,13 @@
 package trapx00.lightx00.client.presentation.clientui;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
@@ -17,6 +20,7 @@ import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
@@ -37,7 +41,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
     @FXML
     private JFXTextField clientName;
     @FXML
-    private JFXTextField clientType;
+    private JFXComboBox clientType;
     @FXML
     private JFXTextField clientLevel;
     @FXML
@@ -62,16 +66,24 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
 
     @FXML
     private void initialize() {
+        if (((SaleStaffVo) currentEmployee.getValue()).isRoot()) {
+            clientReceivableQuota.setEditable(true);
+        }
         clientTypeMap.put(ClientType.Retailer.toString(), ClientType.Retailer);
         clientTypeMap.put(ClientType.Supplier.toString(), ClientType.Supplier);
 
-        NumberValidator numberValidator=new NumberValidator();
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "销售商", "进货商"
+        );
+        clientType.setItems(stringObservableList);
+        clientType.setValue("销售商");
+
+        NumberValidator numberValidator = new NumberValidator();
         numberValidator.setMessage("请输入数字类型");
-        RequiredFieldValidator requiredValidator=new RequiredFieldValidator();
+        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
         requiredValidator.setMessage("请输入信息");
 
         clientName.getValidators().add(requiredValidator);
-        clientType.getValidators().add(requiredValidator);
         clientLevel.getValidators().add(requiredValidator);
         clientLevel.getValidators().add(numberValidator);
         clientPhone.getValidators().add(requiredValidator);
@@ -192,7 +204,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
     }
 
     private ClientVo getCurrentClientVo() {
-        if (clientName.getText().length() == 0 || clientType.getText().length() == 0 || clientLevel.getText().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
+        if (clientName.getText().length() == 0 || clientType.getValue().toString().length() == 0 || clientLevel.getText().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！", "请先填写完客户信息。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
@@ -200,7 +212,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
         }
         return new ClientVo(
                 clientId.getText(),
-                clientTypeMap.get(clientType.getText()),
+                clientTypeMap.get(clientType.getValue()),
                 Integer.parseInt(clientLevel.getText()),
                 clientName.getText(),
                 clientPhone.getText(),
@@ -235,7 +247,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
 
     private void reset() {
         clientName.clear();
-        clientType.clear();
+        clientType.setValue("销售商");
         clientLevel.clear();
         clientPhone.clear();
         clientAddress.clear();
@@ -290,7 +302,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
         ClientModifyUiController clientModifyUiController = externalLoadedUiPackage.getController();
         clientModifyUiController.clientId.setText(clientVo.getId());
         clientModifyUiController.clientName.setText(clientVo.getName());
-        clientModifyUiController.clientType.setText(clientVo.getClientType().toString());
+        clientModifyUiController.clientType.setValue(clientVo.getClientType().toString());
         clientModifyUiController.clientLevel.setText(clientVo.getClientLevel() + "");
         clientModifyUiController.clientPhone.setText(clientVo.getPhone());
         clientModifyUiController.clientAddress.setText(clientVo.getAddress());

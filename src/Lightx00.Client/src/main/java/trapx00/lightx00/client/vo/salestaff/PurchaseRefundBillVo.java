@@ -10,6 +10,7 @@ import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiContro
 import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillDetailUiController;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillDetailUiController;
+import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillType;
@@ -25,7 +26,7 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
     private CommodityItem[] commodityList;
 
     public PurchaseRefundBillVo(String id, Date date, BillState state, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, PurchaseBillType.PurchaseRefund,operatorId);
+        super(id, date, state, PurchaseBillType.PurchaseRefund, operatorId);
         this.clientId = clientId;
         this.repository = repository;
         this.comment = comment;
@@ -120,7 +121,7 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new PurchaseRefundBillUiController();
     }
 
     @Override
@@ -135,6 +136,6 @@ public class PurchaseRefundBillVo extends PurchaseBillBaseVo {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new PurchaseRefundBillUiController();
     }
 }

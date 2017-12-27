@@ -13,6 +13,7 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -22,15 +23,15 @@ import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 public class PurchaseRefundBillDetailUiController extends BillDetailUi {
     @FXML
-    JFXTextField tfBillId;
+    private JFXTextField tfBillId;
     @FXML
-    JFXTextField tfOperator;
+    private JFXTextField tfOperator;
     @FXML
-    JFXTextField tfClientId;
+    private JFXTextField tfClientId;
     @FXML
-    JFXComboBox<String> cbRepository;
+    private JFXComboBox<String> cbRepository;
     @FXML
-    JFXTextField tfBillTotal;
+    private JFXTextField tfBillTotal;
     @FXML
     private JFXTextField tfDate;
     @FXML
@@ -60,6 +61,7 @@ public class PurchaseRefundBillDetailUiController extends BillDetailUi {
 
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
+        currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         PurchaseRefundBillVo purchaseRefundBillVo = (PurchaseRefundBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseRefundBillDetailUiController purchaseRefundBillDetailUiController = externalLoadedUiPackage.getController();
@@ -92,7 +94,6 @@ public class PurchaseRefundBillDetailUiController extends BillDetailUi {
         TreeItem<CommodityItemModel> root = new RecursiveTreeItem<>(commodityItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCommodityList.setRoot(root);
         tbCommodityList.setShowRoot(false);
-
     }
 
     /**

@@ -37,23 +37,23 @@
         <JFXButton buttonType="RAISED" onAction="#onBtnAddClicked"
                    style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="添加">
             <graphic>
-                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
+                <MaterialIconView glyphName="ADD" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
         </JFXButton>
         <JFXButton buttonType="RAISED" onAction="#onBtnModifyClicked"
-                   style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="修改">
+                   style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF;" text="修改">
             <graphic>
-                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
+                <MaterialIconView glyphName="BORDER_COLOR" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
         </JFXButton>
         <JFXButton buttonType="RAISED" onAction="#onBtnDeleteClicked"
-                   style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="删除">
+                   style="-fx-background-color: #9999CC; -fx-text-fill: #FFFFFF;" text="删除">
             <graphic>
-                <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
+                <MaterialIconView glyphName="CLEAR" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
         </JFXButton>
         <JFXButton buttonType="RAISED" onAction="#onBtnSelectClicked"
-                   style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="选择">
+                   style="-fx-background-color: #339900; -fx-text-fill: #FFFFFF;" text="选择">
             <graphic>
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>

@@ -7,6 +7,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -85,6 +86,8 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
+    private StringProperty tfClientIdProperty = new SimpleStringProperty("");
+    private StringProperty tfClientNameProperty = new SimpleStringProperty("");
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -146,6 +149,8 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         tbCommodityList.setShowRoot(false);
 
         commodityItemModelObservableList.addListener(new PurchaseRefundBillUiController.ListHandler());
+        tfClientId.textProperty().bindBidirectional(tfClientIdProperty);
+        tfClientName.textProperty().bindBidirectional(tfClientNameProperty);
 
         ObservableList<String> stringObservableList = FXCollections.observableArrayList(
                 "1", "2", "3"
@@ -162,16 +167,17 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         tfClientId.getValidators().add(requiredValidator);
         tfClientName.getValidators().add(requiredValidator);
 
-        tfClientId.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        tfClientIdProperty.addListener(event -> {
+            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
                 tfClientId.validate();
             }
-        });
 
-        tfClientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        });
+        tfClientNameProperty.addListener(event -> {
+            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
                 tfClientName.validate();
             }
+
         });
     }
 

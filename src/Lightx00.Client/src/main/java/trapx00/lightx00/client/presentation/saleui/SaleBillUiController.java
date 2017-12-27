@@ -7,6 +7,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -20,6 +21,9 @@ import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlServiceFactory;
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlServiceFactory;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelectionUi;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
@@ -42,6 +46,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Date;
 
@@ -71,13 +76,13 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     @FXML
     JFXTextField tfToken;
     @FXML
-    private JFXTextField tfUltiTotal;
-    @FXML
     JFXTextField tfPromotionId;
     @FXML
     JFXTextField tfGiftToken;
     @FXML
     JFXTextField tfComment;
+    @FXML
+    private JFXTextField tfUltiTotal;
     @FXML
     private JFXTreeTableView<CommodityItemModel> tbCommodityList;
     @FXML
@@ -119,9 +124,14 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ObservableList<CommodityItemModel> giftItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
-    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
+    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
+    private ClientBlService clientBlService = ClientBlServiceFactory.getInstance();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
+    private StringProperty tfClientIdProperty = new SimpleStringProperty("");
+    private StringProperty tfClientNameProperty = new SimpleStringProperty("");
+    private StringProperty tfSalesmanIdProperty = new SimpleStringProperty("");
+    private StringProperty tfSalesmanNameProperty = new SimpleStringProperty("");
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -142,13 +152,13 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         saleBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         saleBillUiController.tfClientId.setText(saleBillVo.getClientId());
         saleBillUiController.tfClientName.setText(clientBlService.queryById(saleBillVo.getClientId()).getName());
-        saleBillUiController.tfClientLevel.setText(clientBlService.queryById(saleBillVo.getClientId()).getClientLevel()+"");
+        saleBillUiController.tfClientLevel.setText(clientBlService.queryById(saleBillVo.getClientId()).getClientLevel() + "");
         saleBillUiController.cbRepository.setValue(saleBillVo.getRepository() + "");
         saleBillUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
         saleBillUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
         saleBillUiController.tfToken.setText(saleBillVo.getToken() + "");
         saleBillUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
-        saleBillUiController.tfGiftToken.setText(saleBillVo.getGiftToken()+"");
+        saleBillUiController.tfGiftToken.setText(saleBillVo.getGiftToken() + "");
         saleBillUiController.tfComment.setText(saleBillVo.getComment());
         saleBillUiController.addCommodityListItems(saleBillVo.getCommodityList());
         saleBillUiController.addGiftListItems(saleBillVo.getGiftList());
@@ -209,6 +219,10 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         tbGiftList.setShowRoot(false);
 
         commodityItemModelObservableList.addListener(new SaleBillUiController.ListHandler());
+        tfClientId.textProperty().bindBidirectional(tfClientIdProperty);
+        tfClientName.textProperty().bindBidirectional(tfClientNameProperty);
+        tfSalesmanId.textProperty().bindBidirectional(tfSalesmanIdProperty);
+        tfSalesmanName.textProperty().bindBidirectional(tfSalesmanNameProperty);
 
         ObservableList<String> stringObservableList = FXCollections.observableArrayList(
                 "1", "2", "3"
@@ -226,16 +240,27 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
 
         tfClientId.getValidators().add(requiredValidator);
         tfClientName.getValidators().add(requiredValidator);
+        tfSalesmanId.getValidators().add(requiredValidator);
+        tfSalesmanName.getValidators().add(requiredValidator);
 
-        tfClientId.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        tfClientIdProperty.addListener(event -> {
+            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
                 tfClientId.validate();
             }
         });
-
-        tfClientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        tfClientNameProperty.addListener(event -> {
+            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
                 tfClientName.validate();
+            }
+        });
+        tfSalesmanIdProperty.addListener(event -> {
+            if (tfSalesmanIdProperty == null || tfSalesmanIdProperty.get().length() == 0) {
+                tfSalesmanId.validate();
+            }
+        });
+        tfSalesmanNameProperty.addListener(event -> {
+            if (tfSalesmanNameProperty == null || tfSalesmanNameProperty.get().length() == 0) {
+                tfSalesmanName.validate();
             }
         });
     }
@@ -259,13 +284,13 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         saleBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         saleBillUiController.tfClientId.setText(saleBillVo.getClientId());
         saleBillUiController.tfClientName.setText(clientBlService.queryById(saleBillVo.getClientId()).getName());
-        saleBillUiController.tfClientLevel.setText(clientBlService.queryById(saleBillVo.getClientId()).getClientLevel()+"");
+        saleBillUiController.tfClientLevel.setText(clientBlService.queryById(saleBillVo.getClientId()).getClientLevel() + "");
         saleBillUiController.cbRepository.setValue(saleBillVo.getRepository() + "");
         saleBillUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
         saleBillUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
         saleBillUiController.tfToken.setText(saleBillVo.getToken() + "");
         saleBillUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
-        saleBillUiController.tfGiftToken.setText(saleBillVo.getGiftToken()+"");
+        saleBillUiController.tfGiftToken.setText(saleBillVo.getGiftToken() + "");
         saleBillUiController.tfComment.setText(saleBillVo.getComment());
         saleBillUiController.addCommodityListItems(saleBillVo.getCommodityList());
         saleBillUiController.addGiftListItems(saleBillVo.getGiftList());
@@ -277,7 +302,15 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
-            tfClientLevel.setText(x.getClientLevel()+"");
+            tfClientLevel.setText(x.getClientLevel() + "");
+        });
+    }
+
+    @FXML
+    private void onEmployeeClicked() {
+        employeeSelection.showEmployeeSelectDialog(x -> {
+            tfSalesmanId.setText(x.get(0).getId());
+            tfSalesmanName.setText(x.get(0).getName());
         });
     }
 
@@ -308,13 +341,14 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     }
 
     @FXML
-    private void onBtnGetPromotionClicked(){
+    private void onBtnGetPromotionClicked() {
         giftItemModelObservableList.clear();
         tfPromotionId.clear();
         tfGiftToken.clear();
-        PromotionVoBase[] promotionVos=blService.queryPromotion(getCurrentSaleBillVo());
+        PromotionVoBase[] promotionVos = blService.queryPromotion(getCurrentSaleBillVo());
         PromptDialogHelper.start("请选择促销策略", null)
-                .addCloseButton("选择", "DONE", e -> {})
+                .addCloseButton("选择", "DONE", e -> {
+                })
                 .addCloseButton("取消", "UNDO", null)
                 .createAndShow();
     }
@@ -350,6 +384,11 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         } catch (NotCompleteException ignored) {
 
         }
+
+    }
+
+    @FXML
+    private void onEmployeeClicked(ActionEvent actionEvent) {
 
     }
 

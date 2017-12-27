@@ -7,6 +7,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -20,6 +21,8 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBl
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlServiceFactory;
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlServiceFactory;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
@@ -98,8 +101,13 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
     private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
+    private EmployeeSelection employeeSelection= UserManagementUiFactory.getEmployeeSelectionUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
+    private StringProperty tfClientIdProperty = new SimpleStringProperty("");
+    private StringProperty tfClientNameProperty = new SimpleStringProperty("");
+    private StringProperty tfSalesmanIdProperty = new SimpleStringProperty("");
+    private StringProperty tfSalesmanNameProperty = new SimpleStringProperty("");
 
     /**
      * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
@@ -166,6 +174,10 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         tbCommodityList.setShowRoot(false);
 
         commodityItemModelObservableList.addListener(new SaleRefundBillUiController.ListHandler());
+        tfClientId.textProperty().bindBidirectional(tfClientIdProperty);
+        tfClientName.textProperty().bindBidirectional(tfClientNameProperty);
+        tfSalesmanId.textProperty().bindBidirectional(tfSalesmanIdProperty);
+        tfSalesmanName.textProperty().bindBidirectional(tfSalesmanNameProperty);
 
         ObservableList<String> stringObservableList = FXCollections.observableArrayList(
                 "1", "2", "3"
@@ -183,16 +195,27 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
 
         tfClientId.getValidators().add(requiredValidator);
         tfClientName.getValidators().add(requiredValidator);
+        tfSalesmanId.getValidators().add(requiredValidator);
+        tfSalesmanName.getValidators().add(requiredValidator);
 
-        tfClientId.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        tfClientIdProperty.addListener(event -> {
+            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
                 tfClientId.validate();
             }
         });
-
-        tfClientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        tfClientNameProperty.addListener(event -> {
+            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
                 tfClientName.validate();
+            }
+        });
+        tfSalesmanIdProperty.addListener(event -> {
+            if (tfSalesmanIdProperty == null || tfSalesmanIdProperty.get().length() == 0) {
+                tfSalesmanId.validate();
+            }
+        });
+        tfSalesmanNameProperty.addListener(event -> {
+            if (tfSalesmanNameProperty == null || tfSalesmanNameProperty.get().length() == 0) {
+                tfSalesmanName.validate();
             }
         });
     }
@@ -230,6 +253,14 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
+        });
+    }
+
+    @FXML
+    private void onEmployeeClicked(){
+        employeeSelection.showEmployeeSelectDialog(x->{
+            tfSalesmanId.setText(x.get(0).getId());
+            tfSalesmanName.setText(x.get(0).getName());
         });
     }
 

@@ -23,6 +23,7 @@ import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFacto
 import trapx00.lightx00.client.presentation.financeui.cashbill.CashBillItemModel;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.vo.BillVo;
@@ -73,6 +74,7 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
 
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
+        currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseBillDetailUiController purchaseBillDetailUiController = externalLoadedUiPackage.getController();
@@ -105,7 +107,6 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
         TreeItem<CommodityItemModel> root = new RecursiveTreeItem<>(commodityItemModelObservableList, RecursiveTreeObject::getChildren);
         tbCommodityList.setRoot(root);
         tbCommodityList.setShowRoot(false);
-
     }
 
     /**

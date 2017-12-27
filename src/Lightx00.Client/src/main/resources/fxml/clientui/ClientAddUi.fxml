@@ -14,6 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.clientui.ClientAddUiController"
@@ -33,13 +34,13 @@
     <VBox maxWidth="500" spacing="30">
         <JFXTextField fx:id="clientId" editable="false" prefWidth="150" promptText="编号" labelFloat="true"/>
         <JFXTextField fx:id="clientName" editable="true" prefWidth="150" promptText="姓名" labelFloat="true"/>
-        <JFXTextField fx:id="clientType" editable="true" prefWidth="150" promptText="分类" labelFloat="true"/>
+        <JFXComboBox fx:id="clientType" editable="true" prefWidth="150" promptText="分类" labelFloat="true"/>
         <JFXTextField fx:id="clientLevel" editable="true" prefWidth="150" promptText="级别" labelFloat="true"/>
         <JFXTextField fx:id="clientPhone" editable="true" prefWidth="150" promptText="电话" labelFloat="true"/>
         <JFXTextField fx:id="clientAddress" editable="true" prefWidth="150" promptText="地址" labelFloat="true"/>
         <JFXTextField fx:id="clientZipCode" editable="true" prefWidth="150" promptText="邮编" labelFloat="true"/>
         <JFXTextField fx:id="clientEmail" editable="true" prefWidth="150" promptText="电子邮箱" labelFloat="true"/>
-        <JFXTextField fx:id="clientReceivableQuota" editable="true" prefWidth="150" promptText="应收额度" labelFloat="true"/>
+        <JFXTextField fx:id="clientReceivableQuota" editable="false" prefWidth="150" promptText="应收额度" labelFloat="true"/>
         <JFXTextField fx:id="clientReceivable" editable="false" prefWidth="150" promptText="应收" labelFloat="true"/>
         <JFXTextField fx:id="clientPayable" editable="false" prefWidth="150" promptText="应付" labelFloat="true"/>
         <JFXTextField fx:id="clientDefaultOperator" editable="false" onMouseClicked="#selectEmployee" prefWidth="150" promptText="默认业务员" labelFloat="true"/>
@@ -61,7 +62,7 @@
             </graphic>
         </JFXButton>
         <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="保存草稿">
+                   style="-fx-background-color: #9999CC; -fx-text-fill: #000000;" text="保存草稿">
             <graphic>
                 <MaterialIconView glyphName="SAVE" glyphSize="24"/>
             </graphic>

@@ -15,6 +15,7 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.vo.BillVo;
@@ -79,6 +80,7 @@ public class SaleRefundBillDetailUiController extends BillDetailUi {
 
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
+        currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         SaleBillVo saleBillVo=(SaleBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillDetailUiController saleBillDetailUiController = externalLoadedUiPackage.getController();

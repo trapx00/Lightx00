@@ -21,6 +21,7 @@ import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelec
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityFillUiController;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
@@ -109,6 +110,7 @@ public class SaleBillDetailUiController extends BillDetailUi {
 
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
+        currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         SaleBillVo saleBillVo=(SaleBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillDetailUiController saleBillDetailUiController = externalLoadedUiPackage.getController();
