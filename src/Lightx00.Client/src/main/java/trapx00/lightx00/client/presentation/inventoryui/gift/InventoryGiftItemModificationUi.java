@@ -43,11 +43,10 @@ public class InventoryGiftItemModificationUi implements ExternalLoadableUiContro
     }
 
     public void onBtnSubmitClicked(ActionEvent actionEvent) {
-
+        close();
         if (validate()) {
             if (callback != null) {
                 callback.accept(Double.valueOf(tfAmount.getText()));
-                close();
             }
 
         }

@@ -7,8 +7,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
@@ -21,6 +23,7 @@ import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
+import trapx00.lightx00.client.presentation.commodityui.commoditySort.CommoditySortModificationUi;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
@@ -29,6 +32,7 @@ import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftItemMo
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
+import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryDetailBillVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
@@ -42,6 +46,7 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -67,6 +72,8 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableSortColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableIdColumn;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tableWarningColumn;
+
+    public MenuItem modifyMenuItem;
 
     private ObjectProperty<CommodityVo> currentCommodity = new SimpleObjectProperty<>();
     private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
@@ -126,6 +133,8 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
 
         auto();
 
+
+
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(inventoryGiftItemModelObservableList, RecursiveTreeObject::getChildren);
         inventoryGiftItems.setRoot(root);
         inventoryGiftItems.setShowRoot(false);
@@ -137,8 +146,19 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         jfxComboBox.getItems().add(new Label("OverFlow"));
         jfxComboBox.getItems().add(new Label("Warning"));
 
+        modifyMenuItem.setOnAction((ActionEvent t)->{
+                CommodityVo selected=commodityTable.getSelectionModel().getSelectedItem().getValue().getCommodityVoObjectProperty();
+                new InventoryActualValue().show(selected,this::updateCommodity);
+
+        });
 
         initTable();
+    }
+
+    public void updateCommodity(){
+        CommodityVo[] queryResult = blService1.query(new CommodityQueryVo());
+        commodityModels.clear();
+        commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
     @FXML
 
@@ -166,8 +186,42 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
 
     public void addQWE(double a,CommodityVo vo){
         vo.setActualAmount(a);
-       inventoryGiftItemModelObservableList.
-                add(new CommoditySelectionItemModel(vo));
+        System.out.println();
+        if(jfxComboBox.getSelectionModel().getSelectedItem()==null){
+            inventoryGiftItemModelObservableList.
+                    add(new CommoditySelectionItemModel(vo));
+            if(vo.getAmount()>vo.getActualAmount())
+                jfxComboBox.getSelectionModel().select(0);
+            else if(vo.getActualAmount()>vo.getAmount())
+                jfxComboBox.getSelectionModel().select(1);
+            else
+                jfxComboBox.getSelectionModel().select(2);
+        }else{
+            if(jfxComboBox.getSelectionModel().getSelectedItem().getText().equals("Loss")){
+                System.out.println("loss");
+                if(vo.getActualAmount()<vo.getAmount())
+                    inventoryGiftItemModelObservableList.
+                            add(new CommoditySelectionItemModel(vo));
+                else
+                    PromptDialogHelper.start("添加失败","该单据为报损单").createAndShow();
+            }else if(jfxComboBox.getSelectionModel().getSelectedItem().getText().equals("OverFlow")){
+                if(vo.getAmount()<vo.getActualAmount())
+                    inventoryGiftItemModelObservableList.
+                            add(new CommoditySelectionItemModel(vo));
+                else{
+                    PromptDialogHelper.start("添加失败","该单据为报溢单").createAndShow();
+                }
+
+            }else{
+                System.out.println("warning");
+                if(vo.getActualAmount()==vo.getAmount())
+                    inventoryGiftItemModelObservableList.
+                            add(new CommoditySelectionItemModel(vo));
+                else
+                    PromptDialogHelper.start("添加失败","该单据为报警单").createAndShow();
+            }
+        }
+
     }
 
     /**
