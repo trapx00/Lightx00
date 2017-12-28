@@ -42,7 +42,6 @@ public class FrameworkUiController {
     public Text titleText;
     private ExternalLoadableUiController subController;
     private DialogStack dialogStack = new DialogStack();
-    private LogBackupBlService logBackupBlService= LogBackupBlServiceFactory.getInstance();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -112,9 +111,13 @@ public class FrameworkUiController {
      * @param refresh 如果新的UI界面和原来的界面是同一个界面的话，是否需要刷新。
      */
     public void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title, boolean refresh) {
+
         if (refresh || !clazz.isAssignableFrom(subController.getClass())) {
             try {
                 ExternalLoadedUiPackage externalLoadedUiPackage = clazz.newInstance().load();
+                if (subController != null) {
+                    subController.onClose();
+                }
                 subController = externalLoadedUiPackage.getController();
                 this.contentPane.getChildren().clear();
                 this.contentPane.getChildren().add(externalLoadedUiPackage.getComponent());
@@ -146,6 +149,9 @@ public class FrameworkUiController {
      */
     public void switchFunction(Parent parent, ExternalLoadableUiController controller, String title, boolean refresh) {
         if (refresh || (!(subController.getClass().isAssignableFrom(controller.getClass())))) {
+            if (subController != null) {
+                subController.onClose();
+            }
             subController = controller;
             this.contentPane.getChildren().clear();
             this.contentPane.getChildren().add(parent);

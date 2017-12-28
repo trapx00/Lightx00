@@ -27,7 +27,6 @@ import java.util.List;
 public class FaceIdAuthenticationController implements FaceIdAuthenticationService {
     private static final String endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
     private FaceIdService faceIdService = new FaceIdService();
-    private ServerLogService logService = ServerLogServiceFactory.getService();
     private Dao<EmployeeFaceIdInfo, String> dao = FaceIdDaoFactory.getDao();
     private static final double ConfidenceThreshold = 0.5;
 

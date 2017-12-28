@@ -44,13 +44,12 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
         this.converter = converter;
     }
 
-    public ResultMessage submit(BillVoType bill) {
+    public ResultMessage add(BillVoType bill) {
         try {
-            bill.setState(BillState.WaitingForApproval);
             ResultMessage opResult = dataService.submit(converter.fromVoToPo(bill));
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("创建了一张%s，内容是%s。", billName, bill.toString()));
-                approvalRequest.requestApproval(bill);
+
             } else {
                 logService.log(LogSeverity.Failure, String.format("创建一张%s失败，原因不明。内容是%s。",billName, bill.toString()));
             }
@@ -64,6 +63,12 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
         }
     }
 
+    public ResultMessage submit(BillVoType bill) {
+        bill.setState(BillState.WaitingForApproval);
+        approvalRequest.requestApproval(bill);
+        return add(bill);
+    }
+
     /**
      * Saves a half-completed CashBill as draft.
      *
@@ -71,7 +76,8 @@ public class CommonBillBlController<BillVoType extends BillVo, BillPoType extend
      * @return whether the operation is done successfully
      */
     public ResultMessage saveAsDraft(BillVoType bill) {
-        submit(bill); //再次强调草稿的逻辑是先提交，再找DraftService记录一下草稿信息。
+        bill.setState(BillState.Draft);
+        add(bill); //再次强调草稿的逻辑是先提交，再找DraftService记录一下草稿信息。
         ResultMessage opResult = draftService.saveAsDraft(bill);
         if (opResult.isSuccess()) {
             logService.log(LogSeverity.Success, "提交草稿成功，单据ID是" + bill.getId());

@@ -59,6 +59,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
 
     @FXML
     private void initialize() {
+        currentEmployee.set(FrameworkUiManager.getCurrentEmployee());
         if (((SaleStaffVo) currentEmployee.getValue()).isRoot()) {
             clientReceivableQuota.setEditable(true);
         }

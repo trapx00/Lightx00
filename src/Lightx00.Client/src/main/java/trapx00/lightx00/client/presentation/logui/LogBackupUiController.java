@@ -25,6 +25,7 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
+import java.net.URI;
 
 public class LogBackupUiController implements ExternalLoadableUiController {
 
@@ -48,8 +49,11 @@ public class LogBackupUiController implements ExternalLoadableUiController {
                     Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
                     Transferable text = new StringSelection(selected.getUrl());
                     clip.setContents(text, null);
-                } catch (Exception ignored) {
-                    ignored.printStackTrace();
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().browse(new URI(selected.getUrl()));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }});
     }

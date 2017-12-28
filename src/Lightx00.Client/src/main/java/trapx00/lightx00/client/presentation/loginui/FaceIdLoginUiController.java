@@ -39,12 +39,12 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
             .create(rootPane);
         Task<Void> task = new Task<Void>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 try {
                     EmployeeVo employeeVo = blService.authenticate(webCamView.acquireImage());
                     dialog.close();
                     if (employeeVo == null) {
-                        showPromptDialog("登录失败！","未知错误！");
+                        showPromptDialog("登录失败！","未知错误！", () -> startCamera());
                     } else {
                         Platform.runLater(() -> {
                             JFXDialogLayout layout = new JFXDialogLayout();
@@ -70,13 +70,13 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
                     }
                 } catch (MultipleFacesException e) {
                     dialog.close();
-                    Platform.runLater(() -> showPromptDialog("登录失败！", String.format("检测到%d张脸。只允许一张脸！", e.getNumOfFaces())));
+                    Platform.runLater(() -> showPromptDialog("登录失败！", String.format("检测到%d张脸。只允许一张脸！", e.getNumOfFaces()), () -> startCamera()));
                 } catch (NoFaceDetectedException e) {
                     dialog.close();
-                    Platform.runLater(() -> showPromptDialog("登录失败！", "未检测到脸！"));
+                    Platform.runLater(() -> showPromptDialog("登录失败！", "未检测到脸！", () -> startCamera()));
                 } catch (NetworkException e) {
                     dialog.close();
-                    Platform.runLater(() -> showPromptDialog("网络错误！", "请联系技术人员。HTTP响应码：" + e.getStatusCode()));
+                    Platform.runLater(() -> showPromptDialog("网络错误！", "请联系技术人员。HTTP响应码：" + e.getStatusCode(), () -> startCamera()));
                 }
                 return null;
             }
@@ -89,7 +89,7 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
 
     }
 
-    public void showPromptDialog(String title, String content) {
+    public void showPromptDialog(String title, String content, Runnable callback) {
         JFXDialogLayout layout = new JFXDialogLayout();
         JFXButton button = new JFXButton("好", new MaterialIconView(MaterialIcon.CHECK));
         layout.setBody(new javafx.scene.control.Label(content));
@@ -98,6 +98,9 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
         JFXDialog dialog = new JFXDialog(rootPane, layout, JFXDialog.DialogTransition.CENTER);
         button.setOnAction(e -> {
             dialog.close();
+            if (callback != null) {
+                callback.run();
+            }
         });
         dialog.show();
 
@@ -137,5 +140,10 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
         ExternalLoadedUiPackage externalLoadedUiPackage = new LoginUiController().load();
         StageManager.changeScene(new Scene(externalLoadedUiPackage.getComponent()));
 
+    }
+
+    @Override
+    public void onClose() {
+        webCamView.closeCamera();
     }
 }

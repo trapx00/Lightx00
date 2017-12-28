@@ -70,7 +70,7 @@ public class FaceIdRegistrationUiController implements ExternalLoadableUiControl
 
     public void showPromptDialog(String title, String content) {
         Platform.runLater(() -> PromptDialogHelper.start(title, content)
-            .addCloseButton("好","CHECK",null)
+            .addCloseButton("好","CHECK",e -> webCamView.startCamera())
             .createAndShow());
     }
 
@@ -105,5 +105,10 @@ public class FaceIdRegistrationUiController implements ExternalLoadableUiControl
 
     public void onTfEmployeeIdClicked(MouseEvent mouseEvent) {
         employeeSelection.showEmployeeSelectDialog(x -> employee.set(x.size() == 0 ? null : x.get(0)));
+    }
+
+    @Override
+    public void onClose() {
+        webCamView.closeCamera();
     }
 }
