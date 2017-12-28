@@ -42,7 +42,8 @@ public class FaceIdRegistrationUiController implements ExternalLoadableUiControl
             @Override
             protected Object call() {
                 try {
-                    ResultMessage rm = blService.register(employee.get().getId(), webCamView.acquireImage());
+                    byte[] img = webCamView.acquireImage();
+                    ResultMessage rm = blService.register(employee.get().getId(), img);
                     Platform.runLater(dialog::close);
                     if (rm.equals(ResultMessage.Success)) {
                         showPromptDialog("注册成功",String.format("您已给ID为%s的职员注册Face ID。", employee.get().getId()));
