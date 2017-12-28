@@ -61,9 +61,14 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
         currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseBillDetailUiController purchaseBillDetailUiController = externalLoadedUiPackage.getController();
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "1", "2", "3"
+        );
+        purchaseBillDetailUiController.cbRepository.setItems(stringObservableList);
         purchaseBillDetailUiController.tfBillId.setText(purchaseBillVo.getId());
         purchaseBillDetailUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
