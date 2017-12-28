@@ -14,6 +14,7 @@ import trapx00.lightx00.client.bl.adminbl.factory.UserManagementBlFactory;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
@@ -68,7 +69,7 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
     }
 
     private void update() {
-        update(new UserAccountQueryVo());
+        update(new UserAccountQueryVo().addQueryVoForAllEmployeePosition(new SpecificUserAccountQueryVo()));
     }
 
     private void update(UserAccountQueryVo queryVo) {
@@ -96,7 +97,7 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
      * @return 当前已经选择的项
      */
     private List<EmployeeVo> getSelected() {
-        List<EmployeeVo> list = new ArrayList<EmployeeVo>();
+        List<EmployeeVo> list = new ArrayList<>();
         list.add(tbEmployee.getSelectionModel().getSelectedItem().getValue().employeeVoObjectProperty.getValue());
         return list;
     }
@@ -104,11 +105,9 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
     @Override
     public void showEmployeeSelectDialog(Consumer<List<EmployeeVo>> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        EmployeeSelectionUi controller = (EmployeeSelectionUi) uiPackage.getController();
+        EmployeeSelectionUi controller = uiPackage.getController();
         controller.callback = callback;
-        JFXDialog dialog = PromptDialogHelper.start("","").create();
-        dialog.setContent((Region) uiPackage.getComponent());
-        FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
+        PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
     }
 
     @Override

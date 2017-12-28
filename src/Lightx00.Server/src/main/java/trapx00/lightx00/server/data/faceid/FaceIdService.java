@@ -26,8 +26,8 @@ import java.sql.SQLException;
 
 public class FaceIdService {
     private Dao<EmployeeFaceIdInfo, String> dao = FaceIdDaoFactory.getDao();
-    private static final String api1 = "9e59366d759449a5b65d7dc60600d1f5";
-    private static final String api2 = "c9b78e3ee4264873947013e20a5f7b1b";
+    private static final String api1 = "80f6b11c822c4fc39dddd0ac8fbdcf09";
+    private static final String api2 = "f210f2a3a2c044119b63129e70070d04";
     private static final String endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
 
     public byte[] readAsByteArray(String resourceUri) {

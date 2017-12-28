@@ -17,7 +17,7 @@
         </font>
     </Label>
     <JFXTextField fx:id="tfSearch" maxWidth="200.0" prefWidth="150.0" promptText="输入姓名搜索" />
-    <JFXTreeTableView fx:id="commodityTable" prefHeight="500.0" prefWidth="500.0">
+    <JFXTreeTableView fx:id="tbEmployee" prefHeight="500.0" prefWidth="500.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcId" prefWidth="150" text="职员ID" />
             <JFXTreeTableColumn fx:id="tcName" editable="false" prefWidth="150" text="姓名" />

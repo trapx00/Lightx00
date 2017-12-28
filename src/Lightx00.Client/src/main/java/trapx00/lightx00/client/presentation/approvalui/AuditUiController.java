@@ -64,7 +64,7 @@ public class AuditUiController implements ExternalLoadableUiController {
                             ResultMessage result = blService.reject(new AuditIdVo(selected.getId(),new Date()));
                             if(result.equals(ResultMessage.Success)) {
                                 PromptDialogHelper.start("拒绝通过成功", "已发送通知。")
-                                        .addCloseButton("完成", "DONE", null)
+                                        .addCloseButton("完成", "DONE", e2 -> updateItems())
                                         .createAndShow();
                             }
                             else{
@@ -78,7 +78,7 @@ public class AuditUiController implements ExternalLoadableUiController {
                         ResultMessage result = blService.pass(new AuditIdVo(selected.getId(),new Date()));
                         if(result.equals(ResultMessage.Success)) {
                             PromptDialogHelper.start("审批通过成功", "已发送通知。")
-                                    .addCloseButton("完成", "DONE", null)
+                                    .addCloseButton("完成", "DONE", e2->updateItems())
                                     .createAndShow();
                         }
                         else{
@@ -125,7 +125,7 @@ public class AuditUiController implements ExternalLoadableUiController {
                  ResultMessage result = blService.pass(new AuditIdVo(getSelected().getId(),new Date()));
                 if(result.equals(ResultMessage.Success)) {
                     PromptDialogHelper.start("审批通过成功", "已发送通知。")
-                            .addCloseButton("完成", "DONE", null)
+                            .addCloseButton("完成", "DONE", e -> updateItems())
                             .createAndShow();
                 }
             }
@@ -157,7 +157,7 @@ public class AuditUiController implements ExternalLoadableUiController {
             showDetail(tbBill.getSelectionModel().getSelectedItem().getValue());
         } catch (Exception ex) {
             PromptDialogHelper.start("错误","请至少选一个条目。")
-                    .addCloseButton("好的","DONE",null)
+                    .addCloseButton("好的","DsONE",null)
                     .createAndShow();
         }
 

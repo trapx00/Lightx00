@@ -27,27 +27,25 @@ public class FaceIdRegistrationUiController implements ExternalLoadableUiControl
     public JFXButton btnRegister;
     public JFXTextField tfEmployeeId;
     public WebCamView webCamView;
-    public StackPane rootPane;
     private FaceIdRegistrationBlService blService = FaceIdRegistrationBlServiceFactory.getService();
     private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
 
     private ObjectProperty<EmployeeVo> employee = new SimpleObjectProperty<>();
 
     public void onBtnRegisterClicked(ActionEvent actionEvent) {
-        JFXDialog dialog = PromptDialogHelper.start("注册中", "注册中，请稍等").create(rootPane);
-        dialog.show();
         if (employee.get() == null) {
             showPromptDialog("请先选择一个用户！","未选择用户");
             return;
         }
+        JFXDialog dialog = PromptDialogHelper.start("注册中","注册中").create();
         Task task = new Task() {
             @Override
-            protected Object call() throws Exception {
+            protected Object call() {
                 try {
                     ResultMessage rm = blService.register(employee.get().getId(), webCamView.acquireImage());
-                    dialog.close();
+                    Platform.runLater(dialog::close);
                     if (rm.equals(ResultMessage.Success)) {
-                        showPromptDialog("注册成功",String.format("您已给ID为%s的职员注册Face ID。", tfEmployeeId.getId()));
+                        showPromptDialog("注册成功",String.format("您已给ID为%s的职员注册Face ID。", employee.get().getId()));
                     } else {
                         showPromptDialog("注册失败！", "未知错误");
                     }
@@ -62,16 +60,17 @@ public class FaceIdRegistrationUiController implements ExternalLoadableUiControl
             }
         };
         Thread th = new Thread(task);
+        dialog.show();
         th.setDaemon(true);
         th.start();
+
 
     }
 
     public void showPromptDialog(String title, String content) {
         Platform.runLater(() -> PromptDialogHelper.start(title, content)
             .addCloseButton("好","CHECK",null)
-            .create(rootPane)
-            .show());
+            .createAndShow());
     }
 
 

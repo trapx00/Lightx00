@@ -11,7 +11,7 @@ public class FaceIdRegistrationDataServiceFactory extends DataServiceFactory {
     }
 
     public static FaceIdRegistrationDataService getDataService() {
-        //initRmi();
+        initRmi();
         return dataService;
     }
 }
