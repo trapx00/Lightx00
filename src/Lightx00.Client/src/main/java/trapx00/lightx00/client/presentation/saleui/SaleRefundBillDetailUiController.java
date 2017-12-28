@@ -21,6 +21,7 @@ import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 
 public class SaleRefundBillDetailUiController extends BillDetailUi {
@@ -39,8 +40,6 @@ public class SaleRefundBillDetailUiController extends BillDetailUi {
     @FXML
     private JFXTextField tfClientName;
     @FXML
-    private JFXTextField tfClientLevel;
-    @FXML
     private JFXComboBox<String> cbRepository;
     @FXML
     private JFXTextField tfOriginTotal;
@@ -50,10 +49,6 @@ public class SaleRefundBillDetailUiController extends BillDetailUi {
     private JFXTextField tfToken;
     @FXML
     private JFXTextField tfUltiTotal;
-    @FXML
-    private JFXTextField tfPromotionId;
-    @FXML
-    private JFXTextField tfGiftToken;
     @FXML
     private JFXTextField tfComment;
     @FXML
@@ -81,25 +76,27 @@ public class SaleRefundBillDetailUiController extends BillDetailUi {
     @Override
     public ExternalLoadedUiPackage showContent(BillVo arg) {
         currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
-        SaleBillVo saleBillVo=(SaleBillVo) arg;
+        SaleRefundBillVo saleRefundBillVo=(SaleRefundBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        SaleBillDetailUiController saleBillDetailUiController = externalLoadedUiPackage.getController();
-        saleBillDetailUiController.tfBillId.setText(saleBillVo.getId());
-        saleBillDetailUiController.tfDate.setText(saleBillVo.getDate().toString());
-        saleBillDetailUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());
-        saleBillDetailUiController.tfSalesmanName.setText(employeeInfo.queryById(saleBillVo.getSalesmanId()).getName());
-        saleBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
-        saleBillDetailUiController.tfClientId.setText(saleBillVo.getClientId());
-        saleBillDetailUiController.tfClientName.setText(clientBlService.queryById(saleBillVo.getClientId()).getName());
-        saleBillDetailUiController.tfClientLevel.setText(clientBlService.queryById(saleBillVo.getClientId()).getClientLevel()+"");
-        saleBillDetailUiController.cbRepository.setValue(saleBillVo.getRepository() + "");
-        saleBillDetailUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
-        saleBillDetailUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
-        saleBillDetailUiController.tfToken.setText(saleBillVo.getToken() + "");
-        saleBillDetailUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
-        saleBillDetailUiController.tfGiftToken.setText(saleBillVo.getGiftToken()+"");
-        saleBillDetailUiController.tfComment.setText(saleBillVo.getComment());
-        saleBillDetailUiController.addCommodityListItems(saleBillVo.getCommodityList());
+        SaleRefundBillDetailUiController saleRefundBillDetailUiController = externalLoadedUiPackage.getController();
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "1", "2", "3"
+        );
+        saleRefundBillDetailUiController.cbRepository.setItems(stringObservableList);
+
+        saleRefundBillDetailUiController.tfBillId.setText(saleRefundBillVo.getId());
+        saleRefundBillDetailUiController.tfDate.setText(saleRefundBillVo.getDate().toString());
+        saleRefundBillDetailUiController.tfSalesmanId.setText(saleRefundBillVo.getSalesmanId());
+        saleRefundBillDetailUiController.tfSalesmanName.setText(employeeInfo.queryById(saleRefundBillVo.getSalesmanId()).getName());
+        saleRefundBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
+        saleRefundBillDetailUiController.tfClientId.setText(saleRefundBillVo.getClientId());
+        saleRefundBillDetailUiController.tfClientName.setText(clientBlService.queryById(saleRefundBillVo.getClientId()).getName());
+        saleRefundBillDetailUiController.cbRepository.setValue(saleRefundBillVo.getRepository() + "");
+        saleRefundBillDetailUiController.tfOriginTotal.setText(saleRefundBillVo.getOriginTotal() + "");
+        saleRefundBillDetailUiController.tfMinusProfits.setText(saleRefundBillVo.getMinusProfits() + "");
+        saleRefundBillDetailUiController.tfToken.setText(saleRefundBillVo.getToken() + "");
+        saleRefundBillDetailUiController.tfComment.setText(saleRefundBillVo.getComment());
+        saleRefundBillDetailUiController.addCommodityListItems(saleRefundBillVo.getCommodityList());
         return externalLoadedUiPackage;
     }
 

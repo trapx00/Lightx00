@@ -30,23 +30,24 @@ public class ClientDetailUiController extends ClientDetailUi implements External
     private JFXTextField clientPayable;
     @FXML
     private JFXTextField clientDefaultOperator;
-    @FXML
-    private JFXTextField clientOperatorId;
 
     @Override
     public ExternalLoadedUiPackage showContent(ClientVo arg) {
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ClientVo clientVo = (ClientVo) arg;
+        ClientVo clientVo = arg;
         ClientDetailUiController clientDetailUiController = externalLoadedUiPackage.getController();
         clientDetailUiController.clientId.setText(clientVo.getId());
-        clientDetailUiController.clientName.setText(clientVo.getClientType().toString());
+        clientDetailUiController.clientName.setText(clientVo.getName());
+        clientDetailUiController.clientType.setText(clientVo.getClientType().toString());
         clientDetailUiController.clientLevel.setText(clientVo.getClientLevel() + "");
         clientDetailUiController.clientPhone.setText(clientVo.getAddress());
+        clientDetailUiController.clientAddress.setText(clientVo.getAddress());
         clientDetailUiController.clientZipCode.setText(clientVo.getEmail());
         clientDetailUiController.clientEmail.setText(clientVo.getEmail());
         clientDetailUiController.clientReceivableQuota.setText(clientVo.getReceivableQuota() + "");
         clientDetailUiController.clientReceivable.setText(clientVo.getReceivable() + "");
         clientDetailUiController.clientPayable.setText(clientVo.getPayable() + "");
+        clientDetailUiController.clientDefaultOperator.setText(clientVo.getDefaultOperatorId());
         return externalLoadedUiPackage;
     }
 
@@ -61,7 +62,7 @@ public class ClientDetailUiController extends ClientDetailUi implements External
     }
 
     @FXML
-    private void onBtnCancelClicked(){
+    private void onBtnCancelClicked() {
         FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
     }
 }

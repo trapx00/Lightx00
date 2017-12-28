@@ -33,7 +33,7 @@ public class ClientAddUiController implements ExternalLoadableUiController {
     @FXML
     private JFXComboBox clientType;
     @FXML
-    private JFXTextField clientLevel;
+    private JFXComboBox clientLevel;
     @FXML
     private JFXTextField clientPhone;
     @FXML
@@ -57,7 +57,7 @@ public class ClientAddUiController implements ExternalLoadableUiController {
     @FXML
     private void initialize() {
         currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
-        if(((SaleStaffVo)currentEmployee.getValue()).isRoot()){
+        if (((SaleStaffVo) currentEmployee.getValue()).isRoot()) {
             clientReceivableQuota.setEditable(true);
         }
         clientReceivableQuota.setText("0.0");
@@ -67,20 +67,24 @@ public class ClientAddUiController implements ExternalLoadableUiController {
         clientTypeMap.put(ClientType.Retailer.toString(), ClientType.Retailer);
         clientTypeMap.put(ClientType.Supplier.toString(), ClientType.Supplier);
 
-        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+        ObservableList<String> stringObservableList1 = FXCollections.observableArrayList(
                 "销售商", "进货商"
         );
-        clientType.setItems(stringObservableList);
+        clientType.setItems(stringObservableList1);
         clientType.setValue("销售商");
 
-        NumberValidator numberValidator=new NumberValidator();
+        ObservableList<String> stringObservableList2 = FXCollections.observableArrayList(
+                "1", "2", "3", "4", "5"
+        );
+        clientLevel.setItems(stringObservableList2);
+        clientLevel.setValue("1");
+
+        NumberValidator numberValidator = new NumberValidator();
         numberValidator.setMessage("请输入数字类型");
-        RequiredFieldValidator requiredValidator=new RequiredFieldValidator();
+        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
         requiredValidator.setMessage("请输入信息");
 
         clientName.getValidators().add(requiredValidator);
-        clientLevel.getValidators().add(requiredValidator);
-        clientLevel.getValidators().add(numberValidator);
         clientPhone.getValidators().add(requiredValidator);
         clientAddress.getValidators().add(requiredValidator);
         clientZipCode.getValidators().add(requiredValidator);
@@ -94,12 +98,6 @@ public class ClientAddUiController implements ExternalLoadableUiController {
         });
 
         clientType.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                clientName.validate();
-            }
-        });
-
-        clientLevel.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 clientName.validate();
             }
@@ -175,7 +173,7 @@ public class ClientAddUiController implements ExternalLoadableUiController {
     }
 
     private ClientVo getCurrentClientVo() {
-        if (clientName.getText().length() == 0 || clientType.getValue().toString().length() == 0 || clientLevel.getText().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
+        if (clientName.getText().length() == 0 || clientType.getValue().toString().length() == 0 || clientLevel.getValue().toString().length() == 0 || clientPhone.getText().length() == 0 || clientAddress.getText().length() == 0 || clientZipCode.getText().length() == 0 || clientEmail.getText().length() == 0 || clientDefaultOperator.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！", "请先填写完客户信息。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
@@ -184,7 +182,7 @@ public class ClientAddUiController implements ExternalLoadableUiController {
         return new ClientVo(
                 clientId.getText(),
                 clientTypeMap.get(clientType.getValue()),
-                Integer.parseInt(clientLevel.getText()),
+                Integer.parseInt(clientLevel.getValue().toString()),
                 clientName.getText(),
                 clientPhone.getText(),
                 clientAddress.getText(),
@@ -219,10 +217,13 @@ public class ClientAddUiController implements ExternalLoadableUiController {
     private void reset() {
         clientName.clear();
         clientType.setValue("销售商");
-        clientLevel.clear();
+        clientType.setValue("1");
         clientPhone.clear();
         clientAddress.clear();
         clientZipCode.clear();
+        clientReceivableQuota.clear();
+        clientReceivable.clear();
+        clientPayable.clear();
         clientEmail.clear();
         clientDefaultOperator.clear();
     }

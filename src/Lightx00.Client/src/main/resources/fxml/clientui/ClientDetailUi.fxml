@@ -11,7 +11,7 @@
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="trapx00.lightx00.client.presentation.clientui.ClientDetailUiController"
-      prefHeight="800.0" prefWidth="600.0" spacing="20">
+      prefHeight="600.0" prefWidth="600.0" spacing="20">
     <padding>
         <Insets top="10" left="20" bottom="20" right="20"/>
     </padding>
@@ -33,20 +33,11 @@
         <JFXTextField fx:id="clientAddress" editable="false" prefWidth="150" promptText="地址" labelFloat="true"/>
         <JFXTextField fx:id="clientZipCode" editable="false" prefWidth="150" promptText="邮编" labelFloat="true"/>
         <JFXTextField fx:id="clientEmail" editable="false" prefWidth="150" promptText="电子邮箱" labelFloat="true"/>
-        <JFXTextField fx:id="clientReceivableQuota" editable="false" prefWidth="150" promptText="应收额度" labelFloat="true"/>
+        <JFXTextField fx:id="clientReceivableQuota" editable="false" prefWidth="150" promptText="应收额度"
+                      labelFloat="true"/>
         <JFXTextField fx:id="clientReceivable" editable="false" prefWidth="150" promptText="应收" labelFloat="true"/>
         <JFXTextField fx:id="clientPayable" editable="false" prefWidth="150" promptText="应付" labelFloat="true"/>
-        <JFXTextField fx:id="clientDefaultOperator" editable="false" prefWidth="150" promptText="默认业务员" labelFloat="true"/>
+        <JFXTextField fx:id="clientDefaultOperator" editable="false" prefWidth="150" promptText="默认业务员"
+                      labelFloat="true"/>
     </VBox>
-
-    <Separator/>
-    <HBox spacing="20">
-        <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="确定">
-            <graphic>
-                <FontAwesomeIconView glyphName="HOME" glyphSize="24"/>
-            </graphic>
-        </JFXButton>
-    </HBox>
-
 </VBox>
