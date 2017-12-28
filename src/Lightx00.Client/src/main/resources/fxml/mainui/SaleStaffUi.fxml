@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<StackPane fx:id="dialogContainer" prefHeight="700" prefWidth="1200" styleClass="exteriorLine"
+<StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine"
            stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="trapx00.lightx00.client.presentation.mainui.SaleStaffUiController">
