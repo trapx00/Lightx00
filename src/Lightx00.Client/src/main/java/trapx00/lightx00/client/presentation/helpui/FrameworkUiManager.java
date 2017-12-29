@@ -45,4 +45,8 @@ public class FrameworkUiManager {
         frameworkUiController.switchFunction(clazz, title, refresh);
     }
 
+    public static void switchFunction(ExternalLoadedUiPackage uiPackage, String title, boolean refresh) {
+        frameworkUiController.switchFunction(uiPackage, title, refresh);
+    }
+
 }

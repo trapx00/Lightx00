@@ -1,11 +1,13 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.effects.JFXDepthManager;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -24,6 +26,9 @@ import trapx00.lightx00.client.presentation.logui.LogBackupUiController;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FrameworkUiController {
     public static final int DEPTH = 3;
@@ -69,9 +74,9 @@ public class FrameworkUiController {
         });
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(1000),
-                        event -> timeText.setText(DateHelper.fromTimestamp(System.currentTimeMillis()))
-                )
+            new KeyFrame(Duration.millis(1000),
+                event -> timeText.setText(DateHelper.fromTimestamp(System.currentTimeMillis()))
+            )
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -94,13 +99,22 @@ public class FrameworkUiController {
         switchFunction(LogUiController.class, "日志", true);
     }
 
-    public void onLogFetchButtonClicked(ActionEvent actionEvent){
+    public void onLogFetchButtonClicked(ActionEvent actionEvent) {
         switchFunction(LogBackupUiController.class, "远程日志", true);
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
         switchFunction(NotificationUiController.class, "通知", true);
 
+    }
+
+
+    public void showLoadingAnimation() {
+        JFXSpinner spinner = new JFXSpinner();
+        spinner.setStyle("-jfx-radius: 70px");
+
+        this.contentPane.getChildren().clear();
+        this.contentPane.getChildren().add(spinner);
     }
 
     /**
@@ -110,22 +124,29 @@ public class FrameworkUiController {
      * @param title   标题名称
      * @param refresh 如果新的UI界面和原来的界面是同一个界面的话，是否需要刷新。
      */
+
     public void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title, boolean refresh) {
 
-        if (refresh || !clazz.isAssignableFrom(subController.getClass())) {
+
+        Thread thread = new Thread(() -> {
+            Platform.runLater(this::showLoadingAnimation);
             try {
-                ExternalLoadedUiPackage externalLoadedUiPackage = clazz.newInstance().load();
-                if (subController != null) {
-                    subController.onClose();
-                }
-                subController = externalLoadedUiPackage.getController();
-                this.contentPane.getChildren().clear();
-                this.contentPane.getChildren().add(externalLoadedUiPackage.getComponent());
-                this.titleText.setText(title);
-            } catch (InstantiationException | IllegalAccessException e) {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+            Platform.runLater(() -> {
+                try {
+                    switchFunction(clazz.newInstance().load(), title, refresh);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+        thread.setUncaughtExceptionHandler(Thread.getDefaultUncaughtExceptionHandler());
+        thread.start();
+
+
     }
 
     /**
