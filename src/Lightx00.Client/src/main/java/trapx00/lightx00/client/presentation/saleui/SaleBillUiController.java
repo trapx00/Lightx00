@@ -137,6 +137,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
      */
     @Override
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
+        currentEmployee.set(FrameworkUiManager.getCurrentEmployee());
         SaleBillVo saleBillVo = (SaleBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillUiController saleBillUiController = externalLoadedUiPackage.getController();
@@ -268,6 +269,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
      */
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
+        currentEmployee.set(FrameworkUiManager.getCurrentEmployee());
         SaleBillVo saleBillVo = (SaleBillVo) reversible;
         saleBillVo.setUltiTotal(-saleBillVo.getUltiTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
