@@ -150,7 +150,7 @@ public class BaseDatabaseFactory {
                     666,
                     123,
                     456,
-                    "1",
+                    "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("1",
                     ClientType.Retailer,
@@ -163,7 +163,7 @@ public class BaseDatabaseFactory {
                     666,
                     123,
                     456,
-                    "1",
+                    "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("2",
                     ClientType.Retailer,
@@ -176,7 +176,7 @@ public class BaseDatabaseFactory {
                     666,
                     123,
                     456,
-                    "1",
+                    "10002",
                     ClientState.Real));
              } catch (SQLException e) {
             e.printStackTrace();
