@@ -69,6 +69,7 @@ public class PurchaseBillDetailUiController extends BillDetailUi {
                 "1", "2", "3"
         );
         purchaseBillDetailUiController.cbRepository.setItems(stringObservableList);
+
         purchaseBillDetailUiController.tfBillId.setText(purchaseBillVo.getId());
         purchaseBillDetailUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));

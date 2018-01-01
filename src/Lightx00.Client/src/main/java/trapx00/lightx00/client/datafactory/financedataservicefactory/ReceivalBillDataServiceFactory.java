@@ -12,7 +12,7 @@ public class ReceivalBillDataServiceFactory extends DataServiceFactory {
     }
 
     public static ReceivalBillDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }

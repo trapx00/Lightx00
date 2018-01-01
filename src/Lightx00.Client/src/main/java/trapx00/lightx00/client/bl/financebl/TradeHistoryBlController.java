@@ -19,6 +19,7 @@ import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.log.LogSeverity;
@@ -72,7 +73,7 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
      */
     @Override
     public TradeHistoryVo query(TradeHistoryQueryVo query) {
-        BaseQueryVo baseQueryVo = new BaseQueryVo();
+        BaseQueryVo baseQueryVo = new BaseQueryVo().ne("state", BillState.Draft);
         if (query.getStart() != null && query.getEnd() != null) {
             baseQueryVo.between("date", query.getStart(), query.getEnd());
         }

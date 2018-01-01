@@ -64,6 +64,11 @@ public class PurchaseRefundBillDetailUiController extends BillDetailUi {
         PurchaseRefundBillVo purchaseRefundBillVo = (PurchaseRefundBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseRefundBillDetailUiController purchaseRefundBillDetailUiController = externalLoadedUiPackage.getController();
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "1", "2", "3"
+        );
+        purchaseRefundBillDetailUiController.cbRepository.setItems(stringObservableList);
+
         purchaseRefundBillDetailUiController.tfBillId.setText(purchaseRefundBillVo.getId());
         purchaseRefundBillDetailUiController.tfDate.setText(purchaseRefundBillVo.getDate().toString());
         purchaseRefundBillDetailUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));

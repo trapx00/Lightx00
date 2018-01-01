@@ -102,6 +102,11 @@ public class SaleBillDetailUiController extends BillDetailUi {
         SaleBillVo saleBillVo=(SaleBillVo) arg;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillDetailUiController saleBillDetailUiController = externalLoadedUiPackage.getController();
+        ObservableList<String> stringObservableList = FXCollections.observableArrayList(
+                "1", "2", "3"
+        );
+        saleBillDetailUiController.cbRepository.setItems(stringObservableList);
+
         saleBillDetailUiController.tfBillId.setText(saleBillVo.getId());
         saleBillDetailUiController.tfDate.setText(saleBillVo.getDate().toString());
         saleBillDetailUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());

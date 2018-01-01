@@ -8,7 +8,7 @@ import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
 import trapx00.lightx00.client.bl.salebl.mock.SaleBillBlControllerMock;
 
 public class SaleBillBlFactory {
-    private static SaleBillBlController saleBillBlController = new SaleBillBlControllerMock();
+    private static SaleBillBlController saleBillBlController = new SaleBillBlController();
     private static NotificationActivateService notificationActivateService = saleBillBlController;
     private static NotificationAbandonService notificationAbandonService = saleBillBlController;
     private static BillApprovalCompleteService billApprovalCompleteService = saleBillBlController;

@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.vo.salestaff;
 
+import trapx00.lightx00.client.bl.clientbl.factory.ClientBlFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.presentation.clientui.ClientDetailUiController;
 import trapx00.lightx00.client.presentation.clientui.ClientModifyUiController;
@@ -157,7 +158,7 @@ public class ClientVo implements Draftable {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return ClientBlFactory.getClientBlController();
     }
 
     /**
@@ -167,7 +168,7 @@ public class ClientVo implements Draftable {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new ClientModifyUiController();
     }
 
     /**
@@ -177,7 +178,7 @@ public class ClientVo implements Draftable {
      */
     @Override
     public ContentDisplayUi contentDisplayUi() {
-        return null;
+        return new ClientDetailUiController();
     }
 
     public ClientModifyUi modifyUi() {

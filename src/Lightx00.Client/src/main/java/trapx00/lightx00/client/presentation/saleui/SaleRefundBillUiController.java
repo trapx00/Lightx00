@@ -111,6 +111,7 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
      */
     @Override
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
+        currentEmployee.set(FrameworkUiManager.getCurrentEmployee());
         SaleRefundBillVo saleRefundBillVo = (SaleRefundBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleRefundBillUiController saleRefundBillUiController = externalLoadedUiPackage.getController();
@@ -221,6 +222,7 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
      */
     @Override
     public ExternalLoadedUiPackage revertReversible(Reversible reversible) {
+        currentEmployee.set(FrameworkUiManager.getCurrentEmployee());
         SaleRefundBillVo saleRefundBillVo = (SaleRefundBillVo) reversible;
         saleRefundBillVo.setUltiTotal(-saleRefundBillVo.getUltiTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();

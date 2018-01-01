@@ -8,7 +8,7 @@ import trapx00.lightx00.client.bl.salebl.SaleRefundBillBlController;
 import trapx00.lightx00.client.bl.salebl.mock.SaleRefundBillBlControllerMock;
 
 public class SaleRefundBillBlFactory {
-    private static SaleRefundBillBlController saleRefundBillBlController = new SaleRefundBillBlControllerMock();
+    private static SaleRefundBillBlController saleRefundBillBlController = new SaleRefundBillBlController();
     private static NotificationActivateService notificationActivateService = saleRefundBillBlController;
     private static NotificationAbandonService notificationAbandonService = saleRefundBillBlController;
     private static BillApprovalCompleteService billApprovalCompleteService = saleRefundBillBlController;
