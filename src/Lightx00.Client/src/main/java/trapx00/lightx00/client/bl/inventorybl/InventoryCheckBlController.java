@@ -43,16 +43,20 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public InventoryViewVo getInventoryView(Date beginTime, Date endTime) {
-        PurchaseBillVo [] purchaseBillVos=purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
-        PurchaseRefundBillVo[] purchaseRefundBillVos=purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
-        SaleBillVo[]saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
-        SaleRefundBillVo[] saleRefundBillVos=saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo().between("date",beginTime,endTime).and().eq("state", BillState.Approved));
+        PurchaseBillVo [] purchaseBillVos=purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo()
+                .between("date",beginTime,endTime));
+        PurchaseRefundBillVo[] purchaseRefundBillVos=purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo()
+                .between("date",beginTime,endTime));
+        SaleBillVo[]saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo()
+                .between("date",beginTime,endTime));
+        SaleRefundBillVo[] saleRefundBillVos=saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo()
+                .between("date",beginTime,endTime).and());
+
         InventoryViewVo inventoryViewVo=new InventoryViewVo("View"+FormatDateTime.toShortDateString(new Date()),new Date(),null);
         InventoryViewItem inventoryViewItem=new InventoryViewItem(new Date(),0,
                 0,0,0,0,0,
                 0);
-        System.out.println(purchaseBillVos==null);
-        System.out.println(saleBillVos==null);
+        System.out.println(saleBillVos.length);
         System.out.println(saleBillVos[0].getCommodityList()[0].getNumber());
         for(int i=0;i<purchaseBillVos.length;i++){
             for(int j=0;j<purchaseBillVos[i].getCommodityList().length;j++) {
