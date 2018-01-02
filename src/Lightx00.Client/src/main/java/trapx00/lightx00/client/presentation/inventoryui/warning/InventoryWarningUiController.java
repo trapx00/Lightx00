@@ -364,7 +364,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public void onBtnSetItemClicked(){
         CommodityVo commodityVo=getSelected();
         if(commodityVo!=null){
-            new InventoryGiftItemModificationUi().show(commodityVo.getId(),aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
+            new InventoryWarningModificationUi().show(commodityVo.getId(),aDouble -> inventoryGiftItems.getSelectionModel().getSelectedItem().
                     getValue().getCommodityVoObjectProperty().setActualAmount(aDouble));
         }
 

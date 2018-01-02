@@ -48,7 +48,7 @@
             <columns>
                 <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="商品"/>
                 <JFXTreeTableColumn fx:id="tcId" prefWidth="100" text="Id" />
-                <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="实际数量" />
+                <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="实际数量" editable="true" />
                 <JFXTreeTableColumn fx:id="tcStockAmount" prefWidth="100" text="库存数量"/>
                 <JFXTreeTableColumn fx:id="tcWarningWalue" prefWidth="100" text="警戒值"/>
             </columns>

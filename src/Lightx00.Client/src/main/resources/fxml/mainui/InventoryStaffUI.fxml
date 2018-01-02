@@ -63,26 +63,29 @@
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
+                    <!--复制这个按钮到这个地方-->
                     <JFXButton onAction="#switchBackToHome" prefHeight="60" prefWidth="200" text="主界面" textFill="#000000">
                         <graphic>
                             <FontAwesomeIconView glyphName="HOME" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                    <!--复制这里到你的fxml里-->
+                    <JFXButton fx:id="btnNotification" onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
+                    <JFXButton fx:id="btnDraft" onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="CLASS" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
+                    <JFXButton onAction="#onBtnAboutClicked" prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="SENTIMENT_VERY_SATISFIED" glyphSize="20" />
                         </graphic>
                     </JFXButton>
+                    <!--复制这里-->
                 </VBox>
             </GridPane>
             <BorderPane AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
@@ -151,8 +154,9 @@
                 <bottom>
                     <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="2000" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="2000" />
+                            <ColumnConstraints prefWidth="1000" />
+                            <ColumnConstraints prefWidth="1000" />
+                            <ColumnConstraints prefWidth="1000" />
                         </columnConstraints>
                         <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -160,9 +164,12 @@
 
 
                         <HBox alignment="CENTER" GridPane.columnIndex="0">
-                            <JFXButton onAction="#onLogButtonClicked" prefWidth="1000.0" text="日志" />
+                            <JFXButton onAction="#onLogButtonClicked" text="日志" />
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER" GridPane.columnIndex="1">
+                            <JFXButton onAction="#onLogFetchButtonClicked" text="取回远程日志" />
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="2">
                             <MaterialIconView glyphName="SIGNAL_CELLULAR_4_BAR" glyphSize="16" glyphStyle="-fx-background-color: #DDDDDD" />
                             <Text fx:id="timeText" text="2017/10/25 21:50:00" />
                         </HBox>

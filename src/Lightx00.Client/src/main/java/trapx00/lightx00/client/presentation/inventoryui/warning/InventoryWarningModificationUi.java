@@ -7,29 +7,29 @@ import javafx.fxml.FXML;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
+import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 
-public class InventoryActualValue implements ExternalLoadableUiController {
+import java.util.function.Consumer;
+
+public class InventoryWarningModificationUi implements ExternalLoadableUiController {
     public JFXTextField tfAmount;
-    public JFXTextField tfoldAmount;
-
-
-    private CommodityBlService blService = CommodityBlServiceFactory.getInstance();
-    private Runnable runnable;
-    private CommodityVo commodityVo;
-
+    public JFXTextField tfAcutal;
+    private Consumer<Double> callback;
+    private String id;
+    private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
+    private  double amout;
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/inventoryui/warning/InventoryActualValue.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/inventoryui/warning/InventoryWarningModificationUi.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void show(CommodityVo oldcommodityVo, Runnable runnable) {
+    public void show(String limit,Consumer<Double> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        InventoryActualValue ui = uiPackage.getController();
-        ui.commodityVo=oldcommodityVo;
-        ui.tfoldAmount.setText(String.valueOf(oldcommodityVo.getAmount()));
+        InventoryWarningModificationUi controller = (InventoryWarningModificationUi) uiPackage.getController();
+        controller.callback = callback;
+        controller.id=limit;
+        controller.tfAcutal.setText(String.valueOf(blService.query(new CommodityQueryVo().eq("id",limit))[0].getAmount()));
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
-        ((InventoryActualValue)uiPackage.getController()).runnable = runnable;
     }
     @FXML
     private void initialize() {
@@ -37,20 +37,22 @@ public class InventoryActualValue implements ExternalLoadableUiController {
         validator.setMessage("请输入数字");
         tfAmount.getValidators().add(validator);
         tfAmount.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
+            if(!newVal)
                 tfAmount.validate();
-            }
+
         });
     }
 
     public void onBtnSubmitClicked(ActionEvent actionEvent) {
+        close();
         if (validate()) {
-            commodityVo.setWarningValue(Double.valueOf(tfAmount.getText()));
-            blService.modify(commodityVo);
-            PromptDialogHelper.start("修改成功！","实际数量已经修改成功。")
-                    .addCloseButton("好","CHECK",e -> close())
-                    .createAndShow();
+            if (callback != null) {
+                blService.query(new CommodityQueryVo().eq("id",id))[0].setActualAmount(Double.valueOf(tfAmount.getText()));
+                callback.accept(Double.valueOf(tfAmount.getText()));
+            }
+
         }
+
     }
 
     private boolean validate() {
@@ -63,7 +65,5 @@ public class InventoryActualValue implements ExternalLoadableUiController {
 
     public void close() {
         FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
-        runnable.run();
     }
 }
-

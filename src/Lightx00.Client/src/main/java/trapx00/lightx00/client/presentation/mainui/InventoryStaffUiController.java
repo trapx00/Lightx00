@@ -1,9 +1,9 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
-import trapx00.lightx00.client.presentation.commodityui.InventoryStaffHome;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommodityUiController;
 import trapx00.lightx00.client.presentation.commodityui.commoditySort.CommoditySortUiController;
+import trapx00.lightx00.client.presentation.inventoryui.InventoryStaffHomeUiController;
 import trapx00.lightx00.client.presentation.inventoryui.check.InventoryCheckUiController;
 import trapx00.lightx00.client.presentation.inventoryui.check.InventoryPictureUiController;
 import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftUiController;
@@ -68,6 +68,6 @@ public class InventoryStaffUiController extends FrameworkUiController {
 
     @Override
     public void switchBackToHome() {
-        switchFunction(InventoryStaffHome.class, "主界面",true);
+        switchFunction(InventoryStaffHomeUiController.class, "主界面",true);
     }
 }
