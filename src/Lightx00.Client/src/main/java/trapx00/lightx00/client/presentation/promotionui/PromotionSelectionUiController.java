@@ -14,16 +14,16 @@ import trapx00.lightx00.client.bl.promotionbl.factory.PromotionInfoFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
-import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.function.Consumer;
 
-public class PromotionSelectionUi extends SelectingDialog implements PromotionSelection {
+public class PromotionSelectionUiController extends SelectingDialog implements PromotionSelection {
     public JFXTreeTableView<PromotionSelectionItemModel> tbPromotion;
     public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcId;
-    public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcStartDate;
-    public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcEndDate;
     public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcType;
+    public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcGift;//赠品
+    public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcCoupon;//代金券
+    public JFXTreeTableColumn<PromotionSelectionItemModel, String> tcSale;//客户折扣
     public JFXButton btnSelect;
     public JFXButton btnClose;
 
@@ -50,14 +50,22 @@ public class PromotionSelectionUi extends SelectingDialog implements PromotionSe
 
     @FXML
     private void initTable() {
-        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPromotionVoObjectProperty().getId()));
-        tcStartDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getPromotionVoObjectProperty().getStartDate())));
-        tcEndDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getPromotionVoObjectProperty().getEndDate())));
-        tcType.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getPromotionVoObjectProperty().getType().toString()));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getId()));
+        tcType.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
+        tcGift.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getGift()));
+        tcCoupon.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCoupon()));
+        tcSale.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getSale()));
         TreeItem<PromotionSelectionItemModel> root = new RecursiveTreeItem<>(promotionSelectionItemModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotion.setRoot(root);
         tbPromotion.setShowRoot(false);
         tbPromotion.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        tbPromotion.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                TreeItem<PromotionSelectionItemModel> selectedItem = tbPromotion.getSelectionModel().getSelectedItem();
+                showDetail(selectedItem.getValue());
+            }
+        });
     }
 
     @Override
@@ -70,7 +78,7 @@ public class PromotionSelectionUi extends SelectingDialog implements PromotionSe
         }
         else {
             ExternalLoadedUiPackage uiPackage = load();
-            PromotionSelectionUi controller = (PromotionSelectionUi) uiPackage.getController();
+            PromotionSelectionUiController controller = (PromotionSelectionUiController) uiPackage.getController();
             controller.callback = callback;
             JFXDialog dialog = PromptDialogHelper.start("", "").create();
             dialog.setContent((Region) uiPackage.getComponent());
@@ -80,6 +88,34 @@ public class PromotionSelectionUi extends SelectingDialog implements PromotionSe
 
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/managerui/PromotionInfoUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/managerui/PromotionSelectionUi.fxml").loadAndGetPackageWithoutException();
     }
+
+    public void onBtnCloseClicked() {
+        onClose();
+    }
+    public void onBtnSelectClicked() {
+        PromotionVoBase selected = tbPromotion.getSelectionModel().getSelectedItem().getValue().getPromotion();
+        if (callback != null && selected != null) {
+            callback.accept(selected);
+        }
+        onClose();
+    }
+
+    private void showDetail(PromotionSelectionItemModel model) {
+        if (model != null) {
+            PromotionVoBase selected = model.getPromotion();
+            PromptDialogHelper.start("单据详细信息", "")
+                    .setContent(selected.promotionDetailUi().showContent(selected).getComponent())
+                    .addButton("选择", "CHECK", e -> {
+                        if (callback != null && selected != null) {
+                            callback.accept(selected);
+                        }
+                        onClose();
+                    })
+                    .addCloseButton("取消", "CLOSE", null)
+                    .createAndShow();
+        }
+    }
+
 }

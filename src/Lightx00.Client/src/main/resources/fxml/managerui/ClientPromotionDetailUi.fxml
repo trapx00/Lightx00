@@ -40,7 +40,7 @@
         </font>
     </Label>
 
-    <JFXTreeTableView fx:id="tbPromotionCommodity" prefHeight="300.0" prefWidth="400.0">
+    <JFXTreeTableView fx:id="tbPromotionCommodity" prefHeight="350.0" prefWidth="400.0">
         <columns>
             <JFXTreeTableColumn fx:id="tcId" prefWidth="100" text="商品Id"/>
             <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="商品名称"/>
@@ -48,10 +48,5 @@
             <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量"/>
         </columns>
     </JFXTreeTableView>
-    <HBox alignment="CENTER" maxWidth="500" spacing="30">
-        <JFXButton fx:id="btnSubmit" buttonType="RAISED" onAction="#onBtnSubmitClicked" prefHeight="32.0" prefWidth="80.0"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="确认"/>
-        <JFXButton fx:id="btnBack" buttonType="RAISED" onAction="#onBtnBackClicked" prefHeight="32.0" prefWidth="80.0"
-               style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="返回"/>
-    </HBox>
+
 </VBox>
