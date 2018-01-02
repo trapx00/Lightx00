@@ -121,10 +121,18 @@ public class BaseDatabaseFactory {
             Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
             TableUtils.dropTable(saleBillPos,true);
             TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    null, 0, 0, 0, 0,
+            saleBillPos.create(new SaleBillPo("XSD-20171122-00002", new Date(), BillState.Approved, "0", "0", "0", 0,
+                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
                     "",1,"2"
-                    ,new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 10));
+                    ,null, 10));
+            saleBillPos.create(new SaleBillPo("XSD-20171122-00003", new Date(), BillState.Approved, "0", "0", "0", 0,
+                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
+                    "",1,"2"
+                    ,null, 10));
+            saleBillPos.create(new SaleBillPo("XSD-20171122-00004", new Date(), BillState.Approved, "0", "0", "0", 0,
+                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
+                    "",1,"2"
+                    ,null, 10));
 
 
 
@@ -147,9 +155,10 @@ public class BaseDatabaseFactory {
                     "12345678",
                     "210000",
                     "12345679@qq.com",
+                    666,
                     123,
                     456,
-                    "1",
+                    "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("1",
                     ClientType.Retailer,
@@ -159,9 +168,10 @@ public class BaseDatabaseFactory {
                     "12345678",
                     "210000",
                     "12345679@qq.com",
+                    666,
                     123,
                     456,
-                    "1",
+                    "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("2",
                     ClientType.Retailer,
@@ -171,9 +181,10 @@ public class BaseDatabaseFactory {
                     "12345678",
                     "210000",
                     "12345679@qq.com",
+                    666,
                     123,
                     456,
-                    "1",
+                    "10002",
                     ClientState.Real));
              } catch (SQLException e) {
             e.printStackTrace();

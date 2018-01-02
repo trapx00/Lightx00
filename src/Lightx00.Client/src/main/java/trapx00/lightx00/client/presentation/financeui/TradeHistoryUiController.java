@@ -151,7 +151,7 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
             if (selected instanceof Reversible) {
                 Reversible reversible = (Reversible) selected;
                 FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
-                PromptDialogHelper.start("红冲单据","").setContent(reversible.reversibleUi().revertReversible(reversible).getComponent()).createAndShow();
+                FrameworkUiManager.switchFunction(reversible.reversibleUi().revertReversible(reversible), "红冲", true);
             } else {
                 PromptDialogHelper.start("您所选的单据不可红冲！","您所选的单据不可红冲！")
                     .addCloseButton("好","CHECK",null)

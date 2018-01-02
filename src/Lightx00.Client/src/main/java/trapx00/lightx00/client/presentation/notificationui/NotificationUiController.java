@@ -19,6 +19,7 @@ import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
@@ -43,9 +44,10 @@ public class NotificationUiController implements ExternalLoadableUiController {
         updateItems();
     }
 
-    public void updateItems(){
+    public int updateItems(){
         notificationModels.clear();
         notificationModels.addAll(Arrays.stream(blService.update()).map(NotificationModel::new).collect(Collectors.toList()));
+        return notificationModels.size();
     }
 
     public void initNotifyItem() {

@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.logdataservice.LogBackupDataServi
 import static trapx00.lightx00.client.datafactory.DataServiceFactory.lookupService;
 
 public class LogBackupDataServiceFactory {
-    private static LogBackupDataService service = new LogBackupDataServiceStub();
+    private static LogBackupDataService service;
 
     public static void initRmi() {
         service = lookupService(LogBackupDataService.class);

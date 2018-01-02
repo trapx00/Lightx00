@@ -117,9 +117,8 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
         ClientSelectionItemModel model = clientTable.getSelectionModel().getSelectedItem().getValue();
         if (model != null) {
             ClientVo selected = model.getClientVoObjectProperty();
-            PromptDialogHelper.start("修改客户信息信息", "")
+            PromptDialogHelper.start("修改客户信息", "")
                     .setContent(selected.modifyUi().showContent(selected).getComponent())
-                    .addCloseButton("好", "CHECK", null)
                     .createAndShow();
         } else {
             PromptDialogHelper.start("错误", "请至少选一个条目。")
@@ -140,7 +139,7 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
         List<String> idList = new ArrayList<>();
         ObservableList<TreeItem<ClientSelectionItemModel>> clientSelectionTreeItemModels = clientTable.getSelectionModel().getSelectedItems();
         for (TreeItem<ClientSelectionItemModel> treeItem : clientSelectionTreeItemModels) {
-            idList.add(treeItem.getValue().getClientVoObjectProperty().getName());
+            idList.add(treeItem.getValue().getClientVoObjectProperty().getId());
         }
         ResultMessage resultMessage = blService.delete(idList.toArray(new String[idList.size()]));
         if (resultMessage == ResultMessage.Success) {
@@ -163,9 +162,9 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
         ClientSelectionItemModel model = clientTable.getSelectionModel().getSelectedItem().getValue();
         if (model != null) {
             ClientVo selected = model.getClientVoObjectProperty();
-            PromptDialogHelper.start("修改客户信息信息", "")
+            PromptDialogHelper.start("客户详细信息", "")
                     .setContent(selected.detailUi().showContent(selected).getComponent())
-                    .addCloseButton("好", "CHECK", null)
+                    .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
         } else {
             PromptDialogHelper.start("错误", "请至少选一个条目。")

@@ -2,6 +2,7 @@ package trapx00.lightx00.client.bl.logbl.mock;
 
 import trapx00.lightx00.client.bl.logbl.LogBackupBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
 public class LogBackupBlControllerMock extends LogBackupBlController {
     /**
@@ -20,7 +21,7 @@ public class LogBackupBlControllerMock extends LogBackupBlController {
      * @return the temp uri of the log resources
      */
     @Override
-    public String fetchCloudLog() {
-      return "www.123.com";
+    public LogBackupVo[] fetchCloudLog() {
+      return null;
     }
 }

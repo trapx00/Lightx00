@@ -9,4 +9,8 @@ public interface ExternalLoadableUiController {
      * @return external loaded ui controller and component
      */
     ExternalLoadedUiPackage load();
+
+    default void onClose() {
+
+    }
 }

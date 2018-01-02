@@ -1,10 +1,12 @@
 package trapx00.lightx00.server.data.logindata.factory;
 
 import trapx00.lightx00.server.data.logindata.FaceIdAuthenticationDataController;
+import trapx00.lightx00.server.data.util.export.Export;
 import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
 
 import java.rmi.RemoteException;
 
+@Export
 public class FaceIdAuthenticationDataFactory {
     private static FaceIdAuthenticationDataService dataService;
 
@@ -16,7 +18,7 @@ public class FaceIdAuthenticationDataFactory {
         }
     }
 
-    public static FaceIdAuthenticationDataService getDataService() {
+    public static FaceIdAuthenticationDataService getService() {
         return dataService;
     }
 }

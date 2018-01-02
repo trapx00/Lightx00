@@ -2,6 +2,7 @@ package trapx00.lightx00.client.bl.logbl;
 
 import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
 import trapx00.lightx00.client.datafactory.logdataservicefactory.LogBackupDataServiceFactory;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 
@@ -31,12 +32,12 @@ public class LogBackupBlController implements LogBackupBlService {
      * @return the temp uri of the log resources
      */
     @Override
-    public String fetchCloudLog() {
+    public LogBackupVo[] fetchCloudLog() {
         try {
             return service.fetchCloudLog();
         } catch (RemoteException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 }

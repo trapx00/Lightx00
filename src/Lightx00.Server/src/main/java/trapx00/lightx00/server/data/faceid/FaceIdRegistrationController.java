@@ -51,7 +51,7 @@ public class FaceIdRegistrationController implements FaceIdRegistrationService {
     /**
      * Registers a picture with a Employee id.
      *
-     * @param employeeId employee id
+     * @param empl  oyeeId employee id
      * @param image      image in binary
      * @return whether the registration is done successfully
      */
@@ -67,13 +67,10 @@ public class FaceIdRegistrationController implements FaceIdRegistrationService {
             dao.deleteById(employeeId);
             info.setImgUri(imgDir + employeeId);
             dao.create(info);
-            faceIdService.updateEmployeeFaceInfo(info);
-
-            boolean success = file.createNewFile();
-
             try (FileOutputStream stream = new FileOutputStream(file)) {
                 stream.write(image);
             }
+            faceIdService.updateEmployeeFaceInfo(info);
             return ResultMessage.Success;
         } catch (SQLException e) {
             throw new DbSqlException(e);

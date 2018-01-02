@@ -2,6 +2,7 @@ package trapx00.lightx00.client.blservicestub.logblservice;
 
 import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
 public class LogBackupBlServiceStub implements LogBackupBlService {
     /**
@@ -20,7 +21,7 @@ public class LogBackupBlServiceStub implements LogBackupBlService {
      * @return the temp uri of the log resources
      */
     @Override
-    public String fetchCloudLog() {
-        return "www.123.com";
+    public LogBackupVo[] fetchCloudLog() {
+        return null;
     }
 }

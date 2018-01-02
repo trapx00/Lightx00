@@ -2,6 +2,7 @@ package trapx00.lightx00.shared.dataservicestub.logdataservice;
 
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
 import java.rmi.RemoteException;
 
@@ -22,7 +23,7 @@ public class LogBackupDataServiceStub implements LogBackupDataService {
      * @return the temp uri of the log resources
      */
     @Override
-    public String fetchCloudLog() throws RemoteException {
-        return "www.123.com";
+    public LogBackupVo[] fetchCloudLog() throws RemoteException {
+        return null;
     }
 }

@@ -17,6 +17,7 @@ import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.oos.CannotOpenTempFileException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogPo;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.File;
@@ -25,18 +26,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.Timestamp;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class LogBackupDataController extends UnicastRemoteObject implements LogBackupDataService {
-    private static final String END_POINT = "http://oos.ctyunapi.cn";
+    private static final String END_POINT = "http://oos-bj2.ctyunapi.cn";
     private static final String BUCKET_NAME = "lightx00";
-    private static final String ACCESS_KEY = "622ff0aad8c78a306eaa";
-    private static final String SECRET_KEY = "c4a84bcc4ce1ad09805def0284a07452dd7a7519";
+    private static final String ACCESS_KEY = "c4582dec5d0809103126";
+    private static final String SECRET_KEY = "47c783687d4c452c5d71b817b8c481915fb0094a";
     private static final String FILE_PATH = Server.class.getResource("/temp.txt").getPath();
     private static final String SEPATAROR = " | ";
-    private static final long EXPIRATION = 1000 * 60 * 60 * 24;
+    private static final long EXPIRATION =
+            new Date().getTime() * 1000 * 60 * 60 * 24;
 
     private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
     private Object delegate = this;
@@ -70,7 +74,7 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage backupLog() throws RemoteException {
+    public ResultMessage backupLog() {
         try {
             List<LogPo> logPos = logDao.queryBuilder().query();
             File file = new File(FILE_PATH);
@@ -107,24 +111,22 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
      * @return the temp uri of the log resources
      */
     @Override
-    public String fetchCloudLog() throws RemoteException {
-        String result = "";
+    public LogBackupVo[] fetchCloudLog() {
+        ArrayList<LogBackupVo> result = new ArrayList<>();
         AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
         AmazonS3 oos = new AmazonS3Client(credentials);
 
         oos.setEndpoint(END_POINT);
         List<S3ObjectSummary> list = oos.listObjects(BUCKET_NAME).getObjectSummaries();
         for (S3ObjectSummary object : list) {
-            result += object.getKey();
             GeneratePresignedUrlRequest generatePresignedUrlRequest =
                     new GeneratePresignedUrlRequest(BUCKET_NAME, object.getKey());
-            generatePresignedUrlRequest.setMethod(HttpMethod.GET);
             generatePresignedUrlRequest.setExpiration(new Date(EXPIRATION));
             URL url = oos.generatePresignedUrl(generatePresignedUrlRequest);
-            result += SEPATAROR;
-            result += url.toString();
-            result += System.lineSeparator();
+            LogBackupVo logBackupVo = new LogBackupVo(object.getKey(), url.toString());
+            logService.printLog(delegate, "fetch cloud log:" + logBackupVo.getDate() + "|" + logBackupVo.getUrl());
+            result.add(logBackupVo);
         }
-        return result;
+        return result.toArray(new LogBackupVo[result.size()]);
     }
 }

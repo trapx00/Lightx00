@@ -7,6 +7,7 @@ import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -50,6 +51,12 @@ public class LoginUiController implements ExternalLoadableUiController {
                 passwordField.validate();
             }
         }));
+
+        passwordField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                loginButton.fire();
+            }
+        });
 
     }
 

@@ -16,7 +16,7 @@ public class FinishLoginLogic {
     public static void finishLogin(EmployeeVo employeeVo) {
         try {
             FrameworkUiManager.setCurrentEmployee(employeeVo);
-            StageManager.closeStage();
+
             Stage newStage = new Stage();
 
             UiLoader loader = new UiLoader(selectUrl(employeeVo.getPosition()));
@@ -32,9 +32,9 @@ public class FinishLoginLogic {
             newStage.initStyle(StageStyle.UNDECORATED);
 
             newStage.setScene(scene);
-            newStage.setHeight(700);
-            newStage.setWidth(1200);
-
+            newStage.setHeight(960);
+            newStage.setWidth(1340);
+            StageManager.closeStage();
             controller.setStage(newStage);
             newStage.show();
         } catch (IOException e) {
