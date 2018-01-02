@@ -1,11 +1,13 @@
 package trapx00.lightx00.client.presentation.mainui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.effects.JFXDepthManager;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -16,14 +18,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
-import trapx00.lightx00.client.blservice.logblservice.LogBackupBlServiceFactory;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.logui.LogBackupUiController;
 import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
+
+import java.util.Date;
 
 public class FrameworkUiController {
     public static final int DEPTH = 3;
@@ -40,8 +42,31 @@ public class FrameworkUiController {
     public MaterialIconView maximizeButtonGlyph;
     public Label promptLabel;
     public Text titleText;
+    public JFXButton btnNotification;
+    public JFXButton btnDraft;
     private ExternalLoadableUiController subController;
     private DialogStack dialogStack = new DialogStack();
+    private ExternalLoadedUiPackage notificationUi;
+    private ExternalLoadedUiPackage draftUi;
+    private Date loginDate;
+
+    public Date getLoginDate() {
+        return loginDate;
+    }
+
+    public int refreshNotificationStatus() {
+        NotificationUiController controller = notificationUi.getController();
+        int count = controller.updateItems();
+        btnNotification.setText(String.format("通知（%d）", count));
+        return count;
+    }
+
+    public int refreshDraftStatus() {
+        DraftUiController controller = draftUi.getController();
+        int count = controller.updateItems();
+        btnDraft.setText(String.format("草稿（%d）", count));
+        return count;
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -69,15 +94,22 @@ public class FrameworkUiController {
         });
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(1000),
-                        event -> timeText.setText(DateHelper.fromTimestamp(System.currentTimeMillis()))
-                )
+            new KeyFrame(Duration.millis(1000),
+                event -> timeText.setText(DateHelper.fromTimestamp(System.currentTimeMillis()))
+            )
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         switchBackToHome();
 
         promptLabel.setText("欢迎你！" + FrameworkUiManager.getCurrentEmployee().getName());
+
+
+        notificationUi = new NotificationUiController().load();
+        draftUi = new DraftUiController().load();
+        refreshDraftStatus();
+        refreshNotificationStatus();
+        loginDate = new Date();
     }
 
 
@@ -87,20 +119,29 @@ public class FrameworkUiController {
     }
 
     public void onDraftFunctionButtonClicked(ActionEvent event) {
-        switchFunction(DraftUiController.class, "草稿", true);
+        switchFunction(draftUi,"草稿", true);
     }
 
     public void onLogButtonClicked(ActionEvent actionEvent) {
         switchFunction(LogUiController.class, "日志", true);
     }
 
-    public void onLogFetchButtonClicked(ActionEvent actionEvent){
+    public void onLogFetchButtonClicked(ActionEvent actionEvent) {
         switchFunction(LogBackupUiController.class, "远程日志", true);
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-        switchFunction(NotificationUiController.class, "通知", true);
+        switchFunction(notificationUi, "通知", true);
 
+    }
+
+
+    public void showLoadingAnimation() {
+        JFXSpinner spinner = new JFXSpinner();
+        spinner.setStyle("-jfx-radius: 70px");
+
+        this.contentPane.getChildren().clear();
+        this.contentPane.getChildren().add(spinner);
     }
 
     /**
@@ -110,22 +151,29 @@ public class FrameworkUiController {
      * @param title   标题名称
      * @param refresh 如果新的UI界面和原来的界面是同一个界面的话，是否需要刷新。
      */
+
     public void switchFunction(Class<? extends ExternalLoadableUiController> clazz, String title, boolean refresh) {
 
-        if (refresh || !clazz.isAssignableFrom(subController.getClass())) {
+
+        Thread thread = new Thread(() -> {
+            Platform.runLater(this::showLoadingAnimation);
             try {
-                ExternalLoadedUiPackage externalLoadedUiPackage = clazz.newInstance().load();
-                if (subController != null) {
-                    subController.onClose();
-                }
-                subController = externalLoadedUiPackage.getController();
-                this.contentPane.getChildren().clear();
-                this.contentPane.getChildren().add(externalLoadedUiPackage.getComponent());
-                this.titleText.setText(title);
-            } catch (InstantiationException | IllegalAccessException e) {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+            Platform.runLater(() -> {
+                try {
+                    switchFunction(clazz.newInstance().load(), title, refresh);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+        thread.setUncaughtExceptionHandler(Thread.getDefaultUncaughtExceptionHandler());
+        thread.start();
+
+
     }
 
     /**
@@ -169,5 +217,9 @@ public class FrameworkUiController {
 
     public DialogStack getDialogStack() {
         return dialogStack;
+    }
+
+    public void onBtnAboutClicked(ActionEvent actionEvent) {
+
     }
 }

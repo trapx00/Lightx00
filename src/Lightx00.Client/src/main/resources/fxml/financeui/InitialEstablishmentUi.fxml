@@ -23,7 +23,7 @@
             </font>
         </Label>
     </HBox>
-    <JFXMasonryPane>
+    <JFXMasonryPane prefHeight="100">
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfId" editable="false" promptText="ID"/>
         </StackPane>
@@ -42,7 +42,7 @@
                     <Font size="20.0"/>
                 </font>
             </Label>
-            <JFXTreeTableView fx:id="tableBankAccounts">
+            <JFXTreeTableView fx:id="tableBankAccounts" prefHeight="600" maxHeight="2000">
                 <columns>
                     <JFXTreeTableColumn fx:id="tcBankId" prefWidth="50" text="ID"/>
                     <JFXTreeTableColumn fx:id="tcBankName" editable="false" prefWidth="150" text="账户名称"/>
@@ -56,7 +56,7 @@
                     <Font size="20.0"/>
                 </font>
             </Label>
-            <JFXTreeTableView fx:id="tableClient">
+            <JFXTreeTableView fx:id="tableClient" prefHeight="600" maxHeight="2000">
                 <columns>
                     <JFXTreeTableColumn fx:id="tcClientId" prefWidth="50" text="ID"/>
                     <JFXTreeTableColumn fx:id="tcClientName" editable="false" prefWidth="150" text="客户名称"/>
@@ -70,7 +70,7 @@
                     <Font size="20.0"/>
                 </font>
             </Label>
-            <JFXTreeTableView fx:id="tableCommodity">
+            <JFXTreeTableView fx:id="tableCommodity" prefHeight="600" maxHeight="2000">
                 <columns>
                     <JFXTreeTableColumn fx:id="tcCommodityId" prefWidth="100" text="ID"/>
                     <JFXTreeTableColumn fx:id="tcCommodityName" editable="false" prefWidth="150" text="商品名称"/>

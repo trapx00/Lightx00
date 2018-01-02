@@ -31,7 +31,7 @@
         </padding>
         <Label text="双击复制所需日志的地址"/>
     </HBox>
-    <JFXTreeTableView fx:id="logBackupTable" prefHeight="600.0" prefWidth="600.0">
+    <JFXTreeTableView fx:id="logBackupTable" prefHeight="2000.0" prefWidth="600.0">
         <columns>
             <JFXTreeTableColumn fx:id="logDateColumn" prefWidth="150" text="备份日期"/>
             <JFXTreeTableColumn fx:id="logContentColumn" prefWidth="400" text="日志地址"/>

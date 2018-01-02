@@ -20,7 +20,7 @@
             </font>
         </Label>
     </HBox>
-    <JFXTreeTableView fx:id="draftTable" maxHeight="2000.0" maxWidth="2000.0" prefHeight="600.0" prefWidth="600.0">
+    <JFXTreeTableView fx:id="draftTable" prefHeight="2000.0" >
         <columns>
             <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="150" text="日期"/>
             <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" text="草稿ID"/>

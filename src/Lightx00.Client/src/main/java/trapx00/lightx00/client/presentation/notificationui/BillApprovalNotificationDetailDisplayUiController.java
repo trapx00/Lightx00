@@ -65,6 +65,7 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
         PromptDialogHelper.start("入账成功！",String.format("单据%s已经被入账！", notificationVo.getBill().getId()))
             .addCloseButton("好","CHECK",null)
             .createAndShow();
+        FrameworkUiManager.getFrameworkUiController().refreshNotificationStatus();
 
     }
 
@@ -82,9 +83,10 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
     public void onBtnModifyClicked(ActionEvent actionEvent) {
         try {
             ExternalLoadedUiPackage uiPackage = billVo.continueWritableUi().continueWriting(billVo);
-            FrameworkUiManager.switchFunction(uiPackage.getController(), "修改单据",true);
+            FrameworkUiManager.switchFunction(uiPackage, "修改单据",true);
             close();
             abandon();
+            FrameworkUiManager.getFrameworkUiController().refreshNotificationStatus();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,7 +98,7 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
         PromptDialogHelper.start("丢弃成功！",String.format("单据%s已经被丢弃！", notificationVo.getBill().getId()))
             .addCloseButton("好","CHECK",null)
             .createAndShow();
-
+        FrameworkUiManager.getFrameworkUiController().refreshNotificationStatus();
     }
 
     public void onTfBillIdClicked(MouseEvent mouseEvent) {
