@@ -308,6 +308,7 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
         clientModifyUiController.clientAddress.setText(clientVo.getAddress());
         clientModifyUiController.clientZipCode.setText(clientVo.getZipCode() + "");
         clientModifyUiController.clientEmail.setText(clientVo.getEmail());
+        clientModifyUiController.clientReceivableQuota.setText(clientVo.getReceivableQuota()+"");
         clientModifyUiController.clientReceivable.setText(clientVo.getReceivable() + "");
         clientModifyUiController.clientPayable.setText(clientVo.getPayable() + "");
         clientModifyUiController.clientDefaultOperator.setText(clientVo.getDefaultOperatorId());

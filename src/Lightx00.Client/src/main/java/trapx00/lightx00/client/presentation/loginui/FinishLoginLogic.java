@@ -32,8 +32,8 @@ public class FinishLoginLogic {
             newStage.initStyle(StageStyle.UNDECORATED);
 
             newStage.setScene(scene);
-            newStage.setHeight(700);
-            newStage.setWidth(1200);
+            newStage.setHeight(960);
+            newStage.setWidth(1340);
 
             controller.setStage(newStage);
             newStage.show();

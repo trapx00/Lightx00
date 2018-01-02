@@ -146,7 +146,7 @@ public class ClientAddUiController implements ExternalLoadableUiController {
                     clientVo.detailUi().showContent(clientVo).getComponent())
                     .addCloseButton("确定", "CHECK", e -> {
                         try {
-                            blService.modify(clientVo);
+                            blService.add(clientVo);
                             PromptDialogHelper.start("提交成功！", "你的客户信息已经提交成功！")
                                     .addCloseButton("继续填写", "EDIT", e1 -> {
                                         onBtnResetClicked();
