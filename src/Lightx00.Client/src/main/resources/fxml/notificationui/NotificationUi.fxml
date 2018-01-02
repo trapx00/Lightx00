@@ -23,7 +23,7 @@
         </Label>
     </HBox>
 
-    <JFXTreeTableView fx:id="notificationTable" prefHeight="1000" >
+    <JFXTreeTableView fx:id="notificationTable" prefHeight="2000" >
         <columns>
             <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="150" text="日期"/>
             <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" resizable="false" text="消息"/>

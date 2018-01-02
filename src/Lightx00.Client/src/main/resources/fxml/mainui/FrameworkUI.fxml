@@ -34,17 +34,17 @@
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
-                    <JFXButton onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                    <JFXButton fx:id="btnNotification" onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
+                    <JFXButton fx:id="btnDraft" onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="CLASS" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
+                    <JFXButton onAction="#onBtnAboutClicked" prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="SENTIMENT_VERY_SATISFIED" glyphSize="20" />
                         </graphic>

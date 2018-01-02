@@ -4,10 +4,15 @@ import com.jfoenix.controls.JFXDialog;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import java.util.Date;
 
 public class FrameworkUiManager {
     private static FrameworkUiController frameworkUiController;
     private static EmployeeVo currentEmployee;
+
+    public static Date getLoginDate() {
+        return frameworkUiController.getLoginDate();
+    }
 
     public static FrameworkUiController getFrameworkUiController() {
         return frameworkUiController;

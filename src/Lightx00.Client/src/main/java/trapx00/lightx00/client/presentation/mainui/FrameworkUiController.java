@@ -18,8 +18,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
-import trapx00.lightx00.client.blservice.logblservice.LogBackupBlServiceFactory;
 import trapx00.lightx00.client.presentation.draftui.DraftUiController;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.logui.LogBackupUiController;
@@ -27,8 +25,7 @@ import trapx00.lightx00.client.presentation.logui.LogUiController;
 import trapx00.lightx00.client.presentation.notificationui.NotificationUiController;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Date;
 
 public class FrameworkUiController {
     public static final int DEPTH = 3;
@@ -45,8 +42,31 @@ public class FrameworkUiController {
     public MaterialIconView maximizeButtonGlyph;
     public Label promptLabel;
     public Text titleText;
+    public JFXButton btnNotification;
+    public JFXButton btnDraft;
     private ExternalLoadableUiController subController;
     private DialogStack dialogStack = new DialogStack();
+    private ExternalLoadedUiPackage notificationUi;
+    private ExternalLoadedUiPackage draftUi;
+    private Date loginDate;
+
+    public Date getLoginDate() {
+        return loginDate;
+    }
+
+    public int refreshNotificationStatus() {
+        NotificationUiController controller = notificationUi.getController();
+        int count = controller.updateItems();
+        btnNotification.setText(String.format("通知（%d）", count));
+        return count;
+    }
+
+    public int refreshDraftStatus() {
+        DraftUiController controller = draftUi.getController();
+        int count = controller.updateItems();
+        btnDraft.setText(String.format("草稿（%d）", count));
+        return count;
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -83,6 +103,13 @@ public class FrameworkUiController {
         switchBackToHome();
 
         promptLabel.setText("欢迎你！" + FrameworkUiManager.getCurrentEmployee().getName());
+
+
+        notificationUi = new NotificationUiController().load();
+        draftUi = new DraftUiController().load();
+        refreshDraftStatus();
+        refreshNotificationStatus();
+        loginDate = new Date();
     }
 
 
@@ -92,7 +119,7 @@ public class FrameworkUiController {
     }
 
     public void onDraftFunctionButtonClicked(ActionEvent event) {
-        switchFunction(DraftUiController.class, "草稿", true);
+        switchFunction(draftUi,"草稿", true);
     }
 
     public void onLogButtonClicked(ActionEvent actionEvent) {
@@ -104,7 +131,7 @@ public class FrameworkUiController {
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
-        switchFunction(NotificationUiController.class, "通知", true);
+        switchFunction(notificationUi, "通知", true);
 
     }
 
@@ -190,5 +217,9 @@ public class FrameworkUiController {
 
     public DialogStack getDialogStack() {
         return dialogStack;
+    }
+
+    public void onBtnAboutClicked(ActionEvent actionEvent) {
+
     }
 }

@@ -44,9 +44,10 @@ public class DraftUiController implements ExternalLoadableUiController {
         updateItems();
     }
 
-    public void updateItems() {
+    public int updateItems() {
         draftModels.clear();
         draftModels.addAll(Arrays.stream(blService.update()).map(DraftTableItemModel::new).collect(Collectors.toList()));
+        return draftModels.size();
 
     }
 
@@ -87,6 +88,7 @@ public class DraftUiController implements ExternalLoadableUiController {
         try {
             blService.delete(draftVo);
             PromptDialogHelper.start("删除成功！","草稿和草稿内容已经删除！").addCloseButton("好", "CHECK", e -> updateItems()).createAndShow();
+            FrameworkUiManager.getFrameworkUiController().refreshDraftStatus();
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("网络错误！","网络错误，信息是：" + e.getMessage()).addCloseButton("好","CHECK",null).createAndShow();
         }
@@ -107,8 +109,9 @@ public class DraftUiController implements ExternalLoadableUiController {
                     .addCloseButton("确定","CHECK",e -> {
                         try {
                             ExternalLoadedUiPackage ui = model.getDraft().continueWritableUi().continueWriting(model.getDraft());
-                            FrameworkUiManager.getFrameworkUiController().switchFunction(ui, "继续填写草稿",true);
+                            FrameworkUiManager.switchFunction(ui, "继续填写草稿",true);
                             blService.delete(model.toDraftVo());
+                            FrameworkUiManager.getFrameworkUiController().refreshDraftStatus();
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }

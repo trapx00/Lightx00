@@ -24,7 +24,7 @@
     </HBox>
 
 
-    <JFXMasonryPane>
+    <JFXMasonryPane prefHeight="100">
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfId" editable="false" promptText="ID"/>
         </StackPane>
@@ -45,7 +45,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <JFXTreeTableView fx:id="tbTranscations" prefHeight="300.0" prefWidth="400.0">
+        <JFXTreeTableView fx:id="tbTranscations" prefHeight="600.0" prefWidth="400.0" maxHeight="2000">
             <columns>
                 <JFXTreeTableColumn fx:id="tcBankAccount" prefWidth="100" text="银行账户"/>
                 <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="金额" />
