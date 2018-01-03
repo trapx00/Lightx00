@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.presentation.promotionui.mock;
 
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.promotionui.ComSalePromotionUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionUiController;
 import trapx00.lightx00.client.vo.Draftable;
 
 public class ComSalePromotionUiControllerMock extends ComSalePromotionUiController {

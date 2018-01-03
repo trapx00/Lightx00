@@ -2,12 +2,14 @@ package trapx00.lightx00.client.presentation.mainui;
 
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.presentation.approvalui.AuditUiController;
+import trapx00.lightx00.client.presentation.approvalui.ManagerHomeUiController;
 import trapx00.lightx00.client.presentation.financeui.SaleDetailUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeHistoryUiController;
 import trapx00.lightx00.client.presentation.financeui.TradeSituationUiController;
-import trapx00.lightx00.client.presentation.promotionui.ClientPromotionUiController;
-import trapx00.lightx00.client.presentation.promotionui.ComSalePromotionUiController;
-import trapx00.lightx00.client.presentation.promotionui.TotalPricePromotionUiController;
+import trapx00.lightx00.client.presentation.promotionui.PromotionManagementUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.ClientPromotionUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.TotalPricePromotionUiController;
 
 public class ManagerUiController extends FrameworkUiController {
 
@@ -41,7 +43,17 @@ public class ManagerUiController extends FrameworkUiController {
 
     }
 
+    public void onPromotionManagementFunctionClicked(ActionEvent actionEvent) {
+        switchFunction(PromotionManagementUiController.class, "管理促销策略", true);
+
+    }
+
    public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {
+        switchFunction(SaleDetailUiController.class, "查看销售明细表", true);
+
+    }
+
+    public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
         switchFunction(TradeSituationUiController.class, "查看经营情况表", true);
 
     }
@@ -51,17 +63,14 @@ public class ManagerUiController extends FrameworkUiController {
 
     }
 
-    public void onTradeSituationFunctionClicked(ActionEvent actionEvent) {
-        switchFunction(SaleDetailUiController.class, "查看销售明细表", true);
 
-    }
     /*
-    增加一个HomeUiController后，重写这个方法做到退回主界面。
-
+    * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+    */
     @Override
     public void switchBackToHome() {
-        switchFunction(HomeUiController.class, "主界面",true);
+        switchFunction(ManagerHomeUiController.class, "主界面",true);
     }
-    */
+
 
 }
