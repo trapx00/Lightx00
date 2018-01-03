@@ -2,8 +2,11 @@ package trapx00.lightx00.client.vo.manager.promotion;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.promotionbl.factory.ClientPromotionBlFactory;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.ClientPromotionDetailUi;
+import trapx00.lightx00.client.presentation.promotionui.detail.PromotionDetailUi;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
@@ -66,14 +69,8 @@ public class ClientPromotionVo extends PromotionVoBase {
         return null;
     }
 
-
-    /**
-     * 显示详细信息UI
-     *
-     * @return 显示详细信息UI
-     */
     @Override
-    public ContentDisplayUi contentDisplayUi() {
-        return null;
+    public PromotionDetailUi promotionDetailUi() {
+        return new ClientPromotionDetailUi();
     }
 }

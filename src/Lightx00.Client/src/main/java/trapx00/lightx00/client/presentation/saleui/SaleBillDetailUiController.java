@@ -119,6 +119,7 @@ public class SaleBillDetailUiController extends BillDetailUi {
         saleBillDetailUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
         saleBillDetailUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
         saleBillDetailUiController.tfToken.setText(saleBillVo.getToken() + "");
+        saleBillDetailUiController.tfUltiTotal.setText(saleBillVo.getUltiTotal()+"");
         saleBillDetailUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
         saleBillDetailUiController.tfGiftToken.setText(saleBillVo.getGiftToken()+"");
         saleBillDetailUiController.tfComment.setText(saleBillVo.getComment());

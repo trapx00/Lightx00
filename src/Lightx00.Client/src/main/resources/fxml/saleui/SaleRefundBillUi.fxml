@@ -25,7 +25,7 @@
         </Label>
     </HBox>
 
-    <JFXMasonryPane>
+    <JFXMasonryPane prefHeight="400" prefWidth="200">
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField labelFloat="true" fx:id="tfBillId" editable="false" promptText="单据编号"/>
         </StackPane>

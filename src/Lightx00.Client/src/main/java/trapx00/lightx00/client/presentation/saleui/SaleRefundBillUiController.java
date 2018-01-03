@@ -13,6 +13,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
@@ -44,6 +46,9 @@ import trapx00.lightx00.shared.util.DateHelper;
 import java.util.Date;
 
 public class SaleRefundBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
+
+    @FXML
+    private VBox dialogContainer;
     @FXML
     private JFXTextField tfBillId;
     @FXML
@@ -210,6 +215,11 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         tfSalesmanNameProperty.addListener(event -> {
             if (tfSalesmanNameProperty == null || tfSalesmanNameProperty.get().length() == 0) {
                 tfSalesmanName.validate();
+            }
+        });
+        dialogContainer.setOnKeyPressed(event -> {
+            if(event.getCode()== KeyCode.ENTER){
+                onBtnSubmitClicked();
             }
         });
     }

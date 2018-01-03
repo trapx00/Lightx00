@@ -5,34 +5,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import trapx00.lightx00.client.presentation.clientui.ClientUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
-import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController;
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleBillUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 import trapx00.lightx00.shared.util.DateHelper;
 
-public class SaleStaffHomeUiController extends FrameworkUiController implements ExternalLoadableUiController {
+public class SaleStaffHomeUiController extends BaseHomepageUiController implements ExternalLoadableUiController {
     @FXML
-    private Text welcomeText;
-
-    @FXML
-    private Text welcomeTimeText;
-
-    @FXML
-    private JFXButton notificationButton;
-
-    @FXML
-    private JFXButton draftButton;
+    private Text textWelcome;
+    private SaleStaffUiController uiController = (SaleStaffUiController) FrameworkUiManager.getFrameworkUiController();
 
     public void initialize() {
-        welcomeText.setText(welcomeText.getText() + FrameworkUiManager.getCurrentEmployee().getPosition() + " " + FrameworkUiManager.getCurrentEmployee().getName());
-        welcomeTimeText.setText(welcomeTimeText.getText() + DateHelper.fromTimestamp(System.currentTimeMillis()));
-        draftButton.setText("8");
-        notificationButton.setText("12");
+        super.refresh();
+        textWelcome.setText(textWelcome.getText() + FrameworkUiManager.getCurrentEmployee().getPosition() + " " + FrameworkUiManager.getCurrentEmployee().getName());
     }
 
     /**
@@ -68,5 +55,15 @@ public class SaleStaffHomeUiController extends FrameworkUiController implements 
     @FXML
     private void onSaleRefundBillFunctionClicked(ActionEvent actionEvent) {
         FrameworkUiManager.switchFunction(SaleRefundBillUiController.class, "制定销售退货单", true);
+    }
+
+    @FXML
+    private void onBtnNotificationClicked(ActionEvent actionEvent) {
+        uiController.onNotificationFunctionButtonClicked(actionEvent);
+    }
+
+    @FXML
+    private void onBtnDraftButtonClicked(ActionEvent actionEvent) {
+        uiController.onDraftFunctionButtonClicked(actionEvent);
     }
 }

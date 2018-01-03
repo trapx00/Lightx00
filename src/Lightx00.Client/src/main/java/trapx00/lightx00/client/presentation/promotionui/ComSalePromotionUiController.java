@@ -14,6 +14,7 @@ import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlSe
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.promotionui.factory.PromotionSelectionFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;

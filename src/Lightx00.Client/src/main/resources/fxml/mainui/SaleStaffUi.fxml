@@ -70,22 +70,23 @@
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
+                    <!--复制这个按钮到这个地方-->
                     <JFXButton onAction="#switchBackToHome" prefHeight="60" prefWidth="200" text="主界面" textFill="#000000">
                         <graphic>
                             <FontAwesomeIconView glyphName="HOME" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                    <JFXButton fx:id="btnNotification" onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
+                    <JFXButton fx:id="btnDraft" onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="CLASS" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
+                    <JFXButton onAction="#onBtnAboutClicked" prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="SENTIMENT_VERY_SATISFIED" glyphSize="20" />
                         </graphic>
@@ -137,225 +138,6 @@
                 </top>
                 <center>
                     <StackPane fx:id="contentPane" alignment="CENTER" styleClass="floatingPane">
-                        <BorderPane>
-                            <top>
-                                <VBox>
-                                    <HBox>
-                                        <Text fx:id="welcomeText" fill="black" text="欢迎~,">
-                                            <font>
-                                                <Font size="32.00" />
-                                            </font>
-                                        </Text>
-                                        <padding>
-                                            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                                        </padding>
-                                    </HBox>
-                                    <HBox>
-                                        <Text fx:id="welcomeTimeText" fill="black" text="登录时间：">
-                                            <font>
-                                                <Font size="32.00" />
-                                            </font>
-                                        </Text>
-                                        <padding>
-                                            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                                        </padding>
-                                    </HBox>
-                                </VBox>
-                            </top>
-                            <center>
-                                <HBox alignment="TOP_CENTER">
-                                    <VBox>
-                                        <JFXButton buttonType="RAISED" onAction="#onClientFunctionClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="">
-                                            <graphic>
-                                                <MaterialIconView glyphName="FILTER_TILT_SHIFT" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="10.0" />
-                                            </VBox.margin>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="管理客户">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                                <HBox.margin>
-                                                    <Insets left="10.0" />
-                                                </HBox.margin>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                    </VBox>
-                                    <VBox>
-                                        <JFXButton buttonType="RAISED" onAction="#onPurchaseBillFunctionClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="">
-                                            <graphic>
-                                                <MaterialIconView glyphName="CONTACTS" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="30.0" />
-                                            </VBox.margin>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="填写进货单">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                                <HBox.margin>
-                                                    <Insets left="15.0" />
-                                                </HBox.margin>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                        <HBox.margin>
-                                            <Insets />
-                                        </HBox.margin>
-                                    </VBox>
-                                    <VBox>
-                                        <JFXButton buttonType="RAISED" onAction="#onPurchaseRefundBillFunctionClicked" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="">
-                                            <graphic>
-                                                <MaterialIconView glyphName="CHROME_READER_MODE" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="30.0" />
-                                            </VBox.margin>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="填写进货退货单">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                                <HBox.margin>
-                                                    <Insets />
-                                                </HBox.margin>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                    </VBox>
-                                    <VBox>
-                                        <JFXButton buttonType="RAISED" onAction="#onSaleBillFunctionClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="">
-                                            <graphic>
-                                                <MaterialIconView glyphName="GAVEL" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="20.0" />
-                                            </VBox.margin>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="填写销售单">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                    </VBox>
-                                    <VBox prefWidth="173.0">
-                                        <JFXButton buttonType="RAISED" onAction="#onSaleRefundBillFunctionClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="">
-                                            <graphic>
-                                                <MaterialIconView glyphName="LOCAL_GROCERY_STORE" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="40.0" />
-                                            </VBox.margin>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="填写销售退货单">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                    </VBox>
-                                    <BorderPane.margin>
-                                        <Insets right="-20.0" />
-                                    </BorderPane.margin>
-                                </HBox>
-                            </center>
-                            <bottom>
-                                <HBox alignment="TOP_CENTER">
-                                    <VBox>
-                                        <JFXButton fx:id="notificationButton" buttonType="RAISED" onAction="#onNotificationFunctionButtonClicked" style="-fx-background-color: #CC0000; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="0">
-                                            <graphic>
-                                                <MaterialIconView glyphName="MESSAGE" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="40.0" right="40.0" />
-                                            </VBox.margin>
-                                            <font>
-                                                <Font size="30.0" />
-                                            </font>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="通知">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                    </VBox>
-                                    <VBox>
-                                        <JFXButton fx:id="draftButton" buttonType="RAISED" onAction="#onDraftFunctionButtonClicked" style="-fx-background-color: #CC0000; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="0">
-                                            <graphic>
-                                                <MaterialIconView glyphName="CLASS" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
-                                            </graphic>
-                                            <VBox.margin>
-                                                <Insets left="40.0" right="40.0" />
-                                            </VBox.margin>
-                                            <font>
-                                                <Font size="30.0" />
-                                            </font>
-                                        </JFXButton>
-                                        <HBox alignment="CENTER">
-                                            <Text fill="black" text="草稿">
-                                                <font>
-                                                    <Font size="22.00" />
-                                                </font>
-                                            </Text>
-                                            <padding>
-                                                <Insets bottom="20.0" top="20.0" />
-                                            </padding>
-                                        </HBox>
-                                        <padding>
-                                            <Insets bottom="20.0" top="20.0" />
-                                        </padding>
-                                    </VBox>
-                                </HBox>
-                            </bottom>
-                            <padding>
-                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                            </padding>
-                        </BorderPane>
                         <BorderPane.margin>
                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </BorderPane.margin>
@@ -364,9 +146,9 @@
                 <bottom>
                     <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="1000" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="1000" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="2000" />
+                            <ColumnConstraints prefWidth="1000" />
+                            <ColumnConstraints prefWidth="1000" />
+                            <ColumnConstraints prefWidth="1000" />
                         </columnConstraints>
                         <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -374,10 +156,10 @@
 
 
                         <HBox alignment="CENTER" GridPane.columnIndex="0">
-                            <JFXButton onAction="#onLogButtonClicked" prefWidth="1000.0" text="日志" />
+                            <JFXButton onAction="#onLogButtonClicked" text="日志" />
                         </HBox>
                         <HBox alignment="CENTER" GridPane.columnIndex="1">
-                            <JFXButton onAction="#onLogFetchButtonClicked" prefWidth="1000.0" text="取回远程日志" />
+                            <JFXButton onAction="#onLogFetchButtonClicked" text="取回远程日志" />
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="2">
                             <MaterialIconView glyphName="SIGNAL_CELLULAR_4_BAR" glyphSize="16" glyphStyle="-fx-background-color: #DDDDDD" />
