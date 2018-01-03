@@ -51,9 +51,30 @@ public class BaseDatabaseFactory {
         }
     }
 
-    public static void init() throws SQLException {
+    private static void basicInit() throws SQLException {
         System.setProperty("com.j256.ormlite.logger.level", "ERROR"); //this closes ORMLite log
         BaseDatabaseFactory.connectionSource = new JdbcConnectionSource(connectionString);
+    }
+
+    public static void init() throws SQLException {
+        basicInit();
+        initializeData();
+    }
+
+    public static void initTest() throws SQLException {
+        basicInit();
+        dropAllTables();
+    }
+
+    public static void dropAllTables() {
+        FastClasspathScanner scanner = new FastClasspathScanner();
+        scanner.matchClassesWithAnnotation(DatabaseTable.class, classWithAnnotation -> {
+            try {
+                TableUtils.dropTable(connectionSource, classWithAnnotation, true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }).scan();
         initializeTables();
     }
 
@@ -69,7 +90,7 @@ public class BaseDatabaseFactory {
             }
         }).scan();
 
-        initializeData();
+
     }
 
     private static void initializeData() {

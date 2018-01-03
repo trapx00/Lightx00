@@ -11,6 +11,17 @@ public class TradeHistoryQueryVo { //经营历程表查询条件
     private String[] clientIds;
     private String[] operatorIds;
     private int repository;
+    private boolean empty = false;
+
+    public static TradeHistoryQueryVo empty() {
+        TradeHistoryQueryVo tradeHistoryQueryVo = new TradeHistoryQueryVo();
+        tradeHistoryQueryVo.empty = true;
+        return tradeHistoryQueryVo;
+    }
+
+    public boolean isEmpty() {
+        return empty;
+    }
 
     public TradeHistoryQueryVo(Date start, Date end, BillType[] billTypes, String[] clientIds, String[] operatorIds, int repository) {
         this.start = start;

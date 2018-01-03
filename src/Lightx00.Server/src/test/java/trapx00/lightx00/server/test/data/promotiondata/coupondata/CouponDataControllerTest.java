@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class CouponDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }

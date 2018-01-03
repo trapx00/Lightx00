@@ -22,8 +22,6 @@ testjob:
     - cd ./src/
     - chmod +x gradlew
     - ./gradlew ':Lightx00.Server:check'
-    - chmod +x test.sh
-    - ./test.sh
   only:
     - develop
     - master
