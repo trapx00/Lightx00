@@ -21,8 +21,7 @@ import trapx00.lightx00.shared.util.DateHelper;
 import java.util.Date;
 
 public class InventoryCheckUiController implements ExternalLoadableUiController {
-    @FXML
-    private JFXDatePicker startDatePicker;
+    @FXML private JFXDatePicker startDatePicker;
     @FXML private JFXDatePicker endDatePicker;
     @FXML private JFXButton btnFilter;
     @FXML private JFXTreeTableView<InventoryViewModel> tableView;

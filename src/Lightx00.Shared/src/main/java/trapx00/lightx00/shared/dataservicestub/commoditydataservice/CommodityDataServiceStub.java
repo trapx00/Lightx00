@@ -24,7 +24,7 @@ public class CommodityDataServiceStub implements CommodityDataService {
     public CommodityPo[] query(CommodityQueryVo commodityQueryVo) {
         return  new CommodityPo[]{
                 new CommodityPo("C0001", "LedLight", "Led", 98, new Date(),
-                        "1", "2", 56, 60, 90, 99, 50)
+                        "1", "2", 56, 60, 90, 99, 50,0)
         };
     }
 

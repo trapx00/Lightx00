@@ -112,11 +112,11 @@ public class BaseDatabaseFactory {
             TableUtils.dropTable(commodityPos, true);
             TableUtils.createTableIfNotExists(connectionSource, CommodityPo.class);
             commodityPos.create(new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"һ",
-                    "01",34,34,34,34,100));
+                    "01",34,34,34,34,100,0));
             commodityPos.create(new CommodityPo("PRO-0002-0002","SmaqwellLed","PRO-0002",13,new Date(),"һ",
-                    "01",34,34,34,34,100));
+                    "01",34,34,34,34,100,0));
             commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"һ",
-                    "01",34,34,34,34,100));
+                    "01",34,34,34,34,100,0));
 
             Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
             TableUtils.dropTable(saleBillPos,true);

@@ -10,7 +10,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import java.util.Date;
 
 public class SaleDetailBlControllerMock extends SaleDetailBlController {
-    private CommodityVo commodityVo = new CommodityVo("123","123","123",10,new Date(),"123","123",10,10,10,10,10);
+    private CommodityVo commodityVo = new CommodityVo("123","123","123",10,new Date(),"123","123",10,10,10,10,10,0);
     /**
      * Queries SaleDetail.
      *

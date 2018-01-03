@@ -391,6 +391,18 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
                 .createAndShow();
 
     }
+    public void onAutoFilledClicked(){
+        CommodityVo [] commodityVos=blService1.query(new CommodityQueryVo());
+        inventoryGiftItemModelObservableList.clear();
+        for(CommodityVo temp:commodityVos){
+            if(temp.getAmount()<temp.getWarningValue()){
+                temp.setActualAmount(temp.getAmount());
+                blService1.modify(temp);
+                jfxComboBox.getSelectionModel().select(2);
+                inventoryGiftItemModelObservableList.add(new CommoditySelectionItemModel(temp));
+            }
+        }
+    }
 
 
 

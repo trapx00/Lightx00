@@ -38,10 +38,15 @@ public class CommodityPo implements Serializable {
     private double inventoryNum;//报警报溢数量
 
 
+
+    @DatabaseField
+    private double actualValue;
+
+
     public CommodityPo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
                        double recentPurchasePrice, double retailPrice, double recentRetailPrice,
-                       double warningValue) {
+                       double warningValue,double actualValue) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -54,6 +59,7 @@ public class CommodityPo implements Serializable {
         this.retailPrice = retailPrice;
         this.recentRetailPrice = recentRetailPrice;
         this.warningValue = warningValue;
+        this.actualValue=actualValue;
     }
 
     public CommodityPo(){
@@ -63,6 +69,13 @@ public class CommodityPo implements Serializable {
         return id;
     }
 
+    public double getActualValue() {
+        return actualValue;
+    }
+
+    public void setActualValue(double actualValue) {
+        this.actualValue = actualValue;
+    }
     public double getInventoryNum() {
         return inventoryNum;
     }

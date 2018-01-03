@@ -98,6 +98,15 @@
                 <MaterialIconView glyphName="CHECK" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
             </graphic>
         </JFXButton>
+        <JFXButton fx:id="exportButton" buttonType="RAISED" onAction="#onAutoFilledClicked"
+                   style="-fx-background-color: #ff6f00; -fx-text-fill: #FFFFFF" text="自动填充报警单">
+            <graphic>
+                <MaterialIconView glyphName="SHARE" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0"/>
+            </HBox.margin>
+        </JFXButton>
         <JFXButton fx:id="btnReset" buttonType="RAISED" onAction="#onBtnResetClicked"
                    style="-fx-background-color: #e64a19; -fx-text-fill: #FFFFFF" text="重置">
             <graphic>

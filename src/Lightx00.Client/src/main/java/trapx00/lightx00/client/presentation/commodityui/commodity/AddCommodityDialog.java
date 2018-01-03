@@ -102,7 +102,8 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
                         Double.parseDouble(tfpurchasePrice.getText()),
                         Double.parseDouble(tfretailPrice.getText()),
                         Double.parseDouble(tfretailPrice.getText()),
-                        Double.parseDouble(tfwarningValue.getText())
+                        Double.parseDouble(tfwarningValue.getText()),
+                   0
                 ));
             PromptDialogHelper.start("创建成功！","已经创建新的商品。")
                     .addCloseButton("好","CHECK",e -> close())

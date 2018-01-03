@@ -17,7 +17,8 @@ public class CommodityBlServiceDriver {
     Date date=new Date() ;
 
     CommodityVo LedLight=new CommodityVo("C0001","LedLight", "Led", 98, date,
-    "1", "2", 56, 60, 90, 99, 50);
+    "1", "2", 56, 60, 90, 99, 50
+    ,0);
 
     CommodityVo[] commoditys;
 

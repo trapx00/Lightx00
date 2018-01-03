@@ -30,7 +30,7 @@ public class CommodityVo {
     public CommodityVo(String id, String name, String type, double amount, Date productionDate,
                        String batch, String batchNo, double purchasePrice,
                        double recentPurchasePrice, double retailPrice, double recentRetailPrice,
-                       double warningValue) {
+                       double warningValue,double actualAmount) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -43,6 +43,7 @@ public class CommodityVo {
         this.retailPrice = retailPrice;
         this.recentRetailPrice = recentRetailPrice;
         this.warningValue = warningValue;
+        this.actualAmount=actualAmount;
     }
 
     public String getId() {

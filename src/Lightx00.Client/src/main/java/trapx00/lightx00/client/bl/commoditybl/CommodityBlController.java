@@ -238,7 +238,7 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
         return new CommodityPo(commodityVo.getId(),commodityVo.getName(),commodityVo.getType(),commodityVo.getAmount(),
                 commodityVo.getProductionDate(),commodityVo.getBatch(),commodityVo.getBatchNo(),commodityVo.getPurchasePrice(),
                 commodityVo.getRecentPurchasePrice(),commodityVo.getRetailPrice(),commodityVo.getRecentRetailPrice(),
-                commodityVo.getWarningValue());
+                commodityVo.getWarningValue(),commodityVo.getActualAmount());
     }
 
     @Override
@@ -246,6 +246,6 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
         return new CommodityVo(commodityPo.getId(),commodityPo.getName(),commodityPo.getType(),commodityPo.getAmount(),
                 commodityPo.getProductionDate(),commodityPo.getBatch(),commodityPo.getBatchNo(),commodityPo.getPurchasePrice(),
                 commodityPo.getRecentPurchasePrice(),commodityPo.getRetailPrice(),commodityPo.getRecentRetailPrice(),
-                commodityPo.getWarningValue());
+                commodityPo.getWarningValue(),commodityPo.getActualValue());
     }
 }

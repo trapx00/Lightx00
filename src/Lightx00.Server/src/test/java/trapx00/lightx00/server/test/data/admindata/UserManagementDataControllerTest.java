@@ -29,7 +29,7 @@ public class UserManagementDataControllerTest {
             e.printStackTrace();
         }
     }
-    private UserManagementDataService service = AdminDataFactory.getUserManagementDataService();
+    private UserManagementDataService service = AdminDataFactory.getService();
     private Dao<ManagerPo, String> managerDao = AdminDataDaoFactory.getManagerDao();
     private Dao<FinanceStaffPo, String> financeStaffDao = AdminDataDaoFactory.getFinanceStaffDao();
     private Dao<InventoryStaffPo,String> inventoryStaffPos=AdminDataDaoFactory.getInventoryStaffDao();
