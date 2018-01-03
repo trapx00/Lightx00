@@ -65,6 +65,9 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
                 System.out.println(inventoryViewItem.getInventoryAmount());
                 inventoryViewItem.setInventoryMoney(inventoryViewItem.getInventoryMoney() + purchaseBillVos[i].getCommodityList()[j].getPrice()
                         *purchaseBillVos[i].getCommodityList()[j].getNumber());
+                inventoryViewItem.setInsellnum(inventoryViewItem.getInsellnum()+purchaseBillVos[i].getCommodityList()[j].getNumber());
+                inventoryViewItem.setOutSoldPrice(inventoryViewItem.getOutSoldPrice()+purchaseBillVos[i].getCommodityList()[j].getNumber()*
+                purchaseBillVos[i].getCommodityList()[j].getPrice());
                 System.out.println(inventoryViewItem.getInventoryMoney());
             }
         }
@@ -81,6 +84,9 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
                 inventoryViewItem.setOutOfInventoryAmount(inventoryViewItem.getOutOfInventoryAmount() + saleBillVos[i].getCommodityList()[j].getNumber());
                 inventoryViewItem.setOutOfInVentoryMoney(inventoryViewItem.getOutOfInVentoryMoney() + saleBillVos[i].getCommodityList()[j].getPrice()
                         *saleBillVos[i].getCommodityList()[j].getNumber());
+                inventoryViewItem.setInSoldPrice(inventoryViewItem.getInSoldPrice()+saleBillVos[i].getCommodityList()[j].getNumber()*
+                saleBillVos[i].getCommodityList()[j].getPrice());
+                inventoryViewItem.setSolerNum(inventoryViewItem.getSolerNum()+saleBillVos[i].getCommodityList()[j].getNumber());
             }
         }
 
@@ -93,8 +99,6 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
         }
 
         inventoryViewItem.setSum(inventoryViewItem.getInventoryAmount()-inventoryViewItem.getOutOfInventoryAmount());
-        inventoryViewItem.setInSoldPrice(inventoryViewItem.getInventoryMoney()/inventoryViewItem.getInventoryAmount());
-        inventoryViewItem.setOutSoldPrice(inventoryViewItem.getOutOfInVentoryMoney()/inventoryViewItem.getOutOfInventoryAmount());
         inventoryViewVo.setItems(inventoryViewItem);
         System.out.println(inventoryViewVo.getItems().getInventoryAmount());
         System.out.println(inventoryViewVo.getItems().getSum());

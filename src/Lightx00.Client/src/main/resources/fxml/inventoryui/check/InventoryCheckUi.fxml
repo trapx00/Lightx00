@@ -57,7 +57,9 @@
             <JFXTreeTableColumn fx:id="tcoutOfInventoryAmount" prefWidth="150" text="出库数量" />
             <JFXTreeTableColumn fx:id="tcoutOfInVentoryMoney" prefWidth="150" text="出库金额" />
             <JFXTreeTableColumn fx:id="tcinSold" prefWidth="150" text="销售金额" />
+            <JFXTreeTableColumn fx:id="tcsoldNum" prefWidth="150" text="销售数量" />
             <JFXTreeTableColumn fx:id="tcoutSold" prefWidth="150" text="进货金额" />
+            <JFXTreeTableColumn fx:id="tcinvennum" prefWidth="150" text="进货数量" />
             <JFXTreeTableColumn fx:id="tcsum" prefWidth="150" text="合计" />
         </columns>
     </JFXTreeTableView>
