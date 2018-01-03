@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class SaleRefundBillDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }

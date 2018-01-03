@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNull;
 public class UserManagementDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class UserManagementDataControllerTest {
     private Dao<ManagerPo, String> managerDao = AdminDataDaoFactory.getManagerDao();
     private Dao<FinanceStaffPo, String> financeStaffDao = AdminDataDaoFactory.getFinanceStaffDao();
     private Dao<InventoryStaffPo,String> inventoryStaffPos=AdminDataDaoFactory.getInventoryStaffDao();
-    private ManagerPo account = new ManagerPo("10001","总经理",new Date(),"123456", EmployeeState.Active);
+    private ManagerPo account = new ManagerPo("001","总经理",new Date(),"123456", EmployeeState.Active);
     private FinanceStaffPo financeStaffPo = new FinanceStaffPo("10002","财务人员",new Date(), "123456",EmployeeState.Active,true);
     private InventoryStaffPo inventoryStaffPo=new InventoryStaffPo("10003","库存管理",new Date(),"1215",EmployeeState.Active);
 
@@ -48,7 +48,7 @@ public class UserManagementDataControllerTest {
         managerDao.create(anotherManagerPo);
         try {
             assertEquals(2, service.query(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.Manager, new SpecificUserAccountQueryVo())).length);
-            assertEquals(1, service.query(new UserAccountQueryVo().addQueryVoForAllEmployeePosition((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo().eq("username","123"))).length);
+            assertEquals(1, service.query(new UserAccountQueryVo().addQueryVoForAllEmployeePosition((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo().eq("name","总经理"))).length);
             assertEquals(0, service.query(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.Admin, new SpecificUserAccountQueryVo())).length);
         } finally {
             managerDao.deleteById(account.getId());

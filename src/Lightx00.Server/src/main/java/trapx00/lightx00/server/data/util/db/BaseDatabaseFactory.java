@@ -55,9 +55,30 @@ public class BaseDatabaseFactory {
         }
     }
 
-    public static void init() throws SQLException {
+    private static void basicInit() throws SQLException {
         System.setProperty("com.j256.ormlite.logger.level", "ERROR"); //this closes ORMLite log
         BaseDatabaseFactory.connectionSource = new JdbcConnectionSource(connectionString);
+    }
+
+    public static void init() throws SQLException {
+        basicInit();
+        initializeData();
+    }
+
+    public static void initTest() throws SQLException {
+        basicInit();
+        dropAllTables();
+    }
+
+    public static void dropAllTables() {
+        FastClasspathScanner scanner = new FastClasspathScanner();
+        scanner.matchClassesWithAnnotation(DatabaseTable.class, classWithAnnotation -> {
+            try {
+                TableUtils.dropTable(connectionSource, classWithAnnotation, true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }).scan();
         initializeTables();
     }
 
@@ -73,7 +94,7 @@ public class BaseDatabaseFactory {
             }
         }).scan();
 
-        initializeData();
+
     }
 
     private static void initializeData() {
@@ -125,18 +146,6 @@ public class BaseDatabaseFactory {
             Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
             TableUtils.dropTable(saleBillPos,true);
             TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00002", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
-                    "",1,"2"
-                    ,null, 10));
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00003", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
-                    "",1,"2"
-                    ,null, 10));
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00004", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
-                    "",1,"2"
-                    ,null, 10));
 
             Dao<TotalPricePromotionPo,String> promotions = createDao(TotalPricePromotionPo.class);
             TableUtils.dropTable(promotions,true);

@@ -36,6 +36,7 @@ import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.presentation.promotionui.PromotionSelection;
 import trapx00.lightx00.client.presentation.promotionui.factory.PromotionSelectionFactory;
+import trapx00.lightx00.client.presentation.saleui.factory.SaleCommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -140,7 +141,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     private ClientBlService clientBlService = ClientBlServiceFactory.getInstance();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
-    private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
+    private SaleCommodityFillUiController saleCommodityFillUiController = SaleCommodityFillUiFactory.getSaleCommodityFillUiController();
     private PromotionSelection promotionSelection = PromotionSelectionFactory.getPromotionSelection();
     private StringProperty tfClientIdProperty = new SimpleStringProperty("");
     private StringProperty tfClientNameProperty = new SimpleStringProperty("");
@@ -368,8 +369,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     @FXML
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
-            commodityFillUiController.showCommodityFillDialog(y -> {
-                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
+            saleCommodityFillUiController.showSaleCommodityFillDialog(y -> {
+                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), y.getPrice(), y.getPrice() * y.getNumber(), y.getComment())));
             });
         });
     }

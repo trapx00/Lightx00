@@ -63,7 +63,7 @@ public class DraftUiController implements ExternalLoadableUiController {
 
 
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        updateItems();
+        FrameworkUiManager.getFrameworkUiController().refreshDraftStatus();
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {

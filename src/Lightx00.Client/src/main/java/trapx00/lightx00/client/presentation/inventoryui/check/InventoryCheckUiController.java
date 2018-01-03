@@ -9,6 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
@@ -32,9 +36,13 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
     @FXML private JFXTreeTableColumn<InventoryViewModel, Double> tcsum;
     @FXML private JFXTreeTableColumn<InventoryViewModel, Double> tcinSold;
     @FXML private JFXTreeTableColumn<InventoryViewModel, Double> tcoutSold;
+    @FXML private JFXTreeTableColumn<InventoryViewModel,Double> tcsoldNum;//销售数量
+    @FXML private JFXTreeTableColumn<InventoryViewModel,Double> tcinvennum;//进货数量
 
     private ObservableList<InventoryViewModel> viewModels = FXCollections.observableArrayList();
     private InventoryCheckBlService blService= InventoryCheckBlServiceFactory.getInstance();
+    private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
+    private PurchaseBillBlInfo purchaseBillBlInfo= PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
 
     public void onBtnFilterClicked(ActionEvent actionEvent) {
         updateItems();
@@ -46,15 +54,14 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
     public void updateItems() {
 
         InventoryViewVo inventoryViewVo=null;
+        Date beginTime=DateHelper.fromLocalDate(startDatePicker.getValue());
+        Date endTime=DateHelper.fromLocalDate(endDatePicker.getValue());
             try {
                 inventoryViewVo=blService.getInventoryView(
-                        DateHelper.fromLocalDate(startDatePicker.getValue()),
-                        DateHelper.fromLocalDate(endDatePicker.getValue()));
+                        beginTime,
+                        endTime);
                 System.out.println(inventoryViewVo.getId());
-                viewModels.add(new InventoryViewModel(new InventoryViewItem(new Date(),inventoryViewVo.getItems().getInventoryAmount(),
-                        inventoryViewVo.getItems().getInventoryMoney(),inventoryViewVo.getItems().getOutOfInventoryAmount()
-                        ,inventoryViewVo.getItems().getOutOfInVentoryMoney()
-                        ,inventoryViewVo.getItems().getSum(),inventoryViewVo.getItems().getInSoldPrice(),inventoryViewVo.getItems().getOutSoldPrice())));
+                viewModels.add(new InventoryViewModel(inventoryViewVo.getItems()));
             } catch (Exception ignored) { }
 
 
@@ -69,8 +76,10 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
         tcoutOfInVentoryMoney.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getOutOfInVentoryMoney()));
         tcsum.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getSum()));
         tcinSold.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getInSoldPrice()));
-        tcoutSold.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getOutOfInVentoryMoney()));
+        tcoutSold.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getOutSoldPrice()));
 
+        tcinvennum.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getInsellnum()));
+        tcsoldNum.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getInventorViewItem().getSolerNum()));
         TreeItem<InventoryViewModel> root = new RecursiveTreeItem<>(viewModels, RecursiveTreeObject::getChildren);
         tableView.setRoot(root);
         tableView.setShowRoot(false);

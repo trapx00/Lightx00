@@ -74,6 +74,11 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
     @Override
     public TradeHistoryVo query(TradeHistoryQueryVo query) {
         BaseQueryVo baseQueryVo = new BaseQueryVo().ne("state", BillState.Draft);
+
+        if (query.getBillTypes() == null) {
+            query.setBillTypes(BillType.values());
+        }
+
         if (query.getStart() != null && query.getEnd() != null) {
             baseQueryVo.between("date", query.getStart(), query.getEnd());
         }
@@ -82,17 +87,17 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
             baseQueryVo.in("operatorId", query.getOperatorIds());
         }
 
+        if (query.getClientIds() != null && query.getClientIds().length > 0) {
+            baseQueryVo.and();
+            baseQueryVo.in("clientId", query.getClientIds());
+        }
+
         List<BillVo> queryResult = new ArrayList<>();
 
-        if (query.getBillTypes() != null && query.getBillTypes().length != 0) {
+        if (query.getBillTypes().length != 0) {
             List<BillType> billTypes = new ArrayList<>(Arrays.asList(query.getBillTypes()));
             if (billTypes.contains(BillType.InventoryBill)) {
                 queryResult.addAll(Arrays.asList(inventoryGiftInfo.queryInventoryGiftBill(new InventoryGiftQueryVo(baseQueryVo))));
-            }
-
-            if (query.getClientIds() != null && query.getClientIds().length > 0) {
-                baseQueryVo.and();
-                baseQueryVo.in("clientId", query.getClientIds());
             }
 
             if (billTypes.contains(BillType.FinanceBill)) {

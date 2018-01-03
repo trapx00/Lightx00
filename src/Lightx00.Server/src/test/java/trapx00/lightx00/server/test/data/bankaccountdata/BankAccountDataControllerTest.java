@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNull;
 public class BankAccountDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }

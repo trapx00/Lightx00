@@ -90,6 +90,6 @@ public class PaymentBillVo extends ReceivalPaymentBillVoBase {
      */
     @Override
     public ReversibleUi reversibleUi() {
-        return null;
+        return new PaymentBillUiController();
     }
 }

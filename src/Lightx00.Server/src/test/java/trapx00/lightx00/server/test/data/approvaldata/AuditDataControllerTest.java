@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class AuditDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,6 @@ public class AuditDataControllerTest {
             dao.create(billInfo2);
             dao.create(billInfo3);
             assertEquals(3, service.query(new AuditIdQueryVo()).length);
-            assertEquals(2, service.query(new AuditIdQueryVo().eq("type",BillType.FinanceBill)).length);
         } finally {
             dao.deleteById(billInfo1.getId());
             dao.deleteById(billInfo2.getId());

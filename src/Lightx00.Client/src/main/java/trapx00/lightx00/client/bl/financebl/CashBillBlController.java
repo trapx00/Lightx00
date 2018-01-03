@@ -103,7 +103,7 @@ public class CashBillBlController implements CashBillBlService, NotificationActi
     @Override
     public ResultMessage activate(String id) {
         CashBillVo cashBillVo = query(new CashBillQueryVo().idEq(id))[0];
-        modificationService.modifyBankAccount(cashBillVo.getAccountId(), cashBillVo.getTotal());
+        modificationService.modifyBankAccount(cashBillVo.getAccountId(), -cashBillVo.getTotal());
         return commonBillBlController.activate(id);
     }
 

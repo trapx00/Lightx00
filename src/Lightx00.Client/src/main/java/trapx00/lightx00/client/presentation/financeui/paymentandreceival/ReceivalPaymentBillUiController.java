@@ -203,7 +203,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
             try {
                 return voClazz.getDeclaredConstructor(
                         String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.TYPE)
-                        .newInstance(tfId.getId(),
+                        .newInstance(tfId.getText(),
                                 currentDate.get(),
                                 BillState.Draft,
                                 client.get().getId(),

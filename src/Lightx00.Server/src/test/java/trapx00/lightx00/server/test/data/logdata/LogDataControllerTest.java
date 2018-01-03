@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class LogDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class LogDataControllerTest {
         try {
             assertEquals(1, dao.countOf()-previous);
         } finally {
-           // dao.deleteBuilder().delete();
+           dao.deleteBuilder().delete();
         }
 
     }

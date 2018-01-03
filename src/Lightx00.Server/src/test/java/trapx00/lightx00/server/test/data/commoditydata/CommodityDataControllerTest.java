@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class CommodityDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class CommodityDataControllerTest {
     @Test
     public void query() throws Exception {
         dao.create(commodityPo);
-        assertEquals(1, service.query(new CommodityQueryVo().eq("id","PRO-0001-0001")).length);
+        assertEquals(1, service.query(new CommodityQueryVo().eq("id","PRO-0002-0001")).length);
         resetTable();
     }
 

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class ClientDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }

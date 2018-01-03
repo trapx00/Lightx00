@@ -12,10 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.bl.notificationbl.factory.NotificationBlFactory;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
-import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
-import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
-import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -62,7 +59,7 @@ public class NotificationUiController implements ExternalLoadableUiController {
 
 
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        updateItems();
+        FrameworkUiManager.getFrameworkUiController().refreshNotificationStatus();
     }
 
     public NotificationModel getSelected() {

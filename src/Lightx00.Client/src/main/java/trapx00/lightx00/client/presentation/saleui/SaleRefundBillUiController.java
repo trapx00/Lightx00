@@ -31,6 +31,7 @@ import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityFillUiController;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
+import trapx00.lightx00.client.presentation.saleui.factory.SaleCommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -96,12 +97,12 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
     private SaleRefundBillBlService blService = SaleRefundBillBlServiceFactory.getInstance();
     private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
-    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
+    private ClientBlService clientBlService = ClientBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
-    private EmployeeSelection employeeSelection= UserManagementUiFactory.getEmployeeSelectionUi();
+    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
-    private CommodityFillUiController commodityFillUiController = CommodityFillUiFactory.getCommodityFillUiController();
+    private SaleCommodityFillUiController saleCommodityFillUiController = SaleCommodityFillUiFactory.getSaleCommodityFillUiController();
     private StringProperty tfClientIdProperty = new SimpleStringProperty("");
     private StringProperty tfClientNameProperty = new SimpleStringProperty("");
     private StringProperty tfSalesmanIdProperty = new SimpleStringProperty("");
@@ -218,7 +219,7 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
             }
         });
         FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
-            if(event.getCode()== KeyCode.ENTER){
+            if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
             }
         });
@@ -262,8 +263,8 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
     }
 
     @FXML
-    private void onEmployeeClicked(){
-        employeeSelection.showEmployeeSelectDialog(x->{
+    private void onEmployeeClicked() {
+        employeeSelection.showEmployeeSelectDialog(x -> {
             tfSalesmanId.setText(x.get(0).getId());
             tfSalesmanName.setText(x.get(0).getName());
         });
@@ -281,8 +282,8 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
     @FXML
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
-            commodityFillUiController.showCommodityFillDialog(y -> {
-                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
+            saleCommodityFillUiController.showSaleCommodityFillDialog(y -> {
+                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), y.getPrice(), y.getPrice() * y.getNumber(), y.getComment())));
             });
         });
     }

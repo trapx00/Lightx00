@@ -105,7 +105,6 @@ public class BankAccountUiController implements ExternalLoadableUiController {
         if (selected != null) {
             new PromptDialogHelper("确定删除",
                 String.format("您确定要删除账户(id: %d, 名称: %s)吗？", selected.getId(), selected.getName()))
-                .addCloseButton("取消","CLOSE",null)
                 .addButton("确定","CHECK",e -> {
                     blService.delete(selected.getId());
                     new PromptDialogHelper("删除成功",String.format("账户(id: %d)已经删除！", selected.getId()))
@@ -115,6 +114,7 @@ public class BankAccountUiController implements ExternalLoadableUiController {
                         })
                         .createAndShow();
                 })
+                .addCloseButton("取消","CLOSE",null)
                 .createAndShow();
         }
     }

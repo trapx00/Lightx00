@@ -10,8 +10,28 @@ public class InventoryViewItem  {
     private  double outOfInventoryAmount;//出库数量
     private  double outOfInVentoryMoney;//
     private  double sum;//合计
-    private  double inSoldPrice;//最近进价
-    private  double outSoldPrice;//最近售价
+
+
+    public double getSolerNum() {
+        return solerNum;
+    }
+
+    public void setSolerNum(double solerNum) {
+        this.solerNum = solerNum;
+    }
+
+    public double getInsellnum() {
+        return insellnum;
+    }
+
+    public void setInsellnum(double insellnum) {
+        this.insellnum = insellnum;
+    }
+
+    private  double inSoldPrice;//销售金额
+    private double solerNum;//销售数量
+    private double insellnum;//进货数量
+    private  double outSoldPrice;//进货金额
 
     public InventoryViewItem (Date time, double inventoryAmount, double inventoryMoney,
                            double outOfInventoryAmount, double outOfInVentoryMoney, double sum,
@@ -24,6 +44,8 @@ public class InventoryViewItem  {
         this.sum = sum;
         this.inSoldPrice = inSoldPrice;
         this.outSoldPrice = outSoldPrice;
+        this.solerNum=0;
+        this.insellnum =0;
     }
 
     public double getInventoryAmount() {

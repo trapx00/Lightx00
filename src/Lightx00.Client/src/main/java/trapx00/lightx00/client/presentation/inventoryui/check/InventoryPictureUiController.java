@@ -51,7 +51,6 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
 
     public void initialize() {
         initTable();
-        updateItems();
     }
     public void updateItems() {
         viewModels.clear();

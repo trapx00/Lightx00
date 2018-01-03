@@ -87,6 +87,15 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
         TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
         commodityTable.setRoot(root);
         commodityTable.setShowRoot(false);
+
+        commodityTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                CommodityVo selected = getSelected();
+                onClose();
+                if (callback != null && selected != null) {
+                    callback.accept(selected);
+                }
+            }});
        // commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
     }
 

@@ -26,7 +26,7 @@ public class InventoryGiftDataControllerTest {
 
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }

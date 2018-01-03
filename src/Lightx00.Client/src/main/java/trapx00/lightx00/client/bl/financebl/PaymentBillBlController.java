@@ -1,6 +1,8 @@
 package trapx00.lightx00.client.bl.financebl;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.bankaccountbl.BankAccountModificationService;
+import trapx00.lightx00.client.bl.bankaccountbl.factory.BankAccountFactory;
 import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
 import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
@@ -10,12 +12,14 @@ import trapx00.lightx00.client.bl.util.BillPoVoConverter;
 import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.PaymentBillBlService;
 import trapx00.lightx00.client.datafactory.financedataservicefactory.PaymentBillDataServiceFactory;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
+import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
 
 import java.util.List;
@@ -26,6 +30,7 @@ public class PaymentBillBlController
 
     private PaymentBillDataService dataService = PaymentBillDataServiceFactory.getService();
     private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+    private BankAccountModificationService bankAccountModificationService = BankAccountFactory.getModificationService();
 
     private CommonBillBlController<PaymentBillVo, PaymentBillPo, PaymentBillQueryVo> commonBillBlController =
         new CommonBillBlController<>(dataService, "付款单", this);
@@ -102,6 +107,9 @@ public class PaymentBillBlController
     public ResultMessage activate(String id) {
         PaymentBillVo paymentBillVo = query(new PaymentBillQueryVo().idEq(id))[0];
         clientModificationService.modifyClient(paymentBillVo.getClientId(), ClientModificationFlag.RECEIVABLE, -paymentBillVo.getTotal());
+        for (Transcation transcation : paymentBillVo.getTranscations()) {
+            bankAccountModificationService.modifyBankAccount(transcation.getAccountId(), -transcation.getTotal());
+        }
         return commonBillBlController.activate(id);
     }
 

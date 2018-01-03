@@ -12,7 +12,7 @@
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <Label text="选择一个客户" textFill="#5e5e5e">
+    <Label text="选择客户" textFill="#5e5e5e">
         <font>
             <Font name="System Bold" size="32.0" />
         </font>
