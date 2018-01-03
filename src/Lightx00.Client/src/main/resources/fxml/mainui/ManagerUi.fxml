@@ -56,6 +56,11 @@
                             <FontAwesomeIconView glyphName="YEN" glyphSize="24" fill="black" />
                         </graphic>
                     </JFXButton>
+                    <JFXButton onAction="#onPromotionManagementFunctionClicked" prefHeight="60" prefWidth="200" text="促销策略管理" textFill="#000000">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="WPFORMS" glyphSize="24" fill="black" />
+                        </graphic>
+                    </JFXButton>
                     <JFXButton onAction="#onSaleDetailFunctionClicked" prefHeight="60" prefWidth="200" text="查看销售明细表" textFill="#000000">
                         <graphic>
                             <FontAwesomeIconView glyphName="LINE_CHART" glyphSize="18" fill="black" />
@@ -75,16 +80,29 @@
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
-                    <JFXButton onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
+                    <!--复制这个按钮到这个地方-->
+                    <JFXButton onAction="#switchBackToHome" prefHeight="60" prefWidth="200" text="主界面" textFill="#000000">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="HOME" glyphSize="20" />
+                        </graphic>
+                    </JFXButton>
+                    <!--复制这里到你的fxml里-->
+                    <JFXButton fx:id="btnNotification" onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                        <graphic>
+                            <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="btnDraft" onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="CLASS" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
+                    <JFXButton onAction="#onBtnAboutClicked" prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="SENTIMENT_VERY_SATISFIED" glyphSize="20" />
                         </graphic>
                     </JFXButton>
+                    <!--复制这里-->
                 </VBox>
             </GridPane>
             <BorderPane AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">

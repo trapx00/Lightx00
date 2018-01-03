@@ -1,19 +1,23 @@
-package trapx00.lightx00.client.presentation.promotionui;
+package trapx00.lightx00.client.presentation.promotionui.detail;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
-import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlServiceFactory;
+import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
+import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlServiceFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.promotionui.PromotionCommodityModel;
+import trapx00.lightx00.client.presentation.promotionui.detail.ClientPromotionUiController;
 import trapx00.lightx00.client.vo.Draftable;
-import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
+import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
@@ -27,12 +31,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class TotalPricePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
+public class ComSalePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     public JFXTextField tfId;
     public JFXDatePicker tfStartDate;
     public JFXDatePicker tfEndDate;
-    public JFXTextField tfCouponPrice;
-    public JFXTextField tfTotalPrice;
+    public JFXTextField tfSalePrice;
     public JFXTreeTableView<PromotionCommodityModel> tbPromotionCommodity;
     public JFXTreeTableColumn<PromotionCommodityModel, String> tcId;
     public JFXTreeTableColumn<PromotionCommodityModel, String> tcName;
@@ -43,8 +46,9 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
     public JFXButton btnSubmit;
     public JFXButton btnDraft;
     public JFXButton btnReset;
+    public Label lbTotal;
 
-    private TotalPricePromotionBlService blService = TotalPricePromotionBlServiceFactory.getInstance();
+    private ComSalePromotionBlService blService = ComSalePromotionBlServiceFactory.getInstance();
 
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
 
@@ -57,7 +61,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/managerui/TotalPricePromotionUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/managerui/ComSalePromotionUi.fxml").loadAndGetPackageWithoutException();
     }
 
 
@@ -74,28 +78,30 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
          * 草稿功能实现。
          * 和对应单据详细界面一样，通过传入的参数初始化对应的控件元素信息。
          */
-        TotalPricePromotionVo totalPricePromotion = (TotalPricePromotionVo) draft;
+        ComSalePromotionVo comSalePromotion = (ComSalePromotionVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        TotalPricePromotionUiController continueWriting = externalLoadedUiPackage.getController();
-        continueWriting.tfId.setText(totalPricePromotion.getId());
-        continueWriting.tfStartDate.setValue(DateToLocalDate(totalPricePromotion.getStartDate()));
-        continueWriting.tfEndDate.setValue(DateToLocalDate(totalPricePromotion.getEndDate()));
-        continueWriting.tfCouponPrice.setText(String.valueOf(totalPricePromotion.getCouponPrice()));
-        continueWriting.tfTotalPrice.setText(String.valueOf(totalPricePromotion.getTotalPrice()));
-        continueWriting.addPromotionCommodities(totalPricePromotion.getPromotionCommodities());
+        ClientPromotionUiController continueWriting = externalLoadedUiPackage.getController();
+        continueWriting.tfId.setText(comSalePromotion.getId());
+        continueWriting.tfStartDate.setValue(DateToLocalDate(comSalePromotion.getStartDate()));
+        continueWriting.tfEndDate.setValue(DateToLocalDate(comSalePromotion.getEndDate()));
+        continueWriting.tfSalePrice.setText(String.valueOf(comSalePromotion.getOnSalePrice()));
+        continueWriting.addPromotionCommodities(comSalePromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
 
     public void initialize() {
         tfId.setText(blService.getId());
-        tfTotalPrice.setText("0");
-        tfCouponPrice.setText("0");
-
+        tfSalePrice.setText("0");
 
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+       // tcAmount.setCellValueFactory(TextFieldTableCell.forTableColumn());
+
+        promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
+            lbTotal.setText(BillHelper.toFixed(promotionCommodityModelObservableList.stream().mapToDouble(PromotionCommodityModel::getAmount).sum()));
+        });
 
         TreeItem<PromotionCommodityModel> root = new RecursiveTreeItem<>(promotionCommodityModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotionCommodity.setRoot(root);
@@ -104,7 +110,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         tbPromotionCommodity.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
-    private TotalPricePromotionVo getCurrentTotalPricePromotionVo() {
+    private ComSalePromotionVo getCurrentComSalePromotionVo() {
         if (tfId.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！","请先获得促销策略编号。")
                     .addCloseButton("好的","CHECK", null)
@@ -119,26 +125,25 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
             throw new NotCompleteException();
         }
 
-        else if (tfTotalPrice == null ) {
-            PromptDialogHelper.start("提交失败！","请输入总价条件。")
+        else if (tfSalePrice == null ) {
+            PromptDialogHelper.start("提交失败！","请输入组合包售卖价格。")
                     .addCloseButton("好的","CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
         }
-        return new TotalPricePromotionVo(
+        return new ComSalePromotionVo(
                 tfId.getText(),
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
                 PromotionState.Waiting,
-                Integer.valueOf(tfCouponPrice.getText()),
-                Integer.valueOf(tfTotalPrice.getText()),
-                promotionCommodityModelObservableList.stream().map(PromotionCommodityModel::toPromotionCommodity).toArray(PromotionCommodity[]::new)
+                promotionCommodityModelObservableList.stream().map(PromotionCommodityModel::toPromotionCommodity).toArray(PromotionCommodity[]::new),
+                Integer.valueOf(tfSalePrice.getText())
         );
     }
 
     public void onBtnSubmitClicked() {
         try {
-            blService.submit(getCurrentTotalPricePromotionVo());
+            blService.submit(getCurrentComSalePromotionVo());
             PromptDialogHelper.start("提交成功！", "促销策略已经提交。")
                     .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
                     .createAndShow();
@@ -152,7 +157,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
 
     public void onBtnDraftClicked() {
         try {
-            blService.saveAsDraft(getCurrentTotalPricePromotionVo());
+            blService.saveAsDraft(getCurrentComSalePromotionVo());
             PromptDialogHelper.start("保存草稿成功","促销策略已经保存为草稿。")
                     .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
                     .createAndShow();
@@ -168,18 +173,17 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         tfId.setText("");
         tfStartDate.setValue(null);
         tfEndDate.setValue(null);
-        tfCouponPrice.setText("");
-        tfTotalPrice.setText("");
+        tfSalePrice.setText("");
         promotionCommodityModelObservableList.clear();
     }
 
-    public void onBtnAddGiftClicked() {
+    public void onBtnAddCommodityClicked() {
         commoditySelection.showCommoditySelectDialog(
                 vo -> promotionCommodityModelObservableList.add(new PromotionCommodityModel(new PromotionCommodity(vo.getId(), vo.getName(),vo.getRetailPrice(),1)))
         );
     }
 
-    public void onBtnDeleteGiftClicked () {
+    public void onBtnDeleteCommodityClicked () {
         try {
             int index = tbPromotionCommodity.getSelectionModel().getSelectedIndex();
             promotionCommodityModelObservableList.remove(index);

@@ -1,5 +1,6 @@
 package trapx00.lightx00.client.presentation.promotionui;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,17 +10,19 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
 
-public class PromotionInfoModel {
+public class PromotionInfoModel extends RecursiveTreeObject<PromotionInfoModel> {
     private StringProperty id;
     private ObjectProperty<Date> startDate;
     private ObjectProperty<Date> endDate;
     private ObjectProperty<PromotionType> type;
+    private ObjectProperty<PromotionVoBase> promotion;
 
     public PromotionInfoModel(PromotionVoBase promotionVo) {
         this.id = new SimpleStringProperty(promotionVo.getId());
         this.startDate = new SimpleObjectProperty(promotionVo.getStartDate());
         this.endDate = new SimpleObjectProperty<>(promotionVo.getEndDate());
         this.type = new SimpleObjectProperty<>(promotionVo.getType());
+        this.promotion = new SimpleObjectProperty<>(promotionVo);
     }
 
     public String getId() {
@@ -69,5 +72,19 @@ public class PromotionInfoModel {
     public void setEndDate(Date endDate) {
         this.endDate.set(endDate);
     }
+
+    public void setPromotion(PromotionVoBase promotion) {
+        this.promotion.set(promotion);
+    }
+
+    public PromotionVoBase getPromotion() {
+        return promotion.get();
+    }
+
+    public ObjectProperty<PromotionVoBase> promotionProperty() {
+        return promotion;
+    }
+
+
 
 }
