@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox fx:id="dialogContainer" prefHeight="900" prefWidth="1600"
+<VBox fx:id="dialogContainer" prefHeight="604" prefWidth="804"
       xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="trapx00.lightx00.client.presentation.saleui.SaleBillDetailUiController">
