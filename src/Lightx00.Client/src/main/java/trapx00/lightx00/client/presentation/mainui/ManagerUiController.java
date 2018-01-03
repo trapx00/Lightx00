@@ -20,6 +20,7 @@ public class ManagerUiController extends FrameworkUiController {
     /**
      * 调用父类切换界面方法实现切换界面。
      * 第一个参数是功能Controller（需要实现ExternalLoadableUiController），第二个是标题文字。
+     *
      * @see #switchFunction(Class, String, boolean)
      */
     public void onAuditFunctionClicked(ActionEvent actionEvent) {
@@ -27,9 +28,8 @@ public class ManagerUiController extends FrameworkUiController {
     }
 
     public void onClientPromotionFunctionClicked(ActionEvent actionEvent) {
-        switchFunction(ClientPromotionUiController.class, "制定客户类促销策略",true);
+        switchFunction(ClientPromotionUiController.class, "制定客户类促销策略", true);
     }
-
 
 
     public void onComSalePromotionFunctionClicked(ActionEvent actionEvent) {
@@ -41,7 +41,7 @@ public class ManagerUiController extends FrameworkUiController {
 
     }
 
-   public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {
+    public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {
         switchFunction(TradeSituationUiController.class, "查看经营情况表", true);
 
     }

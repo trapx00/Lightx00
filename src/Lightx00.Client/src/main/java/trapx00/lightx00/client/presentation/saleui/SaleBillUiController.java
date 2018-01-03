@@ -298,7 +298,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                 tfMinusProfits.validate();
             }
         });
-        dialogContainer.setOnKeyPressed(event -> {
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.ENTER){
                 onBtnSubmitClicked();
             }

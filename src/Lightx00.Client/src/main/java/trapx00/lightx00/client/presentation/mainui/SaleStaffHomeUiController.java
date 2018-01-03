@@ -63,7 +63,7 @@ public class SaleStaffHomeUiController extends BaseHomepageUiController implemen
     }
 
     @FXML
-    private void onBtnDraftButtonClicked(ActionEvent actionEvent) {
+    private void onBtnDraftClicked(ActionEvent actionEvent) {
         uiController.onDraftFunctionButtonClicked(actionEvent);
     }
 }

@@ -1,9 +1,11 @@
 package trapx00.lightx00.client.presentation.helpui;
 
 import com.jfoenix.controls.JFXDialog;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;
+
 import java.util.Date;
 
 public class FrameworkUiManager {
@@ -28,6 +30,10 @@ public class FrameworkUiManager {
 
     public static JFXDialog createDialog(PromptDialogHelper promptDialogHelper) {
         return promptDialogHelper.create(frameworkUiController.dialogContainer);
+    }
+
+    public static StackPane getWholePane() {
+        return frameworkUiController.dialogContainer;
     }
 
     public static StackPane getDialogContainer() {

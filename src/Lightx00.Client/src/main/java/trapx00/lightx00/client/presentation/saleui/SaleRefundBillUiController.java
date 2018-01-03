@@ -217,7 +217,7 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
                 tfSalesmanName.validate();
             }
         });
-        dialogContainer.setOnKeyPressed(event -> {
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.ENTER){
                 onBtnSubmitClicked();
             }

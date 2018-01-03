@@ -181,7 +181,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
             }
 
         });
-        dialogContainer.setOnKeyPressed(event -> {
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
             }

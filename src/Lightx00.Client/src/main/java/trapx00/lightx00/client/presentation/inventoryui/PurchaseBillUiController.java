@@ -180,7 +180,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
             }
 
         });
-        dialogContainer.setOnKeyPressed(event -> {
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
             }
