@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.bl.promotionbl.couponbl;
 
 import trapx00.lightx00.client.blservice.promotionblservice.couponblservice.CouponBlService;
-import trapx00.lightx00.client.datafactory.promotiondataservicefactory.coupondataservicefactory.CouponDataServieFactory;
+import trapx00.lightx00.client.datafactory.promotiondataservicefactory.coupondataservicefactory.CouponDataServiceFactory;
 import trapx00.lightx00.client.vo.manager.CouponVo;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 public class CouponBlController implements CouponBlService, CouponInfo, SendCouponInfo, UseCouponInfo {
-    private CouponDataService dataService = CouponDataServieFactory.getService();
+    private CouponDataService dataService = CouponDataServiceFactory.getService();
     /**
      * Add a used coupon.
      * @param usedCoupon used coupon

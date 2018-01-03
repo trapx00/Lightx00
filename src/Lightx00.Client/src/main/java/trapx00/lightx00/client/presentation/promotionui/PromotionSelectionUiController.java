@@ -31,7 +31,7 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
     private ObservableList<PromotionSelectionItemModel> promotionSelectionItemModelObservableList = FXCollections.observableArrayList();
 
     private PromotionInfo promotionInfo = PromotionInfoFactory.getPromotionInfo();
-    private PromotionVoBase[] available = null;
+    private PromotionVoBase[] available;
 
     @FXML
     private void initialize() {
@@ -72,18 +72,18 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
 
     @Override
     public void showEmployeeSelectDialog(Consumer<PromotionVoBase> callback, SaleBillVo bill) {
-        available = promotionInfo.queryPromotion(bill);
-        if (available == null) {
+        PromotionVoBase[] result = promotionInfo.queryPromotion(bill);
+        if (result == null) {
             PromptDialogHelper.start("查询结果", "无可用促销策略！")
                     .addCloseButton("好的", "CHECK", e -> onClose())
                     .createAndShow();
         } else {
             ExternalLoadedUiPackage uiPackage = load();
-            PromotionSelectionUiController controller = (PromotionSelectionUiController) uiPackage.getController();
+            PromotionSelectionUiController controller = uiPackage.getController();
             controller.callback = callback;
-            JFXDialog dialog = PromptDialogHelper.start("", "").create();
-            dialog.setContent((Region) uiPackage.getComponent());
-            FrameworkUiManager.getCurrentDialogStack().pushAndShow(dialog);
+            controller.available = result;
+            controller.update();
+            PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
         }
     }
 

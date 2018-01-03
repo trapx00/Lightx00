@@ -1,6 +1,6 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
-public enum PromotionState{
+public enum PromotionState {
     Draft("草稿"),
     Waiting("等待生效"),
     Active("生效中"),

@@ -66,12 +66,23 @@ public class PromotionInfoController implements PromotionInfo,DraftableQueryServ
             }
             for(ClientPromotionPo po:clientPromotions) {
                 if(compare(percent,po.getStartDate(),po.getEndDate())){
+                    if(po.getClientLevel()<=saleBill.getClientLevel())
+                        result.add(fromPotoVo(po));
                 }
             }
             for(ComSalePromotionPo po:comSalePromotions) {
                 //改促销策略
                 if(compare(percent,po.getStartDate(),po.getEndDate())){
                     PromotionCommodity[] promotionCommodities = po.getPromotionCommodities();
+                    int num = 0;
+                    for(CommodityItem commodity:saleBill.getCommodityList()) {
+                        for(PromotionCommodity promotionCommodity:promotionCommodities){
+                            if(commodity.getCommodityId().equals(promotionCommodity.getCommodityId())&&commodity.getNumber()>=promotionCommodity.getAmount())
+                                num++;
+                        }
+                    }
+                    if(num == promotionCommodities.length)
+                        result.add(fromPotoVo(po));
                 }
 
             }
