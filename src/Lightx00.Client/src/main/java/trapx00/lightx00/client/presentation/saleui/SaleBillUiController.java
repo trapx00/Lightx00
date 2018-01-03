@@ -396,6 +396,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         giftItemModelObservableList.clear();
         promotionSelection.showEmployeeSelectDialog(
                 promotionVoBase -> {
+                    tfPromotionId.setText(promotionVoBase.getId());
                     addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                     switch (promotionVoBase.getType()) {
                         case ClientPromotion:
@@ -408,7 +409,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                             break;
                         case TotalPricePromotion:
                             TotalPricePromotionVo totalPricePromotionVo = (TotalPricePromotionVo) promotionVoBase;
-                            tfGiftToken.setText(totalPricePromotionVo.getCouponPrice() + "");
+                            tfGiftToken.setText((Double.parseDouble(tfUltiTotal.getText())/totalPricePromotionVo.getTotalPrice())*totalPricePromotionVo.getCouponPrice() + "");
                             break;
                     }
                     (new ListHandler()).change();//修改总价格
