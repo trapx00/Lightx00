@@ -9,6 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;
+import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
+import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
+import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
+import trapx00.lightx00.client.bl.util.FormatDateTime;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
@@ -16,6 +21,14 @@ import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
+import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -35,6 +48,8 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
 
     private ObservableList<InventoryViewModel> viewModels = FXCollections.observableArrayList();
     private InventoryCheckBlService blService= InventoryCheckBlServiceFactory.getInstance();
+    private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
+    private PurchaseBillBlInfo purchaseBillBlInfo= PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
 
     public void onBtnFilterClicked(ActionEvent actionEvent) {
         updateItems();
@@ -46,10 +61,12 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
     public void updateItems() {
 
         InventoryViewVo inventoryViewVo=null;
+        Date beginTime=DateHelper.fromLocalDate(startDatePicker.getValue());
+        Date endTime=DateHelper.fromLocalDate(endDatePicker.getValue());
             try {
                 inventoryViewVo=blService.getInventoryView(
-                        DateHelper.fromLocalDate(startDatePicker.getValue()),
-                        DateHelper.fromLocalDate(endDatePicker.getValue()));
+                        beginTime,
+                        endTime);
                 System.out.println(inventoryViewVo.getId());
                 viewModels.add(new InventoryViewModel(new InventoryViewItem(new Date(),inventoryViewVo.getItems().getInventoryAmount(),
                         inventoryViewVo.getItems().getInventoryMoney(),inventoryViewVo.getItems().getOutOfInventoryAmount()

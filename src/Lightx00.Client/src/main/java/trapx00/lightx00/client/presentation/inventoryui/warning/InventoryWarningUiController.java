@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
@@ -172,6 +173,12 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         CommodityVo[] queryResult = blService1.query(new CommodityQueryVo());
         commodityModels.clear();
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
+
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onBtnSubmitClicked();
+            }
+        });
     }
 
     public void addQWE(double a,CommodityVo vo){

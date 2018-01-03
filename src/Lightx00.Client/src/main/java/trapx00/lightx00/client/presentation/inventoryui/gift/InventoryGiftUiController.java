@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryGiftBlServiceFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
@@ -97,6 +98,12 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         inventoryGiftItems.setShowRoot(false);
         inventoryGiftItems.setEditable(true);
         inventoryGiftItems.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onBtnSubmitClicked();
+            }
+        });
     }
 
 

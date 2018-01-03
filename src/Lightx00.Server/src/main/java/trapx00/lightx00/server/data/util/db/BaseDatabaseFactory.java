@@ -121,18 +121,6 @@ public class BaseDatabaseFactory {
             Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
             TableUtils.dropTable(saleBillPos,true);
             TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00002", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
-                    "",1,"2"
-                    ,null, 10));
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00003", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
-                    "",1,"2"
-                    ,null, 10));
-            saleBillPos.create(new SaleBillPo("XSD-20171122-00004", new Date(), BillState.Approved, "0", "0", "0", 0,
-                    new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 0, 0, 0, 0,
-                    "",1,"2"
-                    ,null, 10));
 
 
 
