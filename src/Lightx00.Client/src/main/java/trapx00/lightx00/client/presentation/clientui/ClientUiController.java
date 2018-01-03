@@ -65,7 +65,12 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
     private void initialize() {
         initLogItem();
         initClients();
-        initSearch();
+
+        clientTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onBtnSelectClicked(null);
+            }
+        });
     }
 
     private void initLogItem() {

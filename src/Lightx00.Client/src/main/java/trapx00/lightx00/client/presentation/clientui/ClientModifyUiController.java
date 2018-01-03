@@ -95,33 +95,27 @@ public class ClientModifyUiController extends ClientModifyUi implements DraftCon
             }
         });
 
-        clientType.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                clientName.validate();
-            }
-        });
-
         clientPhone.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                clientName.validate();
+                clientPhone.validate();
             }
         });
 
         clientAddress.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                clientName.validate();
+                clientAddress.validate();
             }
         });
 
         clientZipCode.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                clientName.validate();
+                clientZipCode.validate();
             }
         });
 
         clientDefaultOperator.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                clientName.validate();
+                clientDefaultOperator.validate();
             }
         });
     }

@@ -17,7 +17,13 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -42,7 +48,7 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
     private TreeTableColumn<ClientSelectionItemModel, String> clientPhoneColumn;
     private ObservableList<ClientSelectionItemModel> clientSelectionItemModels = FXCollections.observableArrayList();
 
-    private ClientBlService blService= ClientBlServiceFactory.getInstance();
+    private ClientBlService blService = ClientBlServiceFactory.getInstance();
 
     /**
      * show the select client dialog
@@ -61,6 +67,12 @@ public class ClientDialogUiController extends SelectingDialog implements ClientI
         initLogItem();
         initClients();
         initSearch();
+
+        clientTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onBtnSelectClicked(null);
+            }
+        });
     }
 
     private void initClients() {

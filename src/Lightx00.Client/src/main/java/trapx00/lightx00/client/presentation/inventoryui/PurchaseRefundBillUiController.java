@@ -13,6 +13,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
@@ -41,6 +43,8 @@ import java.util.Date;
 
 public class PurchaseRefundBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
+    @FXML
+    private VBox dialogContainer;
     @FXML
     private JFXTextField tfBillId;
     @FXML
@@ -78,7 +82,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
     private ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
     private PurchaseRefundBillBlService blService = PurchaseRefundBillBlServiceFactory.getInstance();
     private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
-    private ClientBlService clientBlService= ClientBlServiceFactory.getInstance();
+    private ClientBlService clientBlService = ClientBlServiceFactory.getInstance();
     private ObservableList<CommodityItemModel> commodityItemModelObservableList = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
@@ -176,6 +180,11 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
                 tfClientName.validate();
             }
 
+        });
+        dialogContainer.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onBtnSubmitClicked();
+            }
         });
     }
 

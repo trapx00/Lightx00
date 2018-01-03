@@ -14,6 +14,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
@@ -40,6 +42,8 @@ import java.util.Date;
 
 public class PurchaseBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
 
+    @FXML
+    VBox dialogContainer;
     @FXML
     JFXTextField tfBillId;
     @FXML
@@ -175,6 +179,11 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
                 tfClientName.validate();
             }
 
+        });
+        dialogContainer.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onBtnSubmitClicked();
+            }
         });
     }
 

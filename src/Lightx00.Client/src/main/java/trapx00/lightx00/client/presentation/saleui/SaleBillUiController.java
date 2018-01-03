@@ -11,8 +11,11 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
@@ -53,9 +56,13 @@ import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 
 public class SaleBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
+
+    @FXML
+    VBox dialogContainer;
     @FXML
     JFXTextField tfBillId;
     @FXML
@@ -289,6 +296,11 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         tfMinusProfits.focusedProperty().addListener(event -> {
             if (tfMinusProfits.getText().length() == 0) {
                 tfMinusProfits.validate();
+            }
+        });
+        dialogContainer.setOnKeyPressed(event -> {
+            if(event.getCode()== KeyCode.ENTER){
+                onBtnSubmitClicked();
             }
         });
     }
