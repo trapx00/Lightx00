@@ -6,13 +6,11 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.DatabaseTable;
 import com.j256.ormlite.table.TableUtils;
-import com.sun.tools.javac.util.Name;
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
-import trapx00.lightx00.server.Server;
+import trapx00.lightx00.server.data.util.IOUtil;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.po.admin.AdminPo;
-import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientPo;
 import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
@@ -23,13 +21,9 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
-import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
-import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
-import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -43,7 +37,7 @@ public class BaseDatabaseFactory {
     }
 
     private static String getDbFilePath() {
-        return Server.class.getResource("/database/database.db").getPath();
+        return IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir("/misc/database.db");
 
     }
 
@@ -147,10 +141,7 @@ public class BaseDatabaseFactory {
             TableUtils.dropTable(saleBillPos,true);
             TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
 
-            Dao<TotalPricePromotionPo,String> promotions = createDao(TotalPricePromotionPo.class);
-            TableUtils.dropTable(promotions,true);
-            TableUtils.createTableIfNotExists(connectionSource,TotalPricePromotionPo.class);
-            promotions.create(new TotalPricePromotionPo("ZJCXCL-20171112-00001",new Date(),new Date(), PromotionState.Waiting,200,1000,null));
+
 
             Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);
             TableUtils.dropTable(commoditySortPos, true);

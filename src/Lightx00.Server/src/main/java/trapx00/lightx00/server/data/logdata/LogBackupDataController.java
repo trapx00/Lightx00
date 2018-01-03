@@ -1,6 +1,5 @@
 package trapx00.lightx00.server.data.logdata;
 
-import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
@@ -8,8 +7,10 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.j256.ormlite.dao.Dao;
-import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
+import trapx00.lightx00.server.data.util.IOUtil;
+import trapx00.lightx00.server.data.util.config.Config;
+import trapx00.lightx00.server.data.util.config.LogBackupConfig;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
@@ -25,19 +26,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
-import java.security.Timestamp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class LogBackupDataController extends UnicastRemoteObject implements LogBackupDataService {
-    private static final String END_POINT = "http://oos-bj2.ctyunapi.cn";
-    private static final String BUCKET_NAME = "lightx00";
-    private static final String ACCESS_KEY = "c4582dec5d0809103126";
-    private static final String SECRET_KEY = "47c783687d4c452c5d71b817b8c481915fb0094a";
-    private static final String FILE_PATH = Server.class.getResource("/temp.txt").getPath();
+    private static String END_POINT;
+    private static String BUCKET_NAME;
+    private static String ACCESS_KEY;
+    private static String SECRET_KEY;
+    private static final String FILE_PATH = IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir("/misc/temp.txt");
     private static final String SEPATAROR = " | ";
     private static final long EXPIRATION =
             new Date().getTime() * 1000 * 60 * 60 * 24;
@@ -45,6 +46,14 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
     private Dao<LogPo, Integer> logDao = LogDataDaoFactory.getLogDao();
     private Object delegate = this;
     private ServerLogService logService = ServerLogServiceFactory.getService();
+
+    static {
+        LogBackupConfig config = Config.getConfig().getLogBackupConfig();
+        ACCESS_KEY = config.getAccessKey();
+        SECRET_KEY = config.getSecretKey();
+        BUCKET_NAME = config.getBucketName();
+        END_POINT = config.getEndpoint();
+    }
 
     /**
      * Creates and exports a new UnicastRemoteObject object using an
