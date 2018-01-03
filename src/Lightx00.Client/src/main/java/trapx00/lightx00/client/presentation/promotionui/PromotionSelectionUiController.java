@@ -42,8 +42,10 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
 
     private void update() {
         promotionSelectionItemModelObservableList.clear();
-        for(PromotionVoBase promotion:available) {
-            promotionSelectionItemModelObservableList.add(new PromotionSelectionItemModel(promotion));
+        if (available != null) {
+            for (PromotionVoBase promotion : available) {
+                promotionSelectionItemModelObservableList.add(new PromotionSelectionItemModel(promotion));
+            }
         }
     }
 
@@ -51,7 +53,7 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
     @FXML
     private void initTable() {
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getId()));
-        tcType.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
+        tcType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
         tcGift.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getGift()));
         tcCoupon.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCoupon()));
         tcSale.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getSale()));
@@ -71,12 +73,11 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
     @Override
     public void showEmployeeSelectDialog(Consumer<PromotionVoBase> callback, SaleBillVo bill) {
         available = promotionInfo.queryPromotion(bill);
-        if(available==null){
+        if (available == null) {
             PromptDialogHelper.start("查询结果", "无可用促销策略！")
                     .addCloseButton("好的", "CHECK", e -> onClose())
                     .createAndShow();
-        }
-        else {
+        } else {
             ExternalLoadedUiPackage uiPackage = load();
             PromotionSelectionUiController controller = (PromotionSelectionUiController) uiPackage.getController();
             controller.callback = callback;
@@ -94,6 +95,7 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
     public void onBtnCloseClicked() {
         onClose();
     }
+
     public void onBtnSelectClicked() {
         PromotionVoBase selected = tbPromotion.getSelectionModel().getSelectedItem().getValue().getPromotion();
         if (callback != null && selected != null) {

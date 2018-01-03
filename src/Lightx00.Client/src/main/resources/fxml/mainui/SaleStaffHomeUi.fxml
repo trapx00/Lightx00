@@ -13,23 +13,23 @@
     <top>
         <VBox>
             <HBox>
-                <Text fx:id="welcomeText" fill="black" text="欢迎~,">
+                <Text fx:id="textWelcome" fill="black" text="欢迎~,">
                     <font>
                         <Font size="32.00" />
                     </font>
                 </Text>
                 <padding>
-                    <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                    <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
                 </padding>
             </HBox>
             <HBox>
-                <Text fx:id="welcomeTimeText" fill="black" text="登录时间：">
+                <Text fx:id="textLoginTime" fill="black" text="登录时间：">
                     <font>
                         <Font size="32.00" />
                     </font>
                 </Text>
                 <padding>
-                    <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                    <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
                 </padding>
             </HBox>
         </VBox>
@@ -171,7 +171,7 @@
     <bottom>
         <HBox alignment="TOP_CENTER">
             <VBox>
-                <JFXButton fx:id="notificationButton" buttonType="RAISED" onAction="#onNotificationFunctionButtonClicked" style="-fx-background-color: #CC0000; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="0">
+                <JFXButton fx:id="btnNotification" buttonType="RAISED" onAction="#onNotificationFunctionButtonClicked" style="-fx-background-color: #CC0000; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="0">
                     <graphic>
                         <MaterialIconView glyphName="MESSAGE" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
                     </graphic>
@@ -197,7 +197,7 @@
                 </padding>
             </VBox>
             <VBox>
-                <JFXButton fx:id="draftButton" buttonType="RAISED" onAction="#onDraftFunctionButtonClicked" style="-fx-background-color: #CC0000; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="0">
+                <JFXButton fx:id="btnDraft" buttonType="RAISED" onAction="#onDraftFunctionButtonClicked" style="-fx-background-color: #CC0000; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;" text="0">
                     <graphic>
                         <MaterialIconView glyphName="CLASS" glyphSize="100.0" glyphStyle="-fx-fill: #FFFFFF;" />
                     </graphic>
