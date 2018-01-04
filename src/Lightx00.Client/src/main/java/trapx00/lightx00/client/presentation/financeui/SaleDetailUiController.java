@@ -110,7 +110,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
         tcModel.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getValue().getCommodityVo().getType()));
         tcAmount.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getAmount())));
         tcUnitPrice.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getUnitPrice())));
-        tcUnitPrice.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getTotal())));
+        tcTotal.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getTotal())));
         TreeItem<SaleRecordModel> root = new RecursiveTreeItem<>(saleRecordModels, RecursiveTreeObject::getChildren);
         tbSaleDetails.setRoot(root);
         tbSaleDetails.setShowRoot(false);
@@ -125,7 +125,9 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
             queryVo.setStart(DateHelper.fromLocalDate(start));
             queryVo.setEnd(DateHelper.fromLocalDate(end));
         }
-        queryVo.setClient(new ClientVo[] { client.get() });
+        if (client.get() != null) {
+            queryVo.setClient(new ClientVo[] { client.get() });
+        }
         List<EmployeeVo> operatorss = operators.get();
         queryVo.setOperator(operatorss == null ? null : operatorss.toArray(new EmployeeVo[operatorss.size()]));
         List<CommodityVo> commoditiess = commodities.get();

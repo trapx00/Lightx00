@@ -56,14 +56,14 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
 
     protected EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     protected PaymentAndReceivalBlService blService;
-    protected Class<T> voClazz;
-    protected ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
+    private Class<T> voClazz;
+    private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
 
-    protected ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
+    private ObjectProperty<Date> currentDate = new SimpleObjectProperty<>();
     protected ObjectProperty<ClientVo> client = new SimpleObjectProperty<>();
     protected ObjectProperty<EmployeeVo> currentEmployee = new SimpleObjectProperty<>();
 
-    protected ObservableList<TranscationModel> transcationModels = FXCollections.observableArrayList();
+    private ObservableList<TranscationModel> transcationModels = FXCollections.observableArrayList();
 
     /**
      * Start continuing write a draft. Returns a External loaded ui package.
@@ -279,15 +279,16 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         saveAsDraft();
     }
 
+    public void reset() {
+        currentEmployee.set(null);
+        currentDate.set(null);
+        transcationModels.clear();
+    }
+
     public void onBtnResetClicked() {
         PromptDialogHelper.start("重置确认","是否确定重置？")
-            .addCloseButton("是","CHECK", e-> {
-                client.set(null);
-                currentEmployee.set(null);
-                currentDate.set(null);
-                tfId.setText("");
-                transcationModels.clear();
-            }).addCloseButton("否","CLOSE", null)
+            .addCloseButton("是","CHECK", e-> reset())
+            .addCloseButton("否","CLOSE", null)
             .createAndShow();
 
     }
@@ -304,7 +305,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         try {
             blService.saveAsDraft(getCurrent());
             PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
-                    .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
+                    .addCloseButton("好的", "CHECK", e -> reset())
                     .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {

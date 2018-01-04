@@ -80,7 +80,8 @@ public class SaleDetailBlController implements SaleDetailBlService {
     }
 
     private SaleDetailVo calculateDetailWithFilteredSaleBillsAndCommodities(List<SaleBillVo> filtered, List<CommodityVo> concernedCommodities) {
-        List<SaleRecordVo> saleRecordVos = filtered.stream()
+
+        return new SaleDetailVo(filtered.stream()
             .map(x -> {
                 List<SaleRecordVo> recordsForDate = new ArrayList<>();
                 for (CommodityItem item : x.getCommodityList()) {
@@ -89,9 +90,7 @@ public class SaleDetailBlController implements SaleDetailBlService {
                     recordsForDate.add(new SaleRecordVo(x.getDate(), commodity, item.getNumber(), commodity.getRetailPrice(), item.getNumber() * commodity.getRetailPrice()));
                 }
                 return recordsForDate;
-            }).flatMap(Collection::stream).collect(Collectors.toList());
-
-        return new SaleDetailVo(saleRecordVos.toArray(new SaleRecordVo[saleRecordVos.size()]));
+            }).flatMap(Collection::stream).toArray(SaleRecordVo[]::new));
     }
 
     /**
