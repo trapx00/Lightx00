@@ -34,6 +34,7 @@ public class BaseDatabaseFactory {
 
     private static final String connectionString = "jdbc:sqlite:" + getDbFilePath();
     protected static ConnectionSource connectionSource;
+    protected static boolean testInited = false;
 
     protected BaseDatabaseFactory() {
     }
@@ -69,8 +70,12 @@ public class BaseDatabaseFactory {
     }
 
     public static void initTest() throws SQLException {
-        basicInit();
-        dropAllTables();
+        if (!testInited) {
+            basicInit();
+            dropAllTables();
+            testInited = true;
+        }
+
     }
 
     public static void dropAllTables() {
