@@ -41,7 +41,6 @@ public class DraftUiController implements ExternalLoadableUiController {
 
     public void initialize() {
         initDraftItem();
-        updateItems();
     }
 
     public int updateItems() {

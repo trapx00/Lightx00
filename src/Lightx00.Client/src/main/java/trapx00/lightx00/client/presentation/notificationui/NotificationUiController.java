@@ -38,7 +38,6 @@ public class NotificationUiController implements ExternalLoadableUiController {
 
     public void initialize(){
         initNotifyItem();
-        updateItems();
     }
 
     public int updateItems(){
