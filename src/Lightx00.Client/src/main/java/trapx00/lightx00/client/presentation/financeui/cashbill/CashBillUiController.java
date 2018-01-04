@@ -124,7 +124,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     public void addCashBillItems(CashBillItem[] cashBillItems) {
         for (CashBillItem cashBillItem : cashBillItems) {
             cashBillItemModelObservableList.add(
-                    new CashBillItemModel(cashBillItem));
+                new CashBillItemModel(cashBillItem));
         }
 
     }
@@ -185,17 +185,17 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     private CashBillVo getCurrentCashBillVo() {
         if (tfBankaccountId.getText().length() == 0) {
             PromptDialogHelper.start("提交失败！", "请先选择银行账户。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
             throw new NotCompleteException();
         }
         return new CashBillVo(
-                tfId.getText(),
-                currentDate.getValue(),
-                BillState.Draft,
-                currentEmployee.getValue().getId(),
-                currentBankAccount.getValue().getId(),
-                cashBillItemModelObservableList.stream().map(CashBillItemModel::toCashBillItem).toArray(CashBillItem[]::new)
+            tfId.getText(),
+            currentDate.getValue(),
+            BillState.Draft,
+            currentEmployee.getValue().getId(),
+            currentBankAccount.getValue().getId(),
+            cashBillItemModelObservableList.stream().map(CashBillItemModel::toCashBillItem).toArray(CashBillItem[]::new)
         );
     }
 
@@ -203,29 +203,28 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         try {
             CashBillVo cashBillVo = getCurrentCashBillVo();
             PromptDialogHelper.start("确认单据", "").setContent(
-                    cashBillVo.billDetailUi().showContent(cashBillVo).getComponent())
-                    .addCloseButton("确定", "CHECK", e -> {
-                        try {
-                            blService.submit(cashBillVo);
-                            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
-                                    .addCloseButton("继续填写", "EDIT", e1 -> {
-                                        onBtnResetClicked();
-                                        autofill();
-                                    })
-                                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
-                                    .createAndShow();
-                        } catch (UncheckedRemoteException e1) {
-                            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
-                                    .addCloseButton("好的", "CHECK", null)
-                                    .createAndShow();
-                        } catch (IdExistsException e1) {
-                            PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
-                                    .addCloseButton("好的", "CHECK", null)
-                                    .createAndShow();
-                        }
-                    })
-                    .addCloseButton("取消", "CLOSE", null)
-                    .createAndShow();
+                cashBillVo.billDetailUi().showContent(cashBillVo).getComponent())
+                .addCloseButton("确定", "CHECK", e -> {
+                    try {
+                        blService.submit(cashBillVo);
+                        PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
+                            .addCloseButton("继续填写", "EDIT", e1 -> {
+                                reset();
+                            })
+                            .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                            .createAndShow();
+                    } catch (UncheckedRemoteException e1) {
+                        PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
+                            .addCloseButton("好的", "CHECK", null)
+                            .createAndShow();
+                    } catch (IdExistsException e1) {
+                        PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
+                            .addCloseButton("好的", "CHECK", null)
+                            .createAndShow();
+                    }
+                })
+                .addCloseButton("取消", "CLOSE", null)
+                .createAndShow();
         } catch (NotCompleteException ignored) {
 
         }
@@ -234,10 +233,10 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
 
     public void onBtnCancelClicked() {
         PromptDialogHelper.start("是否退出？", "是否保存草稿？")
-                .addCloseButton("保存", "SAVE", e -> saveAsDraft())
-                .addCloseButton("不保存", "DELETE", e -> FrameworkUiManager.switchBackToHome())
-                .addCloseButton("取消", "CLOSE", null)
-                .createAndShow();
+            .addCloseButton("保存", "SAVE", e -> saveAsDraft())
+            .addCloseButton("不保存", "DELETE", e -> FrameworkUiManager.switchBackToHome())
+            .addCloseButton("取消", "CLOSE", null)
+            .createAndShow();
 
     }
 
@@ -245,29 +244,31 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         try {
             blService.saveAsDraft(getCurrentCashBillVo());
             PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
-                    .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchBackToHome())
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchBackToHome())
+                .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         } catch (Exception e) {
             PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         }
     }
 
+    public void reset() {
+        currentBankAccount.setValue(null);
+        cashBillItemModelObservableList.clear();
+    }
+
     public void onBtnResetClicked() {
-        PromptDialogHelper.start("重置","是否要重置？")
-            .addCloseButton("是","CHECK", e-> {
-                tfId.setText("");
-                currentDate.setValue(null);
-                currentEmployee.setValue(null);
-                currentBankAccount.setValue(null);
-                cashBillItemModelObservableList.clear();
-            }).addCloseButton("否","CLOSE", null)
+        PromptDialogHelper.start("重置", "是否要重置？")
+            .addCloseButton("是", "CHECK", e -> {
+                reset();
+
+            }).addCloseButton("否", "CLOSE", null)
             .createAndShow();
 
     }
@@ -279,19 +280,19 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
             currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         } catch (NoMoreBillException e) {
             PromptDialogHelper.start("ID不够！", "当日ID已经达到99999，无法增加新的单据。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         } catch (Exception e) {
             PromptDialogHelper.start("初始化失败！", "请重试！")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         }
 
     }
 
     public void onTfBankAccountClicked(MouseEvent actionEvent) {
         BankAccountUiFactory.getBankAccountSelectionUi()
-                .showBankAccountSelectDialog(vo -> this.currentBankAccount.setValue(vo));
+            .showBankAccountSelectDialog(vo -> this.currentBankAccount.setValue(vo));
     }
 
     public void onBtnSaveAsDraftClicked(ActionEvent actionEvent) {

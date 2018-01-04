@@ -105,12 +105,9 @@ public class FrameworkUiController {
 
         promptLabel.setText("欢迎你！" + FrameworkUiManager.getCurrentEmployee().getName());
 
-
+        loginDate = new Date();
         notificationUi = new NotificationUiController().load();
         draftUi = new DraftUiController().load();
-        refreshDraftStatus();
-        refreshNotificationStatus();
-        loginDate = new Date();
     }
 
 
@@ -120,6 +117,7 @@ public class FrameworkUiController {
     }
 
     public void onDraftFunctionButtonClicked(ActionEvent event) {
+        refreshDraftStatus();
         switchFunction(draftUi,"草稿", true);
     }
 
@@ -132,6 +130,7 @@ public class FrameworkUiController {
     }
 
     public void onNotificationFunctionButtonClicked(ActionEvent actionEvent) {
+        refreshNotificationStatus();
         switchFunction(notificationUi, "通知", true);
 
     }

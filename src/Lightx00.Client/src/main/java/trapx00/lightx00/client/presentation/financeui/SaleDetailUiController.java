@@ -55,7 +55,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<SaleRecordModel, String> tcTotal;
 
     public ObjectProperty<ClientVo> client = new SimpleObjectProperty<>();
-    public ObjectProperty<List<CommodityVo>> commodities = new SimpleObjectProperty<>();
+    public ObjectProperty<CommodityVo> commodities = new SimpleObjectProperty<>();
     public ObjectProperty<List<EmployeeVo>> operators = new SimpleObjectProperty<>();
 
     private SaleDetailBlService blService = SaleDetailBlServiceFactory.getInstance();
@@ -83,12 +83,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
 
         commodities.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                if (newValue.size() == 1) {
-                    CommodityVo selected = newValue.get(0);
-                    tfCommodity.setText(String.format("%s(id: %s)", selected.getName(), selected.getId()));
-                } else {
-                    tfCommodity.setText(String.format("已选择%d项商品", newValue.size()));
-                }
+                tfCommodity.setText(String.format("%s(id: %s)", newValue.getName(), newValue.getId()));
             }
         });
 
@@ -110,7 +105,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
         tcModel.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getValue().getCommodityVo().getType()));
         tcAmount.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getAmount())));
         tcUnitPrice.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getUnitPrice())));
-        tcUnitPrice.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getTotal())));
+        tcTotal.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getValue().getTotal())));
         TreeItem<SaleRecordModel> root = new RecursiveTreeItem<>(saleRecordModels, RecursiveTreeObject::getChildren);
         tbSaleDetails.setRoot(root);
         tbSaleDetails.setShowRoot(false);
@@ -125,11 +120,13 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
             queryVo.setStart(DateHelper.fromLocalDate(start));
             queryVo.setEnd(DateHelper.fromLocalDate(end));
         }
-        queryVo.setClient(new ClientVo[] { client.get() });
+        if (client.get() != null) {
+            queryVo.setClient(new ClientVo[] { client.get() });
+        }
         List<EmployeeVo> operatorss = operators.get();
         queryVo.setOperator(operatorss == null ? null : operatorss.toArray(new EmployeeVo[operatorss.size()]));
-        List<CommodityVo> commoditiess = commodities.get();
-        queryVo.setCommodityNames(commoditiess == null ? null : commoditiess.stream().map(CommodityVo::getName).toArray(String[]::new));
+        CommodityVo commoditiess = commodities.get();
+        queryVo.setCommodityName(commoditiess == null ? null : commoditiess.getName());
         return queryVo;
     }
 
@@ -179,7 +176,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
     }
 
     public void onTfCommodityClicked(MouseEvent mouseEvent) {
-        //commoditySelection.showCommoditySelectDialog(x -> commodities.set(x));
+        commoditySelection.showCommoditySelectDialog(x -> commodities.set(x));
     }
 
     public void onTfClientClicked(MouseEvent mouseEvent) {

@@ -66,7 +66,9 @@ public class BaseDatabaseFactory {
 
     public static void init() throws SQLException {
         basicInit();
+        initializeTables();
         initializeData();
+
     }
 
     public static void initTest() throws SQLException {
