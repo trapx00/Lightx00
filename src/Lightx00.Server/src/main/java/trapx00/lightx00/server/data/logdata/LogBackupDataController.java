@@ -87,6 +87,9 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
         try {
             List<LogPo> logPos = logDao.queryBuilder().query();
             File file = new File(FILE_PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             FileWriter fileWriter = new FileWriter(file);
             for (LogPo logPo : logPos) {
                 fileWriter.write(logPo.getId() + SEPATAROR);

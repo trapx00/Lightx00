@@ -25,6 +25,8 @@ import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -37,7 +39,15 @@ public class BaseDatabaseFactory {
     }
 
     private static String getDbFilePath() {
-        return IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir("/misc/database.db");
+        File databaseFile = new File(IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir("/database.db"));
+        if (!databaseFile.exists()) {
+            try {
+                databaseFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return databaseFile.getAbsolutePath();
 
     }
 
@@ -50,7 +60,6 @@ public class BaseDatabaseFactory {
     }
 
     private static void basicInit() throws SQLException {
-        System.setProperty("com.j256.ormlite.logger.level", "ERROR"); //this closes ORMLite log
         BaseDatabaseFactory.connectionSource = new JdbcConnectionSource(connectionString);
     }
 

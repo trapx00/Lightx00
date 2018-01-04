@@ -14,23 +14,12 @@ public class CognitiveServiceConfig {
         return api1;
     }
 
-    void setApi1(String api1) {
-        this.api1 = api1;
-    }
-
     public String getApi2() {
         return api2;
-    }
-
-    void setApi2(String api2) {
-        this.api2 = api2;
     }
 
     public String getEndpoint() {
         return endpoint;
     }
 
-    void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
 }
