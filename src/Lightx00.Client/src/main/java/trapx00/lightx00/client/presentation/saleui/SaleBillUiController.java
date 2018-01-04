@@ -173,7 +173,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         saleBillUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
         saleBillUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
         saleBillUiController.tfToken.setText(saleBillVo.getToken() + "");
-        saleBillUiController.tfUltiTotal.setText(saleBillVo.getUltiTotal()+"");
+        saleBillUiController.tfUltiTotal.setText(saleBillVo.getUltiTotal() + "");
         saleBillUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
         saleBillUiController.tfGiftToken.setText(saleBillVo.getGiftToken() + "");
         saleBillUiController.tfComment.setText(saleBillVo.getComment());
@@ -300,7 +300,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
             }
         });
         FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
-            if(event.getCode()== KeyCode.ENTER){
+            if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
             }
         });
@@ -331,7 +331,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         saleBillUiController.tfOriginTotal.setText(saleBillVo.getOriginTotal() + "");
         saleBillUiController.tfMinusProfits.setText(saleBillVo.getMinusProfits() + "");
         saleBillUiController.tfToken.setText(saleBillVo.getToken() + "");
-        saleBillUiController.tfUltiTotal.setText(saleBillVo.getUltiTotal()+"");
+        saleBillUiController.tfUltiTotal.setText(saleBillVo.getUltiTotal() + "");
         saleBillUiController.tfPromotionId.setText(saleBillVo.getPromotionId());
         saleBillUiController.tfGiftToken.setText(saleBillVo.getGiftToken() + "");
         saleBillUiController.tfComment.setText(saleBillVo.getComment());
@@ -392,25 +392,42 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         return commodityItems;
     }
 
+    private double calculateMinusProfit(CommodityItem[] commodityItems, double onSalePrice) {
+        //最大组合数
+        int maxCom = 1000000000;
+        for (CommodityItem commodityItem : commodityItems) {
+            for (CommodityItemModel commodityItemModel : commodityItemModelObservableList)
+                if (commodityItem.getCommodityId().equals(commodityItemModel.getCommodityItemObjectProperty().getCommodityId())) {
+                    int temp = (int) (commodityItemModel.getCommodityItemObjectProperty().getNumber() / commodityItem.getNumber());
+                    if (maxCom > temp) {
+                        maxCom = temp;
+                    }
+                    break;
+                }
+        }
+        return maxCom * onSalePrice;
+    }
+
     @FXML
     private void onBtnGetPromotionClicked() {
         giftItemModelObservableList.clear();
         promotionSelection.showEmployeeSelectDialog(
                 promotionVoBase -> {
                     tfPromotionId.setText(promotionVoBase.getId());
-                    addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                     switch (promotionVoBase.getType()) {
                         case ClientPromotion:
                             ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
                             tfGiftToken.setText(clientPromotionVo.getCouponPrice() + "");
+                            addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                             break;
                         case ComSalePromotion:
                             ComSalePromotionVo comSalePromotionVo = (ComSalePromotionVo) promotionVoBase;
-                            tfMinusProfits.setText(comSalePromotionVo.getOnSalePrice() + "");
+                            tfMinusProfits.setText(calculateMinusProfit(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()), comSalePromotionVo.getOnSalePrice()) + "");
                             break;
                         case TotalPricePromotion:
                             TotalPricePromotionVo totalPricePromotionVo = (TotalPricePromotionVo) promotionVoBase;
-                            tfGiftToken.setText((Double.parseDouble(tfUltiTotal.getText())/totalPricePromotionVo.getTotalPrice())*totalPricePromotionVo.getCouponPrice() + "");
+                            tfGiftToken.setText((((int) Double.parseDouble(tfUltiTotal.getText())) / totalPricePromotionVo.getTotalPrice()) * totalPricePromotionVo.getCouponPrice() + "");
+                            addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                             break;
                     }
                     (new ListHandler()).change();//修改总价格
