@@ -12,6 +12,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
+import trapx00.lightx00.server.data.util.config.CognitiveServiceConfig;
+import trapx00.lightx00.server.data.util.config.Config;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.faceid.FileException;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
@@ -26,9 +28,14 @@ import java.sql.SQLException;
 
 public class FaceIdService {
     private Dao<EmployeeFaceIdInfo, String> dao = FaceIdDaoFactory.getDao();
-    private static final String api1 = "80f6b11c822c4fc39dddd0ac8fbdcf09";
-    private static final String api2 = "f210f2a3a2c044119b63129e70070d04";
-    private static final String endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
+    private static String api1 = "80f6b11c822c4fc39dddd0ac8fbdcf09";
+    private static String endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
+
+    static {
+        CognitiveServiceConfig cognitiveServiceConfig = Config.getConfig().getCognitiveServiceConfig();
+        api1 = cognitiveServiceConfig.getApi1();
+        endpoint = cognitiveServiceConfig.getEndpoint();
+    }
 
     public byte[] readAsByteArray(String resourceUri) {
         try {

@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import de.jensd.fx.glyphs.materialicons.MaterialIcon;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -15,6 +16,14 @@ import trapx00.lightx00.client.bl.loginbl.factory.LoginBlFactory;
 import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.shared.util.RmiHelper;
+
+import java.net.MalformedURLException;
+import java.rmi.ConnectException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 public class LoginUiController implements ExternalLoadableUiController {
     public JFXPasswordField passwordField;
@@ -57,6 +66,7 @@ public class LoginUiController implements ExternalLoadableUiController {
                 loginButton.fire();
             }
         });
+
 
     }
 

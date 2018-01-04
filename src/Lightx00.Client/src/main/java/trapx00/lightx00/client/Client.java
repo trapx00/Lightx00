@@ -1,12 +1,23 @@
 package trapx00.lightx00.client;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.StageManager;
 import trapx00.lightx00.client.presentation.loginui.LoginUiController;
+import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.shared.util.RmiHelper;
+
+import java.net.MalformedURLException;
+import java.rmi.ConnectException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 public class Client extends Application {
 
@@ -32,10 +43,16 @@ public class Client extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         StageManager.setStage(primaryStage);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+
+        if (!testConnection(primaryStage)) {
+            return;
+        }
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/loginui/LoginUi.fxml"));
         Scene newScene = new Scene(loader.load());
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+
 
         LoginUiController controller = loader.getController();
 
@@ -45,4 +62,26 @@ public class Client extends Application {
         primaryStage.show();
     }
 
+    public boolean testConnection(Stage primaryStage) {
+        try {
+            Naming.lookup(RmiHelper.generateRmiUrl(LoginDataService.class));
+            return true;
+        } catch (ConnectException e) {
+            StackPane stackPane = new StackPane();
+            primaryStage.setScene(new Scene(stackPane));
+
+            PromptDialogHelper.start("服务器未启动！","请启动服务器后重新打开客户端。")
+                .addButton("好","CHECK", e2 -> primaryStage.close())
+                .create(stackPane)
+                .show();
+
+            primaryStage.sizeToScene();
+            primaryStage.centerOnScreen();
+            primaryStage.show();
+
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -11,6 +11,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
+import trapx00.lightx00.server.data.util.config.Config;
 import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
 import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
@@ -25,7 +26,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class FaceIdAuthenticationController implements FaceIdAuthenticationService {
-    private static final String endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
+    private static final String endpoint = Config.getConfig().getCognitiveServiceConfig().getEndpoint();
     private FaceIdService faceIdService = new FaceIdService();
     private Dao<EmployeeFaceIdInfo, String> dao = FaceIdDaoFactory.getDao();
     private static final double ConfidenceThreshold = 0.5;

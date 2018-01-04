@@ -11,7 +11,7 @@ import javafx.scene.control.TreeItem;
 
 import java.util.Map;
 
-
+@SuppressWarnings("unchecked")
 public class ReadOnlyPairTableHelper {
     private JFXTreeTableView<Pair> table = new JFXTreeTableView<>();
     private ObservableList<Pair> contentList = FXCollections.observableArrayList();
