@@ -56,7 +56,6 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
 
     public void initialize() {
         initTable();
-        updateItems();
     }
 
     public void initTable() {

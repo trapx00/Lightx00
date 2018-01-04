@@ -58,8 +58,8 @@ public class SaleDetailBlController implements SaleDetailBlService {
 
         List<CommodityVo> concernedCommodities = new ArrayList<>();
 
-        if (query.getCommodityNames() != null && query.getCommodityNames().length > 0){
-            concernedCommodities.addAll(Arrays.asList(commodityInfo.queryCommodity(new CommodityQueryVo().in("name", new ArrayList<>(Arrays.asList(query.getCommodityNames()))))));
+        if (query.getCommodityName() != null){
+            concernedCommodities.addAll(Arrays.asList(commodityInfo.queryCommodity(new CommodityQueryVo().eq("name", query.getCommodityName()))));
             List<String> commodityIdConditions = concernedCommodities.stream()
                 .map(CommodityVo::getId).collect(Collectors.toList());
             for (SaleBillVo saleBillVo : queryResult) {
@@ -87,7 +87,7 @@ public class SaleDetailBlController implements SaleDetailBlService {
                 for (CommodityItem item : x.getCommodityList()) {
                     CommodityVo commodity = concernedCommodities.stream().filter(ec -> ec.getId().equals(item.getCommodityId())).findFirst().orElse(null);
                     assert commodity != null;
-                    recordsForDate.add(new SaleRecordVo(x.getDate(), commodity, item.getNumber(), commodity.getRetailPrice(), item.getNumber() * commodity.getRetailPrice()));
+                    recordsForDate.add(new SaleRecordVo(x.getDate(), commodity, item.getNumber(), item.getPrice(), item.getNumber() * item.getPrice()));
                 }
                 return recordsForDate;
             }).flatMap(Collection::stream).toArray(SaleRecordVo[]::new));

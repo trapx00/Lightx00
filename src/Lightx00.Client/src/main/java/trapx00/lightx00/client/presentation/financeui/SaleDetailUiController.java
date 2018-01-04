@@ -55,7 +55,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<SaleRecordModel, String> tcTotal;
 
     public ObjectProperty<ClientVo> client = new SimpleObjectProperty<>();
-    public ObjectProperty<List<CommodityVo>> commodities = new SimpleObjectProperty<>();
+    public ObjectProperty<CommodityVo> commodities = new SimpleObjectProperty<>();
     public ObjectProperty<List<EmployeeVo>> operators = new SimpleObjectProperty<>();
 
     private SaleDetailBlService blService = SaleDetailBlServiceFactory.getInstance();
@@ -83,12 +83,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
 
         commodities.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                if (newValue.size() == 1) {
-                    CommodityVo selected = newValue.get(0);
-                    tfCommodity.setText(String.format("%s(id: %s)", selected.getName(), selected.getId()));
-                } else {
-                    tfCommodity.setText(String.format("已选择%d项商品", newValue.size()));
-                }
+                tfCommodity.setText(String.format("%s(id: %s)", newValue.getName(), newValue.getId()));
             }
         });
 
@@ -130,8 +125,8 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
         }
         List<EmployeeVo> operatorss = operators.get();
         queryVo.setOperator(operatorss == null ? null : operatorss.toArray(new EmployeeVo[operatorss.size()]));
-        List<CommodityVo> commoditiess = commodities.get();
-        queryVo.setCommodityNames(commoditiess == null ? null : commoditiess.stream().map(CommodityVo::getName).toArray(String[]::new));
+        CommodityVo commoditiess = commodities.get();
+        queryVo.setCommodityName(commoditiess == null ? null : commoditiess.getName());
         return queryVo;
     }
 
@@ -181,7 +176,7 @@ public class SaleDetailUiController implements ExternalLoadableUiController {
     }
 
     public void onTfCommodityClicked(MouseEvent mouseEvent) {
-        //commoditySelection.showCommoditySelectDialog(x -> commodities.set(x));
+        commoditySelection.showCommoditySelectDialog(x -> commodities.set(x));
     }
 
     public void onTfClientClicked(MouseEvent mouseEvent) {

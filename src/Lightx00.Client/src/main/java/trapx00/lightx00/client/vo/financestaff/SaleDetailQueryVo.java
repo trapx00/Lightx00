@@ -9,16 +9,16 @@ import java.util.Date;
 public class SaleDetailQueryVo { //销售明细表查询条件
     private Date start;
     private Date end;
-    private String[] commodityNames;
+    private String commodityName;
     private ClientVo[] clients;
     private EmployeeVo[] operators;
     private int repository;
 
-    public SaleDetailQueryVo(Date start, Date end, String[] commodityNames, ClientVo[] clients,
+    public SaleDetailQueryVo(Date start, Date end, String commodityName, ClientVo[] clients,
                              EmployeeVo[] operators, int repository) {
         this.start = start;
         this.end = end;
-        this.commodityNames = commodityNames;
+        this.commodityName = commodityName;
         this.clients = clients;
         this.operators = operators;
         this.repository = repository;
@@ -43,12 +43,12 @@ public class SaleDetailQueryVo { //销售明细表查询条件
         this.end = end;
     }
 
-    public String[] getCommodityNames() {
-        return commodityNames;
+    public String getCommodityName() {
+        return commodityName;
     }
 
-    public void setCommodityNames(String[] commodityNames) {
-        this.commodityNames = commodityNames;
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 
     public ClientVo[] getClients() {

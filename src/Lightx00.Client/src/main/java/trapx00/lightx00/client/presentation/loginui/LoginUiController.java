@@ -87,6 +87,8 @@ public class LoginUiController implements ExternalLoadableUiController {
             if (employeeVo != null) {
                 finishLogin(employeeVo);
             } else {
+                loginButton.setDisable(false);
+                loginButton.setText("登录");
                 JFXDialogLayout layout = new JFXDialogLayout();
                 JFXButton button = new JFXButton("好", new MaterialIconView(MaterialIcon.CHECK));
                 layout.setBody(new Label("登录失败！请检查用户名！或者寻找支持人员！"));
@@ -95,7 +97,6 @@ public class LoginUiController implements ExternalLoadableUiController {
                 JFXDialog dialog = new JFXDialog(dialogContainer, layout, JFXDialog.DialogTransition.CENTER);
                 button.setOnAction(e -> {
                     dialog.close();
-                    loginButton.setDisable(false);
                 });
                 dialog.show();
 
