@@ -77,6 +77,9 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
                 } catch (NetworkException e) {
                     dialog.close();
                     Platform.runLater(() -> showPromptDialog("网络错误！", "请联系技术人员。HTTP响应码：" + e.getStatusCode(), () -> startCamera()));
+                } catch (Exception e) {
+                    dialog.close();
+                    Platform.runLater(() -> showPromptDialog("登录失败！",String.format("出现了异常。\n%s", e.toString()), () -> startCamera()));
                 }
                 return null;
             }
@@ -84,7 +87,6 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
         Thread th = new Thread(task);
         th.setDaemon(true);
         dialog.show();
-        th.setUncaughtExceptionHandler((eh, x) -> System.out.println(x.toString()));
         th.start();
 
     }
