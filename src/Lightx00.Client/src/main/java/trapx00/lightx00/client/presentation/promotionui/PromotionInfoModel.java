@@ -19,7 +19,7 @@ public class PromotionInfoModel extends RecursiveTreeObject<PromotionInfoModel> 
 
     public PromotionInfoModel(PromotionVoBase promotionVo) {
         this.id = new SimpleStringProperty(promotionVo.getId());
-        this.startDate = new SimpleObjectProperty(promotionVo.getStartDate());
+        this.startDate = new SimpleObjectProperty<>(promotionVo.getStartDate());
         this.endDate = new SimpleObjectProperty<>(promotionVo.getEndDate());
         this.type = new SimpleObjectProperty<>(promotionVo.getType());
         this.promotion = new SimpleObjectProperty<>(promotionVo);
