@@ -6,6 +6,7 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import java.io.Serializable;
 import java.util.HashMap;
 
+@SuppressWarnings("unchecked")
 public class UserAccountQueryVo extends BaseQueryVo<EmployeePo,String, UserAccountQueryVo> implements Serializable {
 
     private HashMap<EmployeePosition, SpecificUserAccountQueryVo> specificUserAccountQueryVoHashMap = new HashMap<>();

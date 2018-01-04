@@ -221,6 +221,6 @@ public class FrameworkUiController {
     }
 
     public void onBtnAboutClicked(ActionEvent actionEvent) {
-
+        switchFunction(AboutPageController.class, "关于",true);
     }
 }

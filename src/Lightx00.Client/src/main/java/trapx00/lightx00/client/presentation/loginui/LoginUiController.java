@@ -75,7 +75,14 @@ public class LoginUiController implements ExternalLoadableUiController {
     }
 
     public void onLoginButtonClicked() {
-        if (validate()) {
+        if (!validate()) {
+            return;
+        }
+
+        loginButton.setDisable(true);
+        loginButton.setText("登录中");
+
+        Thread thread = new Thread(() -> Platform.runLater(() -> {
             EmployeeVo employeeVo = blService.login(usernameField.getText(), passwordField.getText());
             if (employeeVo != null) {
                 finishLogin(employeeVo);
@@ -88,12 +95,14 @@ public class LoginUiController implements ExternalLoadableUiController {
                 JFXDialog dialog = new JFXDialog(dialogContainer, layout, JFXDialog.DialogTransition.CENTER);
                 button.setOnAction(e -> {
                     dialog.close();
+                    loginButton.setDisable(false);
                 });
                 dialog.show();
 
             }
+        }));
 
-        }
+        thread.start();
     }
 
     private void finishLogin(EmployeeVo employeeVo) {
