@@ -4,6 +4,7 @@ import trapx00.lightx00.server.data.admindata.LoginService;
 import trapx00.lightx00.server.data.admindata.UserManagementDataController;
 import trapx00.lightx00.server.data.util.export.Export;
 import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.shared.dataservicestub.admindataservice.UserManagementDataServiceStub;
 
 import java.rmi.RemoteException;
 

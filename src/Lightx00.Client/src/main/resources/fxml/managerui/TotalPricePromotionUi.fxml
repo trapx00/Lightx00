@@ -23,7 +23,7 @@
 
 
     <JFXMasonryPane maxHeight="150.0" prefHeight="150.0">
-        <StackPane prefHeight="50" prefWidth="150">
+        <StackPane prefHeight="50" prefWidth="200">
             <JFXTextField fx:id="tfId" editable="false" labelFloat="true" promptText="ID" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">

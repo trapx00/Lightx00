@@ -44,7 +44,7 @@
     <center>
         <JFXMasonryPane prefWidth="800">
             <VBox spacing="10" alignment="CENTER">
-                <JFXButton buttonType="RAISED" onAction="#onBtnBankAccountClicked" prefHeight="100.0" prefWidth="100.0"
+                <JFXButton buttonType="RAISED" onAction="#onBtnAuditClicked" prefHeight="100.0" prefWidth="100.0"
                            style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;"
                            text="">
                     <graphic>

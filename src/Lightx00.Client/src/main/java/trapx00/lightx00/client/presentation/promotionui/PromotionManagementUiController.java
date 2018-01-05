@@ -30,8 +30,7 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
     public JFXTreeTableColumn<PromotionInfoModel, String> tcType;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcStartDate;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcEndDate;
-    public JFXButton btnAdd;
-    public JFXButton btnModify;
+    public JFXButton btnDetail;
     public JFXButton btnDelete;
 
     private ObservableList<PromotionInfoModel> promotionInfoModels = FXCollections.observableArrayList();
@@ -61,6 +60,11 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
         PromotionVoBase[] result3 = clientPromotionBlService.queryPromotion(clientPromotionQueryVo);
         promotionInfoModels.addAll(Arrays.stream(result3).map(PromotionInfoModel::new).collect(Collectors.toList()));
 
+        tablePromotion.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onBtnDetailClicked();
+            }
+        });
     }
 
     private void initTable() {
@@ -72,6 +76,11 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
         tablePromotion.setRoot(root);
         tablePromotion.setShowRoot(false);
         tablePromotion.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tablePromotion.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onBtnDetailClicked();
+            }
+        });
     }
 
     /**
@@ -135,6 +144,21 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
                     return ResultMessage.Failure;
         }
 
+    }
+    public void onBtnDetailClicked() {
+        TreeItem<PromotionInfoModel> selectedItem = tablePromotion.getSelectionModel().getSelectedItem();
+        if(selectedItem.getValue()!=null) {
+            PromotionVoBase promotion = selectedItem.getValue().getPromotion();
+            PromptDialogHelper.start("促销策略详细信息","")
+                    .setContent(promotion.promotionDetailUi().showContent(promotion).getComponent())
+                    .addCloseButton("返回","REFRESH",null)
+                    .createAndShow();
+        }
+        else {
+            PromptDialogHelper.start("错误","请先选择一条促销策略。")
+                    .addCloseButton("好的","DONE",null)
+                    .createAndShow();
+        }
     }
 
 }

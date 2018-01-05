@@ -26,7 +26,7 @@ public class CommodityDataControllerTest {
     }
 
     private Dao<CommodityPo, String> dao = CommodityDataDaoFactory.getCommodityDao();
-    private CommodityDataService service= CommodityDataFactory.getController();
+    private CommodityDataService service= CommodityDataFactory.getService();
     private  CommodityPo commodityPo = new CommodityPo("PRO-0002-0001","SmallLed","PRO-0002",13,new Date(),"一",
             "01",34,34,34,34,100);
 

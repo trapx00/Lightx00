@@ -5,8 +5,11 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlServiceFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
@@ -30,8 +33,8 @@ import java.util.Date;
 
 public class TotalPricePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     public JFXTextField tfId;
-    public JFXDatePicker tfStartDate;
-    public JFXDatePicker tfEndDate;
+    public JFXDatePicker tfStartDate = new JFXDatePicker();
+    public JFXDatePicker tfEndDate = new JFXDatePicker();
     public JFXTextField tfCouponPrice;
     public JFXTextField tfTotalPrice;
     public JFXTreeTableView<PromotionCommodityModel> tbPromotionCommodity;
@@ -46,9 +49,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
     public JFXButton btnReset;
 
     private TotalPricePromotionBlService blService = TotalPricePromotionBlServiceFactory.getInstance();
-
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
-
     private ObservableList<PromotionCommodityModel> promotionCommodityModelObservableList = FXCollections.observableArrayList();
 
     /**
@@ -98,6 +99,13 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
 
+        tcId.setMinWidth(tbPromotionCommodity.getWidth()/4);
+        tcName.setMinWidth(tbPromotionCommodity.getWidth()/4);
+        tcPrice.setMinWidth(tbPromotionCommodity.getWidth()/4);
+        tcAmount.setMinWidth(tbPromotionCommodity.getWidth()/4);
+
+        tfStartDate.setDayCellFactory(startDayCellFactory);
+        tfEndDate.setDayCellFactory(endDayCellFactory);
         TreeItem<PromotionCommodityModel> root = new RecursiveTreeItem<>(promotionCommodityModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotionCommodity.setRoot(root);
         tbPromotionCommodity.setShowRoot(false);
@@ -166,7 +174,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
     }
 
     public void onBtnResetClicked() {
-        tfId.setText("");
+        tfId.setText(blService.getId());
         tfStartDate.setValue(null);
         tfEndDate.setValue(null);
         tfCouponPrice.setText("");
@@ -202,4 +210,36 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
         return localDateTime.toLocalDate();
     }
+
+    private final Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
+        @Override
+        public DateCell call(final DatePicker datePicker) {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item,empty);
+                    if(item.isBefore(tfStartDate.getValue().plusDays(1))) {
+                        setDisable(true);
+                    }
+                }
+
+            };
+        }
+    };
+
+    private final Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
+        @Override
+        public DateCell call(final DatePicker datePicker) {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item,empty);
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
+                        setDisable(true);
+                    }
+                }
+
+            };
+        }
+    };
 }

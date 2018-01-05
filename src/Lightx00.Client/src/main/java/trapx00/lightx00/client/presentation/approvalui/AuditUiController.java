@@ -5,7 +5,11 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import trapx00.lightx00.client.bl.approvalbl.factory.AuditBlFactory;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
@@ -21,10 +25,8 @@ import trapx00.lightx00.shared.util.DateHelper;
 import java.util.Date;
 
 public class AuditUiController implements ExternalLoadableUiController {
-    public JFXComboBox sortChoiceBox;
-    //public JFXButton updateButton;
-    public JFXButton approveButton;
-    public JFXButton detailButton;
+    public JFXButton btnRefresh;
+    public JFXButton btnApproval;
     public JFXTreeTableView<BillAuditItemModel> tbBill;
     public JFXTreeTableColumn<BillAuditItemModel, String> tcId;
     public JFXTreeTableColumn<BillAuditItemModel, String> tcType;
@@ -47,6 +49,7 @@ public class AuditUiController implements ExternalLoadableUiController {
         TreeItem<BillAuditItemModel> root = new RecursiveTreeItem<>(billTableItemModels, RecursiveTreeObject::getChildren);
         tbBill.setRoot(root);
         tbBill.setShowRoot(false);
+        tbBill.getSelectionModel().setCellSelectionEnabled(true);
         tbBill.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 TreeItem<BillAuditItemModel> selectedItem = tbBill.getSelectionModel().getSelectedItem();
@@ -137,20 +140,10 @@ public class AuditUiController implements ExternalLoadableUiController {
         }
     }
 
-   /* public void onRejectClicked() {
-        try {
-            ResultMessage result = blService.reject(new AuditIdVo(getSelected().getId(),new Date()));
-            if(result.equals(ResultMessage.Success)) {
-                PromptDialogHelper.start("拒绝通过成功", "已发送通知。")
-                        .addCloseButton("完成", "DONE", null)
-                        .createAndShow();
-            }
-        } catch (NullPointerException e){
-            PromptDialogHelper.start("错误","请至少选一张单据。")
-                    .addCloseButton("好的","DONE",null)
-                    .createAndShow();
-        }
-    }*/
+   public void onBtnRefreshClicked() {
+        updateItems();
+   }
+
 
     public void onDetailClicked() {
         try {
@@ -162,6 +155,8 @@ public class AuditUiController implements ExternalLoadableUiController {
         }
 
     }
+
+
     /**
      * Loads the controller.
      *

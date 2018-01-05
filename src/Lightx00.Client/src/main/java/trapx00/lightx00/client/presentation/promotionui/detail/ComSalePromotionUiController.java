@@ -6,9 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlServiceFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
@@ -33,8 +32,8 @@ import java.util.Date;
 
 public class ComSalePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
     public JFXTextField tfId;
-    public JFXDatePicker tfStartDate;
-    public JFXDatePicker tfEndDate;
+    public JFXDatePicker tfStartDate = new JFXDatePicker();
+    public JFXDatePicker tfEndDate = new JFXDatePicker();
     public JFXTextField tfSalePrice;
     public JFXTreeTableView<PromotionCommodityModel> tbPromotionCommodity;
     public JFXTreeTableColumn<PromotionCommodityModel, String> tcId;
@@ -74,7 +73,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
      */
     @Override
     public ExternalLoadedUiPackage continueWriting(Draftable draft) {
-        /**
+        /*
          * 草稿功能实现。
          * 和对应单据详细界面一样，通过传入的参数初始化对应的控件元素信息。
          */
@@ -97,7 +96,9 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
-       // tcAmount.setCellValueFactory(TextFieldTableCell.forTableColumn());
+
+        tfStartDate.setDayCellFactory(startDayCellFactory);
+        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             lbTotal.setText(BillHelper.toFixed(promotionCommodityModelObservableList.stream().mapToDouble(PromotionCommodityModel::getAmount).sum()));
@@ -170,7 +171,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
     }
 
     public void onBtnResetClicked() {
-        tfId.setText("");
+        tfId.setText(blService.getId());
         tfStartDate.setValue(null);
         tfEndDate.setValue(null);
         tfSalePrice.setText("");
@@ -205,4 +206,36 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
         return localDateTime.toLocalDate();
     }
+
+    private final Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
+        @Override
+        public DateCell call(final DatePicker datePicker) {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item,empty);
+                    if(item.isBefore(tfStartDate.getValue().plusDays(1))) {
+                        setDisable(true);
+                    }
+                }
+
+            };
+        }
+    };
+
+    private final Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
+        @Override
+        public DateCell call(final DatePicker datePicker) {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item,empty);
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
+                        setDisable(true);
+                    }
+                }
+
+            };
+        }
+    };
 }

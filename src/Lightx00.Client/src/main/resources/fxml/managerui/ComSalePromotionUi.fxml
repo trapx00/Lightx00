@@ -22,7 +22,7 @@
 
 
     <JFXMasonryPane maxHeight="150.0" prefHeight="150.0">
-        <StackPane prefHeight="50" prefWidth="100">
+        <StackPane prefHeight="50" prefWidth="200">
             <JFXTextField fx:id="tfId" editable="false" labelFloat="true" promptText="ID" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
@@ -44,7 +44,7 @@
         </Label>
         <JFXTreeTableView fx:id="tbPromotionCommodity" prefHeight="300.0" prefWidth="600.0">
             <columns>
-                <JFXTreeTableColumn fx:id="tcId" prefWidth="200" text="商品ID" />
+                <JFXTreeTableColumn fx:id="tcId" prefWidth = "200" text="商品ID" />
                 <JFXTreeTableColumn fx:id="tcName" prefWidth="200" text="商品名称" />
                 <JFXTreeTableColumn fx:id="tcPrice" prefWidth="200" text="价格" />
                 <JFXTreeTableColumn fx:id="tcAmount" prefWidth="200" text="数量" />

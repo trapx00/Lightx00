@@ -21,7 +21,7 @@ public class ManagerHomeUiController extends BaseHomepageUiController {
         return new UiLoader("/fxml/managerui/ManagerHome.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void onBtnBankAccountClicked(ActionEvent actionEvent) {
+    public void onBtnAuditClicked(ActionEvent actionEvent) {
         uiController.onAuditFunctionClicked(actionEvent);
     }
 
