@@ -42,7 +42,7 @@
                             <FontAwesomeIconView glyphName="ADDRESS_CARD" glyphSize="18" fill="black" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onFaceIdRegistrationFunctionClicked" prefHeight="60" prefWidth="200" text="注册Face ID" textFill="#000000">
+                    <JFXButton onAction="#onFaceIdRegistrationFunctionClicked" prefHeight="60" prefWidth="200" text="注册FaceId" textFill="#000000">
                         <graphic>
                             <MaterialDesignIconView glyphName="FACE" glyphSize="18" fill="black" />
                         </graphic>
@@ -66,6 +66,11 @@
                     <JFXButton fx:id="btnNotification" onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="btnDraft" onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
+                        <graphic>
+                            <MaterialIconView glyphName="CLASS" glyphSize="20" />
                         </graphic>
                     </JFXButton>
                     <JFXButton onAction="#onBtnAboutClicked" prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">

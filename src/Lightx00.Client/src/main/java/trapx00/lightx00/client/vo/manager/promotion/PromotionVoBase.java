@@ -29,6 +29,16 @@ public abstract class PromotionVoBase implements Draftable, Serializable {
         this.endDate = endDate;
         this.state = state;
         this.promotionCommodities = promotionCommodities;
+        if(!state.equals(PromotionState.Draft)) {
+            Date currentDate = new Date();
+            if (startDate.getTime() <= currentDate.getTime() && endDate.getTime() > currentDate.getTime()) {
+                this.state = PromotionState.Active;
+            } else if (startDate.getTime() > currentDate.getTime()) {
+                this.state = PromotionState.Waiting;
+            } else if (endDate.getTime() <= currentDate.getTime()) {
+                this.state = PromotionState.Overdue;
+            }
+        }
     }
 
     public PromotionState getState() {

@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import de.jensd.fx.glyphs.materialicons.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXMasonryPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 <VBox prefHeight="800.0" prefWidth="800.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.promotionui.detail.ClientPromotionUiController">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <HBox alignment="CENTER_LEFT" spacing="10">
-        <MaterialIconView fill="black" glyphName="PEOPLE" glyphSize="48" />
+        <MaterialIconView fill="black" glyphName="PEOPLE" glyphSize="32" />
         <Label text="客户类促销策略" textFill="#5e5e5e">
             <font>
-                <Font name="System Bold" size="32.0" />
+                <Font name="System Bold" size="28.0" />
             </font>
         </Label>
     </HBox>
 
 
     <JFXMasonryPane maxHeight="150.0" prefHeight="150.0">
-        <StackPane prefHeight="50" prefWidth="100">
+        <StackPane prefHeight="50" prefWidth="200">
             <JFXTextField fx:id="tfId" editable="false" labelFloat="true" promptText="ID" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
@@ -32,7 +41,7 @@
             <JFXDatePicker fx:id="tfEndDate" editable="true" promptText="结束日期" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
-            <JFXTextField fx:id="tfClientLevel" editable="true" labelFloat="true" promptText="客户等级" />
+            <JFXComboBox fx:id="cbClientLevel" editable="true" labelFloat="true" promptText="客户等级" />
         </StackPane>
         <StackPane prefHeight="50" prefWidth="100">
             <JFXTextField fx:id="tfCouponPrice" editable="true" labelFloat="true" promptText="代金券金额" />
@@ -57,7 +66,9 @@
             </columns>
         </JFXTreeTableView>
         <HBox alignment="BASELINE_RIGHT" prefWidth="100" spacing="10">
-            <JFXButton fx:id="btnAdd" onAction="#onBtnAddGiftClicked" style="-fx-text-fill: #000000;" text="">
+            <Label text="总价：" />
+            <Label fx:id="lbTotal" text="0.00" />
+            <JFXButton fx:id="btnAdd" onAction="#onBtnAddGiftClicked" style="-fx-text-fill: #000000;" text="添加">
                 <graphic>
                     <MaterialIconView glyphName="ADD" glyphSize="24" />
                 </graphic>
@@ -65,7 +76,7 @@
                     <Insets right="10.0" />
                 </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteGiftClicked" style="-fx-text-fill: #000000;" text="">
+            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteGiftClicked" style="-fx-text-fill: #000000;" text="删除">
                 <graphic>
                     <MaterialIconView glyphName="DELETE" glyphSize="24" />
                 </graphic>
@@ -73,6 +84,9 @@
                     <Insets right="10.0" />
                 </HBox.margin>
             </JFXButton>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
         </HBox>
     </VBox>
     <Separator />

@@ -1,10 +1,7 @@
 package trapx00.lightx00.client.presentation.promotionui;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
 public class PromotionCommodityModel extends RecursiveTreeObject<PromotionCommodityModel> {
@@ -12,7 +9,6 @@ public class PromotionCommodityModel extends RecursiveTreeObject<PromotionCommod
     private StringProperty name;
     private DoubleProperty price;
     private DoubleProperty amount;
-
 
     public PromotionCommodityModel(String id, String name, double price, double amount) {
         this.id = new SimpleStringProperty(id);

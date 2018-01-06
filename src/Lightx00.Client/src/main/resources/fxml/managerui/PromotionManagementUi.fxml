@@ -61,7 +61,14 @@
         <padding>
             <Insets bottom="10" right="20" top="10" />
         </padding>
-
+        <JFXButton fx:id="btnDetail" buttonType="RAISED" onAction="#onBtnDetailClicked" style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000" text="详细">
+            <graphic>
+                <MaterialIconView glyphName="DESCRIPTION" glyphSize="24" glyphStyle="-fx-fill: #000000" />
+            </graphic>
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </JFXButton>
         <JFXButton fx:id="btnDelete" buttonType="RAISED" onAction="#onBtnDeleteClicked" style="-fx-background-color: #bf360c; -fx-text-fill: #FFFFFF" text="删除">
             <graphic>
                 <MaterialIconView glyphName="DELETE" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF" />

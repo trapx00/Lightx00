@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @DatabaseTable(tableName = "promotion")
-public class PromotionPoBase implements Serializable{
+public class PromotionPoBase  implements Serializable {
     @DatabaseField(id = true)
     private String id;
     @DatabaseField
