@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlServiceFactory;
@@ -104,16 +106,22 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
             }
         });
 
-
+        tbPromotionCommodity.setEditable(true);
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+        tcAmount.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        tcAmount.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionCommodityModel,String> t)-> {
+            (t.getTreeTableView().getTreeItem((t.getTreeTablePosition().getRow())).getValue()).setAmount(Double.parseDouble(t.getNewValue()));
+            updateTotal();
+        });
+
         tfStartDate.setDayCellFactory(startDayCellFactory);
         tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
-            double total = 0.0;
+            double total = 0;
             for(PromotionCommodityModel model:promotionCommodityModelObservableList) {
                total+= model.getAmount()*model.getPrice();
             }
@@ -125,6 +133,14 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         tbPromotionCommodity.setShowRoot(false);
         tbPromotionCommodity.setEditable(true);
         tbPromotionCommodity.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    private void updateTotal() {
+        double total = 0.0;
+        for(PromotionCommodityModel model:promotionCommodityModelObservableList) {
+            total+= model.getAmount()*model.getPrice();
+        }
+        lbTotal.setText(String.valueOf(total));
     }
 
     private ComSalePromotionVo getCurrentComSalePromotionVo() {

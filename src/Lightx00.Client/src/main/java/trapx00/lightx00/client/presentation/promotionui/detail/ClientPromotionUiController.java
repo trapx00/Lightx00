@@ -6,6 +6,7 @@ import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.util.Callback;
@@ -45,6 +46,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
     public JFXButton btnSubmit;
     public JFXButton btnDraft;
     public JFXButton btnReset;
+    public Label lbTotal;
 
     private ClientPromotionBlService blService = ClientPromotionBlServiceFactory.getInstance();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
@@ -109,15 +111,35 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+        tcAmount.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionCommodityModel,String> t)-> {
+            (t.getTreeTableView().getTreeItem((t.getTreeTablePosition().getRow())).getValue()).setAmount(Double.parseDouble(t.getNewValue()));
+            updateTotal();
+        });
 
         tfStartDate.setDayCellFactory(startDayCellFactory);
         tfEndDate.setDayCellFactory(endDayCellFactory);
+
+        promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
+            double total = 0.0;
+            for(PromotionCommodityModel model:promotionCommodityModelObservableList) {
+                total+= model.getAmount()*model.getPrice();
+            }
+            lbTotal.setText(String.valueOf(total));
+        });
 
         TreeItem<PromotionCommodityModel> root = new RecursiveTreeItem<>(promotionCommodityModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotionCommodity.setRoot(root);
         tbPromotionCommodity.setShowRoot(false);
         tbPromotionCommodity.setEditable(true);
         tbPromotionCommodity.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    private void updateTotal() {
+        double total = 0.0;
+        for(PromotionCommodityModel model:promotionCommodityModelObservableList) {
+            total+= model.getAmount()*model.getPrice();
+        }
+        lbTotal.setText(String.valueOf(total));
     }
 
     private ClientPromotionVo getCurrentClientPromotionVo() {

@@ -9,6 +9,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.bl.approvalbl.factory.AuditBlFactory;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
+import trapx00.lightx00.client.blservice.approvalblservice.AuditBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
@@ -31,7 +32,7 @@ public class AuditUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<BillAuditItemModel, String> tcCommitTime;
 
     private ObservableList<BillAuditItemModel> billTableItemModels = FXCollections.observableArrayList();
-    private AuditBlService blService = AuditBlFactory.getController();
+    private AuditBlService blService = AuditBlServiceFactory.getInstance();
 
     public void initialize() {
         initTable();

@@ -50,12 +50,14 @@
             <columns>
                 <JFXTreeTableColumn fx:id="tcId" prefWidth="200" text="商品ID" />
                 <JFXTreeTableColumn fx:id="tcName" prefWidth="200" text="商品名称" />
-                <JFXTreeTableColumn fx:id="tcPrice" prefWidth="200" text="价格" />
-                <JFXTreeTableColumn fx:id="tcAmount" prefWidth="200" text="数量" />
+                <JFXTreeTableColumn fx:id="tcPrice" prefWidth="100" text="价格" />
+                <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量" />
             </columns>
         </JFXTreeTableView>
         <HBox alignment="BASELINE_RIGHT" prefWidth="100" spacing="10">
-            <JFXButton fx:id="btnAdd" onAction="#onBtnAddGiftClicked" style="-fx-text-fill: #000000;" text = "" >
+            <Label text="总价：" />
+            <Label fx:id="lbTotal" text="0.00" />
+            <JFXButton fx:id="btnAdd" onAction="#onBtnAddGiftClicked" style="-fx-text-fill: #000000;" text = "添加" >
                 <graphic>
                     <MaterialIconView glyphName="ADD" glyphSize="24" />
                 </graphic>
@@ -63,7 +65,7 @@
                     <Insets right="10.0" />
                 </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteGiftClicked" style="-fx-text-fill: #000000;" text = "" >
+            <JFXButton fx:id="btnDelete" onAction="#onBtnDeleteGiftClicked" style="-fx-text-fill: #000000;" text = "删除" >
                 <graphic>
                     <MaterialIconView glyphName="DELETE" glyphSize="24" />
                 </graphic>

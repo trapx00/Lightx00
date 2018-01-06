@@ -1,16 +1,18 @@
 package trapx00.lightx00.client.presentation.promotionui.detail;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlServiceFactory;
@@ -29,6 +31,7 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import javax.swing.event.CellEditorListener;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,6 +54,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
     public JFXButton btnSubmit;
     public JFXButton btnDraft;
     public JFXButton btnReset;
+    public Label lbTotal;
 
     private TotalPricePromotionBlService blService = TotalPricePromotionBlServiceFactory.getInstance();
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
@@ -112,19 +116,41 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
             }
         });
 
+        tbPromotionCommodity.setEditable(true);
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+        tcAmount.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        tcAmount.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionCommodityModel,String> t)-> {
+            (t.getTreeTableView().getTreeItem((t.getTreeTablePosition().getRow())).getValue()).setAmount(Double.parseDouble(t.getNewValue()));
+            updateTotal();
+        });
 
+        promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
+            double total = 0.00;
+            for(PromotionCommodityModel model:promotionCommodityModelObservableList) {
+                total+= model.getAmount()*model.getPrice();
+            }
+            lbTotal.setText(String.valueOf(total));
+        });
 
         tfStartDate.setDayCellFactory(startDayCellFactory);
         tfEndDate.setDayCellFactory(endDayCellFactory);
+
         TreeItem<PromotionCommodityModel> root = new RecursiveTreeItem<>(promotionCommodityModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotionCommodity.setRoot(root);
         tbPromotionCommodity.setShowRoot(false);
         tbPromotionCommodity.setEditable(true);
         tbPromotionCommodity.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    private void updateTotal() {
+        double total = 0.0;
+        for(PromotionCommodityModel model:promotionCommodityModelObservableList) {
+            total+= model.getAmount()*model.getPrice();
+        }
+        lbTotal.setText(String.valueOf(total));
     }
 
     private TotalPricePromotionVo getCurrentTotalPricePromotionVo() {
