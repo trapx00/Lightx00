@@ -162,14 +162,11 @@ public class InitialEstablishmentBlController
      */
     @Override
     public SystemSnapshotPo fromVoToPo(SystemSnapshotVo vo) {
-        List<ClientPo> convertedClientPo = new ArrayList<>();
-        convertedClientPo.addAll(Arrays.stream(vo.getClients()).map(x -> clientVoPoVoConverter.fromVoToPo(x)).collect(Collectors.toList()));
+        List<ClientPo> convertedClientPo = new ArrayList<>(Arrays.stream(vo.getClients()).map(x -> clientVoPoVoConverter.fromVoToPo(x)).collect(Collectors.toList()));
 
-        List<CommodityPo> convertedCommodityPo = new ArrayList<>();
-        convertedCommodityPo.addAll(Arrays.stream(vo.getCommodities()).map(x -> commodityVoPoVoConverter.fromVoToPo(x)).collect(Collectors.toList()));
+        List<CommodityPo> convertedCommodityPo = new ArrayList<>(Arrays.stream(vo.getCommodities()).map(x -> commodityVoPoVoConverter.fromVoToPo(x)).collect(Collectors.toList()));
 
-        List<BankAccountPo> convertedBankAccountPo = new ArrayList<>();
-        convertedBankAccountPo.addAll(Arrays.stream(vo.getBankAccounts()).map(x -> bankAccountVoPoVoConverter.fromVoToPo(x)).collect(Collectors.toList()));
+        List<BankAccountPo> convertedBankAccountPo = new ArrayList<>(Arrays.stream(vo.getBankAccounts()).map(x -> bankAccountVoPoVoConverter.fromVoToPo(x)).collect(Collectors.toList()));
 
         return new SystemSnapshotPo(vo.getId(), vo.getDate(), vo.getState(),
             convertedCommodityPo.toArray(new CommodityPo[convertedCommodityPo.size()]),
@@ -186,14 +183,11 @@ public class InitialEstablishmentBlController
      */
     @Override
     public SystemSnapshotVo fromPoToVo(SystemSnapshotPo po) {
-        List<ClientVo> convertedClientVo = new ArrayList<>();
-        convertedClientVo.addAll(Arrays.stream(po.getClients()).map(x -> clientVoPoVoConverter.fromPoToVo(x)).collect(Collectors.toList()));
+        List<ClientVo> convertedClientVo = new ArrayList<>(Arrays.stream(po.getClients()).map(x -> clientVoPoVoConverter.fromPoToVo(x)).collect(Collectors.toList()));
 
-        List<CommodityVo> convertedCommodityVo = new ArrayList<>();
-        convertedCommodityVo.addAll(Arrays.stream(po.getCommodities()).map(x -> commodityVoPoVoConverter.fromPoToVo(x)).collect(Collectors.toList()));
+        List<CommodityVo> convertedCommodityVo = new ArrayList<>(Arrays.stream(po.getCommodities()).map(x -> commodityVoPoVoConverter.fromPoToVo(x)).collect(Collectors.toList()));
 
-        List<BankAccountVo> convertedBankAccountPo = new ArrayList<>();
-        convertedBankAccountPo.addAll(Arrays.stream(po.getBankAccounts()).map(x -> bankAccountVoPoVoConverter.fromPoToVo(x)).collect(Collectors.toList()));
+        List<BankAccountVo> convertedBankAccountPo = new ArrayList<>(Arrays.stream(po.getBankAccounts()).map(x -> bankAccountVoPoVoConverter.fromPoToVo(x)).collect(Collectors.toList()));
 
         return new SystemSnapshotVo(po.getId(), po.getDate(), po.getState(),
             convertedCommodityVo.toArray(new CommodityVo[convertedCommodityVo.size()]),

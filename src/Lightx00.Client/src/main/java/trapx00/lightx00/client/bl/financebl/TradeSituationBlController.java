@@ -5,6 +5,8 @@ import trapx00.lightx00.client.bl.inventorybl.InventoryGiftInfo;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryBillInfoFactory;
 import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
+import trapx00.lightx00.client.bl.logbl.LogService;
+import trapx00.lightx00.client.bl.logbl.factory.LogServiceFactory;
 import trapx00.lightx00.client.bl.promotionbl.couponbl.CouponInfo;
 import trapx00.lightx00.client.bl.promotionbl.couponbl.factory.CouponFactory;
 import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
@@ -19,6 +21,7 @@ import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
+import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.*;
 
@@ -34,6 +37,8 @@ public class TradeSituationBlController implements TradeSituationBlService {
     private InventoryGiftInfo inventoryGiftInfo = InventoryBillInfoFactory.getInventoryGiftInfo();
     private PurchaseBillBlInfo purchaseBillBlInfo = PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
     private CouponInfo couponInfo = CouponFactory.getCouponInfo();
+    private LogService logService = LogServiceFactory.getLogService();
+
     /**
      * Queries TradeSituation during specified time range
      *
@@ -62,6 +67,8 @@ public class TradeSituationBlController implements TradeSituationBlService {
 
         List<PurchaseBillVo> purchaseBillVos = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo().between("date", start, end))));
         List<PurchaseRefundBillVo> purchaseRefundBillVoList = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo().between("date", start, end))));
+
+        logService.log(LogSeverity.Info, "查询了经营情况表。");
 
         return new TradeSituationVo(
             saleIncome(saleBillVos, saleRefundBillVos),
@@ -155,6 +162,7 @@ public class TradeSituationBlController implements TradeSituationBlService {
      */
     @Override
     public ResultMessage export(TradeSituationVo situation) {
-        return null;
+        logService.log(LogSeverity.Info, "导出了经营情况表。");
+        return ResultMessage.Success;
     }
 }
