@@ -9,6 +9,7 @@ import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 
 import java.util.Date;
 
@@ -17,12 +18,14 @@ public class EmployeeInfoModel extends RecursiveTreeObject<EmployeeInfoModel> {
     private StringProperty name;
     private ObjectProperty<Date> workDate;
     private ObjectProperty<EmployeePosition> position;
+    private ObjectProperty<EmployeeState> state;
 
     public EmployeeInfoModel(EmployeeVo employeeVo) {
         this.id = new SimpleStringProperty(employeeVo.getId());
         this.name = new SimpleStringProperty(employeeVo.getName());
         this.workDate = new SimpleObjectProperty<>(employeeVo.getWorkSince());
         this.position = new SimpleObjectProperty<>(employeeVo.getPosition());
+        this.state = new SimpleObjectProperty<>(employeeVo.getState());
     }
 
     public EmployeeVo toEmployeeVo() {
@@ -66,6 +69,18 @@ public class EmployeeInfoModel extends RecursiveTreeObject<EmployeeInfoModel> {
         this.position.set(position);
     }
 
+    public EmployeeState getState() {
+        return state.get();
+    }
+
+    public ObjectProperty<EmployeeState> stateProperty() {
+        return state;
+    }
+
+    public void setState(EmployeeState state) {
+        this.state.set(state);
+    }
+
     public Date getWorkDate() {
         return workDate.get();
     }
@@ -77,5 +92,4 @@ public class EmployeeInfoModel extends RecursiveTreeObject<EmployeeInfoModel> {
     public void setWorkDate(Date workDate) {
         this.workDate.set(workDate);
     }
-
 }

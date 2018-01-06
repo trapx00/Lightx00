@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ public class PromotionInfoModel extends RecursiveTreeObject<PromotionInfoModel> 
     private ObjectProperty<Date> startDate;
     private ObjectProperty<Date> endDate;
     private ObjectProperty<PromotionType> type;
+    private ObjectProperty<PromotionState> state;
     private ObjectProperty<PromotionVoBase> promotion;
 
     public PromotionInfoModel(PromotionVoBase promotionVo) {
@@ -22,6 +24,7 @@ public class PromotionInfoModel extends RecursiveTreeObject<PromotionInfoModel> 
         this.startDate = new SimpleObjectProperty<>(promotionVo.getStartDate());
         this.endDate = new SimpleObjectProperty<>(promotionVo.getEndDate());
         this.type = new SimpleObjectProperty<>(promotionVo.getType());
+        this.state = new SimpleObjectProperty<>(promotionVo.getState());
         this.promotion = new SimpleObjectProperty<>(promotionVo);
     }
 
@@ -85,6 +88,17 @@ public class PromotionInfoModel extends RecursiveTreeObject<PromotionInfoModel> 
         return promotion;
     }
 
+    public void setState(PromotionState state) {
+        this.state.set(state);
+    }
+
+    public PromotionState getState() {
+        return state.get();
+    }
+
+    public ObjectProperty<PromotionState> stateProperty() {
+        return state;
+    }
 
 
 }
