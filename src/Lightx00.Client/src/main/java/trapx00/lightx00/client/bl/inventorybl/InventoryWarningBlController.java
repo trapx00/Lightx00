@@ -45,7 +45,6 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
     private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
     private InventoryModificationService inventoryModificationService= InventoryModificationServiceFactory.getService();
     private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
-    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
     EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
 
     private CommonBillBlController<InventoryDetailBillVo, InventoryDetailBillPo, InventoryBillQueryVo> commonBillBlController
@@ -164,10 +163,11 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
                     EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.SaleStaff, new SpecificUserAccountQueryVo()));
                     notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(inventoryDetailBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseBillMessage(id)));
                     return ResultMessage.Success;
-                }
-                for(int i=0;i<length;i++){
-                    inventoryModificationService.modifyInventory(inventoryDetailBillPo.getCommodityList()[i].getId(),
-                            InventoryModificationFlag.Up,inventoryDetailBillPo.getCommodityList()[i].getDelta());
+                }else{
+                    for(int i=0;i<length;i++){
+                        inventoryModificationService.modifyInventory(inventoryDetailBillPo.getCommodityList()[i].getId(),
+                                InventoryModificationFlag.Up,inventoryDetailBillPo.getCommodityList()[i].getDelta());
+                    }
                 }
                 return ResultMessage.Success;
             }

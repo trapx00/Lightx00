@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
@@ -34,7 +36,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
 
     private Consumer<CommodityVo> callback;
     private ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
-    private CommodityBlService blService= CommodityBlServiceFactory.getInstance();
+    private CommodityInfo blService= CommodityInfoFactory.getCommodityInfo();
     /**
      * Loads the controller.
      *
@@ -70,7 +72,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
     }
 
     private void update(CommodityQueryVo queryVo) {
-        CommodityVo[] queryResult = blService.query(queryVo);
+        CommodityVo[] queryResult = blService.queryCommodity(queryVo);
         commodityModels.clear();
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
 
@@ -131,7 +133,7 @@ public class CommoditySelectingDialog extends SelectingDialog implements Commodi
     @Override
     public CommodityVo queryId(String id) {
 
-        return blService.query(new CommodityQueryVo().idEq(id))[0];
+        return blService.queryCommodity(new CommodityQueryVo().idEq(id))[0];
     }
 
     /**
