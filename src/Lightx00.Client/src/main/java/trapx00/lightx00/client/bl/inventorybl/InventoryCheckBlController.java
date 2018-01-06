@@ -56,9 +56,6 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
         InventoryViewItem inventoryViewItem=new InventoryViewItem(new Date(),0,
                 0,0,0,0,0,
                 0);
-        System.out.println(saleBillVos.length);
-        System.out.println(saleBillVos[0].getId());
-        System.out.println(saleBillVos[1].getId());
         for(int i=0;i<purchaseBillVos.length;i++){
             for(int j=0;j<purchaseBillVos[i].getCommodityList().length;j++) {
                 inventoryViewItem.setInventoryAmount(inventoryViewItem.getInventoryAmount() + purchaseBillVos[i].getCommodityList()[j].getNumber());
