@@ -37,11 +37,11 @@ public class FinanceStaffUiController extends FrameworkUiController {
     }
 
     public void onReceivalBillFunctionClicked(ActionEvent actionEvent) {
-        switchFunction(ReceivalBillUiController.class, "制定付款单",true);
+        switchFunction(ReceivalBillUiController.class, "制定收款单",true);
     }
 
     public void onPaymentBillFunctionClicked(ActionEvent actionEvent) {
-        switchFunction(PaymentBillUiController.class, "制定收款单",true);
+        switchFunction(PaymentBillUiController.class, "制定付款单",true);
     }
 
     public void onSaleDetailFunctionClicked(ActionEvent actionEvent) {

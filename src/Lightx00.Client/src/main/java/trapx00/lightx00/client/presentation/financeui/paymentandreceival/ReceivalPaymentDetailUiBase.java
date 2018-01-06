@@ -66,7 +66,7 @@ public abstract class ReceivalPaymentDetailUiBase<T extends ReceivalPaymentBillV
         controller.tfDate.setText(DateHelper.fromDate(bill.getDate()));
         controller.tfOperator.setText(String.format("%s(id: %s)", employee.getName(), employee.getId()));
         controller.tfClient.setText(String.format("%s(id: %s)", client.getName(), client.getId()));
-        controller.tfBillState.setText(bill.getState().name());
+        controller.tfBillState.setText(bill.getState().toString());
         controller.initTranscationTable(bill.getTranscations());
         return uiPackage;
     }

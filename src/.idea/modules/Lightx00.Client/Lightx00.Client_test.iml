@@ -21,10 +21,10 @@
     </orderEntry>
     <orderEntry type="module" module-name="Lightx00.Shared_main" />
     <orderEntry type="library" name="Gradle: com.jfoenix:jfoenix:1.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-commons:8.15" level="project" />
     <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-materialicons:2.2.0-5" level="project" />
     <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-fontawesome:4.7.0-5" level="project" />
     <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-materialdesignfont:1.7.22-4" level="project" />
-    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx-commons:8.15" level="project" />
     <orderEntry type="library" name="Gradle: com.github.sarxos:webcam-capture:0.3.11" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: com.j256.ormlite:ormlite-core:5.0" level="project" />

@@ -395,17 +395,20 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private double calculateMinusProfit(CommodityItem[] commodityItems, double onSalePrice) {
         //最大组合数
         int maxCom = 1000000000;
+        double originTotal=0;
         for (CommodityItem commodityItem : commodityItems) {
-            for (CommodityItemModel commodityItemModel : commodityItemModelObservableList)
+            for (CommodityItemModel commodityItemModel : commodityItemModelObservableList) {
                 if (commodityItem.getCommodityId().equals(commodityItemModel.getCommodityItemObjectProperty().getCommodityId())) {
                     int temp = (int) (commodityItemModel.getCommodityItemObjectProperty().getNumber() / commodityItem.getNumber());
                     if (maxCom > temp) {
                         maxCom = temp;
                     }
+                    originTotal+=commodityItemModel.getCommodityItemObjectProperty().getPrice();
                     break;
                 }
+            }
         }
-        return maxCom * onSalePrice;
+        return maxCom * (originTotal-onSalePrice);
     }
 
     @FXML

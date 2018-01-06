@@ -75,11 +75,20 @@ public class LoginUiController implements ExternalLoadableUiController {
     }
 
     public void onLoginButtonClicked() {
-        if (validate()) {
+        if (!validate()) {
+            return;
+        }
+
+        loginButton.setDisable(true);
+        loginButton.setText("登录中");
+
+        Thread thread = new Thread(() -> Platform.runLater(() -> {
             EmployeeVo employeeVo = blService.login(usernameField.getText(), passwordField.getText());
             if (employeeVo != null) {
                 finishLogin(employeeVo);
             } else {
+                loginButton.setDisable(false);
+                loginButton.setText("登录");
                 JFXDialogLayout layout = new JFXDialogLayout();
                 JFXButton button = new JFXButton("好", new MaterialIconView(MaterialIcon.CHECK));
                 layout.setBody(new Label("登录失败！请检查用户名！或者寻找支持人员！"));
@@ -92,8 +101,9 @@ public class LoginUiController implements ExternalLoadableUiController {
                 dialog.show();
 
             }
+        }));
 
-        }
+        thread.start();
     }
 
     private void finishLogin(EmployeeVo employeeVo) {

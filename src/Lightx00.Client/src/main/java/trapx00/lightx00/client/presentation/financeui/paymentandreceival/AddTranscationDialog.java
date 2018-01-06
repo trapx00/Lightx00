@@ -44,8 +44,9 @@ public class AddTranscationDialog implements ExternalLoadableUiController {
                 tfPrice.validate();
             }
         });
+
         RequiredFieldValidator bankAccountValidator = new RequiredFieldValidator();
-        validator.setMessage("请选择银行账户！");
+        bankAccountValidator.setMessage("请选择银行账户！");
         tfBankAccount.getValidators().add(bankAccountValidator);
         tfBankAccount.focusedProperty().addListener((observable, old, newValue) -> {
             if (!newValue) {

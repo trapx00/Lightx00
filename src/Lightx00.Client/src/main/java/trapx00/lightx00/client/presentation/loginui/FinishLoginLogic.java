@@ -28,7 +28,6 @@ public class FinishLoginLogic {
 
             FrameworkUiManager.setFrameworkUiController(controller);
 
-
             newStage.initStyle(StageStyle.UNDECORATED);
 
             newStage.setScene(scene);
