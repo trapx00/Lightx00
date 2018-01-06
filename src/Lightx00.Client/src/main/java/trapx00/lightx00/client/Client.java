@@ -66,7 +66,7 @@ public class Client extends Application {
         try {
             Naming.lookup(RmiHelper.generateRmiUrl(LoginDataService.class));
             return true;
-        } catch (ConnectException e) {
+        } catch (ConnectException | NotBoundException e) {
             StackPane stackPane = new StackPane();
             primaryStage.setScene(new Scene(stackPane));
 
@@ -79,7 +79,7 @@ public class Client extends Application {
             primaryStage.centerOnScreen();
             primaryStage.show();
 
-        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+        } catch (MalformedURLException | RemoteException e) {
             e.printStackTrace();
         }
         return false;

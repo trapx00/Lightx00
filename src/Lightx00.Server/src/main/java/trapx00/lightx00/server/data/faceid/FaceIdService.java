@@ -12,6 +12,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
+import trapx00.lightx00.server.data.util.IOUtil;
 import trapx00.lightx00.server.data.util.config.CognitiveServiceConfig;
 import trapx00.lightx00.server.data.util.config.Config;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
@@ -21,6 +22,8 @@ import trapx00.lightx00.shared.exception.faceid.NetworkException;
 import trapx00.lightx00.shared.exception.faceid.NoFaceDetectedException;
 import trapx00.lightx00.shared.po.employee.EmployeeFaceIdInfo;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,8 +31,8 @@ import java.sql.SQLException;
 
 public class FaceIdService {
     private Dao<EmployeeFaceIdInfo, String> dao = FaceIdDaoFactory.getDao();
-    private static String api1 = "80f6b11c822c4fc39dddd0ac8fbdcf09";
-    private static String endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
+    private static String api1;
+    private static String endpoint;
 
     static {
         CognitiveServiceConfig cognitiveServiceConfig = Config.getConfig().getCognitiveServiceConfig();
@@ -39,7 +42,8 @@ public class FaceIdService {
 
     public byte[] readAsByteArray(String resourceUri) {
         try {
-            return com.amazonaws.util.IOUtils.toByteArray(Server.class.getResourceAsStream(resourceUri));
+            return com.amazonaws.util.IOUtils.toByteArray(
+                new FileInputStream(new File(IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir(resourceUri))));
         } catch (IOException e) {
             e.printStackTrace();
             throw new FileException(e);

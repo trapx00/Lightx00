@@ -3,6 +3,7 @@ package trapx00.lightx00.server.data.faceid;
 import com.j256.ormlite.dao.Dao;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
+import trapx00.lightx00.server.data.util.IOUtil;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.exception.faceid.FileException;
@@ -18,8 +19,20 @@ import java.sql.SQLException;
 public class FaceIdRegistrationController implements FaceIdRegistrationService {
     private Dao<EmployeeFaceIdInfo, String> dao = FaceIdDaoFactory.getDao();
     private static final String imgDir = "/faceIdImg/";
-    private static final URL rootURL = Server.class.getResource(imgDir);
+    private static final String rootURL = IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir(imgDir);
+
+    static {
+        File file = new File(rootURL);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+    }
+
     private FaceIdService faceIdService = new FaceIdService();
+
+    private String getImgPath(String employeeId) {
+        return rootURL + "/" + employeeId;
+    }
 
     /**
      * Unregisters a employeeId.
@@ -30,7 +43,7 @@ public class FaceIdRegistrationController implements FaceIdRegistrationService {
     @Override
     public ResultMessage unregister(String employeeId) {
         try {
-            File file = new File(rootURL.getPath() + employeeId);
+            File file = new File(getImgPath(employeeId));
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -51,14 +64,14 @@ public class FaceIdRegistrationController implements FaceIdRegistrationService {
     /**
      * Registers a picture with a Employee id.
      *
-     * @param empl  oyeeId employee id
-     * @param image      image in binary
+     * @param employeeId  oyeeId employee id
+     * @param image  image in binary
      * @return whether the registration is done successfully
      */
     @Override
     public ResultMessage register(String employeeId, byte[] image) {
         try {
-            String imgPath = rootURL.getPath() + employeeId;
+            String imgPath = getImgPath(employeeId);
             File file = new File(imgPath);
             if (file.exists()) {
                 file.delete();

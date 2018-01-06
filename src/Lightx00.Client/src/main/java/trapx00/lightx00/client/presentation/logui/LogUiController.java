@@ -46,8 +46,8 @@ public class LogUiController implements ExternalLoadableUiController {
                     LogVo selected = getSelected();
                     ExternalLoadedUiPackage uiPackage = selected.contentDisplayUi().showContent(selected);
                     PromptDialogHelper.start("日志信息","").setContent(uiPackage.getComponent()).createAndShow();
-                } catch (Exception ignored) {
-                    ignored.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
         }});
         TreeItem<LogTableItemModel> root = new RecursiveTreeItem<>(logTableItemModels, RecursiveTreeObject::getChildren);

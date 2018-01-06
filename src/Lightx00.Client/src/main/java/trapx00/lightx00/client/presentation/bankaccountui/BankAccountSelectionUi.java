@@ -84,6 +84,11 @@ public class BankAccountSelectionUi extends SelectingDialog implements BankAccou
         tableBankAccounts.setRoot(root);
         tableBankAccounts.setShowRoot(false);
         tableBankAccounts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tableBankAccounts.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                onBtnCloseClicked(null);
+            }
+        });
     }
 
     @Override

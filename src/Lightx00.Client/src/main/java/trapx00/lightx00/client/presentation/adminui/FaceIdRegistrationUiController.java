@@ -51,11 +51,18 @@ public class FaceIdRegistrationUiController implements ExternalLoadableUiControl
                         showPromptDialog("注册失败！", "未知错误");
                     }
                 } catch (MultipleFacesException e) {
+                    Platform.runLater(dialog::close);
                     showPromptDialog("注册失败！", String.format("检测到%d张脸。只允许一张脸！", e.getNumOfFaces()));
                 } catch (NoFaceDetectedException e) {
+                    Platform.runLater(dialog::close);
                     showPromptDialog("注册失败！", "未检测到脸！");
                 } catch (NetworkException e) {
+                    Platform.runLater(dialog::close);
                     showPromptDialog("注册失败！", "请联系技术人员！HTTP响应码：" + e.getStatusCode());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Platform.runLater(dialog::close);
+                    showPromptDialog("注册失败！", "请联系技术人员！\n" + e.getMessage());
                 }
                 return null;
             }

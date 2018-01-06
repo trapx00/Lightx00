@@ -23,7 +23,7 @@ public class AdminStaffUiController extends FrameworkUiController {
     }
 
     public void onFaceIdRegistrationFunctionClicked(ActionEvent actionEvent) {
-        switchFunction(FaceIdRegistrationUiController.class, "注册FaceId",true);
+        switchFunction(FaceIdRegistrationUiController.class, "注册Face ID",true);
     }
     public void onLogBackUpFunctionClicked(ActionEvent actionEvent) {
         if(logBackupBlService.backupLog()== ResultMessage.Success){
