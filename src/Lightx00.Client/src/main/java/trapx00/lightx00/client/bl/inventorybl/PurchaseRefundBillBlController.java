@@ -92,8 +92,6 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
     public ResultMessage activate(String id) {
         try {
             PurchaseRefundBillPo purchaseRefundBillPo = dataService.query(new PurchaseRefundBillQueryVo().idEq(id))[0];
-            EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
-            notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(purchaseRefundBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseRefundBillMessage(id)));
             clientModificationService.modifyClient(purchaseRefundBillPo.getClientId(), ClientModificationFlag.PAYABLE, purchaseRefundBillPo.getTotal());
             for (CommodityItem commodityItem : purchaseRefundBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Low, commodityItem.getNumber());

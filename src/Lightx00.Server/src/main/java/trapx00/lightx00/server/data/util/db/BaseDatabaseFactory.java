@@ -153,12 +153,6 @@ public class BaseDatabaseFactory {
             commodityPos.create(new CommodityPo("PRO-0003-0001","SmaqweasqllLed","PRO-0003",13,new Date(),"һ",
                     "01",34,34,34,34,100,0));
 
-            Dao<SaleBillPo,String>saleBillPos=createDao(SaleBillPo.class);
-            TableUtils.dropTable(saleBillPos,true);
-            TableUtils.createTableIfNotExists(connectionSource,SaleBillPo.class);
-
-
-
             Dao<CommoditySortPo,String>commoditySortPos=createDao(CommoditySortPo.class);
             TableUtils.dropTable(commoditySortPos, true);
             TableUtils.createTableIfNotExists(connectionSource, CommoditySortPo.class);

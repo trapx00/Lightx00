@@ -93,7 +93,6 @@ public class SaleRefundBillBlController implements SaleRefundBillBlService, Noti
         try {
             SaleRefundBillPo saleRefundBillPo = dataService.query(new SaleRefundBillQueryVo().idEq(id))[0];
             EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
-            notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(saleRefundBillPo.getOperatorId()), employeeVos, NotificationType.Others, generateSaleRefundBillMessage(id)));
             clientModificationService.modifyClient(saleRefundBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, saleRefundBillPo.getUltiTotal());
             for (CommodityItem commodityItem : saleRefundBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Up, commodityItem.getNumber());

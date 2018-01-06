@@ -90,7 +90,6 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
         try {
             SaleBillPo saleBillPo = dataService.query(new SaleBillQueryVo().idEq(id))[0];
             EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
-            notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(saleBillPo.getOperatorId()), employeeVos, NotificationType.Others, generateSaleBillMessage(id)));
             clientModificationService.modifyClient(saleBillPo.getClientId(), ClientModificationFlag.PAYABLE, saleBillPo.getUltiTotal());
             for (CommodityItem commodityItem : saleBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Low, commodityItem.getNumber());
