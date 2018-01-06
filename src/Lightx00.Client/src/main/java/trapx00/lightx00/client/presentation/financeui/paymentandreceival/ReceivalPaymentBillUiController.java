@@ -248,7 +248,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
                             blService.submit(getCurrent());
                             PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
                                 .addCloseButton("继续填写", "EDIT", e1 -> {
-                                    onBtnResetClicked();
+                                    reset();
                                     autofill();
                                 })
                                 .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
@@ -280,9 +280,8 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
     }
 
     public void reset() {
-        currentEmployee.set(null);
-        currentDate.set(null);
         transcationModels.clear();
+        client.set(null);
     }
 
     public void onBtnResetClicked() {
