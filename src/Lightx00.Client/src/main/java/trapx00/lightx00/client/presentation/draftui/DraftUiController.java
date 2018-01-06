@@ -102,7 +102,7 @@ public class DraftUiController implements ExternalLoadableUiController {
                             ReadOnlyPairTableHelper.start()
                                 .addPair("草稿ID", String.valueOf(model.getId()))
                                 .addPair("草稿时间", DateHelper.fromDate(model.getDate()))
-                                .addPair("草稿类型", model.getType().name())
+                                .addPair("草稿类型", model.getType().toString())
                                 .addPair("草稿内容ID", model.getDraft().getId())
                                 .create())
                     .addCloseButton("确定","CHECK",e -> {

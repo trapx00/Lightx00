@@ -19,7 +19,7 @@ public class LogDetailUi implements ContentDisplayUi<LogVo>, ExternalLoadableUiC
         LogDetailUi controller = uiPackage.getController();
         controller.tfId.setText(String.valueOf(arg.getId()));
         controller.tfDate.setText(DateHelper.fromDate(arg.getDate()));
-        controller.tfType.setText(arg.getSeverity().name());
+        controller.tfType.setText(arg.getSeverity().toString());
         controller.taLogContent.setText(arg.getContent());
         return uiPackage;
     }

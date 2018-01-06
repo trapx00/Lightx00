@@ -25,9 +25,10 @@ import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.*;
 
+import java.io.Serializable;
 import java.util.*;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked","varargs"})
 public class TradeHistoryBlController implements TradeHistoryBlService, FinanceBillInfo, BillInfo, DraftableQueryService {
     private CashBillInfo cashBillInfo = SpecificFinanceBillQueryFactory.getCashbillInfo();
     private PaymentBillInfo paymentBillInfo = SpecificFinanceBillQueryFactory.getPaymentBillInfo();

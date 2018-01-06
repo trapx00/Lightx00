@@ -13,6 +13,7 @@ import javafx.scene.control.TreeItem;
 import trapx00.lightx00.client.bl.notificationbl.factory.NotificationBlFactory;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.vo.notification.NotificationVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -54,6 +55,10 @@ public class NotificationUiController implements ExternalLoadableUiController {
         TreeItem<NotificationModel> root = new RecursiveTreeItem<>(notificationModels, RecursiveTreeObject::getChildren);
         notificationTable.setRoot(root);
         notificationTable.setShowRoot(false);
+        notificationTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onReadButtonClicked(null);
+            }});
     }
 
 

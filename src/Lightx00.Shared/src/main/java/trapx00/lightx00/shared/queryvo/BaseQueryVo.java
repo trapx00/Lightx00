@@ -50,7 +50,7 @@ public class BaseQueryVo<Po,PK, T extends BaseQueryVo> implements Serializable {
         return (T) this;
     }
 
-    public <Obj extends Serializable>  T in(String columnName, Obj... objects) {
+    public <Obj extends Serializable>  T in(String columnName, Obj[] objects) {
         ArrayList<Obj> list = Arrays.stream(objects).collect(Collectors.toCollection(ArrayList::new));
         queries.add(new In<>(columnName, list));
         return (T) this;

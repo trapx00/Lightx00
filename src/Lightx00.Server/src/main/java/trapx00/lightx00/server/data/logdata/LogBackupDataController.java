@@ -38,7 +38,7 @@ public class LogBackupDataController extends UnicastRemoteObject implements LogB
     private static String BUCKET_NAME;
     private static String ACCESS_KEY;
     private static String SECRET_KEY;
-    private static final String FILE_PATH = IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir("/misc/temp.txt");
+    private static final String FILE_PATH = IOUtil.getFilePathUnderRootDirOfJarFileOrClassDir("/temp.txt");
     private static final String SEPATAROR = " | ";
     private static final long EXPIRATION =
             new Date().getTime() * 1000 * 60 * 60 * 24;
