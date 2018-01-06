@@ -78,9 +78,9 @@ public class InitialEstablishmentUiController implements DraftContinueWritableUi
     }
 
     public void initialize() {
-        initBankAccountTable();
-        initClientTable();
-        initCommodityTable();
+        TableInitialization.initBankAccountTable(tableBankAccounts, tcBankId, tcBankName, tcBankBalance, bankAccountModels);
+        TableInitialization.initClientTable(tableClient, tcClientId, tcClientName, tcClientType, clientModels);
+        TableInitialization.initCommodityTable(tableCommodity, tcCommodityName, tcCommodityId, commodityModels);
 
         systemSnapshot.addListener((observable, oldValue, newValue) -> {
             bankAccountModels.clear();
@@ -103,35 +103,6 @@ public class InitialEstablishmentUiController implements DraftContinueWritableUi
             tfOperator.setText(String.format("%s(id: %s)", newValue.getName(), newValue.getId()));
         });
 
-    }
-
-    public void initBankAccountTable() {
-        tcBankId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty().asObject());
-        tcBankName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
-        tcBankBalance.setCellValueFactory(cellData -> cellData.getValue().getValue().balanceProperty().asObject());
-        TreeItem<BankAccountModel> root = new RecursiveTreeItem<>(bankAccountModels, RecursiveTreeObject::getChildren);
-        tableBankAccounts.setRoot(root);
-        tableBankAccounts.setShowRoot(false);
-        tableBankAccounts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    }
-
-    public void initClientTable() {
-        tcClientId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getId()));
-        tcClientName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getName()));
-        tcClientType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getClientVoObjectProperty().getClientType().toString()));
-        TreeItem<ClientSelectionItemModel> root = new RecursiveTreeItem<>(clientModels, RecursiveTreeObject::getChildren);
-        tableClient.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tableClient.setRoot(root);
-        tableClient.setShowRoot(false);
-    }
-
-    public void initCommodityTable() {
-        tcCommodityName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCommodityVoObjectProperty().getName()));
-        tcCommodityId.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getCommodityVoObjectProperty().getId())));
-        TreeItem<CommoditySelectionItemModel> root = new RecursiveTreeItem<>(commodityModels, RecursiveTreeObject::getChildren);
-        tableCommodity.setRoot(root);
-        tableCommodity.setShowRoot(false);
-        tableCommodity.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
     }
 
     /**
