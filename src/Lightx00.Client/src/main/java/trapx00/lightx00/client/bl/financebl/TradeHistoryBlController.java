@@ -105,6 +105,7 @@ public class TradeHistoryBlController implements TradeHistoryBlService, FinanceB
                 queryResult.addAll(Arrays.asList(cashBillInfo.query(new CashBillQueryVo(baseQueryVo))));
                 queryResult.addAll(Arrays.asList(paymentBillInfo.query(new PaymentBillQueryVo(baseQueryVo))));
                 queryResult.addAll(Arrays.asList(receivalBillInfo.query(new ReceivalBillQueryVo(baseQueryVo))));
+                queryResult.addAll(Arrays.asList(systemSnapshotInfo.query(new SystemSnapshotQueryVo(baseQueryVo))));
             }
 
             if (billTypes.contains(BillType.SaleBill)) {

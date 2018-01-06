@@ -15,7 +15,7 @@
     </padding>
     <HBox alignment="CENTER_LEFT" spacing="10">
         <MaterialIconView glyphName="ASSESSMENT" glyphSize="40" fill="black" />
-        <Label text="销售明细表" textFill="#5e5e5e">
+        <Label text="经营情况表" textFill="#5e5e5e">
             <font>
                 <Font name="System Bold" size="32.0"/>
             </font>

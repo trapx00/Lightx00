@@ -5,6 +5,7 @@ import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.presentation.financeui.InitialEstablishmentDetailUiController;
 import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
@@ -59,7 +60,7 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return InitialEstablishmentBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -69,7 +70,7 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return InitialEstablishmentBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -99,11 +100,11 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return null; // this type can't be reversed as there is no "save as draft" button on its ui.
     }
 
     @Override
     public BillDetailUi billDetailUi() {
-        return null;
+        return new InitialEstablishmentDetailUiController();
     }
 }
