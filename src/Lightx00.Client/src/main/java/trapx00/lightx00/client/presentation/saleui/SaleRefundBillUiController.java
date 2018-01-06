@@ -218,6 +218,10 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
                 tfSalesmanName.validate();
             }
         });
+        initHotKey();
+    }
+
+    private void initHotKey(){
         FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
@@ -303,31 +307,50 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
             PromptDialogHelper.start("确认单据", "").setContent(
                     saleRefundBillVo.billDetailUi().showContent(saleRefundBillVo).getComponent())
                     .addCloseButton("确定", "CHECK", e -> {
-                        try {
-                            blService.submit(saleRefundBillVo);
-                            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
-                                    .addCloseButton("继续填写", "EDIT", e1 -> {
-                                        onBtnResetClicked();
-                                        autofill();
-                                    })
-                                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
-                                    .createAndShow();
-                        } catch (UncheckedRemoteException e1) {
-                            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
-                                    .addCloseButton("好的", "CHECK", null)
-                                    .createAndShow();
-                        } catch (IdExistsException e1) {
-                            PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
-                                    .addCloseButton("好的", "CHECK", null)
-                                    .createAndShow();
-                        }
+                        submit();
                     })
                     .addCloseButton("取消", "CLOSE", null)
                     .createAndShow();
+            FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    initHotKey();
+                    FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                    submit();
+                }
+            });
         } catch (NotCompleteException ignored) {
 
         }
 
+    }
+
+    private void submit(){
+        try {
+            blService.submit(getCurrentSaleRefundBillVo());
+            PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
+                    .addCloseButton("继续填写", "EDIT", e1 -> {
+                        onBtnResetClicked();
+                        autofill();
+                    })
+                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                    .createAndShow();
+            FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    initHotKey();
+                    FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                    onBtnResetClicked();
+                    autofill();
+                }
+            });
+        } catch (UncheckedRemoteException e1) {
+            PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        } catch (IdExistsException e1) {
+            PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
+                    .addCloseButton("好的", "CHECK", null)
+                    .createAndShow();
+        }
     }
 
     private SaleRefundBillVo getCurrentSaleRefundBillVo() {
@@ -400,6 +423,13 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
                 .addCloseButton("确定", "DONE", e -> reset())
                 .addCloseButton("取消", "UNDO", null)
                 .createAndShow();
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                initHotKey();
+                FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                reset();
+            }
+        });
     }
 
     private void reset() {
