@@ -51,10 +51,11 @@
     </HBox>
     <JFXTreeTableView fx:id="tablePromotion" prefHeight="500.0" prefWidth="500.0">
         <columns>
-            <JFXTreeTableColumn fx:id="tcId" prefWidth="150" text="编号" />
-            <JFXTreeTableColumn fx:id="tcType" prefWidth="150" text="促销类型" />
+            <JFXTreeTableColumn fx:id="tcId" prefWidth="200" text="促销策略编号" />
+            <JFXTreeTableColumn fx:id="tcType" prefWidth="140" text="促销类型" />
             <JFXTreeTableColumn fx:id="tcStartDate" editable="false" prefWidth="150" text="开始时间" />
             <JFXTreeTableColumn fx:id="tcEndDate" prefWidth="150" text="结束时间" />
+            <JFXTreeTableColumn fx:id="tcState" prefWidth="140" text="促销策略状态" />
         </columns>
     </JFXTreeTableView>
     <HBox alignment="CENTER_LEFT" maxHeight="60.0" maxWidth="2000.0" prefHeight="60.0" prefWidth="600.0">

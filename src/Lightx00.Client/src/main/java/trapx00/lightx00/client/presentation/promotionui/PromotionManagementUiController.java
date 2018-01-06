@@ -30,6 +30,7 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
     public JFXTreeTableColumn<PromotionInfoModel, String> tcType;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcStartDate;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcEndDate;
+    public JFXTreeTableColumn<PromotionInfoModel, String> tcState;
     public JFXButton btnDetail;
     public JFXButton btnDelete;
 
@@ -72,6 +73,8 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
         tcStartDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getStartDate())));
         tcEndDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getEndDate())));
         tcType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getType().toString()));
+        tcState.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getValue().getState().toString()));
+
         TreeItem<PromotionInfoModel> root = new RecursiveTreeItem<>(promotionInfoModels, RecursiveTreeObject::getChildren);
         tablePromotion.setRoot(root);
         tablePromotion.setShowRoot(false);

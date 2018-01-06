@@ -40,7 +40,7 @@ public class PromotionSelectionItemModel extends RecursiveTreeObject<PromotionSe
         }
         this.coupon = new SimpleStringProperty(String.valueOf(couponPrice));
         this.sale = new SimpleStringProperty(String.valueOf(salePrice));
-        this.promotion = new SimpleObjectProperty(promotionVo) ;
+        this.promotion = new SimpleObjectProperty<>(promotionVo) ;
     }
 
     public String getId() {

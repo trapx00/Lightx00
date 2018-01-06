@@ -57,15 +57,20 @@ public class EmployeeAddUi implements ExternalLoadableUiController {
         ui.tfRoot.getItems().addAll(root);
         ui.tfSaleType.getItems().addAll(FXCollections.observableArrayList(SaleStaffType.values()));
 
-        ui.tfRoot.setEditable(false);
-        ui.tfSaleType.setEditable(false);
-        tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+        ui.tfRoot.setVisible(false);
+        ui.tfSaleType.setVisible(false);
+        ui.tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue.equals(EmployeePosition.SaleStaff)) {
-                tfRoot.setEditable(true);
-                tfSaleType.setEditable(true);
+                ui.tfRoot.setVisible(true);
+                ui.tfSaleType.setVisible(true);
             }
             else if(newValue.equals(EmployeePosition.FinanceStaff)) {
-                tfRoot.setEditable(true);
+                ui.tfRoot.setVisible(true);
+                ui.tfSaleType.setVisible(false);
+            }
+            else {
+                ui.tfRoot.setVisible(false);
+                ui.tfSaleType.setVisible(false);
             }
         });
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();

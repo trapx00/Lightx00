@@ -71,20 +71,25 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
         ui.tfPassword.setText(employee.getPassword());
         ui.tfPosition.getSelectionModel().select(employee.getPosition());
         ui.tfState.getSelectionModel().select(employee.getState());
-        ui.tfRoot.setEditable(false);
-        ui.tfSaleType.setEditable(false);
-        if (employee.getPosition().equals(EmployeePosition.FinanceStaff)){
-            ui.tfRoot.setValue(((FinanceStaffVo)employee).getRoot());
-            ui.tfRoot.setEditable(true);
-        }
-        else if (employee.getPosition().equals(EmployeePosition.SaleStaff)){
-            ui.tfRoot.setValue(((SaleStaffVo)employee).getRoot());
-            ui.tfSaleType.setValue(((SaleStaffVo)employee).getSaleStaffType());
-            ui.tfRoot.setEditable(true);
-            ui.tfSaleType.setEditable(true);
-        }
-        tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
-            transPerson = !newValue.equals(oldEmployee.getPosition());
+
+        ui.tfRoot.setVisible(false);
+        ui.tfSaleType.setVisible(false);
+        ui.tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue.equals(EmployeePosition.SaleStaff)) {
+                ui.tfRoot.setVisible(true);
+                ui.tfSaleType.setVisible(true);
+            }
+            else if(newValue.equals(EmployeePosition.FinanceStaff)) {
+                ui.tfRoot.setVisible(true);
+                ui.tfSaleType.setVisible(false);
+            }
+            else {
+                ui.tfRoot.setVisible(false);
+                ui.tfSaleType.setVisible(false);
+            }
+        });
+        ui.tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
+            ui.transPerson = !newValue.equals(ui.oldEmployee.getPosition());
         });
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
         ((EmployeeModificationUi)uiPackage.getController()).runnable = runnable;
@@ -129,7 +134,7 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
             else {
                 blService.modify(getCurrentEmployeeVo());
             }
-            PromptDialogHelper.start("修改成功！","已经创建一位新的职员。")
+            PromptDialogHelper.start("修改成功！","职员信息已修改。")
                     .addCloseButton("好的","CHECK",e -> close())
                     .createAndShow();
         }
