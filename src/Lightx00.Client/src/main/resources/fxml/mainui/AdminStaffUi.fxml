@@ -42,7 +42,7 @@
                             <FontAwesomeIconView glyphName="ADDRESS_CARD" glyphSize="18" fill="black" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onFaceIdRegistrationFunctionClicked" prefHeight="60" prefWidth="200" text="注册FaceId" textFill="#000000">
+                    <JFXButton onAction="#onFaceIdRegistrationFunctionClicked" prefHeight="60" prefWidth="200" text="注册Face ID" textFill="#000000">
                         <graphic>
                             <MaterialDesignIconView glyphName="FACE" glyphSize="18" fill="black" />
                         </graphic>
@@ -142,8 +142,9 @@
                 <bottom>
                     <GridPane fx:id="bottomBar" styleClass="floatingPane" BorderPane.alignment="CENTER">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="2000" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="2000" />
+                            <ColumnConstraints prefWidth="1000" />
+                            <ColumnConstraints prefWidth="1000" />
+                            <ColumnConstraints prefWidth="1000" />
                         </columnConstraints>
                         <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -151,9 +152,12 @@
 
 
                         <HBox alignment="CENTER" GridPane.columnIndex="0">
-                            <JFXButton onAction="#onLogButtonClicked" prefWidth="1000.0" text="日志" />
+                            <JFXButton onAction="#onLogButtonClicked" text="日志" />
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER" GridPane.columnIndex="1">
+                            <JFXButton onAction="#onLogFetchButtonClicked" text="取回远程日志" />
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.columnIndex="2">
                             <MaterialIconView glyphName="SIGNAL_CELLULAR_4_BAR" glyphSize="16" glyphStyle="-fx-background-color: #DDDDDD" />
                             <Text fx:id="timeText" text="2017/10/25 21:50:00" />
                         </HBox>

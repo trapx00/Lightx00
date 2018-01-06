@@ -14,6 +14,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
+import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
+import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
@@ -73,10 +75,9 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     private ObservableList<CommoditySelectionItemModel> inventoryGiftItemModelObservableList = FXCollections.observableArrayList();
     public ObservableList<CommoditySelectionItemModel> commodityModels = FXCollections.observableArrayList();
 
-    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
-    private CommodityBlService blService1= CommodityBlServiceFactory.getInstance();
+    private CommodityInfo blService1= CommodityInfoFactory.getCommodityInfo();
     private InventoryWarningBlService blService= InventoryWarningBlServiceFactory.getInstance();
-    private CommoditySelection commoditySelection= CommodityUiFactory.getCommoditySelectionUi();
+
 
     /**
      * Start continuing write a draft. Returns a External loaded ui package.
@@ -101,7 +102,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public void addCommodityItem (InventoryWarningItem[] inventoryWarningItems){
         for(InventoryWarningItem inventoryWarningItem:inventoryWarningItems){
             inventoryGiftItemModelObservableList.add(new CommoditySelectionItemModel(
-                    blService1.query(new CommodityQueryVo().idEq(inventoryWarningItem.getId()))[0])
+                    blService1.queryCommodity(new CommodityQueryVo().idEq(inventoryWarningItem.getId()))[0])
             );
         }
     }
@@ -147,7 +148,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     }
 
     public void updateCommodity(){
-        CommodityVo[] queryResult = blService1.query(new CommodityQueryVo());
+        CommodityVo[] queryResult = blService1.queryCommodity(new CommodityQueryVo());
         commodityModels.clear();
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
     }
@@ -170,7 +171,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         commodityTable.setShowRoot(false);
         commodityTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //支持多选，没有这句话就是不支持
 
-        CommodityVo[] queryResult = blService1.query(new CommodityQueryVo());
+        CommodityVo[] queryResult = blService1.queryCommodity(new CommodityQueryVo());
         commodityModels.clear();
         commodityModels.addAll(Arrays.stream(queryResult).map(CommoditySelectionItemModel::new).collect(Collectors.toList()));
 
@@ -399,7 +400,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
 
     }
     public void onAutoFilledClicked(){
-        CommodityVo [] commodityVos=blService1.query(new CommodityQueryVo());
+        CommodityVo [] commodityVos=blService1.queryCommodity(new CommodityQueryVo());
         inventoryGiftItemModelObservableList.clear();
         for(CommodityVo temp:commodityVos){
             if(temp.getAmount()<temp.getWarningValue()){

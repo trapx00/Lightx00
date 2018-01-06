@@ -41,8 +41,6 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
 
     private ObservableList<InventoryViewModel> viewModels = FXCollections.observableArrayList();
     private InventoryCheckBlService blService= InventoryCheckBlServiceFactory.getInstance();
-    private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
-    private PurchaseBillBlInfo purchaseBillBlInfo= PurchaseBillBlInfoFactory.getPurchaseBillBlInfo();
 
     public void onBtnFilterClicked(ActionEvent actionEvent) {
         updateItems();

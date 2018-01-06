@@ -32,7 +32,6 @@ public  class InventoryGiftBlController implements InventoryGiftInfo, BillApprov
 
 
     private InventoryGiftDataService dataService= InventoryGiftDataServiceFactory.getService();
-    private CommodityInfo commodityInfo= CommodityServiceFactory.getController();
     private SaleBillBlInfo saleBillBlInfo= SaleBillBlInfoFactory.getSaleBillBlInfo();
     private InventoryModificationService inventoryModificationService= InventoryModificationServiceFactory.getService();
 

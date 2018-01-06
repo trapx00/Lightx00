@@ -17,5 +17,7 @@ public interface CommodityInfo {
 
     CommodityVo[] getAllCommodity();
 
+    ResultMessage modify(CommodityVo commodityVo);
+
 
 }

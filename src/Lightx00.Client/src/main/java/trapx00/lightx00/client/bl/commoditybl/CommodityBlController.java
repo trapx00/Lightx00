@@ -224,6 +224,7 @@ public class CommodityBlController implements CommodityBlService,CommodityInfo,I
             CommodityPo[] commodityPos=dataService.query(new CommodityQueryVo().eq("id",commodityId));
             CommodityVo commodityVo=this.fromPoToVo(commodityPos[0]);
             commodityVo.setAmount(commodityVo.getAmount()+((flag==InventoryModificationFlag.Up?1:-1)*delta));
+            commodityVo.setActualAmount(commodityVo.getAmount());
             this.modify(commodityVo);
             logService.log(LogSeverity.Success, String.format("修改%s%s的库存值成功",commodityVo.getId(),commodityVo.getName()));
             return ResultMessage.Success;
