@@ -218,6 +218,9 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
                 tfSalesmanName.validate();
             }
         });
+        tfMinusProfits.setOnKeyPressed(event -> {
+            new SaleRefundBillUiController.ListHandler().change();
+        });
         initHotKey();
     }
 
@@ -456,7 +459,11 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
          */
         @Override
         public void onChanged(ListChangeListener.Change<? extends CommodityItemModel> c) {
-            ObservableList<? extends CommodityItemModel> list = c.getList();
+            change();
+        }
+
+        public void change() {
+            ObservableList<? extends CommodityItemModel> list = commodityItemModelObservableList;
             double total = 0;
             for (CommodityItemModel commodityItemModel : list) {
                 total += commodityItemModel.getCommodityItemObjectProperty().getPrice() * commodityItemModel.getCommodityItemObjectProperty().getNumber();

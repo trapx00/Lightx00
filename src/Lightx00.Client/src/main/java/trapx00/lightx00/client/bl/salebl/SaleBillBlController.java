@@ -10,6 +10,8 @@ import trapx00.lightx00.client.bl.commoditybl.factory.InventoryModificationServi
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.notificationbl.NotificationService;
+import trapx00.lightx00.client.bl.notificationbl.factory.NotificationServiceFactory;
 import trapx00.lightx00.client.bl.promotionbl.PromotionInfo;
 import trapx00.lightx00.client.bl.promotionbl.couponbl.SendCouponInfo;
 import trapx00.lightx00.client.bl.promotionbl.couponbl.UseCouponInfo;
@@ -38,6 +40,7 @@ import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +49,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
     private SaleBillDataService dataService = SaleBillDataServiceFactory.getInstance();
     private CommonBillBlController<SaleBillVo, SaleBillPo, SaleBillQueryVo> commonBillBlController
             = new CommonBillBlController<>(dataService, "销售单", this);
-    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
+    private NotificationService notificationService = NotificationServiceFactory.getNotificationService();
     private SendCouponInfo sendCouponInfo = CouponFactory.getSendCouponInfo();
     private UseCouponInfo useCouponInfo = CouponFactory.getUseCouponInfo();
     private PromotionInfo promotionInfo = PromotionInfoFactory.getPromotionInfo();
@@ -54,7 +57,24 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
     private InventoryModificationService inventoryModificationService = InventoryModificationServiceFactory.getService();
 
     private String generateSaleBillMessage(String id) {
-        return "销售单 编号:" + id;
+        try {
+            SaleBillPo saleBillPo = dataService.query(new SaleBillQueryVo().eq("id", id))[0];
+            StringBuilder result = new StringBuilder();
+            if (saleBillPo.getGiftList() != null) {
+                for (CommodityItem commodityItem : saleBillPo.getGiftList()) {
+                    result.append(commodityItem.getCommodityId());
+                    result.append("|");
+                    result.append(commodityItem.getNumber());
+                    result.append(System.lineSeparator());
+                }
+            } else {
+                result.append("none");
+            }
+            return new String(result);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     /**
@@ -90,6 +110,7 @@ public class SaleBillBlController implements SaleBillBlService, NotificationActi
         try {
             SaleBillPo saleBillPo = dataService.query(new SaleBillQueryVo().idEq(id))[0];
             EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
+            notificationService.addNotification(new OtherNotificationVo(new Date(), employeeInfo.queryById(saleBillPo.getOperatorId()), employeeVos, NotificationType.Others, generateSaleBillMessage(id)));
             clientModificationService.modifyClient(saleBillPo.getClientId(), ClientModificationFlag.PAYABLE, saleBillPo.getUltiTotal());
             for (CommodityItem commodityItem : saleBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Low, commodityItem.getNumber());

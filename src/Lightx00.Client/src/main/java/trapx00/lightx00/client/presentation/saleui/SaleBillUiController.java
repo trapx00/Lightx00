@@ -299,6 +299,10 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                 tfMinusProfits.validate();
             }
         });
+
+        tfMinusProfits.setOnKeyPressed(event -> {
+            new ListHandler().change();
+        });
         initHotKey();
     }
 
