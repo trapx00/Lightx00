@@ -23,10 +23,16 @@
         <padding>
             <Insets right="10.0" />
         </padding>
+        <HBox.margin>
+            <Insets right="10.0" />
+        </HBox.margin>
     </HBox>
 
 
     <HBox alignment="BASELINE_LEFT" maxWidth="2000">
+        <padding>
+            <Insets right="20.0" />
+        </padding>
     </HBox>
 
     <JFXTreeTableView fx:id="tableView" prefHeight="500.0" prefWidth="500.0">
