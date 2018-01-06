@@ -19,6 +19,7 @@ import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.exception.faceid.MultipleFacesException;
 import trapx00.lightx00.shared.exception.faceid.NetworkException;
 import trapx00.lightx00.shared.exception.faceid.NoFaceDetectedException;
+import trapx00.lightx00.shared.exception.faceid.NotRegisteredException;
 
 public class FaceIdLoginUiController implements ExternalLoadableUiController {
     public JFXButton loginButton;
@@ -74,7 +75,11 @@ public class FaceIdLoginUiController implements ExternalLoadableUiController {
                 } catch (NoFaceDetectedException e) {
                     dialog.close();
                     Platform.runLater(() -> showPromptDialog("登录失败！", "未检测到脸！", () -> startCamera()));
-                } catch (NetworkException e) {
+                } catch (NotRegisteredException e) {
+                    dialog.close();
+                    Platform.runLater(() -> showPromptDialog("登录失败！", "未注册Face ID。请联系管理员注册Face ID。", () -> startCamera()));
+                }
+                catch (NetworkException e) {
                     dialog.close();
                     Platform.runLater(() -> showPromptDialog("网络错误！", "请联系技术人员。HTTP响应码：" + e.getStatusCode(), () -> startCamera()));
                 } catch (Exception e) {
