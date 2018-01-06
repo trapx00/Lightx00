@@ -12,7 +12,7 @@ public class TotalPricePromotionDataServiceFactory extends DataServiceFactory {
     }
 
     public static TotalPricePromotionDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }

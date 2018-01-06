@@ -13,7 +13,7 @@ public class ClientPromotionDataServiceFactory extends DataServiceFactory {
     }
 
     public static ClientPromotionDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }

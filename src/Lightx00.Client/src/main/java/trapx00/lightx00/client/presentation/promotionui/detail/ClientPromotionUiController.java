@@ -18,6 +18,7 @@ import trapx00.lightx00.client.presentation.promotionui.PromotionCommodityModel;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
@@ -91,10 +92,18 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
         cbClientLevel.setItems(ints);
         NumberValidator numberValidator = new NumberValidator();
         numberValidator.setMessage("请输入数字类型");
-        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
-        requiredValidator.setMessage("请输入信息");
         tfSalePrice.getValidators().add(numberValidator);
         tfCouponPrice.getValidators().add(numberValidator);
+        tfSalePrice.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                tfSalePrice.validate();
+            }
+        });
+        tfCouponPrice.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                tfCouponPrice.validate();
+            }
+        });
 
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
@@ -122,7 +131,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                     .createAndShow();
             throw new NotCompleteException();
         }
-        else if (tfStartDate == null || tfEndDate == null) {
+        else if (tfStartDate.getValue() == null || tfEndDate.getValue() == null) {
             PromptDialogHelper.start("提交失败！","请输入有效的促销策略生效时间区间。")
                     .addCloseButton("好的","CHECK", null)
                     .createAndShow();
@@ -143,7 +152,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
             ifCoupon = true;
         }
         if(!ifSale && !ifCoupon && promotionCommodities==null){
-            PromptDialogHelper.start("提交失败！","客户促销策略无效！请选择促销方式。")
+            PromptDialogHelper.start("提交失败！","促销策略无效！请选择客户促销方式。")
                     .addCloseButton("好的","CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
@@ -162,17 +171,33 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
 
     public void onBtnSubmitClicked() {
         try {
-            blService.submit(getCurrentClientPromotionVo());
-            PromptDialogHelper.start("提交成功！", "促销策略已经提交。")
-                    .addCloseButton("好的", "CHECK", e -> onBtnResetClicked())
-                    .createAndShow();
-        } catch (NotCompleteException ignored) {
-        } catch (UncheckedRemoteException e) {
-            PromptDialogHelper.start("提交失败！","网络错误。")
-                    .addCloseButton("好的","CHECK", null)
-                    .createAndShow();
-        }
+            ClientPromotionVo promotion = getCurrentClientPromotionVo();
+            PromptDialogHelper.start("确认当前促销策略", "").setContent(
+                    promotion.promotionDetailUi().showContent(promotion).getComponent())
+                    .addCloseButton("确定", "CHECK", e -> {
+                        try {
+                            blService.submit(promotion);
+                            PromptDialogHelper.start("提交成功！", "客户类促销策略已经提交。")
+                                    .addCloseButton("继续填写", "EDIT", e1 -> onBtnResetClicked())
+                                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                                .createAndShow();
+                        } catch (UncheckedRemoteException e1) {
+                            PromptDialogHelper.start("提交失败！", "网络错误。")
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        } catch (IdExistsException e1) {
+                            PromptDialogHelper.start("提交失败！", "促销策略编号已经存在，请重新获取编号。")
+                                    .addCloseButton("好的", "CHECK", null)
+                                    .createAndShow();
+                        }
+                    })
+        .addCloseButton("取消", "CLOSE", null)
+                .createAndShow();
+    } catch (NotCompleteException ignored) {
+
     }
+
+}
 
     public void onBtnDraftClicked() {
         try {
@@ -242,7 +267,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()).plusDays(1))) {
                         setDisable(true);
                     }
                 }

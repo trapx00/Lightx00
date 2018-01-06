@@ -12,7 +12,7 @@ public class CouponDataServieFactory extends DataServiceFactory {
     }
 
     public static CouponDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }

@@ -78,13 +78,13 @@ public class BaseDatabaseFactory {
             Dao<BankAccountPo, Integer> dao = createDao(BankAccountPo.class);
             TableUtils.dropTable(dao, true);
             TableUtils.createTableIfNotExists(connectionSource, BankAccountPo.class);
-            dao.create(new BankAccountPo("1", 10, new Date()));
-            dao.create(new BankAccountPo("2", 20, new Date()));
+            dao.create(new BankAccountPo("李泽言", 10000, new Date()));
+            dao.create(new BankAccountPo("许墨", 2000, new Date()));
 
             Dao<FinanceStaffPo, String> financeStaffDao = createDao(FinanceStaffPo.class);
             TableUtils.dropTable(financeStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, FinanceStaffPo.class);
-            financeStaffDao.create(new FinanceStaffPo("10002", "123456", new Date(), "123456",EmployeeState.Active,true));
+            financeStaffDao.create(new FinanceStaffPo("10002", "财务经理", new Date(), "123456",EmployeeState.Active,true));
             financeStaffDao.create(new FinanceStaffPo("10103", "财务职员", new Date(), "123456",EmployeeState.Active,false));
 
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
@@ -149,42 +149,42 @@ public class BaseDatabaseFactory {
             TableUtils.createTableIfNotExists(connectionSource,ClientPo.class);
             clientPos.create(new ClientPo("0",
                     ClientType.Retailer,
-                    1,
-                    "xiaoming",
-                    "12345678",
-                    "12345678",
-                    "210000",
-                    "12345679@qq.com",
-                    666,
-                    123,
-                    456,
-                    "10002",
+                    5,
+                    "王俊凯",
+                    "保密",
+                    "山城",
+                    "240000",
+                    "990921@qq.com",
+                    9374.7,
+                    4801.5,
+                    378,
+                    "10003",
                     ClientState.Real));
             clientPos.create(new ClientPo("1",
                     ClientType.Retailer,
                     1,
-                    "xiaoming",
-                    "12345678",
-                    "12345678",
-                    "210000",
-                    "12345679@qq.com",
-                    666,
-                    123,
-                    456,
+                    "Alfred.F.Jones",
+                    "0107893",
+                    "美国华盛顿州",
+                    "110000",
+                    "17760704@twitter.com",
+                    10340,
+                    0,
+                    0,
                     "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("2",
                     ClientType.Retailer,
-                    1,
-                    "xiaoming",
-                    "12345678",
-                    "12345678",
+                    3,
+                    "米玲",
+                    "13897331281",
+                    "恋语大学",
                     "210000",
-                    "12345679@qq.com",
+                    "10010@qq.com",
                     666,
                     123,
                     456,
-                    "10002",
+                    "10004",
                     ClientState.Real));
              } catch (SQLException e) {
             e.printStackTrace();

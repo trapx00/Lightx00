@@ -5,11 +5,8 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import trapx00.lightx00.client.bl.approvalbl.factory.AuditBlFactory;
 import trapx00.lightx00.client.blservice.approvalblservice.AuditBlService;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
@@ -49,7 +46,7 @@ public class AuditUiController implements ExternalLoadableUiController {
         TreeItem<BillAuditItemModel> root = new RecursiveTreeItem<>(billTableItemModels, RecursiveTreeObject::getChildren);
         tbBill.setRoot(root);
         tbBill.setShowRoot(false);
-        tbBill.getSelectionModel().setCellSelectionEnabled(true);
+        tbBill.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tbBill.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 TreeItem<BillAuditItemModel> selectedItem = tbBill.getSelectionModel().getSelectedItem();
@@ -110,52 +107,26 @@ public class AuditUiController implements ExternalLoadableUiController {
 
     }
 
-    private BillVo getSelected() {
-        try {
-            return tbBill.getSelectionModel().getSelectedItem().getValue().getBill();
-        } catch (NullPointerException e){
-            PromptDialogHelper.start("错误","请至少选一张单据。")
-                    .addCloseButton("好的","DONE",null)
-                    .createAndShow();
-            return null;
-        }
-
-    }
-
     public void onApproveClicked() {
-        try {
-            if(getSelected()!=null) {
-                 ResultMessage result = blService.pass(new AuditIdVo(getSelected().getId(),new Date()));
-                if(result.equals(ResultMessage.Success)) {
-                    PromptDialogHelper.start("审批通过成功", "已发送通知。")
-                            .addCloseButton("完成", "DONE", e -> updateItems())
-                            .createAndShow();
-                }
+        ObservableList<Integer> list = tbBill.getSelectionModel().getSelectedIndices();
+        for(Integer e:list) {
+            BillVo bill = billTableItemModels.get(e).getBill();
+            ResultMessage result = blService.pass(new AuditIdVo(bill.getId(),new Date()));
+            if(!result.isSuccess()) {
+                PromptDialogHelper.start("错误", "单据" + bill.getId() + "审批失败！")
+                        .addCloseButton("好的", "DONE", null)
+                        .createAndShow();
             }
-
-        } catch (NullPointerException e){
-            PromptDialogHelper.start("错误","请至少选一张单据。")
-                    .addCloseButton("好的","DONE",null)
-                    .createAndShow();
         }
+        PromptDialogHelper.start("审批通过成功", "已发送通知。")
+                .addCloseButton("完成", "DONE", e -> updateItems())
+                .createAndShow();
+
     }
 
    public void onBtnRefreshClicked() {
         updateItems();
    }
-
-
-    public void onDetailClicked() {
-        try {
-            showDetail(tbBill.getSelectionModel().getSelectedItem().getValue());
-        } catch (Exception ex) {
-            PromptDialogHelper.start("错误","请至少选一个条目。")
-                    .addCloseButton("好的","DsONE",null)
-                    .createAndShow();
-        }
-
-    }
-
 
     /**
      * Loads the controller.

@@ -3,10 +3,11 @@ package trapx00.lightx00.shared.po.manager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @DatabaseTable(tableName = "UsedCoupon")
-public class CouponPo {
+public class CouponPo implements Serializable {
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField

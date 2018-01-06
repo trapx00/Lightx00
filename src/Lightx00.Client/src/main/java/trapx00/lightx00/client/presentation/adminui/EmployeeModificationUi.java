@@ -74,12 +74,12 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
         ui.tfRoot.setEditable(false);
         ui.tfSaleType.setEditable(false);
         if (employee.getPosition().equals(EmployeePosition.FinanceStaff)){
-            ui.tfRoot.getSelectionModel().select(((FinanceStaffVo)employee).getRoot());
+            ui.tfRoot.setValue(((FinanceStaffVo)employee).getRoot());
             ui.tfRoot.setEditable(true);
         }
         else if (employee.getPosition().equals(EmployeePosition.SaleStaff)){
-            ui.tfRoot.getSelectionModel().select(((SaleStaffVo)employee).getRoot());
-            ui.tfSaleType.getSelectionModel().select(((SaleStaffVo)employee).getSaleStaffType());
+            ui.tfRoot.setValue(((SaleStaffVo)employee).getRoot());
+            ui.tfSaleType.setValue(((SaleStaffVo)employee).getSaleStaffType());
             ui.tfRoot.setEditable(true);
             ui.tfSaleType.setEditable(true);
         }

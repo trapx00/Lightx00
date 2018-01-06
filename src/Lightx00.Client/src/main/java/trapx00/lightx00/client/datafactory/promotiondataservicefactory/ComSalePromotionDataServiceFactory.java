@@ -13,7 +13,7 @@ public class ComSalePromotionDataServiceFactory extends DataServiceFactory {
     }
 
     public static  ComSalePromotionDataService getService() {
-        //initRmi();
+        initRmi();
         return service;
     }
 }
