@@ -5,6 +5,8 @@ import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
 import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
+import trapx00.lightx00.client.bl.commoditybl.InventoryModificationService;
+import trapx00.lightx00.client.bl.commoditybl.factory.InventoryModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
@@ -22,6 +24,7 @@ import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
@@ -40,6 +43,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
             = new CommonBillBlController<>(dataService, "进货单", this);
     private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
     private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+    private InventoryModificationService inventoryModificationService = InventoryModificationServiceFactory.getService();
 
     private String generatePurchaseBillMessage(String id) {
         String separator = " | ";
@@ -91,6 +95,9 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
             EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.InventoryStaff, new SpecificUserAccountQueryVo()));
             notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(purchaseBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseBillMessage(id)));
             clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, purchaseBillPo.getTotal());
+            for (CommodityItem commodityItem : purchaseBillPo.getCommodityList()) {
+                inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Up, commodityItem.getNumber());
+            }
             return commonBillBlController.activate(id);
         } catch (Exception e) {
             e.printStackTrace();

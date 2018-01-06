@@ -65,7 +65,7 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
     private void initialize() {
         initLogItem();
         initClients();
-
+        initSearch();
         clientTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 onBtnSelectClicked(null);
@@ -93,6 +93,13 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
     }
 
     private void initSearch() {
+        FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                ClientVo[] clientVos = blService.query(tfSearch.getText());
+                clientSelectionItemModels.clear();
+                clientSelectionItemModels.addAll(Arrays.stream(clientVos).map(ClientSelectionItemModel::new).collect(Collectors.toList()));
+            }
+        });
         tfSearch.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 ClientVo[] clientVos = blService.query(tfSearch.getText());
