@@ -22,6 +22,7 @@
     </padding>
 
     <JFXTextField maxWidth="300" labelFloat="true" fx:id="tfNewName" promptText="新账户名" />
+    <JFXTextField maxWidth="300" labelFloat="true" fx:id="tfInitialValue" promptText="初始金额" />
 
 
     <HBox alignment="CENTER">
