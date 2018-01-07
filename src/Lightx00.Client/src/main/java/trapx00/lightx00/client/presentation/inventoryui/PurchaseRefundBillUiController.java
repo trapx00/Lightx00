@@ -184,7 +184,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         initHotKey();
     }
 
-    private void initHotKey(){
+    private void initHotKey() {
         FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
@@ -237,7 +237,19 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
             commodityFillUiController.showCommodityFillDialog(y -> {
-                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
+                double tempAmount = y.getNumber();
+                for (CommodityItemModel commodityItemModel : commodityItemModelObservableList) {
+                    if (commodityItemModel.getCommodityItemObjectProperty().getCommodityId().equals(x.getId())) {
+                        tempAmount += commodityItemModel.getCommodityItemObjectProperty().getNumber();
+                    }
+                }
+                if (x.getAmount() < tempAmount) {
+                    PromptDialogHelper.start("超出已有库存数量，请重新填写", null)
+                            .addCloseButton("确定", "DONE", null)
+                            .createAndShow();
+                } else {
+                    commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
+                }
             });
         });
     }
@@ -275,7 +287,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
 
     }
 
-    private void submit(){
+    private void submit() {
         try {
             blService.submit(getCurrentPurchaseRefundBillVo());
             PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")

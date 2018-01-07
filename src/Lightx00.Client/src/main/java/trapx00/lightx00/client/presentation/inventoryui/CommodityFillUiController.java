@@ -38,10 +38,10 @@ public class CommodityFillUiController extends SelectingDialog implements Extern
 
     @FXML
     private void onBtnSubmitClicked(ActionEvent actionEvent) {
+        onClose(); //一定要调用这个来把弹出框关了。
         if (callback != null) {
             callback.accept(new CommodityFillVo(Double.parseDouble(tfCommodityNumber.getText()), tfCommodityComment.getText())); //选择结束，调用回调方法。
         }
-        onClose(); //一定要调用这个来把弹出框关了。
     }
 
     @FXML

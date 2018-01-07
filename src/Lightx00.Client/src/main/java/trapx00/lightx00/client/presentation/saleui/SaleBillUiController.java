@@ -378,7 +378,24 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private void onBtnAddItemClicked() {
         commoditySelection.showCommoditySelectDialog(x -> {
             saleCommodityFillUiController.showSaleCommodityFillDialog(y -> {
-                commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), y.getPrice(), y.getPrice() * y.getNumber(), y.getComment())));
+                double tempAmount = y.getNumber();
+                for (CommodityItemModel commodityItemModel : commodityItemModelObservableList) {
+                    if (commodityItemModel.getCommodityItemObjectProperty().getCommodityId().equals(x.getId())) {
+                        tempAmount += commodityItemModel.getCommodityItemObjectProperty().getNumber();
+                    }
+                }
+                for (CommodityItemModel commodityItemModel : giftItemModelObservableList) {
+                    if (commodityItemModel.getCommodityItemObjectProperty().getCommodityId().equals(x.getId())) {
+                        tempAmount += commodityItemModel.getCommodityItemObjectProperty().getNumber();
+                    }
+                }
+                if (x.getAmount() < tempAmount) {
+                    PromptDialogHelper.start("超出已有库存数量，请重新填写", null)
+                            .addCloseButton("确定", "DONE", null)
+                            .createAndShow();
+                } else {
+                    commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
+                }
             });
         });
     }

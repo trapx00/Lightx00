@@ -148,6 +148,30 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
     }
 
     private void delete() {
+        List<String> cannotDeleteIdList=new ArrayList<>();
+        List<String> idList = new ArrayList<>();
+        ObservableList<TreeItem<ClientSelectionItemModel>> clientSelectionTreeItemModels = clientTable.getSelectionModel().getSelectedItems();
+        for (TreeItem<ClientSelectionItemModel> treeItem : clientSelectionTreeItemModels) {
+            idList.add(treeItem.getValue().getClientVoObjectProperty().getId());
+            if(treeItem.getValue().getClientVoObjectProperty().getReceivable()!=0.0||treeItem.getValue().getClientVoObjectProperty().getPayable()!=0.0){
+                cannotDeleteIdList.add(treeItem.getValue().getClientVoObjectProperty().getId());
+            }
+        }
+        if(cannotDeleteIdList.size()>0){
+            StringBuilder content=new StringBuilder();
+            content.append("|");
+            for(String id:cannotDeleteIdList){
+                content.append(id);
+                content.append("|");
+            }
+            PromptDialogHelper.start("以下客户应收应付不为0，再次确定是否要删除", new String(content))
+                    .addCloseButton("确定", "DONE", e -> confirmDelete())
+                    .addCloseButton("取消", "UNDO", null)
+                    .createAndShow();
+        }
+    }
+
+    private void confirmDelete(){
         List<String> idList = new ArrayList<>();
         ObservableList<TreeItem<ClientSelectionItemModel>> clientSelectionTreeItemModels = clientTable.getSelectionModel().getSelectedItems();
         for (TreeItem<ClientSelectionItemModel> treeItem : clientSelectionTreeItemModels) {
