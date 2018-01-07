@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class PurchaseBillDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -115,8 +115,8 @@ public class PurchaseBillDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new PurchaseBillQueryVo(q -> q.where().eq("id", bill.getId()).prepare())).length);
-        assertEquals(0, service.query(new PurchaseBillQueryVo(q -> q.where().eq("operatorId", "12").prepare())).length);
+        assertEquals(1, service.query(new PurchaseBillQueryVo().eq("id", bill.getId())).length);
+        assertEquals(0, service.query(new PurchaseBillQueryVo().eq("operatorId", "12")).length);
     }
 
     @Test

@@ -1,13 +1,12 @@
 package trapx00.lightx00.client.bl.inventorybl.mock;
 
-import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlController;
 import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfoController;
-import trapx00.lightx00.client.bl.inventorybl.PurchaseRefundBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
 public class PurchaseBillBlInfoControllerMock extends PurchaseBillBlInfoController {
     PurchaseBillBlService purchaseBillBlService=new PurchaseBillBlControllerMock();
@@ -31,7 +30,7 @@ public class PurchaseBillBlInfoControllerMock extends PurchaseBillBlInfoControll
      * @return array of PurchaseRefundBillVo
      */
     @Override
-    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query) {
         return purchaseRefundBillBlService.queryPurchaseRefundBillVo(query);
     }
 }

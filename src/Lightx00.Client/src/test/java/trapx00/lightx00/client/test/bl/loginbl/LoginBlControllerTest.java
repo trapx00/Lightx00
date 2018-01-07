@@ -3,9 +3,9 @@ package trapx00.lightx00.client.test.bl.loginbl;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.loginbl.LoginBlController;
 import trapx00.lightx00.client.bl.loginbl.factory.LoginBlFactory;
-import trapx00.lightx00.shared.po.ResultMessage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class LoginBlControllerTest {
     private LoginBlController controller = LoginBlFactory.getController();

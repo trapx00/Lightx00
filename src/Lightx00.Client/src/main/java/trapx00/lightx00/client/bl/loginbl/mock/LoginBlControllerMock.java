@@ -3,11 +3,12 @@ package trapx00.lightx00.client.bl.loginbl.mock;
 import trapx00.lightx00.client.bl.loginbl.LoginBlController;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 
 import java.util.Date;
 
 public class LoginBlControllerMock extends LoginBlController {
-    private EmployeeVo user = new FinanceStaffVo("123","123",new Date(), "123");;
+    private EmployeeVo user = new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true);;
     /**
      * Login with username and password provided.
      *

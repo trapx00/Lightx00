@@ -4,14 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.financebl.SaleDetailBlController;
 import trapx00.lightx00.client.bl.financebl.factory.SaleDetailBlFactory;
-import trapx00.lightx00.client.blservice.financeblservice.SaleDetailBlServiceFactory;
 import trapx00.lightx00.client.vo.financestaff.SaleDetailQueryVo;
 import trapx00.lightx00.client.vo.financestaff.SaleDetailVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SaleDetailBlControllerTest {
     private SaleDetailBlController controller = SaleDetailBlFactory.getController();

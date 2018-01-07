@@ -1,16 +1,64 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
+import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
+import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
+import trapx00.lightx00.client.bl.commoditybl.InventoryModificationService;
+import trapx00.lightx00.client.bl.commoditybl.factory.InventoryModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
+import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
+import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
+import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
+import trapx00.lightx00.shared.po.notification.NotificationType;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
+import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
-public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService {
+import java.rmi.RemoteException;
+import java.util.Date;
+import java.util.List;
+
+public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<PurchaseBillPo, PurchaseBillVo> {
+    EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
+    PurchaseBillDataService dataService = PurchaseBillDataServiceFactory.getInstance();
+    private CommonBillBlController<PurchaseBillVo, PurchaseBillPo, PurchaseBillQueryVo> commonBillBlController
+            = new CommonBillBlController<>(dataService, "进货单", this);
+    private NotificationBlService notificationService = NotificationBlServiceFactory.getInstance();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+    private InventoryModificationService inventoryModificationService = InventoryModificationServiceFactory.getService();
+
+    private String generatePurchaseBillMessage(String id) {
+        String separator = " | ";
+        String result = id + " up:" + System.lineSeparator();
+        try {
+            PurchaseBillPo purchaseBillPo = dataService.query(new PurchaseBillQueryVo().idEq(id))[0];
+            CommodityItem[] commodityList = purchaseBillPo.getCommodityList();
+            for (CommodityItem commodityItem : commodityList) {
+                result += commodityItem.getCommodityId() + separator + commodityItem.getNumber() + System.lineSeparator();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * Deletes a draft.
@@ -20,7 +68,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return commonBillBlController.deleteDraft(id);
     }
 
     /**
@@ -31,7 +79,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return commonBillBlController.abandon(id);
     }
 
     /**
@@ -42,7 +90,17 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        try {
+            PurchaseBillPo purchaseBillPo = dataService.query(new PurchaseBillQueryVo().idEq(id))[0];
+            clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, purchaseBillPo.getTotal());
+            for (CommodityItem commodityItem : purchaseBillPo.getCommodityList()) {
+                inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Up, commodityItem.getNumber());
+            }
+            return commonBillBlController.activate(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultMessage.Failure;
+        }
     }
 
     /**
@@ -53,7 +111,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage submit(PurchaseBillVo purchaseBill) {
-        return null;
+        return commonBillBlController.submit(purchaseBill);
     }
 
     /**
@@ -64,7 +122,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage saveAsDraft(PurchaseBillVo purchaseBill) {
-        return null;
+        return commonBillBlController.saveAsDraft(purchaseBill);
     }
 
     /**
@@ -74,7 +132,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public String getId() {
-        return null;
+        return commonBillBlController.getId();
     }
 
     /**
@@ -85,7 +143,8 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public PurchaseBillVo[] queryPurchaseBillVo(PurchaseBillQueryVo query) {
-        return new PurchaseBillVo[0];
+        List<PurchaseBillVo> list = commonBillBlController.query(query);
+        return list.toArray(new PurchaseBillVo[list.size()]);
     }
 
     /**
@@ -97,7 +156,29 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
-        return null;
+        return commonBillBlController.approvalComplete(billId, state);
+    }
+
+    /**
+     * Convert vo to po.
+     *
+     * @param vo vo
+     * @return po
+     */
+    @Override
+    public PurchaseBillPo fromVoToPo(PurchaseBillVo vo) {
+        return new PurchaseBillPo(vo.getId(), vo.getDate(), vo.getState(), vo.getClientId(), vo.getRepository(), vo.getOperatorId(), vo.getComment(), vo.getTotal(), vo.getCommodityList());
+    }
+
+    /**
+     * Convert po to vo.
+     *
+     * @param po po
+     * @return vo
+     */
+    @Override
+    public PurchaseBillVo fromPoToVo(PurchaseBillPo po) {
+        return new PurchaseBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getRepository(), po.getOperatorId(), po.getComment(), po.getTotal(), po.getCommodityList());
     }
 }
 

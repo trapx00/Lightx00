@@ -1,14 +1,14 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-import java.util.Arrays;
-import java.util.Date;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.client.ClientPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
+
+import java.util.Arrays;
+import java.util.Date;
 
 @DatabaseTable(tableName = "SystemSnapShot")
 public class  SystemSnapshotPo extends FinanceBillPo { //账
@@ -21,8 +21,8 @@ public class  SystemSnapshotPo extends FinanceBillPo { //账
     private BankAccountPo[] bankAccounts;
 
     public SystemSnapshotPo(String id, Date date, BillState state, CommodityPo[] commodities,
-                            ClientPo[] clients, BankAccountPo[] bankAccounts) {
-        super(id, date, state, FinanceBillType.SystemSnapshot);
+                            ClientPo[] clients, BankAccountPo[] bankAccounts, String operatorId) {
+        super(id, date, state, FinanceBillType.SystemSnapshot, operatorId);
         this.commodities = commodities;
         this.clients = clients;
         this.bankAccounts = bankAccounts;

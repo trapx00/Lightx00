@@ -1,29 +1,32 @@
 package trapx00.lightx00.client.vo.notification;
 
+import trapx00.lightx00.client.bl.notificationbl.NotificationOperationService;
+import trapx00.lightx00.client.presentation.notificationui.NotificationDetailUi;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
-
 
 import java.util.Date;
 
-public class NotificationVo {
+public abstract class NotificationVo {
     private int id;
     private Date date;
     private EmployeeVo sender;
-    private EmployeeVo receiver;
+    private EmployeeVo[] receivers;
     private NotificationType type;
 
-    public NotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo receiver, NotificationType type) {
+    public NotificationVo(int id, Date date, EmployeeVo sender, EmployeeVo[] receivers, NotificationType type) {
         this.id = id;
         this.date = date;
         this.sender = sender;
-        this.receiver = receiver;
+        this.receivers = receivers;
         this.type = type;
     }
 
-    public static NotificationVo convertFromPo(NotificationPo notificationPo) {
-        return NotificationConverterRegistry.convert(notificationPo);
+    public NotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receivers, NotificationType type) {
+        this.date = date;
+        this.sender = sender;
+        this.receivers = receivers;
+        this.type = type;
     }
 
     public Date getDate() {
@@ -42,12 +45,12 @@ public class NotificationVo {
         this.sender = sender;
     }
 
-    public EmployeeVo getReceiver() {
-        return receiver;
+    public EmployeeVo[] getReceivers() {
+        return receivers;
     }
 
-    public void setReceiver(EmployeeVo receiver) {
-        this.receiver = receiver;
+    public void setReceivers(EmployeeVo[] receivers) {
+        this.receivers = receivers;
     }
 
     public NotificationType getType() {
@@ -59,11 +62,14 @@ public class NotificationVo {
     }
 
     public int getId() {
-
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+
+    public abstract NotificationDetailUi notificationDetailUi();
+
+    public abstract NotificationOperationService operationService();
 }

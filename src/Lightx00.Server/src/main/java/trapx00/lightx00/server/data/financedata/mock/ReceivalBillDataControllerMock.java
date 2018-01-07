@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.financedata.mock;
 
 import trapx00.lightx00.server.data.financedata.ReceivalBillDataController;
-import trapx00.lightx00.shared.dataservicestub.financedataservice.ReceivalBillDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
@@ -80,7 +79,7 @@ public class ReceivalBillDataControllerMock extends ReceivalBillDataController {
     @Override
     public ReceivalBillPo[] query(ReceivalBillQueryVo query) {
         return new ReceivalBillPo[]{
-                new ReceivalBillPo("SKD-20171111-00001",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation("123",0.0,"123")}, 0.0)
+                new ReceivalBillPo("SKD-20171111-00001",new Date(), BillState.Approved, "123", "123", new Transcation[]{ new Transcation(1,0.0,"123")}, 0.0)
         };
     }
 

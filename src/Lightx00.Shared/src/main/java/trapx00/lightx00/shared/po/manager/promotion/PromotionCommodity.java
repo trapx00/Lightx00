@@ -1,38 +1,50 @@
 package trapx00.lightx00.shared.po.manager.promotion;
 
-import com.j256.ormlite.field.DatabaseField;
-
 import java.io.Serializable;
 
 public class PromotionCommodity implements Serializable {
-    @DatabaseField
-    private String id;
-    @DatabaseField
     private String commodityId;
-    @DatabaseField
+    private String name;
+    private double price;
     private double amount;
+
+    public PromotionCommodity(String commodityId, String name, double price, double amount) {
+        this.commodityId = commodityId;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
+    public PromotionCommodity() {}
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public double getAmount() {
         return amount;
     }
 
-    public String getCommodityId() {
-        return commodityId;
+    public String getName() {
+        return name;
     }
 
-    public String getId() {
-        return id;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getCommodityId() {
+        return commodityId;
     }
 
     public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setCommodityId(String commodityId) {
         this.commodityId = commodityId;
     }
+
+
 }

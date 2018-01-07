@@ -63,12 +63,8 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
                         || clientPo.getAddress().contains(query)
                         || (clientPo.getClientLevel() + "").contains(query)
                         || clientPo.getClientType().toString().contains(query)
-                        || clientPo.getDefaultOperatorId().contains(query)
-                        || clientPo.getEmail().contains(query)
                         || clientPo.getPhone().contains(query)
-                        || clientPo.getName().contains(query)
-                        || (clientPo.getPayableQuota() + "").contains(query)
-                        || (clientPo.getReceivableQuota() + "").contains(query)) {
+                        || clientPo.getName().contains(query)) {
                     result.add(clientPo);
                 }
             }
@@ -83,6 +79,26 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
             arrayResult[i] = result.get(i);
         }
         return arrayResult;
+    }
+
+    /**
+     * Query clients who has the id
+     *
+     * @param id id
+     * @return the clients with its id
+     */
+    @Override
+    public ClientPo queryById(String id) throws RemoteException {
+        ClientPo result;
+        try {
+            result = clientDao.queryForId(id);
+            logService.printLog(delegate, "query a client whose id is " + id);
+        } catch (SQLException e) {
+            result = null;
+            e.printStackTrace();
+            handleSQLException(e);
+        }
+        return result;
     }
 
     /**
@@ -132,7 +148,7 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
     }
 
     /**
-     * add a client
+     * addQueryVoForOneEmployeePosition a client
      *
      * @param client to be added
      * @return whether the operation is done successfully
@@ -141,7 +157,7 @@ public class ClientDataController extends UnicastRemoteObject implements ClientD
     public ResultMessage add(ClientPo client) {
         try {
             clientDao.createIfNotExists(client);
-            logService.printLog(delegate, "add a new client " + client);
+            logService.printLog(delegate, "addQueryVoForOneEmployeePosition a new client " + client);
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();

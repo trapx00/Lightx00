@@ -1,26 +1,23 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-import java.util.Arrays;
-import java.util.Date;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 
+import java.util.Arrays;
+import java.util.Date;
+
 @DatabaseTable(tableName = "CashBill")
-public class CashBillPo extends FinanceBillPo {
+public class CashBillPo extends FinanceBillPo  {
     @DatabaseField
-    private String operatorId;
-    @DatabaseField
-    private String accountId;
+    private int accountId;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CashBillItem[] items;
 
     public CashBillPo(String id, Date date, BillState state, String operatorId,
-                      String accountId, CashBillItem[] items) {
-        super(id, date, state, FinanceBillType.CashBill);
-        this.operatorId = operatorId;
+                      int accountId, CashBillItem[] items) {
+        super(id, date, state, FinanceBillType.CashBill, operatorId);
         this.accountId = accountId;
         this.items = items;
     }
@@ -29,19 +26,11 @@ public class CashBillPo extends FinanceBillPo {
 
     }
 
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
-    }
-
-    public String getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 
@@ -56,7 +45,6 @@ public class CashBillPo extends FinanceBillPo {
     @Override
     public String toString() {
         return "CashBillPo{" +
-            "operatorId='" + operatorId + '\'' +
             ", accountId='" + accountId + '\'' +
             ", items=" + Arrays.toString(items) +
             "} " + super.toString();

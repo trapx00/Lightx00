@@ -1,20 +1,78 @@
 package trapx00.lightx00.server;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
-import trapx00.lightx00.server.data.financedata.factory.FinanceDataDaoFactory;
-import trapx00.lightx00.server.data.logdata.factory.LogDataDaoFactory;
+import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
+import trapx00.lightx00.server.data.admindata.factory.AdminDataFactory;
+import trapx00.lightx00.server.data.admindata.factory.FaceIdRegistrationDataFactory;
+import trapx00.lightx00.server.data.approvaldata.factory.AuditDataFactory;
+import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
+import trapx00.lightx00.server.data.clientdata.factory.ClientDataFactory;
+import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataFactory;
+import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
+import trapx00.lightx00.server.data.draftdata.factory.DraftDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.CashBillDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.InitialEstablishmentDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.PaymentBillDataFactory;
+import trapx00.lightx00.server.data.financedata.factory.ReceivalBillDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryGiftDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.InventoryWarningDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.PurchaseBillDataFactory;
+import trapx00.lightx00.server.data.inventorydata.factory.PurchaseRefundBillDataFactory;
+import trapx00.lightx00.server.data.logdata.factory.LogBackupDataFactory;
+import trapx00.lightx00.server.data.logdata.factory.LogDataFactory;
+import trapx00.lightx00.server.data.logindata.factory.FaceIdAuthenticationDataFactory;
+import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
+import trapx00.lightx00.server.data.notificationdata.factory.NotificationDataFactory;
+import trapx00.lightx00.server.data.saledata.factory.SaleBillDataFactory;
+import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataFactory;
+import trapx00.lightx00.server.data.util.config.Config;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
-import trapx00.lightx00.shared.po.financestaff.CashBillPo;
-import trapx00.lightx00.shared.po.log.LogPo;
-import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.queryvo.LogQueryVo;
+import trapx00.lightx00.server.data.util.export.Export;
+import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
+import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
+import trapx00.lightx00.server.exception.ConfigNotValidException;
+import trapx00.lightx00.shared.dataservice.admindataservice.FaceIdRegistrationDataService;
+import trapx00.lightx00.shared.dataservice.admindataservice.UserManagementDataService;
+import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
+import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
+import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommodityDataService;
+import trapx00.lightx00.shared.dataservice.commoditydataservice.CommoditySortDataService;
+import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.CashBillDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.InitialEstablishmentDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
+import trapx00.lightx00.shared.dataservice.financedataservice.ReceivalBillDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryGiftDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.InventoryWarningDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
+import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
+import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
+import trapx00.lightx00.shared.dataservice.logdataservice.LogDataService;
+import trapx00.lightx00.shared.dataservice.logindataservice.FaceIdAuthenticationDataService;
+import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
+import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
+import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
+import trapx00.lightx00.shared.exception.faceid.FileException;
+import trapx00.lightx00.shared.util.RmiHelper;
 
-import java.util.Date;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.rmi.Naming;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
-import java.util.List;
+
 
 public class Server {
+
+    public static final String caller = "Main function";
+    public static ServerLogService logService = ServerLogServiceFactory.getService();
 
     /**
      * Server runner
@@ -22,56 +80,60 @@ public class Server {
      * @param args command line args
      */
     public static void main(String[] args) {
-//        try {
-//            SaleBillDataService saleBillDataService = SaleBillDataFactory.getService();
-//            SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
-//            PurchaseBillDataService purchaseBillDataService = PurchaseBillDataFactory.getService();
-//            PurchaseRefundBillDataService purchaseRefundBillDataService = PurchaseRefundBillDataFactory.getService();
-//            ClientDataService clientDataService = ClientDataFactory.getService();
-//
-//            LocateRegistry.createRegistry(8888);
-//            Naming.bind(RmiHelper.generateRmiUrl(SaleBillDataService.class), saleBillDataService);
-//            Naming.bind(RmiHelper.generateRmiUrl(SaleRefundBillDataService.class), saleRefundBillDataService);
-//            Naming.bind(RmiHelper.generateRmiUrl(PurchaseBillDataService.class), purchaseBillDataService);
-//            Naming.bind(RmiHelper.generateRmiUrl(PurchaseRefundBillDataService.class), purchaseRefundBillDataService);
-//            Naming.bind(RmiHelper.generateRmiUrl(ClientDataService.class), clientDataService);
-//            System.out.println(">>>>>INFO:远程对象绑定成功！");
-//        } catch (RemoteException e) {
-//            System.out.println("创建远程对象发生异常！");
-//            e.printStackTrace();
-//        } catch (AlreadyBoundException e) {
-//            System.out.println("发生重复绑定对象异常！");
-//            e.printStackTrace();
-//        } catch (MalformedURLException e) {
-//            System.out.println("发生URL畸形异常！");
-//            e.printStackTrace();
-//        }
-        Dao<LogPo, Integer> log = LogDataDaoFactory.getLogDao();
-        //用户构造查询条件
-        LogQueryVo query = new LogQueryVo(q ->q.where().eq("id", 1).prepare());
+        initRmi();
+    }
 
-        //data层使用查询条件
+    public static void initRmi() {
         try {
-            PreparedQuery<LogPo> preparedQuery = query.prepareQuery(log);
-            List<LogPo> logs = log.query(preparedQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
+            testConfig();
             BaseDatabaseFactory.init();
-            log.create(new LogPo(new Date(), LogSeverity.Success,"123"));
+            LocateRegistry.createRegistry(Integer.parseInt(RmiHelper.getPort()));
+            exportAll();
+            logService.printLog(caller, "Initialization done.");
 
-            Dao<CashBillPo, String> cashBillDao = FinanceDataDaoFactory.getCashBillDao();
-//            cashBillDao.create(new CashBillPo("123",new Date(), BillState.Rejected,"123","123",new CashBillItem[] { new CashBillItem("123",0,"123")}));
-            System.out.println(cashBillDao.queryForAll().get(0).getItems()[0].getAmount());
-
-
-
-
-        } catch (SQLException e) {
+        } catch (RemoteException | SQLException e) {
+            logService.printLog(caller, String.format("%s occurred. Message: %s", e.getClass().toString(), e.getMessage()));
             e.printStackTrace();
         }
     }
+
+    public static void testConfig() {
+        try {
+            Config.getConfig();
+        } catch (ConfigNotValidException e) {
+            logService.printLog(caller, "Config is not valid. Extracting default config files from resources.");
+            try {
+                Files.copy(Server.class.getResourceAsStream("/config.json"), e.getConfigFile().toPath());
+            } catch (IOException e1) {
+                throw new FileException(e1);
+            }
+        }
+
+    }
+
+    public static void exportAll() {
+        FastClasspathScanner scanner = new FastClasspathScanner();
+        scanner.matchClassesWithAnnotation(Export.class, classWithAnnotation -> {
+            try {
+                export((Remote) classWithAnnotation.getMethod("getService").invoke(null));
+            } catch (RemoteException | MalformedURLException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }).scan();
+
+    }
+
+
+    public static void export(Remote remoteObj) throws RemoteException, MalformedURLException {
+        for (Class clazz : remoteObj.getClass().getInterfaces()) {
+            if (Remote.class.isAssignableFrom(clazz)) {
+                String url = RmiHelper.generateRmiUrl(clazz);
+                logService.printLog(caller, String.format("registered %s to %s", url, remoteObj.toString()));
+                Naming.rebind(url, remoteObj);
+                return;
+            }
+        }
+    }
+
 }
+

@@ -10,11 +10,9 @@ import java.util.Date;
 @DatabaseTable(tableName = "SaleRefundBill")
 public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
-    private String supplier;
+    private String clientId;
     @DatabaseField
-    private String defaultOperatorId;
-    @DatabaseField
-    private String operatorId;
+    private String salesmanId;
     @DatabaseField
     private int repository;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -30,11 +28,13 @@ public class SaleRefundBillPo extends SaleBillBasePo {
     @DatabaseField
     private String comment;
 
-    public SaleRefundBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
-        this.supplier = supplier;
-        this.defaultOperatorId = defaultOperatorId;
-        this.operatorId = operatorId;
+    public SaleRefundBillPo() {
+    }
+
+    public SaleRefundBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.SaleRefund, operatorId);
+        this.clientId = clientId;
+        this.salesmanId = salesmanId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -44,31 +44,20 @@ public class SaleRefundBillPo extends SaleBillBasePo {
         this.comment = comment;
     }
 
-    public SaleRefundBillPo() {
+    public String getClientId() {
+        return clientId;
     }
 
-    public String getSupplier() {
-        return supplier;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public String getDefaultOperatorId() {
-        return defaultOperatorId;
-    }
-
-    public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
+    public void setSalesmanId(String defaultOperatorId) {
+        this.salesmanId = salesmanId;
     }
 
     public int getRepository() {

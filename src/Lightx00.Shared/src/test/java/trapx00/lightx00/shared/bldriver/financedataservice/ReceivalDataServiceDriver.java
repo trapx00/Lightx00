@@ -9,7 +9,7 @@ import trapx00.lightx00.shared.po.financestaff.ReceivalBillPo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ReceivalDataServiceDriver {
     ReceivalBillDataService service = new ReceivalBillDataServiceStub();

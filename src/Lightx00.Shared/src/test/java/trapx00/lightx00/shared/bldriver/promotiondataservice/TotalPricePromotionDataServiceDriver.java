@@ -4,8 +4,8 @@ import org.junit.Test;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
 import trapx00.lightx00.shared.dataservicestub.promotiondataservice.TotalPricePromotionDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
+import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 
 import java.util.Date;
 

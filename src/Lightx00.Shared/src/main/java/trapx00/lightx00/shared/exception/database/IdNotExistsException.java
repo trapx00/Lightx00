@@ -10,4 +10,9 @@ public class IdNotExistsException extends DatabaseException {
     public String getId() {
         return id;
     }
+
+    @Override
+    public String getMessage() {
+        return "unknown id: " + id;
+    }
 }

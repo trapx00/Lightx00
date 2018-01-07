@@ -26,7 +26,7 @@ public class InventoryWarningDataControllerTest {
 
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class InventoryWarningDataControllerTest {
     private Dao<InventoryDetailBillPo, String> dao = InventoryDataDaoFactory.getInventoryDetailBillDao();
     private InventoryWarningDataService service = InventoryWarningDataFactory.getService();
     private final InventoryDetailBillPo bill = new InventoryDetailBillPo("LOSS-20171126-00001",new Date(), BillState.Draft, InventoryBillType.Loss
-            ,null);
+            ,null, "123");
    @Before
     public void setUp() throws Exception {
 
@@ -118,7 +118,7 @@ public class InventoryWarningDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new InventoryBillQueryVo(q->q.where().eq("id",bill.getId()).prepare())).length);
+        assertEquals(1, service.query(new InventoryBillQueryVo().eq("id",bill.getId())).length);
         resetTable();
   }
 

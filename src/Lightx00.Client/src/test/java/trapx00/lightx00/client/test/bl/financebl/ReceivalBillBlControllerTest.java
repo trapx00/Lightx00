@@ -8,7 +8,8 @@ import trapx00.lightx00.client.vo.financestaff.ReceivalBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.ReceivalBillQueryVo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ReceivalBillBlControllerTest {
     private ReceivalBillBlController controller = ReceivalBillBlFactory.getController();

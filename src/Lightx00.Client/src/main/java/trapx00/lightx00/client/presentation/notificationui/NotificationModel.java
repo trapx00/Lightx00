@@ -1,89 +1,30 @@
 package trapx00.lightx00.client.presentation.notificationui;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.*;
-import trapx00.lightx00.shared.po.notification.NotificationType;
-import trapx00.lightx00.client.vo.EmployeeVo;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
 
-import java.util.Date;
-
 public class NotificationModel extends RecursiveTreeObject<NotificationModel> {
-    private ObjectProperty<Date> date;
-    private ObjectProperty<NotificationType> type;
-    private StringProperty id;
-    private ObjectProperty<EmployeeVo> receiver;
-    private StringProperty readType;
+    private ObjectProperty<NotificationVo> voObjectProperty;
 
-    public NotificationModel(NotificationVo notificationVo) {
-        this(notificationVo.getDate(), notificationVo.getType(),notificationVo.getId(),notificationVo.getReceiver(),"未读");
+    public NotificationModel(ObjectProperty<NotificationVo> voObjectProperty) {
+        this.voObjectProperty = voObjectProperty;
     }
 
-    public NotificationModel(Date date, NotificationType type, int id, EmployeeVo reveiver, String readType) {
-        this.date = new SimpleObjectProperty<>(date);
-        this.type = new SimpleObjectProperty<>(type);
-        this.id = new SimpleStringProperty(String.valueOf(id));
-        this.receiver = new SimpleObjectProperty<>(reveiver);
-        this.readType = new SimpleStringProperty(readType);
+    public NotificationModel(NotificationVo vo) {
+        this.voObjectProperty = new SimpleObjectProperty<>(vo);
     }
 
-    public Date getDate() {
-        return date.get();
+    public NotificationVo getVoObjectProperty() {
+        return voObjectProperty.get();
     }
 
-    public ObjectProperty<Date> dateProperty() {
-        return date;
+    public ObjectProperty<NotificationVo> voObjectPropertyProperty() {
+        return voObjectProperty;
     }
 
-    public void setDate(Date date) {
-        this.date.set(date);
-    }
-
-    public NotificationType getType() {
-        return type.get();
-    }
-
-    public ObjectProperty<NotificationType> typeProperty() {
-        return type;
-    }
-
-    public void setType(NotificationType type) {
-        this.type.set(type);
-    }
-
-    public EmployeeVo getReceiver() {
-        return receiver.get();
-    }
-
-    public ObjectProperty<EmployeeVo> receiverProperty() {
-        return receiver;
-    }
-
-    public void setReceiver(EmployeeVo receiver) {
-        this.receiver.set(receiver);
-    }
-
-    public String getId() {
-        return id.get();
-    }
-
-    public StringProperty idProperty() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id.set(id);
-    }
-
-    public String getReadType() {
-        return readType.get();
-    }
-
-    public StringProperty readTypeProperty() {
-        return readType;
-    }
-
-    public void setReadType(String readType) {
-        this.readType.set(readType);
+    public void setVoObjectProperty(NotificationVo voObjectProperty) {
+        this.voObjectProperty.set(voObjectProperty);
     }
 }

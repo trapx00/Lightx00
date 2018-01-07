@@ -2,9 +2,7 @@ package trapx00.lightx00.client.bl.logbl.mock;
 
 import trapx00.lightx00.client.bl.logbl.LogBackupBlController;
 import trapx00.lightx00.shared.po.ResultMessage;
-
-import java.net.URI;
-import java.net.URISyntaxException;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
 public class LogBackupBlControllerMock extends LogBackupBlController {
     /**
@@ -23,13 +21,7 @@ public class LogBackupBlControllerMock extends LogBackupBlController {
      * @return the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() {
-        URI uri = null;
-        try {
-            uri = new URI("www.123.com");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return uri;
+    public LogBackupVo[] fetchCloudLog() {
+      return null;
     }
 }

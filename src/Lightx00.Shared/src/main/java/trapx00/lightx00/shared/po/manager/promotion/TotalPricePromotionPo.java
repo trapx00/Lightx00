@@ -13,7 +13,7 @@ public class TotalPricePromotionPo extends PromotionPoBase {
     private double totalPrice;
 
     public TotalPricePromotionPo(String id, Date startDate, Date endDate, PromotionState state, double couponPrice, double totalPrice,PromotionCommodity[] promotionCommodities) {
-        super(id, PromotionType.TotalPricePromotion, startDate, endDate, PromotionState.Waiting,promotionCommodities);
+        super(id, PromotionType.TotalPricePromotion, startDate, endDate, state, promotionCommodities);
         this.couponPrice = couponPrice;
         this.totalPrice = totalPrice;
     }

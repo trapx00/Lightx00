@@ -6,9 +6,7 @@ import trapx00.lightx00.server.data.draftdata.factory.DraftDataDaoFactory;
 import trapx00.lightx00.server.data.draftdata.factory.DraftDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.draftdataservice.DraftDataService;
-import trapx00.lightx00.shared.dataservicestub.draftdataservice.DraftDataServiceStub;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.draft.DraftPo;
 import trapx00.lightx00.shared.po.draft.DraftType;
 import trapx00.lightx00.shared.queryvo.DraftQueryVo;
@@ -21,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class DraftDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,8 +36,8 @@ public class DraftDataControllerTest {
         int id1 = dao.extractId(dumbDraftPo), id2 = dao.extractId(anotherDumbDraftPo);
         try {
             assertEquals(2, service.query(new DraftQueryVo()).length);
-            assertEquals(1, service.query(new DraftQueryVo(q->q.where().eq("id",id1).prepare())).length);
-            assertEquals(0, service.query(new DraftQueryVo(q->q.where().eq("draftableId","XJFYD-20171113-00001").prepare())).length);
+            assertEquals(1, service.query(new DraftQueryVo().eq("id",id1)).length);
+            assertEquals(0, service.query(new DraftQueryVo().eq("draftableId","XJFYD-20171113-00001")).length);
         } finally {
             dao.deleteById(id1);
             dao.deleteById(id2);

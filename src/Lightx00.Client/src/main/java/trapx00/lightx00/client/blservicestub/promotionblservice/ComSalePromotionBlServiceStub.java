@@ -21,7 +21,7 @@ public class ComSalePromotionBlServiceStub implements ComSalePromotionBlService 
     }
 
     @Override
-    public ResultMessage delete(ComSalePromotionVo promotion) {
+    public ResultMessage delete(String id) {
         return ResultMessage.Success;
     }
 

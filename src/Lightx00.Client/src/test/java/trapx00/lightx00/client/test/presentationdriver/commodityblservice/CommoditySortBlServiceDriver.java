@@ -1,32 +1,28 @@
 package trapx00.lightx00.client.test.presentationdriver.commodityblservice;
 
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommoditySortBlServiceStub;
-import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.inventorystaff.CommoditySortItem;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommoditySortBlServiceDriver {
 
-    CommoditySortBlService service=new CommoditySortBlServiceStub();
-    CommoditySortVo[] commoditysorts;
+    private CommoditySortBlService service=new CommoditySortBlServiceStub();
+
     String commodityIdList[]={""};
-    String nextIds[]={"S0002"};
-    CommoditySortVo Led=new CommoditySortVo("S0001","Led", null,
-    "",  nextIds);
+    private String nextIds[]={"S0002"};
+    CommoditySortVo Led=new CommoditySortVo("S0001","Led", 0,
+    "",  new CommoditySortItem[] {new CommoditySortItem("123","123")});
+    private CommoditySortVo[] commoditysorts={Led};
 
 
-    @Before
-    public void setUp() throws Exception {
-        commoditysorts = service.query(new CommoditySortQueryVo("S0001","Led","S0000"));
-    }
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(Led,null));
+        assertEquals(ResultMessage.Success,service.add(Led));
     }
 
     @Test
@@ -44,14 +40,5 @@ public class CommoditySortBlServiceDriver {
         assertEquals(ResultMessage.Success,service.delete(Led));
     }
 
-    @Test
-    public void display() throws Exception {
-        assertEquals("S0002",service.dispaly(Led)[0].getId());
-    }
-
-    @Test
-    public void dispaly() throws Exception {
-        assertEquals("S0001",service.display()[0].getId());
-    }
 
 }

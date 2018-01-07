@@ -23,14 +23,14 @@ import static org.junit.Assert.*;
 public class CashBillDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     private Dao<CashBillPo, String> dao = FinanceDataDaoFactory.getCashBillDao();
     private CashBillDataService service = CashBillDataFactory.getService();
-    private final CashBillPo bill = new CashBillPo("XJFYD-20171122-00001",new Date(), BillState.Draft, "123","123",null);
+    private final CashBillPo bill = new CashBillPo("XJFYD-20171122-00001",new Date(), BillState.Draft, "123",1,null);
 
     @Before
     public void setUp() throws Exception {
@@ -111,8 +111,8 @@ public class CashBillDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new CashBillQueryVo(q->q.where().eq("id",bill.getId()).prepare())).length);
-        assertEquals(0, service.query(new CashBillQueryVo(q->q.where().eq("operatorId","12").prepare())).length);
+        assertEquals(1, service.query(new CashBillQueryVo().eq("id",bill.getId())).length);
+        assertEquals(0, service.query(new CashBillQueryVo().eq("operatorId","12")).length);
     }
 
     @Test

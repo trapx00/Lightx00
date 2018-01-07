@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.bl.clientbl.factory;
 
 
-import trapx00.lightx00.client.bl.draftbl.DraftService;
 import trapx00.lightx00.client.bl.draftbl.DraftableQueryService;
 
 public class ClientDraftQueryServiceFactory {

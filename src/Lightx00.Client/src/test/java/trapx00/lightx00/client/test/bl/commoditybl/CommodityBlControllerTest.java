@@ -1,10 +1,8 @@
 package trapx00.lightx00.client.test.bl.commoditybl;
 
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.bl.commoditybl.CommodityBlController;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
@@ -20,14 +18,10 @@ public class CommodityBlControllerTest {
     Date date=new Date() ;
 
     CommodityVo LedLight=new CommodityVo("C0001","LedLight", "Led", 98, date,
-            "1", "2", 56, 60, 90, 99, 50);
+            "1", "2", 56, 60, 90, 99, 50
+    ,0);
 
     CommodityVo[] commoditys={LedLight};
-    @Before
-    public void setup()throws Exception{
-
-        commoditys=commodityBlController.query(new CommodityQueryVo("C0001","LedLight"));
-    }
 
     @Test
     public void add() throws Exception {

@@ -31,12 +31,19 @@ public interface CommodityDataService extends Remote {
      */
     CommodityPo[] query(CommodityQueryVo commodityQueryVo)throws RemoteException;//查询
 
+    CommodityPo[] queryNormally(String query)throws RemoteException;
     /**
      * Delete a commoditybl
      * @param commodity
      * @return whether the operation is done successfully
      */
     ResultMessage delete(CommodityPo commodity)throws RemoteException;//删除
+
+
+    CommodityPo[] getAllCommodity() throws RemoteException;
+
+
+    String getId() throws RemoteException;
 
 
 }

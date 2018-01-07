@@ -2,7 +2,6 @@ package trapx00.lightx00.server.test.data.commoditydata;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.table.TableUtils;
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.server.data.commoditydata.factory.CommodityDataDaoFactory;
 import trapx00.lightx00.server.data.commoditydata.factory.CommoditySortDataFactory;
@@ -14,25 +13,22 @@ import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class CommoditySortDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     private Dao<CommoditySortPo, String> dao = CommodityDataDaoFactory.getCommoditySortDao();
-    private CommoditySortDataService service= CommoditySortDataFactory.getCommoditySortDataService();
-    private  CommoditySortPo commoditySortPo = new CommoditySortPo("PRO-0001","Led",null,null);
-    private  CommoditySortPo commoditySortPo1 = new CommoditySortPo("PRO-0002","Led",null,"PRO-0001");
+    private CommoditySortDataService service= CommoditySortDataFactory.getService();
+    private  CommoditySortPo commoditySortPo = new CommoditySortPo("PRO-0001","Led",0,null,null);
 
-    @Before
-    public void setUp() throws Exception {
-    }
 
     private void resetTable() throws Exception {
         TableUtils.dropTable(dao.getConnectionSource(),CommoditySortPo.class,true);
@@ -41,8 +37,9 @@ public class CommoditySortDataControllerTest {
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(commoditySortPo,commoditySortPo1));
-        resetTable();
+       CommoditySortPo[] commoditySortPos=service.display();
+       for(CommoditySortPo commoditySortPo:commoditySortPos)
+           System.out.println(commoditySortPo.getName());
     }
 
     @Test
@@ -54,15 +51,20 @@ public class CommoditySortDataControllerTest {
     @Test
     public void query() throws Exception {
         dao.create(commoditySortPo);
-        assertEquals(1, service.query(new CommoditySortQueryVo(q->q.where().eq("id","PRO-0001").prepare())).length);
+        assertEquals(1, service.query(new CommoditySortQueryVo().eq("id","PRO-0001")).length);
         resetTable();
     }
 
     @Test
     public void delete() throws Exception {
         dao.create(commoditySortPo);
-        assertEquals(ResultMessage.Success,service.delete(commoditySortPo));
-        resetTable();
+        String id = dao.extractId(commoditySortPo);
+        try {
+            service.delete(commoditySortPo);
+            assertNull(dao.queryForId(id));
+        } finally {
+            dao.deleteById(id);
+        }
     }
 
     @Test

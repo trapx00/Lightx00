@@ -1,16 +1,16 @@
 package trapx00.lightx00.client.blservicestub.commodityblservice;
 
 import trapx00.lightx00.client.blservice.commodityblservice.CommoditySortBlService;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
-import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
 public class CommoditySortBlServiceStub implements CommoditySortBlService {
 
 
 
     @Override
-    public ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort) {
+    public ResultMessage add(CommoditySortVo newSort) {
         return ResultMessage.Success;
     }
 
@@ -25,8 +25,8 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
         String nextIds[]={"S0002"};
         String lowNextIds[]={""};
         return new CommoditySortVo[]{
-                new CommoditySortVo("S0001","Led", null,
-                "", nextIds)
+                new CommoditySortVo("S0001","Led", 0,
+                "", null)
         };
     }
 
@@ -36,24 +36,14 @@ public class CommoditySortBlServiceStub implements CommoditySortBlService {
     }
 
     @Override
-    public CommoditySortVo[] display() {
-        String commodityIdList[]={"C0001","C0002"};
-        String nextIds[]={"S0002"};
-        String lowNextIds[]={""};
-        return new CommoditySortVo[]{
-                new CommoditySortVo("S0001","Led", null,
-                        "", nextIds)
-        };
+    public CommoditySortVo[] getAllCommoditySort() {
+        return new CommoditySortVo[0];
     }
 
     @Override
-    public CommoditySortVo[] dispaly(CommoditySortVo commoditySort) {
-        String commodityIdList[]={"C0001","C0002"};
-        String nextIds[]={"S0002"};
-        String lowNextIds[]={""};
-        return new CommoditySortVo[]{
-                new CommoditySortVo("S0002","lowLed", commodityIdList,
-                        "", lowNextIds)
-        };
+    public String getId() {
+        return null;
     }
+
+
 }

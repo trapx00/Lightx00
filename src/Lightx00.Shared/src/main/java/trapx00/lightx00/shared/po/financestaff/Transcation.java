@@ -3,21 +3,21 @@ package trapx00.lightx00.shared.po.financestaff;
 import java.io.Serializable;
 
 public class  Transcation implements Serializable {
-    private String accountId;
+    private int accountId;
     private double total;
     private String comment;
 
-    public Transcation(String accountId, double total, String comment) {
+    public Transcation(int accountId, double total, String comment) {
         this.accountId = accountId;
         this.total = total;
         this.comment = comment;
     }
 
-    public String getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 

@@ -6,6 +6,7 @@ import trapx00.lightx00.server.data.admindata.factory.AdminDataDaoFactory;
 import trapx00.lightx00.server.data.logindata.factory.LoginDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.financestaff.FinanceStaffPo;
 
 import java.sql.SQLException;
@@ -17,14 +18,14 @@ import static org.junit.Assert.assertNull;
 public class LoginDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     private Dao<FinanceStaffPo, String> dao = AdminDataDaoFactory.getFinanceStaffDao();
     private LoginDataService service = LoginDataFactory.getService();
-    private FinanceStaffPo employeePo = new FinanceStaffPo("123","123",new Date(),"123","123");
+    private FinanceStaffPo employeePo = new FinanceStaffPo("0001","123",new Date(),"123", EmployeeState.Active,true);
     @Test
     public void loginSuccess() throws Exception {
         dao.create(employeePo);

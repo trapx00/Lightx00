@@ -1,11 +1,11 @@
 package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.PaymentBillBlController;
+import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
-import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
 import java.util.Date;
 
@@ -84,7 +84,7 @@ public class PaymentBillBlControllerMock extends PaymentBillBlController {
     @Override
     public PaymentBillVo[] query(PaymentBillQueryVo query) {
         return new PaymentBillVo[]{
-                new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)
+                new PaymentBillVo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation(1,0,"123")}, 0.0)
         };
     }
 

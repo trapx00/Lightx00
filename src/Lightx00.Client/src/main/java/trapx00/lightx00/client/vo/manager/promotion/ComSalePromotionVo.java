@@ -1,5 +1,12 @@
 package trapx00.lightx00.client.vo.manager.promotion;
 
+import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
+import trapx00.lightx00.client.bl.promotionbl.factory.ComSalePromotionBlFactory;
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionDetailUi;
+import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionUiController;
+import trapx00.lightx00.client.presentation.promotionui.detail.PromotionDetailUi;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
@@ -7,13 +14,11 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 import java.util.Date;
 
 public class ComSalePromotionVo extends PromotionVoBase {
-    private PromotionCommodity[] commodityOnSale;
     private double onSalePrice;
 
     public ComSalePromotionVo(String id, Date startDate, Date endDate, PromotionState state,
-                              PromotionCommodity[] commodityOnSale, double onSalePrice) {
-        super(id, PromotionType.ComSalePromotion, startDate, endDate, PromotionState.Waiting);
-        this.commodityOnSale = commodityOnSale;
+                              PromotionCommodity[] promotionCommodities, double onSalePrice) {
+        super(id, PromotionType.ComSalePromotion, startDate, endDate, state, promotionCommodities);
         this.onSalePrice = onSalePrice;
     }
 
@@ -25,11 +30,28 @@ public class ComSalePromotionVo extends PromotionVoBase {
         this.onSalePrice = onSalePrice;
     }
 
-    public PromotionCommodity[] getCommodityOnSale() {
-        return commodityOnSale;
+    /**
+     * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DeleteService
+     */
+    @Override
+    public DraftDeleteService deleteService() {
+        return ComSalePromotionBlFactory.getDraftDeleteService();
     }
 
-    public void setCommodityOnSale(PromotionCommodity[] commodityOnSale) {
-        this.commodityOnSale = commodityOnSale;
+    /**
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
+     *
+     * @return DraftContinueWritableUiController
+     */
+    @Override
+    public DraftContinueWritableUiController continueWritableUi() {
+        return new ComSalePromotionUiController();
+    }
+
+    @Override
+    public PromotionDetailUi promotionDetailUi() {
+        return new ComSalePromotionDetailUi();
     }
 }

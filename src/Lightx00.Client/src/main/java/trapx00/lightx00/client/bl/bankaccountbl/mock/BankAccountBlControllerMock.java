@@ -1,9 +1,10 @@
 package trapx00.lightx00.client.bl.bankaccountbl.mock;
 
 import trapx00.lightx00.client.bl.bankaccountbl.BankAccountBlController;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
-import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+
 import java.util.Date;
 
 public class BankAccountBlControllerMock extends BankAccountBlController {
@@ -15,7 +16,7 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage modifyBankAccount(String id, double delta) {
+    public ResultMessage modifyBankAccount(int id, double delta) {
         return ResultMessage.Success;
     }
 
@@ -50,7 +51,7 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
     @Override
     public BankAccountVo[] query(BankAccountQueryVo query) {
         return new BankAccountVo[] {
-                new BankAccountVo("123","现金1",10.0,new Date())
+                new BankAccountVo(1, "现金1",10.0,new Date())
         };
     }
 
@@ -61,7 +62,7 @@ public class BankAccountBlControllerMock extends BankAccountBlController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String id) {
+    public ResultMessage delete(int id) {
         return ResultMessage.Success;
     }
 }

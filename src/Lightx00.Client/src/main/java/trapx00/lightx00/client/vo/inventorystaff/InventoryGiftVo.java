@@ -1,28 +1,31 @@
 package trapx00.lightx00.client.vo.inventorystaff;
 
-import java.util.Date;
-import java.util.HashMap;
-
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.inventorybl.factory.InventoryGiftServiceFactory;
-import trapx00.lightx00.client.bl.inventorybl.factory.InventoryWarningServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftDetailUiController;
+import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftUiController;
+import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
-public class InventoryGiftVo extends InventoryBillBaseVo{
+import java.util.Date;
 
-    PromotionCommodity[] gifts;
+public class InventoryGiftVo extends InventoryBillBaseVo implements Reversible{
 
-    public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts) {
-        super(id, date, state, InventoryBillType.Gift);
+
+    private PromotionCommodity[] gifts;
+
+    public InventoryGiftVo(String id, Date date, BillState state, PromotionCommodity[] gifts,String operatorId) {
+        super(id, date, state, InventoryBillType.Gift,operatorId);
         this.gifts = gifts;
     }
-
 
     public PromotionCommodity[] getGifts() {
         return gifts;
@@ -52,15 +55,6 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
         return InventoryGiftServiceFactory.getNotificationAbandonService();
     }
 
-    /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
 
     /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
@@ -73,14 +67,20 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
-        return null;
+    public DraftContinueWritableUiController continueWritableUi() {
+        return new InventoryGiftUiController();
     }
+
+    @Override
+    public BillDetailUi billDetailUi() {
+        return new InventoryGiftDetailUiController();
+    }
+
     /**
      * Gets the BillApprovalCompleteService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -88,6 +88,16 @@ public class InventoryGiftVo extends InventoryBillBaseVo{
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return InventoryWarningServiceFactory.getBillApprovalCompleteService();
+        return InventoryGiftServiceFactory.getBillApprovalCompleteService();
+    }
+
+    /**
+     * When it is called, it returns a ReversibleUi which can be used to acquire the ui component and controller.
+     *
+     * @return reversible ui service.
+     */
+    @Override
+    public ReversibleUi reversibleUi() {
+        return new InventoryGiftUiController();
     }
 }

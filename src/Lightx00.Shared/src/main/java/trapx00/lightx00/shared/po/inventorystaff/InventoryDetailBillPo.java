@@ -1,16 +1,17 @@
 package trapx00.lightx00.shared.po.inventorystaff;
 
-import java.util.Date;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
 
+import java.util.Date;
+
 @DatabaseTable(tableName = "InventoryDetailBill")
 public class InventoryDetailBillPo extends InventoryBillPo {
+
     @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private CommodityPo[] commodityList;//商品
+    private InventoryWarningItem[] commodityList;//商品
 
 
     public InventoryDetailBillPo(){
@@ -19,15 +20,18 @@ public class InventoryDetailBillPo extends InventoryBillPo {
 
     public InventoryDetailBillPo(String id, Date date, BillState state,
                                  InventoryBillType inventoryBillType,
-                                 CommodityPo[] commodityIdList) {
-        super(id, date, state, inventoryBillType);
-        this.commodityList = commodityIdList;
+                                 InventoryWarningItem[] inventoryWarningItems,String operatorId) {
+        super(id, date, state, inventoryBillType,operatorId);
+        this.commodityList = inventoryWarningItems;;
     }
 
 
-
-    public CommodityPo[] getCommodityIdList() {
+    public InventoryWarningItem[] getCommodityList() {
         return commodityList;
+    }
+
+    public void setCommodityList(InventoryWarningItem[] commodityList) {
+        this.commodityList = commodityList;
     }
 
     public void setNum(double num,CommodityPo commodityPo){
@@ -39,8 +43,6 @@ public class InventoryDetailBillPo extends InventoryBillPo {
     }
 
 
-    public void setCommodityIdList(CommodityPo[] commodityIdList) {
-        this.commodityList = commodityIdList;
-    }
+
 
 }

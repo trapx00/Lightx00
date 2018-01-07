@@ -1,9 +1,9 @@
 package trapx00.lightx00.client.blservicestub.bankaccountblservice;
 
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlService;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
-import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
 
 import java.util.Date;
 
@@ -21,7 +21,7 @@ public class BankAccountManagementBlServiceStub implements BankAccountManagement
     @Override
     public BankAccountVo[] query(BankAccountQueryVo query) {
         return new BankAccountVo[] {
-               new BankAccountVo("123","123",123,new Date())
+               new BankAccountVo(1,"123",123,new Date())
         };
     }
 
@@ -32,7 +32,7 @@ public class BankAccountManagementBlServiceStub implements BankAccountManagement
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage delete(String id) {
+    public ResultMessage delete(int id) {
         return ResultMessage.Success;
     }
 

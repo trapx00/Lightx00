@@ -1,11 +1,11 @@
 package trapx00.lightx00.shared.po.employee;
 
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class EmployeePo {
+public class EmployeePo implements Serializable {
     @DatabaseField
     private String name;
     @DatabaseField(id = true)
@@ -13,20 +13,19 @@ public class EmployeePo {
     @DatabaseField
     private Date workSince;
     @DatabaseField
-    private String username;
-    @DatabaseField
     private String password;
     @DatabaseField
     private EmployeePosition position;
+    @DatabaseField
+    private EmployeeState state;
 
-    public EmployeePo(String name, String id, Date workSince, String username,
-                      String password, EmployeePosition position) {
+    public EmployeePo(String id, String name, Date workSince, EmployeePosition position, String password, EmployeeState state) {
         this.name = name;
         this.id = id;
         this.workSince = workSince;
-        this.username = username;
         this.password = password;
         this.position = position;
+        this.state = state;
     }
 
     public EmployeePo() {
@@ -56,14 +55,6 @@ public class EmployeePo {
         this.workSince = workSince;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -78,5 +69,13 @@ public class EmployeePo {
 
     public void setPosition(EmployeePosition position) {
         this.position = position;
+    }
+
+    public EmployeeState getState() {
+        return state;
+    }
+
+    public void setState(EmployeeState state) {
+        this.state = state;
     }
 }

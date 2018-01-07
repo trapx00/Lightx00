@@ -1,9 +1,8 @@
 package trapx00.lightx00.client.blservice.commodityblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
-
-import trapx00.lightx00.client.vo.inventorystaff.CommoditySortQueryVo;
 import trapx00.lightx00.client.vo.inventorystaff.CommoditySortVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.CommoditySortQueryVo;
 
 public interface CommoditySortBlService {
     //商品分类管理
@@ -11,10 +10,9 @@ public interface CommoditySortBlService {
     /**
      * Create a new commoditySort attaching to a parentSort
      * @param newSort
-     * @param parentSort
      * @return whether the operation is done successfully
      */
-    ResultMessage add(CommoditySortVo newSort, CommoditySortVo parentSort);//新建分类
+    ResultMessage add(CommoditySortVo newSort);//新建分类
 
     /**
      * Modify a commoditySort
@@ -41,12 +39,7 @@ public interface CommoditySortBlService {
      * Display all commoditySorts
      * @return the list of commoditySort
      */
-    CommoditySortVo[] display();//得到all
+    CommoditySortVo[] getAllCommoditySort();//得到all
 
-    /**
-     *  Get the childsoft of a commoditySort
-     * @param commoditySort
-     * @return the childCommoditySort
-     */
-    CommoditySortVo[] dispaly(CommoditySortVo commoditySort);//得到子类
+    String getId();
 }

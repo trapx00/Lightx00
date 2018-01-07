@@ -3,41 +3,33 @@ package trapx00.lightx00.server.test.data.saledata;
 import com.j256.ormlite.dao.Dao;
 import org.junit.Before;
 import org.junit.Test;
-import trapx00.lightx00.server.data.saledata.factory.SaleBillDataDaoFactory;
-import trapx00.lightx00.server.data.saledata.factory.SaleBillDataFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataDaoFactory;
 import trapx00.lightx00.server.data.saledata.factory.SaleRefundBillDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
-import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.exception.database.BillInvalidStateException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SaleRefundBillDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private final SaleRefundBillPo bill = new SaleRefundBillPo("XSTHD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "");
+    private final SaleRefundBillPo bill = new SaleRefundBillPo("XSD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "");
     private Dao<SaleRefundBillPo, String> dao = SaleRefundBillDataDaoFactory.getSaleRefundBillDao();
     private SaleRefundBillDataService service = SaleRefundBillDataFactory.getService();
 
@@ -121,8 +113,8 @@ public class SaleRefundBillDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new SaleRefundBillQueryVo(q -> q.where().eq("id", bill.getId()).prepare())).length);
-        assertEquals(0, service.query(new SaleRefundBillQueryVo(q -> q.where().eq("operatorId", "12").prepare())).length);
+        assertEquals(1, service.query(new SaleRefundBillQueryVo().eq("id", bill.getId())).length);
+        assertEquals(0, service.query(new SaleRefundBillQueryVo().eq("operatorId", "12")).length);
     }
 
     @Test

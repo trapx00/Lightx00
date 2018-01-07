@@ -9,9 +9,8 @@ import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.manager.BillInfoPo;
-import trapx00.lightx00.shared.po.bill.BillPo;
-import trapx00.lightx00.shared.queryvo.BillInfoQueryVo;
+import trapx00.lightx00.shared.po.manager.AuditIdPo;
+import trapx00.lightx00.shared.queryvo.AuditIdQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -34,20 +33,20 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     public AuditDataController() throws RemoteException {
     }
 
-    private Dao<BillInfoPo, String> dao = AuditDataDaoFactory.getAuditDao();
+    private Dao<AuditIdPo, String> dao = AuditDataDaoFactory.getAuditDao();
     private ServerLogService logService = ServerLogServiceFactory.getService();
     private Object delegate = this;
 
     /**
-     * Filter some BillInfoPo.
+     * Filter some AuditIdPo.
      * @param query the filter conditions
-     * @return array of BillInfoPo which match the conditions
+     * @return array of AuditIdPo which match the conditions
      */
-    public BillInfoPo[] query(BillInfoQueryVo query) {
+    public AuditIdPo[] query(AuditIdQueryVo query) {
         try {
-            List<BillInfoPo> results = dao.query(query.prepareQuery(dao));
-            logService.printLog(delegate,String.format("queried BillInfoPos and got %d results", results.size()));
-            return results.toArray(new BillInfoPo[results.size()]);
+            List<AuditIdPo> results = dao.query(query.prepareQuery(dao));
+            logService.printLog(delegate,String.format("查询待审批单据得到%d条结果", results.size()));
+            return results.toArray(new AuditIdPo[results.size()]);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DbSqlException(e);
@@ -55,15 +54,15 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * Delete BillInfoPo after approving the bill.
-     * @param billInfo the corresponding BillInfoPo to the BillPo
+     * Delete AuditIdPo after approving the bill.
+     * @param billInfo the corresponding AuditIdPo to the BillPo
      * @return whether the operation is done successfully
      */
-    public ResultMessage pass(BillInfoPo billInfo) {
+    public ResultMessage pass(AuditIdPo billInfo) {
         assertExists(billInfo.getId(), true);
         try {
+            logService.printLog(delegate, String.format("通过审批(id: %s)",billInfo.getId()));
             dao.deleteById(billInfo.getId());
-            logService.printLog(delegate, String.format("approved BillPo (id: %s)",billInfo.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,15 +71,15 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * Delete BillInfoPo after rejecting the approval.
-     * @param billInfo the corresponding BillInfoPo to the BillPo
+     * Delete AuditIdPo after rejecting the approval.
+     * @param billInfo the corresponding AuditIdPo to the BillPo
      * @return whether the operation is done successfully
      */
-    public ResultMessage reject(BillInfoPo billInfo) {
+    public ResultMessage reject(AuditIdPo billInfo) {
         assertExists(billInfo.getId(), true);
         try {
             dao.deleteById(billInfo.getId());
-            logService.printLog(delegate, String.format("rejected to approve BillPo (id: %s)",billInfo.getId()));
+            logService.printLog(delegate, String.format("拒绝通过审批(id: %s)",billInfo.getId()));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,18 +88,18 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
     }
 
     /**
-     * Save the submitted BillPo as BillInfoPo.
-     * @param bill the bill has been submitted
+     * Save the submitted BillPo as AuditIdPo.
+     * @param id id of the bill has been submitted
      * @return whether the operation is done successfully
      */
-    //在BillInfoPo表里增加一条记录
+    //在AuditIdPo表里增加一条记录
     @Override
-    public ResultMessage requestApproval(BillPo bill) {
-        assertExists(bill.getId(), false);
+    public ResultMessage requestApproval(String id) {
+        assertExists(id, false);
         try {
-            BillInfoPo billInfo = new BillInfoPo(bill.getId(),bill.getBillType(),new Date(),bill.getState());
+            AuditIdPo billInfo = new AuditIdPo(id,new Date());
             dao.create(billInfo);
-            logService.printLog(delegate, String.format("submit Bill (id: %s)",bill.getId()));
+            logService.printLog(delegate, String.format("提交单据等待审批，单据编号是(id: %s)",id));
             return ResultMessage.Success;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,7 +109,7 @@ public class AuditDataController extends UnicastRemoteObject implements AuditDat
 
     private void assertExists(String id, boolean expectedExists) {
         try {
-            BillInfoPo billInfo = dao.queryForId(id);
+            AuditIdPo billInfo = dao.queryForId(id);
             boolean actualExists = billInfo != null;
             if (actualExists && !expectedExists) {
                 throw new IdExistsException(id);

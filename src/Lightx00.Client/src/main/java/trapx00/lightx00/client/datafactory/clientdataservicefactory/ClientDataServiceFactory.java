@@ -1,9 +1,7 @@
 package trapx00.lightx00.client.datafactory.clientdataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
-import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.dataservicestub.clientdataservice.ClientDataServiceStub;
-import trapx00.lightx00.shared.dataservicestub.saledataservice.SaleBillDataServiceStub;
 import trapx00.lightx00.shared.util.RmiHelper;
 
 import java.net.MalformedURLException;
@@ -13,7 +11,7 @@ import java.rmi.RemoteException;
 
 public class ClientDataServiceFactory {
 
-    private static ClientDataService service=new ClientDataServiceStub();
+    private static ClientDataService service = new ClientDataServiceStub();
 
     public static void initRmi(){
         try {
@@ -27,8 +25,8 @@ public class ClientDataServiceFactory {
         }
     }
 
-    public ClientDataService getInstance() {
-        //initRmi();
+    public static ClientDataService getInstance() {
+        initRmi();
         return service;
     }
 }

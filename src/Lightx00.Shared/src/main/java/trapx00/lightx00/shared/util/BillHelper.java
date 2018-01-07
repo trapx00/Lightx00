@@ -20,4 +20,18 @@ public class BillHelper {
     public static String formatId(int id) {
         return String.format("%05d",id);
     }
+
+    public static String comFormaiId(int id){
+        return String.format("%04d",id);
+    }
+
+    public static String toFixed(double num, int precision) {
+        return String.format("%.2f", num);
+    }
+
+    public static String toFixed(double num) {
+        return toFixed(num, 2);
+    }
+
+    public static String formatComid(int id){return  String.format("%04d",id);}
 }

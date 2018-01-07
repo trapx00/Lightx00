@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.inventorydataservice.PurchaseRefu
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.salestaff.PurchaseRefundBillPo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PurchaseRefundBillDataServiceDriver {
 

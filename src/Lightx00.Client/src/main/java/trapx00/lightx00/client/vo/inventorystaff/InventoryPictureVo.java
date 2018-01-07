@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class InventoryPictureVo {
     //名称，型号，库存数量，库存均价，批次，批号，出厂日期
-    Date time;//出厂日期
-    CommodityVo[] items;
+    private Date time;//生成日期
+    private InventoryPictureItem[] items;
 
-    public InventoryPictureVo(Date time, CommodityVo[] items) {
+    public InventoryPictureVo(Date time, InventoryPictureItem[] items) {
         this.time = time;
         this.items = items;
     }
@@ -20,11 +20,11 @@ public class InventoryPictureVo {
         this.time = time;
     }
 
-    public CommodityVo[] getItems() {
+    public InventoryPictureItem[] getItems() {
         return items;
     }
 
-    public void setItems(CommodityVo[] items) {
+    public void setItems(InventoryPictureItem[] items) {
         this.items = items;
     }
 }

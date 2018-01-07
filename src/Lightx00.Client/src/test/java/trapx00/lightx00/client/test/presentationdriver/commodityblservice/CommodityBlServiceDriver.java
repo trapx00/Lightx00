@@ -1,18 +1,14 @@
 package trapx00.lightx00.client.test.presentationdriver.commodityblservice;
 
-import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
 import trapx00.lightx00.client.blservicestub.commodityblservice.CommodityBlServiceStub;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
-
-
+import trapx00.lightx00.shared.po.ResultMessage;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommodityBlServiceDriver {
 
@@ -21,7 +17,8 @@ public class CommodityBlServiceDriver {
     Date date=new Date() ;
 
     CommodityVo LedLight=new CommodityVo("C0001","LedLight", "Led", 98, date,
-    "1", "2", 56, 60, 90, 99, 50);
+    "1", "2", 56, 60, 90, 99, 50
+    ,0);
 
     CommodityVo[] commoditys;
 

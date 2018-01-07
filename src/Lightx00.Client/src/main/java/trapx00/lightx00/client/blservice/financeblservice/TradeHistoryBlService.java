@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.blservice.financeblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
 public interface TradeHistoryBlService {
     /**

@@ -2,9 +2,10 @@ package trapx00.lightx00.shared.po.bill;
 
 import com.j256.ormlite.field.DatabaseField;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BillPo {
+public class BillPo implements Serializable {
     @DatabaseField
     private BillType billType;
     @DatabaseField(id = true)
@@ -13,12 +14,15 @@ public class BillPo {
     private Date date;
     @DatabaseField
     private BillState state;
+    @DatabaseField
+    private String operatorId;
 
-    public BillPo(BillType billType, String id, Date date, BillState state) {
+    public BillPo(BillType billType, String id, Date date, BillState state, String operatorId) {
         this.billType = billType;
         this.id = id;
         this.date = date;
         this.state = state;
+        this.operatorId = operatorId;
     }
 
     public BillPo() {
@@ -55,6 +59,15 @@ public class BillPo {
 
     public void setState(BillState state) {
         this.state = state;
+    }
+
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 
     @Override

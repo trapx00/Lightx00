@@ -1,8 +1,8 @@
 package trapx00.lightx00.client.blservicestub.inventoryblservice;
 
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlService;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 
 public class PurchaseBillBlServiceStub implements PurchaseBillBlService {

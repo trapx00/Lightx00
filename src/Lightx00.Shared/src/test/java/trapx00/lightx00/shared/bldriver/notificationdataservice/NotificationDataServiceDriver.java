@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NotificationDataServiceDriver {
     private NotificationDataService service = new NotificationDataServiceStub();

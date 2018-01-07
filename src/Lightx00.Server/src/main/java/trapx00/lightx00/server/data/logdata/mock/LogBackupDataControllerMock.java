@@ -2,9 +2,8 @@ package trapx00.lightx00.server.data.logdata.mock;
 
 import trapx00.lightx00.server.data.logdata.LogBackupDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 
 public class LogBackupDataControllerMock extends LogBackupDataController {
@@ -27,23 +26,17 @@ public class LogBackupDataControllerMock extends LogBackupDataController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage backupLog() throws RemoteException {
+    public ResultMessage backupLog() {
         return ResultMessage.Success;
     }
 
     /**
-     * get the log backed up on the cloud
-     *
-     * @return the temp uri of the log resources
+     * get the log backed up on the cloudtrin
+     * <p>
+     * urn the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() throws RemoteException {
-        URI uri = null;
-        try {
-            uri = new URI("www.123.com");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return uri;
+    public LogBackupVo[] fetchCloudLog() {
+        return null;
     }
 }

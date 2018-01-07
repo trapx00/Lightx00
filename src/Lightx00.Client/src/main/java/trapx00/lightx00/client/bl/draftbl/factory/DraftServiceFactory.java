@@ -2,10 +2,9 @@ package trapx00.lightx00.client.bl.draftbl.factory;
 
 import trapx00.lightx00.client.bl.draftbl.DraftBlController;
 import trapx00.lightx00.client.bl.draftbl.DraftService;
-import trapx00.lightx00.client.bl.draftbl.mock.DraftBlControllerMock;
 
 public class DraftServiceFactory {
-    private static DraftBlController controller = new DraftBlControllerMock();
+    private static DraftBlController controller = new DraftBlController();
 
     private static DraftService draftService = controller;
 

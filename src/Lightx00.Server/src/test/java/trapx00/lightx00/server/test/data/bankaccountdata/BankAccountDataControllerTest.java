@@ -2,32 +2,29 @@ package trapx00.lightx00.server.test.data.bankaccountdata;
 
 import com.j256.ormlite.dao.Dao;
 import org.junit.Test;
-import trapx00.lightx00.server.data.bankaccountdata.BankAccountDataController;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataDaoFactory;
 import trapx00.lightx00.server.data.bankaccountdata.factory.BankAccountDataFactory;
 import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.bankaccountdataservice.BankAccountDataService;
-import trapx00.lightx00.shared.dataservicestub.bankaccountdataservice.BankAccountDataServiceStub;
-import trapx00.lightx00.shared.exception.database.IdExistsException;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class BankAccountDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     private Dao<BankAccountPo, Integer> dao = BankAccountDataDaoFactory.getBankAccountDao();
-    private BankAccountDataService service = BankAccountDataFactory.getController();
+    private BankAccountDataService service = BankAccountDataFactory.getService();
     private BankAccountPo dumbAccount = new BankAccountPo("123",10,new Date());
     @Test
     public void query() throws Exception {
@@ -39,8 +36,8 @@ public class BankAccountDataControllerTest {
         id2 = dao.extractId(bankAccountPo2);
         try {
             assertEquals(2, service.query(new BankAccountQueryVo()).length);
-            assertEquals(1, service.query(new BankAccountQueryVo(q->q.where().eq("amount",10.0).prepare())).length);
-            assertEquals(0, service.query(new BankAccountQueryVo(q->q.where().eq("amount",1.0).prepare())).length);
+            assertEquals(1, service.query(new BankAccountQueryVo().eq("amount",10.0)).length);
+            assertEquals(0, service.query(new BankAccountQueryVo().eq("amount",1.0)).length);
         } finally {
           dao.deleteById(id1);
           dao.deleteById(id2);

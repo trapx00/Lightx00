@@ -6,7 +6,7 @@ import trapx00.lightx00.shared.dataservicestub.commoditydataservice.CommoditySor
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommoditySortDataServiceDriver {
     CommoditySortDataService service=new CommoditySortDataServiceStub();
@@ -14,12 +14,11 @@ public class CommoditySortDataServiceDriver {
     CommoditySortPo fatheCommoditySortPo=null;
     String commodityIdList[]={""};
     String nextIds[]={"S0002"};
-    CommoditySortPo Led=new CommoditySortPo("S0001","Led", null,
-            "");
+    CommoditySortPo Led=null;
 
     @Test
     public void add() throws Exception {
-        assertEquals(ResultMessage.Success,service.add(commoditySortPo,fatheCommoditySortPo));
+        assertEquals(ResultMessage.Success,service.add(commoditySortPo));
     }
 
     @Test
@@ -29,7 +28,7 @@ public class CommoditySortDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        CommoditySortPo commoditySortPo=new CommoditySortPo("S0001","Led",null,"123");
+        CommoditySortPo commoditySortPo=new CommoditySortPo("S0001","Led",0,"123",null);
         assertEquals("S0001",commoditySortPo.getId());
     }
 

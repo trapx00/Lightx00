@@ -1,10 +1,9 @@
 package trapx00.lightx00.client.presentation.approvalui.factory;
 
 import trapx00.lightx00.client.bl.approvalbl.AuditBlController;
-import trapx00.lightx00.client.bl.approvalbl.mock.AuditBlControllerMock;
 
 public class AuditUiFactory {
-    private static AuditBlController controller = new AuditBlControllerMock();
+    private static AuditBlController controller = new AuditBlController();
 
     public static AuditBlController getController() {
         return controller;

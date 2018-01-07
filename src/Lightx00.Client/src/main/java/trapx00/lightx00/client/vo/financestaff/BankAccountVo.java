@@ -1,25 +1,41 @@
 package trapx00.lightx00.client.vo.financestaff;
 
+import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
+
 import java.util.Date;
 
 public class BankAccountVo {
-    private String id;
+    private int id;
     private String name;
     private double amount;
     private Date createTime;
 
-    public BankAccountVo(String id, String name, double amount, Date createTime) {
-        this.id = id;
+    public BankAccountVo(String name, double amount, Date createTime) {
         this.name = name;
         this.amount = amount;
         this.createTime = createTime;
     }
 
-    public String getId() {
+    public BankAccountVo(int id, String name, double amount, Date createTime) {
+        this(name, amount, createTime);
+        this.id = id;
+    }
+
+    public static BankAccountVo fromPo(BankAccountPo bankAccountPo) {
+        return new BankAccountVo(bankAccountPo.getId(), bankAccountPo.getName(), bankAccountPo.getAmount(), bankAccountPo.getCreateTime());
+    }
+
+    public BankAccountPo toPo() {
+        BankAccountPo bankAccountPo = new BankAccountPo(name, amount, createTime);
+        bankAccountPo.setId(id);
+        return bankAccountPo;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

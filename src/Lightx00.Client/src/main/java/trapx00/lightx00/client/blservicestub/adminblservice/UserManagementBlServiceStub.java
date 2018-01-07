@@ -1,9 +1,10 @@
 package trapx00.lightx00.client.blservicestub.adminblservice;
 
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.util.Date;
@@ -36,7 +37,7 @@ public class UserManagementBlServiceStub implements UserManagementBlService {
      */
     @Override
     public EmployeeVo[] query(UserAccountQueryVo query) {
-        return new EmployeeVo[]{ new FinanceStaffVo("张三","0001",new Date(),"10081")
+        return new EmployeeVo[]{ new FinanceStaffVo("10001","财务经理",new Date(),"123456", EmployeeState.Active,true)
         };
     }
 
@@ -48,5 +49,13 @@ public class UserManagementBlServiceStub implements UserManagementBlService {
     @Override
     public ResultMessage delete(EmployeeVo account) {
         return ResultMessage.Success;
+    }
+
+    /**
+     * New id for a new employee.
+     * @return new id
+     */
+    public String getId() {
+        return "";
     }
 }

@@ -1,6 +1,7 @@
 package trapx00.lightx00.shared.util;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -37,14 +38,27 @@ public class DateHelper {
     }
 
     /**
-     * Get formalized current date string with custom DATE_PATTERN.
+     * Get formalized current date string with custom dataPattern.
      * @return formalized current date string in custom date pattern
      */
-    public static String currentDateString(String DATE_PATTERN) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN).withZone(ZoneId.systemDefault());
+    public static String currentDateString(String dataPattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dataPattern).withZone(ZoneId.systemDefault());
         return formatter.format(Instant.ofEpochMilli(System.currentTimeMillis()));
     }
 
+    public static String currentDateStringForLog() {
+        return currentDateString("yyyy-MM-dd HH:mm:ss.SSS");
+    }
 
+    public static Date fromLocalDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 
+    public static LocalDate dateToLocalDate(Date date) {
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+
+        // atZone()方法返回在指定时区从此Instant生成的ZonedDateTime。
+        return instant.atZone(zoneId).toLocalDate();
+    }
 }

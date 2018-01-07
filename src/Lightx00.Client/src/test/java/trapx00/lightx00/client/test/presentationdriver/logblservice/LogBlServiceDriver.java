@@ -7,7 +7,7 @@ import trapx00.lightx00.client.blservicestub.logblservice.LogBlServiceStub;
 import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class LogBlServiceDriver {
     private LogBlService service = new LogBlServiceStub();

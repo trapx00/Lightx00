@@ -1,11 +1,11 @@
 package trapx00.lightx00.client.bl.financebl.mock;
 
 import trapx00.lightx00.client.bl.financebl.CashBillBlController;
+import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.queryvo.CashBillQueryVo;
-import trapx00.lightx00.client.vo.financestaff.CashBillVo;
 
 import java.util.Date;
 
@@ -84,7 +84,7 @@ public class CashBillBlControllerMock extends CashBillBlController {
     @Override
     public CashBillVo[] query(CashBillQueryVo query) {
         return new CashBillVo[] {
-            new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "","",new CashBillItem[0])
+            new CashBillVo("XJFYD-20171107-00001",new Date(), BillState.Rejected, "",1,new CashBillItem[0])
         };
     }
 

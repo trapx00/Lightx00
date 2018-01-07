@@ -12,25 +12,25 @@ import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NotificationDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     private Dao<NotificationPo, Integer> dao = NotificationDataDaoFactory.getDao();
-    private NotificationPo dumbPo = new NotificationPo(new java.util.Date(),"123","123", NotificationType.Others,"123");
+    private NotificationPo dumbPo = new NotificationPo(new java.util.Date(),"123",new String[]{"123","1234"}, NotificationType.Others,"123");
     private NotificationDataService service = NotificationDataFactory.getService();
     @Test
     public void query() throws Exception {
         dao.create(dumbPo);
         int id = dao.extractId(dumbPo);
         try {
-            assertEquals(1, service.query(new NotificationQueryVo(q->q.where().eq("senderId","123").prepare())).length);
+            assertEquals(1, service.query(new NotificationQueryVo().eq("senderId","123")).length);
             assertEquals(1, service.query(new NotificationQueryVo()).length);
         } finally {
             dao.deleteById(id);

@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 public class TotalPricePromotionDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,8 +87,8 @@ public class TotalPricePromotionDataControllerTest {
     public void query() throws Exception {
         try {
         dao.create(promotion);
-        Assert.assertEquals(1, service.queryPromotion(new TotalPricePromotionQueryVo(q->q.where().eq("id",promotion.getId()).prepare())).length);
-        Assert.assertEquals(0, service.queryPromotion(new TotalPricePromotionQueryVo(q->q.where().eq("id","12").prepare())).length);
+        Assert.assertEquals(1, service.queryPromotion(new TotalPricePromotionQueryVo().eq("id",promotion.getId())).length);
+        Assert.assertEquals(0, service.queryPromotion(new TotalPricePromotionQueryVo().eq("id","12")).length);
         } finally {
             dao.deleteById(promotion.getId());
         }

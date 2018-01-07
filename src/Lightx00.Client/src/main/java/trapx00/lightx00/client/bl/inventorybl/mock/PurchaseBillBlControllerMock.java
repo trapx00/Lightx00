@@ -5,8 +5,6 @@ import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
 
-import java.util.Date;
-
 public class PurchaseBillBlControllerMock extends PurchaseBillBlController {
 
     /**

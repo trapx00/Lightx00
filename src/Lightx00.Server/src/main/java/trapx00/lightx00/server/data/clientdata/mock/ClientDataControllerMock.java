@@ -3,6 +3,7 @@ package trapx00.lightx00.server.data.clientdata.mock;
 import trapx00.lightx00.server.data.clientdata.ClientDataController;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
 
 import java.rmi.RemoteException;
@@ -27,7 +28,8 @@ public class ClientDataControllerMock extends ClientDataController {
                 "12345679@qq.com",
                 123,
                 456,
-                "0");
+                "0",
+             ClientState.Real);
         return clientPos;
     }
 

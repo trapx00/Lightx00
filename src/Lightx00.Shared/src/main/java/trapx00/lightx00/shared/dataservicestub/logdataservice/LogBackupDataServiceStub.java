@@ -2,9 +2,8 @@ package trapx00.lightx00.shared.dataservicestub.logdataservice;
 
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 
 public class LogBackupDataServiceStub implements LogBackupDataService {
@@ -24,13 +23,7 @@ public class LogBackupDataServiceStub implements LogBackupDataService {
      * @return the temp uri of the log resources
      */
     @Override
-    public URI fetchCloudLog() throws RemoteException {
-        URI uri = null;
-        try {
-            uri = new URI("www.123.com");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return uri;
+    public LogBackupVo[] fetchCloudLog() throws RemoteException {
+        return null;
     }
 }

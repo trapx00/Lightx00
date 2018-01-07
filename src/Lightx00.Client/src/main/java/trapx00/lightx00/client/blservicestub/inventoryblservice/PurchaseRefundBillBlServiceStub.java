@@ -1,8 +1,9 @@
 package trapx00.lightx00.client.blservicestub.inventoryblservice;
 
 import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBlService;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
 
 public class PurchaseRefundBillBlServiceStub implements PurchaseRefundBillBlService {
     @Override
@@ -32,7 +33,8 @@ public class PurchaseRefundBillBlServiceStub implements PurchaseRefundBillBlServ
      * @return array of PurchaseRefundBillVo
      */
     @Override
-    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillVo query) {
+    public PurchaseRefundBillVo[] queryPurchaseRefundBillVo(PurchaseRefundBillQueryVo query) {
         return new PurchaseRefundBillVo[0];
     }
+
 }

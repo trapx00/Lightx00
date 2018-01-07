@@ -8,7 +8,7 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommodityDataServiceDriver {
     CommodityDataService service=new CommodityDataServiceStub();
@@ -25,7 +25,7 @@ public class CommodityDataServiceDriver {
 
     @Test
     public void query() throws Exception {
-        CommodityPo commodityPo=new CommodityPo("C0001","Led","Led",34,new Date(),"1","2",34,34,34,34,34);
+        CommodityPo commodityPo=new CommodityPo("C0001","Led","Led",34,new Date(),"1","2",34,34,34,34,34,0);
         assertEquals("C0001",commodityPo.getId());
     }
 

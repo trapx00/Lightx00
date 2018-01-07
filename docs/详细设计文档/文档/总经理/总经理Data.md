@@ -2,7 +2,7 @@
 
 #### 2.3.12.1 概述
 
-promtiondata包负责总经理制定促销策略（包括组合商品降价、满额促销策略（赠送商品或者代金券）、客户促销策略（赠送礼品或者代金券或者价格这让））用例的数据操作。具体功能需求和非功能需求可参见需求规格说明文档和体系结构设计文档。
+promtiondata包负责总经理制定促销策略（包括组合商品降价、满额促销策略（赠送商品或者代金券）、客户促销策略（赠送礼品或者代金券或者价格这让））用例的数据操作，以及代金券管理的数据操作。具体功能需求和非功能需求可参见需求规格说明文档和体系结构设计文档。
 
 #### 2.3.12.2 整体结构
 
@@ -14,13 +14,16 @@ promtiondata包负责总经理制定促销策略（包括组合商品降价、�
 
 ![promotiondata](../../img/设计图/promotiondata.png)
 
+![promotiondata](../../img/设计图/promotiondata.coupondata.png)
+
 ##### 2.3.12.3.2 各个类的职责
 
-| 类名                                | 职责                                 |
-| --------------------------------- | ---------------------------------- |
-| ComSalePromotionDataController    | 负责管理填写组合商品降价促销策略的数据操作。             |
-| TotalPricePromotionDataController | 负责管理填写满额促销策略（赠送礼品或者代金券）的数据操作。      |
-| ClientPromotionDataController     | 负责管理填写客户促销策略（赠送礼品或者代金券或价格折让）的数据操作。 |
+| 类名                                       | 职责                                 |
+| ---------------------------------------- | ---------------------------------- |
+| ComSalePromotionDataController           | 负责管理填写组合商品降价促销策略的数据操作。             |
+| TotalPricePromotionDataController        | 负责管理填写满额促销策略（赠送礼品或者代金券）的数据操作。      |
+| ClientPromotionDataController            | 负责管理填写客户促销策略（赠送礼品或者代金券或价格折让）的数据操作。 |
+| promotiondata.coupondata.CouponDataController | 负责管理代金券使用和发放的数据操作。                 |
 
 ##### 2.3.12.3.3 内部类的接口规范
 
@@ -54,6 +57,17 @@ promtiondata包负责总经理制定促销策略（包括组合商品降价、�
 | ClientPromotionDataService.queryPromotion | `public ClientPromotionPo[] queryPromotion(ClientPromotionQueryVO query);` | 输入有效，其中值为null的字段表示无限制。   | 返回符合筛选条件的Promotion对象数组。 |
 | ClientPromotionDataService.delete        | `public ResultMessage delete(String id);` | 无。                       | 系统修改促销策略状态，更新并保存持久化信息。  |
 | ClientPromotionDataService.getId         | `public String getId();`                 | 无。                       | 返回当前促销策略对象的ID。          |
+
+**CouponDataController**
+
+提供的接口
+
+| 接口名称                                     | 语法                                       | 前置条件      | 后置条件              |
+| ---------------------------------------- | ---------------------------------------- | --------- | ----------------- |
+| promotiondataservice.coupondataserviec.CouponDataService.add | `public ResultMessage add(CouponPo coupon);` | 输入代金券有效。  | 持久化相关对象数据，返回保存结果。 |
+| promotiondataservice.coupondataservice.CouponDataService.query | `public CouponPo[] query(CouponQueryVo query);` | 输入查询条件有效。 | 返回查询结果。           |
+
+
 
 ### 2.3.13 approvaldata包
 

@@ -1,16 +1,15 @@
 package trapx00.lightx00.shared.dataservice.inventorydataservice;
 
+import trapx00.lightx00.shared.dataservice.CommonBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.inventorystaff.InventoryBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 
-public interface InventoryWarningDataService extends Remote {
+public interface InventoryWarningDataService extends CommonBillDataService<InventoryDetailBillPo, InventoryBillQueryVo> {
 
     /**
      *  Modifys the warning value of the commoditybl

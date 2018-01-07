@@ -1,10 +1,9 @@
 package trapx00.lightx00.client.blservice.inventoryblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
-
-import javax.xml.crypto.Data;
-import java.util.Date;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
 public interface InventoryGiftBlService {
     /**
@@ -21,12 +20,17 @@ public interface InventoryGiftBlService {
     String getId();
 
     /**
-     * Gets the giftBill during the time
-     * @param time
-     * @return the giftBill
+     * Saves the current bil
+     * @param bill
+     * @return  whether the operation is done successfully
      */
-    InventoryGiftVo getGift(Date time);
+    ResultMessage saveAsDraft(InventoryGiftVo bill);//保存草稿
+
+    CommodityItem[] getPromotionCommodity(String id);
+
+    InventoryGiftVo[] query(InventoryGiftQueryVo inventoryBillQueryVo);
 
 
 
 }
+

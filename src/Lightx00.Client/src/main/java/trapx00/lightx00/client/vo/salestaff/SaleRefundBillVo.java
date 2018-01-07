@@ -4,48 +4,56 @@ import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
+import trapx00.lightx00.client.bl.salebl.factory.SaleRefundBillBlFactory;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
+import trapx00.lightx00.client.presentation.saleui.SaleRefundBillDetailUiController;
+import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
-import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.salestaff.SaleBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleRefundBillVo extends SaleBillBaseVo {
-    String supplier;
-    EmployeeVo defaultOperator;
-    SaleStaffVo operator;
-    int repository;
-    CommodityItem[] commodityList;
-    double originTotal;
-    double minusProfits;
-    double token;
-    double ultiTotal;
-    String comment;
+    private String clientId;
+    private String salesmanId;
+    private int repository;
+    private CommodityItem[] commodityList;
+    private double originTotal;
+    private double minusProfits;
+    private double token;
+    private double ultiTotal;
+    private String comment;
 
-    public String getSupplier() {
-        return supplier;
+    public SaleRefundBillVo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
+        super(id, date, state, SaleBillType.SaleRefund, operatorId);
+        this.clientId = clientId;
+        this.salesmanId = salesmanId;
+        this.repository = repository;
+        this.commodityList = commodityList;
+        this.originTotal = originTotal;
+        this.minusProfits = minusProfits;
+        this.token = token;
+        this.ultiTotal = ultiTotal;
+        this.comment = comment;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public String getClientId() {
+        return clientId;
     }
 
-    public EmployeeVo getDefaultOperator() {
-        return defaultOperator;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public void setDefaultOperator(EmployeeVo defaultOperator) {
-        this.defaultOperator = defaultOperator;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public SaleStaffVo getOperator() {
-        return operator;
-    }
-
-    public void setOperator(SaleStaffVo operator) {
-        this.operator = operator;
+    public void setSalesmanId(String salesmanId) {
+        this.salesmanId = salesmanId;
     }
 
     public int getRepository() {
@@ -104,20 +112,6 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
         this.comment = comment;
     }
 
-    public SaleRefundBillVo(String id, Date date, BillState state, String supplier, EmployeeVo defaultOperator, SaleStaffVo operator, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.SaleRefund);
-        this.supplier = supplier;
-        this.defaultOperator = defaultOperator;
-        this.operator = operator;
-        this.repository = repository;
-        this.commodityList = commodityList;
-        this.originTotal = originTotal;
-        this.minusProfits = minusProfits;
-        this.token = token;
-        this.ultiTotal = ultiTotal;
-        this.comment = comment;
-    }
-
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
      *
@@ -125,7 +119,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return SaleRefundBillBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -135,7 +129,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return SaleRefundBillBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -145,17 +139,7 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public BillApprovalCompleteService billApprovalCompleteService() {
-        return null;
-    }
-
-    /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
+        return SaleRefundBillBlFactory.getBillApprovalCompleteService();
     }
 
     /**
@@ -165,16 +149,31 @@ public class SaleRefundBillVo extends SaleBillBaseVo {
      */
     @Override
     public DraftDeleteService deleteService() {
-        return null;
+        return SaleRefundBillBlFactory.getDraftDeleteService();
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
-        return null;
+    public DraftContinueWritableUiController continueWritableUi() {
+        return new SaleRefundBillUiController();
+    }
+
+    @Override
+    public BillDetailUi billDetailUi() {
+        return new SaleRefundBillDetailUiController();
+    }
+
+    /**
+     * When it is called, it returns a ReversibleUi which can be used to acquire the ui component and controller.
+     *
+     * @return reversible ui service.
+     */
+    @Override
+    public ReversibleUi reversibleUi() {
+        return new SaleRefundBillUiController();
     }
 }

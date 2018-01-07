@@ -2,10 +2,19 @@ package trapx00.lightx00.client.presentation.clientui;
 
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 
+import java.util.function.Consumer;
+
 public interface ClientInfoUi {
     /**
-     * get the ui of select client
-     * @return the selected clientVo
+     * show the select client dialog
+     * @param callback call back function
      */
-    public ClientVo showClientSelectDialog();
+    void showClientSelectDialog(Consumer<ClientVo> callback);
+
+    /**
+     * query the whole clientvo by id
+     * @param id
+     * @return the whole clientvo
+     */
+    ClientVo queryById(String id);
 }

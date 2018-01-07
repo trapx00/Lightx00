@@ -16,7 +16,7 @@ public class InventoryGiftBlServiceDriver {
     Date date=new Date();
     PromotionCommodity pCommodity=new PromotionCommodity();
     PromotionCommodity[] input={null};
-    InventoryGiftVo gifts=new InventoryGiftVo("G0001",date,null,input);
+    InventoryGiftVo gifts=new InventoryGiftVo("G0001",date,null,input,null);
 
     @Test
     public void sumbit() throws Exception {
@@ -27,10 +27,10 @@ public class InventoryGiftBlServiceDriver {
     public void  getId() throws Exception {
         assertEquals("123",service.getId());
     }
-
-    @Test
-    public void getGift() throws Exception {
-        assertEquals(null,service.getGift(date));
-    }
+//
+//    @Test
+//    public void getGift() throws Exception {
+//        assertEquals(null,service.getGift(date));
+//    }
 
 }

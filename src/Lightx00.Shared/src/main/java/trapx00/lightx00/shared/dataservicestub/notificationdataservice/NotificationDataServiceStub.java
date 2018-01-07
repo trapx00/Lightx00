@@ -1,11 +1,12 @@
 package trapx00.lightx00.shared.dataservicestub.notificationdataservice;
 
-import java.util.Date;
 import trapx00.lightx00.shared.dataservice.notificationdataservice.NotificationDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.notification.NotificationPo;
 import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.NotificationQueryVo;
+
+import java.util.Date;
 
 public class NotificationDataServiceStub implements NotificationDataService {
 
@@ -19,8 +20,8 @@ public class NotificationDataServiceStub implements NotificationDataService {
     @Override
     public NotificationPo[] query(NotificationQueryVo query) {
         return new NotificationPo[] {
-                new NotificationPo(new Date(), "","", NotificationType.BillApproval,"FXD-20171122-00001"),
-                new NotificationPo(new Date(), "","",NotificationType.Others,"hahaha")
+                new NotificationPo(new Date(), "",new String[] {""}, NotificationType.BillApproval,"FXD-20171122-00001"),
+                new NotificationPo(new Date(), "",new String[] {""},NotificationType.Others,"hahaha")
         };
     }
 

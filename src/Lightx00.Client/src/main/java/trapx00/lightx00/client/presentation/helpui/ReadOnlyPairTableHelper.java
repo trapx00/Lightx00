@@ -5,14 +5,13 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
+
 import java.util.Map;
 
-
-
+@SuppressWarnings("unchecked")
 public class ReadOnlyPairTableHelper {
     private JFXTreeTableView<Pair> table = new JFXTreeTableView<>();
     private ObservableList<Pair> contentList = FXCollections.observableArrayList();
@@ -51,7 +50,6 @@ public class ReadOnlyPairTableHelper {
         keyColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().key));
         valueColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().value));
     }
-
 
 
     public JFXTreeTableView create() {

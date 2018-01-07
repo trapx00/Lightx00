@@ -1,23 +1,30 @@
 package trapx00.lightx00.shared.queryvo;
 
-import trapx00.lightx00.shared.po.financestaff.FinanceBillPo;
+import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 
-import java.util.function.Predicate;
+import java.util.HashMap;
 
-public class FinanceBillQueryVo extends BaseQueryVo<FinanceBillPo, String> {
-    /**
-     * Instantiate a QueryVo with prepration method.
-     *
-     * @param preparation QueryBuilderPreparation method
-     */
-    public FinanceBillQueryVo(QueryBuilderPreparation<FinanceBillPo, String> preparation) {
-        super(preparation);
+@SuppressWarnings("unchecked")
+public class FinanceBillQueryVo {
+    private HashMap<FinanceBillType, SpecificFinanceBillQueryVo> hashMap = new HashMap<>();
+
+    public FinanceBillQueryVo addQueryVoForSomeTypes(SpecificFinanceBillQueryVo specificFinanceBillQueryVo, FinanceBillType... types) {
+        for (FinanceBillType type: types) {
+            hashMap.put(type, specificFinanceBillQueryVo);
+        }
+
+        return this;
     }
 
-    /**
-     * Instantiate a QueryVo with a method which returns all rows.
-     */
-    public FinanceBillQueryVo() {
-        super();
+    public FinanceBillQueryVo addQueryVOForAllType(SpecificFinanceBillQueryVo specificFinanceBillQueryVo) {
+        return addQueryVoForSomeTypes(specificFinanceBillQueryVo, FinanceBillType.values());
+    }
+
+    public <T extends SpecificFinanceBillQueryVo> T getSpecificFinanceBillQueryVo(FinanceBillType type) {
+        return (T) hashMap.get(type);
+    }
+
+    public HashMap<FinanceBillType, SpecificFinanceBillQueryVo> getHashMap() {
+        return hashMap;
     }
 }

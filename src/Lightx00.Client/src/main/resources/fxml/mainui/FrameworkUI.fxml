@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.materialicons.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <StackPane fx:id="dialogContainer" prefHeight="604" prefWidth="804" styleClass="exteriorLine" stylesheets="@../helpui/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.mainui.FrameworkUiController">
     <AnchorPane style="-fx-background-image: url(../../img/1.jpg); -fx-background-repeat: no-repeat;">
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
@@ -39,27 +31,20 @@
                             </ImageView>
                         </graphic>
                     </Label>
-                    
-
-                    <JFXButton onAction="#onTradeSituationClicked" prefHeight="60" prefWidth="200" text="查看经营情况表" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
-                    <JFXButton prefHeight="60" prefWidth="200" text="功能2" textFill="#000000" />
                     <Separator prefHeight="5" prefWidth="200" />
                 </VBox>
                 <VBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
-                    <JFXButton onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
+                    <JFXButton fx:id="btnNotification" onAction="#onNotificationFunctionButtonClicked" prefHeight="60" prefWidth="200" text="通知" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="MESSAGE" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
+                    <JFXButton fx:id="btnDraft" onAction="#onDraftFunctionButtonClicked" prefHeight="60" prefWidth="200" text="草稿箱" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="CLASS" glyphSize="20" />
                         </graphic>
                     </JFXButton>
-                    <JFXButton prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
+                    <JFXButton onAction="#onBtnAboutClicked" prefHeight="60" prefWidth="200" text="关于系统" textFill="#000000">
                         <graphic>
                             <MaterialIconView glyphName="SENTIMENT_VERY_SATISFIED" glyphSize="20" />
                         </graphic>

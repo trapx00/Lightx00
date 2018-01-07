@@ -1,11 +1,14 @@
 package trapx00.lightx00.client.presentation.financeui;
 
-import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
+import trapx00.lightx00.client.vo.BillVo;
+import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
 
@@ -14,16 +17,24 @@ import java.util.Date;
 public class BillTableItemModel extends RecursiveTreeObject<BillTableItemModel> {
     private ObjectProperty<Date> date;
     private StringProperty id;
-    private StringProperty operator;
+    private ObjectProperty<EmployeeVo> operator;
     private ObjectProperty<BillType> type;
     private ObjectProperty<BillState> state;
+    private ObjectProperty<BillVo> bill;
 
-    public BillTableItemModel(Date date, String id, String operator, BillType type, BillState state) {
+    public BillTableItemModel(Date date, String id, String operator, BillType type, BillState state, BillVo bill) {
+        EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
         this.date = new SimpleObjectProperty<>(date);
         this.id = new SimpleStringProperty(id);
-        this.operator = new SimpleStringProperty(operator);
+        this.operator = new SimpleObjectProperty<>(employeeSelection.queryId(operator));
         this.type = new SimpleObjectProperty<>(type);
         this.state = new SimpleObjectProperty<>(state);
+        this.bill = new SimpleObjectProperty<>(bill);
+    }
+
+    public BillTableItemModel(BillVo bill) {
+        this(bill.getDate(),
+            bill.getId(), bill.getOperatorId(), bill.getBillType(), bill.getState(), bill);
     }
 
     public Date getDate() {
@@ -50,15 +61,15 @@ public class BillTableItemModel extends RecursiveTreeObject<BillTableItemModel> 
         this.id.set(id);
     }
 
-    public String getOperator() {
+    public EmployeeVo getOperator() {
         return operator.get();
     }
 
-    public StringProperty operatorProperty() {
+    public ObjectProperty<EmployeeVo> operatorProperty() {
         return operator;
     }
 
-    public void setOperator(String operator) {
+    public void setOperator(EmployeeVo operator) {
         this.operator.set(operator);
     }
 
@@ -84,5 +95,17 @@ public class BillTableItemModel extends RecursiveTreeObject<BillTableItemModel> 
 
     public void setState(BillState state) {
         this.state.set(state);
+    }
+
+    public BillVo getBill() {
+        return bill.get();
+    }
+
+    public ObjectProperty<BillVo> billProperty() {
+        return bill;
+    }
+
+    public void setBill(BillVo bill) {
+        this.bill.set(bill);
     }
 }

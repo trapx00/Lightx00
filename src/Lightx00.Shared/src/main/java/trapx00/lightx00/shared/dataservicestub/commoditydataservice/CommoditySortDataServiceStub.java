@@ -11,7 +11,7 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
     String lowNextIds[]={""};
 
     @Override
-    public ResultMessage add(CommoditySortPo newCSort, CommoditySortPo parentSort) {
+    public ResultMessage add(CommoditySortPo newCSort) {
         return ResultMessage.Success;
     }
 
@@ -22,10 +22,7 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
 
     @Override
     public CommoditySortPo[] query(CommoditySortQueryVo commoditySortQueryVo) {
-        return new CommoditySortPo[]{
-                new CommoditySortPo("S0001","Led", null,
-                "")
-        };
+        return null;
     }
 
     @Override
@@ -35,18 +32,21 @@ public class CommoditySortDataServiceStub implements CommoditySortDataService {
 
     @Override
     public CommoditySortPo[] display() {
-        return new CommoditySortPo[]{
-                new CommoditySortPo("S0001","Led", null,
-                        "")
-        };
+        CommoditySortPo commoditySortPo= new CommoditySortPo("PRO-0002","DgLed",0,"PRO-0001",null);
+        CommoditySortPo  commoditySortPo1=new CommoditySortPo("PRO-0001","Led",0,null,null);
+        CommoditySortPo[]result={commoditySortPo,commoditySortPo1};
+        return result;
+
     }
 
     @Override
     public CommoditySortPo[] dispaly(CommoditySortPo commoditySort) {
-        return new CommoditySortPo[]{
-                new CommoditySortPo(commoditySort.getId(),commoditySort.getName(), null,
-                        "")
-        };
+        return null;
+    }
+
+    @Override
+    public String getId() {
+        return null;
     }
 
 

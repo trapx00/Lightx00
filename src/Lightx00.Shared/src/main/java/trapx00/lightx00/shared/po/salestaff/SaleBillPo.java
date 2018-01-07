@@ -10,11 +10,9 @@ import java.util.Date;
 @DatabaseTable(tableName = "SaleBill")
 public class SaleBillPo extends SaleBillBasePo {
     @DatabaseField
-    private String supplier;
+    String salesmanId;
     @DatabaseField
-    private String defaultOperatorId;
-    @DatabaseField
-    private String operatorId;
+    private String clientId;
     @DatabaseField
     private int repository;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -29,12 +27,22 @@ public class SaleBillPo extends SaleBillBasePo {
     private double ultiTotal;
     @DatabaseField
     private String comment;
+    @DatabaseField
+    private int clientLevel;
+    @DatabaseField
+    private String promotionId;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private CommodityItem[] giftList;
+    @DatabaseField
+    private double giftToken;
 
-    public SaleBillPo(String id, Date date, BillState state, String supplier, String defaultOperatorId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment) {
-        super(id, date, state, SaleBillType.Sale);
-        this.supplier = supplier;
-        this.defaultOperatorId = defaultOperatorId;
-        this.operatorId = operatorId;
+    public SaleBillPo() {
+    }
+
+    public SaleBillPo(String id, Date date, BillState state, String clientId, String salesmanId, String operatorId, int repository, CommodityItem[] commodityList, double originTotal, double minusProfits, double token, double ultiTotal, String comment, int clientLevel, String promotionId, CommodityItem[] giftList, double giftToken) {
+        super(id, date, state, SaleBillType.Sale, operatorId);
+        this.clientId = clientId;
+        this.salesmanId = salesmanId;
         this.repository = repository;
         this.commodityList = commodityList;
         this.originTotal = originTotal;
@@ -42,32 +50,26 @@ public class SaleBillPo extends SaleBillBasePo {
         this.token = token;
         this.ultiTotal = ultiTotal;
         this.comment = comment;
+        this.clientLevel = clientLevel;
+        this.promotionId = promotionId;
+        this.giftList = giftList;
+        this.giftToken = giftToken;
     }
 
-    public SaleBillPo() {}
-
-    public String getSupplier() {
-        return supplier;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public String getDefaultOperatorId() {
-        return defaultOperatorId;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public void setDefaultOperatorId(String defaultOperatorId) {
-        this.defaultOperatorId = defaultOperatorId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
+    public void setSalesmanId(String defaultOperatorId) {
+        this.salesmanId = defaultOperatorId;
     }
 
     public int getRepository() {
@@ -124,5 +126,37 @@ public class SaleBillPo extends SaleBillBasePo {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public CommodityItem[] getGiftList() {
+        return giftList;
+    }
+
+    public void setGiftList(CommodityItem[] giftList) {
+        this.giftList = giftList;
+    }
+
+    public double getGiftToken() {
+        return giftToken;
+    }
+
+    public void setGiftToken(double giftToken) {
+        this.giftToken = giftToken;
     }
 }

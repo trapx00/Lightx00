@@ -80,11 +80,9 @@ public class CommonBillDataController<Po extends BillPo> {
         try {
             Po po = dao.queryForId(bill.getId());
             if (po != null && po.getState().equals(BillState.Draft)) {
-                dao.update(bill);
+                dao.deleteById(po.getId());
                 logService.printLog(delegate,String.format("updated a draft %s (id: %s). New content: %s", bill.getState().toString(), bill.getId(), bill.toString()));
-                return ResultMessage.Success;
-            }
-            if (po != null) {
+            } else if (po != null) {
                 throw new IdExistsException(bill.getId());
             }
             dao.create(bill);
@@ -165,7 +163,7 @@ public class CommonBillDataController<Po extends BillPo> {
     @SuppressWarnings("unchecked")
     public <Q extends BaseQueryVo> List<Po> query(Q query) {
         try {
-            List<Po> results = (List<Po>) dao.query(query.prepareQuery(dao));
+            List<Po> results = dao.query(query.prepareQuery(dao));
             logService.printLog(delegate, String.format("queried bills and got %d results.", results.size()));
             return results;
         } catch (SQLException e) {

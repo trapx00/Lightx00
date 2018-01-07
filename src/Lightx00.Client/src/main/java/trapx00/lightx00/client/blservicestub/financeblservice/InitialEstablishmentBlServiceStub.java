@@ -1,9 +1,9 @@
 package trapx00.lightx00.client.blservicestub.financeblservice;
 
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
+import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ public class InitialEstablishmentBlServiceStub implements InitialEstablishmentBl
     @Override
     public SystemSnapshotVo autofill() {
         SystemSnapshotVo vo = new SystemSnapshotVo("123",new Date(),
-                BillState.Draft, null, null, null);
+                BillState.Draft, null, null, null, "123");
         return vo;
     }
 

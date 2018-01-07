@@ -1,8 +1,7 @@
 package trapx00.lightx00.client.blservice.logblservice;
 
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 import trapx00.lightx00.shared.po.ResultMessage;
-
-import java.net.URI;
 
 public interface LogBackupBlService {
     /**
@@ -17,5 +16,5 @@ public interface LogBackupBlService {
      *
      * @return the temp uri of the log resources
      */
-    URI fetchCloudLog();
+    LogBackupVo[] fetchCloudLog();
 }

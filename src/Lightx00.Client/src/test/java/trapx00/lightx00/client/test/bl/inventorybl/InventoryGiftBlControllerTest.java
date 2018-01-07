@@ -18,7 +18,7 @@ public class InventoryGiftBlControllerTest {
     Date date=new Date();
     PromotionCommodity pCommodity=new PromotionCommodity();
     PromotionCommodity[] input={null};
-    InventoryGiftVo gifts=new InventoryGiftVo("G0001",date,null,input);
+    InventoryGiftVo gifts=new InventoryGiftVo("G0001",date,null,input,null);
     @Test
     public void sumbit() throws Exception {
         assertEquals(ResultMessage.Success,service.sumbit(gifts));
@@ -27,11 +27,6 @@ public class InventoryGiftBlControllerTest {
     @Test
     public void getId() throws Exception {
         assertEquals("123",service.getId());
-    }
-
-    @Test
-    public void getGift() throws Exception {
-        assertEquals(null,service.getGift(date));
     }
 
    @Test

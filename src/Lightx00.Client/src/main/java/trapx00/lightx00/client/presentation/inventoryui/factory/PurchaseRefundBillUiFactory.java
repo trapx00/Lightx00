@@ -4,7 +4,7 @@ import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiCont
 import trapx00.lightx00.client.presentation.inventoryui.mock.PurchaseRefundBillUiControllerMock;
 
 public class PurchaseRefundBillUiFactory {
-    private static PurchaseRefundBillUiController purchaseRefundBillUiController=new PurchaseRefundBillUiControllerMock();
+    private static PurchaseRefundBillUiController purchaseRefundBillUiController = new PurchaseRefundBillUiControllerMock();
 
     public static PurchaseRefundBillUiController getPurchaseRefundBillUiController() {
         return purchaseRefundBillUiController;

@@ -2,40 +2,48 @@ package trapx00.lightx00.client.vo;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
-import trapx00.lightx00.client.bl.financebl.factory.BillDraftQueryServiceFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
-import trapx00.lightx00.client.vo.draft.DraftableQueryServiceRegistry;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
+import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.bill.BillType;
-import trapx00.lightx00.shared.po.draft.DraftType;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 
-public abstract class BillVo implements Draftable {
-    static {
-        DraftableQueryServiceRegistry.register(DraftType.Bill, BillDraftQueryServiceFactory.getQueryService());
+public abstract class BillVo implements Draftable, Serializable {
+
+    protected BillType billType;
+    protected String id;
+    protected Date date;
+    protected BillState state;
+    protected String operatorId;
+
+    public String getOperatorId() {
+        return operatorId;
     }
 
-    private BillType billType;
-    private String id;
-    private Date date;
-    private BillState state;
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
 
-    public BillVo(BillType billType, String id, Date date, BillState state) {
+    public BillVo(BillType billType, String id, Date date, BillState state, String operatorId) {
         this.billType = billType;
         this.id = id;
         this.date = date;
         this.state = state;
+        this.operatorId = operatorId;
     }
 
-    public BillType getBill() {
+
+
+    public BillType getBillType() {
         return billType;
     }
 
-    public void setBill(BillType bill) {
+    public void setBillType(BillType bill) {
         this.billType = bill;
     }
 
@@ -83,14 +91,6 @@ public abstract class BillVo implements Draftable {
     public abstract BillApprovalCompleteService billApprovalCompleteService();
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public abstract HashMap<String, String> properties();
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService
@@ -99,12 +99,22 @@ public abstract class BillVo implements Draftable {
     public abstract DraftDeleteService deleteService();
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public abstract ContinueWritable continueWriteService();
+    public abstract DraftContinueWritableUiController continueWritableUi();
 
+    public abstract BillDetailUi billDetailUi();
 
+    /**
+     * 显示详细信息UI
+     *
+     * @return 显示详细信息UI
+     */
+    @Override
+    public ContentDisplayUi contentDisplayUi() {
+        return billDetailUi();
+    }
 }

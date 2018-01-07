@@ -1,13 +1,14 @@
 package trapx00.lightx00.client.presentation.adminui.factory;
 
-import trapx00.lightx00.client.presentation.adminui.UserAccountInfoUi;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelectionUi;
 import trapx00.lightx00.client.presentation.adminui.UserManagementUiController;
-import trapx00.lightx00.client.presentation.adminui.mock.UserManagementUiControllerMock;
 
 public class UserManagementUiFactory {
-    private static UserManagementUiController controller = new UserManagementUiControllerMock();
+    private static UserManagementUiController controller = new UserManagementUiController();
 
-    public static UserAccountInfoUi getController() {
-        return controller;
+    public static EmployeeSelection getEmployeeSelectionUi() {
+        return new EmployeeSelectionUi();
     }
+
 }

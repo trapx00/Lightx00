@@ -1,8 +1,7 @@
 package trapx00.lightx00.client.blservice.notificationblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.notification.billapproval.BillApprovalNotificationVo;
 import trapx00.lightx00.client.vo.notification.NotificationVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
 public interface NotificationBlService {
     /**
@@ -23,6 +22,6 @@ public interface NotificationBlService {
      * @param notification notification with a bill
      * @return whether the operation is done successfully
      */
-    ResultMessage abandon(BillApprovalNotificationVo notification);
+    ResultMessage abandon(NotificationVo notification);
 
 }

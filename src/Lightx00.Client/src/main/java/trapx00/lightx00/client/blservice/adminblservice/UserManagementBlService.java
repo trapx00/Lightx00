@@ -1,7 +1,7 @@
 package trapx00.lightx00.client.blservice.adminblservice;
 
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.EmployeeVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 public interface UserManagementBlService {
@@ -25,10 +25,17 @@ public interface UserManagementBlService {
      * @return array of EmployeeVo which match the conditions
      */
     EmployeeVo[] query(UserAccountQueryVo query);
+
     /**
      * Delete an needless user account.
      * @param account the user account to be deleted
      * @return whether the operation is done successfully
      */
     ResultMessage delete(EmployeeVo account);
+
+    /**
+     * New id for a new employee.
+     * @return new id
+     */
+    String getId();
 }

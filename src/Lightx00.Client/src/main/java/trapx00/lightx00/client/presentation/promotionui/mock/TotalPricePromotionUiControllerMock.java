@@ -1,16 +1,16 @@
 package trapx00.lightx00.client.presentation.promotionui.mock;
 
-import trapx00.lightx00.client.presentation.helpui.FillBillUiController;
-import trapx00.lightx00.client.presentation.promotionui.TotalPricePromotionUiController;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.promotionui.detail.TotalPricePromotionUiController;
 import trapx00.lightx00.client.vo.Draftable;
 
 public class TotalPricePromotionUiControllerMock extends TotalPricePromotionUiController {
     /**
-     * Start continuing write a draft. Returns a FillBillUiController. It can be used to set the stage without casting to specific ui controller.
+     * Start continuing write a draft. Returns a ExternalLoadableUiController. It can be used to set the stage without casting to specific ui controller.
      * Overrides to return a specific ui controller.
      * @param draft draft
-     * @return a FillBillUiController
+     * @return a ExternalLoadableUiController
      */
     @Override
-    public FillBillUiController continueWriting(Draftable draft) { return this; }
+    public ExternalLoadedUiPackage continueWriting(Draftable draft) { return null; }
 }

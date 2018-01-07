@@ -68,6 +68,6 @@ public class TotalPricePromotionDataController extends UnicastRemoteObject imple
      * @return id for the next promotion
      */
     public String getId() {
-        return promotionDataController.getId("ZJCXCL");
+        return promotionDataController.getId("MECXCL");
     }
 }

@@ -2,11 +2,12 @@ package trapx00.lightx00.client.blservicestub.saleblservice;
 
 import trapx00.lightx00.client.blservice.saleblservice.SaleBillBlService;
 import trapx00.lightx00.client.datafactory.saledataservicefactory.SaleBillDataServiceFactory;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
-import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 
 import java.rmi.RemoteException;
 
@@ -60,5 +61,16 @@ public class SaleBillBlServiceStub implements SaleBillBlService {
     @Override
     public SaleBillVo[] querySaleBill(SaleBillQueryVo query) {
         return new SaleBillVo[0];
+    }
+
+    /**
+     * query for sale promotion
+     *
+     * @param saleBillVo current sale bill
+     * @return promotions
+     */
+    @Override
+    public PromotionVoBase[] queryPromotion(SaleBillVo saleBillVo) {
+        return new PromotionVoBase[0];
     }
 }

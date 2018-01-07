@@ -1,10 +1,10 @@
 package trapx00.lightx00.shared.po.financestaff;
 
-import java.util.Arrays;
-import java.util.Date;
-
 import com.j256.ormlite.table.DatabaseTable;
 import trapx00.lightx00.shared.po.bill.BillState;
+
+import java.util.Arrays;
+import java.util.Date;
 
 @DatabaseTable(tableName = "ReceivalBill")
 public class  ReceivalBillPo extends ReceivalPaymentBillPoBase {
@@ -20,7 +20,6 @@ public class  ReceivalBillPo extends ReceivalPaymentBillPoBase {
     public String toString() {
         return "ReceivalBillPo{" +
             "clientId='" + clientId + '\'' +
-            ", operatorId='" + operatorId + '\'' +
             ", transcations=" + Arrays.toString(transcations) +
             ", total=" + total +
             "} " + super.toString();

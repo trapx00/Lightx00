@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.financedata.mock;
 
 import trapx00.lightx00.server.data.financedata.PaymentBillDataController;
-import trapx00.lightx00.shared.dataservicestub.financedataservice.PaymentBillDataServiceStub;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
@@ -70,7 +69,7 @@ public class PaymentBillDataControllerMock extends PaymentBillDataController {
     @Override
     public PaymentBillPo[] query(PaymentBillQueryVo query) {
         return new PaymentBillPo[]{
-                new PaymentBillPo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation("123",0,"123")}, 0.0)
+                new PaymentBillPo("FXD-20171111-00001",new Date(), BillState.Approved, "123","123",new Transcation[] { new Transcation(1,0,"123")}, 0.0)
         };
     }
 

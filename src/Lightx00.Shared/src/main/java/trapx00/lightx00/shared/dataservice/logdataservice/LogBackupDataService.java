@@ -1,8 +1,8 @@
 package trapx00.lightx00.shared.dataservice.logdataservice;
 
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
-import java.net.URI;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -19,5 +19,5 @@ public interface LogBackupDataService extends Remote {
      *
      * @return the temp uri of the log resources
      */
-    URI fetchCloudLog() throws RemoteException;
+    LogBackupVo[] fetchCloudLog() throws RemoteException;
 }

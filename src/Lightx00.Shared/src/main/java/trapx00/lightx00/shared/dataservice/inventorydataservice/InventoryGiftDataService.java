@@ -1,14 +1,14 @@
 package trapx00.lightx00.shared.dataservice.inventorydataservice;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.util.Date;
-
+import trapx00.lightx00.shared.dataservice.CommonBillDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryGiftPo;
+import trapx00.lightx00.shared.queryvo.InventoryGiftQueryVo;
 
-public interface InventoryGiftDataService extends Remote {
+import java.rmi.RemoteException;
+
+public interface InventoryGiftDataService  extends CommonBillDataService<InventoryGiftPo, InventoryGiftQueryVo> {
 
     /**
      * Submits a BillPo or save it as a draft.
@@ -25,7 +25,7 @@ public interface InventoryGiftDataService extends Remote {
     /**
      * Activates a CashBill.
      * The bill must be in BillState.WaitingForApproval state.
-     * Otherwise a BillInvalidStateException will be thrown.
+     * OtherwiseEx a BillInvalidStateception will be thrown.
      *
      * @param id id for the bill that have been approved of
      * @return whether the operation is done successfully
@@ -58,4 +58,11 @@ public interface InventoryGiftDataService extends Remote {
      */
     String getId() throws RemoteException;
 
+    /**
+     * Queries Bill.
+     * @param query query condition
+     * @return BillVos that match the query condition
+     */
+
+    InventoryGiftPo[] query(InventoryGiftQueryVo query) throws RemoteException;
 }

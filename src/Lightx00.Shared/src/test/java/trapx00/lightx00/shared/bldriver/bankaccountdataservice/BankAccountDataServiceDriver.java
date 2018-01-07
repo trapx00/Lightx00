@@ -8,11 +8,17 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.financestaff.BankAccountPo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BankAccountDataServiceDriver {
     private BankAccountDataService service = new BankAccountDataServiceStub();
-    private BankAccountPo account = service.query(new BankAccountQueryVo())[0];
+    private BankAccountPo account;
+
+    @Before
+    public void setUp() throws Exception {
+        account = service.query(new BankAccountQueryVo())[0];
+    }
+
     @Test
     public void query() throws Exception {
         assertEquals(0, account.getId());

@@ -4,10 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
 import trapx00.lightx00.client.blservicestub.financeblservice.InitialEstablishmentBlServiceStub;
-import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class InitialEstablishmentBlServiceDriver {
     private InitialEstablishmentBlService service = new InitialEstablishmentBlServiceStub();

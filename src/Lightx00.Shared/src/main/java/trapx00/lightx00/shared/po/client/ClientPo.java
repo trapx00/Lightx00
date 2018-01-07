@@ -3,8 +3,10 @@ package trapx00.lightx00.shared.po.client;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 @DatabaseTable(tableName = "Client")
-public class ClientPo {
+public class ClientPo implements Serializable {
     @DatabaseField(id = true)
     private String id;
     @DatabaseField
@@ -24,11 +26,15 @@ public class ClientPo {
     @DatabaseField
     private double receivableQuota;
     @DatabaseField
-    private double payableQuota;
+    private double receivable;
+    @DatabaseField
+    private double payable;
     @DatabaseField
     private String defaultOperatorId;
+    @DatabaseField
+    private ClientState clientState;
 
-    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId) {
+    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double receivable, double payable, String defaultOperatorId, ClientState clientState) {
         this.id = id;
         this.clientType = clientType;
         this.clientLevel = clientLevel;
@@ -38,8 +44,25 @@ public class ClientPo {
         this.zipCode = zipCode;
         this.email = email;
         this.receivableQuota = receivableQuota;
-        this.payableQuota = payableQuota;
+        this.receivable = receivable;
+        this.payable = payable;
         this.defaultOperatorId = defaultOperatorId;
+        this.clientState = clientState;
+    }
+
+    public ClientPo(String id, ClientType clientType, int clientLevel, String name, String phone, String address, String zipCode, String email, double receivableQuota, double payableQuota, String defaultOperatorId, ClientState clientState) {
+        this.id = id;
+        this.clientType = clientType;
+        this.clientLevel = clientLevel;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.email = email;
+        this.receivable = receivableQuota;
+        this.payable = payableQuota;
+        this.defaultOperatorId = defaultOperatorId;
+        this.clientState = clientState;
     }
 
     public ClientPo() {
@@ -117,12 +140,20 @@ public class ClientPo {
         this.receivableQuota = receivableQuota;
     }
 
-    public double getPayableQuota() {
-        return payableQuota;
+    public double getReceivable() {
+        return receivable;
     }
 
-    public void setPayableQuota(double payableQuota) {
-        this.payableQuota = payableQuota;
+    public void setReceivable(double receivable) {
+        this.receivable = receivable;
+    }
+
+    public double getPayable() {
+        return payable;
+    }
+
+    public void setPayable(double payable) {
+        this.payable = payable;
     }
 
     public String getDefaultOperatorId() {
@@ -131,6 +162,14 @@ public class ClientPo {
 
     public void setDefaultOperatorId(String defaultOperatorId) {
         this.defaultOperatorId = defaultOperatorId;
+    }
+
+    public ClientState getClientState() {
+        return clientState;
+    }
+
+    public void setClientState(ClientState clientState) {
+        this.clientState = clientState;
     }
 }
 

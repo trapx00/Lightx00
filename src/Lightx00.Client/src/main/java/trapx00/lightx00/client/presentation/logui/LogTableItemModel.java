@@ -1,30 +1,39 @@
 package trapx00.lightx00.client.presentation.logui;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import trapx00.lightx00.shared.po.log.LogSeverity;
+import javafx.beans.property.*;
 import trapx00.lightx00.client.vo.log.LogVo;
+import trapx00.lightx00.shared.po.log.LogSeverity;
 
 import java.util.Date;
 
 public class LogTableItemModel extends RecursiveTreeObject<LogTableItemModel> {
+    private IntegerProperty id;
     private ObjectProperty<Date> date;
     private ObjectProperty<LogSeverity> severity;
     private StringProperty content;
-
-    public LogTableItemModel(ObjectProperty<Date> date, ObjectProperty<LogSeverity> severity, StringProperty content) {
-        this.date = date;
-        this.severity = severity;
-        this.content = content;
-    }
 
     public LogTableItemModel(LogVo logVo) {
         this.date = new SimpleObjectProperty<>(logVo.getDate());
         this.severity = new SimpleObjectProperty<>(logVo.getSeverity());
         this.content = new SimpleStringProperty(logVo.getContent());
+        this.id = new SimpleIntegerProperty(logVo.getId());
+    }
+
+    public LogVo toLogVo() {
+        return new LogVo(id.get(), date.get(), severity.get(), content.get());
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public Date getDate() {

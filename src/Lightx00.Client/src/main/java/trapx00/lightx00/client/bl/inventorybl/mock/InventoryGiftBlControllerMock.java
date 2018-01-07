@@ -1,13 +1,9 @@
 package trapx00.lightx00.client.bl.inventorybl.mock;
 
 import trapx00.lightx00.client.bl.inventorybl.InventoryGiftBlController;
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityQueryVo;
-import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryGiftVo;
+import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-
-import java.util.Date;
 
 public class InventoryGiftBlControllerMock extends InventoryGiftBlController{
     /**
@@ -45,20 +41,13 @@ public class InventoryGiftBlControllerMock extends InventoryGiftBlController{
      * @param time
      * @return The bill during specified time range
      */
-    @Override
-    public InventoryGiftVo getGift(Date time) {
-        return super.getGift(new Date());
-    }
 
     /**
      * Query a commoditybl
      * @param commodityQueryVo
      * @return CommodityVo that match to the requirement
      */
-    @Override
-    public CommodityVo[] queryCommodity(CommodityQueryVo commodityQueryVo) {
-        return  super.queryCommodity(commodityQueryVo);
-    }
+
     /**
      * Abandons a bill.
      * @param id id for the bill

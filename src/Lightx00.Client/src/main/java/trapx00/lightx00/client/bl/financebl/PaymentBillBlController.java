@@ -1,17 +1,47 @@
 package trapx00.lightx00.client.bl.financebl;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.bl.bankaccountbl.BankAccountModificationService;
+import trapx00.lightx00.client.bl.bankaccountbl.factory.BankAccountFactory;
+import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
+import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
+import trapx00.lightx00.client.bl.util.BillPoVoConverter;
+import trapx00.lightx00.client.bl.util.CommonBillBlController;
 import trapx00.lightx00.client.blservice.financeblservice.PaymentBillBlService;
-import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.datafactory.financedataservicefactory.PaymentBillDataServiceFactory;
+import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
+import trapx00.lightx00.shared.dataservice.financedataservice.PaymentBillDataService;
+import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.PaymentBillPo;
+import trapx00.lightx00.shared.po.financestaff.Transcation;
 import trapx00.lightx00.shared.queryvo.PaymentBillQueryVo;
-import trapx00.lightx00.client.vo.financestaff.PaymentBillVo;
 
-public class PaymentBillBlController implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService {
+import java.util.List;
 
+public class PaymentBillBlController
+    implements PaymentBillBlService, NotificationActivateService, NotificationAbandonService,
+    DraftDeleteService, PaymentBillInfo, BillApprovalCompleteService, BillPoVoConverter<PaymentBillPo, PaymentBillVo> {
+
+    private PaymentBillDataService dataService = PaymentBillDataServiceFactory.getService();
+    private ClientModificationService clientModificationService = ClientModificationServiceFactory.getInstance();
+    private BankAccountModificationService bankAccountModificationService = BankAccountFactory.getModificationService();
+
+    private CommonBillBlController<PaymentBillVo, PaymentBillPo, PaymentBillQueryVo> commonBillBlController =
+        new CommonBillBlController<>(dataService, "付款单", this);
+
+    public PaymentBillPo fromVoToPo(PaymentBillVo vo) {
+        return new PaymentBillPo(vo.getId(),vo.getDate(), vo.getState(), vo.getClientId(), vo.getOperatorId(), vo.getTranscations(), vo.getTotal());
+    }
+
+    public PaymentBillVo fromPoToVo(PaymentBillPo po) {
+        return new PaymentBillVo(po.getId(), po.getDate(), po.getState(), po.getClientId(), po.getOperatorId(), po.getTranscations(), po.getTotal());
+    }
 
     /**
      * Submits a PaymentBill.
@@ -21,7 +51,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage submit(PaymentBillVo bill) {
-        return null;
+        return commonBillBlController.submit(bill);
     }
 
     /**
@@ -32,7 +62,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage saveAsDraft(PaymentBillVo bill) {
-        return null;
+        return commonBillBlController.saveAsDraft(bill);
     }
 
     /**
@@ -42,7 +72,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public String getId() {
-        return null;
+        return commonBillBlController.getId();
     }
 
     /**
@@ -53,7 +83,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage deleteDraft(String id) {
-        return null;
+        return commonBillBlController.deleteDraft(id);
     }
 
     /**
@@ -64,7 +94,7 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage abandon(String id) {
-        return null;
+        return commonBillBlController.abandon(id);
     }
 
     /**
@@ -75,7 +105,12 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage activate(String id) {
-        return null;
+        PaymentBillVo paymentBillVo = query(new PaymentBillQueryVo().idEq(id))[0];
+        clientModificationService.modifyClient(paymentBillVo.getClientId(), ClientModificationFlag.RECEIVABLE, -paymentBillVo.getTotal());
+        for (Transcation transcation : paymentBillVo.getTranscations()) {
+            bankAccountModificationService.modifyBankAccount(transcation.getAccountId(), -transcation.getTotal());
+        }
+        return commonBillBlController.activate(id);
     }
 
     /**
@@ -86,7 +121,8 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public PaymentBillVo[] query(PaymentBillQueryVo query) {
-        return new PaymentBillVo[0];
+        List<PaymentBillVo> queryResult = commonBillBlController.query(query);
+        return queryResult.toArray(new PaymentBillVo[queryResult.size()]);
     }
 
     /**
@@ -98,6 +134,6 @@ public class PaymentBillBlController implements PaymentBillBlService, Notificati
      */
     @Override
     public ResultMessage approvalComplete(String billId, BillState state) {
-        return null;
+        return commonBillBlController.approvalComplete(billId, state);
     }
 }

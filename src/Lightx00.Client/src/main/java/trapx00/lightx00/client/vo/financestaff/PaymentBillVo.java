@@ -1,35 +1,45 @@
 package trapx00.lightx00.client.vo.financestaff;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.PaymentBillBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
-import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillDetailUi;
+import trapx00.lightx00.client.presentation.financeui.paymentandreceival.PaymentBillUiController;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
+import trapx00.lightx00.client.presentation.helpui.ReversibleUi;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 import trapx00.lightx00.shared.po.financestaff.Transcation;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class PaymentBillVo extends ReceivalPaymentBillVoBase {
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
-        return null;
+    public DraftContinueWritableUiController continueWritableUi() {
+        return new PaymentBillUiController();
         //not initialized
+    }
+
+    @Override
+    public BillDetailUi billDetailUi() {
+        return new PaymentBillDetailUi();
     }
 
 
     public PaymentBillVo(String id, Date date, BillState state, String clientId, String operatorId, Transcation[] transcations, double total) {
         super(FinanceBillType.PaymentBill, id, date, state, clientId, operatorId, transcations, total);
     }
+
+
 
     /**
      * Gets the NotificationActivateService corresponding to this type of bill. Overrides to meet the specific bill type.
@@ -61,15 +71,6 @@ public class PaymentBillVo extends ReceivalPaymentBillVoBase {
         return PaymentBillBlFactory.getBillApprovalCompleteService();
     }
 
-    /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
 
     /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
@@ -82,4 +83,13 @@ public class PaymentBillVo extends ReceivalPaymentBillVoBase {
     }
 
 
+    /**
+     * When it is called, it returns a ReversibleUi which can be used to acquire the ui component and controller.
+     *
+     * @return reversible ui service.
+     */
+    @Override
+    public ReversibleUi reversibleUi() {
+        return new PaymentBillUiController();
+    }
 }

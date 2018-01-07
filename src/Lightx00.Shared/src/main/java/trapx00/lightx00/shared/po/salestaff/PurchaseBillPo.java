@@ -10,11 +10,9 @@ import java.util.Date;
 @DatabaseTable(tableName = "PurchaseBill")
 public class PurchaseBillPo extends PurchaseBillBasePo {
     @DatabaseField
-    private String supplier;
+    private String clientId;
     @DatabaseField
     private int repository;
-    @DatabaseField
-    private String operatorId;
     @DatabaseField
     private String comment;
     @DatabaseField
@@ -22,25 +20,24 @@ public class PurchaseBillPo extends PurchaseBillBasePo {
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private CommodityItem[] commodityList;
 
-    public PurchaseBillPo(String id, Date date, BillState state, String supplier, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
-        super(id, date, state, PurchaseBillType.Purchase);
-        this.supplier = supplier;
+    public PurchaseBillPo() {
+    }
+
+    public PurchaseBillPo(String id, Date date, BillState state, String clientId, int repository, String operatorId, String comment, double total, CommodityItem[] commodityList) {
+        super(id, date, state, PurchaseBillType.Purchase,operatorId);
+        this.clientId = clientId;
         this.repository = repository;
-        this.operatorId = operatorId;
         this.comment = comment;
         this.total = total;
         this.commodityList = commodityList;
     }
 
-    public PurchaseBillPo() {
+    public String getClientId() {
+        return clientId;
     }
 
-    public String getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public int getRepository() {
@@ -49,14 +46,6 @@ public class PurchaseBillPo extends PurchaseBillBasePo {
 
     public void setRepository(int repository) {
         this.repository = repository;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
     }
 
     public String getComment() {

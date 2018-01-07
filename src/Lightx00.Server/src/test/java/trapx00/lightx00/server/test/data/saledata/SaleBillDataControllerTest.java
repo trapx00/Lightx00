@@ -11,6 +11,7 @@ import trapx00.lightx00.shared.exception.database.BillInvalidStateException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
@@ -23,13 +24,13 @@ import static org.junit.Assert.*;
 public class SaleBillDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private final SaleBillPo bill = new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "");
+    private final SaleBillPo bill = new SaleBillPo("XSD-20171122-00001", new Date(), BillState.Draft, "0", "0", "0", 0, null, 0, 0, 0, 0, "",1,"2",new CommodityItem[] { new CommodityItem("123","1","1",1,1,1,"") }, 10);
     private Dao<SaleBillPo, String> dao = SaleBillDataDaoFactory.getSaleBillDao();
     private SaleBillDataService service = SaleBillDataFactory.getService();
 
@@ -115,8 +116,8 @@ public class SaleBillDataControllerTest {
     @Test
     public void query() throws Exception {
         service.submit(bill);
-        assertEquals(1, service.query(new SaleBillQueryVo(q -> q.where().eq("id", bill.getId()).prepare())).length);
-        assertEquals(0, service.query(new SaleBillQueryVo(q -> q.where().eq("operatorId", "12").prepare())).length);
+        assertEquals(1, service.query(new SaleBillQueryVo().eq("id", bill.getId())).length);
+        assertEquals(0, service.query(new SaleBillQueryVo().eq("operatorId", "12")).length);
     }
 
     @Test

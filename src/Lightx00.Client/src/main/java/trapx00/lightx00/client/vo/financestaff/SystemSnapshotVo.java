@@ -1,28 +1,29 @@
 package trapx00.lightx00.client.vo.financestaff;
 
+import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationActivateService;
-import trapx00.lightx00.client.blservice.financeblservice.InitialEstablishmentBlService;
-import trapx00.lightx00.client.presentation.helpui.ContinueWritable;
-import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
-import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
+import trapx00.lightx00.client.presentation.financeui.InitialEstablishmentDetailUiController;
+import trapx00.lightx00.client.presentation.helpui.BillDetailUi;
+import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
+import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.financestaff.FinanceBillType;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class SystemSnapshotVo extends FinanceBillVo { //账
     //存储一次不修改
     private CommodityVo[] commodities;
     private ClientVo[] clients;
     private BankAccountVo[] bankAccounts;
+    private String operatorId;
 
-    public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts) {
-        super(FinanceBillType.SystemSnapshot, id, date, state);
+    public SystemSnapshotVo(String id, Date date, BillState state, CommodityVo[] commodities, ClientVo[] clients, BankAccountVo[] bankAccounts, String operatorId) {
+        super(FinanceBillType.SystemSnapshot, id, date, state, operatorId);
         this.commodities = commodities;
         this.clients = clients;
         this.bankAccounts = bankAccounts;
@@ -59,7 +60,7 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public NotificationActivateService notificationActivateService() {
-        return null;
+        return InitialEstablishmentBlFactory.getNotificationActivateService();
     }
 
     /**
@@ -69,7 +70,7 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
      */
     @Override
     public NotificationAbandonService notificationAbandonService() {
-        return null;
+        return InitialEstablishmentBlFactory.getNotificationAbandonService();
     }
 
     /**
@@ -83,16 +84,6 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
     }
 
     /**
-     * Gets the key-value maps to display the properties. Overrides to meet the specific bill type.
-     *
-     * @return key-value maps for the properties
-     */
-    @Override
-    public HashMap<String, String> properties() {
-        return null;
-    }
-
-    /**
      * Gets DeleteService corresponding to this type of draft. Overrides to meet the specific bill type.
      *
      * @return DeleteService
@@ -103,12 +94,17 @@ public class SystemSnapshotVo extends FinanceBillVo { //账
     }
 
     /**
-     * Gets the ContinueWritable service corresponding to this type of draft. Overrides to meet the specific bill type.
+     * Gets the DraftContinueWritableUiController service corresponding to this type of draft. Overrides to meet the specific bill type.
      *
-     * @return ContinueWritable
+     * @return DraftContinueWritableUiController
      */
     @Override
-    public ContinueWritable continueWriteService() {
-        return null;
+    public DraftContinueWritableUiController continueWritableUi() {
+        return null; // this type can't be reversed as there is no "save as draft" button on its ui.
+    }
+
+    @Override
+    public BillDetailUi billDetailUi() {
+        return new InitialEstablishmentDetailUiController();
     }
 }

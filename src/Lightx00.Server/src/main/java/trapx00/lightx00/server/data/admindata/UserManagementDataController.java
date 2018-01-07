@@ -9,15 +9,14 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.employee.EmployeePo;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
+import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class UserManagementDataController extends UnicastRemoteObject implements UserManagementDataService, LoginService {
@@ -48,8 +47,6 @@ public class UserManagementDataController extends UnicastRemoteObject implements
         throw new DbSqlException(e);
     }
 
-
-
     /**
      * filter some user accounts.
      * @param query the filter conditions
@@ -57,10 +54,12 @@ public class UserManagementDataController extends UnicastRemoteObject implements
      */
     @Override
     public EmployeePo[] query(UserAccountQueryVo query) {
-        List<? super EmployeePo> list = positionDaoMap.values().stream()
-            .map(x -> x.query(query))
-            .flatMap(List::stream)
-            .collect(Collectors.toList());
+        List<EmployeePo> list = new ArrayList<>();
+        for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> entry : positionDaoMap.entrySet()) {
+            if (query.getQueryVoForPosition(entry.getKey()) != null) {
+                list.addAll(entry.getValue().query(query.getQueryVoForPosition(entry.getKey())));
+            }
+        }
         return list.toArray(new EmployeePo[list.size()]);
     }
 
@@ -100,21 +99,39 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     }
 
     /**
+     * New id for a new employee.
+     * @return new id
+     */
+    @Override
+    public String getId(){
+        List<EmployeePo> employeePos = null;
+        for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> controller : positionDaoMap.entrySet()) {
+            if(employeePos == null)
+                employeePos = (controller.getValue().query(new SpecificUserAccountQueryVo()));
+            else
+                employeePos.addAll(controller.getValue().query(new SpecificUserAccountQueryVo()));
+        }
+            OptionalInt maxId = employeePos.stream().map(EmployeePo::getId)
+                                .mapToInt(Integer::parseInt).max();
+            return String.valueOf(maxId.getAsInt() + 1);
+    }
+    /**
      * Login.
      *
-     * @param username username
+     * @param name name
      * @param password password
      * @return EmployeeId if login is successful. Null otherwise
      */
     @Override
-    public String login(String username, String password) {
-        for (SpecificEmployeeDataController controller : positionDaoMap.values()) {
-            List<EmployeePo> employeePo = controller.query(x ->
-                ((EmployeePo) x).getUsername().equals(username) && ((EmployeePo) x).getPassword().equals(password));
+    public String login(String name, String password) {
+        for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> controller : positionDaoMap.entrySet()) {
+            List<EmployeePo> employeePo = controller.getValue().query((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo()
+                .eq("name", name).and().eq("password", password));
             if (employeePo.size() != 0) {
                 return employeePo.get(0).getId();
             }
         }
         return null;
     }
+
 }

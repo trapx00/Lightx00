@@ -5,6 +5,7 @@ import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.clientdataservice.ClientDataService;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.client.ClientPo;
+import trapx00.lightx00.shared.po.client.ClientState;
 import trapx00.lightx00.shared.po.client.ClientType;
 
 import java.sql.SQLException;
@@ -14,14 +15,14 @@ import static org.junit.Assert.assertEquals;
 public class ClientDataControllerTest {
     static {
         try {
-            BaseDatabaseFactory.init();
+            BaseDatabaseFactory.initTest();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     String[] ids = new String[1];
-    ClientPo clientPo = new ClientPo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, "0");
+    ClientPo clientPo = new ClientPo("0", ClientType.Retailer, 5, "xiaoming", "123456789", "123456789", "215000", "12345679@qq.com", 43.7, 37.5, "0", ClientState.Real);
     ClientDataService service = ClientDataFactory.getService();
 
     @org.junit.Test
@@ -29,6 +30,14 @@ public class ClientDataControllerTest {
         ids[0] = "0";
         service.add(clientPo);
         assertEquals("0", service.query("xiaoming")[0].getId());
+        service.delete(ids);
+    }
+
+    @org.junit.Test
+    public void queryById() throws Exception {
+        ids[0] = "0";
+        service.add(clientPo);
+        assertEquals("xiaoming", service.queryById("0").getName());
         service.delete(ids);
     }
 

@@ -5,9 +5,8 @@ import trapx00.lightx00.client.vo.log.LogVo;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.queryvo.LogQueryVo;
+import trapx00.lightx00.shared.util.DateHelper;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Date;
 
 public class LogBlControllerMock extends LogBlController {
@@ -20,6 +19,7 @@ public class LogBlControllerMock extends LogBlController {
      */
     @Override
     public ResultMessage log(LogSeverity severity, String content) {
+        System.out.println(String.format("%s [%s] %s",DateHelper.currentDateString(), severity.toString(), content));
         return ResultMessage.Success;
     }
 

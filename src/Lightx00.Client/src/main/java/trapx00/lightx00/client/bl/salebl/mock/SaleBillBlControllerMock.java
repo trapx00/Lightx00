@@ -1,10 +1,9 @@
 package trapx00.lightx00.client.bl.salebl.mock;
 
 import trapx00.lightx00.client.bl.salebl.SaleBillBlController;
-import trapx00.lightx00.shared.po.ResultMessage;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
 
 public class SaleBillBlControllerMock extends SaleBillBlController {
 
@@ -82,7 +81,7 @@ public class SaleBillBlControllerMock extends SaleBillBlController {
     @Override
     public SaleBillVo[] querySaleBill(SaleBillQueryVo query) {
         SaleBillVo[] saleBillVos=new SaleBillVo[1];
-        saleBillVos[0]=new SaleBillVo("0",null,null,null,null,null,1,null,100,100,100,100,null);
+        saleBillVos[0]=new SaleBillVo("XSD-171203-00000",null,null,null,null,null,1,null,100,100,100,100,null,1,"1",null,0);
         return saleBillVos;
     }
 }
