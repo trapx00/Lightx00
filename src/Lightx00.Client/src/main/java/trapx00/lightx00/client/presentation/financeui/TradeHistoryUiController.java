@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import trapx00.lightx00.client.bl.financebl.factory.TradeHistoryBlFactory;
+import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
@@ -22,9 +25,12 @@ import trapx00.lightx00.client.vo.financestaff.TradeHistoryQueryVo;
 import trapx00.lightx00.client.vo.financestaff.TradeHistoryVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.shared.po.bill.BillType;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,8 +49,8 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
     public JFXTreeTableColumn<BillTableItemModel, String> tcDate;
     public JFXTreeTableColumn<BillTableItemModel, String> tcOperator;
     public JFXTreeTableColumn<BillTableItemModel, String> tcState;
-    public JFXButton exportButton;
-    public JFXButton detailButton;
+    public JFXButton btnExport;
+    public JFXButton btnDetail;
     public JFXCheckBox cbFilter;
     private ObservableList<BillTableItemModel> billTableItemModels = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
@@ -53,9 +59,13 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
     private ObjectProperty<List<BillType>> billTypes = new SimpleObjectProperty<>();
 
     private TradeHistoryBlService blService = TradeHistoryBlFactory.getController();
+    private ObjectProperty<TradeHistoryVo> tradeHistory = new SimpleObjectProperty<>();
 
     public void initialize() {
         initTable();
+        if (FrameworkUiManager.getCurrentEmployee().getPosition().equals(EmployeePosition.Manager)) {
+            btnRevert.setDisable(true);
+        }
     }
 
     public void initTable() {
@@ -77,8 +87,7 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
         tbBill.setShowRoot(false);
         tbBill.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                TreeItem<BillTableItemModel> selectedItem = tbBill.getSelectionModel().getSelectedItem();
-                showDetail(selectedItem.getValue());
+                showDetail();
             }
         });
 
@@ -91,11 +100,16 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
                     : String.format("选择了%s项种类", newValue.size())
                 ));
         });
+
+        tradeHistory.addListener(((observable, oldValue, newValue) -> {
+            billTableItemModels.clear();
+            billTableItemModels.addAll(Arrays.stream(newValue.getBills()).map(BillTableItemModel::new).collect(Collectors.toList()));
+        }));
     }
 
-    public void showDetail(BillTableItemModel model) {
-        if (model != null) {
-            BillVo selected = model.getBill();
+    public void showDetail() {
+        BillVo selected = getSelected();
+        if (selected != null) {
             PromptDialogHelper.start("单据详细信息","")
                     .setContent(selected.billDetailUi().showContent(selected).getComponent())
                     .addCloseButton("好","CHECK",null)
@@ -108,7 +122,7 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
     }
 
     public void updateItems() {
-        billTableItemModels.clear();
+
         TradeHistoryQueryVo queryVo = new TradeHistoryQueryVo();
         if (cbFilter.isSelected()) {
             LocalDate startDate = dpStart.getValue();
@@ -126,14 +140,15 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
                 queryVo.setBillTypes(billTypes.get().toArray(new BillType[billTypes.get().size()]));
             }
         }
-        TradeHistoryVo tradeHistoryVo = blService.query(queryVo);
-        billTableItemModels.addAll(Arrays.stream(tradeHistoryVo.getBills()).map(BillTableItemModel::new).collect(Collectors.toList()));
+        tradeHistory.set(blService.query(queryVo));
+
     }
 
     public BillVo getSelected() {
-        try {
-            return tbBill.getSelectionModel().getSelectedItem().getValue().getBill();
-        } catch (NullPointerException e){
+        TreeItem<BillTableItemModel> model = tbBill.getSelectionModel().getSelectedItem();
+        if (model != null) {
+            return model.getValue().getBill();
+        } else {
             return null;
         }
 
@@ -165,14 +180,48 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
     }
 
     public void onExportClicked(ActionEvent actionEvent) {
-        PromptDialogHelper.start("导出成功","已经导出到C:\\233.xlsx。")
-                .addCloseButton("去看看","FORWARD",null)
-                .addCloseButton("完成","DONE",null)
+        if (tradeHistory.get() == null) {
+            PromptDialogHelper.start("请先查询表！","请先查询表！")
+                .addCloseButton("好","CHECK",null)
                 .createAndShow();
+            return;
+        }
+        TradeHistoryVo tradeHistoryVo = tradeHistory.get();
+        blService.export(tradeHistoryVo);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("选择路径");
+        fileChooser.setInitialFileName(String.format("经营历程表-%s.xls", DateHelper.currentDateString("yyyy_MM_dd-HH_mm_ss")));
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            ExcelOutput.createExcel(file.getParent(), toExcel(), file.getName(), "//");
+
+            blService.export(tradeHistoryVo);
+
+            PromptDialogHelper.start("导出成功！",String.format("经营历程表已经导出到%s。", file.getAbsolutePath()))
+                .addCloseButton("好","CHECK",null)
+                .createAndShow();
+        }
+    }
+
+    public String[] toExcel() {
+        List<String> content = new ArrayList<>();
+        content.add("日期//ID//操作员//单据类型//单据状态");
+        for(BillTableItemModel record : billTableItemModels) {
+            content.add(String.format("%s//%s//%s//%s//%s\n",
+                DateHelper.fromDate(record.getDate()),
+                record.getId(),
+                String.format("%s(id: %s)", record.getOperator().getName(), record.getOperator().getId()),
+                record.getBill().getBillType(),
+                record.getState()
+            ));
+        }
+        return content.toArray(new String[content.size()]);
     }
 
     public void onDetailClicked(ActionEvent actionEvent) {
-        showDetail(tbBill.getSelectionModel().getSelectedItem().getValue());
+        showDetail();
     }
 
     public void onClientClicked(MouseEvent mouseEvent) {
