@@ -89,10 +89,10 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         TotalPricePromotionUiController continueWriting = externalLoadedUiPackage.getController();
         continueWriting.tfId.setText(totalPricePromotion.getId());
-        continueWriting.tfStartDate.setValue(DateToLocalDate(totalPricePromotion.getStartDate()));
-        continueWriting.tfEndDate.setValue(DateToLocalDate(totalPricePromotion.getEndDate()));
-        continueWriting.tfCouponPrice.setText(String.valueOf(totalPricePromotion.getCouponPrice()));
-        continueWriting.tfTotalPrice.setText(String.valueOf(totalPricePromotion.getTotalPrice()));
+        continueWriting.tfStartDate.setValue(DateHelper.dateToLocalDate(totalPricePromotion.getStartDate()));
+        continueWriting.tfEndDate.setValue(DateHelper.dateToLocalDate(totalPricePromotion.getEndDate()));
+        continueWriting.tfCouponPrice.setText(totalPricePromotion.getCouponPrice()+"");
+        continueWriting.tfTotalPrice.setText(totalPricePromotion.getTotalPrice()+"");
         continueWriting.addPromotionCommodities(totalPricePromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
