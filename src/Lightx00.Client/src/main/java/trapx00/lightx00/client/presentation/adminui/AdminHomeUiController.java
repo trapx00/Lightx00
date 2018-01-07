@@ -18,7 +18,7 @@ public class AdminHomeUiController extends BaseHomepageUiController {
 
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/admin/AdminHomeUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/adminui/AdminHomeUi.fxml").loadAndGetPackageWithoutException();
     }
 
     public void onBtnNotificationClicked(ActionEvent actionEvent) {

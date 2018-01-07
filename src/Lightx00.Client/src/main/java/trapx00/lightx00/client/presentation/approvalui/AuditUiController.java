@@ -62,17 +62,17 @@ public class AuditUiController implements ExternalLoadableUiController {
             PromptDialogHelper.start("单据详细信息","")
                     .setContent(selected.billDetailUi().showContent(selected).getComponent())
                     .addButton("拒绝","CLOSE",e->{
-                            ResultMessage result = blService.reject(new AuditIdVo(selected.getId(),new Date()));
-                            if(result.equals(ResultMessage.Success)) {
-                                PromptDialogHelper.start("拒绝通过成功", "已发送通知。")
-                                        .addCloseButton("完成", "DONE", e2 -> updateItems())
-                                        .createAndShow();
-                            }
-                            else{
-                                PromptDialogHelper.start("拒绝通过失败", "")
-                                        .addCloseButton("好的", "DONE", null)
-                                        .createAndShow();
-                            }
+                        ResultMessage result = blService.reject(new AuditIdVo(selected.getId(),new Date()));
+                        if(result.equals(ResultMessage.Success)) {
+                            PromptDialogHelper.start("拒绝通过成功", "已发送通知。")
+                                    .addCloseButton("完成", "DONE", e2 -> updateItems())
+                                    .createAndShow();
+                        }
+                        else{
+                            PromptDialogHelper.start("拒绝通过失败", "")
+                                    .addCloseButton("好的", "DONE", null)
+                                    .createAndShow();
+                        }
 
                     })
                     .addButton("通过","CHECK",e->{
@@ -125,9 +125,9 @@ public class AuditUiController implements ExternalLoadableUiController {
 
     }
 
-   public void onBtnRefreshClicked() {
+    public void onBtnRefreshClicked() {
         updateItems();
-   }
+    }
 
     /**
      * Loads the controller.

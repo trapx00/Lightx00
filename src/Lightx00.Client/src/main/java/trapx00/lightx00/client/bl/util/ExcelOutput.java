@@ -19,6 +19,11 @@ public class ExcelOutput {
     //outputMessage为你需要输出Excel表格的字符串组
     //name为该表名字，例如为库存盘点就为库存盘点，什么单就是什么单
     public static ResultMessage createExcel(String path, String[]outputMessage,String name) {
+        return createExcel(path, outputMessage, name, "-");
+
+    }
+
+    public static ResultMessage createExcel(String path, String[]outputMessage,String name, String seperator) {
         try {
             path=path+"\\"+name+".xls";
             book = Workbook.createWorkbook(new File(path));
@@ -30,9 +35,9 @@ public class ExcelOutput {
             normalFormat.setAlignment(jxl.format.Alignment.CENTRE);
             normalFormat.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
 
-            for(int i=0;i<outputMessage[0].split("-").length;i++){
+            for(int i=0;i<outputMessage[0].split(seperator).length;i++){
                 for(int j=0;j<outputMessage.length;j++){
-                    sheet.addCell(new Label(i,j,outputMessage[j].split("-")[i],normalFormat));
+                    sheet.addCell(new Label(i,j,outputMessage[j].split(seperator)[i],normalFormat));
                 }
             }
 

@@ -123,14 +123,18 @@ public class PromotionDataController<Po extends PromotionPoBase> {
                     logService.printLog(delegate, String.format("作废过期促销策略(id: %s)", id));
                     return ResultMessage.Success;
                 case Active:
-                    throw new PromotionInvalidStateException(previousState,PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
+                    throw new PromotionInvalidStateException(previousState, PromotionState.Abandoned,PromotionState.Overdue,PromotionState.Waiting);
                 case Waiting:
                     po.setState(PromotionState.Abandoned);
                     dao.update(po);
                     logService.printLog(delegate, String.format("作废待生效促销策略(id: %s)",id));
                     return ResultMessage.Success;
+                case Abandoned:
+                    dao.deleteById(id);
+                    logService.printLog(delegate, String.format("删除已作废促销策略(id: %s)", id));
+                    return ResultMessage.Success;
                 default:
-                    throw new PromotionInvalidStateException(previousState,PromotionState.Draft, PromotionState.Overdue, PromotionState.Active,PromotionState.Waiting);
+                    return ResultMessage.Failure;
             }
         } catch (SQLException e) {
             handleSqlException(e);

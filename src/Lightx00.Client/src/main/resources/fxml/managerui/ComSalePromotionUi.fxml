@@ -51,9 +51,9 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <JFXTreeTableView fx:id="tbPromotionCommodity" prefHeight="400.0" prefWidth="600.0">
+        <JFXTreeTableView fx:id="tbPromotionCommodity" prefHeight="400.0" prefWidth="800.0">
             <columns>
-                <JFXTreeTableColumn fx:id="tcId" prefWidth="200" text="商品ID" />
+                <JFXTreeTableColumn fx:id="tcId" prefWidth="200" text="商品编号" />
                 <JFXTreeTableColumn fx:id="tcName" prefWidth="200" text="商品名称" />
                 <JFXTreeTableColumn fx:id="tcPrice" prefWidth="200" text="价格" />
                 <JFXTreeTableColumn fx:id="tcAmount" prefWidth="200" text="数量" />

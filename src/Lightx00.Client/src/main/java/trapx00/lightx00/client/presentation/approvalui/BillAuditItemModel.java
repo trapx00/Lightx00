@@ -22,15 +22,6 @@ public class BillAuditItemModel extends RecursiveTreeObject<BillAuditItemModel> 
     private ObjectProperty<BillType> type;
     private ObjectProperty<BillVo> bill;
 
-    public BillAuditItemModel(Date date, String id, String operatorId, BillType type, BillVo bill) {
-        EmployeeInfo employeeInfo = UserManagementBlFactory.getController();
-        this.date = new SimpleObjectProperty<>(date);
-        this.id = new SimpleStringProperty(id);
-        operator = new SimpleStringProperty(employeeInfo.queryById(operatorId).getName());
-        this.type = new SimpleObjectProperty<>(type);
-        this.bill = new SimpleObjectProperty<>(bill);
-    }
-
     public BillAuditItemModel(AuditIdVo auditIdVo) {
         BillInfo billInfo = BillInfoBlFactory.getBillInfo();
         BillVo bill = billInfo.queryBill(auditIdVo.getId());

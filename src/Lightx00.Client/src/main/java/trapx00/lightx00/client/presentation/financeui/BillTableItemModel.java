@@ -33,7 +33,6 @@ public class BillTableItemModel extends RecursiveTreeObject<BillTableItemModel> 
     }
 
     public BillTableItemModel(BillVo bill) {
-
         this(bill.getDate(),
             bill.getId(), bill.getOperatorId(), bill.getBillType(), bill.getState(), bill);
     }

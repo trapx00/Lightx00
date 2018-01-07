@@ -28,6 +28,7 @@ import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
+import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
@@ -240,7 +241,9 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
 
     public void onBtnDraftClicked() {
         try {
-            blService.saveAsDraft(getCurrentTotalPricePromotionVo());
+            TotalPricePromotionVo promotion = getCurrentTotalPricePromotionVo();
+            promotion.setState(PromotionState.Draft);
+            blService.saveAsDraft(promotion);
             PromptDialogHelper.start("保存成功!","促销策略已经保存为草稿。")
                     .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
                     .createAndShow();
@@ -290,7 +293,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         return localDateTime.toLocalDate();
     }
 
-    private final Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
+    private Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
         @Override
         public DateCell call(final DatePicker datePicker) {
             return new DateCell() {
@@ -306,7 +309,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
         }
     };
 
-    private final Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
+    private Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
         @Override
         public DateCell call(final DatePicker datePicker) {
             return new DateCell() {
