@@ -115,8 +115,8 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
             updateTotal();
         });
 
-        //tfStartDate.setDayCellFactory(startDayCellFactory);
-        //tfEndDate.setDayCellFactory(endDayCellFactory);
+        tfStartDate.setDayCellFactory(startDayCellFactory);
+        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             double total = 0;
