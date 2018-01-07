@@ -83,8 +83,8 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
         continueWriting.tfId.setText(clientPromotion.getId());
         continueWriting.tfStartDate.setValue(DateHelper.dateToLocalDate(clientPromotion.getStartDate()));
         continueWriting.tfEndDate.setValue(DateHelper.dateToLocalDate(clientPromotion.getEndDate()));
-        continueWriting.cbClientLevel.getSelectionModel().select(clientPromotion.getClientLevel());
-        continueWriting.tfCouponPrice.setText(String.valueOf(clientPromotion.getCouponPrice()));
+        continueWriting.cbClientLevel.setValue(clientPromotion.getClientLevel()+"");
+        continueWriting.tfCouponPrice.setText(clientPromotion.getCouponPrice()+"");
         continueWriting.addPromotionCommodities(clientPromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
@@ -258,7 +258,8 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
 
         }
     }
-    public void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
+
+    private void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
         for (PromotionCommodity commodity : promotionCommodities) {
             promotionCommodityModelObservableList.add(
                     new PromotionCommodityModel(commodity));
@@ -273,8 +274,10 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(tfStartDate.getValue().plusDays(1))) {
-                        setDisable(true);
+                    if(tfStartDate.getValue() != null) {
+                        if (item.isBefore(tfStartDate.getValue().plusDays(1))) {
+                            setDisable(true);
+                        }
                     }
                 }
 

@@ -52,9 +52,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
     public Label lbTotal;
 
     private ComSalePromotionBlService blService = ComSalePromotionBlServiceFactory.getInstance();
-
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
-
     private ObservableList<PromotionCommodityModel> promotionCommodityModelObservableList = FXCollections.observableArrayList();
 
     /**
@@ -83,12 +81,12 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
          */
         ComSalePromotionVo comSalePromotion = (ComSalePromotionVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ClientPromotionUiController continueWriting = externalLoadedUiPackage.getController();
-        continueWriting.tfId.setText(comSalePromotion.getId());
-        continueWriting.tfStartDate.setValue(DateToLocalDate(comSalePromotion.getStartDate()));
-        continueWriting.tfEndDate.setValue(DateToLocalDate(comSalePromotion.getEndDate()));
-        continueWriting.tfSalePrice.setText(String.valueOf(comSalePromotion.getOnSalePrice()));
-        continueWriting.addPromotionCommodities(comSalePromotion.getPromotionCommodities());
+        ComSalePromotionUiController ui = externalLoadedUiPackage.getController();
+        ui.tfId.setText(comSalePromotion.getId());
+        ui.tfStartDate.setValue(DateHelper.dateToLocalDate(comSalePromotion.getStartDate()));
+        ui.tfEndDate.setValue(DateHelper.dateToLocalDate(comSalePromotion.getEndDate()));
+        ui.tfSalePrice.setText(comSalePromotion.getOnSalePrice()+"");
+        ui.addPromotionCommodities(comSalePromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
 
@@ -117,8 +115,8 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
             updateTotal();
         });
 
-        tfStartDate.setDayCellFactory(startDayCellFactory);
-        tfEndDate.setDayCellFactory(endDayCellFactory);
+        //tfStartDate.setDayCellFactory(startDayCellFactory);
+        //tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             double total = 0;
@@ -185,7 +183,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         );
     }
 
-   public void onBtnSubmitClicked() {
+    public void onBtnSubmitClicked() {
         try {
             ComSalePromotionVo promotion = getCurrentComSalePromotionVo();
             PromptDialogHelper.start("确认当前促销策略", "").setContent(
@@ -252,11 +250,12 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         }
     }
 
-    private LocalDate DateToLocalDate(Date date) {
-        Instant instant = date.toInstant();
-        ZoneId zone = ZoneId.systemDefault();
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
-        return localDateTime.toLocalDate();
+    private void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
+        for (PromotionCommodity commodity : promotionCommodities) {
+            promotionCommodityModelObservableList.add(
+                    new PromotionCommodityModel(commodity));
+        }
+
     }
 
     private final Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -266,8 +265,10 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(tfStartDate.getValue().plusDays(1))) {
-                        setDisable(true);
+                    if(tfStartDate.getValue()!=null) {
+                        if (item.isBefore(tfStartDate.getValue().plusDays(1))) {
+                            setDisable(true);
+                        }
                     }
                 }
 
