@@ -41,7 +41,7 @@
          </padding>
         </StackPane>
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
-            <JFXComboBox fx:id="cbPosition" labelFloat="true" maxWidth="150.0" prefWidth="150.0" promptText="部门筛选" />
+            <JFXComboBox fx:id="cbPosition" labelFloat="true" maxWidth="150.0" prefWidth="150.0" promptText="选择部门" />
          <padding>
             <Insets left="10.0" right="20.0" />
          </padding>

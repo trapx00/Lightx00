@@ -7,31 +7,37 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.bl.promotionbl.PromotionInfo;
 import trapx00.lightx00.client.blservice.promotionblservice.*;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionDetailUi;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
+import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
 import trapx00.lightx00.shared.queryvo.promotion.ClientPromotionQueryVo;
 import trapx00.lightx00.shared.queryvo.promotion.ComSalePromotionQueryVo;
 import trapx00.lightx00.shared.queryvo.promotion.TotalPricePromotionQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class PromotionManagementUiController implements ExternalLoadableUiController {
     public JFXTextField tfSearch;
-    public JFXButton btnSearch;
+    public JFXCheckBox cbAbandon;
+    public JFXComboBox<PromotionType> cbType;
     public JFXTreeTableView<PromotionInfoModel> tablePromotion;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcId;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcType;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcStartDate;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcEndDate;
     public JFXTreeTableColumn<PromotionInfoModel, String> tcState;
-    public JFXButton btnDetail;
+    public JFXButton btnRefresh;
     public JFXButton btnDelete;
 
     private ObservableList<PromotionInfoModel> promotionInfoModels = FXCollections.observableArrayList();
@@ -39,8 +45,53 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
     private ComSalePromotionBlService comSalePromotionBlService = ComSalePromotionBlServiceFactory.getInstance();
     private TotalPricePromotionBlService totalPricePromotionBlService = TotalPricePromotionBlServiceFactory.getInstance();
 
-    public void onBtnSearchClicked() {
-        updateItems();
+    private void search() {
+        boolean show = cbAbandon.isSelected();
+        String str = tfSearch.getText();
+        if(str.length()==0) {
+            updateItems();
+        }
+        else {
+            List<PromotionVoBase> promotions = new ArrayList<>();
+            ComSalePromotionQueryVo comSalePromotionQueryVo = new ComSalePromotionQueryVo();
+            PromotionVoBase[] result1 = comSalePromotionBlService.queryPromotion(comSalePromotionQueryVo);
+            if(result1!=null) promotions.addAll(Arrays.stream(result1).collect(Collectors.toList()));
+            TotalPricePromotionQueryVo totalPricePromotionQueryVo = new TotalPricePromotionQueryVo();
+            PromotionVoBase[] result2 = totalPricePromotionBlService.queryPromotion(totalPricePromotionQueryVo);
+            if(result2!=null) promotions.addAll(Arrays.stream(result2).collect(Collectors.toList()));
+            ClientPromotionQueryVo clientPromotionQueryVo = new ClientPromotionQueryVo();
+            PromotionVoBase[] result3 = clientPromotionBlService.queryPromotion(clientPromotionQueryVo);
+            if(result3!=null) promotions.addAll(Arrays.stream(result3).collect(Collectors.toList()));
+
+            if (promotions != null) {
+                promotionInfoModels.clear();
+                for(PromotionVoBase promotion:promotions) {
+                    if(show) {
+                        if (!promotion.getState().equals(PromotionState.Draft)
+                                && promotion.getId().contains(str)
+                                || promotion.getType().toString().contains(str)
+                                || promotion.getState().toString().contains(str)) {
+                            promotionInfoModels.add(new PromotionInfoModel(promotion));
+                        }
+                    }
+                    else {
+                        if(!promotion.getState().equals(PromotionState.Draft)
+                                && !promotion.getState().equals(PromotionState.Abandoned)
+                                && promotion.getId().contains(str)
+                                || promotion.getType().toString().contains(str)
+                                || promotion.getState().toString().contains(str)) {
+                            promotionInfoModels.add(new PromotionInfoModel(promotion));
+                        }
+                    }
+                }
+
+            }
+            else if(promotions==null||promotions.size()==0) {
+                new PromptDialogHelper("未查到匹配信息！", "")
+                        .addCloseButton("好", "CHECK", null)
+                        .createAndShow();
+            }
+        }
     }
 
     public void initialize() {
@@ -50,25 +101,22 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
 
     private void updateItems() {
         promotionInfoModels.clear();
-        ComSalePromotionQueryVo comSalePromotionQueryVo = new ComSalePromotionQueryVo();
-        TotalPricePromotionQueryVo totalPricePromotionQueryVo = new TotalPricePromotionQueryVo();
-        ClientPromotionQueryVo clientPromotionQueryVo = new ClientPromotionQueryVo();
-
-        PromotionVoBase[] result1 = comSalePromotionBlService.queryPromotion(comSalePromotionQueryVo);
-        promotionInfoModels.addAll(Arrays.stream(result1).map(PromotionInfoModel::new).collect(Collectors.toList()));
-        PromotionVoBase[] result2 = totalPricePromotionBlService.queryPromotion(totalPricePromotionQueryVo);
-        promotionInfoModels.addAll(Arrays.stream(result2).map(PromotionInfoModel::new).collect(Collectors.toList()));
-        PromotionVoBase[] result3 = clientPromotionBlService.queryPromotion(clientPromotionQueryVo);
-        promotionInfoModels.addAll(Arrays.stream(result3).map(PromotionInfoModel::new).collect(Collectors.toList()));
-
-        tablePromotion.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                onBtnDetailClicked();
-            }
-        });
+        addComSaleModel();
+        addClientModel();
+        addTotalPriceModel();
     }
 
+
     private void initTable() {
+        tfSearch.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                cbType.getSelectionModel().clearSelection();
+                search();
+            }
+        });
+        cbAbandon.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            updateItems();
+        });
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcStartDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getStartDate())));
         tcEndDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getEndDate())));
@@ -82,6 +130,28 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
         tablePromotion.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 onBtnDetailClicked();
+            }
+        });
+
+        cbType.getItems().addAll(FXCollections.observableArrayList(PromotionType.values()));
+        cbType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue == null){
+
+            }
+            else {
+                tfSearch.setText("");
+                promotionInfoModels.clear();
+                switch (newValue) {
+                    case ComSalePromotion:
+                        addComSaleModel();
+                        break;
+                    case ClientPromotion:
+                        addClientModel();
+                        break;
+                    case TotalPricePromotion:
+                        addTotalPriceModel();
+                        break;
+                }
             }
         });
     }
@@ -113,41 +183,59 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
             new PromptDialogHelper("确定删除？", "促销策略将被废弃，无法撤销。")
                     .addCloseButton("取消","CLOSE",null)
                     .addButton("确定","CHECK",e -> {
-                        ResultMessage result = delete(selected.getId(),selected.getType());
-                        if(result.equals(ResultMessage.Success)) {
-                            new PromptDialogHelper("删除成功","")
-                                    .addCloseButton("好","CHECK", e2 -> {
+                        ResultMessage result = delete(selected.getId(), selected.getType());
+                        if (result.equals(ResultMessage.Success)) {
+                            new PromptDialogHelper("删除成功", "")
+                                    .addCloseButton("好", "CHECK", e2 -> {
+                                        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                                        updateItems();
+                                    })
+                                    .createAndShow();
+                        } else {
+                            new PromptDialogHelper("删除失败", "")
+                                    .addCloseButton("好", "CHECK", e2 -> {
                                         FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
                                         updateItems();
                                     })
                                     .createAndShow();
                         }
-                        else {
-                            new PromptDialogHelper("删除失败","")
-                                    .addCloseButton("好","CHECK", e2 -> {
-                                        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
-                                        updateItems();
-                                    })
-                                    .createAndShow();
-                        }
+
                     })
                     .createAndShow();
         }
     }
 
     private ResultMessage delete(String id, PromotionType type) {
-        switch (type) {
-            case ComSalePromotion:
-                return comSalePromotionBlService.delete(id);
-            case TotalPricePromotion:
-                return totalPricePromotionBlService.delete(id);
-            case ClientPromotion:
-                return clientPromotionBlService.delete(id);
+        ResultMessage result = null;
+        try {
+            switch (type) {
+                case ComSalePromotion:
+                    result = comSalePromotionBlService.delete(id);
+                    break;
+                case TotalPricePromotion:
+                    result =  totalPricePromotionBlService.delete(id);
+                    break;
+                case ClientPromotion:
+                    result =  clientPromotionBlService.delete(id);
+                    break;
                 default:
-                    return ResultMessage.Failure;
+                    result =  ResultMessage.Failure;
+            }
+        } catch (PromotionInvalidStateException e1) {
+            new PromptDialogHelper("删除失败", "促销策略生效中，无法删除。")
+                    .addCloseButton("好", "CHECK", e2 -> {
+                        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                        updateItems();
+                    })
+                    .createAndShow();
         }
-
+        return result;
     }
+
+    public void onBtnRefreshClicked() {
+        updateItems();
+    }
+
     public void onBtnDetailClicked() {
         TreeItem<PromotionInfoModel> selectedItem = tablePromotion.getSelectionModel().getSelectedItem();
         if(selectedItem.getValue()!=null) {
@@ -161,6 +249,50 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
             PromptDialogHelper.start("错误","请先选择一条促销策略。")
                     .addCloseButton("好的","DONE",null)
                     .createAndShow();
+        }
+    }
+    private void addComSaleModel() {
+        ComSalePromotionQueryVo comSalePromotionQueryVo = new ComSalePromotionQueryVo();
+        PromotionVoBase[] result = comSalePromotionBlService.queryPromotion(comSalePromotionQueryVo);
+        for(PromotionVoBase promotion:result) {
+            if(!promotion.getState().equals(PromotionState.Draft)) {
+                if (cbAbandon.isSelected())
+                    promotionInfoModels.add(new PromotionInfoModel(promotion));
+                else {
+                    if (!promotion.getState().equals(PromotionState.Abandoned))
+                        promotionInfoModels.add(new PromotionInfoModel(promotion));
+                }
+            }
+        }
+    }
+
+    private void addClientModel() {
+        TotalPricePromotionQueryVo totalPricePromotionQueryVo = new TotalPricePromotionQueryVo();
+        PromotionVoBase[] result = totalPricePromotionBlService.queryPromotion(totalPricePromotionQueryVo);
+        for(PromotionVoBase promotion:result) {
+            if(!promotion.getState().equals(PromotionState.Draft)) {
+                if (cbAbandon.isSelected())
+                    promotionInfoModels.add(new PromotionInfoModel(promotion));
+                else {
+                    if (!promotion.getState().equals(PromotionState.Abandoned))
+                        promotionInfoModels.add(new PromotionInfoModel(promotion));
+                }
+            }
+        }
+    }
+
+    private void addTotalPriceModel() {
+        ClientPromotionQueryVo clientPromotionQueryVo = new ClientPromotionQueryVo();
+        PromotionVoBase[] result = clientPromotionBlService.queryPromotion(clientPromotionQueryVo);
+        for(PromotionVoBase promotion:result) {
+            if(!promotion.getState().equals(PromotionState.Draft)) {
+                if (cbAbandon.isSelected())
+                    promotionInfoModels.add(new PromotionInfoModel(promotion));
+                else {
+                    if (!promotion.getState().equals(PromotionState.Abandoned))
+                        promotionInfoModels.add(new PromotionInfoModel(promotion));
+                }
+            }
         }
     }
 

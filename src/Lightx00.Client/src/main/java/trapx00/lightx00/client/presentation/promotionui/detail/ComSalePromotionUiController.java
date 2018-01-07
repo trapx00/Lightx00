@@ -217,7 +217,9 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
 
     public void onBtnDraftClicked() {
         try {
-            blService.saveAsDraft(getCurrentComSalePromotionVo());
+            ComSalePromotionVo promotion = getCurrentComSalePromotionVo();
+            promotion.setState(PromotionState.Draft);
+            blService.saveAsDraft(promotion);
             PromptDialogHelper.start("保存草稿成功","促销策略已经保存为草稿。")
                     .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
                     .createAndShow();
@@ -259,7 +261,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         return localDateTime.toLocalDate();
     }
 
-    private final Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
+    private Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
         @Override
         public DateCell call(final DatePicker datePicker) {
             return new DateCell() {
@@ -275,7 +277,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         }
     };
 
-    private final Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
+    private Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
         @Override
         public DateCell call(final DatePicker datePicker) {
             return new DateCell() {

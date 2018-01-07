@@ -86,7 +86,8 @@ public class UserManagementUiController implements ExternalLoadableUiController 
     private void initTable() {
         tfSearch.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-              search();
+                cbPosition.setValue(null);
+                search();
             }
         });
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
@@ -97,12 +98,18 @@ public class UserManagementUiController implements ExternalLoadableUiController 
 
         cbPosition.getItems().addAll(FXCollections.observableArrayList(EmployeePosition.values()));
         cbPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
-            employeeInfoModels.clear();
-            UserAccountQueryVo queryVo = new UserAccountQueryVo();
-            queryVo.addQueryVoForOneEmployeePosition(newValue, new SpecificUserAccountQueryVo());
-            EmployeeVo[] result = blService.query(queryVo);
-            for(EmployeeVo employeeVo:result) {
-                employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
+            if(newValue==null) {
+
+            }
+            else {
+                tfSearch.setText("");
+                employeeInfoModels.clear();
+                UserAccountQueryVo queryVo = new UserAccountQueryVo();
+                queryVo.addQueryVoForOneEmployeePosition(newValue, new SpecificUserAccountQueryVo());
+                EmployeeVo[] result = blService.query(queryVo);
+                for (EmployeeVo employeeVo : result) {
+                    employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
+                }
             }
         });
         TreeItem<EmployeeInfoModel> root = new RecursiveTreeItem<>(employeeInfoModels, RecursiveTreeObject::getChildren);
