@@ -273,7 +273,7 @@ public class ClientBlController implements ClientBlService, DraftDeleteService, 
      */
     @Override
     public ClientVo fromPoToVo(ClientPo clientPo) {
-        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getReceivable(), clientPo.getPayable(), clientPo.getId());
+        ClientVo clientVo = new ClientVo(clientPo.getId(), clientPo.getClientType(), clientPo.getClientLevel(), clientPo.getName(), clientPo.getPhone(), clientPo.getAddress(), clientPo.getZipCode(), clientPo.getEmail(), clientPo.getReceivableQuota(), clientPo.getReceivable(), clientPo.getPayable(), clientPo.getDefaultOperatorId());
         return clientVo;
     }
 }

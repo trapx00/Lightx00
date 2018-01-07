@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <VBox fx:id="dialogContainer" prefHeight="1200" prefWidth="1600"
       xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -145,7 +146,7 @@
     </VBox>
     <Separator/>
     <HBox spacing="20">
-        <JFXButton fx:id="btnAutofill" buttonType="RAISED" onAction="#onBtnGetPromotionClicked"
+        <JFXButton fx:id="btnGetPromotion" buttonType="RAISED" onAction="#onBtnGetPromotionClicked"
                    style="-fx-background-color: #424242; -fx-text-fill: #FFFFFF;" text="获取可用的促销策略">
             <graphic>
                 <MaterialIconView glyphName="EDIT" glyphSize="24" glyphStyle="-fx-fill: #FFFFFF"/>
@@ -163,10 +164,16 @@
                 <MaterialIconView glyphName="REFRESH" glyphSize="24"/>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnCancelClicked"
-                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消">
+        <JFXButton fx:id="btnSaveAsDraft" buttonType="RAISED" onAction="#onBtnSaveAsDraftClicked"
+                   style="-fx-background-color: #9999CC; -fx-text-fill: #FFFFFF;" text="保存草稿">
             <graphic>
                 <MaterialIconView glyphName="SAVE" glyphSize="24"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#onBtnCancelClicked"
+                   style="-fx-background-color: #E8EAF6; -fx-text-fill: #000000;" text="取消">
+            <graphic>
+                <FontAwesomeIconView glyphName="HOME" glyphSize="24"/>
             </graphic>
         </JFXButton>
     </HBox>

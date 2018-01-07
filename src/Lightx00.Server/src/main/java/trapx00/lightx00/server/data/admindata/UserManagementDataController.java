@@ -106,7 +106,10 @@ public class UserManagementDataController extends UnicastRemoteObject implements
     public String getId(){
         List<EmployeePo> employeePos = null;
         for (Map.Entry<EmployeePosition, SpecificEmployeeDataController> controller : positionDaoMap.entrySet()) {
-            employeePos = controller.getValue().query((SpecificUserAccountQueryVo) new SpecificUserAccountQueryVo());
+            if(employeePos == null)
+                employeePos = (controller.getValue().query(new SpecificUserAccountQueryVo()));
+            else
+                employeePos.addAll(controller.getValue().query(new SpecificUserAccountQueryVo()));
         }
             OptionalInt maxId = employeePos.stream().map(EmployeePo::getId)
                                 .mapToInt(Integer::parseInt).max();

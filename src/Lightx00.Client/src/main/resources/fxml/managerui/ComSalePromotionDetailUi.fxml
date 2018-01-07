@@ -22,7 +22,7 @@
     </Label>
 
     <VBox maxWidth="500" spacing="30">
-        <JFXTextField maxWidth="200" promptText="ID" labelFloat="true" fx:id="tfId" editable="false"/>
+        <JFXTextField maxWidth="200" promptText="促销策略编号" labelFloat="true" fx:id="tfId" editable="false"/>
 
         <JFXTextField maxWidth="200" promptText="起始日期" labelFloat="true" fx:id="tfStartDate" editable="false"/>
 
@@ -41,10 +41,10 @@
 
     <JFXTreeTableView fx:id="tbPromotionCommodity" prefHeight="350.0" prefWidth="400.0">
         <columns>
-            <JFXTreeTableColumn fx:id="tcId" prefWidth="100" text="商品Id"/>
-            <JFXTreeTableColumn fx:id="tcName" prefWidth="100" text="商品名称"/>
-            <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="100" resizable="false" text="价格"/>
-            <JFXTreeTableColumn fx:id="tcAmount" prefWidth="100" text="数量"/>
+            <JFXTreeTableColumn fx:id="tcId" prefWidth="200" text="商品编号"/>
+            <JFXTreeTableColumn fx:id="tcName" prefWidth="200" text="商品名称"/>
+            <JFXTreeTableColumn fx:id="tcPrice" editable="false" prefWidth="80" resizable="false" text="价格"/>
+            <JFXTreeTableColumn fx:id="tcAmount" prefWidth="80" text="数量"/>
         </columns>
     </JFXTreeTableView>
 

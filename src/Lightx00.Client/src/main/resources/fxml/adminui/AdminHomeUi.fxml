@@ -82,7 +82,7 @@
                     </Text>
                 </HBox>
             <padding>
-               <Insets left="20.0" right="20.0" />
+               <Insets left="30.0" right="30.0" />
             </padding>
             </VBox>
 

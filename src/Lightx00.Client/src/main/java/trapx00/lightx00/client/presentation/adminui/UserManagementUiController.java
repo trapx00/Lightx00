@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
@@ -18,36 +19,48 @@ import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class UserManagementUiController implements ExternalLoadableUiController {
     public JFXTextField tfSearch;
-    public JFXButton btnSearch;
     public JFXComboBox<EmployeePosition> cbPosition = new JFXComboBox<>();
     public JFXTreeTableView<EmployeeInfoModel> tableEmployee;
     public JFXTreeTableColumn<EmployeeInfoModel, String> tcId;
     public JFXTreeTableColumn<EmployeeInfoModel, String> tcName;
     public JFXTreeTableColumn<EmployeeInfoModel, String> tcWorkDate;
     public JFXTreeTableColumn<EmployeeInfoModel, String> tcPosition;
+    public JFXTreeTableColumn<EmployeeInfoModel, String> tcState;
     public JFXButton btnAdd;
     public JFXButton btnModify;
     public JFXButton btnDelete;
 
     private ObservableList<EmployeeInfoModel> employeeInfoModels = FXCollections.observableArrayList();
     private UserManagementBlService blService = UserManagementBlServiceFactory.getInstance();
-    private EmployeeInfo employeeInfo = EmployeeInfoFactory.getEmployeeInfo();
 
-    public void onBtnSearchClicked() {
-        String id = tfSearch.getText();
-        if(id.length()!=0) {
-            new PromptDialogHelper("错误！", "请输入有效姓名！")
-                    .addCloseButton("好", "CHECK", null)
-                    .createAndShow();
+    private void search() {
+        String str = tfSearch.getText();
+        if(str.length()==0) {
+            updateItems();
         }
         else {
-            EmployeeVo employee = employeeInfo.queryById(id);
+            UserAccountQueryVo queryVo = new UserAccountQueryVo();
+            queryVo.addQueryVoForAllEmployeePosition(new SpecificUserAccountQueryVo());
+            EmployeeVo[] employee = blService.query(queryVo);
             if (employee != null) {
-                employeeInfoModels.add(new EmployeeInfoModel(employee));
-            } else {
-                new PromptDialogHelper("查无此人！", "请核对姓名！")
+                employeeInfoModels.clear();
+                for(EmployeeVo employeeVo:employee) {
+                        if (employeeVo.getId().contains(str)
+                                || employeeVo.getName().contains(str)
+                                || employeeVo.getPosition().toString().contains(str)
+                                || employeeVo.getState().toString().contains(str)) {
+                            employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
+                        }
+                    }
+
+            }
+            else if(employee==null||employee.length==0) {
+                new PromptDialogHelper("未查到匹配信息！", "")
                         .addCloseButton("好", "CHECK", null)
                         .createAndShow();
             }
@@ -65,24 +78,38 @@ public class UserManagementUiController implements ExternalLoadableUiController 
         queryVo.addQueryVoForAllEmployeePosition(new SpecificUserAccountQueryVo());
         EmployeeVo[] result = blService.query(queryVo);
         for(EmployeeVo employeeVo:result) {
-            System.out.println(employeeVo.getId());
             employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
         }
 
     }
 
     private void initTable() {
+        tfSearch.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                cbPosition.setValue(null);
+                search();
+            }
+        });
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcWorkDate.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getWorkDate())));
         tcPosition.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPosition().toString()));
+        tcState.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getState().toString()));
+
         cbPosition.getItems().addAll(FXCollections.observableArrayList(EmployeePosition.values()));
         cbPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
-            UserAccountQueryVo queryVo = new UserAccountQueryVo();
-            queryVo.addQueryVoForOneEmployeePosition(newValue, new SpecificUserAccountQueryVo());
-            EmployeeVo[] result = blService.query(queryVo);
-            for(EmployeeVo employeeVo:result) {
-                employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
+            if(newValue==null) {
+
+            }
+            else {
+                tfSearch.setText("");
+                employeeInfoModels.clear();
+                UserAccountQueryVo queryVo = new UserAccountQueryVo();
+                queryVo.addQueryVoForOneEmployeePosition(newValue, new SpecificUserAccountQueryVo());
+                EmployeeVo[] result = blService.query(queryVo);
+                for (EmployeeVo employeeVo : result) {
+                    employeeInfoModels.add(new EmployeeInfoModel(employeeVo));
+                }
             }
         });
         TreeItem<EmployeeInfoModel> root = new RecursiveTreeItem<>(employeeInfoModels, RecursiveTreeObject::getChildren);
