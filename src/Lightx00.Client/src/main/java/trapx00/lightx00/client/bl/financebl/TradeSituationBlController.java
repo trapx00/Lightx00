@@ -20,6 +20,7 @@ import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
@@ -48,24 +49,43 @@ public class TradeSituationBlController implements TradeSituationBlService {
      */
     @Override
     public TradeSituationVo query(Date start, Date end) {
-        List<SaleBillVo> saleBillVos = new ArrayList<>(Arrays.asList(saleBillBlInfo.querySaleBill(new SaleBillQueryVo().between("date", start, end))));
-        List<SaleRefundBillVo> saleRefundBillVos = new ArrayList<>(Arrays.asList(saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo().between("date", start,end))));
+        List<SaleBillVo> saleBillVos = new ArrayList<>(Arrays.asList(saleBillBlInfo.querySaleBill(
+            new SaleBillQueryVo()
+                .eq("state", BillState.Activated)
+                .and()
+                .between("date", start, end))));
+        List<SaleRefundBillVo> saleRefundBillVos = new ArrayList<>(Arrays.asList(saleBillBlInfo.querySaleRefundBill(
+            new SaleRefundBillQueryVo()
+                .eq("state", BillState.Activated)
+                .and()
+                .between("date", start,end))));
         List<InventoryDetailBillVo> overflowBills = new ArrayList<>(Arrays.asList(inventoryDetailBillInfo.queryInventoryWarningBill(
             new InventoryBillQueryVo()
+                .eq("state", BillState.Activated)
+                .and()
                 .eq("inventoryBillType", InventoryBillType.Overflow)
                 .and()
                 .between("date", start,end)
         )));
         List<InventoryDetailBillVo> lossBills = new ArrayList<>(Arrays.asList(inventoryDetailBillInfo.queryInventoryWarningBill(
             new InventoryBillQueryVo()
+                .eq("state", BillState.Activated)
+                .and()
                 .eq("inventoryBillType", InventoryBillType.Loss)
                 .and()
                 .between("date", start, end)
         )));
         List<InventoryGiftVo> giftVos = new ArrayList<>(Arrays.asList(inventoryGiftInfo.queryInventoryGiftBill(
-            new InventoryGiftQueryVo().between("date", start, end))));
+            new InventoryGiftQueryVo()
+                .eq("state", BillState.Activated)
+                .and()
+                .between("date", start, end))));
 
-        List<PurchaseBillVo> purchaseBillVos = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo().between("date", start, end))));
+        List<PurchaseBillVo> purchaseBillVos = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseBillVo(
+            new PurchaseBillQueryVo()
+                .eq("state", BillState.Activated)
+                .and()
+                .between("date", start, end))));
         List<PurchaseRefundBillVo> purchaseRefundBillVoList = new ArrayList<>(Arrays.asList(purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo().between("date", start, end))));
 
         logService.log(LogSeverity.Info, "查询了经营情况表。");
