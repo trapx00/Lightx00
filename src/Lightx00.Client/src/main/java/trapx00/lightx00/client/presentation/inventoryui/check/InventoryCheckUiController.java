@@ -17,11 +17,13 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServ
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class InventoryCheckUiController implements ExternalLoadableUiController {
@@ -50,10 +52,18 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
         initTable();
     }
     public void updateItems() {
+        LocalDate start = startDatePicker.getValue();
+        LocalDate end = endDatePicker.getValue();
 
+        if (start == null || end == null) {
+            PromptDialogHelper.start("请选择日期","请选择日期！")
+                    .addCloseButton("好","CHECK", null)
+                    .createAndShow();
+            return;
+        }
         InventoryViewVo inventoryViewVo=null;
-        Date beginTime=DateHelper.fromLocalDate(startDatePicker.getValue());
-        Date endTime=DateHelper.fromLocalDate(endDatePicker.getValue());
+        Date beginTime=DateHelper.fromLocalDate(start);
+        Date endTime=DateHelper.fromLocalDate(end);
             try {
                 inventoryViewVo=blService.getInventoryView(
                         beginTime,

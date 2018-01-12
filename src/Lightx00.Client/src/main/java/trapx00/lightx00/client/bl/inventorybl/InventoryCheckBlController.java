@@ -127,7 +127,7 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage export(String path) {
+    public ResultMessage export(String path,String name) {
         InventoryPictureVo operPicture=this.getInventoryPicture();
         String[]output=new String[operPicture.getItems().length+1];
         output[0]="名称-型号-库存数量-库存均价-批次-批号-出厂日期";
@@ -138,7 +138,7 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
                     FormatDateTime.toShortDateString(operPicture.getItems()[i].getDate());
         }
         try{
-            ResultMessage opResult= ExcelOutput.createExcel(path,output,"库存快照");
+            ResultMessage opResult= ExcelOutput.createExcel(path,output,name);
             if (opResult.isSuccess()) {
                 logService.log(LogSeverity.Success, String.format("导出成功"));
             } else {

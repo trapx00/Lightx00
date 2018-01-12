@@ -28,5 +28,5 @@ public interface InventoryCheckBlService {
      * @param newfile
      * @return whether the operation is done successfully
      */
-    ResultMessage export(String newfile);//导出Excel
+    ResultMessage export(String newfile,String name);//导出Excel
 }

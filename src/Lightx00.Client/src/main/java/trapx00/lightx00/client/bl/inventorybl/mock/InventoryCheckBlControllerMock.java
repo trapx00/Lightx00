@@ -37,7 +37,7 @@ public class InventoryCheckBlControllerMock extends InventoryCheckBlController {
      * @return whether the operation is done successfully
      */
     @Override
-    public ResultMessage export(String path) {
-        return super.export(path);
+    public ResultMessage export(String path,String name) {
+        return super.export(path,name);
     }
 }

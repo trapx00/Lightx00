@@ -21,6 +21,7 @@ import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
+import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.File;
@@ -32,6 +33,7 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
     @FXML private JFXButton btnFilter;
     public JFXButton exportButton;
     @FXML private JFXTreeTableView<InventoryPictureModel> tableView;
+    @FXML private JFXTreeTableColumn<InventoryPictureModel, String> tcNum;
     @FXML private JFXTreeTableColumn<InventoryPictureModel, String> tcId;
     @FXML private JFXTreeTableColumn<InventoryPictureModel, String> tcName;
     @FXML private JFXTreeTableColumn<InventoryPictureModel, String> tcType;
@@ -54,8 +56,10 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
     }
     public void updateItems() {
         viewModels.clear();
-
-        viewModels.addAll(Arrays.stream(blService.getInventoryPicture().getItems()).map(InventoryPictureModel::new).collect(Collectors.toList()));
+        InventoryPictureItem[]inventoryPictureItems =blService.getInventoryPicture().getItems();
+        for(int i=0;i<inventoryPictureItems.length;i++){
+            viewModels.add(new InventoryPictureModel(i,inventoryPictureItems[i]));
+        }
     }
 
     @FXML
@@ -68,7 +72,7 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
         tcBatch.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getInventoryPictureModel().getBatch()));
         tcBatchNo.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getValue().getInventoryPictureModel().getBatchNo()));
         tcProductionTime.setCellValueFactory(cellData -> new SimpleStringProperty(DateHelper.fromDate(cellData.getValue().getValue().getInventoryPictureModel().getDate())));
-
+        tcNum.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue().getNo())));
         TreeItem<InventoryPictureModel> root = new RecursiveTreeItem<>(viewModels, RecursiveTreeObject::getChildren);
         tableView.setRoot(root);
         tableView.setShowRoot(false);
@@ -85,10 +89,10 @@ public class InventoryPictureUiController implements ExternalLoadableUiControlle
         if (viewModels.get(0)!= null) {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择路径");
-            fileChooser.setInitialFileName(String.format("库存快照-%s.xls", DateHelper.currentDateString("yyyy_MM_dd-HH_mm_ss")));
+            fileChooser.setInitialFileName(String.format("库存快照%s.xls", DateHelper.currentDateString("yyyy_MM_dd-HH_mm_ss")));
             File file = fileChooser.showSaveDialog(new Stage());
             if (file != null) {
-                blService.export(file.getParent());
+                blService.export(file.getParent(),file.getName());
 
                 PromptDialogHelper.start("导出成功！",String.format("经营情况表已经导出到%s。", file.getAbsolutePath()))
                         .addCloseButton("好","CHECK",null)
