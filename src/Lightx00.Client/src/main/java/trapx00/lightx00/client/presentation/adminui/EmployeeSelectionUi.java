@@ -89,6 +89,12 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
         tbEmployee.setRoot(root);
         tbEmployee.setShowRoot(false);
         tbEmployee.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        tbEmployee.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onBtnSelectClicked();
+            }
+        });
     }
 
     /**

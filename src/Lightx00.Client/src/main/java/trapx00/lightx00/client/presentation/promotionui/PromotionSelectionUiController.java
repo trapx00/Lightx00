@@ -109,13 +109,7 @@ public class PromotionSelectionUiController extends SelectingDialog implements P
             PromotionVoBase selected = model.getPromotion();
             PromptDialogHelper.start("单据详细信息", "")
                     .setContent(selected.promotionDetailUi().showContent(selected).getComponent())
-                    .addButton("选择", "CHECK", e -> {
-                        if (callback != null && selected != null) {
-                            callback.accept(selected);
-                        }
-                        onClose();
-                    })
-                    .addCloseButton("取消", "CLOSE", null)
+                    .addCloseButton("好", "CLOSE", null)
                     .createAndShow();
         }
     }
