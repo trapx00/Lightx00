@@ -20,12 +20,13 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.log.LogSeverity;
-import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
-import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
-import trapx00.lightx00.shared.queryvo.SaleBillQueryVo;
-import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
+import trapx00.lightx00.shared.queryvo.*;
+import trapx00.lightx00.shared.util.DateHelper;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class InventoryCheckBlController implements InventoryCheckBlService {
 
@@ -111,10 +112,64 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
      */
     @Override
     public InventoryPictureVo getInventoryPicture() {
-        CommodityVo[] commodidtyVos=commodityInfo.getAllCommodity();
-        InventoryPictureItem[] inventoryPictureItems=new InventoryPictureItem[commodidtyVos.length];
+        LocalDate start= LocalDate.now();
+        LocalDate end=start.plusDays(1);
+
+        Date beginTime= DateHelper.fromLocalDate(start);
+        Date endTime=DateHelper.fromLocalDate(end);
+        PurchaseBillVo [] purchaseBillVos=purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo()
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
+        PurchaseRefundBillVo[] purchaseRefundBillVos=purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo()
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
+        SaleBillVo[]saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo()
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
+        SaleRefundBillVo[] saleRefundBillVos=saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo()
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
+
+        ArrayList<String> commoditys=new ArrayList<>();
+        for(int i=0;i<purchaseBillVos.length;i++){
+            for(int j=0;j<purchaseBillVos[i].getCommodityList().length;j++) {
+                if(commoditys.contains(purchaseBillVos[i].getCommodityList()[j].getCommodityId())){
+
+                }else{
+                    commoditys.add(purchaseBillVos[i].getCommodityList()[j].getCommodityId());
+                }
+            }
+        }
+        for(int i=0;i<purchaseRefundBillVos.length;i++){
+            for(int j=0;j<purchaseRefundBillVos[i].getCommodityList().length;j++) {
+                if(commoditys.contains(purchaseRefundBillVos[i].getCommodityList()[j].getCommodityId())){
+
+                }else{
+                    commoditys.add(purchaseRefundBillVos[i].getCommodityList()[j].getCommodityId());
+                }
+            }
+        }
+
+        for(int i=0;i<saleBillVos.length;i++){
+            for(int j=0;j<saleBillVos[i].getCommodityList().length;j++) {
+               if(commoditys.contains(saleBillVos[i].getCommodityList()[j].getCommodityId())){
+               }else{
+                   commoditys.add(saleBillVos[i].getCommodityList()[j].getCommodityId());
+               }
+            }
+        }
+
+        for(int i=0;i<saleRefundBillVos.length;i++){
+            for(int j=0;j<saleRefundBillVos[i].getCommodityList().length;j++) {
+               if(commoditys.contains(saleRefundBillVos[i].getCommodityList()[j].getCommodityId())){
+
+               }else{
+                   commoditys.add(saleRefundBillVos[i].getCommodityList()[j].getCommodityId());
+               }
+            }
+        }
+        InventoryPictureItem[] inventoryPictureItems=new InventoryPictureItem[commoditys.size()];
+
         for(int i=0;i<inventoryPictureItems.length;i++){
-            inventoryPictureItems[i]=new InventoryPictureItem(commodityConver.fromVoToPo(commodidtyVos[i]));
+            inventoryPictureItems[i]=new InventoryPictureItem(commodityConver.fromVoToPo(
+                    commodityInfo.queryCommodity(new CommodityQueryVo().idEq(commoditys.get(i)))[0]
+            ));
         }
         InventoryPictureVo inventoryPictureVo=new InventoryPictureVo(new Date(),inventoryPictureItems);
         logService.log(LogSeverity.Success,FormatDateTime.toShortDateString(new Date())+"库存盘点完毕");
