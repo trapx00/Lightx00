@@ -28,9 +28,8 @@ import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityFillUiController;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.presentation.saleui.factory.SaleCommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -189,40 +188,14 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         tfToken.setText("0");
         autofill();
 
-        NumberValidator numberValidator = new NumberValidator();
-        numberValidator.setMessage("请输入数字类型");
-        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
-        requiredValidator.setMessage("请输入信息");
+        ValidatorHelper.addDefaultRequiredValidator(tfClientId);
+        ValidatorHelper.addDefaultRequiredValidator(tfClientName);
+        ValidatorHelper.addDefaultRequiredValidator(tfSalesmanId);
+        ValidatorHelper.addDefaultRequiredValidator(tfSalesmanName);
+        ValidatorHelper.addDefaultDoubleValidator(tfToken);
+        ValidatorHelper.addDefaultDoubleValidator(tfMinusProfits);
+        ValidatorHelper.addDefaultDoubleValidator(tfToken);
 
-        tfClientId.getValidators().add(requiredValidator);
-        tfClientName.getValidators().add(requiredValidator);
-        tfSalesmanId.getValidators().add(requiredValidator);
-        tfSalesmanName.getValidators().add(requiredValidator);
-        tfMinusProfits.getValidators().add(numberValidator);
-
-        tfClientIdProperty.addListener(event -> {
-            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
-                tfClientId.validate();
-            }
-        });
-        tfClientNameProperty.addListener(event -> {
-            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
-                tfClientName.validate();
-            }
-        });
-        tfSalesmanIdProperty.addListener(event -> {
-            if (tfSalesmanIdProperty == null || tfSalesmanIdProperty.get().length() == 0) {
-                tfSalesmanId.validate();
-            }
-        });
-        tfSalesmanNameProperty.addListener(event -> {
-            if (tfSalesmanNameProperty == null || tfSalesmanNameProperty.get().length() == 0) {
-                tfSalesmanName.validate();
-            }
-        });
-        tfMinusProfits.focusedProperty().addListener(event->{
-            tfMinusProfits.validate();
-        });
         tfMinusProfits.setOnKeyReleased(event -> {
             if(tfMinusProfits.validate() || tfMinusProfits.getText().length()==0) {
                 new SaleRefundBillUiController.ListHandler().change();

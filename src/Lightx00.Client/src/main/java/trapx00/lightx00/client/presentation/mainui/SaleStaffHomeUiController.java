@@ -1,6 +1,5 @@
 package trapx00.lightx00.client.presentation.mainui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -10,7 +9,6 @@ import trapx00.lightx00.client.presentation.inventoryui.PurchaseBillUiController
 import trapx00.lightx00.client.presentation.inventoryui.PurchaseRefundBillUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleBillUiController;
 import trapx00.lightx00.client.presentation.saleui.SaleRefundBillUiController;
-import trapx00.lightx00.shared.util.DateHelper;
 
 public class SaleStaffHomeUiController extends BaseHomepageUiController implements ExternalLoadableUiController {
     @FXML

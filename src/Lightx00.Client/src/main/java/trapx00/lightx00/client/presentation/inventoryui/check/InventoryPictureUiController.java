@@ -25,8 +25,6 @@ import trapx00.lightx00.client.vo.inventorystaff.InventoryPictureItem;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class InventoryPictureUiController implements ExternalLoadableUiController {
 

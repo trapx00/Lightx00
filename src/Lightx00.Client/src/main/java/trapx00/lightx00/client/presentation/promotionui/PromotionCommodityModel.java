@@ -1,7 +1,10 @@
 package trapx00.lightx00.client.presentation.promotionui;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 
 public class PromotionCommodityModel extends RecursiveTreeObject<PromotionCommodityModel> {

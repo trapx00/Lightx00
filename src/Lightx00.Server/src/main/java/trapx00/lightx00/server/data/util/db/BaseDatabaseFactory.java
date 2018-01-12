@@ -21,7 +21,6 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 

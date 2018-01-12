@@ -4,7 +4,6 @@ import trapx00.lightx00.server.data.promotiondata.TotalPricePromotionDataControl
 import trapx00.lightx00.server.data.util.export.Export;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
 
-import javax.xml.ws.WebFault;
 import java.rmi.RemoteException;
 
 @Export

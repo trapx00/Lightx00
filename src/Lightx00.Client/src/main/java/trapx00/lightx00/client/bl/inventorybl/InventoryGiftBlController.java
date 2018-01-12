@@ -1,9 +1,7 @@
 package trapx00.lightx00.client.bl.inventorybl;
 
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
-import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
 import trapx00.lightx00.client.bl.commoditybl.InventoryModificationService;
-import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
 import trapx00.lightx00.client.bl.commoditybl.factory.InventoryModificationServiceFactory;
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.notificationbl.NotificationAbandonService;

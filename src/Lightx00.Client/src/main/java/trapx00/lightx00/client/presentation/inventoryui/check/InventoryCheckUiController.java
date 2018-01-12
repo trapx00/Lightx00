@@ -9,17 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
-import trapx00.lightx00.client.bl.inventorybl.PurchaseBillBlInfo;
-import trapx00.lightx00.client.bl.inventorybl.factory.PurchaseBillBlInfoFactory;
-import trapx00.lightx00.client.bl.salebl.SaleBillBlInfo;
-import trapx00.lightx00.client.bl.salebl.factory.SaleBillBlInfoFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
-import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
@@ -52,6 +47,7 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
         initTable();
     }
     public void updateItems() {
+
         LocalDate start = startDatePicker.getValue();
         LocalDate end = endDatePicker.getValue();
 
@@ -68,7 +64,7 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
                 inventoryViewVo=blService.getInventoryView(
                         beginTime,
                         endTime);
-                System.out.println(inventoryViewVo.getId());
+                viewModels.clear();
                 viewModels.add(new InventoryViewModel(inventoryViewVo.getItems()));
             } catch (Exception ignored) {
                 ignored.printStackTrace();

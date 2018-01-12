@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.presentation.helpui;
 
 import com.jfoenix.controls.JFXDialog;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.presentation.mainui.FrameworkUiController;
 import trapx00.lightx00.client.vo.EmployeeVo;

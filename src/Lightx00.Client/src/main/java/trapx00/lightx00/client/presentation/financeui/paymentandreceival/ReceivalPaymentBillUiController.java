@@ -20,6 +20,7 @@ import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.financeui.TranscationModel;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -147,14 +148,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
     }
 
     public void addRequiredValidator(JFXTextField jfxTextField, String message) {
-        RequiredFieldValidator fieldValidator = new RequiredFieldValidator();
-        fieldValidator.setMessage(message);
-        jfxTextField.getValidators().add(fieldValidator);
-        jfxTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                jfxTextField.validate();
-            }
-        });
+        ValidatorHelper.addValidator(RequiredFieldValidator.class, jfxTextField, message);
     }
 
 

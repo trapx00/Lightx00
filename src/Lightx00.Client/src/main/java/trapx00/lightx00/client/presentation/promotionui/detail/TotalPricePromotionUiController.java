@@ -1,17 +1,13 @@
 package trapx00.lightx00.client.presentation.promotionui.detail;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTreeTableCell;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.TotalPricePromotionBlService;
@@ -21,22 +17,16 @@ import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFacto
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.presentation.promotionui.PromotionCommodityModel;
 import trapx00.lightx00.client.vo.Draftable;
-import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
-import trapx00.lightx00.shared.po.manager.promotion.TotalPricePromotionPo;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import javax.swing.event.CellEditorListener;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 
 public class TotalPricePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {

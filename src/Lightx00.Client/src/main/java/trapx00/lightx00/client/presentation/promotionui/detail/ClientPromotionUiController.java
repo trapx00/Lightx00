@@ -3,7 +3,6 @@ package trapx00.lightx00.client.presentation.promotionui.detail;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -16,6 +15,7 @@ import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlSer
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.promotionui.PromotionCommodityModel;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
@@ -93,20 +93,9 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
     public void initialize() {
         tfId.setText(blService.getId());
         cbClientLevel.setItems(ints);
-        NumberValidator numberValidator = new NumberValidator();
-        numberValidator.setMessage("请输入数字类型");
-        tfSalePrice.getValidators().add(numberValidator);
-        tfCouponPrice.getValidators().add(numberValidator);
-        tfSalePrice.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                tfSalePrice.validate();
-            }
-        });
-        tfCouponPrice.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                tfCouponPrice.validate();
-            }
-        });
+
+        ValidatorHelper.addDefaultDoubleValidator(tfSalePrice);
+        ValidatorHelper.addDefaultDoubleValidator(tfCouponPrice);
 
         tbPromotionCommodity.setEditable(true);
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());

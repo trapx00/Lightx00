@@ -1,7 +1,10 @@
 package trapx00.lightx00.client.presentation.inventoryui;
 
 import javafx.event.ActionEvent;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.BaseHomepageUiController;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.mainui.InventoryStaffUiController;
 
 public class InventoryStaffHomeUiController extends BaseHomepageUiController {

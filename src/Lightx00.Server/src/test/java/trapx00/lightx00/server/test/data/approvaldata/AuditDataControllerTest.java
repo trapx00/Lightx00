@@ -9,7 +9,6 @@ import trapx00.lightx00.server.data.util.db.BaseDatabaseFactory;
 import trapx00.lightx00.shared.dataservice.approvaldataservice.AuditDataService;
 import trapx00.lightx00.shared.po.bill.BillPo;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.bill.BillType;
 import trapx00.lightx00.shared.po.financestaff.CashBillItem;
 import trapx00.lightx00.shared.po.financestaff.CashBillPo;
 import trapx00.lightx00.shared.po.manager.AuditIdPo;

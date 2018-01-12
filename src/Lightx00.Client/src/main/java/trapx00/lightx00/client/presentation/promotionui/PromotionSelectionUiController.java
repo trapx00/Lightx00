@@ -1,6 +1,9 @@
 package trapx00.lightx00.client.presentation.promotionui;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -8,10 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
-import javafx.scene.layout.Region;
 import trapx00.lightx00.client.bl.promotionbl.PromotionInfo;
 import trapx00.lightx00.client.bl.promotionbl.factory.PromotionInfoFactory;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.SelectingDialog;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 

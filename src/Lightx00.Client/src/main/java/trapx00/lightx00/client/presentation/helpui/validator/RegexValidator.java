@@ -3,8 +3,6 @@ package trapx00.lightx00.client.presentation.helpui.validator;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 
-import javax.xml.validation.Validator;
-
 public class RegexValidator extends ValidatorBase {
     private String regex;
     public RegexValidator(String regex) {

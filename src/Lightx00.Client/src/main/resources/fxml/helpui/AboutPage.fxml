@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <VBox prefHeight="800.0" prefWidth="800.0" maxHeight="2000" spacing="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trapx00.lightx00.client.presentation.helpui.AboutPageController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />

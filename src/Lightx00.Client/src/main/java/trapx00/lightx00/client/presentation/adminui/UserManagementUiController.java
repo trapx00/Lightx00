@@ -8,8 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
-import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
-import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
@@ -18,9 +16,6 @@ import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class UserManagementUiController implements ExternalLoadableUiController {
     public JFXTextField tfSearch;

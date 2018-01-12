@@ -10,7 +10,6 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
 import trapx00.lightx00.server.data.util.IOUtil;
 import trapx00.lightx00.server.data.util.config.CognitiveServiceConfig;

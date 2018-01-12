@@ -222,6 +222,8 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 

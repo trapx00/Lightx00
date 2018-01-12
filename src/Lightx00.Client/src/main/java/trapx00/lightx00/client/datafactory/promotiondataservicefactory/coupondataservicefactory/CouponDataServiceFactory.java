@@ -2,7 +2,6 @@ package trapx00.lightx00.client.datafactory.promotiondataservicefactory.couponda
 
 import trapx00.lightx00.client.datafactory.DataServiceFactory;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.coupondataservice.CouponDataService;
-import trapx00.lightx00.shared.dataservicestub.promotiondataservice.coupondataservice.CouponDataServiceStub;
 
 public class CouponDataServiceFactory extends DataServiceFactory {
     private static CouponDataService service;

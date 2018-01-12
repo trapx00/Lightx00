@@ -25,6 +25,7 @@ import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -220,6 +221,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 

@@ -17,7 +17,6 @@ import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlSer
 import trapx00.lightx00.client.blservice.saleblservice.SaleRefundBillBlService;
 import trapx00.lightx00.client.datafactory.saledataservicefactory.SaleRefundBillDataServiceFactory;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.dataservice.saledataservice.SaleRefundBillDataService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
@@ -25,7 +24,6 @@ import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
-import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.SaleRefundBillPo;
 import trapx00.lightx00.shared.queryvo.SaleRefundBillQueryVo;
@@ -33,7 +31,6 @@ import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.List;
 
 public class SaleRefundBillBlController implements SaleRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<SaleRefundBillPo, SaleRefundBillVo> {

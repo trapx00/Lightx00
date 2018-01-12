@@ -1,7 +1,6 @@
 package trapx00.lightx00.client.datafactory.logdataservicefactory;
 
 import trapx00.lightx00.shared.dataservice.logdataservice.LogBackupDataService;
-import trapx00.lightx00.shared.dataservicestub.logdataservice.LogBackupDataServiceStub;
 
 import static trapx00.lightx00.client.datafactory.DataServiceFactory.lookupService;
 

@@ -16,14 +16,6 @@ import trapx00.lightx00.client.bl.loginbl.factory.LoginBlFactory;
 import trapx00.lightx00.client.blservice.loginblservice.LoginBlService;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.shared.dataservice.logindataservice.LoginDataService;
-import trapx00.lightx00.shared.util.RmiHelper;
-
-import java.net.MalformedURLException;
-import java.rmi.ConnectException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 
 public class LoginUiController implements ExternalLoadableUiController {
     public JFXPasswordField passwordField;

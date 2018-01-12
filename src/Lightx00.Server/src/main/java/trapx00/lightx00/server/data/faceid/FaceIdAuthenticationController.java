@@ -12,8 +12,6 @@ import org.apache.http.util.EntityUtils;
 import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
 import trapx00.lightx00.server.data.util.config.Config;
-import trapx00.lightx00.server.data.util.serverlogservice.ServerLogService;
-import trapx00.lightx00.server.data.util.serverlogservice.factory.ServerLogServiceFactory;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
 import trapx00.lightx00.shared.exception.faceid.FileException;
 import trapx00.lightx00.shared.exception.faceid.NotRegisteredException;

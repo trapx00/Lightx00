@@ -3,7 +3,6 @@ package trapx00.lightx00.client.presentation.bankaccountui;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlService;
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlServiceFactory;

@@ -1,10 +1,6 @@
 package trapx00.lightx00.client.vo.financestaff;
 
 import trapx00.lightx00.client.vo.BillVo;
-import trapx00.lightx00.shared.util.DateHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TradeHistoryVo { //经营历程表
     private BillVo[] bills;

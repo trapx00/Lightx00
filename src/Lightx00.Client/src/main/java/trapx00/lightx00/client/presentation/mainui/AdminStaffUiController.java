@@ -3,9 +3,9 @@ package trapx00.lightx00.client.presentation.mainui;
 import javafx.event.ActionEvent;
 import trapx00.lightx00.client.blservice.logblservice.LogBackupBlService;
 import trapx00.lightx00.client.blservice.logblservice.LogBackupBlServiceFactory;
+import trapx00.lightx00.client.presentation.adminui.AdminHomeUiController;
 import trapx00.lightx00.client.presentation.adminui.FaceIdRegistrationUiController;
 import trapx00.lightx00.client.presentation.adminui.UserManagementUiController;
-import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
 import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.shared.po.ResultMessage;
 
@@ -35,5 +35,13 @@ public class AdminStaffUiController extends FrameworkUiController {
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
         }
+    }
+
+    /**
+     * 增加一个HomeUiController后，重写这个方法做到退回主界面。
+     */
+    @Override
+    public void switchBackToHome() {
+        switchFunction(AdminHomeUiController.class, "主界面",true);
     }
 }

@@ -1,7 +1,6 @@
 package trapx00.lightx00.server.data.faceid;
 
 import com.j256.ormlite.dao.Dao;
-import trapx00.lightx00.server.Server;
 import trapx00.lightx00.server.data.faceid.factory.FaceIdDaoFactory;
 import trapx00.lightx00.server.data.util.IOUtil;
 import trapx00.lightx00.shared.exception.database.DbSqlException;
@@ -13,7 +12,6 @@ import trapx00.lightx00.shared.po.employee.EmployeeFaceIdInfo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 
 public class FaceIdRegistrationController implements FaceIdRegistrationService {

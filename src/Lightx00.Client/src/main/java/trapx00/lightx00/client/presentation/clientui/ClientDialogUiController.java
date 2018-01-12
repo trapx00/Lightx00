@@ -17,13 +17,7 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlService;
 import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
-import trapx00.lightx00.shared.queryvo.LogBackupVo;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
