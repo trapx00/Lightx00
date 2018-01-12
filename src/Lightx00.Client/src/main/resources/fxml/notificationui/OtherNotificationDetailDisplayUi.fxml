@@ -33,7 +33,7 @@
         </font>
     </Label>
 
-    <JFXTextArea fx:id="taContent" minHeight="100" minWidth="400" disable="true"/>
+    <JFXTextArea fx:id="taContent" minHeight="100" minWidth="400" editable="false"/>
 
     <HBox prefWidth="400" alignment="BASELINE_CENTER" spacing="30">
         <JFXButton fx:id="btnAcknowledge" buttonType="RAISED" onAction="#onBtnAcknowledgeClicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="已读"/>

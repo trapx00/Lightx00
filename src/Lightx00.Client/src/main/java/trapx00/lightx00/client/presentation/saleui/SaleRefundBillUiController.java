@@ -224,9 +224,12 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
             tfMinusProfits.validate();
         });
         tfMinusProfits.setOnKeyReleased(event -> {
-            if(tfMinusProfits.validate()) {
+            if(tfMinusProfits.validate() || tfMinusProfits.getText().length()==0) {
                 new SaleRefundBillUiController.ListHandler().change();
-            }else if(tfMinusProfits.getText().length()==0){
+            }
+        });
+        tfToken.setOnKeyReleased(event -> {
+            if(tfMinusProfits.validate() || tfMinusProfits.getText().length()==0) {
                 new SaleRefundBillUiController.ListHandler().change();
             }
         });

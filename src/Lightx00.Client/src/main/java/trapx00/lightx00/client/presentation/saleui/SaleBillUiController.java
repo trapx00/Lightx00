@@ -264,6 +264,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         tfGiftToken.getValidators().add(numberValidator);
         tfToken.getValidators().add(numberValidator);
         tfMinusProfits.getValidators().add(numberValidator);
+        tfToken.getValidators().add(numberValidator);
 
         tfClientIdProperty.addListener(event -> {
             tfClientId.validate();
@@ -288,9 +289,12 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         });
 
         tfMinusProfits.setOnKeyReleased(event -> {
-            if(tfMinusProfits.validate()) {
+            if(tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
                 new ListHandler().change();
-            }else if(tfMinusProfits.getText().length()==0){
+            }
+        });
+        tfToken.setOnKeyReleased(event -> {
+            if(tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
                 new ListHandler().change();
             }
         });
@@ -437,6 +441,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                     case ClientPromotion:
                         ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
                         tfGiftToken.setText(clientPromotionVo.getCouponPrice() + "");
+                        tfMinusProfits.setText(clientPromotionVo.getSalePrice()+"");
+                        new ListHandler().change();
                         addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                         break;
                     case ComSalePromotion:

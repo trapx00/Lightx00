@@ -52,7 +52,7 @@
                           promptText="业务员" onMouseClicked="#onOperatorClicked"/>
         </StackPane>
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
-            <JFXTextField labelFloat="true" fx:id="tfRepository" maxHeight="30" prefWidth="150" promptText="仓库ID" editable="false" text="1"/>
+            <JFXTextField labelFloat="true" fx:id="tfRepository" maxHeight="30" prefWidth="150" promptText="仓库ID" text="1"/>
         </StackPane>
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
             <JFXCheckBox fx:id="cbFilter" maxHeight="30" prefWidth="150" text="使用筛选条件"/>
