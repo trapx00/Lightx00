@@ -25,8 +25,8 @@
 
     <JFXTreeTableView fx:id="notificationTable" prefHeight="2000" >
         <columns>
+            <JFXTreeTableColumn fx:id="tableIdColumn" prefWidth="150" resizable="false" text="消息ID"/>
             <JFXTreeTableColumn fx:id="tableDateColumn" prefWidth="150" text="日期"/>
-            <JFXTreeTableColumn fx:id="tableIdColumn" editable="false" prefWidth="150" resizable="false" text="消息"/>
             <JFXTreeTableColumn fx:id="tableTypeColumn" prefWidth="150" text="类型"/>
             <JFXTreeTableColumn fx:id="tableSenderColumn" prefWidth="150" text="发送者"/>
         </columns>

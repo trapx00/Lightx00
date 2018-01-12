@@ -86,7 +86,7 @@ public class BankAccountSelectionUi extends SelectingDialog implements BankAccou
         tableBankAccounts.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tableBankAccounts.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
-                onBtnCloseClicked(null);
+                onBtnSelectClicked(null);
             }
         });
     }
@@ -94,7 +94,7 @@ public class BankAccountSelectionUi extends SelectingDialog implements BankAccou
     @Override
     public void showBankAccountSelectDialog(Consumer<BankAccountVo> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        BankAccountSelectionUi controller = (BankAccountSelectionUi) uiPackage.getController();
+        BankAccountSelectionUi controller = uiPackage.getController();
         controller.callback = callback;
         JFXDialog dialog = PromptDialogHelper.start("","").create();
         dialog.setContent((Region) uiPackage.getComponent());

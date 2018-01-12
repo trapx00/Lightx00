@@ -15,6 +15,7 @@ import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.shared.po.ResultMessage;
+import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.log.LogSeverity;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
@@ -37,8 +38,10 @@ public class SaleDetailBlController implements SaleDetailBlService {
     @Override
     public SaleDetailVo query(SaleDetailQueryVo query) {
         SaleBillQueryVo queryVo = new SaleBillQueryVo();
+        queryVo.eq("state", BillState.Activated);
 
         if (query.getStart() != null && query.getEnd() != null) {
+            queryVo.and();
             queryVo.between("date", query.getStart(), query.getEnd());
         }
         if (query.getClients() != null && query.getClients().length > 0) {

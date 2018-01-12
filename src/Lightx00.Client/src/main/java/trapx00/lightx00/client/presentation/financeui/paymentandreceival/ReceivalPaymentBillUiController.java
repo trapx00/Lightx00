@@ -82,7 +82,12 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         ClientVo client = clientInfoUi.queryById(bill.getClientId());
         EmployeeVo operator = employeeSelection.queryId(bill.getOperatorId());
 
-        controller.tfId.setText(bill.getId());
+        if (bill.getId().equals(BillHelper.refreshIdRequest)) {
+            controller.tfId.setText(blService.getId());
+        } else {
+            controller.tfId.setText(bill.getId());
+        }
+
         controller.client.set(client);
         controller.currentEmployee.set(operator);
         controller.initTranscationTable(bill.getTranscations());
@@ -223,7 +228,10 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
     }
 
     public void onTfClientClicked() {
-        clientInfoUi.showClientSelectDialog(x -> client.set(x));
+        clientInfoUi.showClientSelectDialog(x -> {
+            client.set(x);
+            tfClient.validate();
+        });
     }
 
     public void autofill() {

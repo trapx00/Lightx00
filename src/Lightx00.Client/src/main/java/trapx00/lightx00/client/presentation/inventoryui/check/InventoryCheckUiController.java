@@ -70,7 +70,9 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
                         endTime);
                 System.out.println(inventoryViewVo.getId());
                 viewModels.add(new InventoryViewModel(inventoryViewVo.getItems()));
-            } catch (Exception ignored) { }
+            } catch (Exception ignored) {
+                ignored.printStackTrace();
+            }
 
 
 

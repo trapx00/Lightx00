@@ -14,6 +14,7 @@ import trapx00.lightx00.client.blservice.clientblservice.ClientBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.EmailValidator;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.salestaff.ClientVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
@@ -24,6 +25,9 @@ import trapx00.lightx00.shared.po.client.ClientType;
 
 import java.util.HashMap;
 
+
+
+@SuppressWarnings("unchecked")
 public class ClientAddUiController implements ExternalLoadableUiController {
     private static final HashMap<String, ClientType> clientTypeMap = new HashMap<>();
     @FXML
@@ -79,16 +83,21 @@ public class ClientAddUiController implements ExternalLoadableUiController {
         clientLevel.setItems(stringObservableList2);
         clientLevel.setValue("1");
 
+
+
         NumberValidator numberValidator = new NumberValidator();
         numberValidator.setMessage("请输入数字类型");
         RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
         requiredValidator.setMessage("请输入信息");
+        EmailValidator emailValidator = new EmailValidator();
+        emailValidator.setMessage("请输入电子邮箱地址");
 
         clientName.getValidators().add(requiredValidator);
         clientPhone.getValidators().add(requiredValidator);
         clientAddress.getValidators().add(requiredValidator);
         clientZipCode.getValidators().add(requiredValidator);
         clientZipCode.getValidators().add(numberValidator);
+        clientEmail.getValidators().add(emailValidator);
         clientDefaultOperator.getValidators().add(requiredValidator);
 
         clientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -120,6 +129,12 @@ public class ClientAddUiController implements ExternalLoadableUiController {
                 clientDefaultOperator.validate();
             }
         });
+
+        clientEmail.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                clientEmail.validate();
+            }
+        });
     }
 
     /**
@@ -132,9 +147,16 @@ public class ClientAddUiController implements ExternalLoadableUiController {
         return new UiLoader("/fxml/clientui/ClientAddUi.fxml").loadAndGetPackageWithoutException();
     }
 
+    public boolean validate() {
+        return clientName.validate() & clientPhone.validate() & clientAddress.validate() & clientZipCode.validate() & clientDefaultOperator.validate() & clientEmail.validate();
+    }
+
     @FXML
     private void onBtnSubmitClicked() {
         try {
+            if (!validate()) {
+                return;
+            }
             ClientVo clientVo = getCurrentClientVo();
             PromptDialogHelper.start("确认单据", "").setContent(
                     clientVo.detailUi().showContent(clientVo).getComponent())

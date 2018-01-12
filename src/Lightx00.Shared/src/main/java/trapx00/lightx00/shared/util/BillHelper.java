@@ -33,5 +33,7 @@ public class BillHelper {
         return toFixed(num, 2);
     }
 
-    public static String formatComid(int id){return  String.format("%04d",id);}
+    public static String formatComid(int id){return String.format("%04d",id);}
+
+    public static final String refreshIdRequest = "REFRESH_ID";
 }

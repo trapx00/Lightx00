@@ -94,6 +94,9 @@ public class AddTranscationDialog implements ExternalLoadableUiController {
 
     public void onTfBankAccountClicked(MouseEvent mouseEvent) {
         BankAccountUiFactory.getBankAccountSelectionUi()
-            .showBankAccountSelectDialog(vo -> this.bankAccountProperty.set(vo));
+            .showBankAccountSelectDialog(vo ->  {
+                this.bankAccountProperty.set(vo);
+                tfBankAccount.validate();
+            } );
     }
 }

@@ -83,7 +83,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         CashBillVo cashBillVo = (CashBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         CashBillUiController cashBillDetailUiController = externalLoadedUiPackage.getController();
-        cashBillDetailUiController.tfId.setText(cashBillVo.getId());
+        cashBillDetailUiController.tfId.setText(cashBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : cashBillVo.getId());
         cashBillDetailUiController.currentDate.setValue(new Date());
         cashBillDetailUiController.currentBankAccount.setValue(bankAccountSelection.queryId(cashBillVo.getAccountId()));
         cashBillDetailUiController.currentEmployee.setValue(employeeSelection.queryId(cashBillVo.getOperatorId()));
@@ -292,7 +292,10 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
 
     public void onTfBankAccountClicked(MouseEvent actionEvent) {
         BankAccountUiFactory.getBankAccountSelectionUi()
-            .showBankAccountSelectDialog(vo -> this.currentBankAccount.setValue(vo));
+            .showBankAccountSelectDialog(vo -> {
+                this.currentBankAccount.setValue(vo);
+                tfBankaccountId.validate();
+            });
     }
 
     public void onBtnSaveAsDraftClicked(ActionEvent actionEvent) {

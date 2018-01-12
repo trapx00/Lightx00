@@ -136,7 +136,7 @@ public class BaseDatabaseFactory {
             Dao<ManagerPo,String> managerPos =createDao(ManagerPo.class);
             TableUtils.dropTable(managerPos, true);
             TableUtils.createTableIfNotExists(connectionSource, ManagerPo.class);
-            managerPos.create(new ManagerPo("10003", "总经理", new Date(), "123456", EmployeeState.Active));
+            managerPos.create(new ManagerPo("10003", "admin", new Date(), "admin", EmployeeState.Active));
 
             Dao<AdminPo,String> adminPos = createDao(AdminPo.class);
             TableUtils.dropTable(adminPos, true);
@@ -191,7 +191,7 @@ public class BaseDatabaseFactory {
                     "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("2",
-                    ClientType.Retailer,
+                    ClientType.Supplier,
                     3,
                     "米玲",
                     "13897331281",
