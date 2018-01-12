@@ -116,8 +116,8 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
             updateTotal();
         });
 
-        tfStartDate.setDayCellFactory(startDayCellFactory);
-        tfEndDate.setDayCellFactory(endDayCellFactory);
+//        tfStartDate.setDayCellFactory(startDayCellFactory);
+//        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             double total = 0.0;
@@ -184,7 +184,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
                 PromotionState.Waiting,
-                Integer.parseInt(cbClientLevel.getValue().toString()),
+                Integer.parseInt(cbClientLevel.getValue()),
                 couponPrice,
                 promotionCommodities,
                 salePrice

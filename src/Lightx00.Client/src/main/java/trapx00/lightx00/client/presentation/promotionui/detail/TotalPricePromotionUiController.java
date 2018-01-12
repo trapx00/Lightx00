@@ -136,8 +136,8 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
             lbTotal.setText(String.valueOf(total));
         });
 
-        tfStartDate.setDayCellFactory(startDayCellFactory);
-        tfEndDate.setDayCellFactory(endDayCellFactory);
+//        tfStartDate.setDayCellFactory(startDayCellFactory);
+//        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         TreeItem<PromotionCommodityModel> root = new RecursiveTreeItem<>(promotionCommodityModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotionCommodity.setRoot(root);
