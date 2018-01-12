@@ -137,6 +137,8 @@ public class ClientUiController implements ClientInfoUi, ExternalLoadableUiContr
                     .addCloseButton("好的", "DONE", null)
                     .createAndShow();
         }
+        clientSelectionItemModels.clear();
+        initClients();
     }
 
     @FXML

@@ -1,6 +1,8 @@
 package trapx00.lightx00.client.presentation.saleui;
 
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
@@ -29,6 +31,25 @@ public class SaleCommodityFillUiController extends SelectingDialog implements Ex
         PromptDialogHelper.start("请填写商品单价、数量和备注", "").setContent((Region) uiPackage.getComponent()).createAndShow();
     }
 
+    public void initialize(){
+        NumberValidator numberValidator = new NumberValidator();
+        numberValidator.setMessage("请输入数字类型");
+        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
+        requiredValidator.setMessage("请输入信息");
+
+        tfCommodityPrice.getValidators().add(numberValidator);
+
+        tfCommodityNumber.getValidators().add(numberValidator);
+
+        tfCommodityPrice.focusedProperty().addListener(event->{
+            tfCommodityPrice.validate();
+        });
+
+        tfCommodityNumber.focusedProperty().addListener(event->{
+            tfCommodityNumber.validate();
+        });
+    }
+
     /**
      * Loads the controller.
      *
@@ -41,9 +62,11 @@ public class SaleCommodityFillUiController extends SelectingDialog implements Ex
 
     @FXML
     private void onBtnSubmitClicked(ActionEvent actionEvent) {
-        onClose(); //一定要调用这个来把弹出框关了。
-        if (callback != null) {
-            callback.accept(new SaleCommodityFillVo(Double.parseDouble(tfCommodityPrice.getText()), Double.parseDouble(tfCommodityNumber.getText()), tfCommodityComment.getText())); //选择结束，调用回调方法。
+        if(tfCommodityNumber.validate()&&tfCommodityPrice.validate()) {
+            onClose(); //一定要调用这个来把弹出框关了。
+            if (callback != null) {
+                callback.accept(new SaleCommodityFillVo(Double.parseDouble(tfCommodityPrice.getText()), Double.parseDouble(tfCommodityNumber.getText()), tfCommodityComment.getText())); //选择结束，调用回调方法。
+            }
         }
     }
 

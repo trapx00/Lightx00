@@ -92,7 +92,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
     public ResultMessage activate(String id) {
         try {
             PurchaseRefundBillPo purchaseRefundBillPo = dataService.query(new PurchaseRefundBillQueryVo().idEq(id))[0];
-            clientModificationService.modifyClient(purchaseRefundBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, purchaseRefundBillPo.getTotal());
+            clientModificationService.modifyClient(purchaseRefundBillPo.getClientId(), ClientModificationFlag.PAYABLE, -purchaseRefundBillPo.getTotal());
             for (CommodityItem commodityItem : purchaseRefundBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Low, commodityItem.getNumber());
             }
