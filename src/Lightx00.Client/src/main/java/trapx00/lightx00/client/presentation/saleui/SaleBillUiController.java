@@ -472,8 +472,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                     PromptDialogHelper.start("失败", "超出权限可折扣金额")
                         .addCloseButton("确定", "CHECK", null)
                         .createAndShow();
+                    return;
                 }
-                return;
             }
 
             PromptDialogHelper.start("确认单据", "").setContent(
