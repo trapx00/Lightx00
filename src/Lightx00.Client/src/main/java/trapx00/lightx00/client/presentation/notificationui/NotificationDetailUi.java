@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 public abstract class NotificationDetailUi<T extends NotificationVo> implements ExternalLoadableUiController, trapx00.lightx00.client.presentation.helpui.ContentDisplayUi<T> {
     protected Consumer<T> onAcknowledgeClicked = x -> {
         x.operationService().activate(x);
-        FrameworkUiManager.getFrameworkUiController().refreshDraftStatus();
+        FrameworkUiManager.getFrameworkUiController().refreshNotificationStatus();
     };
     protected Consumer<T> onIgnoreClicked = x -> FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
     protected Runnable onExit;
