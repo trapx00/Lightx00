@@ -124,8 +124,8 @@ public class BaseDatabaseFactory {
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
-            saleStaffDao.create(new SaleStaffPo("10004", "销售主管", new Date(), "123456", SaleStaffType.AStaff,EmployeeState.Active,true));
-            saleStaffDao.create(new SaleStaffPo("10201", "C销售主任", new Date(), "123456", SaleStaffType.AStaff,EmployeeState.Active,false));
+            saleStaffDao.create(new SaleStaffPo("10004", "销售主管", new Date(), "123456", SaleStaffType.Manager,EmployeeState.Active,true));
+            saleStaffDao.create(new SaleStaffPo("10201", "C销售主任", new Date(), "123456", SaleStaffType.Manager,EmployeeState.Active,false));
 
             Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
             TableUtils.dropTable(inventoryStaffPos, true);

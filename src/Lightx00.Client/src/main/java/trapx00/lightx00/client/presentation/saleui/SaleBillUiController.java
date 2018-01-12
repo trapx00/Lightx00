@@ -2,8 +2,6 @@ package trapx00.lightx00.client.presentation.saleui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -41,15 +39,19 @@ import trapx00.lightx00.client.vo.Reversible;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
 import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
+import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
@@ -139,6 +141,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private SaleCommodityFillUiController saleCommodityFillUiController = SaleCommodityFillUiFactory.getSaleCommodityFillUiController();
     private PromotionSelection promotionSelection = PromotionSelectionFactory.getPromotionSelection();
+    private PromotionVoBase promotionVo = null;
     private StringProperty tfClientIdProperty = new SimpleStringProperty("");
     private StringProperty tfClientNameProperty = new SimpleStringProperty("");
     private StringProperty tfSalesmanIdProperty = new SimpleStringProperty("");
@@ -257,12 +260,12 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         ValidatorHelper.addDefaultDoubleValidator(tfToken);
 
         tfMinusProfits.setOnKeyReleased(event -> {
-            if(tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
+            if (tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
                 new ListHandler().change();
             }
         });
         tfToken.setOnKeyReleased(event -> {
-            if(tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
+            if (tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
                 new ListHandler().change();
             }
         });
@@ -317,6 +320,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
             tfClientLevel.setText(x.getClientLevel() + "");
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 
@@ -325,6 +330,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         employeeSelection.showEmployeeSelectDialog(x -> {
             tfSalesmanId.setText(x.get(0).getId());
             tfSalesmanName.setText(x.get(0).getName());
+            tfSalesmanName.validate();
+            tfSalesmanId.validate();
         });
     }
 
@@ -404,18 +411,16 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         giftItemModelObservableList.clear();
         promotionSelection.showEmployeeSelectDialog(
             promotionVoBase -> {
-                tfPromotionId.setText(promotionVoBase.getId());
+                promotionVo = promotionVoBase;
                 switch (promotionVoBase.getType()) {
                     case ClientPromotion:
                         ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
                         tfGiftToken.setText(clientPromotionVo.getCouponPrice() + "");
-                        tfMinusProfits.setText(clientPromotionVo.getSalePrice()+"");
                         new ListHandler().change();
                         addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                         break;
                     case ComSalePromotion:
                         ComSalePromotionVo comSalePromotionVo = (ComSalePromotionVo) promotionVoBase;
-                        tfMinusProfits.setText(calculateMinusProfit(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()), comSalePromotionVo.getOnSalePrice()) + "");
                         break;
                     case TotalPricePromotion:
                         TotalPricePromotionVo totalPricePromotionVo = (TotalPricePromotionVo) promotionVoBase;
@@ -423,18 +428,54 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                         addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                         break;
                 }
+                tfPromotionId.setText(promotionVoBase.getId());
+                tfMinusProfits.setText(calculateOnSalePrice(promotionVoBase)+"");
                 (new ListHandler()).change();//修改总价格
             },
             getCurrentSaleBillVo()
         );
+        promotionVo = null;
         tfPromotionId.clear();
         tfGiftToken.setText("0");
+    }
+
+    private double calculateOnSalePrice(PromotionVoBase promotionVoBase) {
+        double minusProfit = 0;
+        if(promotionVoBase==null){
+           return minusProfit;
+        }
+        switch (promotionVoBase.getType()) {
+            case ClientPromotion:
+                ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
+                minusProfit = clientPromotionVo.getSalePrice();
+                new ListHandler().change();
+                break;
+            case ComSalePromotion:
+                ComSalePromotionVo comSalePromotionVo = (ComSalePromotionVo) promotionVoBase;
+                minusProfit = calculateMinusProfit(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()), comSalePromotionVo.getOnSalePrice());
+                break;
+            case TotalPricePromotion:
+                minusProfit = 0;
+                break;
+        }
+        return minusProfit;
     }
 
     @FXML
     private void onBtnSubmitClicked() {
         try {
             SaleBillVo saleBillVo = getCurrentSaleBillVo();
+
+            if (currentEmployee.getValue().getPosition() == EmployeePosition.SaleStaff) {
+                int staffOnSale = ((SaleStaffVo) currentEmployee.getValue()).getSaleStaffType() == SaleStaffType.Manager ? 5000 : 1000;
+                if (calculateOnSalePrice(promotionVo) + staffOnSale < Double.parseDouble(tfMinusProfits.getText())) {
+                    PromptDialogHelper.start("失败", "超出权限可折扣金额")
+                        .addCloseButton("确定", "CHECK", null)
+                        .createAndShow();
+                }
+                return;
+            }
+
             PromptDialogHelper.start("确认单据", "").setContent(
                 saleBillVo.billDetailUi().showContent(saleBillVo).getComponent())
                 .addCloseButton("确定", "CHECK", e -> {
@@ -484,8 +525,12 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         }
     }
 
+    public boolean validateAll() {
+        return tfClientId.validate()&&tfClientName.validate()&&tfSalesmanId.validate()&&tfSalesmanName.validate()&&tfGiftToken.validate()&&tfToken.validate()&&tfMinusProfits.validate()&&tfToken.validate();
+    }
+
     private SaleBillVo getCurrentSaleBillVo() {
-        if (cbRepository.getValue() == null || tfOriginTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                 .addCloseButton("好的", "CHECK", null)
                 .createAndShow();
@@ -602,7 +647,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                 total += commodityItemModel.getCommodityItemObjectProperty().getPrice() * commodityItemModel.getCommodityItemObjectProperty().getNumber();
             }
             tfOriginTotal.setText(total + "");
-            double tempMinusProfit=tfMinusProfits.getText().length()==0?0.0:Double.parseDouble(tfMinusProfits.getText());
+            double tempMinusProfit = tfMinusProfits.getText().length() == 0 ? 0.0 : Double.parseDouble(tfMinusProfits.getText());
             tfUltiTotal.setText(total - tempMinusProfit - Double.parseDouble(tfToken.getText()) + "");
         }
     }
