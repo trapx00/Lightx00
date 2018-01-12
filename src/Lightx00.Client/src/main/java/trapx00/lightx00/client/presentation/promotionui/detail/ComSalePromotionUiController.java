@@ -115,8 +115,8 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
             updateTotal();
         });
 
-//        tfStartDate.setDayCellFactory(startDayCellFactory);
-//        tfEndDate.setDayCellFactory(endDayCellFactory);
+        tfStartDate.setDayCellFactory(startDayCellFactory);
+        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             double total = 0;
@@ -173,11 +173,14 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         if(tfSalePrice.getText().length()!=0){
             salePrice = Integer.parseInt(tfSalePrice.getText());
         }
+        PromotionState state = PromotionState.Waiting;
+        if(tfStartDate.getValue().isAfter(DateHelper.dateToLocalDate(new Date())))
+            state = PromotionState.Active;
         return new ComSalePromotionVo(
                 tfId.getText(),
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
-                PromotionState.Waiting,
+                state,
                 promotionCommodities,
                 salePrice
         );
@@ -285,7 +288,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()).plusDays(1))) {
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
                         setDisable(true);
                     }
                 }

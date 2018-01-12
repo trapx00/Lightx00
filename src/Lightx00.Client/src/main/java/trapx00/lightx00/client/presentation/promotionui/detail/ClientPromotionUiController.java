@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlServiceFactory;
@@ -107,17 +108,18 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
             }
         });
 
+        tbPromotionCommodity.setEditable(true);
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+        tcAmount.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         tcAmount.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionCommodityModel,String> t)-> {
             (t.getTreeTableView().getTreeItem((t.getTreeTablePosition().getRow())).getValue()).setAmount(Double.parseDouble(t.getNewValue()));
             updateTotal();
         });
-
-//        tfStartDate.setDayCellFactory(startDayCellFactory);
-//        tfEndDate.setDayCellFactory(endDayCellFactory);
+        tfStartDate.setDayCellFactory(startDayCellFactory);
+        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         promotionCommodityModelObservableList.addListener((ListChangeListener<PromotionCommodityModel>) c -> {
             double total = 0.0;
@@ -179,11 +181,14 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                     .createAndShow();
             throw new NotCompleteException();
         }
+        PromotionState state = PromotionState.Waiting;
+        if(tfStartDate.getValue().isAfter(DateHelper.dateToLocalDate(new Date())))
+            state = PromotionState.Active;
         return new ClientPromotionVo(
                 tfId.getText(),
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
-                PromotionState.Waiting,
+                state,
                 Integer.parseInt(cbClientLevel.getValue()),
                 couponPrice,
                 promotionCommodities,
@@ -292,7 +297,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()).plusDays(1))) {
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
                         setDisable(true);
                     }
                 }

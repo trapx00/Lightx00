@@ -99,9 +99,6 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
 
     public void initialize() {
         tfId.setText(blService.getId());
-        RequiredFieldValidator totalPriceValidator = new RequiredFieldValidator();
-        totalPriceValidator.setMessage("请输入总价条件");
-        tfTotalPrice.getValidators().add(totalPriceValidator);
         NumberValidator numberValidator = new NumberValidator();
         numberValidator.setMessage("请输入数字类型");
         tfTotalPrice.getValidators().add(numberValidator);
@@ -136,8 +133,8 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
             lbTotal.setText(String.valueOf(total));
         });
 
-//        tfStartDate.setDayCellFactory(startDayCellFactory);
-//        tfEndDate.setDayCellFactory(endDayCellFactory);
+        tfStartDate.setDayCellFactory(startDayCellFactory);
+        tfEndDate.setDayCellFactory(endDayCellFactory);
 
         TreeItem<PromotionCommodityModel> root = new RecursiveTreeItem<>(promotionCommodityModelObservableList, RecursiveTreeObject::getChildren);
         tbPromotionCommodity.setRoot(root);
@@ -199,11 +196,14 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
                     .createAndShow();
             throw new NotCompleteException();
         }
+        PromotionState state = PromotionState.Waiting;
+        if(tfStartDate.getValue().isAfter(DateHelper.dateToLocalDate(new Date())))
+            state = PromotionState.Active;
         return new TotalPricePromotionVo(
                 tfId.getText(),
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
-                PromotionState.Waiting,
+                state,
                 couponPrice,
                 totalPrice,
                 promotionCommodities
@@ -278,19 +278,12 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
 
         }
     }
-    public void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
+    private void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
         for (PromotionCommodity commodity : promotionCommodities) {
             promotionCommodityModelObservableList.add(
                     new PromotionCommodityModel(commodity));
         }
 
-    }
-
-    private LocalDate DateToLocalDate(Date date) {
-        Instant instant = date.toInstant();
-        ZoneId zone = ZoneId.systemDefault();
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
-        return localDateTime.toLocalDate();
     }
 
     private Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -316,7 +309,7 @@ public class TotalPricePromotionUiController implements DraftContinueWritableUiC
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()).plusDays(1))) {
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
                         setDisable(true);
                     }
                 }
