@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import trapx00.lightx00.client.bl.financebl.factory.TradeHistoryBlFactory;
 import trapx00.lightx00.client.bl.util.ExcelOutput;
 import trapx00.lightx00.client.blservice.financeblservice.TradeHistoryBlService;
+import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
+import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
 import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
@@ -52,6 +54,8 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
     public JFXButton btnExport;
     public JFXButton btnDetail;
     public JFXCheckBox cbFilter;
+    public JFXTextField tfOperator;
+    private EmployeeSelection employeeSelection = UserManagementUiFactory.getEmployeeSelectionUi();
     private ObservableList<BillTableItemModel> billTableItemModels = FXCollections.observableArrayList();
     private ClientInfoUi clientInfoUi = ClientInfoUiFactory.getClientInfoUi();
 
@@ -60,6 +64,7 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
 
     private TradeHistoryBlService blService = TradeHistoryBlFactory.getController();
     private ObjectProperty<TradeHistoryVo> tradeHistory = new SimpleObjectProperty<>();
+    private ObjectProperty<List<EmployeeVo>> operator = new SimpleObjectProperty<>();
 
     public void initialize() {
         initTable();
@@ -101,6 +106,13 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
                 ));
         });
 
+        operator.addListener((observable, oldValue, newValue) -> {
+                tfOperator.setText(newValue == null ? "" : (
+                    newValue.size() == 1 ? String.format("%s(id: %s)", newValue.get(0).getName(), newValue.get(0).getId())
+                        : String.format("选择了%s项操作员", newValue.size())
+                ));
+            });
+
         tradeHistory.addListener(((observable, oldValue, newValue) -> {
             billTableItemModels.clear();
             billTableItemModels.addAll(Arrays.stream(newValue.getBills()).map(BillTableItemModel::new).collect(Collectors.toList()));
@@ -138,6 +150,10 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
 
             if (billTypes.get() != null && billTypes.get().size() != 0) {
                 queryVo.setBillTypes(billTypes.get().toArray(new BillType[billTypes.get().size()]));
+            }
+
+            if (operator.get() != null) {
+                queryVo.setOperatorIds(operator.get().stream().map(EmployeeVo::getId).toArray(String[]::new));
             }
         }
         tradeHistory.set(blService.query(queryVo));
@@ -247,5 +263,12 @@ public class TradeHistoryUiController implements ExternalLoadableUiController {
         dpEnd.setValue(null);
         client.setValue(null);
         billTypes.setValue(null);
+        operator.set(null);
+    }
+
+    public void onOperatorClicked(MouseEvent mouseEvent) {
+        employeeSelection.showEmployeeSelectDialog(employeeVos -> {
+            operator.set(employeeVos);
+        });
     }
 }

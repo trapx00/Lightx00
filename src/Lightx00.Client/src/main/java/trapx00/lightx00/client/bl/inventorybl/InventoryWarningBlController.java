@@ -161,7 +161,7 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
                 int length=inventoryDetailBillPo.getCommodityList().length;
                 if(inventoryDetailBillPo.getInventoryBillType()== InventoryBillType.Warning){
                     EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.SaleStaff, new SpecificUserAccountQueryVo()));
-                    notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(inventoryDetailBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseBillMessage(id)));
+                    notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(inventoryDetailBillPo.getOperatorId()), employeeVos, generatePurchaseBillMessage(id)));
                     return ResultMessage.Success;
                 }else{
                     for(int i=0;i<length;i++){

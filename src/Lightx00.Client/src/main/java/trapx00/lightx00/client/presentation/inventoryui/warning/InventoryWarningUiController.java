@@ -40,6 +40,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -52,7 +53,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public JFXTextField tfDate;
     public JFXTextField tfId;
     public JFXButton btnDelete;
-    public JFXComboBox<Label> jfxComboBox=new JFXComboBox<Label>();
+    public JFXComboBox<Label> jfxComboBox=new JFXComboBox<>();
     public JFXTreeTableView<CommoditySelectionItemModel> inventoryGiftItems;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcName;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcId;
@@ -91,7 +92,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         InventoryDetailBillVo inventoryDetailBillVo = (InventoryDetailBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         InventoryWarningUiController inventoryWarningUiController = externalLoadedUiPackage.getController();
-        inventoryWarningUiController.tfId.setText(inventoryDetailBillVo.getId());
+        inventoryWarningUiController.tfId.setText(inventoryDetailBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : inventoryDetailBillVo.getId());
         inventoryWarningUiController.currentDate.setValue(inventoryDetailBillVo.getDate());
         inventoryWarningUiController.tfOperator.setText(inventoryDetailBillVo.getOperatorId());
         inventoryWarningUiController.jfxComboBox.setValue(new Label(inventoryDetailBillVo.getInventoryBillType().toString()));

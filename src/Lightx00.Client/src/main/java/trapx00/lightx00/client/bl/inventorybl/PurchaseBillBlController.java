@@ -92,7 +92,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
     public ResultMessage activate(String id) {
         try {
             PurchaseBillPo purchaseBillPo = dataService.query(new PurchaseBillQueryVo().idEq(id))[0];
-            clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, purchaseBillPo.getTotal());
+            clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.PAYABLE, purchaseBillPo.getTotal());
             for (CommodityItem commodityItem : purchaseBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Up, commodityItem.getNumber());
             }

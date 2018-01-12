@@ -36,6 +36,7 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -101,7 +102,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseBillUiController purchaseBillUiController = externalLoadedUiPackage.getController();
-        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
+        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : purchaseBillVo.getId());
         purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
@@ -202,8 +203,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) reversible;
         purchaseBillVo.setTotal(-purchaseBillVo.getTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        PurchaseBillUiController purchaseBillUiController = (PurchaseBillUiController) externalLoadedUiPackage.getController();
-        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
+        PurchaseBillUiController purchaseBillUiController = externalLoadedUiPackage.getController();
+        purchaseBillUiController.tfBillId.setText(blService.getId());
         purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());

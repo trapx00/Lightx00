@@ -18,8 +18,8 @@ public class OtherNotificationVo extends NotificationVo {
         this.content = content;
     }
 
-    public OtherNotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receivers, NotificationType type, String content) {
-        super(date, sender, receivers, type);
+    public OtherNotificationVo(Date date, EmployeeVo sender, EmployeeVo[] receivers, String content) {
+        super(date, sender, receivers, NotificationType.Others);
         this.content = content;
     }
 

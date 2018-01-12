@@ -54,6 +54,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.awt.event.ActionEvent;
@@ -161,7 +162,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         SaleBillVo saleBillVo = (SaleBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillUiController saleBillUiController = externalLoadedUiPackage.getController();
-        saleBillUiController.tfBillId.setText(saleBillVo.getId());
+        saleBillUiController.tfBillId.setText(saleBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : saleBillVo.getId());
         saleBillUiController.tfDate.setText(saleBillVo.getDate().toString());
         saleBillUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());
         saleBillUiController.tfSalesmanName.setText(employeeInfo.queryById(saleBillVo.getSalesmanId()).getName());
@@ -327,7 +328,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         saleBillVo.setUltiTotal(-saleBillVo.getUltiTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillUiController saleBillUiController = externalLoadedUiPackage.getController();
-        saleBillUiController.tfBillId.setText(saleBillVo.getId());
+        saleBillUiController.tfBillId.setText(blService.getId());
         saleBillUiController.tfDate.setText(saleBillVo.getDate().toString());
         saleBillUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());
         saleBillUiController.tfSalesmanName.setText(employeeInfo.queryById(saleBillVo.getSalesmanId()).getName());

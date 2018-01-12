@@ -26,10 +26,10 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
         </padding>
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
-            <JFXDatePicker fx:id="dpStart" maxHeight="30" prefWidth="150" promptText="起始日期"/>
+            <JFXDatePicker editable="false" fx:id="dpStart" maxHeight="30" prefWidth="150" promptText="起始日期"/>
         </StackPane>
         <StackPane alignment="CENTER_LEFT" maxHeight="30">
-            <JFXDatePicker fx:id="dpEnd" maxHeight="30" prefWidth="150" promptText="终止日期"/>
+            <JFXDatePicker editable="false" fx:id="dpEnd" maxHeight="30" prefWidth="150" promptText="终止日期"/>
         </StackPane>
     </JFXMasonryPane>
     <JFXTreeTableView fx:id="tbSituation" prefHeight="600" >
