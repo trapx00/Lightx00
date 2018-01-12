@@ -5,6 +5,7 @@ import trapx00.lightx00.client.bl.promotionbl.factory.ComSalePromotionBlFactory;
 import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionDetailUi;
+import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionUiController;
 import trapx00.lightx00.client.presentation.promotionui.detail.PromotionDetailUi;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
@@ -46,7 +47,7 @@ public class ComSalePromotionVo extends PromotionVoBase {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new ComSalePromotionUiController();
     }
 
     @Override

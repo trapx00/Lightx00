@@ -13,6 +13,7 @@ import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagem
 import trapx00.lightx00.client.blservice.bankaccountblservice.BankAccountManagementBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.financestaff.BankAccountVo;
+import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.shared.queryvo.BankAccountQueryVo;
 import trapx00.lightx00.shared.util.DateHelper;
 
@@ -100,7 +101,21 @@ public class BankAccountUiController implements ExternalLoadableUiController {
 
     }
 
+    public boolean checkAccess() {
+        FinanceStaffVo staffVo = (FinanceStaffVo) FrameworkUiManager.getCurrentEmployee();
+        if (!staffVo.isRoot()) {
+            PromptDialogHelper.start("无最高权限！","此功能仅供最高权限财务人员操作！")
+                .addCloseButton("好","CHECK", null)
+                .createAndShow();
+            return false;
+        }
+        return true;
+    }
+
     public void onBtnDeleteClicked(ActionEvent actionEvent) {
+        if (!checkAccess()) {
+            return;
+        }
         BankAccountVo selected = getSelected();
         if (selected != null) {
             new PromptDialogHelper("确定删除",
@@ -120,6 +135,9 @@ public class BankAccountUiController implements ExternalLoadableUiController {
     }
 
     public void onBtnModifyClicked(ActionEvent actionEvent) {
+        if (!checkAccess()) {
+            return;
+        }
         BankAccountVo selected = getSelected();
         if (selected != null) {
             new BankAccountModificationUi().show(selected, this::updateItems);
@@ -127,6 +145,9 @@ public class BankAccountUiController implements ExternalLoadableUiController {
     }
 
     public void onBtnAddClicked(ActionEvent actionEvent) {
+        if (!checkAccess()) {
+            return;
+        }
         new BankAccountAddUi().show(this::updateItems);
     }
 }

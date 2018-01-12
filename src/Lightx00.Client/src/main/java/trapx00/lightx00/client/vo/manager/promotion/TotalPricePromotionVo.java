@@ -6,6 +6,7 @@ import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.promotionui.detail.PromotionDetailUi;
 import trapx00.lightx00.client.presentation.promotionui.detail.TotalPricePromotionDetailUi;
+import trapx00.lightx00.client.presentation.promotionui.detail.TotalPricePromotionUiController;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionType;
@@ -56,7 +57,7 @@ public class TotalPricePromotionVo extends PromotionVoBase {
      */
     @Override
     public DraftContinueWritableUiController continueWritableUi() {
-        return null;
+        return new TotalPricePromotionUiController();
     }
 
     @Override

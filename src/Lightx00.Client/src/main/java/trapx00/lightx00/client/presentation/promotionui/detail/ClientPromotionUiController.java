@@ -3,12 +3,12 @@ package trapx00.lightx00.client.presentation.promotionui.detail;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlServiceFactory;
@@ -79,13 +79,13 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
          */
         ClientPromotionVo clientPromotion = (ClientPromotionVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        ClientPromotionUiController ui = externalLoadedUiPackage.getController();
-        ui.tfId.setText(clientPromotion.getId());
-        ui.tfStartDate.setValue(DateHelper.dateToLocalDate(clientPromotion.getStartDate()));
-        ui.tfEndDate.setValue(DateHelper.dateToLocalDate(clientPromotion.getEndDate()));
-        ui.cbClientLevel.setValue(String.valueOf(clientPromotion.getClientLevel()));
-        ui.tfCouponPrice.setText(String.valueOf(clientPromotion.getCouponPrice()));
-        ui.addPromotionCommodities(clientPromotion.getPromotionCommodities());
+        ClientPromotionUiController continueWriting = externalLoadedUiPackage.getController();
+        continueWriting.tfId.setText(clientPromotion.getId());
+        continueWriting.tfStartDate.setValue(DateHelper.dateToLocalDate(clientPromotion.getStartDate()));
+        continueWriting.tfEndDate.setValue(DateHelper.dateToLocalDate(clientPromotion.getEndDate()));
+        continueWriting.cbClientLevel.setValue(clientPromotion.getClientLevel()+"");
+        continueWriting.tfCouponPrice.setText(clientPromotion.getCouponPrice()+"");
+        continueWriting.addPromotionCommodities(clientPromotion.getPromotionCommodities());
         return externalLoadedUiPackage;
     }
 
@@ -107,12 +107,10 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
             }
         });
 
-        tbPromotionCommodity.setEditable(true);
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
-        tcAmount.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         tcAmount.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionCommodityModel,String> t)-> {
             (t.getTreeTableView().getTreeItem((t.getTreeTablePosition().getRow())).getValue()).setAmount(Double.parseDouble(t.getNewValue()));
             updateTotal();
@@ -204,7 +202,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                             PromptDialogHelper.start("提交成功！", "客户类促销策略已经提交。")
                                     .addCloseButton("继续填写", "EDIT", e1 -> onBtnResetClicked())
                                     .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
-                                    .createAndShow();
+                                .createAndShow();
                         } catch (UncheckedRemoteException e1) {
                             PromptDialogHelper.start("提交失败！", "网络错误。")
                                     .addCloseButton("好的", "CHECK", null)
@@ -215,19 +213,17 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                                     .createAndShow();
                         }
                     })
-                    .addCloseButton("取消", "CLOSE", null)
-                    .createAndShow();
-        } catch (NotCompleteException ignored) {
-
-        }
+        .addCloseButton("取消", "CLOSE", null)
+                .createAndShow();
+    } catch (NotCompleteException ignored) {
 
     }
 
+}
+
     public void onBtnDraftClicked() {
         try {
-            ClientPromotionVo promotion = getCurrentClientPromotionVo();
-            promotion.setState(PromotionState.Draft);
-            blService.saveAsDraft(promotion);
+            blService.saveAsDraft(getCurrentClientPromotionVo());
             PromptDialogHelper.start("保存草稿成功","促销策略已经保存为草稿。")
                     .addCloseButton("好的","CHECK", e -> onBtnResetClicked())
                     .createAndShow();
@@ -262,7 +258,8 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
 
         }
     }
-    public void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
+
+    private void addPromotionCommodities (PromotionCommodity[] promotionCommodities) {
         for (PromotionCommodity commodity : promotionCommodities) {
             promotionCommodityModelObservableList.add(
                     new PromotionCommodityModel(commodity));
@@ -270,15 +267,17 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
 
     }
 
-    private Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
+    private final Callback<DatePicker, DateCell> endDayCellFactory = new Callback<DatePicker, DateCell>() {
         @Override
         public DateCell call(final DatePicker datePicker) {
             return new DateCell() {
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(tfStartDate.getValue().plusDays(1))) {
-                        setDisable(true);
+                    if(tfStartDate.getValue() != null) {
+                        if (item.isBefore(tfStartDate.getValue().plusDays(1))) {
+                            setDisable(true);
+                        }
                     }
                 }
 
@@ -286,7 +285,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
         }
     };
 
-    private Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
+    private final Callback<DatePicker, DateCell> startDayCellFactory = new Callback<DatePicker, DateCell>() {
         @Override
         public DateCell call(final DatePicker datePicker) {
             return new DateCell() {
