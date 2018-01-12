@@ -44,13 +44,13 @@ public class InventoryCheckBlController implements InventoryCheckBlService {
     @Override
     public InventoryViewVo getInventoryView(Date beginTime, Date endTime) {
         PurchaseBillVo [] purchaseBillVos=purchaseBillBlInfo.queryPurchaseBillVo(new PurchaseBillQueryVo()
-                .between("date",beginTime,endTime));
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
         PurchaseRefundBillVo[] purchaseRefundBillVos=purchaseBillBlInfo.queryPurchaseRefundBillVo(new PurchaseRefundBillQueryVo()
-                .between("date",beginTime,endTime));
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
         SaleBillVo[]saleBillVos=saleBillBlInfo.querySaleBill(new SaleBillQueryVo()
-                .between("date",beginTime,endTime));
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
         SaleRefundBillVo[] saleRefundBillVos=saleBillBlInfo.querySaleRefundBill(new SaleRefundBillQueryVo()
-                .between("date",beginTime,endTime));
+                .between("date",beginTime,endTime).and().eq("state",BillState.Activated));
 
         InventoryViewVo inventoryViewVo=new InventoryViewVo("View"+FormatDateTime.toShortDateString(new Date()),new Date(),null);
         InventoryViewItem inventoryViewItem=new InventoryViewItem(new Date(),0,

@@ -99,10 +99,9 @@ public class InventoryWarningDataController extends UnicastRemoteObject implemen
                 logService.printLog(delegate,String.format("modify a commodity warningValue %s (id: %s).",po.getName() ,po.getId()));
                 return ResultMessage.Success;
             }
-            commodityDao.create(po);
-            //commodityPo.setId(commodityDao.extractId(commodityPo));
-            logService.printLog(delegate, String.format("created a %s (id: %s).", po.getName() , po.getId()));
-            return ResultMessage.Success;
+            else{
+                return ResultMessage.Failure;
+            }
         }catch (SQLException e) {
             handleSQLException(e);
             return ResultMessage.Failure;
