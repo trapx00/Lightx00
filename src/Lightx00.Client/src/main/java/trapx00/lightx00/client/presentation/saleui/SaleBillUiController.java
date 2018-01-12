@@ -437,6 +437,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                     case ClientPromotion:
                         ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
                         tfGiftToken.setText(clientPromotionVo.getCouponPrice() + "");
+                        tfMinusProfits.setText(clientPromotionVo.getSalePrice()+"");
+                        new ListHandler().change();
                         addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
                         break;
                     case ComSalePromotion:
