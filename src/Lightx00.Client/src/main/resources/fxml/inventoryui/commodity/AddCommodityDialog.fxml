@@ -45,7 +45,7 @@
         <JFXTextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="tfSort" disable="true"  />
 
         <Label GridPane.rowIndex="3" GridPane.columnIndex="0"  text="数量"/>
-        <JFXTextField GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfAmount" />
+        <JFXTextField GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="tfAmount" disable="true" />
 
         <Label GridPane.rowIndex="4" GridPane.columnIndex="0"  text="进价"/>
         <JFXTextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="tfpurchasePrice" disable="true" />
