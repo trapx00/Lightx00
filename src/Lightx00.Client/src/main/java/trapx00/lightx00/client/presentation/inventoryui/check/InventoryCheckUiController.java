@@ -17,6 +17,7 @@ import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServ
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryCheckBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadableUiController;
 import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
 import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewItem;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryViewVo;
@@ -60,7 +61,9 @@ public class InventoryCheckUiController implements ExternalLoadableUiController 
                         endTime);
                 System.out.println(inventoryViewVo.getId());
                 viewModels.add(new InventoryViewModel(inventoryViewVo.getItems()));
-            } catch (Exception ignored) { }
+            } catch (Exception ignored) {
+                ignored.printStackTrace();
+            }
 
 
 

@@ -83,11 +83,13 @@ public class BillApprovalNotificationDetailDisplayUiController extends Notificat
 
     public void onBtnModifyClicked(ActionEvent actionEvent) {
         try {
+            String originalId = billVo.getId();
             billVo.setId(BillHelper.refreshIdRequest);
             ExternalLoadedUiPackage uiPackage = billVo.continueWritableUi().continueWriting(billVo);
-            FrameworkUiManager.switchFunction(uiPackage, "修改单据",true);
+            billVo.setId(originalId);
             close();
             abandon();
+            FrameworkUiManager.switchFunction(uiPackage, "修改单据",true);
             FrameworkUiManager.getFrameworkUiController().refreshNotificationStatus();
         } catch (IOException e) {
             e.printStackTrace();
