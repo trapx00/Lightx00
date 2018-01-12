@@ -155,11 +155,11 @@ public class UserManagementUiController implements ExternalLoadableUiController 
     public void onBtnModifyClicked() {
         EmployeeVo selected = getSelected();
         if (selected != null) {
-            new EmployeeModificationUi().show(selected, this::updateItems);
+            new EmployeeModificationUiController().show(selected, this::updateItems);
         }
     }
 
     public void onBtnAddClicked() {
-        new EmployeeAddUi().show(this::updateItems);
+        new EmployeeAddUiController().show(this::updateItems);
     }
 }

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSelection {
+public class EmployeeSelectionUiController extends SelectingDialog implements EmployeeSelection {
     public JFXTreeTableView<EmployeeSelectionItemModel> tbEmployee;
     public JFXTreeTableColumn<EmployeeSelectionItemModel, String> tcId;
     public JFXTreeTableColumn<EmployeeSelectionItemModel, String> tcPosition;
@@ -112,7 +112,7 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
     @Override
     public void showEmployeeSelectDialog(Consumer<List<EmployeeVo>> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        EmployeeSelectionUi controller = uiPackage.getController();
+        EmployeeSelectionUiController controller = uiPackage.getController();
         controller.callback = callback;
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
     }
