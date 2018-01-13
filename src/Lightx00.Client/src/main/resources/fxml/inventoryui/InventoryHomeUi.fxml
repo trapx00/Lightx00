@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<?import com.jfoenix.controls.JFXMasonryPane?>
+<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import javafx.scene.control.Separator?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="trapx00.lightx00.client.presentation.inventoryui.InventoryStaffHomeUiController">
     <top>
@@ -42,7 +34,7 @@
         </VBox>
     </top>
     <center>
-        <JFXMasonryPane prefWidth="800">
+        <HBox alignment="TOP_CENTER">
             <VBox spacing="10" alignment="CENTER">
                 <JFXButton buttonType="RAISED" onAction="#onCommodityFunctionClicked" prefHeight="100.0" prefWidth="100.0"
                            style="-fx-background-color: #1A217E; -fx-text-fill: #FFFFFF;-fx-background-radius: 25;-fx-border-radius:25;"
@@ -50,12 +42,26 @@
                     <graphic>
                         <FontAwesomeIconView glyphName="BANK" glyphSize="90" fill="white" />
                     </graphic>
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
                 </JFXButton>
-                <Text fill="black" text="商品管理">
-                    <font>
-                        <Font size="22.00"/>
-                    </font>
-                </Text>
+                <HBox alignment="CENTER">
+                    <Text fill="black" text="商品管理">
+                        <font>
+                            <Font size="22.00"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </Text>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </HBox>
+                <padding>
+                    <Insets bottom="20.0" top="20.0"/>
+                </padding>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
                 <JFXButton buttonType="RAISED" onAction="#onInventoryCheckFunctionClicked" prefHeight="100.0"
@@ -65,12 +71,26 @@
                     <graphic>
                         <MaterialIconView glyphName="RECEIPT" glyphSize="90" fill="white" />
                     </graphic>
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
                 </JFXButton>
-                <Text fill="black" text="库存查看">
-                    <font>
-                        <Font size="22.00"/>
-                    </font>
-                </Text>
+                <HBox alignment="CENTER">
+                    <Text fill="black" text="库存查看">
+                        <font>
+                            <Font size="22.00"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </Text>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </HBox>
+                <padding>
+                    <Insets bottom="20.0" top="20.0"/>
+                </padding>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
                 <JFXButton buttonType="RAISED" onAction="#onInventoryPictureFunctionClicked"
@@ -79,12 +99,26 @@
                     <graphic>
                         <FontAwesomeIconView glyphName="BTC" glyphSize="90" fill="white" />
                     </graphic>
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
                 </JFXButton>
-                <Text fill="black" text="库存快照">
-                    <font>
-                        <Font size="22.00"/>
-                    </font>
-                </Text>
+                <HBox alignment="CENTER">
+                    <Text fill="black" text="库存快照">
+                        <font>
+                            <Font size="22.00"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </Text>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </HBox>
+                <padding>
+                    <Insets bottom="20.0" top="20.0"/>
+                </padding>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
                 <JFXButton buttonType="RAISED" onAction="#onInventoryGiftFunctionClicked" prefHeight="100.0"
@@ -94,14 +128,26 @@
                     <graphic>
                         <MaterialDesignIconView glyphName="CASH_100" glyphSize="90" fill="white" />
                     </graphic>
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
                 </JFXButton>
                 <HBox alignment="CENTER">
                     <Text fill="black" text="库存赠送">
                         <font>
-                            <Font size="18.00"/>
+                            <Font size="22.00"/>
                         </font>
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
                     </Text>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
                 </HBox>
+                <padding>
+                    <Insets bottom="20.0" top="20.0"/>
+                </padding>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
                 <JFXButton buttonType="RAISED" onAction="#onInventoryWarningFunctionClicked" prefHeight="100.0"
@@ -111,14 +157,28 @@
                     <graphic>
                         <MaterialDesignIconView glyphName="ATTACHMENT" glyphSize="90" fill="white" />
                     </graphic>
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
                 </JFXButton>
-                <Text fill="black" text="库存监控">
-                    <font>
-                        <Font size="22.00"/>
-                    </font>
-                </Text>
+                <HBox alignment="CENTER">
+                    <Text fill="black" text="库存监控">
+                        <font>
+                            <Font size="22.00"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </Text>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </HBox>
+                <padding>
+                    <Insets bottom="20.0" top="20.0"/>
+                </padding>
             </VBox>
-        </JFXMasonryPane>
+        </HBox>
     </center>
     <bottom>
         <HBox alignment="TOP_CENTER">

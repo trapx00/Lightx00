@@ -14,7 +14,6 @@ import trapx00.lightx00.shared.dataservice.promotiondataservice.ClientPromotionD
 import trapx00.lightx00.shared.dataservice.promotiondataservice.ComSalePromotionDataService;
 import trapx00.lightx00.shared.dataservice.promotiondataservice.TotalPricePromotionDataService;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
-import trapx00.lightx00.shared.exception.database.IdNotExistsException;
 import trapx00.lightx00.shared.po.manager.promotion.ClientPromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.ComSalePromotionPo;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
@@ -118,8 +117,6 @@ public class PromotionInfoController implements PromotionInfo,DraftableQueryServ
             return null;
         } catch (RemoteException e) {
             throw new UncheckedRemoteException(e);
-        } catch (IdNotExistsException e) {
-            throw e;
         }
     }
 
@@ -135,9 +132,6 @@ public class PromotionInfoController implements PromotionInfo,DraftableQueryServ
     }
 
     private boolean compare(Date now,Date start,Date end){
-        if(now.getTime()>=start.getTime() && now.getTime()<=end.getTime())
-            return true;
-        else
-            return false;
+        return now.getTime() >= start.getTime() && now.getTime() <= end.getTime();
     }
 }

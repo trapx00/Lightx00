@@ -16,24 +16,17 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseRefundBillBl
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseRefundBillDataServiceFactory;
-import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseRefundBillVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseRefundBillDataService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
-import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseRefundBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseRefundBillQueryVo;
-import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
-import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.List;
 
 public class PurchaseRefundBillBlController implements PurchaseRefundBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<PurchaseRefundBillPo, PurchaseRefundBillVo> {
@@ -92,7 +85,7 @@ public class PurchaseRefundBillBlController implements PurchaseRefundBillBlServi
     public ResultMessage activate(String id) {
         try {
             PurchaseRefundBillPo purchaseRefundBillPo = dataService.query(new PurchaseRefundBillQueryVo().idEq(id))[0];
-            clientModificationService.modifyClient(purchaseRefundBillPo.getClientId(), ClientModificationFlag.PAYABLE, purchaseRefundBillPo.getTotal());
+            clientModificationService.modifyClient(purchaseRefundBillPo.getClientId(), ClientModificationFlag.PAYABLE, -purchaseRefundBillPo.getTotal());
             for (CommodityItem commodityItem : purchaseRefundBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Low, commodityItem.getNumber());
             }

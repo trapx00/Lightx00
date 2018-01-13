@@ -2,7 +2,6 @@ package trapx00.lightx00.client.vo.manager.promotion;
 
 import trapx00.lightx00.client.bl.draftbl.DraftDeleteService;
 import trapx00.lightx00.client.bl.promotionbl.factory.ComSalePromotionBlFactory;
-import trapx00.lightx00.client.presentation.helpui.ContentDisplayUi;
 import trapx00.lightx00.client.presentation.helpui.DraftContinueWritableUiController;
 import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionDetailUi;
 import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionUiController;

@@ -40,9 +40,9 @@ public class ClientDetailUiController extends ClientDetailUi implements External
         clientDetailUiController.clientName.setText(clientVo.getName());
         clientDetailUiController.clientType.setText(clientVo.getClientType().toString());
         clientDetailUiController.clientLevel.setText(clientVo.getClientLevel() + "");
-        clientDetailUiController.clientPhone.setText(clientVo.getAddress());
+        clientDetailUiController.clientPhone.setText(clientVo.getPhone());
         clientDetailUiController.clientAddress.setText(clientVo.getAddress());
-        clientDetailUiController.clientZipCode.setText(clientVo.getEmail());
+        clientDetailUiController.clientZipCode.setText(clientVo.getZipCode());
         clientDetailUiController.clientEmail.setText(clientVo.getEmail());
         clientDetailUiController.clientReceivableQuota.setText(clientVo.getReceivableQuota() + "");
         clientDetailUiController.clientReceivable.setText(clientVo.getReceivable() + "");

@@ -83,7 +83,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
         CashBillVo cashBillVo = (CashBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         CashBillUiController cashBillDetailUiController = externalLoadedUiPackage.getController();
-        cashBillDetailUiController.tfId.setText(cashBillVo.getId());
+        cashBillDetailUiController.tfId.setText(cashBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : cashBillVo.getId());
         cashBillDetailUiController.currentDate.setValue(new Date());
         cashBillDetailUiController.currentBankAccount.setValue(bankAccountSelection.queryId(cashBillVo.getAccountId()));
         cashBillDetailUiController.currentEmployee.setValue(employeeSelection.queryId(cashBillVo.getOperatorId()));
@@ -190,7 +190,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
             throw new NotCompleteException();
         }
         return new CashBillVo(
-            tfId.getText(),
+            blService.getId(),
             currentDate.getValue(),
             BillState.Draft,
             currentEmployee.getValue().getId(),
@@ -209,7 +209,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
                         blService.submit(cashBillVo);
                         PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
                             .addCloseButton("继续填写", "EDIT", e1 -> {
-                                reset();
+                                finishReset();
                             })
                             .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
                             .createAndShow();
@@ -261,15 +261,23 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
     public void reset() {
         currentBankAccount.setValue(null);
         cashBillItemModelObservableList.clear();
+        tfId.setText(blService.getId());
+    }
+
+    public void resetPrompt(Runnable runnable) {
+        PromptDialogHelper.start("重置", "是否要重置？")
+            .addCloseButton("是", "CHECK", e -> {
+                runnable.run();
+            }).addCloseButton("否", "CLOSE", null)
+            .createAndShow();
+    }
+
+    public void finishReset() {
+        resetPrompt(this::autofill);
     }
 
     public void onBtnResetClicked() {
-        PromptDialogHelper.start("重置", "是否要重置？")
-            .addCloseButton("是", "CHECK", e -> {
-                reset();
-
-            }).addCloseButton("否", "CLOSE", null)
-            .createAndShow();
+        resetPrompt(this::reset);
 
     }
 
@@ -278,6 +286,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
             tfId.setText(blService.getId());
             currentDate.setValue(new Date());
             currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+            cashBillItemModelObservableList.clear();
         } catch (NoMoreBillException e) {
             PromptDialogHelper.start("ID不够！", "当日ID已经达到99999，无法增加新的单据。")
                 .addCloseButton("好的", "CHECK", null)
@@ -292,7 +301,10 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
 
     public void onTfBankAccountClicked(MouseEvent actionEvent) {
         BankAccountUiFactory.getBankAccountSelectionUi()
-            .showBankAccountSelectDialog(vo -> this.currentBankAccount.setValue(vo));
+            .showBankAccountSelectDialog(vo -> {
+                this.currentBankAccount.setValue(vo);
+                tfBankaccountId.validate();
+            });
     }
 
     public void onBtnSaveAsDraftClicked(ActionEvent actionEvent) {

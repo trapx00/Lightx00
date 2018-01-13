@@ -41,7 +41,7 @@ public class ClientBlControllerMock extends ClientBlController {
                 "12345679@qq.com",
                 123,
                 456,
-                new SaleStaffVo("10001","销售经理",new Date(),"123456", EmployeeState.Active,true, SaleStaffType.AStaff));
+                new SaleStaffVo("10001","销售经理",new Date(),"123456", EmployeeState.Active,true, SaleStaffType.Manager));
         return clientVos;
     }
 

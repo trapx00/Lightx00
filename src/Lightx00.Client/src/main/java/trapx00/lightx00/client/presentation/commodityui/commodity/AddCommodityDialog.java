@@ -31,6 +31,7 @@ public class AddCommodityDialog implements ExternalLoadableUiController{
         ui.tfSort.setText(text);
         ui.tfpurchasePrice.setText("0");
         ui.tfretailPrice.setText("0");
+        ui.tfAmount.setText("0");
         PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
         ((AddCommodityDialog)externalLoadedUiPackage.getController()).runnable = runnable;
 

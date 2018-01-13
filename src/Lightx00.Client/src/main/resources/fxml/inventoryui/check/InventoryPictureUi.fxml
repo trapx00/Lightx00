@@ -37,14 +37,15 @@
 
     <JFXTreeTableView fx:id="tableView" prefHeight="500.0" prefWidth="500.0">
         <columns>
+            <JFXTreeTableColumn fx:id="tcNum" prefWidth="100" text="行号" />
             <JFXTreeTableColumn fx:id="tcId" prefWidth="150" text="Id" />
             <JFXTreeTableColumn fx:id="tcName"  prefWidth="150" text="名称" />
-            <JFXTreeTableColumn fx:id="tcType" prefWidth="150" text="种类" />
-            <JFXTreeTableColumn fx:id="tcAmount" prefWidth="150" text="数量" />
-            <JFXTreeTableColumn fx:id="tcPrice" prefWidth="150" text="均价" />
+            <JFXTreeTableColumn fx:id="tcType" prefWidth="150" text="型号" />
+            <JFXTreeTableColumn fx:id="tcAmount" prefWidth="150" text="库存数量" />
+            <JFXTreeTableColumn fx:id="tcPrice" prefWidth="150" text="库存均价" />
             <JFXTreeTableColumn fx:id="tcBatch" prefWidth="150" text="批次" />
             <JFXTreeTableColumn fx:id="tcBatchNo" prefWidth="150" text="批号" />
-            <JFXTreeTableColumn fx:id="tcProductionTime" prefWidth="150" text="生产日期" />
+            <JFXTreeTableColumn fx:id="tcProductionTime" prefWidth="150" text="出厂日期" />
         </columns>
     </JFXTreeTableView>
 

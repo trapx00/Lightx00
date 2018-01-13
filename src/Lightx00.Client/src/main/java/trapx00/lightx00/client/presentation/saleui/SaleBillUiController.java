@@ -2,8 +2,6 @@ package trapx00.lightx00.client.presentation.saleui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +9,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
@@ -31,9 +28,8 @@ import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityFillUiController;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.presentation.promotionui.PromotionSelection;
 import trapx00.lightx00.client.presentation.promotionui.factory.PromotionSelectionFactory;
 import trapx00.lightx00.client.presentation.saleui.factory.SaleCommodityFillUiFactory;
@@ -46,18 +42,20 @@ import trapx00.lightx00.client.vo.manager.promotion.ComSalePromotionVo;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.client.vo.manager.promotion.TotalPricePromotionVo;
 import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
+import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
 import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
+import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.Date;
 
 public class SaleBillUiController implements DraftContinueWritableUiController, ExternalLoadableUiController, ReversibleUi {
@@ -143,6 +141,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private CommoditySelection commoditySelection = CommodityUiFactory.getCommoditySelectionUi();
     private SaleCommodityFillUiController saleCommodityFillUiController = SaleCommodityFillUiFactory.getSaleCommodityFillUiController();
     private PromotionSelection promotionSelection = PromotionSelectionFactory.getPromotionSelection();
+    private PromotionVoBase promotionVo = null;
     private StringProperty tfClientIdProperty = new SimpleStringProperty("");
     private StringProperty tfClientNameProperty = new SimpleStringProperty("");
     private StringProperty tfSalesmanIdProperty = new SimpleStringProperty("");
@@ -161,7 +160,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         SaleBillVo saleBillVo = (SaleBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillUiController saleBillUiController = externalLoadedUiPackage.getController();
-        saleBillUiController.tfBillId.setText(saleBillVo.getId());
+        saleBillUiController.tfBillId.setText(saleBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : saleBillVo.getId());
         saleBillUiController.tfDate.setText(saleBillVo.getDate().toString());
         saleBillUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());
         saleBillUiController.tfSalesmanName.setText(employeeInfo.queryById(saleBillVo.getSalesmanId()).getName());
@@ -242,7 +241,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         tfSalesmanName.textProperty().bindBidirectional(tfSalesmanNameProperty);
 
         ObservableList<String> stringObservableList = FXCollections.observableArrayList(
-                "1", "2", "3"
+            "1", "2", "3"
         );
         cbRepository.setItems(stringObservableList);
         cbRepository.setValue("1");
@@ -251,62 +250,29 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         tfGiftToken.setText("0");
         autofill();
 
-        NumberValidator numberValidator = new NumberValidator();
-        numberValidator.setMessage("请输入数字类型");
-        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
-        requiredValidator.setMessage("请输入信息");
+        ValidatorHelper.addDefaultRequiredValidator(tfClientId);
+        ValidatorHelper.addDefaultRequiredValidator(tfClientName);
+        ValidatorHelper.addDefaultRequiredValidator(tfSalesmanId);
+        ValidatorHelper.addDefaultRequiredValidator(tfSalesmanName);
+        ValidatorHelper.addDefaultDoubleValidator(tfGiftToken);
+        ValidatorHelper.addDefaultDoubleValidator(tfToken);
+        ValidatorHelper.addDefaultDoubleValidator(tfMinusProfits);
+        ValidatorHelper.addDefaultDoubleValidator(tfToken);
 
-        tfClientId.getValidators().add(requiredValidator);
-        tfClientName.getValidators().add(requiredValidator);
-        tfSalesmanId.getValidators().add(requiredValidator);
-        tfSalesmanName.getValidators().add(requiredValidator);
-        tfGiftToken.getValidators().add(requiredValidator);
-        tfToken.getValidators().add(requiredValidator);
-        tfMinusProfits.getValidators().add(requiredValidator);
-
-        tfClientIdProperty.addListener(event -> {
-            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
-                tfClientId.validate();
+        tfMinusProfits.setOnKeyReleased(event -> {
+            if (tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
+                new ListHandler().change();
             }
         });
-        tfClientNameProperty.addListener(event -> {
-            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
-                tfClientName.validate();
+        tfToken.setOnKeyReleased(event -> {
+            if (tfMinusProfits.validate() || tfMinusProfits.getText().length() == 0) {
+                new ListHandler().change();
             }
-        });
-        tfSalesmanIdProperty.addListener(event -> {
-            if (tfSalesmanIdProperty == null || tfSalesmanIdProperty.get().length() == 0) {
-                tfSalesmanId.validate();
-            }
-        });
-        tfSalesmanNameProperty.addListener(event -> {
-            if (tfSalesmanNameProperty == null || tfSalesmanNameProperty.get().length() == 0) {
-                tfSalesmanName.validate();
-            }
-        });
-        tfGiftToken.focusedProperty().addListener(event -> {
-            if (tfGiftToken.getText().length() == 0) {
-                tfGiftToken.validate();
-            }
-        });
-        tfToken.focusedProperty().addListener(event -> {
-            if (tfToken.getText().length() == 0) {
-                tfToken.validate();
-            }
-        });
-        tfMinusProfits.focusedProperty().addListener(event -> {
-            if (tfMinusProfits.getText().length() == 0) {
-                tfMinusProfits.validate();
-            }
-        });
-
-        tfMinusProfits.setOnKeyPressed(event -> {
-            new ListHandler().change();
         });
         initHotKey();
     }
 
-    private void initHotKey(){
+    private void initHotKey() {
         FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 onBtnSubmitClicked();
@@ -327,7 +293,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         saleBillVo.setUltiTotal(-saleBillVo.getUltiTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleBillUiController saleBillUiController = externalLoadedUiPackage.getController();
-        saleBillUiController.tfBillId.setText(saleBillVo.getId());
+        saleBillUiController.tfBillId.setText(blService.getId());
         saleBillUiController.tfDate.setText(saleBillVo.getDate().toString());
         saleBillUiController.tfSalesmanId.setText(saleBillVo.getSalesmanId());
         saleBillUiController.tfSalesmanName.setText(employeeInfo.queryById(saleBillVo.getSalesmanId()).getName());
@@ -354,6 +320,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
             tfClientLevel.setText(x.getClientLevel() + "");
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 
@@ -362,16 +330,18 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         employeeSelection.showEmployeeSelectDialog(x -> {
             tfSalesmanId.setText(x.get(0).getId());
             tfSalesmanName.setText(x.get(0).getName());
+            tfSalesmanName.validate();
+            tfSalesmanId.validate();
         });
     }
 
     @FXML
     private void onBtnCancelClicked() {
         PromptDialogHelper.start("是否要存入草稿箱", null)
-                .addCloseButton("存入", "DONE", e -> saveAsDraft())
-                .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.switchBackToHome())
-                .addCloseButton("取消", "UNDO", null)
-                .createAndShow();
+            .addCloseButton("存入", "DONE", e -> saveAsDraft())
+            .addCloseButton("不存入", "CLOSE", e -> FrameworkUiManager.switchBackToHome())
+            .addCloseButton("取消", "UNDO", null)
+            .createAndShow();
     }
 
     @FXML
@@ -391,8 +361,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                 }
                 if (x.getAmount() < tempAmount) {
                     PromptDialogHelper.start("超出已有库存数量，请重新填写", null)
-                            .addCloseButton("确定", "DONE", null)
-                            .createAndShow();
+                        .addCloseButton("确定", "DONE", null)
+                        .createAndShow();
                 } else {
                     commodityItemModelObservableList.add(new CommodityItemModel(new CommodityItem(x.getId(), x.getName(), x.getType(), y.getNumber(), x.getPurchasePrice(), x.getPurchasePrice() * y.getNumber(), y.getComment())));
                 }
@@ -420,7 +390,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
     private double calculateMinusProfit(CommodityItem[] commodityItems, double onSalePrice) {
         //最大组合数
         int maxCom = 1000000000;
-        double originTotal=0;
+        double originTotal = 0;
         for (CommodityItem commodityItem : commodityItems) {
             for (CommodityItemModel commodityItemModel : commodityItemModelObservableList) {
                 if (commodityItem.getCommodityId().equals(commodityItemModel.getCommodityItemObjectProperty().getCommodityId())) {
@@ -428,55 +398,91 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                     if (maxCom > temp) {
                         maxCom = temp;
                     }
-                    originTotal+=commodityItemModel.getCommodityItemObjectProperty().getPrice();
+                    originTotal += commodityItemModel.getCommodityItemObjectProperty().getPrice();
                     break;
                 }
             }
         }
-        return maxCom * (originTotal-onSalePrice);
+        return maxCom * (originTotal - onSalePrice);
     }
 
     @FXML
     private void onBtnGetPromotionClicked() {
         giftItemModelObservableList.clear();
         promotionSelection.showEmployeeSelectDialog(
-                promotionVoBase -> {
-                    tfPromotionId.setText(promotionVoBase.getId());
-                    switch (promotionVoBase.getType()) {
-                        case ClientPromotion:
-                            ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
-                            tfGiftToken.setText(clientPromotionVo.getCouponPrice() + "");
-                            addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
-                            break;
-                        case ComSalePromotion:
-                            ComSalePromotionVo comSalePromotionVo = (ComSalePromotionVo) promotionVoBase;
-                            tfMinusProfits.setText(calculateMinusProfit(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()), comSalePromotionVo.getOnSalePrice()) + "");
-                            break;
-                        case TotalPricePromotion:
-                            TotalPricePromotionVo totalPricePromotionVo = (TotalPricePromotionVo) promotionVoBase;
-                            tfGiftToken.setText((((int) Double.parseDouble(tfUltiTotal.getText())) / totalPricePromotionVo.getTotalPrice()) * totalPricePromotionVo.getCouponPrice() + "");
-                            addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
-                            break;
-                    }
-                    (new ListHandler()).change();//修改总价格
-                },
-                getCurrentSaleBillVo()
+            promotionVoBase -> {
+                promotionVo = promotionVoBase;
+                switch (promotionVoBase.getType()) {
+                    case ClientPromotion:
+                        ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
+                        tfGiftToken.setText(clientPromotionVo.getCouponPrice() + "");
+                        new ListHandler().change();
+                        addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
+                        break;
+                    case ComSalePromotion:
+                        ComSalePromotionVo comSalePromotionVo = (ComSalePromotionVo) promotionVoBase;
+                        break;
+                    case TotalPricePromotion:
+                        TotalPricePromotionVo totalPricePromotionVo = (TotalPricePromotionVo) promotionVoBase;
+                        tfGiftToken.setText((((int) Double.parseDouble(tfUltiTotal.getText())) / totalPricePromotionVo.getTotalPrice()) * totalPricePromotionVo.getCouponPrice() + "");
+                        addGiftListItems(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()));
+                        break;
+                }
+                tfPromotionId.setText(promotionVoBase.getId());
+                tfMinusProfits.setText(calculateOnSalePrice(promotionVoBase)+"");
+                (new ListHandler()).change();//修改总价格
+            },
+            getCurrentSaleBillVo()
         );
+        promotionVo = null;
         tfPromotionId.clear();
         tfGiftToken.setText("0");
+    }
+
+    private double calculateOnSalePrice(PromotionVoBase promotionVoBase) {
+        double minusProfit = 0;
+        if(promotionVoBase==null){
+           return minusProfit;
+        }
+        switch (promotionVoBase.getType()) {
+            case ClientPromotion:
+                ClientPromotionVo clientPromotionVo = (ClientPromotionVo) promotionVoBase;
+                minusProfit = clientPromotionVo.getSalePrice();
+                new ListHandler().change();
+                break;
+            case ComSalePromotion:
+                ComSalePromotionVo comSalePromotionVo = (ComSalePromotionVo) promotionVoBase;
+                minusProfit = calculateMinusProfit(promotionToCommodityItem(promotionVoBase.getPromotionCommodities()), comSalePromotionVo.getOnSalePrice());
+                break;
+            case TotalPricePromotion:
+                minusProfit = 0;
+                break;
+        }
+        return minusProfit;
     }
 
     @FXML
     private void onBtnSubmitClicked() {
         try {
             SaleBillVo saleBillVo = getCurrentSaleBillVo();
+
+            if (currentEmployee.getValue().getPosition() == EmployeePosition.SaleStaff) {
+                int staffOnSale = ((SaleStaffVo) currentEmployee.getValue()).getSaleStaffType() == SaleStaffType.Manager ? 5000 : 1000;
+                if (calculateOnSalePrice(promotionVo) + staffOnSale < Double.parseDouble(tfMinusProfits.getText())) {
+                    PromptDialogHelper.start("失败", "超出权限可折扣金额")
+                        .addCloseButton("确定", "CHECK", null)
+                        .createAndShow();
+                    return;
+                }
+            }
+
             PromptDialogHelper.start("确认单据", "").setContent(
-                    saleBillVo.billDetailUi().showContent(saleBillVo).getComponent())
-                    .addCloseButton("确定", "CHECK", e -> {
-                        submit();
-                    })
-                    .addCloseButton("取消", "CLOSE", null)
-                    .createAndShow();
+                saleBillVo.billDetailUi().showContent(saleBillVo).getComponent())
+                .addCloseButton("确定", "CHECK", e -> {
+                    submit();
+                })
+                .addCloseButton("取消", "CLOSE", null)
+                .createAndShow();
             FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     initHotKey();
@@ -490,16 +496,16 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
 
     }
 
-    private void submit(){
+    private void submit() {
         try {
             blService.submit(getCurrentSaleBillVo());
             PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
-                    .addCloseButton("继续填写", "EDIT", e1 -> {
-                        onBtnResetClicked();
-                        autofill();
-                    })
-                    .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
-                    .createAndShow();
+                .addCloseButton("继续填写", "EDIT", e1 -> {
+                    onBtnResetClicked();
+                    autofill();
+                })
+                .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
+                .createAndShow();
             FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     initHotKey();
@@ -510,40 +516,44 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
             });
         } catch (UncheckedRemoteException e1) {
             PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e1.getRemoteException().getMessage())
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         } catch (IdExistsException e1) {
             PromptDialogHelper.start("提交失败", "ID已经存在，请重新获取ID！")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         }
     }
 
+    public boolean validateAll() {
+        return tfClientId.validate()&&tfClientName.validate()&&tfSalesmanId.validate()&&tfSalesmanName.validate()&&tfGiftToken.validate()&&tfToken.validate()&&tfMinusProfits.validate()&&tfToken.validate();
+    }
+
     private SaleBillVo getCurrentSaleBillVo() {
-        if (cbRepository.getValue() == null || tfOriginTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
             throw new NotCompleteException();
         }
         return new SaleBillVo(
-                tfBillId.getText(),
-                currentDate.getValue(),
-                BillState.Draft,
-                tfClientId.getText(),
-                tfSalesmanId.getText(),
-                currentEmployee.getValue().getId(),
-                Integer.parseInt(cbRepository.getValue()),
-                commodityItemModelObservableList.stream().map(CommodityItemModel::toCommodityItem).toArray(CommodityItem[]::new),
-                Double.parseDouble(tfOriginTotal.getText()),
-                Double.parseDouble(tfMinusProfits.getText()),
-                Double.parseDouble(tfToken.getText()),
-                Double.parseDouble(tfUltiTotal.getText()),
-                tfComment.getText(),
-                Integer.parseInt(tfClientLevel.getText()),
-                tfPromotionId.getText(),
-                giftItemModelObservableList.stream().map(CommodityItemModel::toCommodityItem).toArray(CommodityItem[]::new),
-                Double.parseDouble(tfGiftToken.getText())
+            blService.getId(),
+            currentDate.getValue(),
+            BillState.Draft,
+            tfClientId.getText(),
+            tfSalesmanId.getText(),
+            currentEmployee.getValue().getId(),
+            Integer.parseInt(cbRepository.getValue()),
+            commodityItemModelObservableList.stream().map(CommodityItemModel::toCommodityItem).toArray(CommodityItem[]::new),
+            Double.parseDouble(tfOriginTotal.getText()),
+            Double.parseDouble(tfMinusProfits.getText()),
+            Double.parseDouble(tfToken.getText()),
+            Double.parseDouble(tfUltiTotal.getText()),
+            tfComment.getText(),
+            Integer.parseInt(tfClientLevel.getText()),
+            tfPromotionId.getText(),
+            giftItemModelObservableList.stream().map(CommodityItemModel::toCommodityItem).toArray(CommodityItem[]::new),
+            Double.parseDouble(tfGiftToken.getText())
         );
     }
 
@@ -554,12 +564,12 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
             currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
         } catch (NoMoreBillException e) {
             PromptDialogHelper.start("ID不够！", "当日ID已经达到99999，无法增加新的单据。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         } catch (Exception e) {
             PromptDialogHelper.start("初始化失败！", "请重试！")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         }
 
     }
@@ -573,26 +583,26 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
         try {
             blService.saveAsDraft(getCurrentSaleBillVo());
             PromptDialogHelper.start("保存草稿成功", "你的单据已经保存为草稿。")
-                    .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchBackToHome())
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", e -> FrameworkUiManager.switchBackToHome())
+                .createAndShow();
         } catch (NotCompleteException ignored) {
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         } catch (Exception e) {
             PromptDialogHelper.start("提交失败", "错误信息如下：\n" + e.getMessage())
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
         }
     }
 
     @FXML
     private void onBtnResetClicked() {
         PromptDialogHelper.start("是否要重置", null)
-                .addCloseButton("确定", "DONE", e -> reset())
-                .addCloseButton("取消", "UNDO", null)
-                .createAndShow();
+            .addCloseButton("确定", "DONE", e -> reset())
+            .addCloseButton("取消", "UNDO", null)
+            .createAndShow();
         FrameworkUiManager.getWholePane().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 initHotKey();
@@ -637,7 +647,8 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
                 total += commodityItemModel.getCommodityItemObjectProperty().getPrice() * commodityItemModel.getCommodityItemObjectProperty().getNumber();
             }
             tfOriginTotal.setText(total + "");
-            tfUltiTotal.setText(total - Double.parseDouble(tfMinusProfits.getText()) - Double.parseDouble(tfToken.getText()) + "");
+            double tempMinusProfit = tfMinusProfits.getText().length() == 0 ? 0.0 : Double.parseDouble(tfMinusProfits.getText());
+            tfUltiTotal.setText(total - tempMinusProfit - Double.parseDouble(tfToken.getText()) + "");
         }
     }
 }

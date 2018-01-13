@@ -16,22 +16,18 @@ import trapx00.lightx00.client.vo.financestaff.FinanceStaffVo;
 import trapx00.lightx00.client.vo.inventorystaff.InventoryStaffVo;
 import trapx00.lightx00.client.vo.manager.ManagerVo;
 import trapx00.lightx00.client.vo.salestaff.SaleStaffVo;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.employee.EmployeeState;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
-public class EmployeeModificationUi implements ExternalLoadableUiController {
+public class EmployeeAddUiController implements ExternalLoadableUiController {
     @FXML private JFXTextField tfId;
-    @FXML private JFXDatePicker tfWorkDate;
     @FXML private JFXTextField tfName;
     @FXML private JFXTextField tfPassword;
+    @FXML private JFXDatePicker tfWorkDate;
     @FXML private JFXComboBox<EmployeePosition> tfPosition = new JFXComboBox<>();
     @FXML private JFXComboBox<EmployeeState> tfState = new JFXComboBox<>();
     @FXML private JFXComboBox<String> tfRoot = new JFXComboBox<>();
@@ -41,9 +37,7 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
 
     private UserManagementBlService blService = UserManagementBlServiceFactory.getInstance();
     private Runnable runnable;
-    private ObservableList<String> root = FXCollections.observableArrayList("否","是");
-    private EmployeeVo oldEmployee;
-    private boolean transPerson = false;
+    final private ObservableList<String> root = FXCollections.observableArrayList("否","是");
     /**
      * Loads the controller.
      *
@@ -51,26 +45,17 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
      */
     @Override
     public ExternalLoadedUiPackage load() {
-        return new UiLoader("/fxml/adminui/EmployeeModificationUi.fxml").loadAndGetPackageWithoutException();
+        return new UiLoader("/fxml/adminui/EmployeeAddUi.fxml").loadAndGetPackageWithoutException();
     }
 
-    public void show(EmployeeVo employee, Runnable runnable) {
-        ExternalLoadedUiPackage uiPackage = load();
-        EmployeeModificationUi ui = uiPackage.getController();
-        //设置初始化
-        ui.oldEmployee = employee;
-        ui.tfId.setText(employee.getId());
-        ui.tfName.setText(employee.getName());
-        ui.tfWorkDate.setValue(dateToLocalDate(employee.getWorkSince()));
-
+    public void show(Runnable runnable) {
+        ExternalLoadedUiPackage externalLoadedUiPackage = load();
+        EmployeeAddUiController ui = externalLoadedUiPackage.getController();
+        ui.tfId.setText(blService.getId());
         ui.tfPosition.getItems().addAll(FXCollections.observableArrayList(EmployeePosition.values()));
         ui.tfState.getItems().addAll(FXCollections.observableArrayList(EmployeeState.values()));
         ui.tfRoot.getItems().addAll(root);
         ui.tfSaleType.getItems().addAll(FXCollections.observableArrayList(SaleStaffType.values()));
-
-        ui.tfPassword.setText(employee.getPassword());
-        ui.tfPosition.getSelectionModel().select(employee.getPosition());
-        ui.tfState.getSelectionModel().select(employee.getState());
 
         ui.tfRoot.setVisible(false);
         ui.tfSaleType.setVisible(false);
@@ -88,11 +73,8 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
                 ui.tfSaleType.setVisible(false);
             }
         });
-        ui.tfPosition.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
-            ui.transPerson = !newValue.equals(ui.oldEmployee.getPosition());
-        });
-        PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
-        ((EmployeeModificationUi)uiPackage.getController()).runnable = runnable;
+        PromptDialogHelper.start("","").setContent(externalLoadedUiPackage.getComponent()).createAndShow();
+        ui.runnable = runnable;
     }
 
     private EmployeeVo getCurrentEmployeeVo() {
@@ -103,39 +85,52 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
                 return new ManagerVo(tfId.getText(),tfName.getText(),DateHelper.fromLocalDate(tfWorkDate.getValue()),tfPassword.getText(),tfState.getValue());
             case InventoryStaff:
                 return new InventoryStaffVo(tfId.getText(),tfName.getText(),DateHelper.fromLocalDate(tfWorkDate.getValue()),tfPassword.getText(),tfState.getValue());
-            case SaleStaff:
-                return new SaleStaffVo(tfId.getText(),tfName.getText(),DateHelper.fromLocalDate(tfWorkDate.getValue()),tfPassword.getText(),tfState.getValue(),boolRoot(tfRoot.getVisibleRowCount()),tfSaleType.getValue());
             case FinanceStaff:
                 return new FinanceStaffVo(tfId.getText(),tfName.getText(),DateHelper.fromLocalDate(tfWorkDate.getValue()),tfPassword.getText(),tfState.getValue(),boolRoot(tfRoot.getVisibleRowCount()));
-                default:
-                    throw new NotCompleteException();
+            case SaleStaff:
+                return new SaleStaffVo(tfId.getText(),tfName.getText(),DateHelper.fromLocalDate(tfWorkDate.getValue()),tfPassword.getText(),tfState.getValue(),boolRoot(tfRoot.getVisibleRowCount()),tfSaleType.getValue());
+            default:
+                throw new NotCompleteException();
         }
 
     }
 
     public void onBtnSubmitClicked() {
-        if (tfName.getText().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员姓名。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else if (tfPassword.getText().length() == 0) {
-            PromptDialogHelper.start("提交失败！", "请先输入职员登录密码。")
-                    .addCloseButton("好的", "CHECK", null)
-                    .createAndShow();
-            throw new NotCompleteException();
-        }
-        else {
-            if(transPerson){
-                blService.delete(oldEmployee);
+        try {
+            if (tfName.getText().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员姓名。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfPassword.getText().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员登录密码。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfWorkDate.getValue().toString().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员入职时间。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfPosition.getValue() == null || tfPosition.getValue().toString().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员就职单位。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else if (tfState.getValue().toString().length() == 0) {
+                PromptDialogHelper.start("提交失败！", "请先输入职员就职状态。")
+                        .addCloseButton("好的", "CHECK", null)
+                        .createAndShow();
+                throw new NotCompleteException();
+            } else {
                 blService.add(getCurrentEmployeeVo());
+                PromptDialogHelper.start("创建成功！", "已经创建一位新的职员。")
+                        .addCloseButton("好的", "CHECK", e -> close())
+                        .createAndShow();
             }
-            else {
-                blService.modify(getCurrentEmployeeVo());
-            }
-            PromptDialogHelper.start("修改成功！","职员信息已修改。")
-                    .addCloseButton("好的","CHECK",e -> close())
+        }catch (IdExistsException idException) {
+            PromptDialogHelper.start("创建失败！", "职员ID已经存在。")
+                    .addCloseButton("好的", "CHECK", e -> close())
                     .createAndShow();
         }
     }
@@ -151,13 +146,5 @@ public class EmployeeModificationUi implements ExternalLoadableUiController {
 
     private boolean boolRoot(int index){
         return index!=0;
-    }
-
-    private LocalDate dateToLocalDate(Date date) {
-        Instant instant = date.toInstant();
-        ZoneId zoneId = ZoneId.systemDefault();
-
-        // atZone()方法返回在指定时区从此Instant生成的ZonedDateTime。
-        return instant.atZone(zoneId).toLocalDate();
     }
 }

@@ -3,8 +3,6 @@ package trapx00.lightx00.client.bl.inventorybl;
 import trapx00.lightx00.client.bl.adminbl.EmployeeInfo;
 import trapx00.lightx00.client.bl.adminbl.factory.EmployeeInfoFactory;
 import trapx00.lightx00.client.bl.approvalbl.BillApprovalCompleteService;
-import trapx00.lightx00.client.bl.clientbl.ClientModificationService;
-import trapx00.lightx00.client.bl.clientbl.factory.ClientModificationServiceFactory;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
 import trapx00.lightx00.client.bl.commoditybl.InventoryModificationService;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityServiceFactory;
@@ -29,7 +27,6 @@ import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryDetailBillPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
-import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.queryvo.InventoryBillQueryVo;
 import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
@@ -161,7 +158,7 @@ public class InventoryWarningBlController implements InventoryDetailBillInfo,Bil
                 int length=inventoryDetailBillPo.getCommodityList().length;
                 if(inventoryDetailBillPo.getInventoryBillType()== InventoryBillType.Warning){
                     EmployeeVo[] employeeVos = employeeInfo.queryEmployee(new UserAccountQueryVo().addQueryVoForOneEmployeePosition(EmployeePosition.SaleStaff, new SpecificUserAccountQueryVo()));
-                    notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(inventoryDetailBillPo.getOperatorId()), employeeVos, NotificationType.Others, generatePurchaseBillMessage(id)));
+                    notificationService.acknowledge(new OtherNotificationVo(new Date(), employeeInfo.queryById(inventoryDetailBillPo.getOperatorId()), employeeVos, generatePurchaseBillMessage(id)));
                     return ResultMessage.Success;
                 }else{
                     for(int i=0;i<length;i++){

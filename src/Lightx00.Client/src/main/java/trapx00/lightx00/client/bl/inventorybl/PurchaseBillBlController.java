@@ -16,24 +16,17 @@ import trapx00.lightx00.client.blservice.inventoryblservice.PurchaseBillBlServic
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlService;
 import trapx00.lightx00.client.blservice.notificationblservice.NotificationBlServiceFactory;
 import trapx00.lightx00.client.datafactory.inventorydataservicefactory.PurchaseBillDataServiceFactory;
-import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.notification.others.OtherNotificationVo;
 import trapx00.lightx00.client.vo.salestaff.PurchaseBillVo;
 import trapx00.lightx00.shared.dataservice.inventorydataservice.PurchaseBillDataService;
 import trapx00.lightx00.shared.po.ClientModificationFlag;
 import trapx00.lightx00.shared.po.ResultMessage;
 import trapx00.lightx00.shared.po.bill.BillState;
-import trapx00.lightx00.shared.po.employee.EmployeePosition;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryModificationFlag;
-import trapx00.lightx00.shared.po.notification.NotificationType;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 import trapx00.lightx00.shared.po.salestaff.PurchaseBillPo;
 import trapx00.lightx00.shared.queryvo.PurchaseBillQueryVo;
-import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
-import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
 
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.List;
 
 public class PurchaseBillBlController implements PurchaseBillBlService, NotificationActivateService, NotificationAbandonService, DraftDeleteService, BillApprovalCompleteService, BillPoVoConverter<PurchaseBillPo, PurchaseBillVo> {
@@ -92,7 +85,7 @@ public class PurchaseBillBlController implements PurchaseBillBlService, Notifica
     public ResultMessage activate(String id) {
         try {
             PurchaseBillPo purchaseBillPo = dataService.query(new PurchaseBillQueryVo().idEq(id))[0];
-            clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.RECEIVABLE, purchaseBillPo.getTotal());
+            clientModificationService.modifyClient(purchaseBillPo.getClientId(), ClientModificationFlag.PAYABLE, purchaseBillPo.getTotal());
             for (CommodityItem commodityItem : purchaseBillPo.getCommodityList()) {
                 inventoryModificationService.modifyInventory(commodityItem.getCommodityId(), InventoryModificationFlag.Up, commodityItem.getNumber());
             }

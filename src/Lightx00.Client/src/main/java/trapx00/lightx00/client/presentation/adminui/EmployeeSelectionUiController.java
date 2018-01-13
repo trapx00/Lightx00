@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Region;
 import trapx00.lightx00.client.bl.adminbl.factory.UserManagementBlFactory;
 import trapx00.lightx00.client.blservice.adminblservice.UserManagementBlService;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.PromptDialogHelper;
+import trapx00.lightx00.client.presentation.helpui.SelectingDialog;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.shared.queryvo.SpecificUserAccountQueryVo;
 import trapx00.lightx00.shared.queryvo.UserAccountQueryVo;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSelection {
+public class EmployeeSelectionUiController extends SelectingDialog implements EmployeeSelection {
     public JFXTreeTableView<EmployeeSelectionItemModel> tbEmployee;
     public JFXTreeTableColumn<EmployeeSelectionItemModel, String> tcId;
     public JFXTreeTableColumn<EmployeeSelectionItemModel, String> tcPosition;
@@ -89,6 +91,12 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
         tbEmployee.setRoot(root);
         tbEmployee.setShowRoot(false);
         tbEmployee.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        tbEmployee.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                onBtnSelectClicked();
+            }
+        });
     }
 
     /**
@@ -104,7 +112,7 @@ public class EmployeeSelectionUi extends SelectingDialog implements EmployeeSele
     @Override
     public void showEmployeeSelectDialog(Consumer<List<EmployeeVo>> callback) {
         ExternalLoadedUiPackage uiPackage = load();
-        EmployeeSelectionUi controller = uiPackage.getController();
+        EmployeeSelectionUiController controller = uiPackage.getController();
         controller.callback = callback;
         PromptDialogHelper.start("","").setContent(uiPackage.getComponent()).createAndShow();
     }

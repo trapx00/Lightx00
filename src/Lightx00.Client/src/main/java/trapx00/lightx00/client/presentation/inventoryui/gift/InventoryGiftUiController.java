@@ -26,6 +26,7 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.manager.promotion.PromotionCommodity;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -67,8 +68,8 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
          */
         InventoryGiftVo inventoryGiftVo = (InventoryGiftVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        InventoryGiftUiController inventoryGiftUiController = (InventoryGiftUiController) externalLoadedUiPackage.getController();
-        inventoryGiftUiController.tfId.setText(inventoryGiftVo.getId());
+        InventoryGiftUiController inventoryGiftUiController =  externalLoadedUiPackage.getController();
+        inventoryGiftUiController.tfId.setText(inventoryGiftVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : inventoryGiftVo.getId());
         inventoryGiftUiController.tfDate.setText(DateHelper.fromDate(inventoryGiftVo.getDate()));
         inventoryGiftUiController.tfOperator.setText(inventoryGiftVo.getOperatorId());
         inventoryGiftUiController.addGiftItems(inventoryGiftVo.getGifts());
@@ -203,7 +204,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         }
 
         return new InventoryGiftVo(
-                tfId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 inventoryGiftItemModelObservableList.stream().map(InventoryGiftItemModel::getPromotionCommodityObjectProperty).toArray(PromotionCommodity[]::new),

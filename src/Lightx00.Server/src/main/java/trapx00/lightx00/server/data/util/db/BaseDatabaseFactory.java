@@ -21,7 +21,6 @@ import trapx00.lightx00.shared.po.inventorystaff.CommodityPo;
 import trapx00.lightx00.shared.po.inventorystaff.CommoditySortPo;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryStaffPo;
 import trapx00.lightx00.shared.po.manager.ManagerPo;
-import trapx00.lightx00.shared.po.salestaff.SaleBillPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffPo;
 import trapx00.lightx00.shared.po.salestaff.SaleStaffType;
 
@@ -125,8 +124,8 @@ public class BaseDatabaseFactory {
             Dao<SaleStaffPo, String> saleStaffDao = createDao(SaleStaffPo.class);
             TableUtils.dropTable(saleStaffDao, true);
             TableUtils.createTableIfNotExists(connectionSource, SaleStaffPo.class);
-            saleStaffDao.create(new SaleStaffPo("10004", "销售主管", new Date(), "123456", SaleStaffType.AStaff,EmployeeState.Active,true));
-            saleStaffDao.create(new SaleStaffPo("10201", "C销售主任", new Date(), "123456", SaleStaffType.AStaff,EmployeeState.Active,false));
+            saleStaffDao.create(new SaleStaffPo("10004", "销售主管", new Date(), "123456", SaleStaffType.Manager,EmployeeState.Active,true));
+            saleStaffDao.create(new SaleStaffPo("10201", "C销售主任", new Date(), "123456", SaleStaffType.Manager,EmployeeState.Active,false));
 
             Dao<InventoryStaffPo,String> inventoryStaffPos=createDao(InventoryStaffPo.class);
             TableUtils.dropTable(inventoryStaffPos, true);
@@ -141,7 +140,7 @@ public class BaseDatabaseFactory {
             Dao<AdminPo,String> adminPos = createDao(AdminPo.class);
             TableUtils.dropTable(adminPos, true);
             TableUtils.createTableIfNotExists(connectionSource, AdminPo.class);
-            adminPos.create(new AdminPo("10006", "管理员", new Date(), "123456", EmployeeState.Active));
+            adminPos.create(new AdminPo("10006", "admin", new Date(), "admin", EmployeeState.Active));
 
             Dao<CommodityPo,String>commodityPos=createDao(CommodityPo.class);
             TableUtils.dropTable(commodityPos, true);
@@ -191,7 +190,7 @@ public class BaseDatabaseFactory {
                     "10002",
                     ClientState.Real));
             clientPos.create(new ClientPo("2",
-                    ClientType.Retailer,
+                    ClientType.Supplier,
                     3,
                     "米玲",
                     "13897331281",

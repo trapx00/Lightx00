@@ -16,17 +16,10 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
-import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
-import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlService;
 import trapx00.lightx00.client.blservice.inventoryblservice.InventoryWarningBlServiceFactory;
-import trapx00.lightx00.client.presentation.adminui.EmployeeSelection;
-import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;
-import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelectionItemModel;
-import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.gift.InventoryGiftItemModificationUi;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -40,6 +33,7 @@ import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryBillType;
 import trapx00.lightx00.shared.po.inventorystaff.InventoryWarningItem;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -52,7 +46,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
     public JFXTextField tfDate;
     public JFXTextField tfId;
     public JFXButton btnDelete;
-    public JFXComboBox<Label> jfxComboBox=new JFXComboBox<Label>();
+    public JFXComboBox<Label> jfxComboBox=new JFXComboBox<>();
     public JFXTreeTableView<CommoditySelectionItemModel> inventoryGiftItems;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcName;
     public JFXTreeTableColumn<CommoditySelectionItemModel, String> tcId;
@@ -91,7 +85,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
         InventoryDetailBillVo inventoryDetailBillVo = (InventoryDetailBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         InventoryWarningUiController inventoryWarningUiController = externalLoadedUiPackage.getController();
-        inventoryWarningUiController.tfId.setText(inventoryDetailBillVo.getId());
+        inventoryWarningUiController.tfId.setText(inventoryDetailBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : inventoryDetailBillVo.getId());
         inventoryWarningUiController.currentDate.setValue(inventoryDetailBillVo.getDate());
         inventoryWarningUiController.tfOperator.setText(inventoryDetailBillVo.getOperatorId());
         inventoryWarningUiController.jfxComboBox.setValue(new Label(inventoryDetailBillVo.getInventoryBillType().toString()));
@@ -283,12 +277,17 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
             throw new NotCompleteException();
         }
         InventoryBillType inventoryBillType;
-        if(jfxComboBox.getValue().getText().equals("Loss"))
-            inventoryBillType=InventoryBillType.Loss;
-        else if(jfxComboBox.getValue().getText().equals("OverFlow"))
-            inventoryBillType=InventoryBillType.Overflow;
-        else
-            inventoryBillType=InventoryBillType.Warning;
+        switch (jfxComboBox.getValue().getText()) {
+            case "Loss":
+                inventoryBillType = InventoryBillType.Loss;
+                break;
+            case "OverFlow":
+                inventoryBillType = InventoryBillType.Overflow;
+                break;
+            default:
+                inventoryBillType = InventoryBillType.Warning;
+                break;
+        }
 
         CommodityVo [] commodityVos=inventoryGiftItemModelObservableList.stream().map(CommoditySelectionItemModel::getCommodityVoObjectProperty).toArray(CommodityVo[]::new);
         InventoryWarningItem[] inventoryWarningItems=new InventoryWarningItem[commodityVos.length];
@@ -297,7 +296,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
             );
         }
         return new InventoryDetailBillVo(
-                tfId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 currentEmployee.getValue().getId(),

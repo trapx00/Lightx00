@@ -10,7 +10,6 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import trapx00.lightx00.client.blservice.adminblservice.FaceIdRegistrationBlService;
 import trapx00.lightx00.client.blservice.adminblservice.FaceIdRegistrationBlServiceFactory;
 import trapx00.lightx00.client.presentation.adminui.factory.UserManagementUiFactory;

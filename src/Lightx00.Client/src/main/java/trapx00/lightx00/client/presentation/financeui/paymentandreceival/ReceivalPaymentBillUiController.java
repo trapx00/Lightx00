@@ -20,6 +20,7 @@ import trapx00.lightx00.client.presentation.clientui.ClientInfoUi;
 import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory;
 import trapx00.lightx00.client.presentation.financeui.TranscationModel;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.Reversible;
@@ -82,7 +83,12 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         ClientVo client = clientInfoUi.queryById(bill.getClientId());
         EmployeeVo operator = employeeSelection.queryId(bill.getOperatorId());
 
-        controller.tfId.setText(bill.getId());
+        if (bill.getId().equals(BillHelper.refreshIdRequest)) {
+            controller.tfId.setText(blService.getId());
+        } else {
+            controller.tfId.setText(bill.getId());
+        }
+
         controller.client.set(client);
         controller.currentEmployee.set(operator);
         controller.initTranscationTable(bill.getTranscations());
@@ -142,14 +148,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
     }
 
     public void addRequiredValidator(JFXTextField jfxTextField, String message) {
-        RequiredFieldValidator fieldValidator = new RequiredFieldValidator();
-        fieldValidator.setMessage(message);
-        jfxTextField.getValidators().add(fieldValidator);
-        jfxTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                jfxTextField.validate();
-            }
-        });
+        ValidatorHelper.addValidator(RequiredFieldValidator.class, jfxTextField, message);
     }
 
 
@@ -203,7 +202,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
             try {
                 return voClazz.getDeclaredConstructor(
                         String.class, Date.class, BillState.class, String.class, String.class, Transcation[].class, Double.TYPE)
-                        .newInstance(tfId.getText(),
+                        .newInstance(blService.getId(),
                                 currentDate.get(),
                                 BillState.Draft,
                                 client.get().getId(),
@@ -222,15 +221,39 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
         }
     }
 
-    public void onTfClientClicked() {
-        clientInfoUi.showClientSelectDialog(x -> client.set(x));
+    public void resetPrompt(Runnable runnable) {
+        PromptDialogHelper.start("重置", "是否要重置？")
+            .addCloseButton("是", "CHECK", e -> {
+                runnable.run();
+            }).addCloseButton("否", "CLOSE", null)
+            .createAndShow();
     }
+
+
+    public void onBtnResetClicked() {
+        resetPrompt(this::reset);
+
+    }
+
+    public void finishReset() {
+        resetPrompt(this::autofill);
+    }
+
+    public void onTfClientClicked() {
+        clientInfoUi.showClientSelectDialog(x -> {
+            client.set(x);
+            tfClient.validate();
+        });
+    }
+
+
 
     public void autofill() {
         try {
             tfId.setText(blService.getId());
             currentDate.setValue(new Date());
             currentEmployee.setValue(FrameworkUiManager.getCurrentEmployee());
+            transcationModels.clear();
         } catch (NoMoreBillException e) {
             PromptDialogHelper.start("ID不够！", "当日ID已经达到99999，无法增加新的单据。")
                     .addCloseButton("好的", "CHECK", null)
@@ -248,8 +271,7 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
                             blService.submit(getCurrent());
                             PromptDialogHelper.start("提交成功！", "你的单据已经提交成功！")
                                 .addCloseButton("继续填写", "EDIT", e1 -> {
-                                    reset();
-                                    autofill();
+                                    finishReset();
                                 })
                                 .addCloseButton("返回主界面", "CHECK", e1 -> FrameworkUiManager.switchBackToHome())
                                 .createAndShow();
@@ -281,16 +303,10 @@ public abstract class ReceivalPaymentBillUiController<T extends ReceivalPaymentB
 
     public void reset() {
         transcationModels.clear();
+        tfId.setText(blService.getId());
         client.set(null);
     }
 
-    public void onBtnResetClicked() {
-        PromptDialogHelper.start("重置确认","是否确定重置？")
-            .addCloseButton("是","CHECK", e-> reset())
-            .addCloseButton("否","CLOSE", null)
-            .createAndShow();
-
-    }
 
     public void onBtnCancelClicked(ActionEvent actionEvent) {
         PromptDialogHelper.start("是否退出？", "是否保存草稿？")

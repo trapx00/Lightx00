@@ -3,17 +3,12 @@ package trapx00.lightx00.client.presentation.financeui;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import trapx00.lightx00.client.bl.financebl.factory.InitialEstablishmentBlFactory;
@@ -26,6 +21,7 @@ import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -132,6 +128,11 @@ public class InitialEstablishmentUiController implements DraftContinueWritableUi
                 .createAndShow();
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
+
+        } catch (IdExistsException e) {
+            PromptDialogHelper.start("提交失败！", "ID已存在。请重新填写。")
                 .addCloseButton("好的", "CHECK", null)
                 .createAndShow();
         } catch (Exception e) {

@@ -28,9 +28,8 @@ import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.inventoryui.CommodityFillUiController;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
-import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.presentation.saleui.factory.SaleCommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -42,6 +41,7 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -121,7 +121,7 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         SaleRefundBillVo saleRefundBillVo = (SaleRefundBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleRefundBillUiController saleRefundBillUiController = externalLoadedUiPackage.getController();
-        saleRefundBillUiController.tfBillId.setText(saleRefundBillVo.getId());
+        saleRefundBillUiController.tfBillId.setText(saleRefundBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : draft.getId());
         saleRefundBillUiController.tfDate.setText(saleRefundBillVo.getDate().toString());
         saleRefundBillUiController.tfSalesmanId.setText(saleRefundBillVo.getSalesmanId());
         saleRefundBillUiController.tfSalesmanName.setText(employeeInfo.queryById(saleRefundBillVo.getSalesmanId()).getName());
@@ -188,38 +188,23 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         tfToken.setText("0");
         autofill();
 
-        NumberValidator numberValidator = new NumberValidator();
-        numberValidator.setMessage("请输入数字类型");
-        RequiredFieldValidator requiredValidator = new RequiredFieldValidator();
-        requiredValidator.setMessage("请输入信息");
+        ValidatorHelper.addDefaultRequiredValidator(tfClientId);
+        ValidatorHelper.addDefaultRequiredValidator(tfClientName);
+        ValidatorHelper.addDefaultRequiredValidator(tfSalesmanId);
+        ValidatorHelper.addDefaultRequiredValidator(tfSalesmanName);
+        ValidatorHelper.addDefaultDoubleValidator(tfToken);
+        ValidatorHelper.addDefaultDoubleValidator(tfMinusProfits);
+        ValidatorHelper.addDefaultDoubleValidator(tfToken);
 
-        tfClientId.getValidators().add(requiredValidator);
-        tfClientName.getValidators().add(requiredValidator);
-        tfSalesmanId.getValidators().add(requiredValidator);
-        tfSalesmanName.getValidators().add(requiredValidator);
-
-        tfClientIdProperty.addListener(event -> {
-            if (tfClientIdProperty == null || tfClientIdProperty.get().length() == 0) {
-                tfClientId.validate();
+        tfMinusProfits.setOnKeyReleased(event -> {
+            if(tfMinusProfits.validate() || tfMinusProfits.getText().length()==0) {
+                new SaleRefundBillUiController.ListHandler().change();
             }
         });
-        tfClientNameProperty.addListener(event -> {
-            if (tfClientNameProperty == null || tfClientNameProperty.get().length() == 0) {
-                tfClientName.validate();
+        tfToken.setOnKeyReleased(event -> {
+            if(tfMinusProfits.validate() || tfMinusProfits.getText().length()==0) {
+                new SaleRefundBillUiController.ListHandler().change();
             }
-        });
-        tfSalesmanIdProperty.addListener(event -> {
-            if (tfSalesmanIdProperty == null || tfSalesmanIdProperty.get().length() == 0) {
-                tfSalesmanId.validate();
-            }
-        });
-        tfSalesmanNameProperty.addListener(event -> {
-            if (tfSalesmanNameProperty == null || tfSalesmanNameProperty.get().length() == 0) {
-                tfSalesmanName.validate();
-            }
-        });
-        tfMinusProfits.setOnKeyPressed(event -> {
-            new SaleRefundBillUiController.ListHandler().change();
         });
         initHotKey();
     }
@@ -245,7 +230,7 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         saleRefundBillVo.setUltiTotal(-saleRefundBillVo.getUltiTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         SaleRefundBillUiController saleRefundBillUiController = externalLoadedUiPackage.getController();
-        saleRefundBillUiController.tfBillId.setText(saleRefundBillVo.getId());
+        saleRefundBillUiController.tfBillId.setText(blService.getId());
         saleRefundBillUiController.tfDate.setText(saleRefundBillVo.getDate().toString());
         saleRefundBillUiController.tfSalesmanId.setText(saleRefundBillVo.getSalesmanId());
         saleRefundBillUiController.tfSalesmanName.setText(employeeInfo.queryById(saleRefundBillVo.getSalesmanId()).getName());
@@ -266,6 +251,8 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 
@@ -274,6 +261,8 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         employeeSelection.showEmployeeSelectDialog(x -> {
             tfSalesmanId.setText(x.get(0).getId());
             tfSalesmanName.setText(x.get(0).getName());
+            tfSalesmanId.validate();
+            tfSalesmanName.validate();
         });
     }
 
@@ -356,15 +345,19 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         }
     }
 
+    public boolean validateAll() {
+        return tfClientId.validate()&&tfClientName.validate()&&tfSalesmanId.validate()&&tfSalesmanName.validate()&&tfToken.validate()&&tfMinusProfits.validate()&&tfToken.validate();
+    }
+
     private SaleRefundBillVo getCurrentSaleRefundBillVo() {
-        if (cbRepository.getValue() == null || tfOriginTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
         }
         return new SaleRefundBillVo(
-                tfBillId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 tfClientId.getText(),
@@ -469,7 +462,8 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
                 total += commodityItemModel.getCommodityItemObjectProperty().getPrice() * commodityItemModel.getCommodityItemObjectProperty().getNumber();
             }
             tfOriginTotal.setText(total + "");
-            tfUltiTotal.setText(total - Double.parseDouble(tfMinusProfits.getText()) - Double.parseDouble(tfToken.getText()) + "");
+            double tempMinusProfit=tfMinusProfits.getText().length()==0?0.0:Double.parseDouble(tfMinusProfits.getText());
+            tfUltiTotal.setText(total - tempMinusProfit - Double.parseDouble(tfToken.getText()) + "");
         }
     }
 }

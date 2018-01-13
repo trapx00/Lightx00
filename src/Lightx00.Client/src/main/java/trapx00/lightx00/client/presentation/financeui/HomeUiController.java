@@ -1,9 +1,10 @@
 package trapx00.lightx00.client.presentation.financeui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
-import javafx.scene.text.Text;
-import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.BaseHomepageUiController;
+import trapx00.lightx00.client.presentation.helpui.ExternalLoadedUiPackage;
+import trapx00.lightx00.client.presentation.helpui.FrameworkUiManager;
+import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.mainui.FinanceStaffUiController;
 
 public class HomeUiController extends BaseHomepageUiController {

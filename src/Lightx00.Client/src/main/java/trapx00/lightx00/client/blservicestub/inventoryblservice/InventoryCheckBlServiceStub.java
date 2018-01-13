@@ -32,14 +32,16 @@ public class InventoryCheckBlServiceStub implements InventoryCheckBlService {
         return null;
     }
 
+    @Override
+    public ResultMessage export(String newfile, String name) {
+        return null;
+    }
+
     /**
      * Exports the inventory snapshot to the required file by excel
      *
      * @param newfile
      * @return whether the operation is done successfully
      */
-    @Override
-    public ResultMessage export(String newfile) {
-        return null;
-    }
+
 }

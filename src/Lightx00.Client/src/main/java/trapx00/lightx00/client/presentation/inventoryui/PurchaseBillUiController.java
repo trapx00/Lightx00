@@ -25,6 +25,7 @@ import trapx00.lightx00.client.presentation.clientui.factory.ClientInfoUiFactory
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.inventoryui.factory.CommodityFillUiFactory;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
@@ -36,6 +37,7 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -101,7 +103,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseBillUiController purchaseBillUiController = externalLoadedUiPackage.getController();
-        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
+        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : purchaseBillVo.getId());
         purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
@@ -202,8 +204,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         PurchaseBillVo purchaseBillVo = (PurchaseBillVo) reversible;
         purchaseBillVo.setTotal(-purchaseBillVo.getTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
-        PurchaseBillUiController purchaseBillUiController = (PurchaseBillUiController) externalLoadedUiPackage.getController();
-        purchaseBillUiController.tfBillId.setText(purchaseBillVo.getId());
+        PurchaseBillUiController purchaseBillUiController = externalLoadedUiPackage.getController();
+        purchaseBillUiController.tfBillId.setText(blService.getId());
         purchaseBillUiController.tfDate.setText(purchaseBillVo.getDate().toString());
         purchaseBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseBillUiController.tfClientId.setText(purchaseBillVo.getClientId());
@@ -219,6 +221,8 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 
@@ -301,15 +305,19 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         }
     }
 
+    private boolean validateAll(){
+        return tfClientId.validate()&&tfClientName.validate();
+    }
+
     private PurchaseBillVo getCurrentPurchaseBillVo() {
-        if (cbRepository.getValue() == null || tfBillTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
         }
         return new PurchaseBillVo(
-                tfBillId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 tfClientId.getText(),

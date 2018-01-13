@@ -8,10 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
-import trapx00.lightx00.client.bl.promotionbl.PromotionInfo;
 import trapx00.lightx00.client.blservice.promotionblservice.*;
 import trapx00.lightx00.client.presentation.helpui.*;
-import trapx00.lightx00.client.presentation.promotionui.detail.ComSalePromotionDetailUi;
 import trapx00.lightx00.client.vo.manager.promotion.PromotionVoBase;
 import trapx00.lightx00.shared.exception.database.PromotionInvalidStateException;
 import trapx00.lightx00.shared.po.ResultMessage;
@@ -254,21 +252,10 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
     private void addComSaleModel() {
         ComSalePromotionQueryVo comSalePromotionQueryVo = new ComSalePromotionQueryVo();
         PromotionVoBase[] result = comSalePromotionBlService.queryPromotion(comSalePromotionQueryVo);
-        for(PromotionVoBase promotion:result) {
-            if(!promotion.getState().equals(PromotionState.Draft)) {
-                if (cbAbandon.isSelected())
-                    promotionInfoModels.add(new PromotionInfoModel(promotion));
-                else {
-                    if (!promotion.getState().equals(PromotionState.Abandoned))
-                        promotionInfoModels.add(new PromotionInfoModel(promotion));
-                }
-            }
-        }
+        refreshContent(result);
     }
 
-    private void addClientModel() {
-        TotalPricePromotionQueryVo totalPricePromotionQueryVo = new TotalPricePromotionQueryVo();
-        PromotionVoBase[] result = totalPricePromotionBlService.queryPromotion(totalPricePromotionQueryVo);
+    private void refreshContent(PromotionVoBase[] result) {
         for(PromotionVoBase promotion:result) {
             if(!promotion.getState().equals(PromotionState.Draft)) {
                 if (cbAbandon.isSelected())
@@ -282,18 +269,15 @@ public class PromotionManagementUiController implements ExternalLoadableUiContro
     }
 
     private void addTotalPriceModel() {
+        TotalPricePromotionQueryVo totalPricePromotionQueryVo = new TotalPricePromotionQueryVo();
+        PromotionVoBase[] result = totalPricePromotionBlService.queryPromotion(totalPricePromotionQueryVo);
+        refreshContent(result);
+    }
+
+    private void addClientModel() {
         ClientPromotionQueryVo clientPromotionQueryVo = new ClientPromotionQueryVo();
         PromotionVoBase[] result = clientPromotionBlService.queryPromotion(clientPromotionQueryVo);
-        for(PromotionVoBase promotion:result) {
-            if(!promotion.getState().equals(PromotionState.Draft)) {
-                if (cbAbandon.isSelected())
-                    promotionInfoModels.add(new PromotionInfoModel(promotion));
-                else {
-                    if (!promotion.getState().equals(PromotionState.Abandoned))
-                        promotionInfoModels.add(new PromotionInfoModel(promotion));
-                }
-            }
-        }
+        refreshContent(result);
     }
 
 }

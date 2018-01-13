@@ -20,7 +20,6 @@ import trapx00.lightx00.client.presentation.helpui.UiLoader;
 import trapx00.lightx00.client.presentation.inventoryui.CommodityItemModel;
 import trapx00.lightx00.client.vo.BillVo;
 import trapx00.lightx00.client.vo.EmployeeVo;
-import trapx00.lightx00.client.vo.salestaff.SaleBillVo;
 import trapx00.lightx00.client.vo.salestaff.SaleRefundBillVo;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
 

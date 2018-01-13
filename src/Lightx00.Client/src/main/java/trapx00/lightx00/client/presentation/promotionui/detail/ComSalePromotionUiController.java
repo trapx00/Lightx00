@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.ComSalePromotionBlService;
@@ -28,10 +27,7 @@ import trapx00.lightx00.shared.po.manager.promotion.PromotionState;
 import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 
 public class ComSalePromotionUiController implements DraftContinueWritableUiController, ExternalLoadableUiController {
@@ -173,11 +169,14 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
         if(tfSalePrice.getText().length()!=0){
             salePrice = Integer.parseInt(tfSalePrice.getText());
         }
+        PromotionState state = PromotionState.Waiting;
+        if(tfStartDate.getValue().isAfter(DateHelper.dateToLocalDate(new Date())))
+            state = PromotionState.Active;
         return new ComSalePromotionVo(
                 tfId.getText(),
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
-                PromotionState.Waiting,
+                state,
                 promotionCommodities,
                 salePrice
         );
@@ -285,7 +284,7 @@ public class ComSalePromotionUiController implements DraftContinueWritableUiCont
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()).plusDays(1))) {
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
                         setDisable(true);
                     }
                 }

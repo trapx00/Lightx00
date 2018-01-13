@@ -286,20 +286,34 @@ public class CommodityUiController implements ExternalLoadableUiController {
                     String.format("您确定要删除商品(id: %s, 名称: %s)吗？", selected.getId(), selected.getName()))
                     .addCloseButton("取消","CLOSE",null)
                     .addButton("确定","CHECK",e -> {
-                        blService.delete(selected);
-                        new PromptDialogHelper("删除成功",String.format("商品(id: %s)已经删除！", selected.getId()))
-                                .addCloseButton("好","CHECK", e2 -> {
-                                    FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
-                                    update();
-                                })
-                                .createAndShow();
+                        if(selected.getAmount()==0){
+                            blService.delete(selected);
+                            new PromptDialogHelper("删除成功",String.format("商品(id: %s)已经删除！", selected.getId()))
+                                    .addCloseButton("好","CHECK", e2 -> {
+                                        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                                        update();
+                                    })
+                                    .createAndShow();
+                        }else{
+                            new PromptDialogHelper("删除失败",String.format("商品(id: %s)在库存中仍有存货", selected.getId()))
+                                    .addCloseButton("好","CHECK", e2 -> {
+                                        FrameworkUiManager.getCurrentDialogStack().closeCurrentAndPopAndShowNext();
+                                        update();
+                                    })
+                                    .createAndShow();
+                        }
+
                     })
                     .createAndShow();
         }
     }
 
     public void onAddButtonClicked(ActionEvent actionEvent){
-        if(blService1.query(new CommoditySortQueryVo().idEq(currentSortId))[0].getLeaf()==1){
+        if(currentSortId==null){
+            PromptDialogHelper.start("添加失败","当前分类不是叶节点分类无法添加商品").addCloseButton("确定","CHECK",null)
+                    .createAndShow();
+        }
+        else if(blService1.query(new CommoditySortQueryVo().idEq(currentSortId))[0].getLeaf()==1){
             new AddCommodityDialog().show(currentSortId,this::update);
         }
         else{

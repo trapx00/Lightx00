@@ -3,18 +3,19 @@ package trapx00.lightx00.client.presentation.promotionui.detail;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.util.Callback;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlService;
 import trapx00.lightx00.client.blservice.promotionblservice.ClientPromotionBlServiceFactory;
 import trapx00.lightx00.client.presentation.commodityui.commodity.CommoditySelection;
 import trapx00.lightx00.client.presentation.commodityui.factory.CommodityUiFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
+import trapx00.lightx00.client.presentation.helpui.validator.ValidatorHelper;
 import trapx00.lightx00.client.presentation.promotionui.PromotionCommodityModel;
 import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.manager.promotion.ClientPromotionVo;
@@ -92,30 +93,20 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
     public void initialize() {
         tfId.setText(blService.getId());
         cbClientLevel.setItems(ints);
-        NumberValidator numberValidator = new NumberValidator();
-        numberValidator.setMessage("请输入数字类型");
-        tfSalePrice.getValidators().add(numberValidator);
-        tfCouponPrice.getValidators().add(numberValidator);
-        tfSalePrice.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                tfSalePrice.validate();
-            }
-        });
-        tfCouponPrice.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                tfCouponPrice.validate();
-            }
-        });
 
+        ValidatorHelper.addDefaultDoubleValidator(tfSalePrice);
+        ValidatorHelper.addDefaultDoubleValidator(tfCouponPrice);
+
+        tbPromotionCommodity.setEditable(true);
         tcId.setCellValueFactory(cellData -> cellData.getValue().getValue().idProperty());
         tcName.setCellValueFactory(cellData -> cellData.getValue().getValue().nameProperty());
         tcPrice.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getPrice())));
         tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(BillHelper.toFixed(cellData.getValue().getValue().getAmount())));
+        tcAmount.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         tcAmount.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionCommodityModel,String> t)-> {
             (t.getTreeTableView().getTreeItem((t.getTreeTablePosition().getRow())).getValue()).setAmount(Double.parseDouble(t.getNewValue()));
             updateTotal();
         });
-
         tfStartDate.setDayCellFactory(startDayCellFactory);
         tfEndDate.setDayCellFactory(endDayCellFactory);
 
@@ -179,12 +170,15 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                     .createAndShow();
             throw new NotCompleteException();
         }
+        PromotionState state = PromotionState.Waiting;
+        if(tfStartDate.getValue().isAfter(DateHelper.dateToLocalDate(new Date())))
+            state = PromotionState.Active;
         return new ClientPromotionVo(
                 tfId.getText(),
                 DateHelper.fromLocalDate(tfStartDate.getValue()),
                 DateHelper.fromLocalDate(tfEndDate.getValue()),
-                PromotionState.Waiting,
-                Integer.parseInt(cbClientLevel.getValue().toString()),
+                state,
+                Integer.parseInt(cbClientLevel.getValue()),
                 couponPrice,
                 promotionCommodities,
                 salePrice
@@ -292,7 +286,7 @@ public class ClientPromotionUiController implements DraftContinueWritableUiContr
                 @Override
                 public void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item,empty);
-                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()).plusDays(1))) {
+                    if(item.isBefore(DateHelper.dateToLocalDate(new Date()))) {
                         setDisable(true);
                     }
                 }

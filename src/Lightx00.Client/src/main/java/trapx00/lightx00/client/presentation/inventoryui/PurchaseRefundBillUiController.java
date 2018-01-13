@@ -37,6 +37,7 @@ import trapx00.lightx00.shared.exception.database.NoMoreBillException;
 import trapx00.lightx00.shared.exception.presentation.NotCompleteException;
 import trapx00.lightx00.shared.po.bill.BillState;
 import trapx00.lightx00.shared.po.salestaff.CommodityItem;
+import trapx00.lightx00.shared.util.BillHelper;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Date;
@@ -103,7 +104,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         PurchaseRefundBillVo purchaseRefundBillVo = (PurchaseRefundBillVo) draft;
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseRefundBillUiController purchaseRefundBillUiController = externalLoadedUiPackage.getController();
-        purchaseRefundBillUiController.tfBillId.setText(purchaseRefundBillVo.getId());
+        purchaseRefundBillUiController.tfBillId.setText(purchaseRefundBillVo.getId().equals(BillHelper.refreshIdRequest) ? blService.getId() : purchaseRefundBillVo.getId());
         purchaseRefundBillUiController.tfDate.setText(purchaseRefundBillVo.getDate().toString());
         purchaseRefundBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseRefundBillUiController.tfClientId.setText(purchaseRefundBillVo.getClientId());
@@ -205,7 +206,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         purchaseRefundBillVo.setTotal(-purchaseRefundBillVo.getTotal());
         ExternalLoadedUiPackage externalLoadedUiPackage = load();
         PurchaseRefundBillUiController purchaseRefundBillUiController = externalLoadedUiPackage.getController();
-        purchaseRefundBillUiController.tfBillId.setText(purchaseRefundBillVo.getId());
+        purchaseRefundBillUiController.tfBillId.setText(blService.getId());
         purchaseRefundBillUiController.tfDate.setText(purchaseRefundBillVo.getDate().toString());
         purchaseRefundBillUiController.tfOperator.setText(String.format("%s(id: %s)", currentEmployee.getValue().getName(), currentEmployee.getValue().getId()));
         purchaseRefundBillUiController.tfClientId.setText(purchaseRefundBillVo.getClientId());
@@ -221,6 +222,8 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         clientInfoUi.showClientSelectDialog(x -> {
             tfClientId.setText(x.getId());
             tfClientName.setText(x.getName());
+            tfClientId.validate();
+            tfClientName.validate();
         });
     }
 
@@ -316,15 +319,19 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
         }
     }
 
+    private boolean validateAll(){
+        return tfClientId.validate()&&tfClientName.validate();
+    }
+
     private PurchaseRefundBillVo getCurrentPurchaseRefundBillVo() {
-        if (cbRepository.getValue() == null || tfBillTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
         }
         return new PurchaseRefundBillVo(
-                tfBillId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 tfClientId.getText(),

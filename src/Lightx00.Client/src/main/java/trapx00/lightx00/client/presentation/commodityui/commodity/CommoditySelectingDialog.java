@@ -12,8 +12,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import trapx00.lightx00.client.bl.commoditybl.CommodityInfo;
 import trapx00.lightx00.client.bl.commoditybl.factory.CommodityInfoFactory;
-import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlService;
-import trapx00.lightx00.client.blservice.commodityblservice.CommodityBlServiceFactory;
 import trapx00.lightx00.client.presentation.helpui.*;
 import trapx00.lightx00.client.vo.inventorystaff.CommodityVo;
 import trapx00.lightx00.shared.queryvo.CommodityQueryVo;
