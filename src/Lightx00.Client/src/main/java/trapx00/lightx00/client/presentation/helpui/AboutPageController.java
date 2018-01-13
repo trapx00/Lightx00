@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class AboutPageController implements ExternalLoadableUiController {
     public Label textLicense;
@@ -30,9 +31,37 @@ public class AboutPageController implements ExternalLoadableUiController {
     }
 
     public void initialize() throws IOException {
-        File licenseFile = new File(Client.class.getResource("/others/LICENSE").getPath());
-        licenseText = new String(Files.readAllBytes(licenseFile.toPath()), StandardCharsets.UTF_8);
+
+        licenseText = "Copyright (c) 2018, Trap x00\n" +
+            "All rights reserved.\n" +
+            "\n" +
+            "Redistribution and use in source and binary forms, with or without\n" +
+            "modification, are permitted provided that the following conditions are met:\n" +
+            "1. Redistributions of source code must retain the above copyright\n" +
+            "   notice, this list of conditions and the following disclaimer.\n" +
+            "2. Redistributions in binary form must reproduce the above copyright\n" +
+            "   notice, this list of conditions and the following disclaimer in the\n" +
+            "   documentation and/or other materials provided with the distribution.\n" +
+            "3. All advertising materials mentioning features or use of this software\n" +
+            "   must display the following acknowledgement:\n" +
+            "   This product includes software developed by the Trap x00.\n" +
+            "4. Neither the name of the Trap x00 nor the\n" +
+            "   names of its contributors may be used to endorse or promote products\n" +
+            "   derived from this software without specific prior written permission.\n" +
+            "\n" +
+            "\n" +
+            "THIS SOFTWARE IS PROVIDED BY TRAP x00 ''AS IS'' AND ANY\n" +
+            "EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n" +
+            "WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n" +
+            "DISCLAIMED. IN NO EVENT SHALL TRAP x00 BE LIABLE FOR ANY\n" +
+            "DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n" +
+            "(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\n" +
+            "LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\n" +
+            "ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n" +
+            "(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\n" +
+            "SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
         textLicense.setText(licenseText);
+
     }
 
     @Override
