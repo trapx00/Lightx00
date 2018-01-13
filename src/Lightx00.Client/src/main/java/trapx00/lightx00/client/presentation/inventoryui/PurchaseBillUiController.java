@@ -313,7 +313,7 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
             throw new NotCompleteException();
         }
         return new PurchaseBillVo(
-                tfBillId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 tfClientId.getText(),

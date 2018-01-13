@@ -537,7 +537,7 @@ public class SaleBillUiController implements DraftContinueWritableUiController, 
             throw new NotCompleteException();
         }
         return new SaleBillVo(
-            tfBillId.getText(),
+            blService.getId(),
             currentDate.getValue(),
             BillState.Draft,
             tfClientId.getText(),

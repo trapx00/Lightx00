@@ -21,6 +21,7 @@ import trapx00.lightx00.client.vo.Draftable;
 import trapx00.lightx00.client.vo.EmployeeVo;
 import trapx00.lightx00.client.vo.financestaff.SystemSnapshotVo;
 import trapx00.lightx00.shared.exception.bl.UncheckedRemoteException;
+import trapx00.lightx00.shared.exception.database.IdExistsException;
 import trapx00.lightx00.shared.util.DateHelper;
 
 import java.util.Arrays;
@@ -127,6 +128,11 @@ public class InitialEstablishmentUiController implements DraftContinueWritableUi
                 .createAndShow();
         } catch (UncheckedRemoteException e) {
             PromptDialogHelper.start("提交失败！", "网络错误。详细信息：\n" + e.getRemoteException().getMessage())
+                .addCloseButton("好的", "CHECK", null)
+                .createAndShow();
+
+        } catch (IdExistsException e) {
+            PromptDialogHelper.start("提交失败！", "ID已存在。请重新填写。")
                 .addCloseButton("好的", "CHECK", null)
                 .createAndShow();
         } catch (Exception e) {

@@ -277,12 +277,17 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
             throw new NotCompleteException();
         }
         InventoryBillType inventoryBillType;
-        if(jfxComboBox.getValue().getText().equals("Loss"))
-            inventoryBillType=InventoryBillType.Loss;
-        else if(jfxComboBox.getValue().getText().equals("OverFlow"))
-            inventoryBillType=InventoryBillType.Overflow;
-        else
-            inventoryBillType=InventoryBillType.Warning;
+        switch (jfxComboBox.getValue().getText()) {
+            case "Loss":
+                inventoryBillType = InventoryBillType.Loss;
+                break;
+            case "OverFlow":
+                inventoryBillType = InventoryBillType.Overflow;
+                break;
+            default:
+                inventoryBillType = InventoryBillType.Warning;
+                break;
+        }
 
         CommodityVo [] commodityVos=inventoryGiftItemModelObservableList.stream().map(CommoditySelectionItemModel::getCommodityVoObjectProperty).toArray(CommodityVo[]::new);
         InventoryWarningItem[] inventoryWarningItems=new InventoryWarningItem[commodityVos.length];
@@ -291,7 +296,7 @@ public class InventoryWarningUiController implements DraftContinueWritableUiCont
             );
         }
         return new InventoryDetailBillVo(
-                tfId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 currentEmployee.getValue().getId(),

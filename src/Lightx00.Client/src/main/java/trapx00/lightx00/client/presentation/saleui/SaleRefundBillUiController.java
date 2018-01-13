@@ -345,15 +345,19 @@ public class SaleRefundBillUiController implements DraftContinueWritableUiContro
         }
     }
 
+    public boolean validateAll() {
+        return tfClientId.validate()&&tfClientName.validate()&&tfSalesmanId.validate()&&tfSalesmanName.validate()&&tfToken.validate()&&tfMinusProfits.validate()&&tfToken.validate();
+    }
+
     private SaleRefundBillVo getCurrentSaleRefundBillVo() {
-        if (cbRepository.getValue() == null || tfOriginTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
             throw new NotCompleteException();
         }
         return new SaleRefundBillVo(
-                tfBillId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 tfClientId.getText(),

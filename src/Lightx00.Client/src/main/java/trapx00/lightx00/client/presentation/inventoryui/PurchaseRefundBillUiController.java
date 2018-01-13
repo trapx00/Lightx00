@@ -327,7 +327,7 @@ public class PurchaseRefundBillUiController implements DraftContinueWritableUiCo
             throw new NotCompleteException();
         }
         return new PurchaseRefundBillVo(
-                tfBillId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 tfClientId.getText(),

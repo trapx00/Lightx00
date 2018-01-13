@@ -204,7 +204,7 @@ public class InventoryGiftUiController implements DraftContinueWritableUiControl
         }
 
         return new InventoryGiftVo(
-                tfId.getText(),
+                blService.getId(),
                 currentDate.getValue(),
                 BillState.Draft,
                 inventoryGiftItemModelObservableList.stream().map(InventoryGiftItemModel::getPromotionCommodityObjectProperty).toArray(PromotionCommodity[]::new),

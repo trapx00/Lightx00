@@ -190,7 +190,7 @@ public class CashBillUiController implements DraftContinueWritableUiController, 
             throw new NotCompleteException();
         }
         return new CashBillVo(
-            tfId.getText(),
+            blService.getId(),
             currentDate.getValue(),
             BillState.Draft,
             currentEmployee.getValue().getId(),
