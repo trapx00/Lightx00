@@ -305,8 +305,12 @@ public class PurchaseBillUiController implements DraftContinueWritableUiControll
         }
     }
 
+    private boolean validateAll(){
+        return tfClientId.validate()&&tfClientName.validate();
+    }
+
     private PurchaseBillVo getCurrentPurchaseBillVo() {
-        if (cbRepository.getValue() == null || tfBillTotal.getText().length() == 0) {
+        if (!validateAll()) {
             PromptDialogHelper.start("提交失败！", "请先填写完单据。")
                     .addCloseButton("好的", "CHECK", null)
                     .createAndShow();
