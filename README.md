@@ -10,7 +10,7 @@ develop build status
 
 Light x00 is a light product purchasing-selling-stocking system by Trap x00.
 
-## Feature
+## Features
 
 - Complete and well-written documents
 - **Gradle** for dependency management, automated build and test 
@@ -22,6 +22,6 @@ Light x00 is a light product purchasing-selling-stocking system by Trap x00.
 
 ## Copyright Notice
 
-(From 2018/1/3 13:00:00 GTC +8) BSD License.
+(Since 2018/1/3 13:00:00 GMT +8) BSD License
 
-(Until 2018/1/3 13:00:00 GTC +8) It's allowed to clone this project and for teachers to check for the assignments, but to use on other project or distribute any components (including, but not limited to, documents, cods and configurations) from this project are **strictly prohibited**. An open source license will be applied after the course comes to an end at the beginning of 2018. All rights are reserved.
+(Until 2018/1/3 13:00:00 GMT +8) It's allowed to clone this project and for teachers to check for the assignments, but to use on other project or distribute any components (including, but not limited to, documents, code and configurations) from this project are **strictly prohibited**. An open source license will be applied after the course comes to an end at the beginning of 2018. All rights are reserved.
